@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>لعبة سباق السيارات للأطفال</title>
+
+  <!-- سياسة أمان للموقع (مسموح فقط موارد نفس الصفحة) -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; img-src 'self'; media-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline';">
+
+  <style>
+    :root{
+      --bg1:#4f46e5;  /* أزرق بنفسجي */
+      --bg2:#06b6d4;  /* سماوي */
+      --card:#ffffffee;
+      --text:#1f2937;
+      --accent:#22c55e; /* أخضر عملات */
+      --danger:#ef4444; /* تصادم */
+      --shadow: 0 10px 25px rgba(0,0,0,.15);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      color:var(--text);
+      background: linear-gradient(135deg, var(--bg1), var(--bg2)) fixed;
+      display:flex; align-items:center; justify-content:center;
+      padding:16px;
+    }
+    .wrap{
+      width:min(500px, 96vw);
+    }
+    .card{
+      background:var(--card);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      padding:16px;
+      backdrop-filter:saturate(1.2) blur(4px);
+    }
+    .title{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      margin-bottom:10px;
+    }
+    .title h1{
+      font-size:clamp(18px, 3.5vw, 24px);
+      margin:0;
+    }
+    .controls-row{
+      display:flex; align-items:center; justify-content:space-between; gap:8px;
+      margin:8px 0 10px;
+      flex-wrap:wrap;
+    }
+    .btn, .toggle{
+      border:0; border-radius:14px; padding:10px 14px; cursor:pointer;
+      background:#111827; color:#fff; font-weight:600;
+      box-shadow:0 6px 16px rgba(0,0,0,.2);
+      transition:transform .08s ease;
+      touch-action:manipulation;
+    }
+    .btn:active, .toggle:active{ transform:scale(.98) }
+    .muted{ opacity:.7 }
+    .hint{
+      font-size:13px; opacity:.8; line-height:1.6;
+    }
+
+    /* حاوية اللعبة بنسبة 9:16 لتناسب الجوال أيضاً */
+    .game-box{
+      position:relative;
+      width:100%;
+      aspect-ratio:9/16;
+      border-radius:18px;
+      overflow:hidden;
+      background:#111;
+      box-shadow:var(--shadow);
+      user-select:none;
+      -webkit-user-select:none;
+    }
+    canvas#game{
+      width:100%; height:100%;
+      display:block;
+      touch-action:none;
+    }
+
+    /* أزرار لمس يمين/يسار للجوال */
+    .touch-controls{
+      position:absolute; inset:auto 0 10px 0;
+      display:flex; justify-content:space-between; gap:10px; padding:0 10px; pointer-events:none;
+    }
+    .touch-btn{
+      pointer-events:auto;
+      background:#0f172aCC; color:#fff;
+      border:2px solid #ffffff33;
+      width:22%; height:56px;
+      border-radius:14px;
+      display:flex; align-items:center; justify-content:center;
+      font-size:20px; font-weight:800;
+      backdrop-filter: blur(6px);
+    }
+
+    /* طبقات واجهة داخل اللعبة */
+    .overlay{
+      position:absolute; inset:0;
+      display:flex; align-items:center; justify-content:center;
+      background:linear-gradient(180deg, rgba(17,24,39,.6), rgba(17,24,39,.75));
+      color:#fff; text-align:center; padding:20px;
+    }
+    .overlay .panel{
+      background:#00000066; border:1px solid #ffffff22;
+      border-radius:18px; padding:18px; max-width:90%;
+    }
+    .overlay h2{ margin:.2em 0 .4em; font-size:22px }
+    .overlay p{ margin:.3em 0; opacity:.95; line-height:1.7 }
+    .overlay .big{
+      display:inline-block; margin-top:10px;
+      background:#16a34a; color:#fff; font-weight:800; letter-spacing:.5px;
+      padding:12px 18px; border-radius:14px; box-shadow:0 6px 16px rgba(0,0,0,.35);
+      cursor:pointer;
+    }
+    .overlay .big:active{ transform:scale(.98) }
+
+    footer{
+      margin-top:12px; text-align:center; color:#fff;
+      text-shadow: 0 1px 3px rgba(0,0,0,.35);
+      font-weight:600; letter-spacing:.2px;
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="card">
+      <div class="title">
+        <h1>🏁 لعبة سباق السيارات للأطفال</h1>
+        <button id="muteBtn" class="toggle" aria-pressed="false" title="تشغيل/كتم الصوت">🔊 الصوت</button>
+      </div>
+
+      <div class="controls-row">
+        <button id="startBtn" class="btn">ابدأ / إعادة البدء</button>
+        <button id="pauseBtn" class="btn">إيقاف مؤقت</button>
+        <div class="hint">لوحة المفاتيح: ← → للتحرك • مسافة لبدء/إعادة • P للإيقاف المؤقت</div>
+      </div>
+
+      <div class="game-box">
+        <canvas id="game" width="360" height="640" tabindex="0" aria-label="لوحة لعبة سباق السيارات"></canvas>
+
+        <!-- أزرار لمس للجوال -->
+        <div class="touch-controls" aria-hidden="false">
+          <button class="touch-btn" id="btnLeft" title="يسار">⟵</button>
+          <div style="flex:1"></div>
+          <button class="touch-btn" id="btnRight" title="يمين">⟶</button>
+        </div>
+
+        <!-- شاشة البداية/النهاية -->
+        <div class="overlay" id="overlay" hidden>
+          <div class="panel">
+            <h2 id="overlayTitle">جاهز للانطلاق؟</h2>
+            <p id="overlayText">اجمع العملات 🟡 وتجنب السيارات الأخرى. لديك <b>3 قلوب</b>. السرعة تزيد تدريجيًا!</p>
+            <button class="big" id="overlayBtn">انطلق الآن</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>حقوق الطبع محفوظة — برمجة وتطوير <b>فاضل الريس</b></footer>
+  </main>
+
+  <script>
+    // ===== إعدادات عامة =====
+    const DPR = Math.min(window.devicePixelRatio || 1, 2);
+    const canvas = document.getElementById('game');
+    const ctx = canvas.getContext('2d');
+
+    const startBtn = document.getElementById('startBtn');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const muteBtn  = document.getElementById('muteBtn');
+
+    const overlay = document.getElementById('overlay');
+    const overlayTitle = document.getElementById('overlayTitle');
+    const overlayText  = document.getElementById('overlayText');
+    const overlayBtn   = document.getElementById('overlayBtn');
+
+    const btnLeft  = document.getElementById('btnLeft');
+    const btnRight = document.getElementById('btnRight');
+
+    let W = canvas.clientWidth, H = canvas.clientHeight;
+
+    function resizeCanvas(){
+      const rect = canvas.getBoundingClientRect();
+      W = Math.floor(rect.width);
+      H = Math.floor(rect.height);
+      canvas.width  = Math.floor(W * DPR);
+      canvas.height = Math.floor(H * DPR);
+      ctx.setTransform(DPR,0,0,DPR,0,0);
+    }
+    addEventListener('resize', resizeCanvas, {passive:true});
+    resizeCanvas();
+
+    // ===== صوت بسيط عبر Web Audio =====
+    let audioEnabled = true;
+    let audioCtx = null;
+    function initAudio(){
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+    function beep({freq=440, dur=0.08, type='sine', vol=0.05}={}){
+      if (!audioEnabled) return;
+      if (!audioCtx) return;
+      const t0 = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = type; osc.frequency.value = freq;
+      gain.gain.value = 0; // ramp in
+      osc.connect(gain).connect(audioCtx.destination);
+      osc.start(t0);
+      gain.gain.linearRampToValueAtTime(vol, t0 + 0.01);
+      gain.gain.linearRampToValueAtTime(0.0001, t0 + dur);
+      osc.stop(t0 + dur + 0.02);
+    }
+    function sfxCoin(){ beep({freq:880, dur:0.09, type:'triangle', vol:.06}); }
+    function sfxCrash(){ beep({freq:120, dur:0.20, type:'square', vol:.1}); }
+    function sfxMove(){ beep({freq:520, dur:0.05, type:'sine', vol:.04}); }
+
+    muteBtn.addEventListener('click', ()=>{
+      audioEnabled = !audioEnabled;
+      muteBtn.textContent = audioEnabled ? '🔊 الصوت' : '🔇 صامت';
+      muteBtn.classList.toggle('muted', !audioEnabled);
+    });
+
+    // ===== لعبة: متغيرات الحالة =====
+    const lanes = 3;
+    let gameState = 'menu'; // 'menu' | 'play' | 'pause' | 'over'
+    let score = 0;
+    let coins = 0;
+    let lives = 3;
+    let baseSpeed = 180; // px/sec
+    let speed = baseSpeed;
+    let distance = 0;
+    let elapsed = 0;
+    let lastTime = 0;
+
+    const road = {
+      margin: 24,
+      laneMarkOffset: 0
+    };
+
+    const player = {
+      lane: 1, // 0..lanes-1
+      x: 0, y: 0, w: 0, h: 0,
+      invincibleTime: 0
+    };
+
+    const obstacles = []; // سيارات أخرى
+    const pickups = [];   // عملات
+    let spawnCarTimer = 0;
+    let spawnCoinTimer = 0;
+
+    function laneX(l){
+      const tw = W - road.margin*2;
+      const laneW = tw / lanes;
+      return road.margin + l*laneW + laneW/2;
+    }
+
+    function resetGame(){
+      score = 0; coins = 0; lives = 3;
+      speed = baseSpeed; distance = 0; elapsed = 0;
+      player.lane = 1;
+      obstacles.length = 0;
+      pickups.length = 0;
+      spawnCarTimer = 0; spawnCoinTimer = .6;
+      player.invincibleTime = 0;
+    }
+
+    // رسم قلب بسيط
+    function drawHeart(x,y,size,fill='#ef4444'){
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.fillStyle = fill;
+      ctx.beginPath();
+      const s = size;
+      ctx.moveTo(0, s*0.35);
+      ctx.bezierCurveTo(0, 0, -s*0.5, 0, -s*0.5, s*0.35);
+      ctx.bezierCurveTo(-s*0.5, s*0.7, 0, s, 0, s*1.15);
+      ctx.bezierCurveTo(0, s, s*0.5, s*0.7, s*0.5, s*0.35);
+      ctx.bezierCurveTo(s*0.5, 0, 0, 0, 0, s*0.35);
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+    }
+
+    function drawCar(x,y,w,h,color='#38bdf8'){
+      // جسم السيارة مستطيل بحواف دائرية + خطوط
+      const r = Math.min(w,h)*0.18;
+      ctx.save();
+      ctx.translate(x,y);
+      ctx.fillStyle = color;
+      roundRect(-w/2,-h/2,w,h,r,true,false);
+
+      // زجاج
+      ctx.fillStyle = 'rgba(255,255,255,0.85)';
+      roundRect(-w*0.28,-h*0.25, w*0.56, h*0.22, r*0.6, true, false);
+
+      // خط أبيض وسط
+      ctx.fillStyle = '#fff';
+      ctx.fillRect(-w*0.06, -h*0.42, w*0.12, h*0.2);
+      ctx.fillRect(-w*0.06,  h*0.22, w*0.12, h*0.2);
+
+      // عجلات
+      ctx.fillStyle = '#111827';
+      const tireW = w*0.2, tireH = h*0.18;
+      roundRect(-w/2 - tireW*0.1, -h*0.32, tireW, tireH, tireH*0.3, true,false);
+      roundRect(-w/2 - tireW*0.1,  h*0.14, tireW, tireH, tireH*0.3, true,false);
+      roundRect( w/2 - tireW*0.9, -h*0.32, tireW, tireH, tireH*0.3, true,false);
+      roundRect( w/2 - tireW*0.9,  h*0.14, tireW, tireH, tireH*0.3, true,false);
+      ctx.restore();
+    }
+
+    function roundRect(x,y,w,h,r,fill,stroke){
+      const rr = Math.min(r, w/2, h/2);
+      ctx.beginPath();
+      ctx.moveTo(x+rr, y);
+      ctx.arcTo(x+w, y,   x+w, y+h, rr);
+      ctx.arcTo(x+w, y+h, x,   y+h, rr);
+      ctx.arcTo(x,   y+h, x,   y,   rr);
+      ctx.arcTo(x,   y,   x+w, y,   rr);
+      if(fill) ctx.fill();
+      if(stroke) ctx.stroke();
+    }
+
+    function rand(min,max){ return Math.random()*(max-min)+min; }
+    function choice(arr){ return arr[(Math.random()*arr.length)|0]; }
+
+    function update(dt){
+      if (gameState !== 'play') return;
+
+      elapsed += dt;
+      distance += speed * dt;
+      score = Math.floor(distance/5 + coins*50);
+
+      // زيادة السرعة تدريجياً
+      speed = baseSpeed + Math.min(420, elapsed*18);
+
+      // تحريك خطوط المسارات
+      road.laneMarkOffset = (road.laneMarkOffset + speed*dt*0.8) % 40;
+
+      // حجم اللاعب ومكانه
+      const tw = W - road.margin*2;
+      const laneW = tw / lanes;
+      player.w = laneW * 0.55;
+      player.h = Math.min(H*0.16, 120);
+      player.x = laneX(player.lane);
+      player.y = H - player.h*0.8;
+
+      // توليد سيارات
+      spawnCarTimer -= dt;
+      if (spawnCarTimer <= 0){
+        spawnCarTimer = rand(0.75, 1.2) * Math.max(0.65, 1.2 - elapsed*0.02);
+        const l = (Math.random()*lanes)|0;
+        const speeds = [speed*0.85, speed*1.0, speed*1.15];
+        obstacles.push({
+          lane:l,
+          x: laneX(l),
+          y: -120,
+          w: player.w * rand(0.95,1.05),
+          h: player.h * rand(0.9,1.1),
+          vy: choice(speeds),
+          color: choice(['#38bdf8','#f472b6','#f59e0b','#22c55e','#a78bfa'])
+        });
+      }
+
+      // توليد عملات
+      spawnCoinTimer -= dt;
+      if (spawnCoinTimer <= 0){
+        spawnCoinTimer = rand(0.55, 0.95);
+        const l = (Math.random()*lanes)|0;
+        pickups.push({
+          lane:l,
+          x: laneX(l),
+          y: -30,
+          r: Math.max(7, Math.min(14, (W+H)/80)),
+          vy: speed*0.95
+        });
+      }
+
+      // تحديث الأجسام
+      for (const o of obstacles) o.y += o.vy * dt;
+      for (const c of pickups)   c.y += c.vy * dt;
+
+      // إزالة خارجة الشاشة
+      while (obstacles.length && obstacles[0].y > H + 140) obstacles.shift();
+      while (pickups.length && pickups[0].y > H + 40) pickups.shift();
+
+      // تصادمات
+      if (player.invincibleTime > 0) player.invincibleTime -= dt;
+
+      const pBox = {x:player.x - player.w/2, y:player.y - player.h/2, w:player.w, h:player.h};
+
+      // عملات
+      for (let i=pickups.length-1; i>=0; i--){
+        const c = pickups[i];
+        const rect = {x:c.x-12, y:c.y-12, w:24, h:24};
+        if (rectsOverlap(pBox, rect)){
+          pickups.splice(i,1);
+          coins++;
+          sfxCoin();
+        }
+      }
+
+      // سيارات أخرى
+      for (let i=obstacles.length-1; i>=0; i--){
+        const o = obstacles[i];
+        const oBox = {x:o.x - o.w/2, y:o.y - o.h/2, w:o.w, h:o.h};
+        if (rectsOverlap(pBox, oBox) && player.invincibleTime<=0){
+          lives--;
+          player.invincibleTime = 1.2;
+          sfxCrash();
+          if (lives <= 0){
+            gameOver();
+            break;
+          }
+        }
+      }
+    }
+
+    function rectsOverlap(a,b){
+      return a.x < b.x + b.w && a.x + a.w > b.x &&
+             a.y < b.y + b.h && a.y + a.h > b.y;
+    }
+
+    function render(){
+      // خلفية الطريق
+      ctx.clearRect(0,0,W,H);
+      ctx.fillStyle = '#0b1020';
+      ctx.fillRect(0,0,W,H);
+
+      // كتف الطريق
+      ctx.fillStyle = '#1f2937';
+      ctx.fillRect(road.margin*0.35, 0, road.margin*0.65, H);
+      ctx.fillRect(W-road.margin, 0, road.margin*0.65, H);
+
+      // جسم الطريق
+      ctx.fillStyle = '#2b2b2b';
+      ctx.fillRect(road.margin, 0, W-road.margin*2, H);
+
+      // خطوط المسارات
+      const tw = W - road.margin*2;
+      const laneW = tw / lanes;
+      ctx.strokeStyle = '#e5e7eb';
+      ctx.lineWidth = 4;
+      ctx.setLineDash([18, 18]);
+      for (let i=1;i<lanes;i++){
+        ctx.beginPath();
+        const x = road.margin + laneW*i;
+        ctx.moveTo(x, -road.laneMarkOffset);
+        ctx.lineTo(x, H + 40);
+        ctx.stroke();
+      }
+      ctx.setLineDash([]);
+
+      // عملات
+      for (const c of pickups){
+        // وهج
+        ctx.beginPath();
+        const g = ctx.createRadialGradient(c.x, c.y, 2, c.x, c.y, c.r*2.6);
+        g.addColorStop(0, 'rgba(255,255,0,0.9)');
+        g.addColorStop(1, 'rgba(255,255,0,0)');
+        ctx.fillStyle = g;
+        ctx.arc(c.x, c.y, c.r*2.4, 0, Math.PI*2);
+        ctx.fill();
+
+        // جسم العملة
+        ctx.beginPath();
+        ctx.fillStyle = '#facc15';
+        ctx.arc(c.x, c.y, c.r, 0, Math.PI*2);
+        ctx.fill();
+        // علامة
+        ctx.fillStyle = '#854d0e';
+        ctx.font = `${Math.floor(c.r*1.3)}px system-ui,Arial`;
+        ctx.textAlign = 'center'; ctx.textBaseline='middle';
+        ctx.fillText('●', c.x, c.y);
+      }
+
+      // سيارات الخصوم
+      for (const o of obstacles){
+        drawCar(o.x, o.y, o.w, o.h, o.color);
+      }
+
+      // اللاعب (وميض إذا محصّن)
+      const blink = (player.invincibleTime>0) ? Math.floor(performance.now()/100)%2===0 : true;
+      if (blink){
+        drawCar(player.x, player.y, player.w, player.h, '#38bdf8');
+      }
+
+      // واجهة: نقاط/قلوب/عملات
+      const pad = 10;
+      ctx.fillStyle = 'rgba(0,0,0,.35)';
+      roundRect(pad,pad, W - pad*2, 38, 12, true, false);
+
+      ctx.fillStyle = '#fff';
+      ctx.font = 'bold 16px system-ui,Arial';
+      ctx.textAlign='start'; ctx.textBaseline='middle';
+      ctx.fillText(`النقاط: ${score}`, pad+12, pad+20);
+
+      // عملات
+      ctx.textAlign='center';
+      ctx.fillStyle = '#fde047';
+      ctx.fillText(`🟡 ${coins}`, W/2, pad+20);
+
+      // قلوب
+      let hx = W - 26;
+      for (let i=0;i<lives;i++){
+        drawHeart(hx, pad+6, 8, '#ef4444');
+        hx -= 22;
+      }
+    }
+
+    function loop(t){
+      if (!lastTime) lastTime = t;
+      const dt = Math.min(0.033, (t - lastTime)/1000);
+      lastTime = t;
+
+      update(dt);
+      render();
+
+      requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+
+    // ===== إدخال المستخدم =====
+    function moveLeft(){
+      if (player.lane>0){
+        player.lane--; sfxMove();
+      }
+    }
+    function moveRight(){
+      if (player.lane<lanes-1){
+        player.lane++; sfxMove();
+      }
+    }
+
+    addEventListener('keydown', (e)=>{
+      if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A'){ e.preventDefault(); moveLeft(); }
+      if (e.key === 'ArrowRight'|| e.key === 'd' || e.key === 'D'){ e.preventDefault(); moveRight(); }
+      if (e.key === ' '){ e.preventDefault(); if(gameState!=='play') startGame(); }
+      if (e.key === 'p' || e.key === 'P'){ togglePause(); }
+      if (!audioCtx){ initAudio(); } // تشغيل السياق الصوتي بعد تفاعل المستخدم
+    }, {passive:false});
+
+    btnLeft.addEventListener('click', ()=>{ moveLeft(); if(!audioCtx) initAudio(); });
+    btnRight.addEventListener('click', ()=>{ moveRight(); if(!audioCtx) initAudio(); });
+
+    // أزرار أعلى البطاقة
+    startBtn.addEventListener('click', ()=>{ startGame(); if(!audioCtx) initAudio(); });
+    pauseBtn.addEventListener('click', togglePause);
+    overlayBtn.addEventListener('click', ()=>{ startGame(); if(!audioCtx) initAudio(); });
+
+    function startGame(){
+      resetGame();
+      gameState = 'play';
+      overlay.hidden = true;
+      canvas.focus();
+      lastTime = 0;
+    }
+
+    function showMenu(title, text, btnText){
+      overlayTitle.textContent = title;
+      overlayText.innerHTML = text;
+      overlayBtn.textContent = btnText || 'ابدأ';
+      overlay.hidden = false;
+    }
+
+    function togglePause(){
+      if (gameState === 'play'){
+        gameState = 'pause';
+        showMenu('إيقاف مؤقت ⏸️', 'اضغط "انطلق الآن" للمتابعة.', 'تابع اللعب');
+      } else if (gameState === 'pause'){
+        gameState = 'play';
+        overlay.hidden = true;
+        canvas.focus();
+      }
+    }
+
+    function gameOver(){
+      gameState = 'over';
+      showMenu('انتهت المحاولات 💥',
+               `نتيجتك: <b>${score}</b> — عملات: <b>🟡 ${coins}</b><br>هل تريد اللعب مرة أخرى؟`,
+               'العب مجددًا');
+    }
+
+    // ابدأ على شاشة البداية
+    showMenu('جاهز للانطلاق؟', 'اجمع العملات 🟡 وتجنب السيارات الأخرى. لديك <b>3 قلوب</b>. السرعة تزيد تدريجيًا!', 'انطلق الآن');
+
+    // ===== تحسينات لمس =====
+    // منع سحب/تمرير داخل اللعبة
+    ['touchstart','touchmove','touchend','gesturestart'].forEach(evt=>{
+      canvas.addEventListener(evt, (e)=>{ e.preventDefault(); }, {passive:false});
+    });
+
+    // ===== مساعدة وظائف =====
+    // (لا شيء إضافي هنا)
+
+  </script>
+</body>
+</html>
