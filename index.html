@@ -15,14 +15,14 @@
     .row{display:flex;gap:12px;align-items:center}
     .logo{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;color:#fff;font-weight:900;box-shadow:var(--shadow);background:linear-gradient(180deg,#60a5fa,#0ea5e9)}
     .brand .title{font-size:26px;font-weight:900;letter-spacing:.3px}
-    .brand .tag{color:var(--muted);font-size:13px;margin-top:-4px}/* شريط البحث */
-.search{margin-top:12px;display:grid;gap:12px;grid-template-columns:1fr 1fr auto}
-.fld{position:relative;background:var(--card);border:2px solid var(--line);border-radius:16px;padding:12px 14px;box-shadow:var(--shadow)}
+    .brand .tag{color:var(--muted);font-size:13px;margin-top:-4px}/* شريط البحث العمودي (من الأعلى للأسفل) */
+.search{margin-top:14px;display:grid;gap:12px;grid-template-columns:1fr}
+.fld{position:relative;background:var(--card);border:2px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
 .fld:focus-within{border-color:var(--brand); box-shadow:var(--shadow), var(--ring)}
 .lbl{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
 .input{display:flex;align-items:center;gap:8px;margin-top:6px}
-.input input{width:100%;border:0;outline:none;background:transparent;font-size:18px;padding:8px 2px;color:var(--ink)}
-.cta{background:linear-gradient(180deg,var(--brand),var(--brand-2));color:#fff;border:0;border-radius:16px;padding:14px 18px;font-weight:900;cursor:pointer;box-shadow:var(--shadow)}
+.input input{width:100%;border:0;outline:none;background:transparent;font-size:18px;padding:10px 2px;color:var(--ink)}
+.cta{width:100%;background:linear-gradient(180deg,var(--brand),var(--brand-2));color:#fff;border:0;border-radius:18px;padding:16px 18px;font-weight:900;cursor:pointer;box-shadow:var(--shadow);font-size:18px}
 .cta:hover{filter:brightness(.98)}
 
 /* النتائج */
@@ -34,7 +34,7 @@ main{padding:16px 0}
 .prov{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff;display:flex;flex-direction:column;gap:8px}
 .prov h4{margin:0;font-weight:900}
 .meta{color:var(--muted);font-size:12px}
-.open{display:inline-block;background:var(--accent);color:#062a24;padding:10px 12px;border-radius:12px;font-weight:900;text-decoration:none;text-align:center}
+.open{display:inline-block;background:var(--accent);color:#062a24;padding:12px;border-radius:12px;font-weight:900;text-decoration:none;text-align:center}
 .open:hover{filter:brightness(.95)}
 
 footer{margin-top:16px;border-top:1px dashed var(--line);padding:14px 0}
@@ -51,9 +51,9 @@ footer{margin-top:16px;border-top:1px dashed var(--line);padding:14px 0}
         <div class="logo">✈️</div>
         <div class="brand">
           <div class="title">تذكرتك</div>
-          <div class="tag">قارن أسعار التذاكر من مواقع موثوقة • النتائج بالعربية وتفتح صفحة الحجز مباشرة</div>
+          <div class="tag">روابط مباشرة لمواقع الحجز العالمية (قوقل وغيرها)</div>
         </div>
-      </div><!-- شريط البحث -->
+      </div><!-- شريط البحث العمودي: من / إلى / ابحث -->
   <form id="searchForm" class="search" onsubmit="event.preventDefault(); buildLinks();">
     <div class="fld">
       <div class="lbl">🛫 من</div>
@@ -73,7 +73,7 @@ footer{margin-top:16px;border-top:1px dashed var(--line);padding:14px 0}
 
   </header>  <main class="container">
     <section id="resultsCard" class="card" style="display:none">
-      <h3 style="margin:0 0 6px 0">افتح مواقع الحجز الموثوقة</h3>
+      <h3 style="margin:0 0 6px 0">افتح موقع الحجز مباشرة</h3>
       <p id="summary" class="meta">—</p>
       <div id="providers" class="grid"></div>
     </section><footer>
@@ -83,22 +83,42 @@ footer{margin-top:16px;border-top:1px dashed var(--line);padding:14px 0}
 </footer>
 
   </main>  <script>
-    // تحويل مدخلات عربية بسيطة إلى أكواد IATA شائعة (اختياري للتسهيل)
+    // تحويل أسماء عربية شائعة إلى أكواد IATA لتسهيل الإدخال
     const AR_MAP = {
-      'المنامة':'BAH','البحرين':'BAH','القاهرة':'CAI','الرياض':'RUH','جدة':'JED','الدمام':'DMM','دبي':'DXB','أبوظبي':'AUH','الدوحة':'DOH','الكويت':'KWI','مسقط':'MCT','عمّان':'AMM','بيروت':'BEY','إسطنبول':'IST','طرابزون':'TZX','أنطاليا':'AYT','تبليسي':'TBS','باكو':'GYD','باريس':'CDG','لندن':'LHR','ميلانو':'MXP','روما':'FCO','أثينا':'ATH','برشلونة':'BCN','مدريد':'MAD','زيورخ':'ZRH','جنيف':'GVA'
+      'المنامة':'BAH','البحرين':'BAH','القاهرة':'CAI','الرياض':'RUH','جدة':'JED','الدمام':'DMM','دبي':'DXB','أبوظبي':'AUH','الشارقة':'SHJ','الدوحة':'DOH','الكويت':'KWI','مسقط':'MCT','عمّان':'AMM','بيروت':'BEY','إسطنبول':'IST','طرابزون':'TZX','أنطاليا':'AYT','تبليسي':'TBS','باتومي':'BUS','باكو':'GYD','باريس':'CDG','لندن':'LHR','ميلانو':'MXP','روما':'FCO','أثينا':'ATH','برشلونة':'BCN','مدريد':'MAD','زيورخ':'ZRH','جنيف':'GVA'
     };
 
     function parsePlace(v){
       if(!v) return '';
       v=v.trim();
-      // إن كتب مدينة بالعربي نحولها، وإلا نعيد الأحرف كما هي
       if(AR_MAP[v]) return AR_MAP[v];
-      // إن كتب صيغة "BAH — المنامة" أو مشابهة
       const sep = v.includes('—') ? '—' : '-';
       const head=(v.split(sep)[0]||'').trim();
-      // إن كانت 3 أحرف نفترضها IATA
       if(head.length===3) return head.toUpperCase();
       return v.toUpperCase();
+    }
+
+    function urlFor(site, origin, destination){
+      switch(site){
+        case 'google':
+          return `https://www.google.com/travel/flights?hl=ar&q=${encodeURIComponent(`flights from ${origin} to ${destination}`)}`;
+        case 'skyscanner':
+          return `https://www.skyscanner.net/transport/flights/${origin}/${destination}/?adults=1&cabinclass=economy&locale=ar-SA`;
+        case 'kayak':
+          return `https://www.kayak.ae/flights/${origin}-${destination}?sort=price_a&lang=ar`;
+        case 'wego':
+          return `https://www.wego.ae/flights/${origin}-${destination}`;
+        case 'kiwi':
+          return `https://www.kiwi.com/ar/search/results/${origin}/${destination}/`;
+        case 'expedia':
+          return `https://www.expedia.com/Flights-Search?trip=oneway&leg1=from:${origin},to:${destination}&passengers=adults:1&mode=search`;
+        case 'almosafer':
+          return `https://ar-mosafir.almosafer.com/flights`;
+        case 'rehlat':
+          return `https://www.rehlat.com/ar/flights/`;
+        default:
+          return '#';
+      }
     }
 
     function buildLinks(){
@@ -110,26 +130,25 @@ footer{margin-top:16px;border-top:1px dashed var(--line);padding:14px 0}
 
       if(!origin||!destination){ alert('رجاءً أدخل "من" و"إلى" (رمز مطار مثل BAH/CAI أو اسم مدينة بالعربي).'); return; }
       card.style.display='block';
-      summary.textContent = `من ${origin} إلى ${destination} — اضغط لفتح صفحة الحجز مباشرة`;
+      summary.textContent = `من ${origin} إلى ${destination} — اختر موقعك المفضل لفتح صفحة الحجز مباشرة`;
+      providers.innerHTML='';
 
-      const list = [
-        // محرّكات بحث رحلات عالمية (بالعربية قدر الإمكان)
-        {name:'Google Flights', desc:'نتائج سريعة بالعربية', url:`https://www.google.com/travel/flights?hl=ar&q=${encodeURIComponent(`flights from ${origin} to ${destination}`)}`},
-        {name:'Skyscanner', desc:'مقارنة أسعار شاملة', url:`https://www.skyscanner.net/transport/flights/${origin}/${destination}/?adults=1&cabinclass=economy&locale=ar-SA`},
-        {name:'KAYAK', desc:'خيارات كثيرة وترتيب حسب السعر', url:`https://www.kayak.ae/flights/${origin}-${destination}?sort=price_a&lang=ar`},
-        {name:'Wego', desc:'موقع عربي يعرض أرخص العروض', url:`https://www.wego.ae/flights/${origin}-${destination}`},
-        {name:'Kiwi.com', desc:'خيارات رخيصة وطرق ربط ذكية', url:`https://www.kiwi.com/ar/search/results/${origin}/${destination}/`},
-        // مواقع إقليمية عربية شهيرة (روابط عامة مع تعبئة لاحقة داخل الموقع)
-        {name:'المسافر Almosafer', desc:'موقع عربي موثوق', url:`https://ar-mosafir.almosafer.com/flights`},
-        {name:'رحلات Rehlat', desc:'عروض متكررة', url:`https://www.rehlat.com/ar/flights/`},
-        {name:'طيران ناس Flynas', desc:'شركة إقليمية اقتصادية', url:`https://www.flynas.com/ar`}
+      const SITES = [
+        {id:'google', name:'Google Flights (عربي)', desc:'نتائج سريعة بالعربية'},
+        {id:'skyscanner', name:'Skyscanner (عربي)', desc:'مقارنة أسعار شاملة'},
+        {id:'kayak', name:'KAYAK (عربي)', desc:'فرز حسب السعر والمدة'},
+        {id:'wego', name:'Wego (عربي)', desc:'موقع عربي يعرض الأرخص'},
+        {id:'kiwi', name:'Kiwi.com (عربي)', desc:'خيارات اقتصادية ومرونة'},
+        {id:'expedia', name:'Expedia', desc:'وكالة سفر عالمية'},
+        {id:'almosafer', name:'المسافر', desc:'موقع عربي موثوق'},
+        {id:'rehlat', name:'رحلات', desc:'عروض متكررة'}
       ];
 
-      providers.innerHTML='';
-      list.forEach(p=>{
-        const card=document.createElement('div'); card.className='prov';
-        card.innerHTML = `<h4>${p.name}</h4><div class="meta">${p.desc}</div><a class="open" href="${p.url}" target="_blank" rel="noopener">افتح النتائج</a>`;
-        providers.appendChild(card);
+      SITES.forEach(s=>{
+        const u = urlFor(s.id, origin, destination);
+        const el=document.createElement('div'); el.className='prov';
+        el.innerHTML = `<h4>${s.name}</h4><div class="meta">${s.desc}</div><a class="open" href="${u}" target="_blank" rel="noopener">افتح صفحة الحجز</a>`;
+        providers.appendChild(el);
       });
     }
 
