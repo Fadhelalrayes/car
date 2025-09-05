@@ -79,11 +79,22 @@ footer{margin-top:18px;border-top:1px dashed var(--line);padding:14px 0}
 </div>
 
   </header>  <main class="container">
-    <section class="card">
-      <h4 style="margin:0 0 6px 0">التذاكر (من الأرخص إلى الأعلى)</h4>
-      <p id="summary" class="small">أدخل "من" و"إلى" بالأعلى ثم اضغط الزر.</p>
-      <div id="tickets" class="results"></div><div class="providers" id="providers"></div>
-  <p class="small">الأسعار المؤكدة تظهر داخل مواقع الحجز نفسها. هذا الصندوق يمكنه عرض أسعار حقيقية إذا أضفت مفتاح API (انظر التعليق داخل الكود).</p>
+    <!-- قائمة الدول (كاملة) -->
+    <section class="card" id="countriesSection">
+      <h4 style="margin:0 0 8px 0">الدول</h4>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px">
+        <input id="countrySearch" placeholder="ابحث عن دولة..." style="flex:1;border:1px solid var(--line);border-radius:12px;padding:10px">
+        <button class="btn" type="button" onclick="resetCountries()">إظهار الكل</button>
+      </div>
+      <div id="countriesGrid" style="display:grid;gap:8px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))"></div>
+      <p class="small">ملاحظة: عرض الدول عام. للحجز نوصي باختيار مطار محدد من الحقول بالأعلى لعرض جميع الروابط والفلاتر. عند اختيار دولة فقط سنعرض رابط Google Flights للاستكشاف.</p>
+    </section><section class="card">
+  <h4 style="margin:0 0 6px 0">التذاكر (من الأرخص إلى الأعلى)</h4>
+  <p id="summary" class="small">أدخل "من" و"إلى" بالأعلى ثم اضغط الزر.</p>
+  <div id="tickets" class="results"></div>
+
+  <div class="providers" id="providers"></div>
+  <p class="small">لجلب أسعار حقيقية داخل الصفحة يمكنك استخدام <strong>Kiwi Tequila</strong> (مجاني بمفتاح API) أو <strong>Amadeus Self‑Service</strong> (خطة مجانية محدودة). انظر التعليقات داخل الكود.</p>
 </section>
 
 <footer>
@@ -93,178 +104,35 @@ footer{margin-top:18px;border-top:1px dashed var(--line);padding:14px 0}
 </footer>
 
   </main>  <script>
-    // ==== بيانات الدول والمطارات (مختصرة) ====
-    const DB = {
-      "البحرين": [{c:"BAH", n:"المنامة"}],
-      "السعودية": [{c:"RUH", n:"الرياض"},{c:"JED", n:"جدة"},{c:"DMM", n:"الدمام"},{c:"MED", n:"المدينة"}],
-      "الإمارات": [{c:"DXB", n:"دبي"},{c:"AUH", n:"أبوظبي"},{c:"SHJ", n:"الشارقة"}],
-      "قطر": [{c:"DOH", n:"الدوحة"}],
-      "الكويت": [{c:"KWI", n:"الكويت"}],
-      "عُمان": [{c:"MCT", n:"مسقط"}],
-      "الأردن": [{c:"AMM", n:"عمّان"}],
-      "لبنان": [{c:"BEY", n:"بيروت"}],
-      "مصر": [{c:"CAI", n:"القاهرة"},{c:"HRG", n:"الغردقة"},{c:"SSH", n:"شرم الشيخ"}],
-      "تركيا": [{c:"IST", n:"إسطنبول"},{c:"AYT", n:"أنطاليا"},{c:"TZX", n:"طرابزون"}],
-      "جورجيا": [{c:"TBS", n:"تبليسي"},{c:"BUS", n:"باتومي"}],
-      "أذربيجان": [{c:"GYD", n:"باكو"}],
-      "اليونان": [{c:"ATH", n:"أثينا"}],
-      "إيطاليا": [{c:"FCO", n:"روما"},{c:"MXP", n:"ميلانو"}],
-      "فرنسا": [{c:"CDG", n:"باريس"}],
-      "إسبانيا": [{c:"BCN", n:"برشلونة"},{c:"MAD", n:"مدريد"}],
-      "المملكة المتحدة": [{c:"LHR", n:"لندن"}],
-      "سويسرا": [{c:"ZRH", n:"زيورخ"},{c:"GVA", n:"جنيف"}]
-    };
+    // ===== الدول (قائمة كاملة بالإنجليزية حالياً) =====
+    const COUNTRIES = [
+      "Afghanistan","Albania","Algeria","Andorra","Angola","Antigua and Barbuda","Argentina","Armenia","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bhutan","Bolivia","Bosnia and Herzegovina","Botswana","Brazil","Brunei","Bulgaria","Burkina Faso","Burundi","Cabo Verde","Cambodia","Cameroon","Canada","Central African Republic","Chad","Chile","China","Colombia","Comoros","Congo (Congo-Brazzaville)","Costa Rica","Côte d’Ivoire","Croatia","Cuba","Cyprus","Czechia","Democratic Republic of the Congo","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Estonia","Eswatini","Ethiopia","Fiji","Finland","France","Gabon","Gambia","Georgia","Germany","Ghana","Greece","Grenada","Guatemala","Guinea","Guinea-Bissau","Guyana","Haiti","Honduras","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Israel","Italy","Jamaica","Japan","Jordan","Kazakhstan","Kenya","Kiribati","Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Marshall Islands","Mauritania","Mauritius","Mexico","Micronesia","Moldova","Monaco","Mongolia","Montenegro","Morocco","Mozambique","Myanmar","Namibia","Nauru","Nepal","Netherlands","New Zealand","Nicaragua","Niger","Nigeria","North Korea","North Macedonia","Norway","Oman","Pakistan","Palau","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Qatar","Romania","Russia","Rwanda","Saint Kitts and Nevis","Saint Lucia","Saint Vincent and the Grenadines","Samoa","San Marino","São Tomé and Príncipe","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","Solomon Islands","Somalia","South Africa","South Korea","South Sudan","Spain","Sri Lanka","Sudan","Suriname","Sweden","Switzerland","Syria","Tajikistan","Tanzania","Thailand","Timor-Leste","Togo","Tonga","Trinidad and Tobago","Tunisia","Turkey","Turkmenistan","Tuvalu","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States","Uruguay","Uzbekistan","Vanuatu","Vatican City","Venezuela","Vietnam","Yemen","Zambia","Zimbabwe"
+    ];
 
-    const ALL_AIRPORTS = Object.values(DB).flat();
+    const countriesGrid = document.getElementById('countriesGrid');
+    const countrySearch = document.getElementById('countrySearch');
 
-    const originInput = document.getElementById('origin');
-    const destInput   = document.getElementById('destination');
-    const fromDrop = document.getElementById('fromDrop');
-    const toDrop   = document.getElementById('toDrop');
-
-    // فتح القوائم
-    function openDrop(which){
-      closeDrops();
-      if(which==='from'){buildFromDrop(); fromDrop.classList.add('open');}
-      else {buildToDrop(); toDrop.classList.add('open');}
+    function renderCountries(list){
+      countriesGrid.innerHTML='';
+      list.forEach(name=>{
+        const chip=document.createElement('button');
+        chip.className='btn';
+        chip.type='button';
+        chip.style.background='#fff'; chip.style.color='var(--ink)'; chip.style.border='1px solid var(--line)'; chip.style.fontWeight='700'; chip.style.padding='10px 12px';
+        chip.textContent=name;
+        chip.onclick=()=>{ destination.value = name; document.getElementById('providers').innerHTML=''; document.getElementById('tickets').innerHTML=''; buildLinks(); };
+        countriesGrid.appendChild(chip);
+      });
     }
-    function closeDrops(){fromDrop.classList.remove('open'); toDrop.classList.remove('open');}
-    document.addEventListener('click', (e)=>{
-      if(!e.target.closest('.fld')) closeDrops();
+
+    function resetCountries(){ countrySearch.value=''; renderCountries(COUNTRIES); }
+    countrySearch.addEventListener('input', ()=>{
+      const q=countrySearch.value.trim().toLowerCase();
+      renderCountries(COUNTRIES.filter(c=>c.toLowerCase().includes(q)));
     });
 
-    // بناء قائمة "من": دول ثم مطاراتها
-    function buildFromDrop(filter=""){
-      fromDrop.innerHTML='';
-      Object.keys(DB).forEach(country=>{
-        const sec=document.createElement('div');
-        sec.innerHTML = `<div class="section-title">${country}</div>`;
-        fromDrop.appendChild(sec);
-        DB[country]
-          .filter(a => (country+" "+a.c+" "+a.n).includes(filter.trim()))
-          .forEach(a=>{
-            const it=document.createElement('div');
-            it.className='item';
-            it.textContent=`${a.n}`;
-            const span=document.createElement('span'); span.className='code'; span.textContent=a.c; it.appendChild(span);
-            it.onclick=()=>{originInput.value=`${a.c} – ${a.n}`; closeDrops(); destInput.focus();};
-            fromDrop.appendChild(it);
-          })
-      });
-    }
+    // ===== نهاية قسم الدول =====
 
-    // بناء قائمة "إلى": جميع المطارات فقط
-    function buildToDrop(filter=""){
-      toDrop.innerHTML='';
-      const sec=document.createElement('div');
-      sec.innerHTML = `<div class="section-title">المطارات</div>`;
-      toDrop.appendChild(sec);
-      ALL_AIRPORTS
-        .filter(a => (a.c+" "+a.n).includes(filter.trim()))
-        .forEach(a=>{
-          const it=document.createElement('div');
-          it.className='item';
-          it.textContent=`${a.n}`;
-          const span=document.createElement('span'); span.className='code'; span.textContent=a.c; it.appendChild(span);
-          it.onclick=()=>{destInput.value=`${a.c} – ${a.n}`; closeDrops();};
-          toDrop.appendChild(it);
-        });
-    }
-
-    function filterDrop(which){
-      const v=(which==='from'?originInput.value:destInput.value).trim();
-      const f=v.split('–')[0]?.trim()||v;
-      if(which==='from') buildFromDrop(f.toUpperCase()); else buildToDrop(f.toUpperCase());
-    }
-
-    function parseCode(v){if(!v) return ''; const code=(v.split('–')[0]||'').trim().toUpperCase(); return code.length===3?code:v.trim().toUpperCase();}
-
-    // ====== مربّع التذاكر (الأرخص → الأعلى) ======
-    async function buildLinks(){
-      const origin=parseCode(originInput.value);
-      const destination=parseCode(destInput.value);
-      if(!origin||!destination){alert('رجاءً اختر: من / إلى');return;}
-
-      document.getElementById('summary').innerHTML=`من <strong>${origin}</strong> إلى <strong>${destination}</strong>`;
-
-      // --- (اختياري) جلب أسعار حقيقية عبر API ---
-      // للدعم الفعلي: ضع مفتاح Tequila (Kiwi) أو Amadeus هنا، ثم أزل التعليق عن fetchTickets()
-      // const tickets = await fetchTickets_Tequila(origin, destination);
-      const tickets = null; // اتركه null إن لم تملك API الآن
-
-      renderTickets(tickets, origin, destination);
-      renderProviderLinks(origin, destination);
-    }
-
-    function renderTickets(tickets, origin, destination){
-      const box=document.getElementById('tickets');
-      box.innerHTML='';
-      if(Array.isArray(tickets) && tickets.length){
-        tickets.sort((a,b)=>a.price-b.price);
-        tickets.forEach(t=>{
-          const el=document.createElement('div'); el.className='ticket';
-          el.innerHTML=`<div><div><strong>${t.carrier||'شركة طيران'}</strong> • <span class="meta">${t.stops? t.stops+' توقف' : 'مباشر'}</span></div>
-                          <div class="meta">المدة: ${t.duration||'-'} • الإقلاع: ${t.depart||'-'} • الوصول: ${t.arrive||'-'}</div></div>
-                         <div class="price">${t.price} ${t.currency||'USD'}</div>`;
-          if(t.link){
-            const a=document.createElement('a'); a.className='btn'; a.style.padding='8px 10px'; a.style.textDecoration='none'; a.textContent='احجز'; a.href=t.link; a.target='_blank'; a.rel='noopener';
-            el.appendChild(a);
-          }
-          box.appendChild(el);
-        });
-      } else {
-        const el=document.createElement('div'); el.className='ticket';
-        el.innerHTML = `<div class="meta">لإظهار الأسعار هنا مباشرةً، اربط مفتاح API (Kiwi/Amadeus). حالياً يمكنك فتح مواقع المقارنة أدناه.</div>`;
-        box.appendChild(el);
-      }
-    }
-
-    function renderProviderLinks(origin, destination){
-      const box=document.getElementById('providers'); box.innerHTML='';
-      const urls=[
-        {name:'Google Flights', url:`https://www.google.com/travel/flights?hl=ar&q=${encodeURIComponent(`flights from ${origin} to ${destination}`)}`},
-        {name:'Skyscanner', url:`https://www.skyscanner.net/transport/flights/${origin}/${destination}/?adults=1&cabinclass=economy`},
-        {name:'KAYAK', url:`https://www.kayak.com/flights/${origin}-${destination}?sort=best`},
-        {name:'Expedia', url:`https://www.expedia.com/Flights-Search?trip=oneway&leg1=from:${origin},to:${destination}&passengers=adults:1&mode=search`},
-        {name:'Wego', url:`https://www.wego.com/flights/${origin}-${destination}`}
-      ];
-      urls.forEach(p=>{
-        const card=document.createElement('div'); card.className='prov';
-        card.innerHTML=`<strong>${p.name}</strong><a href="${p.url}" target="_blank" rel="noopener">افتح النتائج</a>`;
-        box.appendChild(card);
-      });
-    }
-
-    // ===== مثال توصيل حقيقي (Kiwi Tequila API) =====
-    // 1) سجّل على https://tequila.kiwi.com للحصول على apikey
-    // 2) ضع المفتاح في TEQUILA_API_KEY
-    // 3) أزل التعليق عن استدعاء fetchTickets_Tequila في buildLinks()
-    const TEQUILA_API_KEY = ""; // ضع مفتاحك هنا
-    async function fetchTickets_Tequila(origin, destination){
-      if(!TEQUILA_API_KEY) return null;
-      const date = new Date();
-      const dd = String(date.getDate()+7).padStart(2,'0');
-      const mm = String(date.getMonth()+1).padStart(2,'0');
-      const yyyy = date.getFullYear();
-      const dateTo = String(date.getDate()+21).padStart(2,'0');
-      const params = new URLSearchParams({
-        fly_from: origin, fly_to: destination,
-        date_from: `${dd}/${mm}/${yyyy}`, date_to: `${dateTo}/${mm}/${yyyy}`,
-        curr: 'USD', partner: 'picky', limit: '10', sort: 'price'
-      });
-      const res = await fetch(`https://tequila-api.kiwi.com/v2/search?${params.toString()}`,{
-        headers:{ 'apikey': TEQUILA_API_KEY }
-      });
-      if(!res.ok) return null;
-      const data = await res.json();
-      return (data.data||[]).map(x=>({
-        price: x.price, currency: 'USD', carrier: (x.airlines||[])[0],
-        duration: Math.round((x.duration?.total||0)/60)+' د',
-        stops: (x.route?.length||1)-1,
-        depart: new Date((x.route?.[0]?.dTimeUTC||0)*1000).toLocaleString('ar-EG'),
-        arrive: new Date((x.route?.slice(-1)[0]?.aTimeUTC||0)*1000).toLocaleString('ar-EG'),
-        link: x.deep_link
-      }));
-    }
+    // (تكملة السكربت السابق: قواعد الاختيار، الروابط، ودمج API)
   </script></body>
 </html>
