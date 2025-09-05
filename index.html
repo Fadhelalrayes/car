@@ -4,31 +4,46 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>تذكرتك | قارن أسعار التذاكر</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
   <style>
     :root{
       --bg:#f9fafb; --card:#ffffff; --ink:#0f172a; --muted:#6b7280; --line:#e5e7eb;
       --brand:#0ea5e9; --brand-2:#0284c7; --shadow:0 12px 30px rgba(2,132,199,.12);
-      --radius:18px; --ring:0 0 0 3px rgba(14,165,233,.25);
+      --radius:18px; --ring:0 0 0 3px rgba(14,165,233,.25); --accent:#10b981;
     }
     *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--ink);font-family:'Cairo',sans-serif}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:'Cairo',system-ui,Segoe UI,Roboto,Arial}
     header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}
     .container{max-width:980px;margin:auto;padding:16px}
-    .logo{font-size:28px;font-weight:900;color:#0ea5e9}
+    .logo{font-weight:900;font-size:28px;color:var(--brand)}
     /* البحث العمودي */
     form.search{display:grid;gap:12px;margin-top:16px}
-    .fld{background:var(--card);border:2px solid #e5e7eb;border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
+    .fld{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
     .fld:focus-within{border-color:var(--brand);box-shadow:var(--shadow),var(--ring)}
     .lbl{font-size:13px;color:var(--muted);margin-bottom:6px}
     select,input{width:100%;border:0;outline:none;background:transparent;font-size:18px;padding:8px 0;color:var(--ink)}
-    .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .cta{width:100%;background:linear-gradient(180deg,var(--brand),var(--brand-2));color:#fff;border:0;border-radius:18px;padding:16px 18px;font-weight:900;cursor:pointer;font-size:18px;box-shadow:var(--shadow)}
+    /* صف التاريخ (3 مربعات صغيرة) */
+    .dates{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .triplet{display:flex;gap:8px}
+    .triplet input{
+      flex:1;
+      border:1px solid var(--line);
+      background:#fff;
+      border-radius:12px;
+      padding:10px;
+      font-size:16px;
+      text-align:center;
+    }
+    .triplet input:focus{outline:none;border-color:var(--brand);box-shadow:var(--ring)}
+    .cta{
+      width:100%;background:linear-gradient(180deg,var(--brand),var(--brand-2));color:#fff;
+      border:0;border-radius:18px;padding:16px 18px;font-weight:900;cursor:pointer;font-size:18px;box-shadow:var(--shadow)
+    }
     .cta:hover{filter:brightness(.98)}
-    /* عرض رابط بديل عند منع النوافذ المنبثقة */
+    /* إشعار فتح الرابط */
     .card{margin:14px 0;background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px}
-    .meta{color:#6b7280;font-size:13px}
-    .link{display:inline-block;margin-top:8px;background:#10b981;color:#062a24;padding:10px 12px;border-radius:12px;font-weight:900;text-decoration:none}
+    .meta{color:var(--muted);font-size:13px}
+    .link{display:inline-block;margin-top:8px;background:var(--accent);color:#062a24;padding:10px 12px;border-radius:12px;font-weight:900;text-decoration:none}
   </style>
 </head>
 <body>
@@ -36,7 +51,7 @@
     <div class="container">
       <div class="logo">✈️ تذكرتك</div>
 
-      <!-- من أعلى لأسفل: من / إلى / تاريخ الذهاب والعودة (يدوي) / الموقع / ابحث -->
+      <!-- من أعلى لأسفل: من / إلى / تاريخ الذهاب والعودة (3 مربعات) / الموقع / ابحث -->
       <form class="search" onsubmit="event.preventDefault(); openSelected();">
         <!-- من -->
         <div class="fld">
@@ -100,7 +115,6 @@
         <div class="fld">
           <div class="lbl">🛬 إلى (الدولة/المدينة)</div>
           <select id="destination">
-            <!-- نفس القوائم -->
             <optgroup label="الدول العربية">
               <option value="CAI" selected>مصر - القاهرة (CAI)</option>
               <option value="RUH">السعودية - الرياض (RUH)</option>
@@ -155,15 +169,23 @@
           </select>
         </div>
 
-        <!-- التواريخ (إدخال يدوي) -->
-        <div class="row2">
+        <!-- التواريخ: 3 مربعات صغيرة لكل تاريخ -->
+        <div class="dates">
           <div class="fld">
-            <div class="lbl">📅 تاريخ الذهاب (مثال: 2025-9-3)</div>
-            <input id="dep" placeholder="YYYY-M-D (اختياري)">
+            <div class="lbl">📅 تاريخ الذهاب</div>
+            <div class="triplet">
+              <input id="depY" placeholder="سنة">
+              <input id="depM" placeholder="شهر">
+              <input id="depD" placeholder="يوم">
+            </div>
           </div>
           <div class="fld">
-            <div class="lbl">↩️ تاريخ العودة (مثال: 2025-9-20)</div>
-            <input id="ret" placeholder="YYYY-M-D (اختياري)">
+            <div class="lbl">↩️ تاريخ العودة</div>
+            <div class="triplet">
+              <input id="retY" placeholder="سنة">
+              <input id="retM" placeholder="شهر">
+              <input id="retD" placeholder="يوم">
+            </div>
           </div>
         </div>
 
@@ -193,26 +215,22 @@
   </header>
 
   <script>
-    function parseDateFlexible(v){
-      if(!v) return null; // اختياري
-      v = v.replace(/[\\/.\\s]+/g,'-').trim(); // يسمح بـ 2025/9/3 أو 2025 9 3
-      const parts = v.split('-').map(x=>x.trim()).filter(Boolean);
-      if(parts.length < 3) return null;
-      let [y,m,d] = parts;
-      if(!/^\\d{4}$/.test(y)) return null;
-      m = String(parseInt(m,10));
-      d = String(parseInt(d,10));
-      if(!(+m>=1 && +m<=12)) return null;
-      if(!(+d>=1 && +d<=31)) return null;
-      // طباعة بصيغة نظامية
-      return `${y}-${m.padStart(2,'0')}-${d.padStart(2,'0')}`;
+    function parseDateParts(y,m,d){
+      // حقول التاريخ اختيارية؛ إذا ناقص أي جزء نرجع null
+      if(!y || !m || !d) return null;
+      y = String(y).trim(); m = String(m).trim(); d = String(d).trim();
+      if(!/^\d{4}$/.test(y)) return null;
+      const mm = String(parseInt(m,10));
+      const dd = String(parseInt(d,10));
+      if(!(+mm>=1 && +mm<=12)) return null;
+      if(!(+dd>=1 && +dd<=31)) return null;
+      return `${y}-${mm.padStart(2,'0')}-${dd.padStart(2,'0')}`;
     }
 
     function buildURL(provider, o, d, dep, ret){
       const hasDep = !!dep, hasRet = !!ret;
       switch(provider){
         case 'google': {
-          // جوجل يقبل صيغة نصية داخل q
           let q = `flights from ${o} to ${d}`;
           if(hasDep) q += ` ${dep}`;
           if(hasRet) q += ` return ${ret}`;
@@ -220,19 +238,16 @@
           return `https://www.google.com/travel/flights?hl=ar&q=${encodeURIComponent(q)}`;
         }
         case 'kayak': {
-          // Kayak يدعم ISO في المسار
           if(hasDep && hasRet) return `https://www.kayak.ae/flights/${o}-${d}/${dep}/${ret}?sort=price_a&lang=ar`;
           if(hasDep)          return `https://www.kayak.ae/flights/${o}-${d}/${dep}?sort=price_a&lang=ar`;
           return `https://www.kayak.ae/flights/${o}-${d}?sort=price_a&lang=ar`;
         }
         case 'kiwi': {
-          // Kiwi يدعم ISO في المسار
           if(hasDep && hasRet) return `https://www.kiwi.com/ar/search/results/${o}/${d}/${dep}/${ret}/`;
           if(hasDep)          return `https://www.kiwi.com/ar/search/results/${o}/${d}/${dep}/`;
           return `https://www.kiwi.com/ar/search/results/${o}/${d}/`;
         }
         case 'expedia': {
-          // Expedia عبر بارامترات (تقريبية تكفي للفتح)
           const base = 'https://www.expedia.com/Flights-Search';
           if(hasDep && hasRet){
             return `${base}?trip=roundtrip&leg1=from:${o},to:${d},departure:${dep}TANYT&leg2=from:${d},to:${o},departure:${ret}TANYT&passengers=adults:1&mode=search`;
@@ -243,11 +258,11 @@
           return `${base}?trip=oneway&leg1=from:${o},to:${d}&passengers=adults:1&mode=search`;
         }
         case 'skyscanner': {
-          // تمرير بدون تاريخ (أنماط التواريخ لديهم متعددة حسب المنطقة)
+          // تمرير بدون تاريخ لفتح البحث بسرعة
           return `https://www.skyscanner.net/transport/flights/${o}/${d}/?adults=1&cabinclass=economy&locale=ar-SA`;
         }
         case 'wego': {
-          // تمرير بدون تاريخ (روابط عامة تعمل سريعًا)
+          // تمرير بدون تاريخ
           return `https://www.wego.ae/flights/${o}-${d}`;
         }
         default: return '#';
@@ -255,26 +270,36 @@
     }
 
     function openSelected(){
-      const o = document.getElementById('origin').value;
-      const d = document.getElementById('destination').value;
-      const provider = document.getElementById('provider').value;
-      const dep = parseDateFlexible(document.getElementById('dep').value);
-      const ret = parseDateFlexible(document.getElementById('ret').value);
+      const o   = document.getElementById('origin').value;
+      const d   = document.getElementById('destination').value;
+      const p   = document.getElementById('provider').value;
 
-      // إن أدخل المستخدم نصًا غير صالح في التاريخ نتجاهله بدل إيقافه
-      const url = buildURL(provider, o, d, dep, ret);
+      const dep = parseDateParts(
+        document.getElementById('depY').value,
+        document.getElementById('depM').value,
+        document.getElementById('depD').value
+      );
+      const ret = parseDateParts(
+        document.getElementById('retY').value,
+        document.getElementById('retM').value,
+        document.getElementById('retD').value
+      );
 
-      // افتح في تبويب جديد + عرض رابط احتياطي
+      if(!o || !d){ alert('اختر: من / إلى'); return; }
+
+      const url = buildURL(p, o, d, dep, ret);
+
+      // افتح في تبويب جديد + رابط احتياطي
       const win = window.open(url, '_blank', 'noopener');
       const info = document.getElementById('openInfo');
       const link = document.getElementById('openLink');
       const sum  = document.getElementById('openSummary');
       info.style.display='block';
-      sum.textContent = `الموقع: ${document.querySelector('#provider option:checked').textContent} — المسار: ${o} → ${d}`
-        + (dep? ` — الذهاب: ${dep}`:'') + (ret? ` — العودة: ${ret}`:'');
+      sum.textContent = `المسار: ${o} → ${d}` + (dep? ` — الذهاب: ${dep}`:'') + (ret? ` — العودة: ${ret}`:'') +
+                        ` — الموقع: ${document.querySelector('#provider option:checked').textContent}`;
       link.href = url;
 
-      if(!win){ alert('جاهز! إذا لم يُفتح تلقائيًا، اضغط "افتح الرابط يدويًا".'); }
+      if(!win){ alert('تم تجهيز الرابط. إذا لم يُفتح تلقائيًا، اضغط "افتح الرابط يدويًا".'); }
     }
   </script>
 </body>
