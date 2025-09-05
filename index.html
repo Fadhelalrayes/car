@@ -6,44 +6,21 @@
   <title>تذكرتك | قارن أسعار التذاكر</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#f9fafb; --card:#ffffff; --ink:#0f172a; --muted:#6b7280; --line:#e5e7eb;
-      --brand:#0ea5e9; --brand-2:#0284c7; --shadow:0 12px 30px rgba(2,132,199,.12);
-      --radius:18px; --ring:0 0 0 3px rgba(14,165,233,.25); --accent:#10b981;
-    }
-    *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--ink);font-family:'Cairo',system-ui,Segoe UI,Roboto,Arial}
-    header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}
+    body{margin:0;background:#f9fafb;color:#0f172a;font-family:'Cairo',sans-serif}
+    header{background:#fff;border-bottom:1px solid #e5e7eb;position:sticky;top:0;z-index:10}
     .container{max-width:980px;margin:auto;padding:16px}
-    .logo{font-weight:900;font-size:28px;color:var(--brand)}
-    /* البحث العمودي */
+    .logo{font-weight:900;font-size:28px;color:#0ea5e9}
     form.search{display:grid;gap:12px;margin-top:16px}
-    .fld{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
-    .fld:focus-within{border-color:var(--brand);box-shadow:var(--shadow),var(--ring)}
-    .lbl{font-size:13px;color:var(--muted);margin-bottom:6px}
-    select,input{width:100%;border:0;outline:none;background:transparent;font-size:18px;padding:8px 0;color:var(--ink)}
-    /* صف التاريخ (3 مربعات صغيرة) */
-    .dates{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .triplet{display:flex;gap:8px}
-    .triplet input{
-      flex:1;
-      border:1px solid var(--line);
-      background:#fff;
-      border-radius:12px;
-      padding:10px;
-      font-size:16px;
-      text-align:center;
-    }
-    .triplet input:focus{outline:none;border-color:var(--brand);box-shadow:var(--ring)}
-    .cta{
-      width:100%;background:linear-gradient(180deg,var(--brand),var(--brand-2));color:#fff;
-      border:0;border-radius:18px;padding:16px 18px;font-weight:900;cursor:pointer;font-size:18px;box-shadow:var(--shadow)
-    }
+    .fld{background:#fff;border:2px solid #e5e7eb;border-radius:18px;padding:14px 16px;box-shadow:0 12px 30px rgba(2,132,199,.12)}
+    .fld:focus-within{border-color:#0ea5e9;box-shadow:0 12px 30px rgba(2,132,199,.12),0 0 0 3px rgba(14,165,233,.25)}
+    .lbl{font-size:13px;color:#6b7280;margin-bottom:6px}
+    select,input{width:100%;border:0;outline:none;background:transparent;font-size:18px;padding:8px 0;color:#0f172a}
+    input[type=date]{font-size:16px;padding:6px}
+    .cta{width:100%;background:linear-gradient(180deg,#0ea5e9,#0284c7);color:#fff;border:0;border-radius:18px;padding:16px;font-weight:900;cursor:pointer;font-size:18px;box-shadow:0 12px 30px rgba(2,132,199,.12)}
     .cta:hover{filter:brightness(.98)}
-    /* إشعار فتح الرابط */
-    .card{margin:14px 0;background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px}
-    .meta{color:var(--muted);font-size:13px}
-    .link{display:inline-block;margin-top:8px;background:var(--accent);color:#062a24;padding:10px 12px;border-radius:12px;font-weight:900;text-decoration:none}
+    .card{margin:14px 0;background:#fff;border:1px solid #e5e7eb;border-radius:18px;padding:14px}
+    .meta{color:#6b7280;font-size:13px}
+    .link{display:inline-block;margin-top:8px;background:#10b981;color:#062a24;padding:10px 12px;border-radius:12px;font-weight:900;text-decoration:none}
   </style>
 </head>
 <body>
@@ -51,162 +28,91 @@
     <div class="container">
       <div class="logo">✈️ تذكرتك</div>
 
-      <!-- من أعلى لأسفل: من / إلى / تاريخ الذهاب والعودة (3 مربعات) / الموقع / ابحث -->
       <form class="search" onsubmit="event.preventDefault(); openSelected();">
         <!-- من -->
         <div class="fld">
-          <div class="lbl">🛫 من (الدولة/المدينة)</div>
+          <div class="lbl">🛫 من</div>
           <select id="origin">
             <optgroup label="الدول العربية">
               <option value="CAI">مصر - القاهرة (CAI)</option>
               <option value="RUH">السعودية - الرياض (RUH)</option>
               <option value="JED">السعودية - جدة (JED)</option>
-              <option value="DMM">السعودية - الدمام (DMM)</option>
               <option value="DXB">الإمارات - دبي (DXB)</option>
-              <option value="AUH">الإمارات - أبوظبي (AUH)</option>
-              <option value="SHJ">الإمارات - الشارقة (SHJ)</option>
-              <option value="DOH">قطر - الدوحة (DOH)</option>
-              <option value="KWI">الكويت - الكويت (KWI)</option>
-              <option value="MCT">عُمان - مسقط (MCT)</option>
               <option value="BAH" selected>البحرين - المنامة (BAH)</option>
-              <option value="AMM">الأردن - عمّان (AMM)</option>
-              <option value="BEY">لبنان - بيروت (BEY)</option>
-              <option value="CMN">المغرب - الدار البيضاء (CMN)</option>
-              <option value="ALG">الجزائر - الجزائر (ALG)</option>
-              <option value="TUN">تونس - تونس (TUN)</option>
-              <option value="MJI">ليبيا - طرابلس (MJI)</option>
-              <option value="KRT">السودان - الخرطوم (KRT)</option>
-              <option value="SAH">اليمن - صنعاء (SAH)</option>
-              <option value="DAM">سوريا - دمشق (DAM)</option>
-              <option value="BGW">العراق - بغداد (BGW)</option>
-              <option value="NKC">موريتانيا - نواكشوط (NKC)</option>
+              <!-- أضف بقية الدول العربية حسب الحاجة -->
             </optgroup>
             <optgroup label="وجهات سياحية أجنبية">
               <option value="IST">تركيا - إسطنبول (IST)</option>
-              <option value="TZX">تركيا - طرابزون (TZX)</option>
-              <option value="AYT">تركيا - أنطاليا (AYT)</option>
               <option value="CDG">فرنسا - باريس (CDG)</option>
               <option value="LHR">بريطانيا - لندن (LHR)</option>
-              <option value="MXP">إيطاليا - ميلانو (MXP)</option>
               <option value="FCO">إيطاليا - روما (FCO)</option>
-              <option value="ATH">اليونان - أثينا (ATH)</option>
               <option value="BCN">إسبانيا - برشلونة (BCN)</option>
-              <option value="MAD">إسبانيا - مدريد (MAD)</option>
-              <option value="GVA">سويسرا - جنيف (GVA)</option>
-              <option value="ZRH">سويسرا - زيورخ (ZRH)</option>
-              <option value="AMS">هولندا - أمستردام (AMS)</option>
-              <option value="FRA">ألمانيا - فرانكفورت (FRA)</option>
-              <option value="MUC">ألمانيا - ميونخ (MUC)</option>
-              <option value="VIE">النمسا - فيينا (VIE)</option>
-              <option value="PRG">تشيك - براغ (PRG)</option>
-              <option value="BUD">المجر - بودابست (BUD)</option>
-              <option value="TBS">جورجيا - تبليسي (TBS)</option>
-              <option value="BUS">جورجيا - باتومي (BUS)</option>
-              <option value="GYD">أذربيجان - باكو (GYD)</option>
-              <option value="MLE">المالديف - ماليه (MLE)</option>
-              <option value="BKK">تايلاند - بانكوك (BKK)</option>
-              <option value="KUL">ماليزيا - كوالالمبور (KUL)</option>
-              <option value="SIN">سنغافورة (SIN)</option>
+              <!-- أضف وجهات أخرى -->
             </optgroup>
           </select>
         </div>
 
         <!-- إلى -->
         <div class="fld">
-          <div class="lbl">🛬 إلى (الدولة/المدينة)</div>
+          <div class="lbl">🛬 إلى</div>
           <select id="destination">
             <optgroup label="الدول العربية">
               <option value="CAI" selected>مصر - القاهرة (CAI)</option>
               <option value="RUH">السعودية - الرياض (RUH)</option>
-              <option value="JED">السعودية - جدة (JED)</option>
-              <option value="DMM">السعودية - الدمام (DMM)</option>
               <option value="DXB">الإمارات - دبي (DXB)</option>
-              <option value="AUH">الإمارات - أبوظبي (AUH)</option>
-              <option value="SHJ">الإمارات - الشارقة (SHJ)</option>
-              <option value="DOH">قطر - الدوحة (DOH)</option>
-              <option value="KWI">الكويت - الكويت (KWI)</option>
-              <option value="MCT">عُمان - مسقط (MCT)</option>
-              <option value="BAH">البحرين - المنامة (BAH)</option>
               <option value="AMM">الأردن - عمّان (AMM)</option>
-              <option value="BEY">لبنان - بيروت (BEY)</option>
-              <option value="CMN">المغرب - الدار البيضاء (CMN)</option>
-              <option value="ALG">الجزائر - الجزائر (ALG)</option>
-              <option value="TUN">تونس - تونس (TUN)</option>
-              <option value="MJI">ليبيا - طرابلس (MJI)</option>
-              <option value="KRT">السودان - الخرطوم (KRT)</option>
-              <option value="SAH">اليمن - صنعاء (SAH)</option>
-              <option value="DAM">سوريا - دمشق (DAM)</option>
-              <option value="BGW">العراق - بغداد (BGW)</option>
-              <option value="NKC">موريتانيا - نواكشوط (NKC)</option>
             </optgroup>
             <optgroup label="وجهات سياحية أجنبية">
               <option value="IST">تركيا - إسطنبول (IST)</option>
-              <option value="TZX">تركيا - طرابزون (TZX)</option>
-              <option value="AYT">تركيا - أنطاليا (AYT)</option>
               <option value="CDG">فرنسا - باريس (CDG)</option>
               <option value="LHR">بريطانيا - لندن (LHR)</option>
-              <option value="MXP">إيطاليا - ميلانو (MXP)</option>
-              <option value="FCO">إيطاليا - روما (FCO)</option>
-              <option value="ATH">اليونان - أثينا (ATH)</option>
               <option value="BCN">إسبانيا - برشلونة (BCN)</option>
-              <option value="MAD">إسبانيا - مدريد (MAD)</option>
-              <option value="GVA">سويسرا - جنيف (GVA)</option>
-              <option value="ZRH">سويسرا - زيورخ (ZRH)</option>
-              <option value="AMS">هولندا - أمستردام (AMS)</option>
-              <option value="FRA">ألمانيا - فرانكفورت (FRA)</option>
-              <option value="MUC">ألمانيا - ميونخ (MUC)</option>
-              <option value="VIE">النمسا - فيينا (VIE)</option>
-              <option value="PRG">تشيك - براغ (PRG)</option>
-              <option value="BUD">المجر - بودابست (BUD)</option>
-              <option value="TBS">جورجيا - تبليسي (TBS)</option>
-              <option value="BUS">جورجيا - باتومي (BUS)</option>
-              <option value="GYD">أذربيجان - باكو (GYD)</option>
-              <option value="MLE">المالديف - ماليه (MLE)</option>
-              <option value="BKK">تايلاند - بانكوك (BKK)</option>
-              <option value="KUL">ماليزيا - كوالالمبور (KUL)</option>
-              <option value="SIN">سنغافورة (SIN)</option>
             </optgroup>
           </select>
         </div>
 
-        <!-- التواريخ: 3 مربعات صغيرة لكل تاريخ -->
-        <div class="dates">
-          <div class="fld">
-            <div class="lbl">📅 تاريخ الذهاب</div>
-            <div class="triplet">
-              <input id="depY" placeholder="سنة">
-              <input id="depM" placeholder="شهر">
-              <input id="depD" placeholder="يوم">
-            </div>
-          </div>
-          <div class="fld">
-            <div class="lbl">↩️ تاريخ العودة</div>
-            <div class="triplet">
-              <input id="retY" placeholder="سنة">
-              <input id="retM" placeholder="شهر">
-              <input id="retD" placeholder="يوم">
-            </div>
-          </div>
+        <!-- التواريخ -->
+        <div class="fld">
+          <div class="lbl">📅 تاريخ الذهاب</div>
+          <input id="dep" type="date">
+        </div>
+        <div class="fld">
+          <div class="lbl">↩️ تاريخ العودة</div>
+          <input id="ret" type="date">
+        </div>
+
+        <!-- عدد المسافرين -->
+        <div class="fld">
+          <div class="lbl">👥 عدد المسافرين</div>
+          <input id="pax" type="number" min="1" value="1">
+        </div>
+
+        <!-- الدرجة -->
+        <div class="fld">
+          <div class="lbl">💺 الدرجة</div>
+          <select id="cabin">
+            <option value="economy" selected>اقتصادية</option>
+            <option value="business">أعمال</option>
+            <option value="first">أولى</option>
+          </select>
         </div>
 
         <!-- الموقع -->
         <div class="fld">
           <div class="lbl">🌐 الموقع</div>
           <select id="provider">
-            <option value="google" selected>Google Flights (عربي)</option>
-            <option value="skyscanner">Skyscanner (عربي)</option>
-            <option value="kayak">KAYAK (عربي)</option>
-            <option value="wego">Wego (عربي)</option>
-            <option value="kiwi">Kiwi.com (عربي)</option>
+            <option value="google" selected>Google Flights</option>
+            <option value="skyscanner">Skyscanner</option>
+            <option value="kayak">KAYAK</option>
+            <option value="wego">Wego</option>
+            <option value="kiwi">Kiwi.com</option>
             <option value="expedia">Expedia</option>
           </select>
         </div>
 
-        <!-- ابحث -->
         <button class="cta" type="submit">🔎 ابحث</button>
       </form>
 
-      <!-- إشعار فتح الرابط -->
       <div id="openInfo" class="card" style="display:none">
         <div class="meta" id="openSummary">—</div>
         <a class="link" id="openLink" target="_blank" rel="noopener">افتح الرابط يدويًا</a>
@@ -215,56 +121,41 @@
   </header>
 
   <script>
-    function parseDateParts(y,m,d){
-      // حقول التاريخ اختيارية؛ إذا ناقص أي جزء نرجع null
-      if(!y || !m || !d) return null;
-      y = String(y).trim(); m = String(m).trim(); d = String(d).trim();
-      if(!/^\d{4}$/.test(y)) return null;
-      const mm = String(parseInt(m,10));
-      const dd = String(parseInt(d,10));
-      if(!(+mm>=1 && +mm<=12)) return null;
-      if(!(+dd>=1 && +dd<=31)) return null;
-      return `${y}-${mm.padStart(2,'0')}-${dd.padStart(2,'0')}`;
-    }
-
-    function buildURL(provider, o, d, dep, ret){
-      const hasDep = !!dep, hasRet = !!ret;
+    function buildURL(provider, o, d, dep, ret, pax, cabin){
       switch(provider){
         case 'google': {
           let q = `flights from ${o} to ${d}`;
-          if(hasDep) q += ` ${dep}`;
-          if(hasRet) q += ` return ${ret}`;
-          q += ` 1 adult economy`;
+          if(dep) q += ` ${dep}`;
+          if(ret) q += ` return ${ret}`;
+          q += ` ${pax} adult ${cabin}`;
           return `https://www.google.com/travel/flights?hl=ar&q=${encodeURIComponent(q)}`;
         }
         case 'kayak': {
-          if(hasDep && hasRet) return `https://www.kayak.ae/flights/${o}-${d}/${dep}/${ret}?sort=price_a&lang=ar`;
-          if(hasDep)          return `https://www.kayak.ae/flights/${o}-${d}/${dep}?sort=price_a&lang=ar`;
-          return `https://www.kayak.ae/flights/${o}-${d}?sort=price_a&lang=ar`;
+          let base = `https://www.kayak.ae/flights/${o}-${d}`;
+          if(dep) base += `/${dep}`;
+          if(ret) base += `/${ret}`;
+          return `${base}?adults=${pax}&cabin=${cabin}&sort=price_a&lang=ar`;
         }
         case 'kiwi': {
-          if(hasDep && hasRet) return `https://www.kiwi.com/ar/search/results/${o}/${d}/${dep}/${ret}/`;
-          if(hasDep)          return `https://www.kiwi.com/ar/search/results/${o}/${d}/${dep}/`;
-          return `https://www.kiwi.com/ar/search/results/${o}/${d}/`;
+          let base = `https://www.kiwi.com/ar/search/results/${o}/${d}`;
+          if(dep) base += `/${dep}`;
+          if(ret) base += `/${ret}`;
+          return base + `/?adults=${pax}&cabinClass=${cabin}`;
         }
         case 'expedia': {
           const base = 'https://www.expedia.com/Flights-Search';
-          if(hasDep && hasRet){
-            return `${base}?trip=roundtrip&leg1=from:${o},to:${d},departure:${dep}TANYT&leg2=from:${d},to:${o},departure:${ret}TANYT&passengers=adults:1&mode=search`;
+          if(dep && ret){
+            return `${base}?trip=roundtrip&leg1=from:${o},to:${d},departure:${dep}TANYT&leg2=from:${d},to:${o},departure:${ret}TANYT&passengers=adults:${pax}&cabinclass=${cabin}&mode=search`;
           }
-          if(hasDep){
-            return `${base}?trip=oneway&leg1=from:${o},to:${d},departure:${dep}TANYT&passengers=adults:1&mode=search`;
+          if(dep){
+            return `${base}?trip=oneway&leg1=from:${o},to:${d},departure:${dep}TANYT&passengers=adults:${pax}&cabinclass=${cabin}&mode=search`;
           }
-          return `${base}?trip=oneway&leg1=from:${o},to:${d}&passengers=adults:1&mode=search`;
+          return `${base}?trip=oneway&leg1=from:${o},to:${d}&passengers=adults:${pax}&cabinclass=${cabin}&mode=search`;
         }
-        case 'skyscanner': {
-          // تمرير بدون تاريخ لفتح البحث بسرعة
-          return `https://www.skyscanner.net/transport/flights/${o}/${d}/?adults=1&cabinclass=economy&locale=ar-SA`;
-        }
-        case 'wego': {
-          // تمرير بدون تاريخ
-          return `https://www.wego.ae/flights/${o}-${d}`;
-        }
+        case 'skyscanner':
+          return `https://www.skyscanner.net/transport/flights/${o}/${d}/?adults=${pax}&cabinclass=${cabin}&locale=ar-SA`;
+        case 'wego':
+          return `https://www.wego.ae/flights/${o}-${d}?adults=${pax}&cabin=${cabin}`;
         default: return '#';
       }
     }
@@ -273,33 +164,25 @@
       const o   = document.getElementById('origin').value;
       const d   = document.getElementById('destination').value;
       const p   = document.getElementById('provider').value;
-
-      const dep = parseDateParts(
-        document.getElementById('depY').value,
-        document.getElementById('depM').value,
-        document.getElementById('depD').value
-      );
-      const ret = parseDateParts(
-        document.getElementById('retY').value,
-        document.getElementById('retM').value,
-        document.getElementById('retD').value
-      );
+      const dep = document.getElementById('dep').value;
+      const ret = document.getElementById('ret').value;
+      const pax = document.getElementById('pax').value || 1;
+      const cabin = document.getElementById('cabin').value;
 
       if(!o || !d){ alert('اختر: من / إلى'); return; }
 
-      const url = buildURL(p, o, d, dep, ret);
-
-      // افتح في تبويب جديد + رابط احتياطي
+      const url = buildURL(p, o, d, dep, ret, pax, cabin);
       const win = window.open(url, '_blank', 'noopener');
+
       const info = document.getElementById('openInfo');
       const link = document.getElementById('openLink');
       const sum  = document.getElementById('openSummary');
       info.style.display='block';
-      sum.textContent = `المسار: ${o} → ${d}` + (dep? ` — الذهاب: ${dep}`:'') + (ret? ` — العودة: ${ret}`:'') +
-                        ` — الموقع: ${document.querySelector('#provider option:checked').textContent}`;
+      sum.textContent = `المسار: ${o} → ${d} — ${pax} راكب — ${cabin}`
+        + (dep? ` — ذهاب: ${dep}`:'') + (ret? ` — عودة: ${ret}`:'');
       link.href = url;
 
-      if(!win){ alert('تم تجهيز الرابط. إذا لم يُفتح تلقائيًا، اضغط "افتح الرابط يدويًا".'); }
+      if(!win){ alert('إذا لم يُفتح الرابط تلقائيًا، اضغط "افتح الرابط يدويًا".'); }
     }
   </script>
 </body>
