@@ -2,81 +2,41 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>تذكرتك | ابحث وقارن أرخص الرحلات</title>
+  <title>تذكرتك | أرخص التذاكر</title>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&display=swap" rel="stylesheet">
-  <meta name="description" content="تذكرتك — واجهة تشبه تجربة Google Flights: ابحث، صفِّ، رشّح، وافتح روابط الحجز الموثوقة مباشرةً." />
+  <meta name="description" content="تذكرتك — أدخل من وإلى فقط ثم افتح مواقع الحجز الموثوقة لعرض أرخص التذاكر." />
   <style>
     :root{
-      --ink:#0f172a;           /* slate-900 */
-      --muted:#596276;         /* slate-500 */
-      --line:#e5e7eb;          /* gray-200 */
-      --bg:#f8fafc;            /* slate-50 */
-      --card:#ffffff;
-      --brand:#0ea5e9;         /* sky-600 */
-      --brand-2:#0284c7;       /* sky-700 */
-      --accent:#16a34a;        /* green-600 */
-      --warn:#f59e0b;          /* amber-500 */
-      --radius:18px;
-      --ring:0 0 0 3px rgba(14,165,233,.25);
+      --ink:#0f172a; --muted:#64748b; --line:#e5e7eb; --bg:#f8fafc; --card:#ffffff;
+      --brand:#0ea5e9; --brand-2:#0284c7; --radius:16px; --ring:0 0 0 3px rgba(14,165,233,.25);
     }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{margin:0;background:var(--bg);color:var(--ink);font-family:'Cairo',system-ui,Segoe UI,Roboto,Arial,sans-serif}/* Header */
-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-.container{max-width:1200px;margin:0 auto;padding:14px 18px}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:'Cairo',system-ui,Segoe UI,Roboto,Arial,sans-serif}header{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line)}
+.container{max-width:900px;margin:0 auto;padding:14px}
 .row{display:flex;align-items:center;gap:12px}
-.brand{display:flex;align-items:center;gap:12px}
-.logo{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:radial-gradient(circle at 30% 30%, #7dd3fc, #0ea5e9);color:white;font-weight:900}
+.logo{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:radial-gradient(circle at 30% 30%, #7dd3fc, #0ea5e9);color:#fff;font-weight:900}
 .title{font-size:22px;font-weight:900}
-.tag{font-size:12px;color:var(--muted)}
 
-/* Search bar */
-.searchbar{margin:14px auto 0;display:grid;gap:10px}
-@media(min-width:960px){.searchbar{grid-template-columns:1.2fr 1.2fr .9fr .9fr .8fr .8fr auto}}
-label{font-size:12px;color:var(--muted);margin-inline:6px}
-.fld{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 10px}
-.fld input,.fld select{width:100%;border:0;outline:none;background:transparent;padding:6px 4px;font-size:14px;color:var(--ink)}
-.actions{display:flex;gap:8px;flex-wrap:wrap}
-.btn{background:var(--brand);color:#fff;border:0;border-radius:12px;padding:10px 14px;font-weight:800;cursor:pointer}
+/* Simple search */
+.searchbar{margin:12px auto 0;display:grid;gap:10px;grid-template-columns:1fr 1fr auto}
+.fld{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:8px 10px}
+.fld label{display:block;font-size:12px;color:var(--muted)}
+.fld input{width:100%;border:0;outline:none;background:transparent;padding:6px 2px;font-size:15px;color:var(--ink)}
+.btn{background:var(--brand);color:#fff;border:0;border-radius:12px;padding:12px 16px;font-weight:800;cursor:pointer}
 .btn:hover{background:var(--brand-2)}
-.btn.alt{background:#fff;color:var(--ink);border:1px solid var(--line)}
-.pill{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 12px;font-size:13px}
 
-/* Filters + sort */
-.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-.tool{background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 12px;font-size:13px;display:flex;gap:8px;align-items:center}
-.tool input[type="checkbox"],.tool input[type="range"]{accent-color:var(--brand)}
-.tool select{border:0;background:transparent}
-.range{display:flex;align-items:center;gap:6px}
-
-/* Layout */
-main{padding:14px 0}
-.grid{display:grid;gap:16px;grid-template-columns:1fr}
-@media(min-width:1000px){.grid{grid-template-columns:320px 1fr}}
-
-/* Side panel */
-.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px;position:sticky;top:86px;height:fit-content}
-.panel h3{margin:0 0 8px 0;font-size:16px}
-.sep{border-top:1px solid var(--line);margin:12px 0}
-
-/* Results */
-.results{display:flex;flex-direction:column;gap:10px}
+main{padding:16px 0}
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px}
-.card h4{margin:0 0 8px 0}
-.meta{display:flex;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:13px}
 .providers{display:grid;gap:10px}
-@media(min-width:800px){.providers{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:720px){.providers{grid-template-columns:repeat(3,1fr)}}
 .prov{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff}
+.prov strong{display:block;margin-bottom:6px}
 .prov a{display:inline-block;margin-top:8px;text-decoration:none;background:var(--brand);color:#fff;padding:8px 12px;border-radius:10px;font-weight:700}
-.prov small{color:var(--muted)}
+.note{color:var(--muted);font-size:13px;margin-top:6px}
 
-/* Chips */
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{background:#fff;border:1px solid var(--line);padding:8px 12px;border-radius:999px;cursor:pointer;font-size:13px}
-
-/* Footer */
-footer{margin-top:16px;border-top:1px dashed var(--line);padding:14px 0}
+footer{margin-top:18px;border-top:1px dashed var(--line);padding:14px 0}
 .credit{display:flex;gap:8px;align-items:center;flex-wrap:wrap;color:var(--muted)}
 .credit a{color:var(--brand-2);font-weight:800;text-decoration:none}
 .credit a:hover{text-decoration:underline}
@@ -88,224 +48,83 @@ footer{margin-top:16px;border-top:1px dashed var(--line);padding:14px 0}
   <header>
     <div class="container">
       <div class="row">
-        <div class="brand">
-          <div class="logo">✈️</div>
-          <div>
-            <div class="title">تذكرتك</div>
-            <div class="tag">واجهة وأدوات قريبة من تجربة Google Flights</div>
-          </div>
-        </div>
-        <div style="margin-inline-start:auto;display:flex;gap:8px;align-items:center">
-          <span class="pill">مواقع موثوقة</span>
-          <span class="pill">بدون تسجيل</span>
-        </div>
-      </div><!-- Searchbar -->
+        <div class="logo">✈️</div>
+        <div class="title">تذكرتك</div>
+      </div><!-- Simple Search: From / To only -->
   <form id="searchForm" class="searchbar" onsubmit="event.preventDefault(); buildLinks();">
     <div class="fld"><label for="origin">من</label><input list="airports" id="origin" placeholder="BAH – المنامة" autocomplete="off"></div>
     <div class="fld"><label for="destination">إلى</label><input list="airports" id="destination" placeholder="CAI – القاهرة" autocomplete="off"></div>
-    <div class="fld"><label for="depart">تاريخ الذهاب</label><input type="date" id="depart"></div>
-    <div class="fld"><label for="return">تاريخ العودة</label><input type="date" id="return"></div>
-    <div class="fld"><label for="adults">المسافرون</label>
-      <select id="adults"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select>
-    </div>
-    <div class="fld"><label for="cabin">الدرجة</label>
-      <select id="cabin"><option value="economy">اقتصادية</option><option value="premium_economy">اقتصادية مميزة</option><option value="business">رجال أعمال</option><option value="first">أولى</option></select>
-    </div>
-    <div class="actions">
-      <button class="btn" type="submit">ابحث</button>
-      <button class="btn alt" type="button" onclick="swap();">تبديل الاتجاه ↔︎</button>
-      <button class="btn alt" type="button" onclick="openAll();">فتح الكل للمقارنة</button>
-    </div>
+    <button class="btn" type="submit">اعرض أرخص التذاكر</button>
   </form>
-
-  <!-- Filter toolbar -->
-  <div class="toolbar" id="toolbar">
-    <div class="tool"><input type="checkbox" id="nonstop"> <label for="nonstop">مباشر فقط</label></div>
-    <div class="tool"><label>مدة الرحلة (س):</label><div class="range"><input id="dur" type="range" min="2" max="24" value="24" oninput="this.nextElementSibling.innerText=this.value"/><span>24</span></div></div>
-    <div class="tool"><label>زمن الإقلاع (ذهاب):</label><div class="range"><input id="depw" type="range" min="0" max="23" value="0" oninput="this.nextElementSibling.innerText=this.value+':00'"/><span>0:00</span></div></div>
-    <div class="tool"><label>زمن الإقلاع (عودة):</label><div class="range"><input id="retw" type="range" min="0" max="23" value="0" oninput="this.nextElementSibling.innerText=this.value+':00'"/><span>0:00</span></div></div>
-    <div class="tool"><label for="sort">ترتيب:</label>
-      <select id="sort"><option value="price">الأرخص أولاً</option><option value="duration">الأسرع</option><option value="depart">الأقرب وقتاً</option></select>
-    </div>
-  </div>
 </div>
 
   </header>  <main class="container">
-    <div class="grid">
-      <!-- Side filters like Google Flights left rail -->
-      <aside class="panel">
-        <h3>التصفية المتقدمة</h3>
-        <div class="sep"></div>
-        <div style="display:grid;gap:8px">
-          <label class="tool"><input type="checkbox" id="onebag"> حقيبة يد فقط</label>
-          <label class="tool"><input type="checkbox" id="refund"> إظهار خيارات قابلة للاسترداد</label>
-          <div class="tool" style="flex-direction:column;align-items:flex-start">
-            <span>شركات الطيران</span>
-            <select id="airlines" multiple size="6" style="width:100%;margin-top:6px">
-              <option value="GF">Gulf Air</option>
-              <option value="SV">Saudia</option>
-              <option value="EK">Emirates</option>
-              <option value="QR">Qatar Airways</option>
-              <option value="MS">EgyptAir</option>
-              <option value="RJ">Royal Jordanian</option>
-            </select>
-          </div>
-          <small style="color:var(--muted)">ملاحظة: التصفية تتم عند فتح مواقع الحجز — هذه الخيارات لتخصيص بحثك فقط.</small>
-        </div>
-        <div class="sep"></div>
-        <h3>وجهات جاهزة</h3>
-        <div class="chips" id="arabChips"></div>
-        <div class="chips" id="worldChips" style="margin-top:8px"></div>
-      </aside><!-- Results column -->
-  <section>
-    <div class="card">
-      <h4>عروض سريعة من مواقع موثوقة</h4>
-      <p class="meta" id="summary">اضبط البحث بالأعلى ثم افتح النتائج.</p>
+    <section class="card">
+      <h4 style="margin:0 0 8px 0">روابط سريعة لأرخص التذاكر</h4>
+      <p id="summary" class="note">أدخل "من" و"إلى" بالأعلى ثم اضغط زر العرض.</p>
       <div class="providers" id="providers"></div>
-      <p style="color:var(--muted);font-size:13px;margin-top:6px">تُعرض الأسعار الفعلية داخل مواقع الحجز (Google Flights، Skyscanner، KAYAK، Expedia، Wego).</p>
-    </div>
-
-    <div class="card">
-      <h4>نصائح لتوفير السعر</h4>
-      <ul style="margin:8px 0 0 0; padding-inline-start:18px; line-height:1.9; color:var(--muted)">
-        <li>جرّب تواريخ قريبة (±3 أيام) أو رحلات منتصف الأسبوع.</li>
-        <li>استخدم مطارات قريبة من الوجهة (مثل HBE بدل CAI حسب الحاجة).</li>
-        <li>رحلات الترانزيت قد تكون أرخص من المباشرة.</li>
-      </ul>
-    </div>
-
-    <footer>
-      <div class="credit">
-        <span>برمجة وتطوير: <a id="devLink" href="https://api.whatsapp.com/send/?phone=97333375858&text&type=phone_number&app_absent=0&wame_ctl=1" target="_blank" rel="noopener">فاضل الريس</a></span>
-        <span>— تواصل عبر واتساب API الرسمي.</span>
-      </div>
-    </footer>
-  </section>
-</div>
+      <p class="note">الأسعار تُعرض داخل مواقع الحجز نفسها (Google Flights، Skyscanner، KAYAK، Expedia، Wego).</p>
+    </section><footer>
+  <div class="credit">
+    <span>برمجة وتطوير: <a href="https://api.whatsapp.com/send/?phone=97333375858&text&type=phone_number&app_absent=0&wame_ctl=1" target="_blank" rel="noopener">فاضل الريس</a></span>
+  </div>
+</footer>
 
   </main>  <!-- datalist for airports --><datalist id="airports"></datalist>
 
   <script>
-    // ===== المطارات الشائعة (IATA) =====
-    const AIRPORTS = [
-      {code:'BAH', name:'المنامة – البحرين'}, {code:'RUH', name:'الرياض – السعودية'}, {code:'JED', name:'جدة – السعودية'}, {code:'DMM', name:'الدمام – السعودية'},
-      {code:'DXB', name:'دبي – الإمارات'}, {code:'AUH', name:'أبوظبي – الإمارات'}, {code:'KWI', name:'الكويت – الكويت'}, {code:'DOH', name:'الدوحة – قطر'}, {code:'MCT', name:'مسقط – عُمان'},
-      {code:'AMM', name:'عمّان – الأردن'}, {code:'BEY', name:'بيروت – لبنان'}, {code:'CAI', name:'القاهرة – مصر'}, {code:'HRG', name:'الغردقة – مصر'}, {code:'SSH', name:'شرم الشيخ – مصر'},
-      {code:'CMN', name:'الدار البيضاء – المغرب'}, {code:'RAK', name:'مراكش – المغرب'}, {code:'TUN', name:'تونس – تونس'}, {code:'ALG', name:'الجزائر – الجزائر'}, {code:'EBL', name:'أربيل – العراق'},
-      {code:'IST', name:'إسطنبول – تركيا'}, {code:'AYT', name:'أنطاليا – تركيا'}, {code:'TBS', name:'تبليسي – جورجيا'}, {code:'GYD', name:'باكو – أذربيجان'},
-      {code:'ATH', name:'أثينا – اليونان'}, {code:'FCO', name:'روما – إيطاليا'}, {code:'CDG', name:'باريس – فرنسا'}, {code:'BCN', name:'برشلونة – إسبانيا'}, {code:'LHR', name:'لندن – المملكة المتحدة'},
-      {code:'BKK', name:'بانكوك – تايلاند'}, {code:'HKT', name:'بوكيت – تايلاند'}, {code:'KUL', name:'كوالالمبور – ماليزيا'}, {code:'DPS', name:'بالي – إندونيسيا'}, {code:'SIN', name:'سنغافورة'}, {code:'MLE', name:'المالديف'}
-    ];
-
-    const ARAB_COUNTRIES = [
-      {label:'البحرين (BAH)', code:'BAH'}, {label:'السعودية – الرياض (RUH)', code:'RUH'}, {label:'السعودية – جدة (JED)', code:'JED'},
-      {label:'الإمارات – دبي (DXB)', code:'DXB'}, {label:'الكويت (KWI)', code:'KWI'}, {label:'قطر – الدوحة (DOH)', code:'DOH'}, {label:'عُمان – مسقط (MCT)', code:'MCT'},
-      {label:'الأردن – عمّان (AMM)', code:'AMM'}, {label:'لبنان – بيروت (BEY)', code:'BEY'}, {label:'مصر – القاهرة (CAI)', code:'CAI'}
-    ];
-
-    const WORLD_HOLIDAYS = [
-      {label:'تركيا – إسطنبول (IST)', code:'IST'}, {label:'تركيا – أنطاليا (AYT)', code:'AYT'}, {label:'جورجيا – تبليسي (TBS)', code:'TBS'},
-      {label:'أذربيجان – باكو (GYD)', code:'GYD'}, {label:'اليونان – أثينا (ATH)', code:'ATH'}, {label:'إيطاليا – روما (FCO)', code:'FCO'},
-      {label:'فرنسا – باريس (CDG)', code:'CDG'}, {label:'إسبانيا – برشلونة (BCN)', code:'BCN'}, {label:'المالديف – ماليه (MLE)', code:'MLE'}
+    // مطارات مختصرة شائعة
+    const AIRPORTS=[
+      {code:'BAH',name:'المنامة – البحرين'}, {code:'RUH',name:'الرياض – السعودية'}, {code:'JED',name:'جدة – السعودية'}, {code:'DMM',name:'الدمام – السعودية'},
+      {code:'DXB',name:'دبي – الإمارات'}, {code:'AUH',name:'أبوظبي – الإمارات'}, {code:'KWI',name:'الكويت – الكويت'}, {code:'DOH',name:'الدوحة – قطر'}, {code:'MCT',name:'مسقط – عُمان'},
+      {code:'AMM',name:'عمّان – الأردن'}, {code:'BEY',name:'بيروت – لبنان'}, {code:'CAI',name:'القاهرة – مصر'}, {code:'HRG',name:'الغردقة – مصر'}, {code:'SSH',name:'شرم الشيخ – مصر'},
+      {code:'CMN',name:'الدار البيضاء – المغرب'}, {code:'RAK',name:'مراكش – المغرب'}, {code:'IST',name:'إسطنبول – تركيا'}, {code:'AYT',name:'أنطاليا – تركيا'}, {code:'TBS',name:'تبليسي – جورجيا'},
+      {code:'ATH',name:'أثينا – اليونان'}, {code:'FCO',name:'روما – إيطاليا'}, {code:'CDG',name:'باريس – فرنسا'}, {code:'BCN',name:'برشلونة – إسبانيا'}, {code:'LHR',name:'لندن – المملكة المتحدة'}
     ];
 
     // datalist
-    const dl = document.getElementById('airports');
-    AIRPORTS.forEach(a=>{const o=document.createElement('option'); o.value=`${a.code} – ${a.name}`; dl.appendChild(o);});
+    const dl=document.getElementById('airports');
+    AIRPORTS.forEach(a=>{const o=document.createElement('option');o.value=`${a.code} – ${a.name}`;dl.appendChild(o)});
 
-    // chips
-    function makeChip({label,code}){const el=document.createElement('div'); el.className='chip'; el.textContent=label; el.onclick=()=>{document.getElementById('destination').value=`${code} – ${findName(code)}`; scrollTo({top:0,behavior:'smooth'});}; return el;}
-    function fillChips(){const a=document.getElementById('arabChips'); const w=document.getElementById('worldChips'); ARAB_COUNTRIES.forEach(c=>a.appendChild(makeChip(c))); WORLD_HOLIDAYS.forEach(c=>w.appendChild(makeChip(c)));}
-
-    function findName(code){const f = AIRPORTS.find(x=>x.code===code); return f?f.name:code;}
+    function findName(code){const f=AIRPORTS.find(x=>x.code===code);return f?f.name:code}
     function parseCode(v){if(!v) return ''; const code=(v.split('–')[0]||'').trim().toUpperCase(); return code.length===3?code:v.trim().toUpperCase();}
-    function ymd(d){if(!d) return ''; const x=new Date(d); return `${x.getFullYear()}-${String(x.getMonth()+1).padStart(2,'0')}-${String(x.getDate()).padStart(2,'0')}`;}
-    function mmddyyyy(d){if(!d) return ''; const x=new Date(d); return `${String(x.getMonth()+1).padStart(2,'0')}/${String(x.getDate()).padStart(2,'0')}/${x.getFullYear()}`;}
-
-    function swap(){const o=document.getElementById('origin');const d=document.getElementById('destination'); const t=o.value;o.value=d.value;d.value=t}
-
-    function context(){
-      const origin=parseCode(document.getElementById('origin').value);
-      const destination=parseCode(document.getElementById('destination').value);
-      const depart=ymd(document.getElementById('depart').value);
-      const ret=ymd(document.getElementById('return').value);
-      const adults=document.getElementById('adults').value||'1';
-      const cabin=document.getElementById('cabin').value||'economy';
-      const nonstop=document.getElementById('nonstop').checked;
-      const duration=document.getElementById('dur').value;
-      const depw=document.getElementById('depw').value;
-      const retw=document.getElementById('retw').value;
-      const airlines=[...document.getElementById('airlines').selectedOptions].map(o=>o.value);
-      return {origin,destination,depart,ret,adults,cabin,nonstop,duration,depw,retw,airlines};
-    }
-
-    function encodeHash(ctx){location.hash = encodeURIComponent(JSON.stringify(ctx));}
-    function decodeHash(){try{if(location.hash.length>1){return JSON.parse(decodeURIComponent(location.hash.slice(1)));}}catch(e){} return null}
 
     function buildLinks(){
-      const ctx=context();
-      const {origin,destination,depart,ret,adults,cabin}=ctx;
-      if(!origin||!destination||!depart){alert('رجاءً أدخل: من / إلى / تاريخ الذهاب');return;}
-      localStorage.setItem('ticketk', JSON.stringify(ctx));
-      encodeHash(ctx);
+      const origin=parseCode(document.getElementById('origin').value);
+      const destination=parseCode(document.getElementById('destination').value);
+      if(!origin||!destination){alert('رجاءً أدخل: من / إلى');return;}
 
-      const urls=[];
-      // Google Flights
-      const gfQuery=encodeURIComponent(`flights from ${origin} to ${destination} ${depart}${ret?` return ${ret}`:''} ${adults} adult ${cabin}`);
-      urls.push({name:'Google Flights',url:`https://www.google.com/travel/flights?hl=ar&q=${gfQuery}`,note:'أداة بحث موثوقة وسريعة.'});
-      // Skyscanner
-      urls.push({name:'Skyscanner',url:`https://www.skyscanner.net/transport/flights/${origin}/${destination}/${depart}${ret?`/${ret}`:''}/?adults=${adults}&cabinclass=${cabin}`,note:'مقارنة شاملة.'});
-      // Kayak
-      urls.push({name:'KAYAK',url:`https://www.kayak.com/flights/${origin}-${destination}/${depart}${ret?`/${ret}`:''}?adults=${adults}`,note:'فلاتر قوية.'});
-      // Expedia
-      urls.push({name:'Expedia',url:`https://www.expedia.com/Flights-Search?trip=${ret?'roundtrip':'oneway'}&leg1=from:${origin},to:${destination},departure:${mmddyyyy(document.getElementById('depart').value)}TANYT&${ret?`leg2=from:${destination},to:${origin},departure:${mmddyyyy(document.getElementById('return').value)}TANYT&`:''}passengers=adults:${adults}&mode=search`,note:'وكيل عالمي.'});
-      // Wego
-      urls.push({name:'Wego',url:`https://www.wego.com/flights/searches/${origin}.${destination}.${depart}/${ret?`${destination}.${origin}.${ret}`:''}?adults=${adults}&cabin_class=${cabin}`,note:'شائع بالمنطقة.'});
+      const summary=document.getElementById('summary');
+      summary.innerHTML=`بحث من <strong>${origin}</strong> إلى <strong>${destination}</strong>. افتح أحد المواقع أدناه لعرض أرخص التذاكر.`;
 
-      render(list=urls, ctx);
+      const urls=[
+        {name:'Google Flights', url:`https://www.google.com/travel/flights?hl=ar&q=${encodeURIComponent(`flights from ${origin} to ${destination}`)}`, note:'يعرض أرخص الخيارات عبر شركات ووكالات مختلفة.'},
+        {name:'Skyscanner', url:`https://www.skyscanner.net/transport/flights/${origin}/${destination}/?adults=1&cabinclass=economy`, note:'انتقل لاختيار التاريخ ورؤية الأسعار.'},
+        {name:'KAYAK', url:`https://www.kayak.com/flights/${origin}-${destination}?sort=best`, note:'ابحث بلا تاريخ ثم اختر الأرخص.'},
+        {name:'Expedia', url:`https://www.expedia.com/Flights-Search?trip=oneway&leg1=from:${origin},to:${destination}&passengers=adults:1&mode=search`, note:'قد يطلب تحديد التاريخ داخل الموقع.'},
+        {name:'Wego', url:`https://www.wego.com/flights/${origin}-${destination}`, note:'يعرض تجميع أسعار من مزودين مختلفين.'}
+      ];
+
+      renderProviders(urls);
     }
 
-    function render(list, ctx){
+    function renderProviders(list){
       const box=document.getElementById('providers');
-      const sum=document.getElementById('summary');
       box.innerHTML='';
-      sum.innerHTML = `بحث من <strong>${ctx.origin}</strong> إلى <strong>${ctx.destination}</strong> في <strong>${ctx.depart}</strong>${ctx.ret?` والعودة <strong>${ctx.ret}</strong>`:''} — ركاب: <strong>${ctx.adults}</strong> — درجة: <strong>${arabCabin(ctx.cabin)}</strong>`;
       list.forEach(p=>{
         const card=document.createElement('div'); card.className='prov';
-        const h=document.createElement('div'); h.innerHTML=`<strong>${p.name}</strong>`;
-        const s=document.createElement('small'); s.textContent=p.note;
+        const h=document.createElement('strong'); h.textContent=p.name;
+        const s=document.createElement('small'); s.textContent=p.note; s.style.color='#64748b';
         const a=document.createElement('a'); a.href=p.url; a.target='_blank'; a.rel='noopener'; a.textContent='افتح النتائج';
         card.appendChild(h); card.appendChild(s); card.appendChild(a);
         box.appendChild(card);
       });
     }
 
-    function openAll(){
-      const providers=document.querySelectorAll('#providers .prov a');
-      if(!providers.length){buildLinks();}
-      document.querySelectorAll('#providers .prov a').forEach(a=>window.open(a.href,'_blank','noopener'));
-    }
-
-    function arabCabin(c){return ({economy:'اقتصادية', premium_economy:'اقتصادية مميزة', business:'رجال أعمال', first:'أولى'})[c]||c}
-
-    // init
+    // تهيئة افتراضية: المنامة -> القاهرة
     (function init(){
-      fillChips();
-      try{
-        const saved = decodeHash() || JSON.parse(localStorage.getItem('ticketk')||'null');
-        if(saved){
-          const {origin,destination,depart,ret,adults,cabin}=saved;
-          if(origin) document.getElementById('origin').value=`${origin} – ${findName(origin)}`;
-          if(destination) document.getElementById('destination').value=`${destination} – ${findName(destination)}`;
-          if(depart) document.getElementById('depart').value=depart;
-          if(ret) document.getElementById('return').value=ret;
-          if(adults) document.getElementById('adults').value=adults;
-          if(cabin) document.getElementById('cabin').value=cabin;
-          buildLinks();
-        } else {
-          document.getElementById('origin').value = `BAH – ${findName('BAH')}`;
-        }
-      }catch(e){}
+      document.getElementById('origin').value = `BAH – ${findName('BAH')}`;
+      document.getElementById('destination').value = `CAI – ${findName('CAI')}`;
     })();
   </script></body>
 </html>
