@@ -1,605 +1,311 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<!DOCTYPE html><html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>لعبة سباق السيارات للأطفال</title>
-
-  <!-- سياسة أمان للموقع (مسموح فقط موارد نفس الصفحة) -->
-  <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; img-src 'self'; media-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline';">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>تذكرتك | ابحث وقارن أرخص الرحلات</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&display=swap" rel="stylesheet">
+  <meta name="description" content="تذكرتك — واجهة تشبه تجربة Google Flights: ابحث، صفِّ، رشّح، وافتح روابط الحجز الموثوقة مباشرةً." />
   <style>
     :root{
-      --bg1:#4f46e5;  /* أزرق بنفسجي */
-      --bg2:#06b6d4;  /* سماوي */
-      --card:#ffffffee;
-      --text:#1f2937;
-      --accent:#22c55e; /* أخضر عملات */
-      --danger:#ef4444; /* تصادم */
-      --shadow: 0 10px 25px rgba(0,0,0,.15);
+      --ink:#0f172a;           /* slate-900 */
+      --muted:#596276;         /* slate-500 */
+      --line:#e5e7eb;          /* gray-200 */
+      --bg:#f8fafc;            /* slate-50 */
+      --card:#ffffff;
+      --brand:#0ea5e9;         /* sky-600 */
+      --brand-2:#0284c7;       /* sky-700 */
+      --accent:#16a34a;        /* green-600 */
+      --warn:#f59e0b;          /* amber-500 */
+      --radius:18px;
+      --ring:0 0 0 3px rgba(14,165,233,.25);
     }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-      color:var(--text);
-      background: linear-gradient(135deg, var(--bg1), var(--bg2)) fixed;
-      display:flex; align-items:center; justify-content:center;
-      padding:16px;
-    }
-    .wrap{
-      width:min(500px, 96vw);
-    }
-    .card{
-      background:var(--card);
-      border-radius:24px;
-      box-shadow:var(--shadow);
-      padding:16px;
-      backdrop-filter:saturate(1.2) blur(4px);
-    }
-    .title{
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
-      margin-bottom:10px;
-    }
-    .title h1{
-      font-size:clamp(18px, 3.5vw, 24px);
-      margin:0;
-    }
-    .controls-row{
-      display:flex; align-items:center; justify-content:space-between; gap:8px;
-      margin:8px 0 10px;
-      flex-wrap:wrap;
-    }
-    .btn, .toggle{
-      border:0; border-radius:14px; padding:10px 14px; cursor:pointer;
-      background:#111827; color:#fff; font-weight:600;
-      box-shadow:0 6px 16px rgba(0,0,0,.2);
-      transition:transform .08s ease;
-      touch-action:manipulation;
-    }
-    .btn:active, .toggle:active{ transform:scale(.98) }
-    .muted{ opacity:.7 }
-    .hint{
-      font-size:13px; opacity:.8; line-height:1.6;
-    }
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:'Cairo',system-ui,Segoe UI,Roboto,Arial,sans-serif}/* Header */
+header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.container{max-width:1200px;margin:0 auto;padding:14px 18px}
+.row{display:flex;align-items:center;gap:12px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:radial-gradient(circle at 30% 30%, #7dd3fc, #0ea5e9);color:white;font-weight:900}
+.title{font-size:22px;font-weight:900}
+.tag{font-size:12px;color:var(--muted)}
 
-    /* حاوية اللعبة بنسبة 9:16 لتناسب الجوال أيضاً */
-    .game-box{
-      position:relative;
-      width:100%;
-      aspect-ratio:9/16;
-      border-radius:18px;
-      overflow:hidden;
-      background:#111;
-      box-shadow:var(--shadow);
-      user-select:none;
-      -webkit-user-select:none;
-    }
-    canvas#game{
-      width:100%; height:100%;
-      display:block;
-      touch-action:none;
-    }
+/* Search bar */
+.searchbar{margin:14px auto 0;display:grid;gap:10px}
+@media(min-width:960px){.searchbar{grid-template-columns:1.2fr 1.2fr .9fr .9fr .8fr .8fr auto}}
+label{font-size:12px;color:var(--muted);margin-inline:6px}
+.fld{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 10px}
+.fld input,.fld select{width:100%;border:0;outline:none;background:transparent;padding:6px 4px;font-size:14px;color:var(--ink)}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.btn{background:var(--brand);color:#fff;border:0;border-radius:12px;padding:10px 14px;font-weight:800;cursor:pointer}
+.btn:hover{background:var(--brand-2)}
+.btn.alt{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.pill{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 12px;font-size:13px}
 
-    /* أزرار لمس يمين/يسار للجوال */
-    .touch-controls{
-      position:absolute; inset:auto 0 10px 0;
-      display:flex; justify-content:space-between; gap:10px; padding:0 10px; pointer-events:none;
-    }
-    .touch-btn{
-      pointer-events:auto;
-      background:#0f172aCC; color:#fff;
-      border:2px solid #ffffff33;
-      width:22%; height:56px;
-      border-radius:14px;
-      display:flex; align-items:center; justify-content:center;
-      font-size:20px; font-weight:800;
-      backdrop-filter: blur(6px);
-    }
+/* Filters + sort */
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.tool{background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 12px;font-size:13px;display:flex;gap:8px;align-items:center}
+.tool input[type="checkbox"],.tool input[type="range"]{accent-color:var(--brand)}
+.tool select{border:0;background:transparent}
+.range{display:flex;align-items:center;gap:6px}
 
-    /* طبقات واجهة داخل اللعبة */
-    .overlay{
-      position:absolute; inset:0;
-      display:flex; align-items:center; justify-content:center;
-      background:linear-gradient(180deg, rgba(17,24,39,.6), rgba(17,24,39,.75));
-      color:#fff; text-align:center; padding:20px;
-    }
-    .overlay .panel{
-      background:#00000066; border:1px solid #ffffff22;
-      border-radius:18px; padding:18px; max-width:90%;
-    }
-    .overlay h2{ margin:.2em 0 .4em; font-size:22px }
-    .overlay p{ margin:.3em 0; opacity:.95; line-height:1.7 }
-    .overlay .big{
-      display:inline-block; margin-top:10px;
-      background:#16a34a; color:#fff; font-weight:800; letter-spacing:.5px;
-      padding:12px 18px; border-radius:14px; box-shadow:0 6px 16px rgba(0,0,0,.35);
-      cursor:pointer;
-    }
-    .overlay .big:active{ transform:scale(.98) }
+/* Layout */
+main{padding:14px 0}
+.grid{display:grid;gap:16px;grid-template-columns:1fr}
+@media(min-width:1000px){.grid{grid-template-columns:320px 1fr}}
 
-    footer{
-      margin-top:12px; text-align:center; color:#fff;
-      text-shadow: 0 1px 3px rgba(0,0,0,.35);
-      font-weight:600; letter-spacing:.2px;
-    }
+/* Side panel */
+.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px;position:sticky;top:86px;height:fit-content}
+.panel h3{margin:0 0 8px 0;font-size:16px}
+.sep{border-top:1px solid var(--line);margin:12px 0}
+
+/* Results */
+.results{display:flex;flex-direction:column;gap:10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px}
+.card h4{margin:0 0 8px 0}
+.meta{display:flex;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:13px}
+.providers{display:grid;gap:10px}
+@media(min-width:800px){.providers{grid-template-columns:repeat(3,1fr)}}
+.prov{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff}
+.prov a{display:inline-block;margin-top:8px;text-decoration:none;background:var(--brand);color:#fff;padding:8px 12px;border-radius:10px;font-weight:700}
+.prov small{color:var(--muted)}
+
+/* Chips */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:#fff;border:1px solid var(--line);padding:8px 12px;border-radius:999px;cursor:pointer;font-size:13px}
+
+/* Footer */
+footer{margin-top:16px;border-top:1px dashed var(--line);padding:14px 0}
+.credit{display:flex;gap:8px;align-items:center;flex-wrap:wrap;color:var(--muted)}
+.credit a{color:var(--brand-2);font-weight:800;text-decoration:none}
+.credit a:hover{text-decoration:underline}
+
   </style>
 </head>
 <body>
-  <main class="wrap">
-    <div class="card">
-      <div class="title">
-        <h1>🏁 لعبة سباق السيارات للأطفال</h1>
-        <button id="muteBtn" class="toggle" aria-pressed="false" title="تشغيل/كتم الصوت">🔊 الصوت</button>
-      </div>
-
-      <div class="controls-row">
-        <button id="startBtn" class="btn">ابدأ / إعادة البدء</button>
-        <button id="pauseBtn" class="btn">إيقاف مؤقت</button>
-        <div class="hint">لوحة المفاتيح: ← → للتحرك • مسافة لبدء/إعادة • P للإيقاف المؤقت</div>
-      </div>
-
-      <div class="game-box">
-        <canvas id="game" width="360" height="640" tabindex="0" aria-label="لوحة لعبة سباق السيارات"></canvas>
-
-        <!-- أزرار لمس للجوال -->
-        <div class="touch-controls" aria-hidden="false">
-          <button class="touch-btn" id="btnLeft" title="يسار">⟵</button>
-          <div style="flex:1"></div>
-          <button class="touch-btn" id="btnRight" title="يمين">⟶</button>
-        </div>
-
-        <!-- شاشة البداية/النهاية -->
-        <div class="overlay" id="overlay" hidden>
-          <div class="panel">
-            <h2 id="overlayTitle">جاهز للانطلاق؟</h2>
-            <p id="overlayText">اجمع العملات 🟡 وتجنب السيارات الأخرى. لديك <b>3 قلوب</b>. السرعة تزيد تدريجيًا!</p>
-            <button class="big" id="overlayBtn">انطلق الآن</button>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="row">
+        <div class="brand">
+          <div class="logo">✈️</div>
+          <div>
+            <div class="title">تذكرتك</div>
+            <div class="tag">واجهة وأدوات قريبة من تجربة Google Flights</div>
           </div>
         </div>
-      </div>
+        <div style="margin-inline-start:auto;display:flex;gap:8px;align-items:center">
+          <span class="pill">مواقع موثوقة</span>
+          <span class="pill">بدون تسجيل</span>
+        </div>
+      </div><!-- Searchbar -->
+  <form id="searchForm" class="searchbar" onsubmit="event.preventDefault(); buildLinks();">
+    <div class="fld"><label for="origin">من</label><input list="airports" id="origin" placeholder="BAH – المنامة" autocomplete="off"></div>
+    <div class="fld"><label for="destination">إلى</label><input list="airports" id="destination" placeholder="CAI – القاهرة" autocomplete="off"></div>
+    <div class="fld"><label for="depart">تاريخ الذهاب</label><input type="date" id="depart"></div>
+    <div class="fld"><label for="return">تاريخ العودة</label><input type="date" id="return"></div>
+    <div class="fld"><label for="adults">المسافرون</label>
+      <select id="adults"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select>
+    </div>
+    <div class="fld"><label for="cabin">الدرجة</label>
+      <select id="cabin"><option value="economy">اقتصادية</option><option value="premium_economy">اقتصادية مميزة</option><option value="business">رجال أعمال</option><option value="first">أولى</option></select>
+    </div>
+    <div class="actions">
+      <button class="btn" type="submit">ابحث</button>
+      <button class="btn alt" type="button" onclick="swap();">تبديل الاتجاه ↔︎</button>
+      <button class="btn alt" type="button" onclick="openAll();">فتح الكل للمقارنة</button>
+    </div>
+  </form>
+
+  <!-- Filter toolbar -->
+  <div class="toolbar" id="toolbar">
+    <div class="tool"><input type="checkbox" id="nonstop"> <label for="nonstop">مباشر فقط</label></div>
+    <div class="tool"><label>مدة الرحلة (س):</label><div class="range"><input id="dur" type="range" min="2" max="24" value="24" oninput="this.nextElementSibling.innerText=this.value"/><span>24</span></div></div>
+    <div class="tool"><label>زمن الإقلاع (ذهاب):</label><div class="range"><input id="depw" type="range" min="0" max="23" value="0" oninput="this.nextElementSibling.innerText=this.value+':00'"/><span>0:00</span></div></div>
+    <div class="tool"><label>زمن الإقلاع (عودة):</label><div class="range"><input id="retw" type="range" min="0" max="23" value="0" oninput="this.nextElementSibling.innerText=this.value+':00'"/><span>0:00</span></div></div>
+    <div class="tool"><label for="sort">ترتيب:</label>
+      <select id="sort"><option value="price">الأرخص أولاً</option><option value="duration">الأسرع</option><option value="depart">الأقرب وقتاً</option></select>
+    </div>
+  </div>
+</div>
+
+  </header>  <main class="container">
+    <div class="grid">
+      <!-- Side filters like Google Flights left rail -->
+      <aside class="panel">
+        <h3>التصفية المتقدمة</h3>
+        <div class="sep"></div>
+        <div style="display:grid;gap:8px">
+          <label class="tool"><input type="checkbox" id="onebag"> حقيبة يد فقط</label>
+          <label class="tool"><input type="checkbox" id="refund"> إظهار خيارات قابلة للاسترداد</label>
+          <div class="tool" style="flex-direction:column;align-items:flex-start">
+            <span>شركات الطيران</span>
+            <select id="airlines" multiple size="6" style="width:100%;margin-top:6px">
+              <option value="GF">Gulf Air</option>
+              <option value="SV">Saudia</option>
+              <option value="EK">Emirates</option>
+              <option value="QR">Qatar Airways</option>
+              <option value="MS">EgyptAir</option>
+              <option value="RJ">Royal Jordanian</option>
+            </select>
+          </div>
+          <small style="color:var(--muted)">ملاحظة: التصفية تتم عند فتح مواقع الحجز — هذه الخيارات لتخصيص بحثك فقط.</small>
+        </div>
+        <div class="sep"></div>
+        <h3>وجهات جاهزة</h3>
+        <div class="chips" id="arabChips"></div>
+        <div class="chips" id="worldChips" style="margin-top:8px"></div>
+      </aside><!-- Results column -->
+  <section>
+    <div class="card">
+      <h4>عروض سريعة من مواقع موثوقة</h4>
+      <p class="meta" id="summary">اضبط البحث بالأعلى ثم افتح النتائج.</p>
+      <div class="providers" id="providers"></div>
+      <p style="color:var(--muted);font-size:13px;margin-top:6px">تُعرض الأسعار الفعلية داخل مواقع الحجز (Google Flights، Skyscanner، KAYAK، Expedia، Wego).</p>
     </div>
 
-    <footer>حقوق الطبع محفوظة — برمجة وتطوير <b>فاضل الريس</b></footer>
-  </main>
+    <div class="card">
+      <h4>نصائح لتوفير السعر</h4>
+      <ul style="margin:8px 0 0 0; padding-inline-start:18px; line-height:1.9; color:var(--muted)">
+        <li>جرّب تواريخ قريبة (±3 أيام) أو رحلات منتصف الأسبوع.</li>
+        <li>استخدم مطارات قريبة من الوجهة (مثل HBE بدل CAI حسب الحاجة).</li>
+        <li>رحلات الترانزيت قد تكون أرخص من المباشرة.</li>
+      </ul>
+    </div>
+
+    <footer>
+      <div class="credit">
+        <span>برمجة وتطوير: <a id="devLink" href="https://api.whatsapp.com/send/?phone=97333375858&text&type=phone_number&app_absent=0&wame_ctl=1" target="_blank" rel="noopener">فاضل الريس</a></span>
+        <span>— تواصل عبر واتساب API الرسمي.</span>
+      </div>
+    </footer>
+  </section>
+</div>
+
+  </main>  <!-- datalist for airports --><datalist id="airports"></datalist>
 
   <script>
-    // ===== إعدادات عامة =====
-    const DPR = Math.min(window.devicePixelRatio || 1, 2);
-    const canvas = document.getElementById('game');
-    const ctx = canvas.getContext('2d');
+    // ===== المطارات الشائعة (IATA) =====
+    const AIRPORTS = [
+      {code:'BAH', name:'المنامة – البحرين'}, {code:'RUH', name:'الرياض – السعودية'}, {code:'JED', name:'جدة – السعودية'}, {code:'DMM', name:'الدمام – السعودية'},
+      {code:'DXB', name:'دبي – الإمارات'}, {code:'AUH', name:'أبوظبي – الإمارات'}, {code:'KWI', name:'الكويت – الكويت'}, {code:'DOH', name:'الدوحة – قطر'}, {code:'MCT', name:'مسقط – عُمان'},
+      {code:'AMM', name:'عمّان – الأردن'}, {code:'BEY', name:'بيروت – لبنان'}, {code:'CAI', name:'القاهرة – مصر'}, {code:'HRG', name:'الغردقة – مصر'}, {code:'SSH', name:'شرم الشيخ – مصر'},
+      {code:'CMN', name:'الدار البيضاء – المغرب'}, {code:'RAK', name:'مراكش – المغرب'}, {code:'TUN', name:'تونس – تونس'}, {code:'ALG', name:'الجزائر – الجزائر'}, {code:'EBL', name:'أربيل – العراق'},
+      {code:'IST', name:'إسطنبول – تركيا'}, {code:'AYT', name:'أنطاليا – تركيا'}, {code:'TBS', name:'تبليسي – جورجيا'}, {code:'GYD', name:'باكو – أذربيجان'},
+      {code:'ATH', name:'أثينا – اليونان'}, {code:'FCO', name:'روما – إيطاليا'}, {code:'CDG', name:'باريس – فرنسا'}, {code:'BCN', name:'برشلونة – إسبانيا'}, {code:'LHR', name:'لندن – المملكة المتحدة'},
+      {code:'BKK', name:'بانكوك – تايلاند'}, {code:'HKT', name:'بوكيت – تايلاند'}, {code:'KUL', name:'كوالالمبور – ماليزيا'}, {code:'DPS', name:'بالي – إندونيسيا'}, {code:'SIN', name:'سنغافورة'}, {code:'MLE', name:'المالديف'}
+    ];
 
-    const startBtn = document.getElementById('startBtn');
-    const pauseBtn = document.getElementById('pauseBtn');
-    const muteBtn  = document.getElementById('muteBtn');
+    const ARAB_COUNTRIES = [
+      {label:'البحرين (BAH)', code:'BAH'}, {label:'السعودية – الرياض (RUH)', code:'RUH'}, {label:'السعودية – جدة (JED)', code:'JED'},
+      {label:'الإمارات – دبي (DXB)', code:'DXB'}, {label:'الكويت (KWI)', code:'KWI'}, {label:'قطر – الدوحة (DOH)', code:'DOH'}, {label:'عُمان – مسقط (MCT)', code:'MCT'},
+      {label:'الأردن – عمّان (AMM)', code:'AMM'}, {label:'لبنان – بيروت (BEY)', code:'BEY'}, {label:'مصر – القاهرة (CAI)', code:'CAI'}
+    ];
 
-    const overlay = document.getElementById('overlay');
-    const overlayTitle = document.getElementById('overlayTitle');
-    const overlayText  = document.getElementById('overlayText');
-    const overlayBtn   = document.getElementById('overlayBtn');
+    const WORLD_HOLIDAYS = [
+      {label:'تركيا – إسطنبول (IST)', code:'IST'}, {label:'تركيا – أنطاليا (AYT)', code:'AYT'}, {label:'جورجيا – تبليسي (TBS)', code:'TBS'},
+      {label:'أذربيجان – باكو (GYD)', code:'GYD'}, {label:'اليونان – أثينا (ATH)', code:'ATH'}, {label:'إيطاليا – روما (FCO)', code:'FCO'},
+      {label:'فرنسا – باريس (CDG)', code:'CDG'}, {label:'إسبانيا – برشلونة (BCN)', code:'BCN'}, {label:'المالديف – ماليه (MLE)', code:'MLE'}
+    ];
 
-    const btnLeft  = document.getElementById('btnLeft');
-    const btnRight = document.getElementById('btnRight');
+    // datalist
+    const dl = document.getElementById('airports');
+    AIRPORTS.forEach(a=>{const o=document.createElement('option'); o.value=`${a.code} – ${a.name}`; dl.appendChild(o);});
 
-    let W = canvas.clientWidth, H = canvas.clientHeight;
+    // chips
+    function makeChip({label,code}){const el=document.createElement('div'); el.className='chip'; el.textContent=label; el.onclick=()=>{document.getElementById('destination').value=`${code} – ${findName(code)}`; scrollTo({top:0,behavior:'smooth'});}; return el;}
+    function fillChips(){const a=document.getElementById('arabChips'); const w=document.getElementById('worldChips'); ARAB_COUNTRIES.forEach(c=>a.appendChild(makeChip(c))); WORLD_HOLIDAYS.forEach(c=>w.appendChild(makeChip(c)));}
 
-    function resizeCanvas(){
-      const rect = canvas.getBoundingClientRect();
-      W = Math.floor(rect.width);
-      H = Math.floor(rect.height);
-      canvas.width  = Math.floor(W * DPR);
-      canvas.height = Math.floor(H * DPR);
-      ctx.setTransform(DPR,0,0,DPR,0,0);
-    }
-    addEventListener('resize', resizeCanvas, {passive:true});
-    resizeCanvas();
+    function findName(code){const f = AIRPORTS.find(x=>x.code===code); return f?f.name:code;}
+    function parseCode(v){if(!v) return ''; const code=(v.split('–')[0]||'').trim().toUpperCase(); return code.length===3?code:v.trim().toUpperCase();}
+    function ymd(d){if(!d) return ''; const x=new Date(d); return `${x.getFullYear()}-${String(x.getMonth()+1).padStart(2,'0')}-${String(x.getDate()).padStart(2,'0')}`;}
+    function mmddyyyy(d){if(!d) return ''; const x=new Date(d); return `${String(x.getMonth()+1).padStart(2,'0')}/${String(x.getDate()).padStart(2,'0')}/${x.getFullYear()}`;}
 
-    // ===== صوت بسيط عبر Web Audio =====
-    let audioEnabled = true;
-    let audioCtx = null;
-    function initAudio(){
-      if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      }
-    }
-    function beep({freq=440, dur=0.08, type='sine', vol=0.05}={}){
-      if (!audioEnabled) return;
-      if (!audioCtx) return;
-      const t0 = audioCtx.currentTime;
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.type = type; osc.frequency.value = freq;
-      gain.gain.value = 0; // ramp in
-      osc.connect(gain).connect(audioCtx.destination);
-      osc.start(t0);
-      gain.gain.linearRampToValueAtTime(vol, t0 + 0.01);
-      gain.gain.linearRampToValueAtTime(0.0001, t0 + dur);
-      osc.stop(t0 + dur + 0.02);
-    }
-    function sfxCoin(){ beep({freq:880, dur:0.09, type:'triangle', vol:.06}); }
-    function sfxCrash(){ beep({freq:120, dur:0.20, type:'square', vol:.1}); }
-    function sfxMove(){ beep({freq:520, dur:0.05, type:'sine', vol:.04}); }
+    function swap(){const o=document.getElementById('origin');const d=document.getElementById('destination'); const t=o.value;o.value=d.value;d.value=t}
 
-    muteBtn.addEventListener('click', ()=>{
-      audioEnabled = !audioEnabled;
-      muteBtn.textContent = audioEnabled ? '🔊 الصوت' : '🔇 صامت';
-      muteBtn.classList.toggle('muted', !audioEnabled);
-    });
-
-    // ===== لعبة: متغيرات الحالة =====
-    const lanes = 3;
-    let gameState = 'menu'; // 'menu' | 'play' | 'pause' | 'over'
-    let score = 0;
-    let coins = 0;
-    let lives = 3;
-    let baseSpeed = 180; // px/sec
-    let speed = baseSpeed;
-    let distance = 0;
-    let elapsed = 0;
-    let lastTime = 0;
-
-    const road = {
-      margin: 24,
-      laneMarkOffset: 0
-    };
-
-    const player = {
-      lane: 1, // 0..lanes-1
-      x: 0, y: 0, w: 0, h: 0,
-      invincibleTime: 0
-    };
-
-    const obstacles = []; // سيارات أخرى
-    const pickups = [];   // عملات
-    let spawnCarTimer = 0;
-    let spawnCoinTimer = 0;
-
-    function laneX(l){
-      const tw = W - road.margin*2;
-      const laneW = tw / lanes;
-      return road.margin + l*laneW + laneW/2;
+    function context(){
+      const origin=parseCode(document.getElementById('origin').value);
+      const destination=parseCode(document.getElementById('destination').value);
+      const depart=ymd(document.getElementById('depart').value);
+      const ret=ymd(document.getElementById('return').value);
+      const adults=document.getElementById('adults').value||'1';
+      const cabin=document.getElementById('cabin').value||'economy';
+      const nonstop=document.getElementById('nonstop').checked;
+      const duration=document.getElementById('dur').value;
+      const depw=document.getElementById('depw').value;
+      const retw=document.getElementById('retw').value;
+      const airlines=[...document.getElementById('airlines').selectedOptions].map(o=>o.value);
+      return {origin,destination,depart,ret,adults,cabin,nonstop,duration,depw,retw,airlines};
     }
 
-    function resetGame(){
-      score = 0; coins = 0; lives = 3;
-      speed = baseSpeed; distance = 0; elapsed = 0;
-      player.lane = 1;
-      obstacles.length = 0;
-      pickups.length = 0;
-      spawnCarTimer = 0; spawnCoinTimer = .6;
-      player.invincibleTime = 0;
+    function encodeHash(ctx){location.hash = encodeURIComponent(JSON.stringify(ctx));}
+    function decodeHash(){try{if(location.hash.length>1){return JSON.parse(decodeURIComponent(location.hash.slice(1)));}}catch(e){} return null}
+
+    function buildLinks(){
+      const ctx=context();
+      const {origin,destination,depart,ret,adults,cabin}=ctx;
+      if(!origin||!destination||!depart){alert('رجاءً أدخل: من / إلى / تاريخ الذهاب');return;}
+      localStorage.setItem('ticketk', JSON.stringify(ctx));
+      encodeHash(ctx);
+
+      const urls=[];
+      // Google Flights
+      const gfQuery=encodeURIComponent(`flights from ${origin} to ${destination} ${depart}${ret?` return ${ret}`:''} ${adults} adult ${cabin}`);
+      urls.push({name:'Google Flights',url:`https://www.google.com/travel/flights?hl=ar&q=${gfQuery}`,note:'أداة بحث موثوقة وسريعة.'});
+      // Skyscanner
+      urls.push({name:'Skyscanner',url:`https://www.skyscanner.net/transport/flights/${origin}/${destination}/${depart}${ret?`/${ret}`:''}/?adults=${adults}&cabinclass=${cabin}`,note:'مقارنة شاملة.'});
+      // Kayak
+      urls.push({name:'KAYAK',url:`https://www.kayak.com/flights/${origin}-${destination}/${depart}${ret?`/${ret}`:''}?adults=${adults}`,note:'فلاتر قوية.'});
+      // Expedia
+      urls.push({name:'Expedia',url:`https://www.expedia.com/Flights-Search?trip=${ret?'roundtrip':'oneway'}&leg1=from:${origin},to:${destination},departure:${mmddyyyy(document.getElementById('depart').value)}TANYT&${ret?`leg2=from:${destination},to:${origin},departure:${mmddyyyy(document.getElementById('return').value)}TANYT&`:''}passengers=adults:${adults}&mode=search`,note:'وكيل عالمي.'});
+      // Wego
+      urls.push({name:'Wego',url:`https://www.wego.com/flights/searches/${origin}.${destination}.${depart}/${ret?`${destination}.${origin}.${ret}`:''}?adults=${adults}&cabin_class=${cabin}`,note:'شائع بالمنطقة.'});
+
+      render(list=urls, ctx);
     }
 
-    // رسم قلب بسيط
-    function drawHeart(x,y,size,fill='#ef4444'){
-      ctx.save();
-      ctx.translate(x, y);
-      ctx.fillStyle = fill;
-      ctx.beginPath();
-      const s = size;
-      ctx.moveTo(0, s*0.35);
-      ctx.bezierCurveTo(0, 0, -s*0.5, 0, -s*0.5, s*0.35);
-      ctx.bezierCurveTo(-s*0.5, s*0.7, 0, s, 0, s*1.15);
-      ctx.bezierCurveTo(0, s, s*0.5, s*0.7, s*0.5, s*0.35);
-      ctx.bezierCurveTo(s*0.5, 0, 0, 0, 0, s*0.35);
-      ctx.closePath();
-      ctx.fill();
-      ctx.restore();
+    function render(list, ctx){
+      const box=document.getElementById('providers');
+      const sum=document.getElementById('summary');
+      box.innerHTML='';
+      sum.innerHTML = `بحث من <strong>${ctx.origin}</strong> إلى <strong>${ctx.destination}</strong> في <strong>${ctx.depart}</strong>${ctx.ret?` والعودة <strong>${ctx.ret}</strong>`:''} — ركاب: <strong>${ctx.adults}</strong> — درجة: <strong>${arabCabin(ctx.cabin)}</strong>`;
+      list.forEach(p=>{
+        const card=document.createElement('div'); card.className='prov';
+        const h=document.createElement('div'); h.innerHTML=`<strong>${p.name}</strong>`;
+        const s=document.createElement('small'); s.textContent=p.note;
+        const a=document.createElement('a'); a.href=p.url; a.target='_blank'; a.rel='noopener'; a.textContent='افتح النتائج';
+        card.appendChild(h); card.appendChild(s); card.appendChild(a);
+        box.appendChild(card);
+      });
     }
 
-    function drawCar(x,y,w,h,color='#38bdf8'){
-      // جسم السيارة مستطيل بحواف دائرية + خطوط
-      const r = Math.min(w,h)*0.18;
-      ctx.save();
-      ctx.translate(x,y);
-      ctx.fillStyle = color;
-      roundRect(-w/2,-h/2,w,h,r,true,false);
-
-      // زجاج
-      ctx.fillStyle = 'rgba(255,255,255,0.85)';
-      roundRect(-w*0.28,-h*0.25, w*0.56, h*0.22, r*0.6, true, false);
-
-      // خط أبيض وسط
-      ctx.fillStyle = '#fff';
-      ctx.fillRect(-w*0.06, -h*0.42, w*0.12, h*0.2);
-      ctx.fillRect(-w*0.06,  h*0.22, w*0.12, h*0.2);
-
-      // عجلات
-      ctx.fillStyle = '#111827';
-      const tireW = w*0.2, tireH = h*0.18;
-      roundRect(-w/2 - tireW*0.1, -h*0.32, tireW, tireH, tireH*0.3, true,false);
-      roundRect(-w/2 - tireW*0.1,  h*0.14, tireW, tireH, tireH*0.3, true,false);
-      roundRect( w/2 - tireW*0.9, -h*0.32, tireW, tireH, tireH*0.3, true,false);
-      roundRect( w/2 - tireW*0.9,  h*0.14, tireW, tireH, tireH*0.3, true,false);
-      ctx.restore();
+    function openAll(){
+      const providers=document.querySelectorAll('#providers .prov a');
+      if(!providers.length){buildLinks();}
+      document.querySelectorAll('#providers .prov a').forEach(a=>window.open(a.href,'_blank','noopener'));
     }
 
-    function roundRect(x,y,w,h,r,fill,stroke){
-      const rr = Math.min(r, w/2, h/2);
-      ctx.beginPath();
-      ctx.moveTo(x+rr, y);
-      ctx.arcTo(x+w, y,   x+w, y+h, rr);
-      ctx.arcTo(x+w, y+h, x,   y+h, rr);
-      ctx.arcTo(x,   y+h, x,   y,   rr);
-      ctx.arcTo(x,   y,   x+w, y,   rr);
-      if(fill) ctx.fill();
-      if(stroke) ctx.stroke();
-    }
+    function arabCabin(c){return ({economy:'اقتصادية', premium_economy:'اقتصادية مميزة', business:'رجال أعمال', first:'أولى'})[c]||c}
 
-    function rand(min,max){ return Math.random()*(max-min)+min; }
-    function choice(arr){ return arr[(Math.random()*arr.length)|0]; }
-
-    function update(dt){
-      if (gameState !== 'play') return;
-
-      elapsed += dt;
-      distance += speed * dt;
-      score = Math.floor(distance/5 + coins*50);
-
-      // زيادة السرعة تدريجياً
-      speed = baseSpeed + Math.min(420, elapsed*18);
-
-      // تحريك خطوط المسارات
-      road.laneMarkOffset = (road.laneMarkOffset + speed*dt*0.8) % 40;
-
-      // حجم اللاعب ومكانه
-      const tw = W - road.margin*2;
-      const laneW = tw / lanes;
-      player.w = laneW * 0.55;
-      player.h = Math.min(H*0.16, 120);
-      player.x = laneX(player.lane);
-      player.y = H - player.h*0.8;
-
-      // توليد سيارات
-      spawnCarTimer -= dt;
-      if (spawnCarTimer <= 0){
-        spawnCarTimer = rand(0.75, 1.2) * Math.max(0.65, 1.2 - elapsed*0.02);
-        const l = (Math.random()*lanes)|0;
-        const speeds = [speed*0.85, speed*1.0, speed*1.15];
-        obstacles.push({
-          lane:l,
-          x: laneX(l),
-          y: -120,
-          w: player.w * rand(0.95,1.05),
-          h: player.h * rand(0.9,1.1),
-          vy: choice(speeds),
-          color: choice(['#38bdf8','#f472b6','#f59e0b','#22c55e','#a78bfa'])
-        });
-      }
-
-      // توليد عملات
-      spawnCoinTimer -= dt;
-      if (spawnCoinTimer <= 0){
-        spawnCoinTimer = rand(0.55, 0.95);
-        const l = (Math.random()*lanes)|0;
-        pickups.push({
-          lane:l,
-          x: laneX(l),
-          y: -30,
-          r: Math.max(7, Math.min(14, (W+H)/80)),
-          vy: speed*0.95
-        });
-      }
-
-      // تحديث الأجسام
-      for (const o of obstacles) o.y += o.vy * dt;
-      for (const c of pickups)   c.y += c.vy * dt;
-
-      // إزالة خارجة الشاشة
-      while (obstacles.length && obstacles[0].y > H + 140) obstacles.shift();
-      while (pickups.length && pickups[0].y > H + 40) pickups.shift();
-
-      // تصادمات
-      if (player.invincibleTime > 0) player.invincibleTime -= dt;
-
-      const pBox = {x:player.x - player.w/2, y:player.y - player.h/2, w:player.w, h:player.h};
-
-      // عملات
-      for (let i=pickups.length-1; i>=0; i--){
-        const c = pickups[i];
-        const rect = {x:c.x-12, y:c.y-12, w:24, h:24};
-        if (rectsOverlap(pBox, rect)){
-          pickups.splice(i,1);
-          coins++;
-          sfxCoin();
+    // init
+    (function init(){
+      fillChips();
+      try{
+        const saved = decodeHash() || JSON.parse(localStorage.getItem('ticketk')||'null');
+        if(saved){
+          const {origin,destination,depart,ret,adults,cabin}=saved;
+          if(origin) document.getElementById('origin').value=`${origin} – ${findName(origin)}`;
+          if(destination) document.getElementById('destination').value=`${destination} – ${findName(destination)}`;
+          if(depart) document.getElementById('depart').value=depart;
+          if(ret) document.getElementById('return').value=ret;
+          if(adults) document.getElementById('adults').value=adults;
+          if(cabin) document.getElementById('cabin').value=cabin;
+          buildLinks();
+        } else {
+          document.getElementById('origin').value = `BAH – ${findName('BAH')}`;
         }
-      }
-
-      // سيارات أخرى
-      for (let i=obstacles.length-1; i>=0; i--){
-        const o = obstacles[i];
-        const oBox = {x:o.x - o.w/2, y:o.y - o.h/2, w:o.w, h:o.h};
-        if (rectsOverlap(pBox, oBox) && player.invincibleTime<=0){
-          lives--;
-          player.invincibleTime = 1.2;
-          sfxCrash();
-          if (lives <= 0){
-            gameOver();
-            break;
-          }
-        }
-      }
-    }
-
-    function rectsOverlap(a,b){
-      return a.x < b.x + b.w && a.x + a.w > b.x &&
-             a.y < b.y + b.h && a.y + a.h > b.y;
-    }
-
-    function render(){
-      // خلفية الطريق
-      ctx.clearRect(0,0,W,H);
-      ctx.fillStyle = '#0b1020';
-      ctx.fillRect(0,0,W,H);
-
-      // كتف الطريق
-      ctx.fillStyle = '#1f2937';
-      ctx.fillRect(road.margin*0.35, 0, road.margin*0.65, H);
-      ctx.fillRect(W-road.margin, 0, road.margin*0.65, H);
-
-      // جسم الطريق
-      ctx.fillStyle = '#2b2b2b';
-      ctx.fillRect(road.margin, 0, W-road.margin*2, H);
-
-      // خطوط المسارات
-      const tw = W - road.margin*2;
-      const laneW = tw / lanes;
-      ctx.strokeStyle = '#e5e7eb';
-      ctx.lineWidth = 4;
-      ctx.setLineDash([18, 18]);
-      for (let i=1;i<lanes;i++){
-        ctx.beginPath();
-        const x = road.margin + laneW*i;
-        ctx.moveTo(x, -road.laneMarkOffset);
-        ctx.lineTo(x, H + 40);
-        ctx.stroke();
-      }
-      ctx.setLineDash([]);
-
-      // عملات
-      for (const c of pickups){
-        // وهج
-        ctx.beginPath();
-        const g = ctx.createRadialGradient(c.x, c.y, 2, c.x, c.y, c.r*2.6);
-        g.addColorStop(0, 'rgba(255,255,0,0.9)');
-        g.addColorStop(1, 'rgba(255,255,0,0)');
-        ctx.fillStyle = g;
-        ctx.arc(c.x, c.y, c.r*2.4, 0, Math.PI*2);
-        ctx.fill();
-
-        // جسم العملة
-        ctx.beginPath();
-        ctx.fillStyle = '#facc15';
-        ctx.arc(c.x, c.y, c.r, 0, Math.PI*2);
-        ctx.fill();
-        // علامة
-        ctx.fillStyle = '#854d0e';
-        ctx.font = `${Math.floor(c.r*1.3)}px system-ui,Arial`;
-        ctx.textAlign = 'center'; ctx.textBaseline='middle';
-        ctx.fillText('●', c.x, c.y);
-      }
-
-      // سيارات الخصوم
-      for (const o of obstacles){
-        drawCar(o.x, o.y, o.w, o.h, o.color);
-      }
-
-      // اللاعب (وميض إذا محصّن)
-      const blink = (player.invincibleTime>0) ? Math.floor(performance.now()/100)%2===0 : true;
-      if (blink){
-        drawCar(player.x, player.y, player.w, player.h, '#38bdf8');
-      }
-
-      // واجهة: نقاط/قلوب/عملات
-      const pad = 10;
-      ctx.fillStyle = 'rgba(0,0,0,.35)';
-      roundRect(pad,pad, W - pad*2, 38, 12, true, false);
-
-      ctx.fillStyle = '#fff';
-      ctx.font = 'bold 16px system-ui,Arial';
-      ctx.textAlign='start'; ctx.textBaseline='middle';
-      ctx.fillText(`النقاط: ${score}`, pad+12, pad+20);
-
-      // عملات
-      ctx.textAlign='center';
-      ctx.fillStyle = '#fde047';
-      ctx.fillText(`🟡 ${coins}`, W/2, pad+20);
-
-      // قلوب
-      let hx = W - 26;
-      for (let i=0;i<lives;i++){
-        drawHeart(hx, pad+6, 8, '#ef4444');
-        hx -= 22;
-      }
-    }
-
-    function loop(t){
-      if (!lastTime) lastTime = t;
-      const dt = Math.min(0.033, (t - lastTime)/1000);
-      lastTime = t;
-
-      update(dt);
-      render();
-
-      requestAnimationFrame(loop);
-    }
-    requestAnimationFrame(loop);
-
-    // ===== إدخال المستخدم =====
-    function moveLeft(){
-      if (player.lane>0){
-        player.lane--; sfxMove();
-      }
-    }
-    function moveRight(){
-      if (player.lane<lanes-1){
-        player.lane++; sfxMove();
-      }
-    }
-
-    addEventListener('keydown', (e)=>{
-      if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A'){ e.preventDefault(); moveLeft(); }
-      if (e.key === 'ArrowRight'|| e.key === 'd' || e.key === 'D'){ e.preventDefault(); moveRight(); }
-      if (e.key === ' '){ e.preventDefault(); if(gameState!=='play') startGame(); }
-      if (e.key === 'p' || e.key === 'P'){ togglePause(); }
-      if (!audioCtx){ initAudio(); } // تشغيل السياق الصوتي بعد تفاعل المستخدم
-    }, {passive:false});
-
-    btnLeft.addEventListener('click', ()=>{ moveLeft(); if(!audioCtx) initAudio(); });
-    btnRight.addEventListener('click', ()=>{ moveRight(); if(!audioCtx) initAudio(); });
-
-    // أزرار أعلى البطاقة
-    startBtn.addEventListener('click', ()=>{ startGame(); if(!audioCtx) initAudio(); });
-    pauseBtn.addEventListener('click', togglePause);
-    overlayBtn.addEventListener('click', ()=>{ startGame(); if(!audioCtx) initAudio(); });
-
-    function startGame(){
-      resetGame();
-      gameState = 'play';
-      overlay.hidden = true;
-      canvas.focus();
-      lastTime = 0;
-    }
-
-    function showMenu(title, text, btnText){
-      overlayTitle.textContent = title;
-      overlayText.innerHTML = text;
-      overlayBtn.textContent = btnText || 'ابدأ';
-      overlay.hidden = false;
-    }
-
-    function togglePause(){
-      if (gameState === 'play'){
-        gameState = 'pause';
-        showMenu('إيقاف مؤقت ⏸️', 'اضغط "انطلق الآن" للمتابعة.', 'تابع اللعب');
-      } else if (gameState === 'pause'){
-        gameState = 'play';
-        overlay.hidden = true;
-        canvas.focus();
-      }
-    }
-
-    function gameOver(){
-      gameState = 'over';
-      showMenu('انتهت المحاولات 💥',
-               `نتيجتك: <b>${score}</b> — عملات: <b>🟡 ${coins}</b><br>هل تريد اللعب مرة أخرى؟`,
-               'العب مجددًا');
-    }
-
-    // ابدأ على شاشة البداية
-    showMenu('جاهز للانطلاق؟', 'اجمع العملات 🟡 وتجنب السيارات الأخرى. لديك <b>3 قلوب</b>. السرعة تزيد تدريجيًا!', 'انطلق الآن');
-
-    // ===== تحسينات لمس =====
-    // منع سحب/تمرير داخل اللعبة
-    ['touchstart','touchmove','touchend','gesturestart'].forEach(evt=>{
-      canvas.addEventListener(evt, (e)=>{ e.preventDefault(); }, {passive:false});
-    });
-
-    // ===== مساعدة وظائف =====
-    // (لا شيء إضافي هنا)
-
-  </script>
-</body>
+      }catch(e){}
+    })();
+  </script></body>
 </html>
