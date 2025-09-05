@@ -5,32 +5,30 @@
   <title>تذكرتك | أرخص التذاكر</title>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&display=swap" rel="stylesheet">
-  <meta name="description" content="تذكرتك — أدخل من وإلى فقط ثم افتح مواقع الحجز الموثوقة لعرض أرخص التذاكر." />
   <style>
     :root{
       --ink:#0f172a; --muted:#64748b; --line:#e5e7eb; --bg:#f8fafc; --card:#ffffff;
-      --brand:#0ea5e9; --brand-2:#0284c7; --radius:16px; --ring:0 0 0 3px rgba(14,165,233,.25);
+      --brand:#0ea5e9; --brand-2:#0284c7; --radius:16px;
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{margin:0;background:var(--bg);color:var(--ink);font-family:'Cairo',system-ui,Segoe UI,Roboto,Arial,sans-serif}header{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line)}
-.container{max-width:900px;margin:0 auto;padding:14px}
-.row{display:flex;align-items:center;gap:12px}
-.logo{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:radial-gradient(circle at 30% 30%, #7dd3fc, #0ea5e9);color:#fff;font-weight:900}
-.title{font-size:22px;font-weight:900}
-
-/* Simple search */
-.searchbar{margin:12px auto 0;display:grid;gap:10px;grid-template-columns:1fr 1fr auto}
-.fld{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:8px 10px}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:'Cairo',system-ui,Segoe UI,Roboto,Arial,sans-serif}
+    header{background:#fff;border-bottom:1px solid var(--line)}
+    .container{max-width:700px;margin:0 auto;padding:14px}
+    .row{display:flex;align-items:center;gap:12px}
+    .logo{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:radial-gradient(circle at 30% 30%, #7dd3fc, #0ea5e9);color:#fff;font-weight:900}
+    .title{font-size:22px;font-weight:900}.searchbar{margin:12px auto 0;display:grid;gap:10px;grid-template-columns:1fr 1fr auto}
+.fld{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:8px 10px;position:relative}
 .fld label{display:block;font-size:12px;color:var(--muted)}
 .fld input{width:100%;border:0;outline:none;background:transparent;padding:6px 2px;font-size:15px;color:var(--ink)}
+.dropdown{position:absolute;top:100%;left:0;right:0;background:#fff;border:1px solid var(--line);max-height:180px;overflow-y:auto;z-index:10;display:none}
+.dropdown div{padding:8px;cursor:pointer}
+.dropdown div:hover{background:#f1f5f9}
+
 .btn{background:var(--brand);color:#fff;border:0;border-radius:12px;padding:12px 16px;font-weight:800;cursor:pointer}
 .btn:hover{background:var(--brand-2)}
 
 main{padding:16px 0}
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px}
 .providers{display:grid;gap:10px}
-@media(min-width:720px){.providers{grid-template-columns:repeat(3,1fr)}}
 .prov{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff}
 .prov strong{display:block;margin-bottom:6px}
 .prov a{display:inline-block;margin-top:8px;text-decoration:none;background:var(--brand);color:#fff;padding:8px 12px;border-radius:10px;font-weight:700}
@@ -44,87 +42,103 @@ footer{margin-top:18px;border-top:1px dashed var(--line);padding:14px 0}
   </style>
 </head>
 <body>
-  <!-- Header -->
   <header>
     <div class="container">
       <div class="row">
         <div class="logo">✈️</div>
         <div class="title">تذكرتك</div>
-      </div><!-- Simple Search: From / To only -->
-  <form id="searchForm" class="searchbar" onsubmit="event.preventDefault(); buildLinks();">
-    <div class="fld"><label for="origin">من</label><input list="airports" id="origin" placeholder="BAH – المنامة" autocomplete="off"></div>
-    <div class="fld"><label for="destination">إلى</label><input list="airports" id="destination" placeholder="CAI – القاهرة" autocomplete="off"></div>
-    <button class="btn" type="submit">اعرض أرخص التذاكر</button>
-  </form>
-</div>
-
+      </div>
+      <form id="searchForm" class="searchbar" onsubmit="event.preventDefault(); buildLinks();">
+        <div class="fld">
+          <label for="origin">من</label>
+          <input id="origin" placeholder="اختر مدينة أو مطار" readonly>
+          <div id="dropdownOrigin" class="dropdown"></div>
+        </div>
+        <div class="fld">
+          <label for="destination">إلى</label>
+          <input id="destination" placeholder="اختر مطار" readonly>
+          <div id="dropdownDestination" class="dropdown"></div>
+        </div>
+        <button class="btn" type="submit">اعرض أرخص التذاكر</button>
+      </form>
+    </div>
   </header>  <main class="container">
     <section class="card">
-      <h4 style="margin:0 0 8px 0">روابط سريعة لأرخص التذاكر</h4>
-      <p id="summary" class="note">أدخل "من" و"إلى" بالأعلى ثم اضغط زر العرض.</p>
+      <h4 style="margin:0 0 8px 0">أرخص التذاكر</h4>
+      <p id="summary" class="note">اختر من وإلى لعرض النتائج.</p>
       <div class="providers" id="providers"></div>
-      <p class="note">الأسعار تُعرض داخل مواقع الحجز نفسها (Google Flights، Skyscanner، KAYAK، Expedia، Wego).</p>
     </section><footer>
   <div class="credit">
-    <span>برمجة وتطوير: <a href="https://api.whatsapp.com/send/?phone=97333375858&text&type=phone_number&app_absent=0&wame_ctl=1" target="_blank" rel="noopener">فاضل الريس</a></span>
+    <span>برمجة وتطوير: <a href="https://api.whatsapp.com/send/?phone=97333375858&text&type=phone_number&app_absent=0&wame_ctl=1" target="_blank">فاضل الريس</a></span>
   </div>
 </footer>
 
-  </main>  <!-- datalist for airports --><datalist id="airports"></datalist>
-
-  <script>
-    // مطارات مختصرة شائعة
-    const AIRPORTS=[
-      {code:'BAH',name:'المنامة – البحرين'}, {code:'RUH',name:'الرياض – السعودية'}, {code:'JED',name:'جدة – السعودية'}, {code:'DMM',name:'الدمام – السعودية'},
-      {code:'DXB',name:'دبي – الإمارات'}, {code:'AUH',name:'أبوظبي – الإمارات'}, {code:'KWI',name:'الكويت – الكويت'}, {code:'DOH',name:'الدوحة – قطر'}, {code:'MCT',name:'مسقط – عُمان'},
-      {code:'AMM',name:'عمّان – الأردن'}, {code:'BEY',name:'بيروت – لبنان'}, {code:'CAI',name:'القاهرة – مصر'}, {code:'HRG',name:'الغردقة – مصر'}, {code:'SSH',name:'شرم الشيخ – مصر'},
-      {code:'CMN',name:'الدار البيضاء – المغرب'}, {code:'RAK',name:'مراكش – المغرب'}, {code:'IST',name:'إسطنبول – تركيا'}, {code:'AYT',name:'أنطاليا – تركيا'}, {code:'TBS',name:'تبليسي – جورجيا'},
-      {code:'ATH',name:'أثينا – اليونان'}, {code:'FCO',name:'روما – إيطاليا'}, {code:'CDG',name:'باريس – فرنسا'}, {code:'BCN',name:'برشلونة – إسبانيا'}, {code:'LHR',name:'لندن – المملكة المتحدة'}
+  </main>  <script>
+    const ORIGINS=[
+      {code:'BAH',name:'المنامة – البحرين'}, {code:'RUH',name:'الرياض – السعودية'}, {code:'JED',name:'جدة – السعودية'},
+      {code:'DXB',name:'دبي – الإمارات'}, {code:'KWI',name:'الكويت'}, {code:'DOH',name:'الدوحة – قطر'},
+      {code:'AMM',name:'عمّان – الأردن'}, {code:'BEY',name:'بيروت – لبنان'}, {code:'CAI',name:'القاهرة – مصر'},
+      {code:'CMN',name:'الدار البيضاء – المغرب'}, {code:'IST',name:'إسطنبول – تركيا'}
+    ];
+    const DESTINATIONS=[
+      {code:'CAI',name:'القاهرة – مصر'}, {code:'HRG',name:'الغردقة – مصر'}, {code:'SSH',name:'شرم الشيخ – مصر'},
+      {code:'FCO',name:'روما – إيطاليا'}, {code:'CDG',name:'باريس – فرنسا'}, {code:'BCN',name:'برشلونة – إسبانيا'},
+      {code:'LHR',name:'لندن – المملكة المتحدة'}, {code:'BKK',name:'بانكوك – تايلاند'}, {code:'MLE',name:'المالديف'}
     ];
 
-    // datalist
-    const dl=document.getElementById('airports');
-    AIRPORTS.forEach(a=>{const o=document.createElement('option');o.value=`${a.code} – ${a.name}`;dl.appendChild(o)});
+    const originInput=document.getElementById('origin');
+    const destinationInput=document.getElementById('destination');
+    const dropdownOrigin=document.getElementById('dropdownOrigin');
+    const dropdownDestination=document.getElementById('dropdownDestination');
 
-    function findName(code){const f=AIRPORTS.find(x=>x.code===code);return f?f.name:code}
-    function parseCode(v){if(!v) return ''; const code=(v.split('–')[0]||'').trim().toUpperCase(); return code.length===3?code:v.trim().toUpperCase();}
-
-    function buildLinks(){
-      const origin=parseCode(document.getElementById('origin').value);
-      const destination=parseCode(document.getElementById('destination').value);
-      if(!origin||!destination){alert('رجاءً أدخل: من / إلى');return;}
-
-      const summary=document.getElementById('summary');
-      summary.innerHTML=`بحث من <strong>${origin}</strong> إلى <strong>${destination}</strong>. افتح أحد المواقع أدناه لعرض أرخص التذاكر.`;
-
-      const urls=[
-        {name:'Google Flights', url:`https://www.google.com/travel/flights?hl=ar&q=${encodeURIComponent(`flights from ${origin} to ${destination}`)}`, note:'يعرض أرخص الخيارات عبر شركات ووكالات مختلفة.'},
-        {name:'Skyscanner', url:`https://www.skyscanner.net/transport/flights/${origin}/${destination}/?adults=1&cabinclass=economy`, note:'انتقل لاختيار التاريخ ورؤية الأسعار.'},
-        {name:'KAYAK', url:`https://www.kayak.com/flights/${origin}-${destination}?sort=best`, note:'ابحث بلا تاريخ ثم اختر الأرخص.'},
-        {name:'Expedia', url:`https://www.expedia.com/Flights-Search?trip=oneway&leg1=from:${origin},to:${destination}&passengers=adults:1&mode=search`, note:'قد يطلب تحديد التاريخ داخل الموقع.'},
-        {name:'Wego', url:`https://www.wego.com/flights/${origin}-${destination}`, note:'يعرض تجميع أسعار من مزودين مختلفين.'}
-      ];
-
-      renderProviders(urls);
-    }
-
-    function renderProviders(list){
-      const box=document.getElementById('providers');
-      box.innerHTML='';
-      list.forEach(p=>{
-        const card=document.createElement('div'); card.className='prov';
-        const h=document.createElement('strong'); h.textContent=p.name;
-        const s=document.createElement('small'); s.textContent=p.note; s.style.color='#64748b';
-        const a=document.createElement('a'); a.href=p.url; a.target='_blank'; a.rel='noopener'; a.textContent='افتح النتائج';
-        card.appendChild(h); card.appendChild(s); card.appendChild(a);
-        box.appendChild(card);
+    function fillDropdown(list, dropdown, input){
+      dropdown.innerHTML='';
+      list.forEach(item=>{
+        const div=document.createElement('div');
+        div.textContent=`${item.code} – ${item.name}`;
+        div.onclick=()=>{input.value=div.textContent; dropdown.style.display='none'};
+        dropdown.appendChild(div);
       });
     }
 
-    // تهيئة افتراضية: المنامة -> القاهرة
-    (function init(){
-      document.getElementById('origin').value = `BAH – ${findName('BAH')}`;
-      document.getElementById('destination').value = `CAI – ${findName('CAI')}`;
-    })();
+    originInput.addEventListener('click',()=>{
+      fillDropdown(ORIGINS,dropdownOrigin,originInput);
+      dropdownOrigin.style.display='block';
+    });
+    destinationInput.addEventListener('click',()=>{
+      fillDropdown(DESTINATIONS,dropdownDestination,destinationInput);
+      dropdownDestination.style.display='block';
+    });
+
+    document.addEventListener('click',(e)=>{
+      if(!originInput.parentNode.contains(e.target)) dropdownOrigin.style.display='none';
+      if(!destinationInput.parentNode.contains(e.target)) dropdownDestination.style.display='none';
+    });
+
+    function parseCode(v){if(!v) return ''; return v.split('–')[0].trim().toUpperCase();}
+
+    function buildLinks(){
+      const origin=parseCode(originInput.value);
+      const destination=parseCode(destinationInput.value);
+      if(!origin||!destination){alert('رجاءً اختر: من / إلى');return;}
+      const summary=document.getElementById('summary');
+      summary.innerHTML=`من <strong>${origin}</strong> إلى <strong>${destination}</strong>. النتائج من الأرخص إلى الأعلى.`;
+
+      const urls=[
+        {name:'Google Flights', url:`https://www.google.com/travel/flights?hl=ar&q=${encodeURIComponent(`flights from ${origin} to ${destination}`)}`},
+        {name:'Skyscanner', url:`https://www.skyscanner.net/transport/flights/${origin}/${destination}/?adults=1&cabinclass=economy`},
+        {name:'KAYAK', url:`https://www.kayak.com/flights/${origin}-${destination}?sort=price_a`},
+        {name:'Expedia', url:`https://www.expedia.com/Flights-Search?trip=oneway&leg1=from:${origin},to:${destination}&passengers=adults:1&mode=search`},
+        {name:'Wego', url:`https://www.wego.com/flights/${origin}-${destination}`}
+      ];
+
+      const box=document.getElementById('providers');
+      box.innerHTML='';
+      urls.forEach((p,i)=>{
+        const card=document.createElement('div');card.className='prov';
+        card.innerHTML=`<strong>${i+1}. ${p.name}</strong><a href="${p.url}" target="_blank">افتح النتائج</a>`;
+        box.appendChild(card);
+      });
+    }
   </script></body>
 </html>
