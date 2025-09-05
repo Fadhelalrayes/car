@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="ar" dir="rtl">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -6,7 +7,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <style>
-    :root{ --bg:#f9fafb; --card:#ffffff; --ink:#0f172a; --muted:#6b7280; --line:#e5e7eb; --brand:#0ea5e9; --brand-2:#0284c7; --accent:#10b981; --shadow:0 12px 30px rgba(2,132,199,.12); --radius:18px; --ring:0 0 0 3px rgba(14,165,233,.25);} 
+    :root{
+      --bg:#f9fafb; --card:#ffffff; --ink:#0f172a; --muted:#6b7280; --line:#e5e7eb;
+      --brand:#0ea5e9; --brand-2:#0284c7; --shadow:0 12px 30px rgba(2,132,199,.12);
+      --radius:18px; --ring:0 0 0 3px rgba(14,165,233,.25);
+    }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{margin:0;background:var(--bg);color:var(--ink);font-family:'Cairo',system-ui,Segoe UI,Roboto,Arial}
@@ -15,33 +20,28 @@
     .row{display:flex;gap:12px;align-items:center}
     .logo{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;color:#fff;font-weight:900;box-shadow:var(--shadow);background:linear-gradient(180deg,#60a5fa,#0ea5e9)}
     .brand .title{font-size:26px;font-weight:900;letter-spacing:.3px}
-    .brand .tag{color:var(--muted);font-size:13px;margin-top:-4px}/* شريط البحث العمودي (من الأعلى للأسفل) */
-.search{margin-top:14px;display:grid;gap:12px;grid-template-columns:1fr}
-.fld{position:relative;background:var(--card);border:2px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
-.fld:focus-within{border-color:var(--brand); box-shadow:var(--shadow), var(--ring)}
-.lbl{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
-.input{display:flex;align-items:center;gap:8px;margin-top:6px}
-.input input{width:100%;border:0;outline:none;background:transparent;font-size:18px;padding:10px 2px;color:var(--ink)}
-.cta{width:100%;background:linear-gradient(180deg,var(--brand),var(--brand-2));color:#fff;border:0;border-radius:18px;padding:16px 18px;font-weight:900;cursor:pointer;box-shadow:var(--shadow);font-size:18px}
-.cta:hover{filter:brightness(.98)}
+    .brand .tag{color:var(--muted);font-size:13px;margin-top:-4px}
 
-/* النتائج */
-main{padding:16px 0}
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
-.grid{display:grid;gap:12px}
-@media(min-width:760px){.grid{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:1000px){.grid{grid-template-columns:repeat(3,1fr)}}
-.prov{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff;display:flex;flex-direction:column;gap:8px}
-.prov h4{margin:0;font-weight:900}
-.meta{color:var(--muted);font-size:12px}
-.open{display:inline-block;background:var(--accent);color:#062a24;padding:12px;border-radius:12px;font-weight:900;text-decoration:none;text-align:center}
-.open:hover{filter:brightness(.95)}
+    /* البحث العمودي */
+    .search{margin-top:14px;display:grid;gap:12px;grid-template-columns:1fr}
+    .fld{position:relative;background:var(--card);border:2px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
+    .fld:focus-within{border-color:var(--brand); box-shadow:var(--shadow), var(--ring)}
+    .lbl{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+    .input{display:flex;align-items:center;gap:8px;margin-top:6px}
+    .input input, .input select{width:100%;border:0;outline:none;background:transparent;font-size:18px;padding:10px 2px;color:var(--ink)}
+    .cta{width:100%;background:linear-gradient(180deg,var(--brand),var(--brand-2));color:#fff;border:0;border-radius:18px;padding:16px 18px;font-weight:900;cursor:pointer;box-shadow:var(--shadow);font-size:18px}
+    .cta:hover{filter:brightness(.98)}
 
-footer{margin-top:16px;border-top:1px dashed var(--line);padding:14px 0}
-.credit{display:flex;gap:8px;align-items:center;color:var(--muted)}
-.credit a{color:var(--brand-2);font-weight:800;text-decoration:none}
-.credit a:hover{text-decoration:underline}
+    /* النتائج البسيطة (اختياري للعرض) */
+    main{padding:16px 0}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+    .meta{color:var(--muted);font-size:12px}
+    .link{display:inline-block;margin-top:8px;background:#10b981;color:#062a24;padding:10px 12px;border-radius:12px;font-weight:900;text-decoration:none}
 
+    footer{margin-top:16px;border-top:1px dashed var(--line);padding:14px 0}
+    .credit{display:flex;gap:8px;align-items:center;color:var(--muted)}
+    .credit a{color:var(--brand-2);font-weight:800;text-decoration:none}
+    .credit a:hover{text-decoration:underline}
   </style>
 </head>
 <body>
@@ -51,41 +51,64 @@ footer{margin-top:16px;border-top:1px dashed var(--line);padding:14px 0}
         <div class="logo">✈️</div>
         <div class="brand">
           <div class="title">تذكرتك</div>
-          <div class="tag">روابط مباشرة لمواقع الحجز العالمية (قوقل وغيرها)</div>
+          <div class="tag">مواقع حجز موثوقة • يفتح الرابط مباشرة ببياناتك</div>
         </div>
-      </div><!-- شريط البحث العمودي: من / إلى / ابحث -->
-  <form id="searchForm" class="search" onsubmit="event.preventDefault(); buildLinks();">
-    <div class="fld">
-      <div class="lbl">🛫 من</div>
-      <div class="input">
-        <input id="origin" placeholder="اكتب كود المطار (BAH) أو مدينة (المنامة)">
       </div>
-    </div>
-    <div class="fld">
-      <div class="lbl">🛬 إلى</div>
-      <div class="input">
-        <input id="destination" placeholder="اكتب كود المطار (CAI) أو مدينة (القاهرة)">
-      </div>
-    </div>
-    <button class="cta" type="submit">🔎 ابحث</button>
-  </form>
-</div>
 
-  </header>  <main class="container">
-    <section id="resultsCard" class="card" style="display:none">
-      <h3 style="margin:0 0 6px 0">افتح موقع الحجز مباشرة</h3>
+      <!-- من / إلى / الموقع (قائمة منسدلة) / ابحث -->
+      <form id="searchForm" class="search" onsubmit="event.preventDefault(); openSelected();">
+        <div class="fld">
+          <div class="lbl">🛫 من</div>
+          <div class="input">
+            <input id="origin" placeholder="اكتب كود المطار (BAH) أو مدينة (المنامة)">
+          </div>
+        </div>
+        <div class="fld">
+          <div class="lbl">🛬 إلى</div>
+          <div class="input">
+            <input id="destination" placeholder="اكتب كود المطار (CAI) أو مدينة (القاهرة)">
+          </div>
+        </div>
+        <div class="fld">
+          <div class="lbl">🌐 الموقع الموثوق</div>
+          <div class="input">
+            <select id="provider">
+              <option value="google" selected>Google Flights (عربي)</option>
+              <option value="skyscanner">Skyscanner (عربي)</option>
+              <option value="kayak">KAYAK (عربي)</option>
+              <option value="wego">Wego (عربي)</option>
+              <option value="kiwi">Kiwi.com (عربي)</option>
+              <option value="expedia">Expedia</option>
+            </select>
+          </div>
+        </div>
+        <button class="cta" type="submit">🔎 ابحث</button>
+      </form>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="resultInfo" class="card" style="display:none">
+      <h3 style="margin:0 0 6px 0">تم فتح الموقع في تبويب جديد</h3>
       <p id="summary" class="meta">—</p>
-      <div id="providers" class="grid"></div>
-    </section><footer>
-  <div class="credit">
-    <span>برمجة وتطوير: <a href="https://api.whatsapp.com/send/?phone=97333375858&text&type=phone_number&app_absent=0&wame_ctl=1" target="_blank" rel="noopener">فاضل الريس</a></span>
-  </div>
-</footer>
+      <a id="openedLink" class="link" href="#" target="_blank" rel="noopener">افتح الرابط يدويًا (في حال منع النوافذ المنبثقة)</a>
+    </section>
 
-  </main>  <script>
+    <footer>
+      <div class="credit">
+        <span>برمجة وتطوير: <a href="https://api.whatsapp.com/send/?phone=97333375858&text&type=phone_number&app_absent=0&wame_ctl=1" target="_blank" rel="noopener">فاضل الريس</a></span>
+      </div>
+    </footer>
+  </main>
+
+  <script>
     // تحويل أسماء عربية شائعة إلى أكواد IATA لتسهيل الإدخال
     const AR_MAP = {
-      'المنامة':'BAH','البحرين':'BAH','القاهرة':'CAI','الرياض':'RUH','جدة':'JED','الدمام':'DMM','دبي':'DXB','أبوظبي':'AUH','الشارقة':'SHJ','الدوحة':'DOH','الكويت':'KWI','مسقط':'MCT','عمّان':'AMM','بيروت':'BEY','إسطنبول':'IST','طرابزون':'TZX','أنطاليا':'AYT','تبليسي':'TBS','باتومي':'BUS','باكو':'GYD','باريس':'CDG','لندن':'LHR','ميلانو':'MXP','روما':'FCO','أثينا':'ATH','برشلونة':'BCN','مدريد':'MAD','زيورخ':'ZRH','جنيف':'GVA'
+      'المنامة':'BAH','البحرين':'BAH','القاهرة':'CAI','الرياض':'RUH','جدة':'JED','الدمام':'DMM',
+      'دبي':'DXB','أبوظبي':'AUH','الشارقة':'SHJ','الدوحة':'DOH','الكويت':'KWI','مسقط':'MCT',
+      'عمّان':'AMM','بيروت':'BEY','إسطنبول':'IST','طرابزون':'TZX','أنطاليا':'AYT','تبليسي':'TBS',
+      'باتومي':'BUS','باكو':'GYD','باريس':'CDG','لندن':'LHR','ميلانو':'MXP','روما':'FCO',
+      'أثينا':'ATH','برشلونة':'BCN','مدريد':'MAD','زيورخ':'ZRH','جنيف':'GVA'
     };
 
     function parsePlace(v){
@@ -98,8 +121,9 @@ footer{margin-top:16px;border-top:1px dashed var(--line);padding:14px 0}
       return v.toUpperCase();
     }
 
-    function urlFor(site, origin, destination){
-      switch(site){
+    // بناء الرابط لكل موقع موثوق
+    function buildURL(provider, origin, destination){
+      switch(provider){
         case 'google':
           return `https://www.google.com/travel/flights?hl=ar&q=${encodeURIComponent(`flights from ${origin} to ${destination}`)}`;
         case 'skyscanner':
@@ -112,44 +136,37 @@ footer{margin-top:16px;border-top:1px dashed var(--line);padding:14px 0}
           return `https://www.kiwi.com/ar/search/results/${origin}/${destination}/`;
         case 'expedia':
           return `https://www.expedia.com/Flights-Search?trip=oneway&leg1=from:${origin},to:${destination}&passengers=adults:1&mode=search`;
-        case 'almosafer':
-          return `https://ar-mosafir.almosafer.com/flights`;
-        case 'rehlat':
-          return `https://www.rehlat.com/ar/flights/`;
         default:
           return '#';
       }
     }
 
-    function buildLinks(){
+    function openSelected(){
       const origin = parsePlace(document.getElementById('origin').value);
       const destination = parsePlace(document.getElementById('destination').value);
-      const card=document.getElementById('resultsCard');
-      const providers=document.getElementById('providers');
-      const summary=document.getElementById('summary');
+      const provider = document.getElementById('provider').value;
 
-      if(!origin||!destination){ alert('رجاءً أدخل "من" و"إلى" (رمز مطار مثل BAH/CAI أو اسم مدينة بالعربي).'); return; }
-      card.style.display='block';
-      summary.textContent = `من ${origin} إلى ${destination} — اختر موقعك المفضل لفتح صفحة الحجز مباشرة`;
-      providers.innerHTML='';
+      if(!origin||!destination){
+        alert('رجاءً أدخل "من" و"إلى" (رمز مطار مثل BAH/CAI أو اسم مدينة بالعربي).');
+        return;
+      }
 
-      const SITES = [
-        {id:'google', name:'Google Flights (عربي)', desc:'نتائج سريعة بالعربية'},
-        {id:'skyscanner', name:'Skyscanner (عربي)', desc:'مقارنة أسعار شاملة'},
-        {id:'kayak', name:'KAYAK (عربي)', desc:'فرز حسب السعر والمدة'},
-        {id:'wego', name:'Wego (عربي)', desc:'موقع عربي يعرض الأرخص'},
-        {id:'kiwi', name:'Kiwi.com (عربي)', desc:'خيارات اقتصادية ومرونة'},
-        {id:'expedia', name:'Expedia', desc:'وكالة سفر عالمية'},
-        {id:'almosafer', name:'المسافر', desc:'موقع عربي موثوق'},
-        {id:'rehlat', name:'رحلات', desc:'عروض متكررة'}
-      ];
+      const url = buildURL(provider, origin, destination);
 
-      SITES.forEach(s=>{
-        const u = urlFor(s.id, origin, destination);
-        const el=document.createElement('div'); el.className='prov';
-        el.innerHTML = `<h4>${s.name}</h4><div class="meta">${s.desc}</div><a class="open" href="${u}" target="_blank" rel="noopener">افتح صفحة الحجز</a>`;
-        providers.appendChild(el);
-      });
+      // افتح مباشرة في تبويب جديد
+      const win = window.open(url, '_blank', 'noopener');
+      // أظهر أيضاً رابطاً احتياطياً لو منع المتصفح النوافذ المنبثقة
+      const info = document.getElementById('resultInfo');
+      const summary = document.getElementById('summary');
+      const openedLink = document.getElementById('openedLink');
+      info.style.display='block';
+      summary.textContent = `الموقع: ${document.querySelector('#provider option:checked').textContent} — المسار: ${origin} → ${destination}`;
+      openedLink.href = url;
+
+      if(!win){
+        // بعض المتصفحات تمنع الفتح التلقائي — المستخدم يضغط الرابط الاحتياطي
+        alert('تم تجهيز الرابط — اضغط "افتح الرابط يدويًا" إذا لم يُفتح تلقائيًا.');
+      }
     }
 
     // قيم افتراضية للتجربة
@@ -157,5 +174,6 @@ footer{margin-top:16px;border-top:1px dashed var(--line);padding:14px 0}
       document.getElementById('origin').value='BAH — المنامة';
       document.getElementById('destination').value='CAI — القاهرة';
     })();
-  </script></body>
+  </script>
+</body>
 </html>
