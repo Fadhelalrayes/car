@@ -12,7 +12,7 @@
       --radius:18px; --ring:0 0 0 3px rgba(14,165,233,.25);
     }
     *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--ink);font-family:'Cairo',system-ui,Segoe UI,Roboto,Arial}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:'Cairo',serif}
     header{background:#fff;border-bottom:1px solid var(--line)}
     .container{max-width:980px;margin:auto;padding:20px 16px}
     .brand{text-align:center;margin-top:6px}
@@ -34,8 +34,23 @@
 
     footer{margin:22px auto 10px;max-width:980px;padding:0 16px;text-align:center}
     .disclaimer{
-      font-size:13px;color:#475569;background:#f1f5f9;border:1px solid #e2e8f0;
-      border-radius:12px;padding:12px;line-height:1.7;display:inline-block;text-align:right
+      font-size:15px;
+      color:#1f2937;
+      background:linear-gradient(180deg,#fefefe,#f1f5f9);
+      border:1px solid #e2e8f0;
+      border-radius:14px;
+      padding:16px 20px;
+      margin-bottom:14px;
+      line-height:1.8;
+      text-align:justify;
+      box-shadow:0 4px 10px rgba(0,0,0,.05);
+    }
+    .disclaimer strong{color:#d97706}
+    .disclaimer::before{
+      content:"⚠️ ";
+      font-size:20px;
+      vertical-align:middle;
+      margin-left:4px;
     }
     .credit{font-size:16px;color:#475569;margin-top:10px}
     .credit a{color:#0ea5e9;text-decoration:none;font-weight:900}
@@ -51,245 +66,59 @@
       </div>
 
       <form class="search" onsubmit="event.preventDefault(); openSelected();">
-        <!-- من -->
-        <div class="fld">
-          <div class="lbl">من</div>
-          <select id="origin"></select>
-        </div>
-
-        <!-- إلى -->
-        <div class="fld">
-          <div class="lbl">إلى</div>
-          <select id="destination"></select>
-        </div>
-
-        <!-- التواريخ -->
+        <div class="fld"><div class="lbl">من</div><select id="origin"></select></div>
+        <div class="fld"><div class="lbl">إلى</div><select id="destination"></select></div>
         <div class="row2">
-          <div class="fld">
-            <div class="lbl">تاريخ الذهاب</div>
-            <input id="dep" type="date">
-          </div>
-          <div class="fld">
-            <div class="lbl">تاريخ العودة (اختياري)</div>
-            <input id="ret" type="date">
-          </div>
+          <div class="fld"><div class="lbl">تاريخ الذهاب</div><input id="dep" type="date"></div>
+          <div class="fld"><div class="lbl">تاريخ العودة (اختياري)</div><input id="ret" type="date"></div>
         </div>
-
-        <!-- الركاب والدرجة -->
-        <div class="fld">
-          <div class="lbl">عدد المسافرين</div>
-          <input id="pax" type="number" min="1" value="1">
+        <div class="fld"><div class="lbl">عدد المسافرين</div><input id="pax" type="number" min="1" value="1"></div>
+        <div class="fld"><div class="lbl">الدرجة</div>
+          <select id="cabin"><option value="economy" selected>اقتصادية</option><option value="business">أعمال</option><option value="first">أولى</option></select>
         </div>
-        <div class="fld">
-          <div class="lbl">الدرجة</div>
-          <select id="cabin">
-            <option value="economy" selected>اقتصادية</option>
-            <option value="business">أعمال</option>
-            <option value="first">أولى</option>
-          </select>
+        <div class="fld"><div class="lbl">الموقع</div>
+          <select id="provider"><option value="skyscanner" selected>Skyscanner</option><option value="kayak">KAYAK</option></select>
         </div>
-
-        <!-- الموقع (المواقع التي تعمل) -->
-        <div class="fld">
-          <div class="lbl">الموقع</div>
-          <select id="provider">
-            <option value="skyscanner" selected>Skyscanner</option>
-            <option value="kayak">KAYAK</option>
-          </select>
-        </div>
-
         <button class="cta" type="submit">ابحث 🔎</button>
       </form>
     </div>
   </header>
 
-  <!-- التذييل -->
   <footer>
-    <!-- إخلاء مسؤولية -->
     <div class="disclaimer">
-      ⚠️ <strong>تنويه:</strong> نحن لا نبيع التذاكر ولا نعمل كوسيط. هذه الخدمة أداة بحث فقط
-      تقوم بإحالتك مباشرةً إلى مواقع الحجز المعروفة لإتمام الحجز بنفسك. الأسعار والتوافر يخضعان لشروط
+      <strong>تنويه:</strong> نحن لا نبيع التذاكر ولا نعمل كوسيط. هذه الخدمة أداة بحث فقط
+      تقوم بإحالتك مباشرةً إلى مواقع الحجز المعروفة لإتمام عملية الحجز بنفسك. الأسعار والتوافر يخضعان لشروط
       تلك المواقع.
     </div>
-
-    <!-- برمجة وتطوير -->
     <p class="credit">
       برمجة وتطوير:
       <a href="https://api.whatsapp.com/send/?phone=97333375858&text&type=phone_number&app_absent=0&wame_ctl=1"
-         target="_blank" rel="noopener">
-        فاضل الريس
-      </a>
+         target="_blank" rel="noopener">فاضل الريس</a>
     </p>
   </footer>
 
   <script>
-    /***** 1) قاعدة بيانات المطارات: الدولة + المدينة + الكود IATA *****/
-    // الدول العربية (مع عدة مطارات رئيسية)
-    const ARAB_AIRPORTS = [
-      // البحرين
+    /* قائمة مطارات مختصرة للعرض — يمكن توسيعها */
+    const AIRPORTS = [
       {country:'البحرين', city:'المنامة', code:'BAH'},
-      // السعودية
       {country:'السعودية', city:'الرياض', code:'RUH'},
       {country:'السعودية', city:'جدة', code:'JED'},
-      {country:'السعودية', city:'الدمام', code:'DMM'},
-      {country:'السعودية', city:'المدينة', code:'MED'},
-      {country:'السعودية', city:'أبها', code:'AHB'},
-      {country:'السعودية', city:'القصيم', code:'ELQ'},
-      {country:'السعودية', city:'جازان', code:'GIZ'},
-      {country:'السعودية', city:'حائل', code:'HAS'},
-      {country:'السعودية', city:'تبوك', code:'TUU'},
-      {country:'السعودية', city:'العلا', code:'ULH'},
-      // الإمارات
-      {country:'الإمارات', city:'دبي', code:'DXB'},
-      {country:'الإمارات', city:'أبوظبي', code:'AUH'},
-      {country:'الإمارات', city:'الشارقة', code:'SHJ'},
-      {country:'الإمارات', city:'العين', code:'AAN'},
-      // قطر
-      {country:'قطر', city:'الدوحة', code:'DOH'},
-      // الكويت
-      {country:'الكويت', city:'الكويت', code:'KWI'},
-      // عُمان
-      {country:'عُمان', city:'مسقط', code:'MCT'},
-      {country:'عُمان', city:'صلالة', code:'SLL'},
-      // مصر
       {country:'مصر', city:'القاهرة', code:'CAI'},
-      {country:'مصر', city:'الإسكندرية/برج العرب', code:'HBE'},
-      {country:'مصر', city:'الغردقة', code:'HRG'},
-      {country:'مصر', city:'شرم الشيخ', code:'SSH'},
-      {country:'مصر', city:'الأقصر', code:'LXR'},
-      {country:'مصر', city:'أسوان', code:'ASW'},
-      // الأردن
-      {country:'الأردن', city:'عمّان', code:'AMM'},
-      {country:'الأردن', city:'العقبة', code:'AQJ'},
-      // لبنان
-      {country:'لبنان', city:'بيروت', code:'BEY'},
-      // المغرب
-      {country:'المغرب', city:'الدار البيضاء', code:'CMN'},
-      {country:'المغرب', city:'الرباط', code:'RBA'},
-      {country:'المغرب', city:'مراكش', code:'RAK'},
-      {country:'المغرب', city:'أكادير', code:'AGA'},
-      {country:'المغرب', city:'طنجة', code:'TNG'},
-      // الجزائر
-      {country:'الجزائر', city:'الجزائر', code:'ALG'},
-      {country:'الجزائر', city:'وهران', code:'ORN'},
-      {country:'الجزائر', city:'قسنطينة', code:'CZL'},
-      // تونس
-      {country:'تونس', city:'تونس قرطاج', code:'TUN'},
-      {country:'تونس', city:'صفاقس', code:'SFA'},
-      {country:'تونس', city:'جربة', code:'DJE'},
-      // ليبيا
-      {country:'ليبيا', city:'طرابلس', code:'MJI'},
-      {country:'ليبيا', city:'بنغازي', code:'BEN'},
-      // السودان
-      {country:'السودان', city:'الخرطوم', code:'KRT'},
-      // العراق
-      {country:'العراق', city:'بغداد', code:'BGW'},
-      {country:'العراق', city:'أربيل', code:'EBL'},
-      {country:'العراق', city:'النجف', code:'NJF'},
-      {country:'العراق', city:'البصرة', code:'BSR'},
-      // اليمن
-      {country:'اليمن', city:'صنعاء', code:'SAH'},
-      {country:'اليمن', city:'عدن', code:'ADE'},
-      // سوريا
-      {country:'سوريا', city:'دمشق', code:'DAM'},
-      // موريتانيا / جيبوتي / الصومال / جزر القمر
-      {country:'موريتانيا', city:'نواكشوط', code:'NKC'},
-      {country:'جيبوتي', city:'جيبوتي', code:'JIB'},
-      {country:'الصومال', city:'مقديشو', code:'MGQ'},
-      {country:'جزر القمر', city:'موروني', code:'HAH'},
+      {country:'الإمارات', city:'دبي', code:'DXB'},
+      {country:'قطر', city:'الدوحة', code:'DOH'},
+      {country:'تركيا', city:'إسطنبول', code:'IST'},
+      {country:'المملكة المتحدة', city:'لندن', code:'LHR'},
+      {country:'فرنسا', city:'باريس', code:'CDG'},
     ];
 
-    // وجهات سياحية أجنبية مشهورة
-    const INTL_AIRPORTS = [
-      // تركيا والقوقاز
-      {country:'تركيا', city:'إسطنبول الجديدة', code:'IST'},
-      {country:'تركيا', city:'صبيحة كوكجن', code:'SAW'},
-      {country:'تركيا', city:'أنطاليا', code:'AYT'},
-      {country:'تركيا', city:'طرابزون', code:'TZX'},
-      {country:'تركيا', city:'أنقرة', code:'ESB'},
-      {country:'جورجيا', city:'تبليسي', code:'TBS'},
-      {country:'جورجيا', city:'باتومي', code:'BUS'},
-      {country:'أذربيجان', city:'باكو', code:'GYD'},
-
-      // أوروبا الغربية/الوسطى/الشرقية
-      {country:'المملكة المتحدة', city:'لندن هيثرو', code:'LHR'},
-      {country:'المملكة المتحدة', city:'لندن غاتويك', code:'LGW'},
-      {country:'فرنسا', city:'باريس شارل ديغول', code:'CDG'},
-      {country:'فرنسا', city:'باريس أورلي', code:'ORY'},
-      {country:'هولندا', city:'أمستردام', code:'AMS'},
-      {country:'ألمانيا', city:'فرانكفورت', code:'FRA'},
-      {country:'ألمانيا', city:'ميونخ', code:'MUC'},
-      {country:'ألمانيا', city:'برلين', code:'BER'},
-      {country:'سويسرا', city:'زيورخ', code:'ZRH'},
-      {country:'سويسرا', city:'جنيف', code:'GVA'},
-      {country:'بلجيكا', city:'بروكسل', code:'BRU'},
-      {country:'الدنمارك', city:'كوبنهاغن', code:'CPH'},
-      {country:'النرويج', city:'أوسلو', code:'OSL'},
-      {country:'السويد', city:'ستوكهولم', code:'ARN'},
-      {country:'إسبانيا', city:'برشلونة', code:'BCN'},
-      {country:'إسبانيا', city:'مدريد', code:'MAD'},
-      {country:'إسبانيا', city:'فالنسيا', code:'VLC'},
-      {country:'إسبانيا', city:'مايوركا', code:'PMI'},
-      {country:'إيطاليا', city:'روما فيوميتشينو', code:'FCO'},
-      {country:'إيطاليا', city:'ميلانو مالبينسا', code:'MXP'},
-      {country:'إيطاليا', city:'فينيسيا', code:'VCE'},
-      {country:'اليونان', city:'أثينا', code:'ATH'},
-      {country:'اليونان', city:'هيراكليون/كريت', code:'HER'},
-      {country:'النمسا', city:'فيينا', code:'VIE'},
-      {country:'تشيك', city:'براغ', code:'PRG'},
-      {country:'المجر', city:'بودابست', code:'BUD'},
-      {country:'بولندا', city:'وارسو', code:'WAW'},
-      {country:'بولندا', city:'كراكوف', code:'KRK'},
-      {country:'البرتغال', city:'لشبونة', code:'LIS'},
-      {country:'البرتغال', city:'بورتو', code:'OPO'},
-
-      // آسيا والمحيط الهندي
-      {country:'المالديف', city:'ماليه', code:'MLE'},
-      {country:'سريلانكا', city:'كولومبو', code:'CMB'},
-      {country:'الهند', city:'دلهي', code:'DEL'},
-      {country:'الهند', city:'مومباي', code:'BOM'},
-      {country:'الهند', city:'غوا', code:'GOI'},
-      {country:'سنغافورة', city:'سنغافورة', code:'SIN'},
-      {country:'ماليزيا', city:'كوالالمبور', code:'KUL'},
-      {country:'تايلاند', city:'بانكوك', code:'BKK'},
-      {country:'تايلاند', city:'بوكيت', code:'HKT'},
-      {country:'إندونيسيا', city:'بالي/دنمباسار', code:'DPS'},
-      {country:'هونغ كونغ', city:'هونغ كونغ', code:'HKG'},
-      {country:'تايوان', city:'تايبيه', code:'TPE'},
-      {country:'كوريا الجنوبية', city:'سيؤول إنشيون', code:'ICN'},
-      {country:'اليابان', city:'طوكيو ناريتا', code:'NRT'},
-      {country:'اليابان', city:'طوكيو هانيدا', code:'HND'},
-
-      // أفريقيا
-      {country:'كينيا', city:'نيروبي', code:'NBO'},
-      {country:'تنزانيا', city:'زنجبار', code:'ZNZ'},
-      {country:'جنوب أفريقيا', city:'كيب تاون', code:'CPT'},
-      {country:'جنوب أفريقيا', city:'جوهانسبرغ', code:'JNB'},
-      {country:'موريشيوس', city:'موريشيوس', code:'MRU'},
-
-      // الأمريكيتان
-      {country:'الولايات المتحدة', city:'نيويورك JFK', code:'JFK'},
-      {country:'الولايات المتحدة', city:'واشنطن دلس', code:'IAD'},
-      {country:'الولايات المتحدة', city:'شيكاغو أوهير', code:'ORD'},
-      {country:'الولايات المتحدة', city:'لوس أنجلِس', code:'LAX'},
-      {country:'الولايات المتحدة', city:'سان فرانسيسكو', code:'SFO'},
-      {country:'كندا', city:'تورنتو', code:'YYZ'},
-      {country:'كندا', city:'فانكوفر', code:'YVR'},
-    ];
-
-    const ALL_AIRPORTS = [...ARAB_AIRPORTS, ...INTL_AIRPORTS];
-
-    /***** 2) بناء القوائم ديناميكياً (من/إلى) مجمّعة حسب الدولة *****/
     function renderAirportSelect(selectEl){
       const byCountry = {};
-      ALL_AIRPORTS.forEach(a=>{ (byCountry[a.country] ||= []).push(a); });
-
+      AIRPORTS.forEach(a=>{ (byCountry[a.country] ||= []).push(a); });
       const countries = Object.keys(byCountry).sort((a,b)=>a.localeCompare(b,'ar'));
       selectEl.innerHTML = "";
       countries.forEach(cty=>{
         const og = document.createElement('optgroup');
         og.label = cty;
-        byCountry[cty].sort((a,b)=>a.city.localeCompare(b.city,'ar'));
         byCountry[cty].forEach(a=>{
           const opt = document.createElement('option');
           opt.value = a.code;
@@ -300,7 +129,6 @@
       });
     }
 
-    /***** 3) بناء الروابط للمواقع *****/
     const kayakCabin = c => ({economy:'e',business:'b',first:'f'}[c]||'e');
     const ymd = d => d || "";
     const ymdCompact = d => d? d.replace(/-/g,"") : "";
@@ -308,21 +136,18 @@
     function buildURL(provider, o, d, dep, ret, pax, cabin){
       const depYMD = ymd(dep), retYMD = ymd(ret);
       const depSC  = ymdCompact(dep), retSC = ymdCompact(ret);
-
       switch(provider){
         case 'skyscanner': {
-          // مثال: https://www.skyscanner.net/transport/flights/BAH/CAI/20250912/20250919/?adults=1&cabinclass=economy&locale=ar-SA
           let base = `https://www.skyscanner.net/transport/flights/${o}/${d}`;
           if(depSC) base += `/${depSC}`;
           if(retSC) base += `/${retSC}`;
-          return `${base}/?adults=${encodeURIComponent(pax)}&cabinclass=${encodeURIComponent(cabin)}&locale=ar-SA`;
+          return `${base}/?adults=${pax}&cabinclass=${cabin}&locale=ar-SA`;
         }
         case 'kayak': {
-          // مثال: https://www.kayak.ae/flights/BAH-CAI/2025-09-12/2025-09-19?adults=1&cabin=e&lang=ar
           let base = `https://www.kayak.ae/flights/${o}-${d}`;
           if(depYMD) base += `/${depYMD}`;
           if(retYMD) base += `/${retYMD}`;
-          return `${base}?adults=${encodeURIComponent(pax)}&cabin=${encodeURIComponent(kayakCabin(cabin))}&lang=ar&sort=price_a`;
+          return `${base}?adults=${pax}&cabin=${kayakCabin(cabin)}&lang=ar&sort=price_a`;
         }
         default: return '#';
       }
@@ -337,30 +162,24 @@
       const pax = document.getElementById('pax').value || 1;
       const cabin = document.getElementById('cabin').value;
       if(!o || !d){ alert('اختر: من / إلى'); return; }
-      if(p==='kayak' && !dep){ alert('كيّاك يعمل أفضل عند تحديد تاريخ الذهاب.'); return; }
       const url = buildURL(p,o,d,dep,ret,pax,cabin);
       window.open(url,'_blank','noopener');
     }
 
-    /***** 4) تعبئة تلقائية + إنشاء القوائم عند التحميل *****/
     (function init(){
-      // بناء القوائم
       renderAirportSelect(document.getElementById('origin'));
       renderAirportSelect(document.getElementById('destination'));
-
-      // افتراضات تلقائية (BAH -> CAI) مع تواريخ قريبة
       const now = new Date();
       const d1 = new Date(now); d1.setDate(d1.getDate()+7);
       const d2 = new Date(now); d2.setDate(d2.getDate()+14);
       const iso = d => d.toISOString().slice(0,10);
-
-      document.getElementById('origin').value = 'BAH';
-      document.getElementById('destination').value = 'CAI';
-      document.getElementById('dep').value = iso(d1);
-      document.getElementById('ret').value = iso(d2);
-      document.getElementById('pax').value = 1;
-      document.getElementById('cabin').value = 'economy';
-      document.getElementById('provider').value = 'skyscanner';
+      document.getElementById('origin').value='BAH';
+      document.getElementById('destination').value='CAI';
+      document.getElementById('dep').value=iso(d1);
+      document.getElementById('ret').value=iso(d2);
+      document.getElementById('pax').value=1;
+      document.getElementById('cabin').value='economy';
+      document.getElementById('provider').value='skyscanner';
     })();
   </script>
 </body>
