@@ -7,10 +7,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
   <style>
     :root{--bg:#f9fafb;--card:#fff;--ink:#0f172a;--muted:#6b7280;--line:#e5e7eb;--brand:#0ea5e9;--brand2:#0284c7;--shadow:0 12px 30px rgba(2,132,199,.12);--radius:18px;--ring:0 0 0 3px rgba(14,165,233,.25)}
-    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:'Cairo',sans-serif}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:'Cairo',sans-serif}
     header{background:#fff;border-bottom:1px solid var(--line)}
     .container{max-width:980px;margin:auto;padding:20px 16px}
-    .brand{text-align:center}.brand .title{font-weight:900;font-size:32px;color:var(--brand)}
+    .brand{text-align:center}
+    .brand .title{font-weight:900;font-size:32px;color:var(--brand)}
     .brand .tag{margin-top:6px;color:#374151;font-weight:700}
     form.search{display:grid;gap:12px;margin-top:18px}
     .fld{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
@@ -34,10 +36,10 @@
       <form class="search" onsubmit="event.preventDefault(); openSelected();">
         <!-- من -->
         <div class="fld">
-          <div class="lbl">🛫 من</div>
+          <div class="lbl">من</div>
           <select id="origin">
             <optgroup label="الدول العربية">
-              <option value="BAH">البحرين - المنامة (BAH)</option>
+              <option value="BAH" selected>البحرين - المنامة (BAH)</option>
               <option value="RUH">السعودية - الرياض (RUH)</option>
               <option value="JED">السعودية - جدة (JED)</option>
               <option value="DMM">السعودية - الدمام (DMM)</option>
@@ -69,62 +71,58 @@
               <option value="MGQ">الصومال - مقديشو (MGQ)</option>
               <option value="HAH">جزر القمر - موروني (HAH)</option>
             </optgroup>
-            <optgroup label="وجهات أجنبية">
+            <optgroup label="وجهات أجنبية شائعة">
               <option value="IST">إسطنبول (IST)</option><option value="SAW">صبيحة (SAW)</option>
               <option value="AYT">أنطاليا (AYT)</option><option value="TZX">طرابزون (TZX)</option>
-              <option value="CDG">باريس (CDG)</option><option value="ORY">باريس (ORY)</option>
-              <option value="LHR">لندن (LHR)</option><option value="LGW">لندن (LGW)</option>
+              <option value="CDG">باريس (CDG)</option><option value="LHR">لندن (LHR)</option>
               <option value="AMS">أمستردام (AMS)</option><option value="FRA">فرانكفورت (FRA)</option>
-              <option value="MUC">ميونخ (MUC)</option><option value="BER">برلين (BER)</option>
-              <option value="ZRH">زيورخ (ZRH)</option><option value="GVA">جنيف (GVA)</option>
+              <option value="MUC">ميونخ (MUC)</option><option value="ZRH">زيورخ (ZRH)</option>
               <option value="BCN">برشلونة (BCN)</option><option value="MAD">مدريد (MAD)</option>
-              <option value="FCO">روما (FCO)</option><option value="MXP">ميلانو (MXP)</option><option value="VCE">فينيسيا (VCE)</option>
-              <option value="VIE">فيينا (VIE)</option><option value="PRG">براغ (PRG)</option><option value="BUD">بودابست (BUD)</option>
-              <option value="WAW">وارسو (WAW)</option><option value="LIS">لشبونة (LIS)</option><option value="OPO">بورتو (OPO)</option>
-              <option value="MLE">ماليه (MLE)</option><option value="CMB">كولومبو (CMB)</option>
-              <option value="SIN">سنغافورة (SIN)</option><option value="KUL">كوالالمبور (KUL)</option>
+              <option value="FCO">روما (FCO)</option><option value="MXP">ميلانو (MXP)</option>
+              <option value="VIE">فيينا (VIE)</option><option value="PRG">براغ (PRG)</option>
+              <option value="BUD">بودابست (BUD)</option><option value="WAW">وارسو (WAW)</option>
+              <option value="LIS">لشبونة (LIS)</option><option value="OPO">بورتو (OPO)</option>
+              <option value="MLE">ماليه (MLE)</option><option value="KUL">كوالالمبور (KUL)</option>
               <option value="BKK">بانكوك (BKK)</option><option value="HKT">بوكيت (HKT)</option>
-              <option value="DPS">بالي (DPS)</option><option value="NBO">نيروبي (NBO)</option><option value="ZNZ">زنجبار (ZNZ)</option>
-              <option value="JFK">نيويورك (JFK)</option><option value="IAD">واشنطن (IAD)</option><option value="LAX">لوس أنجلِس (LAX)</option>
-              <option value="SFO">سان فرانسيسكو (SFO)</option><option value="YYZ">تورنتو (YYZ)</option>
+              <option value="DPS">بالي (DPS)</option><option value="NBO">نيروبي (NBO)</option>
+              <option value="ZNZ">زنجبار (ZNZ)</option><option value="JFK">نيويورك (JFK)</option>
             </optgroup>
           </select>
         </div>
 
-        <!-- إلى (نفس القوائم) -->
+        <!-- إلى -->
         <div class="fld">
-          <div class="lbl">🛬 إلى</div>
+          <div class="lbl">إلى</div>
           <select id="destination">
-            <!-- أعِد نفس القوائم أعلاه (اختصرت هنا للحجم) -->
-            <option value="CAI">مصر - القاهرة (CAI)</option>
+            <!-- يمكنك تكرار القائمة كاملة؛ اختصرتها هنا -->
+            <option value="CAI" selected>مصر - القاهرة (CAI)</option>
             <option value="DXB">الإمارات - دبي (DXB)</option>
             <option value="IST">إسطنبول (IST)</option>
             <option value="LHR">لندن (LHR)</option>
             <option value="CDG">باريس (CDG)</option>
             <option value="JED">السعودية - جدة (JED)</option>
-            <!-- … يمكنك تكرار كل الخيارات إن رغبت حرفيًا مثل قائمة (من) -->
           </select>
         </div>
 
         <!-- التواريخ -->
         <div class="row2">
           <div class="fld">
-            <div class="lbl">📅 تاريخ الذهاب</div>
+            <div class="lbl">تاريخ الذهاب</div>
             <input id="dep" type="date">
           </div>
           <div class="fld">
-            <div class="lbl">↩️ تاريخ العودة</div>
+            <div class="lbl">تاريخ العودة (اختياري)</div>
             <input id="ret" type="date">
           </div>
         </div>
 
         <!-- الركاب والدرجة -->
         <div class="fld">
-          <div class="lbl">👥 عدد المسافرين</div>
+          <div class="lbl">عدد المسافرين</div>
           <input id="pax" type="number" min="1" value="1">
         </div>
         <div class="fld">
-          <div class="lbl">💺 الدرجة</div>
+          <div class="lbl">الدرجة</div>
           <select id="cabin">
             <option value="economy" selected>اقتصادية</option>
             <option value="business">أعمال</option>
@@ -132,79 +130,44 @@
           </select>
         </div>
 
-        <!-- الموقع -->
+        <!-- الموقع (المواقع التي تعمل) -->
         <div class="fld">
-          <div class="lbl">🌐 الموقع</div>
+          <div class="lbl">الموقع</div>
           <select id="provider">
-            <option value="google" selected>Google Flights</option>
-            <option value="kiwi">Kiwi.com</option>
-            <option value="expedia">Expedia</option>
-            <option value="skyscanner">Skyscanner</option>
+            <option value="skyscanner" selected>Skyscanner</option>
             <option value="kayak">KAYAK</option>
-            <option value="wego">Wego</option>
           </select>
         </div>
 
-        <button class="cta" type="submit">🔎 ابحث</button>
+        <button class="cta" type="submit">ابحث 🔎</button>
       </form>
     </div>
   </header>
 
   <script>
-    // تحويلات خاصة ببعض المواقع
+    // تحويلات خاصة
     const kayakCabin = c => ({economy:'e',business:'b',first:'f'}[c]||'e');
-    const ymd = d => d? d : "";
-    const ymdCompact = d => d? d.replace(/-/g,"") : "";
+    const ymd = d => d || "";                 // YYYY-MM-DD
+    const ymdCompact = d => d? d.replace(/-/g,"") : ""; // YYYYMMDD
 
     function buildURL(provider, o, d, dep, ret, pax, cabin){
       const depYMD = ymd(dep), retYMD = ymd(ret);
       const depSC  = ymdCompact(dep), retSC = ymdCompact(ret);
 
       switch(provider){
-        case 'google': {
-          // أفضل استعلام عربي واضح لغوغل
-          // مثال: "رحلات من BAH إلى CAI 2025-09-11 عودة 2025-09-30 1 بالغ اقتصادية"
-          let q = `رحلات من ${o} إلى ${d}`;
-          if(depYMD) q += ` ${depYMD}`;
-          if(retYMD) q += ` عودة ${retYMD}`;
-          q += ` ${pax} بالغ ${cabin==='business'?'أعمال':(cabin==='first'?'أولى':'اقتصادية')}`;
-          return `https://www.google.com/travel/flights?hl=ar&q=${encodeURIComponent(q)}`;
-        }
-        case 'kiwi': {
-          let base = `https://www.kiwi.com/ar/search/results/${o}/${d}`;
-          if(depYMD) base += `/${depYMD}`;
-          if(retYMD) base += `/${retYMD}`;
-          return `${base}/?adults=${encodeURIComponent(pax)}&cabinClass=${encodeURIComponent(cabin)}`;
-        }
-        case 'expedia': {
-          const base = 'https://www.expedia.com/Flights-Search';
-          if(depYMD && retYMD){
-            return `${base}?trip=roundtrip&leg1=from:${o},to:${d},departure:${depYMD}TANYT&leg2=from:${d},to:${o},departure:${retYMD}TANYT&passengers=adults:${pax}&cabinclass=${cabin}&mode=search`;
-          }
-          if(depYMD){
-            return `${base}?trip=oneway&leg1=from:${o},to:${d},departure:${depYMD}TANYT&passengers=adults:${pax}&cabinclass=${cabin}&mode=search`;
-          }
-          return `${base}?trip=oneway&leg1=from:${o},to:${d}&passengers=adults:${pax}&cabinclass=${cabin}&mode=search`;
-        }
         case 'skyscanner': {
-          // أفضل صيغة مع تواريخ: /YYYYMMDD/…; إن لم يقبل التاريخ سيملأ من/إلى ويطلب تأكيد
+          // مثال: https://www.skyscanner.net/transport/flights/BAH/CAI/20250912/20250919/?adults=1&cabinclass=economy&locale=ar-SA
           let base = `https://www.skyscanner.net/transport/flights/${o}/${d}`;
           if(depSC) base += `/${depSC}`;
           if(retSC) base += `/${retSC}`;
           return `${base}/?adults=${encodeURIComponent(pax)}&cabinclass=${encodeURIComponent(cabin)}&locale=ar-SA`;
         }
         case 'kayak': {
-          // Kayak مع مسار واضح؛ يحتاج تواريخ ليقبل أحيانًا
+          // مثال: https://www.kayak.ae/flights/BAH-CAI/2025-09-12/2025-09-19?adults=1&cabin=e&lang=ar
           let base = `https://www.kayak.ae/flights/${o}-${d}`;
           if(depYMD) base += `/${depYMD}`;
           if(retYMD) base += `/${retYMD}`;
-          return `${base}?adults=${encodeURIComponent(pax)}&cabin=${encodeURIComponent(kayakCabin(cabin))}&sort=price_a&lang=ar`;
-        }
-        case 'wego': {
-          let base = `https://www.wego.ae/flights/${o}-${d}`;
-          if(depYMD) base += `/${depYMD}`;
-          if(retYMD) base += `/${retYMD}`;
-          return `${base}?adults=${encodeURIComponent(pax)}&cabin=${encodeURIComponent(cabin)}`;
+          return `${base}?adults=${encodeURIComponent(pax)}&cabin=${encodeURIComponent(kayakCabin(cabin))}&lang=ar&sort=price_a`;
         }
         default: return '#';
       }
@@ -219,6 +182,13 @@
       const pax = document.getElementById('pax').value || 1;
       const cabin = document.getElementById('cabin').value;
       if(!o || !d){ alert('اختر: من / إلى'); return; }
+
+      // في كاياك، يفضَّل وجود تاريخ على الأقل ليقبل الرابط دائماً
+      if(p==='kayak' && !dep){
+        alert('كيّاك يعمل أفضل عند تحديد تاريخ الذهاب.');
+        return;
+      }
+
       const url = buildURL(p,o,d,dep,ret,pax,cabin);
       window.open(url,'_blank','noopener');
     }
@@ -235,7 +205,7 @@
       document.getElementById('ret').value=iso(d2);
       document.getElementById('pax').value=1;
       document.getElementById('cabin').value='economy';
-      document.getElementById('provider').value='google';
+      document.getElementById('provider').value='skyscanner'; // افتراضيًا على سكاي سكانر
     })();
   </script>
 </body>
