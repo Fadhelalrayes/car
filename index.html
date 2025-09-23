@@ -1,186 +1,334 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<!DOCTYPE html><html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>تذكرتك | قارن أسعار التذاكر</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+  <title>دعاء وفاضل — لعبة إكس-أو الفاخرة</title>
   <style>
     :root{
-      --bg:#f9fafb; --card:#fff; --ink:#0f172a; --muted:#6b7280; --line:#e5e7eb;
-      --brand:#0ea5e9; --brand2:#0284c7; --shadow:0 12px 30px rgba(2,132,199,.12);
-      --radius:18px; --ring:0 0 0 3px rgba(14,165,233,.25);
+      --bg1:#0b0f1a; --bg2:#11182a; --fg:#eaf0ff; --muted:#9fb2d9; --acc1:#7c4dff; --acc2:#22c55e; --acc3:#f59e0b; --danger:#ef4444; --glass:rgba(255,255,255,.06);
+      --shadow: 0 10px 30px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.04);
+    }
+    [data-theme="light"]{
+      --bg1:#f6f7fb; --bg2:#ffffff; --fg:#0b1220; --muted:#5b6b8c; --acc1:#6d28d9; --acc2:#059669; --acc3:#d97706; --danger:#dc2626; --glass:rgba(0,0,0,.04);
+      --shadow: 0 10px 30px rgba(0,0,0,.10), inset 0 1px 0 rgba(255,255,255,.6);
     }
     *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--ink);font-family:'Cairo',serif}
-    header{background:#fff;border-bottom:1px solid var(--line)}
-    .container{max-width:980px;margin:auto;padding:20px 16px}
-    .brand{text-align:center;margin-top:6px}
-    .brand .title{font-weight:900;font-size:32px;letter-spacing:.2px;color:var(--brand)}
-    .brand .tag{margin-top:6px;color:#374151;font-weight:700}
+    body{margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Kufi Arabic", "Noto Naskh Arabic", Arial, sans-serif; background: radial-gradient(1200px 800px at 70% -10%, #1b2440, transparent), linear-gradient(180deg, var(--bg1), var(--bg2)); color:var(--fg); min-height:100vh}
+    .container{max-width:1100px; margin:0 auto; padding:24px}header{display:flex; flex-wrap:wrap; gap:16px; align-items:center; justify-content:space-between; margin-bottom:18px}
+.brand{display:flex; align-items:center; gap:12px}
+.logo{width:42px; height:42px; border-radius:14px; background:linear-gradient(135deg, var(--acc1), #4f46e5); box-shadow:var(--shadow); display:grid; place-items:center; color:white; font-weight:900}
+h1{margin:0; font-size:clamp(20px, 2.5vw, 28px)}
+.sub{opacity:.75; font-size:13px}
 
-    form.search{display:grid;gap:12px;margin-top:18px}
-    .fld{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
-    .fld:focus-within{border-color:var(--brand);box-shadow:var(--shadow),var(--ring)}
-    .lbl{font-size:13px;color:var(--muted);margin-bottom:6px}
-    select,input{width:100%;border:0;outline:none;background:transparent;font-size:18px;padding:8px 0;color:var(--ink)}
-    input[type=date]{font-size:16px;padding:6px}
-    .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .cta{
-      width:100%;background:linear-gradient(180deg,var(--brand),var(--brand2));color:#fff;
-      border:0;border-radius:18px;padding:16px;font-weight:900;cursor:pointer;font-size:18px;box-shadow:var(--shadow)
-    }
-    .cta:hover{filter:brightness(.98)}
+.panel{background:var(--glass); border:1px solid rgba(255,255,255,.08); border-radius:20px; padding:16px; box-shadow:var(--shadow)}
+.grid{display:grid; grid-template-columns: 360px 1fr; gap:20px}
+@media (max-width: 940px){ .grid{grid-template-columns:1fr;}}
 
-    footer{margin:22px auto 10px;max-width:980px;padding:0 16px;text-align:center}
-    .disclaimer{
-      font-size:15px;
-      color:#1f2937;
-      background:linear-gradient(180deg,#fefefe,#f1f5f9);
-      border:1px solid #e2e8f0;
-      border-radius:14px;
-      padding:16px 20px;
-      margin-bottom:14px;
-      line-height:1.8;
-      text-align:justify;
-      box-shadow:0 4px 10px rgba(0,0,0,.05);
-    }
-    .disclaimer strong{color:#d97706}
-    .disclaimer::before{
-      content:"⚠️ ";
-      font-size:20px;
-      vertical-align:middle;
-      margin-left:4px;
-    }
-    .credit{font-size:16px;color:#475569;margin-top:10px}
-    .credit a{color:#0ea5e9;text-decoration:none;font-weight:900}
-    .credit a:hover{text-decoration:underline}
+.row{display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:space-between}
+.chip{padding:10px 14px; border-radius:14px; background:transparent; border:1px solid rgba(255,255,255,.12); color:var(--fg); cursor:pointer; font-weight:600}
+.chip.active{background:linear-gradient(135deg, var(--acc1), #4f46e5); border-color:transparent; color:#fff; box-shadow:0 10px 20px rgba(79,70,229,.35)}
+
+.field{display:flex; align-items:center; gap:10px; margin:10px 0}
+.field label{font-size:13px; opacity:.8}
+.input{flex:1; background:rgba(0,0,0,.2); border:1px solid rgba(255,255,255,.08); padding:10px 12px; border-radius:12px; color:var(--fg)}
+[data-theme="light"] .input{background:rgba(255,255,255,.85)}
+select.input{cursor:pointer}
+
+.btn{padding:10px 14px; border-radius:14px; border:1px solid rgba(255,255,255,.12); background:linear-gradient(135deg, var(--bg2), var(--bg1)); color:var(--fg); cursor:pointer; font-weight:700}
+.btn.primary{background:linear-gradient(135deg, var(--acc2), #16a34a); color:#fff; border:0}
+.btn.warn{background:linear-gradient(135deg, var(--danger), #b91c1c); color:#fff; border:0}
+.btn.ghost{background:transparent}
+
+/* Board */
+.board{display:grid; grid-template-columns:repeat(3, 1fr); gap:14px; width:min(520px, 100%); aspect-ratio:1/1; margin-inline:auto}
+.cell{position:relative; border-radius:22px; background:linear-gradient(160deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.12); box-shadow:var(--shadow); font-size:clamp(42px, 10vw, 72px); font-weight:900; display:grid; place-items:center; cursor:pointer; user-select:none; transition: transform .06s ease, box-shadow .2s ease}
+.cell:hover{box-shadow:0 0 0 3px rgba(124,77,255,.35) inset}
+.cell.disabled{pointer-events:none; opacity:.9}
+.cell.X{color:#60a5fa}
+.cell.O{color:#fb7185}
+.cell.win{box-shadow:0 0 0 3px rgba(34,197,94,.65) inset !important}
+
+.statusBar{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px; margin:6px 0 14px}
+.status{font-weight:800}
+.muted{opacity:.7}
+
+.stats{display:grid; grid-template-columns:repeat(3,1fr); gap:10px}
+.card{padding:12px; border-radius:14px; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.1); text-align:center}
+.card h4{margin:0 0 6px 0; font-size:12px; opacity:.7}
+.card .big{font-size:24px; font-weight:900}
+
+footer{margin-top:18px; text-align:center; opacity:.7; font-size:12px}
+
   </style>
 </head>
 <body>
-  <header>
-    <div class="container">
+  <div class="container" id="app" data-theme="dark">
+    <header>
       <div class="brand">
-        <div class="title">تذكرتك</div>
-        <div class="tag">استكشف أرخص أسعار تذاكر الطيران</div>
+        <div class="logo">XO</div>
+        <div>
+          <h1>دعاء وفاضل — لعبة إكس-أو الفاخرة</h1>
+          <div class="sub">اختَر: تحدي بين شخصين أو لاعب واحد ضد الذكاء الاصطناعي • تصميم فخم وأنيق</div>
+        </div>
       </div>
-
-      <form class="search" onsubmit="event.preventDefault(); openSelected();">
-        <div class="fld"><div class="lbl">من</div><select id="origin"></select></div>
-        <div class="fld"><div class="lbl">إلى</div><select id="destination"></select></div>
-        <div class="row2">
-          <div class="fld"><div class="lbl">تاريخ الذهاب</div><input id="dep" type="date"></div>
-          <div class="fld"><div class="lbl">تاريخ العودة (اختياري)</div><input id="ret" type="date"></div>
-        </div>
-        <div class="fld"><div class="lbl">عدد المسافرين</div><input id="pax" type="number" min="1" value="1"></div>
-        <div class="fld"><div class="lbl">الدرجة</div>
-          <select id="cabin"><option value="economy" selected>اقتصادية</option><option value="business">أعمال</option><option value="first">أولى</option></select>
-        </div>
-        <div class="fld"><div class="lbl">الموقع</div>
-          <select id="provider"><option value="skyscanner" selected>Skyscanner</option><option value="kayak">KAYAK</option></select>
-        </div>
-        <button class="cta" type="submit">ابحث 🔎</button>
-      </form>
+      <div class="row">
+        <button class="btn" id="themeBtn" title="تبديل السمة">🌙/☀️</button>
+        <button class="btn primary" id="newBtn">لعبة جديدة</button>
+        <button class="btn warn" id="resetBtn">تصفير النتائج</button>
+      </div>
+    </header><div class="grid">
+  <!-- Controls -->
+  <section class="panel" style="min-height:340px">
+    <div class="row" style="margin-bottom:8px">
+      <div class="muted">الوضع</div>
+      <div class="row">
+        <button class="chip active" data-mode="pvp">تحدي شخصين</button>
+        <button class="chip" data-mode="ai">لاعب واحد</button>
+      </div>
     </div>
-  </header>
 
-  <footer>
-    <div class="disclaimer">
-      <strong>تنويه:</strong> نحن لا نبيع التذاكر ولا نعمل كوسيط. هذه الخدمة أداة بحث فقط
-      تقوم بإحالتك مباشرةً إلى مواقع الحجز المعروفة لإتمام عملية الحجز بنفسك. الأسعار والتوافر يخضعان لشروط
-      تلك المواقع.
+    <!-- PvP names -->
+    <div id="pvpBox">
+      <div class="field"><label>اسم اللاعب (X):</label><input id="p1Name" class="input" value="دعاء" /></div>
+      <div class="field"><label>اسم اللاعب (O):</label><input id="p2Name" class="input" value="فاضل" /></div>
     </div>
-    <p class="credit">
-      برمجة وتطوير:
-      <a href="https://api.whatsapp.com/send/?phone=97333375858&text&type=phone_number&app_absent=0&wame_ctl=1"
-         target="_blank" rel="noopener">فاضل الريس</a>
-    </p>
-  </footer>
 
-  <script>
-    /* قائمة مطارات مختصرة للعرض — يمكن توسيعها */
-    const AIRPORTS = [
-      {country:'البحرين', city:'المنامة', code:'BAH'},
-      {country:'السعودية', city:'الرياض', code:'RUH'},
-      {country:'السعودية', city:'جدة', code:'JED'},
-      {country:'مصر', city:'القاهرة', code:'CAI'},
-      {country:'الإمارات', city:'دبي', code:'DXB'},
-      {country:'قطر', city:'الدوحة', code:'DOH'},
-      {country:'تركيا', city:'إسطنبول', code:'IST'},
-      {country:'المملكة المتحدة', city:'لندن', code:'LHR'},
-      {country:'فرنسا', city:'باريس', code:'CDG'},
-    ];
+    <!-- AI options -->
+    <div id="aiBox" style="display:none">
+      <div class="field"><label>اختر الرمز:</label>
+        <select id="humanMark" class="input"><option value="X">X</option><option value="O">O</option></select>
+      </div>
+      <div class="field"><label>أول من يبدأ:</label>
+        <select id="firstMove" class="input"><option value="human">اللاعب</option><option value="ai">الذكاء الاصطناعي</option></select>
+      </div>
+      <div class="field"><label>الصعوبة:</label>
+        <select id="difficulty" class="input">
+          <option value="easy">سهل</option>
+          <option value="medium">متوسط</option>
+          <option value="hard" selected>صعب (مثالي)</option>
+        </select>
+      </div>
+      <button class="btn" id="hintBtn">💡 تلميح</button>
+    </div>
 
-    function renderAirportSelect(selectEl){
-      const byCountry = {};
-      AIRPORTS.forEach(a=>{ (byCountry[a.country] ||= []).push(a); });
-      const countries = Object.keys(byCountry).sort((a,b)=>a.localeCompare(b,'ar'));
-      selectEl.innerHTML = "";
-      countries.forEach(cty=>{
-        const og = document.createElement('optgroup');
-        og.label = cty;
-        byCountry[cty].forEach(a=>{
-          const opt = document.createElement('option');
-          opt.value = a.code;
-          opt.textContent = `${cty} — ${a.city} (${a.code})`;
-          og.appendChild(opt);
-        });
-        selectEl.appendChild(og);
-      });
+    <hr style="border:none; border-top:1px solid rgba(255,255,255,.08); margin:14px 0"/>
+
+    <div class="stats">
+      <div class="card"><h4>فوز</h4><div class="big" id="wins">0</div></div>
+      <div class="card"><h4>تعادل</h4><div class="big" id="draws">0</div></div>
+      <div class="card"><h4>خسارة</h4><div class="big" id="losses">0</div></div>
+    </div>
+  </section>
+
+  <!-- Game -->
+  <section>
+    <div class="statusBar">
+      <div class="status" id="status">جاهز للبدء</div>
+      <div class="muted" id="turnInfo"></div>
+    </div>
+    <div class="board" id="board"></div>
+  </section>
+</div>
+
+<footer>مصنوع بحب — واجهة فاخرة، أصوات، حفظ النتائج محليًا، وذكاء اصطناعي متدرّج.</footer>
+
+  </div>  <script>
+    // ============== Utilities & Audio ==============
+    const $ = (s, r=document) => r.querySelector(s);
+    const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+
+    function beep(freq=700, dur=.07){
+      try{
+        const ctx = new (window.AudioContext||window.webkitAudioContext)();
+        const o = ctx.createOscillator(); const g = ctx.createGain();
+        o.type = 'sine'; o.frequency.value = freq; o.connect(g); g.connect(ctx.destination);
+        g.gain.setValueAtTime(.0001, ctx.currentTime);
+        g.gain.exponentialRampToValueAtTime(.2, ctx.currentTime+.01);
+        g.gain.exponentialRampToValueAtTime(.0001, ctx.currentTime+dur);
+        o.start(); o.stop(ctx.currentTime + dur + .02);
+      }catch{}
     }
 
-    const kayakCabin = c => ({economy:'e',business:'b',first:'f'}[c]||'e');
-    const ymd = d => d || "";
-    const ymdCompact = d => d? d.replace(/-/g,"") : "";
+    const LINES = [ [0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6] ];
+    function winnerOf(b){
+      for(const [a,b2,c] of LINES){
+        if(b[a] && b[a]===b[b2] && b[a]===b[c]) return {w:b[a], line:[a,b2,c]};
+      }
+      if(b.every(Boolean)) return {w:'draw', line:[]};
+      return {w:null, line:[]};
+    }
+    const emptyIdx = b => b.map((v,i)=>v?null:i).filter(v=>v!==null);
 
-    function buildURL(provider, o, d, dep, ret, pax, cabin){
-      const depYMD = ymd(dep), retYMD = ymd(ret);
-      const depSC  = ymdCompact(dep), retSC = ymdCompact(ret);
-      switch(provider){
-        case 'skyscanner': {
-          let base = `https://www.skyscanner.net/transport/flights/${o}/${d}`;
-          if(depSC) base += `/${depSC}`;
-          if(retSC) base += `/${retSC}`;
-          return `${base}/?adults=${pax}&cabinclass=${cabin}&locale=ar-SA`;
-        }
-        case 'kayak': {
-          let base = `https://www.kayak.ae/flights/${o}-${d}`;
-          if(depYMD) base += `/${depYMD}`;
-          if(retYMD) base += `/${retYMD}`;
-          return `${base}?adults=${pax}&cabin=${kayakCabin(cabin)}&lang=ar&sort=price_a`;
-        }
-        default: return '#';
+    function minimax(board, ai, hu, max, a=-Infinity, bt=Infinity){
+      const {w} = winnerOf(board);
+      if(w===ai) return {s:10};
+      if(w===hu) return {s:-10};
+      if(w==='draw') return {s:0};
+      let best=null;
+      if(max){
+        let bestS=-Infinity; for(const i of emptyIdx(board)){
+          board[i]=ai; const {s}=minimax(board, ai, hu, false, a, bt); board[i]=null;
+          if(s>bestS){bestS=s; best=i} a=Math.max(a,bestS); if(bt<=a) break;
+        } return {s:bestS, m:best};
+      } else {
+        let bestS=Infinity; for(const i of emptyIdx(board)){
+          board[i]=hu; const {s}=minimax(board, ai, hu, true, a, bt); board[i]=null;
+          if(s<bestS){bestS=s; best=i} bt=Math.min(bt,bestS); if(bt<=a) break;
+        } return {s:bestS, m:best};
       }
     }
 
-    function openSelected(){
-      const o = document.getElementById('origin').value;
-      const d = document.getElementById('destination').value;
-      const p = document.getElementById('provider').value;
-      const dep = document.getElementById('dep').value;
-      const ret = document.getElementById('ret').value;
-      const pax = document.getElementById('pax').value || 1;
-      const cabin = document.getElementById('cabin').value;
-      if(!o || !d){ alert('اختر: من / إلى'); return; }
-      const url = buildURL(p,o,d,dep,ret,pax,cabin);
-      window.open(url,'_blank','noopener');
+    function bestMedium(board, ai, hu){
+      // win
+      for(const i of emptyIdx(board)){ const c=[...board]; c[i]=ai; if(winnerOf(c).w===ai) return i }
+      // block
+      for(const i of emptyIdx(board)){ const c=[...board]; c[i]=hu; if(winnerOf(c).w===hu) return i }
+      // center -> corners -> edges
+      if(!board[4]) return 4;
+      const corners=[0,2,6,8].filter(i=>!board[i]); if(corners.length) return corners[Math.floor(Math.random()*corners.length)];
+      const edges=[1,3,5,7].filter(i=>!board[i]); if(edges.length) return edges[Math.floor(Math.random()*edges.length)];
+      return null;
     }
 
-    (function init(){
-      renderAirportSelect(document.getElementById('origin'));
-      renderAirportSelect(document.getElementById('destination'));
-      const now = new Date();
-      const d1 = new Date(now); d1.setDate(d1.getDate()+7);
-      const d2 = new Date(now); d2.setDate(d2.getDate()+14);
-      const iso = d => d.toISOString().slice(0,10);
-      document.getElementById('origin').value='BAH';
-      document.getElementById('destination').value='CAI';
-      document.getElementById('dep').value=iso(d1);
-      document.getElementById('ret').value=iso(d2);
-      document.getElementById('pax').value=1;
-      document.getElementById('cabin').value='economy';
-      document.getElementById('provider').value='skyscanner';
-    })();
-  </script>
-</body>
+    // ============== State ==============
+    let mode='pvp'; // 'pvp' | 'ai'
+    let board = Array(9).fill(null);
+    let turn='X';
+    let human='X', ai='O';
+    let first='human';
+    let diff='hard';
+    let locked=false; // for AI thinking
+    let names={ X: 'دعاء', O: 'فاضل' };
+    let hintIndex=null;
+
+    const score = JSON.parse(localStorage.getItem('xo_score_df')||'{"w":0,"d":0,"l":0}');
+
+    // ============== DOM refs ==============
+    const app=$('#app');
+    const boardEl=$('#board');
+    const statusEl=$('#status');
+    const turnInfo=$('#turnInfo');
+    const newBtn=$('#newBtn');
+    const resetBtn=$('#resetBtn');
+    const themeBtn=$('#themeBtn');
+    const chips=$$('[data-mode]');
+    const pvpBox=$('#pvpBox'); const aiBox=$('#aiBox');
+    const p1Name=$('#p1Name'); const p2Name=$('#p2Name');
+    const humanMark=$('#humanMark'); const firstMove=$('#firstMove'); const difficulty=$('#difficulty');
+    const hintBtn=$('#hintBtn');
+    const winsEl=$('#wins'), drawsEl=$('#draws'), lossesEl=$('#losses');
+
+    function updateScore(){ winsEl.textContent=score.w; drawsEl.textContent=score.d; lossesEl.textContent=score.l; localStorage.setItem('xo_score_df', JSON.stringify(score)); }
+    updateScore();
+
+    // ============== UI Build ==============
+    function drawBoard(){
+      boardEl.innerHTML='';
+      board.forEach((v,i)=>{
+        const btn=document.createElement('button'); btn.className='cell'+(v?(' '+v):''); btn.dataset.idx=i; btn.textContent=v||'';
+        if(locked || v) btn.classList.add('disabled');
+        if(hintIndex===i && !v && mode==='ai' && !locked){ btn.style.boxShadow='0 0 0 3px rgba(245,158,11,.65) inset' }
+        btn.addEventListener('click', onCellClick);
+        boardEl.appendChild(btn);
+      })
+    }
+
+    function setStatus(txt){ statusEl.textContent = txt }
+    function setTurnInfo(){
+      if(mode==='pvp'){
+        const who = (turn==='X'? (p1Name.value||'لاعب X') : (p2Name.value||'لاعب O'));
+        turnInfo.textContent = `دور: ${who} (${turn})`;
+      } else {
+        const who = (turn===human? 'اللاعب' : 'الذكاء الاصطناعي');
+        turnInfo.textContent = `الدور: ${who} (${turn})`;
+      }
+    }
+
+    function highlight(line){
+      line.forEach(i=>{ const c=boardEl.querySelector(`[data-idx="${i}"]`); if(c) c.classList.add('win') })
+    }
+
+    function newGame(){
+      board = Array(9).fill(null); hintIndex=null; locked=false;
+      if(mode==='pvp'){
+        turn='X'; names={ X: p1Name.value||'دعاء', O: p2Name.value||'فاضل' };
+      } else {
+        human = humanMark.value; ai = (human==='X'?'O':'X'); first = firstMove.value; diff = difficulty.value; turn = (first==='human'? human : ai);
+      }
+      drawBoard(); setTurnInfo(); setStatus('حظًا موفقًا!');
+      if(mode==='ai' && turn===ai){ locked=true; setStatus('الذكاء الاصطناعي يفكّر…'); setTimeout(aiPlay, 300) }
+    }
+
+    function resetAll(){ score.w=0; score.d=0; score.l=0; updateScore(); newGame(); }
+
+    // ============== Game Logic ==============
+    function onCellClick(e){
+      const i=+e.currentTarget.dataset.idx;
+      if(board[i] || locked) return;
+      board[i]=turn; beep(turn==='X'?740:560, .06); drawBoard();
+      const {w, line} = winnerOf(board);
+      if(w){
+        endGame(w, line); return;
+      }
+      turn = (turn==='X'?'O':'X'); setTurnInfo();
+      if(mode==='ai' && turn===ai){ locked=true; setStatus('الذكاء الاصطناعي يفكّر…'); setTimeout(aiPlay, 300) }
+    }
+
+    function endGame(w, line){
+      if(line && line.length) highlight(line);
+      if(w==='draw'){ setStatus('تعادل!'); score.d++; }
+      else{
+        if(mode==='pvp'){
+          const winnerName = (w==='X'? (p1Name.value||'لاعب X') : (p2Name.value||'لاعب O'));
+          setStatus('فوز: '+winnerName+` (${w})`);
+        } else {
+          setStatus(w===human? 'فزت!': 'فاز الذكاء الاصطناعي');
+          if(w===human) score.w++; else score.l++;
+        }
+      }
+      updateScore();
+      // disable
+      locked=true; $$('.cell').forEach(c=>c.classList.add('disabled'));
+      beep(w==='draw'?500:(w==='X'?900:300), .09);
+    }
+
+    function aiPlay(){
+      if(winnerOf(board).w) return; // already finished
+      const move = chooseAIMove();
+      if(move!==null && board[move]===null){ board[move]=ai }
+      drawBoard(); locked=false; setTurnInfo();
+      const {w,line}=winnerOf(board);
+      if(w){ endGame(w,line); return; }
+      turn=human; setStatus('دورك!');
+    }
+
+    function chooseAIMove(){
+      const empties = emptyIdx(board); if(!empties.length) return null;
+      if(diff==='easy') return empties[Math.floor(Math.random()*empties.length)];
+      if(diff==='medium') return bestMedium(board, ai, human);
+      const {m} = minimax([...board], ai, human, true); return m ?? empties[0];
+    }
+
+    function showHint(){ if(mode!=='ai' || locked) return; const {m} = minimax([...board], human, ai, true); hintIndex = m ?? null; drawBoard(); setTimeout(()=>{ hintIndex=null; drawBoard() }, 1600); beep(800,.05) }
+
+    // ============== Events ==============
+    newBtn.addEventListener('click', newGame);
+    resetBtn.addEventListener('click', resetAll);
+    themeBtn.addEventListener('click', ()=>{ app.dataset.theme = app.dataset.theme==='dark'?'light':'dark' });
+
+    chips.forEach(ch=>{
+      ch.addEventListener('click', ()=>{
+        chips.forEach(c=>c.classList.remove('active'));
+        ch.classList.add('active');
+        mode=ch.dataset.mode; if(mode==='pvp'){ pvpBox.style.display='block'; aiBox.style.display='none' } else { pvpBox.style.display='none'; aiBox.style.display='block' }
+        newGame();
+      })
+    })
+
+    [p1Name,p2Name,humanMark,firstMove,difficulty].forEach(el=> el.addEventListener('change', newGame));
+    hintBtn.addEventListener('click', showHint);
+
+    // Init
+    newGame();
+  </script></body>
 </html>
