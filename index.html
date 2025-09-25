@@ -34,11 +34,12 @@
   .item img{width:36px; height:36px}
   .muted{color:var(--muted); font-size:.9rem}
   .err{color:#b91c1c; font-weight:700}
+.top{justify-content:center; flex-direction:column; text-align:center}
 </style></head>
 <body>
   <div class="wrap">
     <div class="card">
-      <div class="row">
+      <div class="row top">
         <h1>حالة الطقس</h1>
         <div class="sub" id="dateLbl">—</div>
       </div>
@@ -174,13 +175,29 @@ function fillDays(days, tzShift){
 }
 
 function findNextRain(list, tzShift){
-  const rainItem = list.find(ent=>(ent.pop||0) > 0.4);
-  if(rainItem){
-    const d = fromTZ(rainItem.dt, tzShift);
-    nextRainEl.textContent = fmtDateTime(d);
-  } else {
-    nextRainEl.textContent = "لا يوجد توقع قريب للمطر";
+  // ابحث أولاً عن أقرب فترة لديها مطر (rain) أو احتمال > 0%
+  let candidate = list.find(ent => (ent.rain && (Object.values(ent.rain)[0]||0) > 0) || (ent.pop||0) > 0);
+  // إن لم يوجد ضمن التسلسل، اختر الفترة ذات أعلى احتمال هطول كخيار بعيد
+  if(!candidate){
+    candidate = list.reduce((best, ent) => {
+      const pop = ent.pop||0;
+      const r = ent.rain ? (Object.values(ent.rain)[0]||0) : 0;
+      const score = (r>0? 1:0) + pop; // أولوية للمطر الفعلي ثم الاحتمال
+      if(!best) return ent;
+      const bestPop = best.pop||0;
+      const bestR = best.rain ? (Object.values(best.rain)[0]||0) : 0;
+      const bestScore = (bestR>0?1:0) + bestPop;
+      return score>bestScore ? ent : best;
+    }, null);
   }
+  if(candidate){
+    const d = fromTZ(candidate.dt, tzShift);
+    const popPct = Math.round((candidate.pop||0)*100);
+    nextRainEl.textContent = `${fmtDateTime(d)} — احتمال ${popPct}%`;
+  } else {
+    nextRainEl.textContent = "لا توجد أمطار في البيانات المتاحة";
+  }
+}
 }
 
 function showError(text){
