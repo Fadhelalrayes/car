@@ -1,334 +1,224 @@
-<!DOCTYPE html><html lang="ar" dir="rtl">
+<!doctype html>
+
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>دعاء وفاضل — لعبة إكس-أو الفاخرة</title>
-  <style>
-    :root{
-      --bg1:#0b0f1a; --bg2:#11182a; --fg:#eaf0ff; --muted:#9fb2d9; --acc1:#7c4dff; --acc2:#22c55e; --acc3:#f59e0b; --danger:#ef4444; --glass:rgba(255,255,255,.06);
-      --shadow: 0 10px 30px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.04);
-    }
-    [data-theme="light"]{
-      --bg1:#f6f7fb; --bg2:#ffffff; --fg:#0b1220; --muted:#5b6b8c; --acc1:#6d28d9; --acc2:#059669; --acc3:#d97706; --danger:#dc2626; --glass:rgba(0,0,0,.04);
-      --shadow: 0 10px 30px rgba(0,0,0,.10), inset 0 1px 0 rgba(255,255,255,.6);
-    }
-    *{box-sizing:border-box}
-    body{margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Kufi Arabic", "Noto Naskh Arabic", Arial, sans-serif; background: radial-gradient(1200px 800px at 70% -10%, #1b2440, transparent), linear-gradient(180deg, var(--bg1), var(--bg2)); color:var(--fg); min-height:100vh}
-    .container{max-width:1100px; margin:0 auto; padding:24px}header{display:flex; flex-wrap:wrap; gap:16px; align-items:center; justify-content:space-between; margin-bottom:18px}
-.brand{display:flex; align-items:center; gap:12px}
-.logo{width:42px; height:42px; border-radius:14px; background:linear-gradient(135deg, var(--acc1), #4f46e5); box-shadow:var(--shadow); display:grid; place-items:center; color:white; font-weight:900}
-h1{margin:0; font-size:clamp(20px, 2.5vw, 28px)}
-.sub{opacity:.75; font-size:13px}
-
-.panel{background:var(--glass); border:1px solid rgba(255,255,255,.08); border-radius:20px; padding:16px; box-shadow:var(--shadow)}
-.grid{display:grid; grid-template-columns: 360px 1fr; gap:20px}
-@media (max-width: 940px){ .grid{grid-template-columns:1fr;}}
-
-.row{display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:space-between}
-.chip{padding:10px 14px; border-radius:14px; background:transparent; border:1px solid rgba(255,255,255,.12); color:var(--fg); cursor:pointer; font-weight:600}
-.chip.active{background:linear-gradient(135deg, var(--acc1), #4f46e5); border-color:transparent; color:#fff; box-shadow:0 10px 20px rgba(79,70,229,.35)}
-
-.field{display:flex; align-items:center; gap:10px; margin:10px 0}
-.field label{font-size:13px; opacity:.8}
-.input{flex:1; background:rgba(0,0,0,.2); border:1px solid rgba(255,255,255,.08); padding:10px 12px; border-radius:12px; color:var(--fg)}
-[data-theme="light"] .input{background:rgba(255,255,255,.85)}
-select.input{cursor:pointer}
-
-.btn{padding:10px 14px; border-radius:14px; border:1px solid rgba(255,255,255,.12); background:linear-gradient(135deg, var(--bg2), var(--bg1)); color:var(--fg); cursor:pointer; font-weight:700}
-.btn.primary{background:linear-gradient(135deg, var(--acc2), #16a34a); color:#fff; border:0}
-.btn.warn{background:linear-gradient(135deg, var(--danger), #b91c1c); color:#fff; border:0}
-.btn.ghost{background:transparent}
-
-/* Board */
-.board{display:grid; grid-template-columns:repeat(3, 1fr); gap:14px; width:min(520px, 100%); aspect-ratio:1/1; margin-inline:auto}
-.cell{position:relative; border-radius:22px; background:linear-gradient(160deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.12); box-shadow:var(--shadow); font-size:clamp(42px, 10vw, 72px); font-weight:900; display:grid; place-items:center; cursor:pointer; user-select:none; transition: transform .06s ease, box-shadow .2s ease}
-.cell:hover{box-shadow:0 0 0 3px rgba(124,77,255,.35) inset}
-.cell.disabled{pointer-events:none; opacity:.9}
-.cell.X{color:#60a5fa}
-.cell.O{color:#fb7185}
-.cell.win{box-shadow:0 0 0 3px rgba(34,197,94,.65) inset !important}
-
-.statusBar{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px; margin:6px 0 14px}
-.status{font-weight:800}
-.muted{opacity:.7}
-
-.stats{display:grid; grid-template-columns:repeat(3,1fr); gap:10px}
-.card{padding:12px; border-radius:14px; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.1); text-align:center}
-.card h4{margin:0 0 6px 0; font-size:12px; opacity:.7}
-.card .big{font-size:24px; font-weight:900}
-
-footer{margin-top:18px; text-align:center; opacity:.7; font-size:12px}
-
-  </style>
-</head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>الطقس — بسيط وعملي (إصدار مُصلَح)</title>
+<meta name="description" content="طقس الآن، الساعات القادمة، و5 أيام.">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet"><style>
+  :root{ --bg:#fafafa; --card:#fff; --ink:#111; --muted:#6b7280; --border:#ece6cc; --shadow:0 8px 24px rgba(0,0,0,.06); --accent:linear-gradient(90deg,#d4af37,#ffdf7f);}  
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--bg); color:var(--ink); font-family:"Tajawal",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;}
+  .wrap{max-width:900px; margin:auto; padding:16px; display:grid; gap:14px}
+  .card{background:var(--card); border:1px solid var(--border); border-radius:14px; box-shadow:var(--shadow); padding:14px}
+  h1{margin:0; font-size:1.3rem; font-weight:800; background:var(--accent); -webkit-background-clip:text; background-clip:text; color:transparent}
+  .row{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap}
+  .loc{font-weight:800}
+  .sub{color:var(--muted); font-size:.92rem}
+  .now{display:flex; align-items:center; gap:12px}
+  .now img{width:60px; height:60px}
+  .now .t{font-size:2rem; font-weight:800}
+  .grid{display:grid; gap:10px}
+  @media(min-width:720px){ .grid{grid-template-columns:1fr 1fr} }
+  .mini{display:grid; grid-template-columns:repeat(4,1fr); gap:8px}
+  @media(max-width:480px){ .mini{grid-template-columns:repeat(2,1fr)} }
+  .chip{border:1px solid var(--border); border-radius:12px; padding:10px; text-align:center}
+  .chip .l{color:var(--muted); font-size:.86rem}
+  .chip .v{font-weight:800}
+  .secTitle{margin:0 0 10px; text-align:center; font-weight:800; background:var(--accent); -webkit-background-clip:text; background-clip:text; color:transparent}
+  .hours, .days{display:grid; gap:8px; grid-template-columns:repeat(6,1fr)}
+  @media(max-width:860px){ .hours{grid-template-columns:repeat(4,1fr)} .days{grid-template-columns:repeat(3,1fr)} }
+  @media(max-width:520px){ .hours{grid-template-columns:repeat(3,1fr)} .days{grid-template-columns:repeat(2,1fr)} }
+  .item{border:1px solid var(--border); border-radius:12px; padding:8px; text-align:center}
+  .item img{width:36px; height:36px}
+  .muted{color:var(--muted); font-size:.9rem}
+  .err{color:#b91c1c; font-weight:700}
+</style></head>
 <body>
-  <div class="container" id="app" data-theme="dark">
-    <header>
-      <div class="brand">
-        <div class="logo">XO</div>
-        <div>
-          <h1>دعاء وفاضل — لعبة إكس-أو الفاخرة</h1>
-          <div class="sub">اختَر: تحدي بين شخصين أو لاعب واحد ضد الذكاء الاصطناعي • تصميم فخم وأنيق</div>
-        </div>
-      </div>
+  <div class="wrap">
+    <div class="card">
       <div class="row">
-        <button class="btn" id="themeBtn" title="تبديل السمة">🌙/☀️</button>
-        <button class="btn primary" id="newBtn">لعبة جديدة</button>
-        <button class="btn warn" id="resetBtn">تصفير النتائج</button>
+        <h1>الطقس — بسيط وعملي</h1>
+        <div class="sub" id="dateLbl">—</div>
       </div>
-    </header><div class="grid">
-  <!-- Controls -->
-  <section class="panel" style="min-height:340px">
-    <div class="row" style="margin-bottom:8px">
-      <div class="muted">الوضع</div>
-      <div class="row">
-        <button class="chip active" data-mode="pvp">تحدي شخصين</button>
-        <button class="chip" data-mode="ai">لاعب واحد</button>
+    </div><div class="card">
+  <div class="row">
+    <div>
+      <div class="loc" id="place">—</div>
+      <div class="sub" id="tzLbl">—</div>
+    </div>
+    <div class="sub" id="upd">آخر تحديث —</div>
+  </div>
+
+  <div class="grid" style="margin-top:8px">
+    <div class="now">
+      <img id="iconNow" alt="" />
+      <div>
+        <div class="t" id="tNow">—°</div>
+        <div id="condNow" class="muted">—</div>
       </div>
     </div>
-
-    <!-- PvP names -->
-    <div id="pvpBox">
-      <div class="field"><label>اسم اللاعب (X):</label><input id="p1Name" class="input" value="دعاء" /></div>
-      <div class="field"><label>اسم اللاعب (O):</label><input id="p2Name" class="input" value="فاضل" /></div>
+    <div class="mini">
+      <div class="chip"><div class="l">أعلى/أدنى</div><div class="v"><span id="hi">—</span>° / <span id="lo">—</span>°</div></div>
+      <div class="chip"><div class="l">الرطوبة</div><div class="v"><span id="hum">—</span>%</div></div>
+      <div class="chip"><div class="l">الرياح</div><div class="v"><span id="wind">—</span> كم/س</div></div>
+      <div class="chip"><div class="l">الإحساس</div><div class="v"><span id="feels">—</span>°</div></div>
     </div>
+  </div>
 
-    <!-- AI options -->
-    <div id="aiBox" style="display:none">
-      <div class="field"><label>اختر الرمز:</label>
-        <select id="humanMark" class="input"><option value="X">X</option><option value="O">O</option></select>
-      </div>
-      <div class="field"><label>أول من يبدأ:</label>
-        <select id="firstMove" class="input"><option value="human">اللاعب</option><option value="ai">الذكاء الاصطناعي</option></select>
-      </div>
-      <div class="field"><label>الصعوبة:</label>
-        <select id="difficulty" class="input">
-          <option value="easy">سهل</option>
-          <option value="medium">متوسط</option>
-          <option value="hard" selected>صعب (مثالي)</option>
-        </select>
-      </div>
-      <button class="btn" id="hintBtn">💡 تلميح</button>
-    </div>
-
-    <hr style="border:none; border-top:1px solid rgba(255,255,255,.08); margin:14px 0"/>
-
-    <div class="stats">
-      <div class="card"><h4>فوز</h4><div class="big" id="wins">0</div></div>
-      <div class="card"><h4>تعادل</h4><div class="big" id="draws">0</div></div>
-      <div class="card"><h4>خسارة</h4><div class="big" id="losses">0</div></div>
-    </div>
-  </section>
-
-  <!-- Game -->
-  <section>
-    <div class="statusBar">
-      <div class="status" id="status">جاهز للبدء</div>
-      <div class="muted" id="turnInfo"></div>
-    </div>
-    <div class="board" id="board"></div>
-  </section>
+  <div class="sub err" id="msg" style="display:none"></div>
 </div>
 
-<footer>مصنوع بحب — واجهة فاخرة، أصوات، حفظ النتائج محليًا، وذكاء اصطناعي متدرّج.</footer>
+<div class="card">
+  <h3 class="secTitle">الساعات القادمة</h3>
+  <div id="hours" class="hours"></div>
+</div>
 
-  </div>  <script>
-    // ============== Utilities & Audio ==============
-    const $ = (s, r=document) => r.querySelector(s);
-    const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+<div class="card">
+  <h3 class="secTitle">توقع 5 أيام</h3>
+  <div id="days" class="days"></div>
+</div>
 
-    function beep(freq=700, dur=.07){
-      try{
-        const ctx = new (window.AudioContext||window.webkitAudioContext)();
-        const o = ctx.createOscillator(); const g = ctx.createGain();
-        o.type = 'sine'; o.frequency.value = freq; o.connect(g); g.connect(ctx.destination);
-        g.gain.setValueAtTime(.0001, ctx.currentTime);
-        g.gain.exponentialRampToValueAtTime(.2, ctx.currentTime+.01);
-        g.gain.exponentialRampToValueAtTime(.0001, ctx.currentTime+dur);
-        o.start(); o.stop(ctx.currentTime + dur + .02);
-      }catch{}
-    }
+  </div><script>
+/* ===== مفتاح OpenWeather ===== */
+const OWM_KEY = "71679af819486daabc9848ad1dec6c05"; // تأكد من صحته وخطة الاشتراك
 
-    const LINES = [ [0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6] ];
-    function winnerOf(b){
-      for(const [a,b2,c] of LINES){
-        if(b[a] && b[a]===b[b2] && b[a]===b[c]) return {w:b[a], line:[a,b2,c]};
-      }
-      if(b.every(Boolean)) return {w:'draw', line:[]};
-      return {w:null, line:[]};
-    }
-    const emptyIdx = b => b.map((v,i)=>v?null:i).filter(v=>v!==null);
+/* ===== عناصر ===== */
+const qs = id=>document.getElementById(id);
+const placeEl=qs('place'), tzEl=qs('tzLbl'), updEl=qs('upd'), iconNow=qs('iconNow');
+const tNow=qs('tNow'), condNow=qs('condNow'), hiEl=qs('hi'), loEl=qs('lo');
+const humEl=qs('hum'), windEl=qs('wind'), feelsEl=qs('feels');
+const hoursEl=qs('hours'), daysEl=qs('days'), dateLbl=qs('dateLbl'), msgEl=qs('msg');
 
-    function minimax(board, ai, hu, max, a=-Infinity, bt=Infinity){
-      const {w} = winnerOf(board);
-      if(w===ai) return {s:10};
-      if(w===hu) return {s:-10};
-      if(w==='draw') return {s:0};
-      let best=null;
-      if(max){
-        let bestS=-Infinity; for(const i of emptyIdx(board)){
-          board[i]=ai; const {s}=minimax(board, ai, hu, false, a, bt); board[i]=null;
-          if(s>bestS){bestS=s; best=i} a=Math.max(a,bestS); if(bt<=a) break;
-        } return {s:bestS, m:best};
-      } else {
-        let bestS=Infinity; for(const i of emptyIdx(board)){
-          board[i]=hu; const {s}=minimax(board, ai, hu, true, a, bt); board[i]=null;
-          if(s<bestS){bestS=s; best=i} bt=Math.min(bt,bestS); if(bt<=a) break;
-        } return {s:bestS, m:best};
-      }
-    }
+const kmh = ms => Math.round(ms*3.6);
+const pad = n => (n<10?"0":"")+n;
+const fmtDate = (d) => d.toLocaleDateString('ar', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+const fmtHour = (d) => d.toLocaleTimeString('ar', { hour:'2-digit', minute:'2-digit' });
+const fromTZ = (ts, shift) => new Date((ts + shift) * 1000); // OpenWeather shifts in seconds
 
-    function bestMedium(board, ai, hu){
-      // win
-      for(const i of emptyIdx(board)){ const c=[...board]; c[i]=ai; if(winnerOf(c).w===ai) return i }
-      // block
-      for(const i of emptyIdx(board)){ const c=[...board]; c[i]=hu; if(winnerOf(c).w===hu) return i }
-      // center -> corners -> edges
-      if(!board[4]) return 4;
-      const corners=[0,2,6,8].filter(i=>!board[i]); if(corners.length) return corners[Math.floor(Math.random()*corners.length)];
-      const edges=[1,3,5,7].filter(i=>!board[i]); if(edges.length) return edges[Math.floor(Math.random()*edges.length)];
-      return null;
-    }
+/* ===== API (بدائل موثوقة لخطة مجانية) ===== */
+async function getCurrent(lat,lon){
+  const u=`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${OWM_KEY}&units=metric&lang=ar`;
+  const r=await fetch(u); if(!r.ok) throw new Error('weather:'+r.status); return r.json();
+}
+async function getForecast(lat,lon){
+  const u=`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${OWM_KEY}&units=metric&lang=ar`;
+  const r=await fetch(u); if(!r.ok) throw new Error('forecast:'+r.status); return r.json();
+}
+async function reverseName(lat,lon){
+  const u=`https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=${OWM_KEY}`;
+  const r=await fetch(u); if(!r.ok) throw new Error('geo:'+r.status); const j=await r.json(); return j?.[0];
+}
 
-    // ============== State ==============
-    let mode='pvp'; // 'pvp' | 'ai'
-    let board = Array(9).fill(null);
-    let turn='X';
-    let human='X', ai='O';
-    let first='human';
-    let diff='hard';
-    let locked=false; // for AI thinking
-    let names={ X: 'دعاء', O: 'فاضل' };
-    let hintIndex=null;
+/* ===== بناء أيام من توقع 3 ساعات ===== */
+function buildDays(list, tzShift){
+  const byDay = {};
+  list.forEach(ent=>{
+    const d = fromTZ(ent.dt, tzShift);
+    const dayKey = d.getUTCFullYear()+"-"+pad(d.getUTCMonth()+1)+"-"+pad(d.getUTCDate());
+    if(!byDay[dayKey]) byDay[dayKey] = [];
+    byDay[dayKey].push(ent);
+  });
+  const days = Object.keys(byDay).sort().map(k=>{
+    const arr = byDay[k];
+    let tmax = -1e9, tmin = 1e9, icon = arr[0].weather[0].icon, desc = arr[0].weather[0].description;
+    // خذ منتصف اليوم إن وجد للأيقونة والوصف
+    const mid = arr.find(e=>{ const h = fromTZ(e.dt, tzShift).getUTCHours(); return h>=11 && h<=15; }) || arr[0];
+    arr.forEach(e=>{ tmax = Math.max(tmax, e.main.temp_max); tmin = Math.min(tmin, e.main.temp_min); });
+    icon = mid.weather[0].icon; desc = mid.weather[0].description;
+    return { key:k, tmax:Math.round(tmax), tmin:Math.round(tmin), icon, desc, dt:arr[0].dt };
+  });
+  return days;
+}
 
-    const score = JSON.parse(localStorage.getItem('xo_score_df')||'{"w":0,"d":0,"l":0}');
+/* ===== عرض البيانات ===== */
+function fillNow(current, tzShift, place){
+  const w=current.weather[0];
+  placeEl.textContent = place || (current.name? `${current.name}، ${current.sys.country}` : "موقعك");
+  const offsetH = (tzShift/3600);
+  const sign = offsetH>=0?'+':'';
+  tzEl.textContent = `المنطقة الزمنية: UTC${sign}${offsetH}`;
+  const nowLocal = fromTZ(Math.floor(Date.now()/1000), tzShift);
+  dateLbl.textContent = fmtDate(nowLocal);
+  updEl.textContent = "آخر تحديث " + fmtHour(new Date());
+  tNow.textContent = Math.round(current.main.temp) + "°";
+  condNow.textContent = w.description;
+  iconNow.src = `https://openweathermap.org/img/wn/${w.icon}@2x.png`;
+  hiEl.textContent = Math.round(current.main.temp_max);
+  loEl.textContent = Math.round(current.main.temp_min);
+  humEl.textContent = Math.round(current.main.humidity);
+  windEl.textContent = kmh(current.wind.speed);
+  feelsEl.textContent = Math.round(current.main.feels_like);
+}
 
-    // ============== DOM refs ==============
-    const app=$('#app');
-    const boardEl=$('#board');
-    const statusEl=$('#status');
-    const turnInfo=$('#turnInfo');
-    const newBtn=$('#newBtn');
-    const resetBtn=$('#resetBtn');
-    const themeBtn=$('#themeBtn');
-    const chips=$$('[data-mode]');
-    const pvpBox=$('#pvpBox'); const aiBox=$('#aiBox');
-    const p1Name=$('#p1Name'); const p2Name=$('#p2Name');
-    const humanMark=$('#humanMark'); const firstMove=$('#firstMove'); const difficulty=$('#difficulty');
-    const hintBtn=$('#hintBtn');
-    const winsEl=$('#wins'), drawsEl=$('#draws'), lossesEl=$('#losses');
+function fillHours(list, tzShift){
+  hoursEl.innerHTML = list.slice(0,6).map(ent=>{
+    const d = fromTZ(ent.dt, tzShift);
+    const w = ent.weather[0];
+    const pop = Math.round((ent.pop||0)*100);
+    return `<div class="item">
+      <div class="muted">${fmtHour(d)}</div>
+      <img src="https://openweathermap.org/img/wn/${w.icon}.png" alt="${w.description}">
+      <div><strong>${Math.round(ent.main.temp)}°</strong></div>
+      <div class="muted">${pop}%</div>
+    </div>`;
+  }).join("");
+}
 
-    function updateScore(){ winsEl.textContent=score.w; drawsEl.textContent=score.d; lossesEl.textContent=score.l; localStorage.setItem('xo_score_df', JSON.stringify(score)); }
-    updateScore();
+function fillDays(days, tzShift){
+  daysEl.innerHTML = days.slice(0,5).map(d=>{
+    const dn = new Date((d.dt+tzShift)*1000).toLocaleDateString('ar', { weekday:'short' });
+    return `<div class="item">
+      <div class="muted">${dn}</div>
+      <img src="https://openweathermap.org/img/wn/${d.icon}.png" alt="${d.desc}">
+      <div><strong>${d.tmax}°</strong> / <span class="muted">${d.tmin}°</span></div>
+      <div class="muted">${d.desc}</div>
+    </div>`;
+  }).join("");
+}
 
-    // ============== UI Build ==============
-    function drawBoard(){
-      boardEl.innerHTML='';
-      board.forEach((v,i)=>{
-        const btn=document.createElement('button'); btn.className='cell'+(v?(' '+v):''); btn.dataset.idx=i; btn.textContent=v||'';
-        if(locked || v) btn.classList.add('disabled');
-        if(hintIndex===i && !v && mode==='ai' && !locked){ btn.style.boxShadow='0 0 0 3px rgba(245,158,11,.65) inset' }
-        btn.addEventListener('click', onCellClick);
-        boardEl.appendChild(btn);
-      })
-    }
+function showError(text){
+  msgEl.style.display='block';
+  msgEl.textContent = text;
+}
 
-    function setStatus(txt){ statusEl.textContent = txt }
-    function setTurnInfo(){
-      if(mode==='pvp'){
-        const who = (turn==='X'? (p1Name.value||'لاعب X') : (p2Name.value||'لاعب O'));
-        turnInfo.textContent = `دور: ${who} (${turn})`;
-      } else {
-        const who = (turn===human? 'اللاعب' : 'الذكاء الاصطناعي');
-        turnInfo.textContent = `الدور: ${who} (${turn})`;
-      }
-    }
+/* ===== تحميل ===== */
+async function refresh(lat,lon){
+  try{
+    msgEl.style.display='none';
+    const [cur, f5, rev] = await Promise.all([
+      getCurrent(lat,lon),
+      getForecast(lat,lon),
+      reverseName(lat,lon).catch(()=>null)
+    ]);
+    const tzShift = cur.timezone || 0; // بالثواني
+    const place = rev ? `${(rev.local_names&&rev.local_names.ar)||rev.name}، ${rev.country}` : (cur.name? `${cur.name}، ${cur.sys.country}` : 'موقعك');
+    fillNow(cur, tzShift, place);
+    fillHours(f5.list, tzShift);
+    const days = buildDays(f5.list, tzShift);
+    fillDays(days, tzShift);
+  }catch(e){
+    console.error(e);
+    const reason = (''+e.message).includes('401') ? 'تحقق من مفتاح OpenWeather أو خطة الاشتراك.' : ((''+e.message).includes('429')? 'تم تجاوز حد الطلبات المؤقت.' : 'تعذّر جلب البيانات.');
+    showError(reason);
+    updEl.textContent = 'تعذّر جلب البيانات';
+  }
+}
 
-    function highlight(line){
-      line.forEach(i=>{ const c=boardEl.querySelector(`[data-idx="${i}"]`); if(c) c.classList.add('win') })
-    }
-
-    function newGame(){
-      board = Array(9).fill(null); hintIndex=null; locked=false;
-      if(mode==='pvp'){
-        turn='X'; names={ X: p1Name.value||'دعاء', O: p2Name.value||'فاضل' };
-      } else {
-        human = humanMark.value; ai = (human==='X'?'O':'X'); first = firstMove.value; diff = difficulty.value; turn = (first==='human'? human : ai);
-      }
-      drawBoard(); setTurnInfo(); setStatus('حظًا موفقًا!');
-      if(mode==='ai' && turn===ai){ locked=true; setStatus('الذكاء الاصطناعي يفكّر…'); setTimeout(aiPlay, 300) }
-    }
-
-    function resetAll(){ score.w=0; score.d=0; score.l=0; updateScore(); newGame(); }
-
-    // ============== Game Logic ==============
-    function onCellClick(e){
-      const i=+e.currentTarget.dataset.idx;
-      if(board[i] || locked) return;
-      board[i]=turn; beep(turn==='X'?740:560, .06); drawBoard();
-      const {w, line} = winnerOf(board);
-      if(w){
-        endGame(w, line); return;
-      }
-      turn = (turn==='X'?'O':'X'); setTurnInfo();
-      if(mode==='ai' && turn===ai){ locked=true; setStatus('الذكاء الاصطناعي يفكّر…'); setTimeout(aiPlay, 300) }
-    }
-
-    function endGame(w, line){
-      if(line && line.length) highlight(line);
-      if(w==='draw'){ setStatus('تعادل!'); score.d++; }
-      else{
-        if(mode==='pvp'){
-          const winnerName = (w==='X'? (p1Name.value||'لاعب X') : (p2Name.value||'لاعب O'));
-          setStatus('فوز: '+winnerName+` (${w})`);
-        } else {
-          setStatus(w===human? 'فزت!': 'فاز الذكاء الاصطناعي');
-          if(w===human) score.w++; else score.l++;
-        }
-      }
-      updateScore();
-      // disable
-      locked=true; $$('.cell').forEach(c=>c.classList.add('disabled'));
-      beep(w==='draw'?500:(w==='X'?900:300), .09);
-    }
-
-    function aiPlay(){
-      if(winnerOf(board).w) return; // already finished
-      const move = chooseAIMove();
-      if(move!==null && board[move]===null){ board[move]=ai }
-      drawBoard(); locked=false; setTurnInfo();
-      const {w,line}=winnerOf(board);
-      if(w){ endGame(w,line); return; }
-      turn=human; setStatus('دورك!');
-    }
-
-    function chooseAIMove(){
-      const empties = emptyIdx(board); if(!empties.length) return null;
-      if(diff==='easy') return empties[Math.floor(Math.random()*empties.length)];
-      if(diff==='medium') return bestMedium(board, ai, human);
-      const {m} = minimax([...board], ai, human, true); return m ?? empties[0];
-    }
-
-    function showHint(){ if(mode!=='ai' || locked) return; const {m} = minimax([...board], human, ai, true); hintIndex = m ?? null; drawBoard(); setTimeout(()=>{ hintIndex=null; drawBoard() }, 1600); beep(800,.05) }
-
-    // ============== Events ==============
-    newBtn.addEventListener('click', newGame);
-    resetBtn.addEventListener('click', resetAll);
-    themeBtn.addEventListener('click', ()=>{ app.dataset.theme = app.dataset.theme==='dark'?'light':'dark' });
-
-    chips.forEach(ch=>{
-      ch.addEventListener('click', ()=>{
-        chips.forEach(c=>c.classList.remove('active'));
-        ch.classList.add('active');
-        mode=ch.dataset.mode; if(mode==='pvp'){ pvpBox.style.display='block'; aiBox.style.display='none' } else { pvpBox.style.display='none'; aiBox.style.display='block' }
-        newGame();
-      })
-    })
-
-    [p1Name,p2Name,humanMark,firstMove,difficulty].forEach(el=> el.addEventListener('change', newGame));
-    hintBtn.addEventListener('click', showHint);
-
-    // Init
-    newGame();
-  </script></body>
+/* ===== تشغيل ===== */
+(function init(){
+  // ملاحظة: geolocation يتطلّب HTTPS؛ على ملف محلي أو http قد يرفض المتصفح — سنسقط على المنامة.
+  const fallback = ()=>refresh(26.2235,50.5876); // المنامة
+  if('geolocation' in navigator){
+    navigator.geolocation.getCurrentPosition(
+      pos=>refresh(pos.coords.latitude,pos.coords.longitude),
+      ()=>fallback(),
+      { enableHighAccuracy:false, timeout:8000, maximumAge:60000 }
+    );
+  } else {
+    fallback();
+  }
+})();
+</script></body>
 </html>
