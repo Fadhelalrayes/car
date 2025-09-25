@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>الطقس — بسيط وعملي (إصدار مُصلَح)</title>
+<title>حالة الطقس</title>
 <meta name="description" content="طقس الآن، الساعات القادمة، و5 أيام.">
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet"><style>
   :root{ --bg:#fafafa; --card:#fff; --ink:#111; --muted:#6b7280; --border:#ece6cc; --shadow:0 8px 24px rgba(0,0,0,.06); --accent:linear-gradient(90deg,#d4af37,#ffdf7f);}  
@@ -39,7 +39,7 @@
   <div class="wrap">
     <div class="card">
       <div class="row">
-        <h1>الطقس — بسيط وعملي</h1>
+        <h1>حالة الطقس</h1>
         <div class="sub" id="dateLbl">—</div>
       </div>
     </div><div class="card">
@@ -67,6 +67,11 @@
     </div>
   </div>
 
+  <div class="chip" style="margin-top:12px; text-align:center;">
+    <div class="l">أقرب وقت متوقع لسقوط المطر</div>
+    <div class="v" id="nextRain">—</div>
+  </div>
+
   <div class="sub err" id="msg" style="display:none"></div>
 </div>
 
@@ -81,23 +86,20 @@
 </div>
 
   </div><script>
-/* ===== مفتاح OpenWeather ===== */
-const OWM_KEY = "71679af819486daabc9848ad1dec6c05"; // تأكد من صحته وخطة الاشتراك
+const OWM_KEY = "71679af819486daabc9848ad1dec6c05";
 
-/* ===== عناصر ===== */
 const qs = id=>document.getElementById(id);
 const placeEl=qs('place'), tzEl=qs('tzLbl'), updEl=qs('upd'), iconNow=qs('iconNow');
 const tNow=qs('tNow'), condNow=qs('condNow'), hiEl=qs('hi'), loEl=qs('lo');
 const humEl=qs('hum'), windEl=qs('wind'), feelsEl=qs('feels');
 const hoursEl=qs('hours'), daysEl=qs('days'), dateLbl=qs('dateLbl'), msgEl=qs('msg');
+const nextRainEl=qs('nextRain');
 
 const kmh = ms => Math.round(ms*3.6);
-const pad = n => (n<10?"0":"")+n;
-const fmtDate = (d) => d.toLocaleDateString('ar', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+const fmtDateTime = (d) => d.toLocaleString('ar', { weekday:'long', year:'numeric', month:'long', day:'numeric', hour:'2-digit', minute:'2-digit'});
 const fmtHour = (d) => d.toLocaleTimeString('ar', { hour:'2-digit', minute:'2-digit' });
-const fromTZ = (ts, shift) => new Date((ts + shift) * 1000); // OpenWeather shifts in seconds
+const fromTZ = (ts, shift) => new Date((ts + shift) * 1000);
 
-/* ===== API (بدائل موثوقة لخطة مجانية) ===== */
 async function getCurrent(lat,lon){
   const u=`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${OWM_KEY}&units=metric&lang=ar`;
   const r=await fetch(u); if(!r.ok) throw new Error('weather:'+r.status); return r.json();
@@ -111,37 +113,30 @@ async function reverseName(lat,lon){
   const r=await fetch(u); if(!r.ok) throw new Error('geo:'+r.status); const j=await r.json(); return j?.[0];
 }
 
-/* ===== بناء أيام من توقع 3 ساعات ===== */
 function buildDays(list, tzShift){
   const byDay = {};
   list.forEach(ent=>{
     const d = fromTZ(ent.dt, tzShift);
-    const dayKey = d.getUTCFullYear()+"-"+pad(d.getUTCMonth()+1)+"-"+pad(d.getUTCDate());
+    const dayKey = d.toISOString().slice(0,10);
     if(!byDay[dayKey]) byDay[dayKey] = [];
     byDay[dayKey].push(ent);
   });
-  const days = Object.keys(byDay).sort().map(k=>{
+  return Object.keys(byDay).sort().map(k=>{
     const arr = byDay[k];
     let tmax = -1e9, tmin = 1e9, icon = arr[0].weather[0].icon, desc = arr[0].weather[0].description;
-    // خذ منتصف اليوم إن وجد للأيقونة والوصف
     const mid = arr.find(e=>{ const h = fromTZ(e.dt, tzShift).getUTCHours(); return h>=11 && h<=15; }) || arr[0];
     arr.forEach(e=>{ tmax = Math.max(tmax, e.main.temp_max); tmin = Math.min(tmin, e.main.temp_min); });
     icon = mid.weather[0].icon; desc = mid.weather[0].description;
-    return { key:k, tmax:Math.round(tmax), tmin:Math.round(tmin), icon, desc, dt:arr[0].dt };
+    return { tmax:Math.round(tmax), tmin:Math.round(tmin), icon, desc, dt:arr[0].dt };
   });
-  return days;
 }
 
-/* ===== عرض البيانات ===== */
 function fillNow(current, tzShift, place){
   const w=current.weather[0];
   placeEl.textContent = place || (current.name? `${current.name}، ${current.sys.country}` : "موقعك");
-  const offsetH = (tzShift/3600);
-  const sign = offsetH>=0?'+':'';
-  tzEl.textContent = `المنطقة الزمنية: UTC${sign}${offsetH}`;
-  const nowLocal = fromTZ(Math.floor(Date.now()/1000), tzShift);
-  dateLbl.textContent = fmtDate(nowLocal);
-  updEl.textContent = "آخر تحديث " + fmtHour(new Date());
+  tzEl.textContent = `المنطقة الزمنية: UTC${tzShift/3600}`;
+  dateLbl.textContent = fmtDateTime(new Date());
+  updEl.textContent = "آخر تحديث " + fmtDateTime(new Date());
   tNow.textContent = Math.round(current.main.temp) + "°";
   condNow.textContent = w.description;
   iconNow.src = `https://openweathermap.org/img/wn/${w.icon}@2x.png`;
@@ -178,12 +173,21 @@ function fillDays(days, tzShift){
   }).join("");
 }
 
+function findNextRain(list, tzShift){
+  const rainItem = list.find(ent=>(ent.pop||0) > 0.4);
+  if(rainItem){
+    const d = fromTZ(rainItem.dt, tzShift);
+    nextRainEl.textContent = fmtDateTime(d);
+  } else {
+    nextRainEl.textContent = "لا يوجد توقع قريب للمطر";
+  }
+}
+
 function showError(text){
   msgEl.style.display='block';
   msgEl.textContent = text;
 }
 
-/* ===== تحميل ===== */
 async function refresh(lat,lon){
   try{
     msgEl.style.display='none';
@@ -192,24 +196,22 @@ async function refresh(lat,lon){
       getForecast(lat,lon),
       reverseName(lat,lon).catch(()=>null)
     ]);
-    const tzShift = cur.timezone || 0; // بالثواني
+    const tzShift = cur.timezone || 0;
     const place = rev ? `${(rev.local_names&&rev.local_names.ar)||rev.name}، ${rev.country}` : (cur.name? `${cur.name}، ${cur.sys.country}` : 'موقعك');
     fillNow(cur, tzShift, place);
     fillHours(f5.list, tzShift);
     const days = buildDays(f5.list, tzShift);
     fillDays(days, tzShift);
+    findNextRain(f5.list, tzShift);
   }catch(e){
     console.error(e);
-    const reason = (''+e.message).includes('401') ? 'تحقق من مفتاح OpenWeather أو خطة الاشتراك.' : ((''+e.message).includes('429')? 'تم تجاوز حد الطلبات المؤقت.' : 'تعذّر جلب البيانات.');
-    showError(reason);
+    showError('تعذّر جلب البيانات');
     updEl.textContent = 'تعذّر جلب البيانات';
   }
 }
 
-/* ===== تشغيل ===== */
 (function init(){
-  // ملاحظة: geolocation يتطلّب HTTPS؛ على ملف محلي أو http قد يرفض المتصفح — سنسقط على المنامة.
-  const fallback = ()=>refresh(26.2235,50.5876); // المنامة
+  const fallback = ()=>refresh(26.2235,50.5876);
   if('geolocation' in navigator){
     navigator.geolocation.getCurrentPosition(
       pos=>refresh(pos.coords.latitude,pos.coords.longitude),
