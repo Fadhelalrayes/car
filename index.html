@@ -1,248 +1,449 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>حالة الطقس</title>
-<meta name="description" content="طقس الآن، الساعات القادمة، و5 أيام.">
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
-
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>أخبار الآن — لوحة عربية احترافية</title>
 <style>
-  :root{ --bg:#fafafa; --card:#fff; --ink:#111; --muted:#6b7280; --border:#ece6cc; --shadow:0 8px 24px rgba(0,0,0,.06); --accent:linear-gradient(90deg,#d4af37,#ffdf7f);}
+  :root{
+    --bg:#0b0b0c;
+    --card:#15161a;
+    --text:#e9eaee;
+    --muted:#a7abbb;
+    --brand:#4da3ff;
+    --accent:#ffd166;
+    --border:#22242a;
+    --shadow: 0 10px 30px rgba(0,0,0,.25);
+  }
+  .light{
+    --bg:#f7f8fb;
+    --card:#ffffff;
+    --text:#0f1222;
+    --muted:#5a6072;
+    --brand:#1e63ff;
+    --accent:#ff8c00;
+    --border:#e8ebf2;
+    --shadow: 0 12px 28px rgba(16,24,40,.08);
+  }
   *{box-sizing:border-box}
-  body{margin:0; background:var(--bg); color:var(--ink); font-family:"Tajawal",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;}
-  .wrap{max-width:900px; margin:auto; padding:16px; display:grid; gap:14px}
-  .card{background:var(--card); border:1px solid var(--border); border-radius:14px; box-shadow:var(--shadow); padding:14px}
-  h1{margin:0; font-size:1.3rem; font-weight:800; background:var(--accent); -webkit-background-clip:text; background-clip:text; color:transparent}
-  .row{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap}
-  .top{justify-content:center; flex-direction:column; text-align:center}
-  .loc{font-weight:800}
-  .sub{color:var(--muted); font-size:.92rem}
-  .now{display:flex; align-items:center; gap:12px}
-  .now img{width:60px; height:60px}
-  .now .t{font-size:2rem; font-weight:800}
-  .grid{display:grid; gap:10px}
-  @media(min-width:720px){ .grid{grid-template-columns:1fr 1fr} }
-  .mini{display:grid; grid-template-columns:repeat(4,1fr); gap:8px}
-  @media(max-width:480px){ .mini{grid-template-columns:repeat(2,1fr)} }
-  .chip{border:1px solid var(--border); border-radius:12px; padding:10px; text-align:center}
-  .chip .l{color:var(--muted); font-size:.86rem}
-  .chip .v{font-weight:800}
-  .secTitle{margin:0 0 10px; text-align:center; font-weight:800; background:var(--accent); -webkit-background-clip:text; background-clip:text; color:transparent}
-  .hours, .days{display:grid; gap:8px; grid-template-columns:repeat(6,1fr)}
-  @media(max-width:860px){ .hours{grid-template-columns:repeat(4,1fr)} .days{grid-template-columns:repeat(3,1fr)} }
-  @media(max-width:520px){ .hours{grid-template-columns:repeat(3,1fr)} .days{grid-template-columns:repeat(2,1fr)} }
-  .item{border:1px solid var(--border); border-radius:12px; padding:8px; text-align:center}
-  .item img{width:36px; height:36px}
-  .muted{color:var(--muted); font-size:.9rem}
-  .err{color:#b91c1c; font-weight:700}
+  body{
+    margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,"Noto Sans Arabic",sans-serif;
+  }
+  header{
+    position:sticky;top:0;z-index:10;background:linear-gradient(180deg,var(--bg),color-mix(in oklab,var(--bg),transparent 30%));
+    backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid var(--border);
+  }
+  .bar{
+    max-width:1200px;margin:auto;display:flex;align-items:center;gap:12px;padding:14px 16px;
+  }
+  .logo{
+    display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;letter-spacing:.2px;
+  }
+  .logo i{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--brand),var(--accent));display:inline-block}
+  .controls{flex:1;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  select, input, button{
+    background:var(--card);color:var(--text);border:1px solid var(--border);
+    padding:10px 12px;border-radius:10px;font:inherit;
+  }
+  input[type="search"]{flex:1;min-width:160px}
+  button{cursor:pointer;box-shadow:var(--shadow);border:none}
+  .chip{background:transparent;border:1px solid var(--border);box-shadow:none}
+  .danger{background:#a61e4d}
+  .ok{background:#176b49}
+  .ghost{background:transparent;box-shadow:none;border:1px solid var(--border)}
+  .grid{
+    max-width:1200px;margin:20px auto;padding:0 16px;
+    display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  }
+  .card{
+    background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;
+    display:flex;flex-direction:column;min-height:320px;box-shadow:var(--shadow);transition:transform .08s ease;
+  }
+  .card:hover{transform:translateY(-2px)}
+  .thumb{aspect-ratio:16/9;background:#0d0f14;object-fit:cover;width:100%}
+  .content{padding:14px 14px 8px 14px;display:flex;flex-direction:column;gap:8px}
+  .title{font-weight:700;line-height:1.3;font-size:16px}
+  .meta{display:flex;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:12px}
+  .footer{margin-top:auto;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);color:var(--muted)}
+  .skeleton{
+    position:relative;overflow:hidden;background:linear-gradient(90deg,#1b1e27 25%,#222633 37%,#1b1e27 63%);
+    background-size:400% 100%;animation:shimmer 1.2s infinite;
+  }
+  .sk-text{height:14px;border-radius:6px;margin:8px 0}
+  .sk-img{aspect-ratio:16/9;border-bottom:1px solid var(--border)}
+  @keyframes shimmer{0%{background-position:100% 0}100%{background-position:0 0}}
+  .empty{
+    max-width:800px;margin:60px auto;padding:24px;border:1px dashed var(--border);border-radius:14px;text-align:center;color:var(--muted)
+  }
+  .settings{
+    position:fixed;inset:0;background:rgba(0,0,0,.35);display:none;align-items:center;justify-content:center;padding:20px
+  }
+  .settings .box{
+    width:min(720px,95vw);background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;box-shadow:var(--shadow)
+  }
+  .row{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0}
+  .row label{font-size:13px;color:var(--muted)}
+  .help{font-size:12px;color:var(--muted)}
+  .badge{font-size:11px;border:1px solid var(--border);padding:3px 8px;border-radius:999px;color:var(--muted)}
+  footer.site{
+    max-width:1200px;margin:40px auto 80px;padding:0 16px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap
+  }
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="card">
-      <div class="row top">
-        <h1>حالة الطقس</h1>
-        <div class="sub" id="dateLbl">—</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="row">
-        <div>
-          <div class="loc" id="place">—</div>
-          <div class="sub" id="tzLbl">—</div>
-        </div>
-        <div class="sub" id="upd">آخر تحديث —</div>
-      </div>
-
-      <div class="grid" style="margin-top:8px">
-        <div class="now">
-          <img id="iconNow" alt="" />
-          <div>
-            <div class="t" id="tNow">—°</div>
-            <div id="condNow" class="muted">—</div>
-          </div>
-        </div>
-        <div class="mini">
-          <div class="chip"><div class="l">أعلى/أدنى</div><div class="v"><span id="hi">—</span>° / <span id="lo">—</span>°</div></div>
-          <div class="chip"><div class="l">الرطوبة</div><div class="v"><span id="hum">—</span>%</div></div>
-          <div class="chip"><div class="l">الرياح</div><div class="v"><span id="wind">—</span> كم/س</div></div>
-          <div class="chip"><div class="l">الإحساس</div><div class="v"><span id="feels">—</span>°</div></div>
-        </div>
-      </div>
-
-      <!-- مربع أقرب وقت للمطر -->
-      <div class="chip" style="margin-top:12px; text-align:center;">
-        <div class="l">أقرب وقت متوقع لسقوط المطر</div>
-        <div class="v" id="nextRain">—</div>
-      </div>
-
-      <div class="sub err" id="msg" style="display:none"></div>
-    </div>
-
-    <div class="card">
-      <h3 class="secTitle">الساعات القادمة</h3>
-      <div id="hours" class="hours"></div>
-    </div>
-
-    <div class="card">
-      <h3 class="secTitle">توقع 5 أيام</h3>
-      <div id="days" class="days"></div>
+<header>
+  <div class="bar">
+    <div class="logo"><i></i> أخبار الآن</div>
+    <div class="controls">
+      <select id="provider" title="مزود الأخبار">
+        <option value="newsapi">NewsAPI</option>
+        <option value="gnews">GNews</option>
+        <option value="newsdata">NewsData.io</option>
+      </select>
+      <select id="category" title="تصنيف">
+        <option value="">كل التصنيفات</option>
+        <option value="general">عام</option>
+        <option value="business">اقتصاد</option>
+        <option value="technology">تقنية</option>
+        <option value="sports">رياضة</option>
+        <option value="health">صحة</option>
+        <option value="science">علوم</option>
+        <option value="entertainment">منوعات</option>
+      </select>
+      <input id="q" type="search" placeholder="ابحث في الأخبار (مثال: الذكاء الاصطناعي)" />
+      <button id="searchBtn">بحث</button>
+      <button id="toggleTheme" class="ghost" title="الوضع الداكن/الفاتح">🌓</button>
+      <button id="openSettings" class="ghost" title="الإعدادات">⚙️</button>
+      <span class="badge" id="statusBadge">جاهز</span>
     </div>
   </div>
+</header>
+
+<main id="app">
+  <div id="grid" class="grid"></div>
+  <div id="empty" class="empty" style="display:none">
+    لم يتم العثور على نتائج مطابقة. جرّب كلمات مفتاحية/تصنيف مختلفًا.
+  </div>
+</main>
+
+<footer class="site">
+  <div>مصمم بواجهة عربية عصرية. يدعم تعدد مزوّدي الأخبار.</div>
+  <div>تلميح: إن ظهرت مشكلة CORS من المتصفح، فعّل خيار البروكسي من الإعدادات.</div>
+</footer>
+
+<!-- نافذة الإعدادات -->
+<div class="settings" id="settings">
+  <div class="box">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+      <h3 style="margin:6px 0">الإعدادات</h3>
+      <button id="closeSettings" class="ghost">✖</button>
+    </div>
+    <div class="row">
+      <div style="flex:1 1 260px">
+        <label>مفتاح API — NewsAPI.org</label>
+        <input id="key-newsapi" placeholder="أدخل مفتاح NewsAPI" />
+        <div class="help">الحصول على المفتاح من newsapi.org (اختر language=ar)</div>
+      </div>
+      <div style="flex:1 1 260px">
+        <label>مفتاح API — GNews</label>
+        <input id="key-gnews" placeholder="أدخل مفتاح GNews" />
+        <div class="help">الحصول على المفتاح من gnews.io (اختر lang=ar)</div>
+      </div>
+      <div style="flex:1 1 260px">
+        <label>مفتاح API — NewsData.io</label>
+        <input id="key-newsdata" placeholder="أدخل مفتاح NewsData.io" />
+        <div class="help">الحصول على المفتاح من newsdata.io</div>
+      </div>
+    </div>
+    <div class="row">
+      <div style="flex:1 1 260px">
+        <label>بروكسي (اختياري لتجاوز CORS)</label>
+        <input id="proxy" placeholder="مثال: https://api.allorigins.win/raw?url=" />
+        <div class="help">اتركه فارغًا إن لم تواجه مشكلة CORS. استخدم على مسؤوليتك واحترم شروط الخدمة.</div>
+      </div>
+      <div style="flex:0 0 220px;display:flex;align-items:flex-end">
+        <button id="saveSettings" class="ok">حفظ</button>
+      </div>
+    </div>
+    <div class="row">
+      <span class="help">يُخزَّن كل ما سبق محليًا على جهازك (LocalStorage).</span>
+    </div>
+  </div>
+</div>
 
 <script>
-/* ===== مفتاح OpenWeather ===== */
-const OWM_KEY = "71679af819486daabc9848ad1dec6c05"; // استبدله بمفتاحك عند الحاجة
+  // ========= تفضيلات الواجهة =========
+  const themeBtn = document.getElementById('toggleTheme');
+  const isLight = localStorage.getItem('theme') === 'light';
+  if(isLight) document.body.classList.add('light');
+  themeBtn.onclick = () => {
+    document.body.classList.toggle('light');
+    localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
+  };
 
-/* ===== عناصر ===== */
-const qs = id=>document.getElementById(id);
-const placeEl=qs('place'), tzEl=qs('tzLbl'), updEl=qs('upd'), iconNow=qs('iconNow');
-const tNow=qs('tNow'), condNow=qs('condNow'), hiEl=qs('hi'), loEl=qs('lo');
-const humEl=qs('hum'), windEl=qs('wind'), feelsEl=qs('feels');
-const hoursEl=qs('hours'), daysEl=qs('days'), dateLbl=qs('dateLbl'), msgEl=qs('msg');
-const nextRainEl=qs('nextRain');
+  // ========= عناصر التحكم =========
+  const grid = document.getElementById('grid');
+  const empty = document.getElementById('empty');
+  const providerSel = document.getElementById('provider');
+  const catSel = document.getElementById('category');
+  const qInput = document.getElementById('q');
+  const searchBtn = document.getElementById('searchBtn');
+  const statusBadge = document.getElementById('statusBadge');
 
-const kmh = ms => Math.round(ms*3.6);
-const fmtDateTime = d => d.toLocaleString('ar', { weekday:'long', year:'numeric', month:'long', day:'numeric', hour:'2-digit', minute:'2-digit' });
-const fmtHour = d => d.toLocaleTimeString('ar', { hour:'2-digit', minute:'2-digit' });
-const fromTZ = (ts, shift) => new Date((ts + shift) * 1000);
+  // ========= نافذة الإعدادات =========
+  const settings = document.getElementById('settings');
+  const openSettings = document.getElementById('openSettings');
+  const closeSettings = document.getElementById('closeSettings');
+  const saveSettings = document.getElementById('saveSettings');
+  const keyNewsapi = document.getElementById('key-newsapi');
+  const keyGnews = document.getElementById('key-gnews');
+  const keyNewsdata = document.getElementById('key-newsdata');
+  const proxyInput = document.getElementById('proxy');
 
-/* ===== API (المسارات المجانية) ===== */
-async function getCurrent(lat,lon){
-  const u=`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${OWM_KEY}&units=metric&lang=ar`;
-  const r=await fetch(u); if(!r.ok) throw new Error('weather:'+r.status); return r.json();
-}
-async function getForecast(lat,lon){
-  const u=`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${OWM_KEY}&units=metric&lang=ar`;
-  const r=await fetch(u); if(!r.ok) throw new Error('forecast:'+r.status); return r.json();
-}
-async function reverseName(lat,lon){
-  const u=`https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=${OWM_KEY}`;
-  const r=await fetch(u); if(!r.ok) throw new Error('geo:'+r.status); const j=await r.json(); return j?.[0];
-}
-
-/* ===== تجميع الأيام من توقع 3 ساعات ===== */
-function buildDays(list, tzShift){
-  const byDay = {};
-  list.forEach(ent=>{
-    const d = fromTZ(ent.dt, tzShift);
-    const key = d.toISOString().slice(0,10);
-    if(!byDay[key]) byDay[key] = [];
-    byDay[key].push(ent);
-  });
-  return Object.keys(byDay).sort().map(k=>{
-    const arr = byDay[k];
-    let tmax = -1e9, tmin = 1e9, icon = arr[0].weather[0].icon, desc = arr[0].weather[0].description;
-    const mid = arr.find(e=>{ const h = fromTZ(e.dt, tzShift).getUTCHours(); return h>=11 && h<=15; }) || arr[0];
-    arr.forEach(e=>{ tmax = Math.max(tmax, e.main.temp_max); tmin = Math.min(tmin, e.main.temp_min); });
-    icon = mid.weather[0].icon; desc = mid.weather[0].description;
-    return { tmax:Math.round(tmax), tmin:Math.round(tmin), icon, desc, dt:arr[0].dt };
-  });
-}
-
-/* ===== العرض ===== */
-function fillNow(current, tzShift, place){
-  const w=current.weather[0];
-  placeEl.textContent = place || (current.name? `${current.name}، ${current.sys.country}` : "موقعك");
-  const offH = tzShift/3600, sign = offH>=0?'+':'';
-  tzEl.textContent = `المنطقة الزمنية: UTC${sign}${offH}`;
-  dateLbl.textContent = fmtDateTime(new Date());
-  updEl.textContent = "آخر تحديث " + fmtDateTime(new Date());
-  tNow.textContent = Math.round(current.main.temp) + "°";
-  condNow.textContent = w.description;
-  iconNow.src = `https://openweathermap.org/img/wn/${w.icon}@2x.png`;
-  hiEl.textContent = Math.round(current.main.temp_max);
-  loEl.textContent = Math.round(current.main.temp_min);
-  humEl.textContent = Math.round(current.main.humidity);
-  windEl.textContent = kmh(current.wind.speed);
-  feelsEl.textContent = Math.round(current.main.feels_like);
-}
-
-function fillHours(list, tzShift){
-  hoursEl.innerHTML = (list||[]).slice(0,6).map(ent=>{
-    const d = fromTZ(ent.dt, tzShift);
-    const w = ent.weather[0];
-    const pop = Math.round((ent.pop||0)*100);
-    return `<div class="item">
-      <div class="muted">${fmtHour(d)}</div>
-      <img src="https://openweathermap.org/img/wn/${w.icon}.png" alt="${w.description}">
-      <div><strong>${Math.round(ent.main.temp)}°</strong></div>
-      <div class="muted">${pop}%</div>
-    </div>`;
-  }).join("");
-}
-
-function fillDays(days, tzShift){
-  daysEl.innerHTML = (days||[]).slice(0,5).map(d=>{
-    const dn = new Date((d.dt+tzShift)*1000).toLocaleDateString('ar', { weekday:'short' });
-    return `<div class="item">
-      <div class="muted">${dn}</div>
-      <img src="https://openweathermap.org/img/wn/${d.icon}.png" alt="${d.desc}">
-      <div><strong>${d.tmax}°</strong> / <span class="muted">${d.tmin}°</span></div>
-      <div class="muted">${d.desc}</div>
-    </div>`;
-  }).join("");
-}
-
-/* ===== أقرب وقت متوقع للمطر (حتى لو الاحتمال 0%) ===== */
-function findNextRain(list, tzShift){
-  if(!list || !list.length){ nextRainEl.textContent = "لا توجد بيانات متاحة"; return; }
-
-  // ابحث أولاً عن أول فترة احتمالها > 0% أو فيها rain
-  let candidate = list.find(ent => (ent.rain && (Object.values(ent.rain)[0]||0) > 0) || (ent.pop||0) > 0);
-
-  // إن لم يوجد أي احتمال >0، اختر أول فترة مستقبلية لعرضها (احتمال 0%)
-  if(!candidate) candidate = list[0];
-
-  const d = fromTZ(candidate.dt, tzShift);
-  const popPct = Math.round((candidate.pop||0)*100);
-  // إن كانت كمية المطر متوفرة (مم) في الكائن rain، اعرضها
-  const rainAmount = candidate.rain ? (Object.values(candidate.rain)[0]||0) : 0;
-  const rainTxt = rainAmount ? ` — ${rainAmount.toFixed(1)} مم` : "";
-
-  nextRainEl.textContent = `${fmtDateTime(d)} — احتمال ${popPct}%${rainTxt}`;
-}
-
-/* ===== تحميل ===== */
-async function refresh(lat,lon){
-  try{
-    msgEl.style.display='none';
-    const [cur, f5, rev] = await Promise.all([
-      getCurrent(lat,lon),
-      getForecast(lat,lon),
-      reverseName(lat,lon).catch(()=>null)
-    ]);
-    const tzShift = cur.timezone || 0; // بالثواني
-    const place = rev ? `${(rev.local_names&&rev.local_names.ar)||rev.name}، ${rev.country}` : (cur.name? `${cur.name}، ${cur.sys.country}` : 'موقعك');
-    fillNow(cur, tzShift, place);
-    fillHours(f5.list, tzShift);
-    const days = buildDays(f5.list, tzShift);
-    fillDays(days, tzShift);
-    findNextRain(f5.list, tzShift);
-  }catch(e){
-    console.error(e);
-    msgEl.style.display='block';
-    msgEl.textContent = 'تعذّر جلب البيانات';
-    updEl.textContent = 'تعذّر جلب البيانات';
+  openSettings.onclick = () => { settings.style.display='flex'; loadSettings(); };
+  closeSettings.onclick = () => { settings.style.display='none'; };
+  function loadSettings(){
+    keyNewsapi.value = localStorage.getItem('key_newsapi') || '';
+    keyGnews.value = localStorage.getItem('key_gnews') || '';
+    keyNewsdata.value = localStorage.getItem('key_newsdata') || '';
+    proxyInput.value = localStorage.getItem('proxy_base') || '';
   }
-}
+  saveSettings.onclick = () => {
+    localStorage.setItem('key_newsapi', keyNewsapi.value.trim());
+    localStorage.setItem('key_gnews', keyGnews.value.trim());
+    localStorage.setItem('key_newsdata', keyNewsdata.value.trim());
+    localStorage.setItem('proxy_base', proxyInput.value.trim());
+    settings.style.display='none';
+    // إعادة تحميل النتائج بالمفاتيح الجديدة
+    resetAndSearch();
+  };
 
-/* ===== تشغيل ===== */
-(function init(){
-  // ملاحظة: geolocation يتطلّب HTTPS أو localhost؛ وإلا سنسقط على المنامة.
-  const fallback = ()=>refresh(26.2235,50.5876); // المنامة
-  if('geolocation' in navigator){
-    navigator.geolocation.getCurrentPosition(
-      pos=>refresh(pos.coords.latitude,pos.coords.longitude),
-      ()=>fallback(),
-      { enableHighAccuracy:false, timeout:8000, maximumAge:60000 }
-    );
-  } else {
-    fallback();
+  // ========= حالة البحث / ترقيم الصفحات =========
+  let page = 1;
+  let loading = false;
+  let done = false;
+
+  function setStatus(text, type=''){
+    statusBadge.textContent = text;
+    statusBadge.style.borderColor = type==='err' ? '#a61e4d' : 'var(--border)';
+    statusBadge.style.color = type==='err' ? '#ffb3c7' : 'var(--muted)';
   }
-})();
+
+  // ========= مساعدات =========
+  function fmtRelative(dateStr){
+    try{
+      const d = new Date(dateStr);
+      const diff = (Date.now() - d.getTime())/1000;
+      if(diff < 60) return 'الآن';
+      if(diff < 3600) return `${Math.floor(diff/60)} دقيقة`;
+      if(diff < 86400) return `${Math.floor(diff/3600)} ساعة`;
+      const days = Math.floor(diff/86400);
+      return `${days} يوم`;
+    }catch(e){ return ''; }
+  }
+
+  function imgOrFallback(url){
+    return url || 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(`
+      <svg xmlns="http://www.w3.org/2000/svg" width="800" height="450">
+        <rect width="100%" height="100%" fill="#10131a"/>
+        <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="28" fill="#4da3ff" font-family="Arial, sans-serif">لا صورة</text>
+      </svg>
+    `);
+  }
+
+  function makeCard(a){
+    const el = document.createElement('article');
+    el.className = 'card';
+    el.innerHTML = `
+      <img class="thumb" loading="lazy" src="${imgOrFallback(a.image)}" alt="">
+      <div class="content">
+        <div class="title">${a.title || 'بدون عنوان'}</div>
+        <div class="meta">
+          <span>📰 ${a.source || 'غير معروف'}</span>
+          <span>⏱ ${a.published ? fmtRelative(a.published) : ''}</span>
+        </div>
+        <div style="color:var(--muted);font-size:13px;">${a.description || ''}</div>
+      </div>
+      <div class="footer">
+        <a href="${a.url}" target="_blank" rel="noopener">فتح الخبر ↗</a>
+        <span>${a.category || ''}</span>
+      </div>
+    `;
+    return el;
+  }
+
+  function makeSkeleton(){
+    const el = document.createElement('div');
+    el.className = 'card';
+    el.innerHTML = `
+      <div class="thumb skeleton sk-img"></div>
+      <div class="content">
+        <div class="skeleton sk-text" style="width:85%"></div>
+        <div class="skeleton sk-text" style="width:60%"></div>
+        <div class="skeleton sk-text" style="width:95%;height:36px;border-radius:10px"></div>
+      </div>
+      <div class="footer">
+        <span class="skeleton sk-text" style="width:100px;height:10px;margin:0"></span>
+        <span class="skeleton sk-text" style="width:60px;height:10px;margin:0"></span>
+      </div>
+    `;
+    return el;
+  }
+
+  function showSkeletons(n=8){
+    const fr = document.createDocumentFragment();
+    for(let i=0;i<n;i++) fr.appendChild(makeSkeleton());
+    grid.appendChild(fr);
+  }
+
+  function clearGrid(){ grid.innerHTML=''; }
+
+  // ======== خرائط التصنيفات لكل مزوّد ========
+  const categoryMap = {
+    newsapi: { // https://newsapi.org/docs/endpoints/top-headlines
+      general:'general',business:'business',technology:'technology',sports:'sports',health:'health',science:'science',entertainment:'entertainment'
+    },
+    gnews: { // https://gnews.io/docs/v4#parameters
+      general:'general',business:'business',technology:'technology',sports:'sports',health:'health',science:'science',entertainment:'entertainment'
+    },
+    newsdata: { // https://newsdata.io/documentation
+      general:'top',business:'business',technology:'technology',sports:'sports',health:'health',science:'science',entertainment:'entertainment'
+    }
+  };
+
+  // ========= بناء URL الطلب لكل مزوّد =========
+  function buildUrl(provider, pageNum, q, cat){
+    const proxy = (localStorage.getItem('proxy_base') || '').trim();
+    const enc = encodeURIComponent;
+    let raw = '';
+    if(provider==='newsapi'){
+      const key = (localStorage.getItem('key_newsapi')||'').trim();
+      raw = `https://newsapi.org/v2/top-headlines?language=ar&pageSize=20&page=${pageNum}`
+          + (q ? `&q=${enc(q)}`:'')
+          + (cat ? `&category=${enc(categoryMap.newsapi[cat]||'')}`:'')
+          + `&apiKey=${enc(key)}`;
+    }else if(provider==='gnews'){
+      const key = (localStorage.getItem('key_gnews')||'').trim();
+      raw = `https://gnews.io/api/v4/top-headlines?lang=ar&max=20&page=${pageNum}`
+          + (q ? `&q=${enc(q)}`:'')
+          + (cat ? `&topic=${enc(categoryMap.gnews[cat]||'')}`:'')
+          + `&token=${enc(key)}`;
+    }else if(provider==='newsdata'){
+      const key = (localStorage.getItem('key_newsdata')||'').trim();
+      raw = `https://newsdata.io/api/1/news?language=ar&page=${pageNum}`
+          + (q ? `&q=${enc(q)}`:'')
+          + (cat ? `&category=${enc(categoryMap.newsdata[cat]||'')}`:'')
+          + `&apikey=${enc(key)}`;
+    }
+    return proxy ? proxy + encodeURIComponent(raw) : raw;
+  }
+
+  // ========= توحيد شكل المقالات من كل مزوّد =========
+  function normalize(provider, data){
+    let items = [];
+    if(provider==='newsapi'){
+      // shape: { articles: [ {title, description, url, urlToImage, source:{name}, publishedAt} ] }
+      items = (data.articles || []).map(x => ({
+        title:x.title, description:x.description, url:x.url,
+        image:x.urlToImage, source:x.source?.name, published:x.publishedAt
+      }));
+    }else if(provider==='gnews'){
+      // shape: { articles: [ {title, description, url, image, source:{name}, publishedAt} ] }
+      items = (data.articles || []).map(x => ({
+        title:x.title, description:x.description, url:x.url,
+        image:x.image, source:x.source?.name, published:x.publishedAt
+      }));
+    }else if(provider==='newsdata'){
+      // shape: { results: [ {title, description, link, image_url, source_id, pubDate} ] }
+      items = (data.results || []).map(x => ({
+        title:x.title, description:x.description, url:x.link,
+        image:x.image_url, source:x.source_id, published:x.pubDate
+      }));
+    }
+    return items;
+  }
+
+  async function fetchNews(append=false){
+    if(loading || done) return;
+    loading = true;
+    setStatus('يجلب الأخبار…');
+    showSkeletons(6);
+    try{
+      const provider = providerSel.value;
+      const q = qInput.value.trim();
+      const cat = catSel.value || '';
+      const url = buildUrl(provider, page, q, cat);
+      // الحماية من الطلبات غير المهيأة
+      if(url.includes('apiKey=') && url.endsWith('apiKey=') ||
+         url.includes('token=')  && url.endsWith('token=')  ||
+         url.includes('apikey=') && url.endsWith('apikey=')){
+        throw new Error('أدخل مفتاح API للمزوّد المختار من إعدادات ⚙️');
+      }
+      const res = await fetch(url);
+      if(!res.ok){
+        throw new Error(`فشل الجلب (${res.status}) — قد يكون حد المعدّل أو CORS.`);
+      }
+      const data = await res.json();
+      const list = normalize(provider, data);
+      // إزالة الهياكل الوهمية
+      grid.querySelectorAll('.card .sk-img, .card .sk-text').forEach(el => el.closest('.card')?.remove());
+
+      if(!append) clearGrid();
+      if(list.length === 0 && page===1){
+        empty.style.display='block';
+      }else{
+        empty.style.display='none';
+        const fr = document.createDocumentFragment();
+        list.forEach(a => fr.appendChild(makeCard(a)));
+        grid.appendChild(fr);
+      }
+
+      // الكشف إن كنّا وصلنا للنهاية (تبسيطًا: إذا رجع أقل من 20 عنصرًا)
+      if(list.length < 20){ done = true; }
+      setStatus('تم التحديث');
+    }catch(err){
+      console.error(err);
+      setStatus(err.message || 'حدث خطأ', 'err');
+      // إزالة الهياكل الوهمية عند الخطأ
+      grid.querySelectorAll('.card .sk-img, .card .sk-text').forEach(el => el.closest('.card')?.remove());
+      if(grid.children.length===0){
+        const demo = [
+          { title:'عرض تجريبي — بطاقة خبر',
+            description:'هذه بطاقة لتوضيح التصميم فقط. أدخل مفاتيح API من الإعدادات لجلب أخبار حقيقية.',
+            url:'#', image:'', source:'Demo', published:new Date().toISOString() }
+        ];
+        const fr = document.createDocumentFragment();
+        demo.forEach(a => fr.appendChild(makeCard(a)));
+        grid.appendChild(fr);
+      }
+    }finally{
+      loading = false;
+    }
+  }
+
+  function resetAndSearch(){
+    page = 1; done = false; clearGrid(); fetchNews(false);
+  }
+
+  // ========= تشغيل البحث =========
+  searchBtn.onclick = resetAndSearch;
+  providerSel.onchange = resetAndSearch;
+  catSel.onchange = resetAndSearch;
+  qInput.addEventListener('keydown', e => { if(e.key==='Enter') resetAndSearch(); });
+
+  // ========= التمرير اللانهائي =========
+  window.addEventListener('scroll', () => {
+    if(loading || done) return;
+    const nearBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 300;
+    if(nearBottom){ page++; fetchNews(true); }
+  });
+
+  // ========= تحميل الإعدادات عند الفتح =========
+  (function init(){
+    loadSettings();
+    setStatus('جاهز');
+    resetAndSearch();
+  })();
 </script>
 </body>
 </html>
