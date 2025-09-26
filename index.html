@@ -2,271 +2,139 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>تشريع التوسل في الإسلام - إضاءات إسلامية</title>
-
-  <!-- خط عربي جميل (اختياري) مع بدائل نظامية -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>مجلة المعرفة – العدد الأول</title>
   <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
-
   <style>
-    :root{
-      --bg:#f7f5ee;
-      --ink:#1f1f1f;
-      --accent:#0a5c55;
-      --rule:#0a5c55;
-      --maxw:1200px;
-      --col-gap:2.6rem;
-    }
-
-    /* إزالة الهوامش والأرقام كما طلبت */
-    html,body{margin:0;padding:0}
-    body{
-      background:var(--bg);
-      color:var(--ink);
-      font-family:"Amiri", "Scheherazade New", "Noto Naskh Arabic", serif;
-      line-height:2.1;
-      -webkit-font-smoothing:antialiased;
-      text-align:justify; /* محاذاة الأطراف مثل الصحف */
-    }
-
-    /* شريط أدوات علوي أنيق */
-    .toolbar{
-      position:sticky; top:0; z-index:50;
-      display:flex; gap:.75rem; justify-content:flex-start; align-items:center;
-      background:linear-gradient(180deg, #ffffffee, #ffffffc9);
-      backdrop-filter:blur(6px);
-      padding:.6rem .9rem;
-      border-bottom:1px solid #ddd;
-    }
-    .btn{
-      display:inline-flex; align-items:center; gap:.5rem;
-      border:1px solid #cfcfcf;
-      background:#fff;
-      padding:.55rem .9rem;
-      border-radius:999px;
-      cursor:pointer;
-      font-weight:700;
-      font-size:.95rem;
-      transition:transform .05s ease, box-shadow .2s ease, border-color .2s ease;
-      user-select:none;
-    }
-    .btn:hover{ box-shadow:0 4px 14px rgba(0,0,0,.06); border-color:#bbb; }
-    .btn:active{ transform:translateY(1px); }
-    .btn svg{ width:18px; height:18px; }
-
-    /* رأس صحيفة */
-    .masthead{
-      max-width:var(--maxw);
-      margin:0 auto;
-      padding:1.4rem 1rem .6rem;
-      border-bottom:4px double var(--rule);
-    }
-    .brand{
-      display:flex; justify-content:space-between; align-items:flex-end; gap:1rem;
-    }
-    .brand h1{
-      margin:0; font-size:2rem; color:var(--accent); letter-spacing:.5px;
-    }
-    .kicker{
-      font-size:1.05rem; color:#555; margin:.35rem 0 0;
-    }
-    .dateline{
-      color:#666; font-size:.95rem;
-    }
-
-    /* جسم المقال بأسلوب أعمدة جرائد */
-    .paper{
-      max-width:var(--maxw);
-      margin:0 auto;
-      padding:1.2rem 1rem 2.2rem;
-    }
-    .dek{
-      font-size:1.15rem; color:#333; margin:1rem 0 1.2rem;
-    }
-    .article{
-      column-count:2;
-      column-gap:var(--col-gap);
-      column-fill:auto;
-      widows:3; orphans:3;
-    }
-    /* فواصل زخرفية خفيفة */
-    hr.rule{
-      border:0; height:1px; background:linear-gradient(90deg, transparent, #b6c7c4, transparent);
-      margin:1.4rem 0 1rem;
-    }
-
-    h2, h3{
-      break-inside:avoid;
-      color:#0d3f3a;
-      margin:1.2rem 0 .4rem;
-      font-size:1.15rem;
-    }
-    blockquote{
-      break-inside:avoid;
-      margin:1rem .2rem;
-      padding:.6rem .9rem;
-      border-right:4px solid var(--rule);
-      background:#ffffffb0;
-      border-radius:.5rem;
-      font-style:italic;
-    }
-    .verse{ font-weight:700 }
-
-    /* تذييل بسيط */
-    .footer{
-      max-width:var(--maxw);
-      margin:0 auto 2rem;
-      padding:0 1rem;
-      color:#666; font-size:.9rem;
-      border-top:1px dashed #c7d7d5;
-    }
-
-    /* استجابة للشاشات الصغيرة: عمود واحد ومسافات مريحة */
-    @media (max-width:900px){
-      .article{ column-count:1 }
-      .masthead{ padding:1rem .8rem .4rem }
-      .paper{ padding:1rem .8rem 2rem }
-    }
-
-    /* نمط الطباعة: A4، بدون هوامش، أعمدة ثلاثية مثل الصحف */
-    @page{
-      size:A4 portrait;
-      margin:0; /* بدون هوامش */
-    }
-    @media print{
-      .toolbar{ display:none !important }
-      body{ background:#fff }
-      .paper{ padding:10mm 8mm 12mm } /* مساحة داخلية طفيفة لراحة القراءة */
-      .article{ column-count:3; column-gap:12mm }
-      .masthead, .footer{ border:0 }
-      a{ color:inherit; text-decoration:none }
-    }
+    body{margin:0;padding:0;background:#f7f5ee;color:#1c1c1c;
+      font-family:"Amiri","Scheherazade New","Noto Naskh Arabic",serif;
+      line-height:2;text-align:justify;}
+    .toolbar{position:sticky;top:0;display:flex;gap:.5rem;
+      background:#fffefee9;backdrop-filter:blur(8px);padding:.6rem .9rem;
+      border-bottom:1px solid #ddd;}
+    .btn{padding:.5rem 1rem;border:1px solid #ccc;border-radius:20px;
+      background:#fff;cursor:pointer;font-weight:700;}
+    .masthead{padding:1rem;border-bottom:4px double #0a5c55;text-align:center}
+    .masthead h1{margin:0;color:#0a5c55}
+    .masthead .tag{color:#555}
+    .masthead .edition{color:#666;font-size:.95rem}
+    .paper{max-width:1200px;margin:0 auto;padding:1rem 2rem}
+    .rule{border:0;height:1px;background:linear-gradient(90deg,transparent,#b6c7c4,transparent);margin:1.2rem 0}
+    .section h2{color:#0d3f3a;margin:.5rem 0}
+    .meta{color:#777;font-size:.9rem;margin-bottom:.5rem}
+    .article{column-count:2;column-gap:2.4rem}
+    .article p{margin:0 0 .8rem}
+    figure{margin:.6rem 0;break-inside:avoid}
+    figure img{max-width:100%;border-radius:8px}
+    figcaption{font-size:.9rem;color:#555}
+    @media (max-width:900px){.article{column-count:1}}
+    @page{size:A4;margin:0}
+    @media print{.toolbar{display:none}.paper{padding:10mm}.article{column-count:3;column-gap:12mm}}
   </style>
 </head>
 <body>
-
-  <!-- شريط الأدوات -->
-  <div class="toolbar" role="toolbar" aria-label="أدوات الصفحة">
-    <button class="btn" onclick="window.print()" aria-label="طباعة الصفحة">
-      <!-- أيقونة طابعة -->
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/><circle cx="18" cy="12" r="1"/></svg>
-      طباعة
-    </button>
-
-    <button class="btn" onclick="window.print()" aria-label="حفظ PDF (A4)">
-      <!-- أيقونة ملف PDF -->
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 17h2a2 2 0 0 0 0-4H8zM13 13h2a2 2 0 0 1 0 4h-2zM13 15h1.2M18 13v4"/></svg>
-      حفظ PDF (A4)
-    </button>
+  <div class="toolbar">
+    <button class="btn" onclick="window.print()">طباعة / PDF</button>
   </div>
 
-  <!-- رأس الصحيفة -->
-  <header class="masthead" role="banner">
-    <div class="brand">
-      <div>
-        <h1>تشريع التوسل في الإسلام</h1>
-        <p class="kicker">إضاءات إسلامية • عرضٌ موسَّع بأسلوب صحفي أنيق</p>
-      </div>
-      <div class="dateline">نسخة معدّة للطباعة – A4</div>
-    </div>
+  <header class="masthead">
+    <h1>مجلة المعرفة</h1>
+    <div class="tag">فصلية ثقافية تصدر عن مجلس الشيخ عباس الريس</div>
+    <div class="edition">العدد الأول – ربيع الثاني 1447</div>
   </header>
 
-  <!-- جسم الصحيفة -->
-  <main class="paper" role="main">
-    <p class="dek">
-      يتناول هذا المقال مشروعية التوسل في الإسلام من خلال نصوص القرآن والسنة، مع عرضٍ لأمثلة تاريخية،
-      وتفصيل النوعين الرئيسين للأدلة: الوقائعيّة والنصّيّة التشريعية.
-    </p>
+  <main class="paper">
+    <!-- غلاف -->
+    <section class="section">
+      <figure>
+        <img src="https://almaaref.org/static/images/d64c8e140d07af8b34d63ecc32e4772d.jpg" alt="غلاف المجلة">
+        <figcaption>غلاف العدد</figcaption>
+      </figure>
+    </section>
 
     <hr class="rule">
 
-    <article class="article">
-      <p>
-        لا شك أن هناك العديد من الطرق التي جعلها الله تعالى لتساعد العبد على الارتباط به، فجعل الصلاة وجعل الصوم
-        وجعل العبادات كلها، بل جعل الكثير من الطرق حتى قال تعالى:
-        <span class="verse">﴿سَنُرِيهِمْ آيَاتِنَا فِي الْآفَاقِ وَفِي أَنْفُسِهِمْ﴾</span>.
-        ولم ينحصر الارتباط بأفعال عبادية معينة فقط، فحتى النظر إلى وجه العالم طريق ارتباط بالله تعالى كما في الرواية
-        عن رسول الله صلى الله عليه وآله: «النظر إلى وجه العالم عبادة».
-        وجعل سبحانه أبواباً واسعةً لرحمته كالتوبة والشفاعة.
-      </p>
+    <!-- فهرس -->
+    <section class="section">
+      <h2>فهرس المحتويات</h2>
+      <div class="article" style="column-count:1">
+        <ol>
+          <li>الأسرة في الإسلام: حصن يواجه العولمة</li>
+          <li>الصدق مع النفس والله: رحلة إلى القلب النقي</li>
+          <li>الخطر الخفي: عندما يخبو نور الإيمان</li>
+          <li>الحياءُ شعاعٌ من نور الإيمان</li>
+        </ol>
+      </div>
+    </section>
 
-      <p>
-        وبما أنّ فتح الأبواب بيد المولى تعالى، يُطرح السؤال:
-        هل التوسل من الأبواب التي فتحها الله تعالى ليدخل منها العباد إلى ساحات رحمته؟
-        ليس الكلام في الإمكان، فهو غير متنافٍ مع صفاته جلّ شأنه، بل الكلام في الثبوت:
-        هل عندنا دليل شرعي يدل على تشريع التوسل؟
-      </p>
+    <hr class="rule">
 
-      <blockquote>
-        <strong>الخلاصة المبدئية:</strong>
-        عند مراجعة القرآن الكريم والروايات الشريفة نجد أدلةً كثيرة دالةً على مشروعية التوسل،
-        تتوزع إلى نوعين:
-        <em>نصوص وقائعية</em> نقلت حدوث التوسل من أنبياء وأمم، بلا إنكار عليهم،
-        و<em>نصوص تشريعية صريحة</em> أمرت بابتغاء الوسيلة وأكدت أثر التوسل في المغفرة والقبول.
-      </blockquote>
+    <!-- المقال الأول -->
+    <section class="section">
+      <h2>الأسرة في الإسلام: حصن يواجه العولمة</h2>
+      <div class="meta">بقلم التحرير</div>
+      <figure>
+        <img src="https://almaaref.org/static/images/d64c8e140d07af8b34d63ecc32e4772d.jpg" alt="الأسرة في الإسلام">
+        <figcaption>صورة مرافقة للمقال الأول</figcaption>
+      </figure>
+      <article class="article">
+        <p>في زمن العولمة والاتصال المفتوح، تواجه أسرنا تحدياً وجودياً. ابتعاد عن القيم الإلهية يقابله غزو ثقافي غربي، يجعل بناء مناعة ذاتية ضرورة حتمية. فبدون جهوزية روحية، يصبح السقوط في متاهات الضلال أمراً محتوماً.</p>
+        <p>يساء فهم دائرة المسؤولية العائلية لدى الكثيرين. يعتقد البعض أن "الحلقة الأضيق" تقتصر على الزوجة والأبناء، مستبعدين الوالدين بعد استقلال الأبناء. هذا الفهم خاطئ جملة وتفصيلاً في الرؤية الإسلامية، التي تجعل للوالدين مكاناً أساسياً في قلب هذه الدائرة ومسؤوليتنا تجاههما دائمة.</p>
+        <p>تنطلق الرؤية الإسلامية من تربية الفرد كأصل لبناء أي مجتمع، وبناء الأسرة المتعاونة المتراحمة كخلية سليمة تُشكّل نسيج المجتمع القوي. من هنا جاءت التشريعات التي تحث على الزواج وتسهله، وتنظم شؤون الأسرة وتحافظ على كيانها.</p>
+        <p>ما نستورده من ثقافات عبر الشاشات ليس مثالاً يُحتذى. ففي المجتمعات الغربية، رغم تقدمها المادي، نرى مأساة إنسانية من ارتفاع مخيف في نسب الطلاق والعزوبية وتفكك الروابط الأسرية. هذا النموذج المأزوم هو ما يُسوَّق لنا، ويجب أن يكون جرس إنذار لنا جميعاً.</p>
+        <p>المواجهة لا تكون بالانغلاق، بل بالوعي والبناء من خلال تعزيز علاقتنا مع الله تعالى والتمسك بقيمنا الإسلامية الأصيلة في التربية والمسؤولية. الأسرة هي حصن الأمة، وحمايتها مسؤولية جماعية.</p>
+      </article>
+    </section>
 
-      <h2>أولاً: أدلة وقائعية (حكايات التوسل)</h2>
+    <hr class="rule">
 
-      <p><strong>1) توسل آدم عليه السلام بالنبي ﷺ:</strong>
-        جاء في الروايات أنه قال: «ربّي أسألك بحقّ محمّد لما غفرتَ لي»،
-        فقال الله عز وجل: «يا آدم وكيف عرفت محمّداً ولم أخلقه؟»
-        … إلى آخر الخبر الذي يبيّن علوّ مقام النبي ﷺ وكون ذكره سبباً في قبول الدعاء.
-      </p>
+    <!-- المقال الثاني -->
+    <section class="section">
+      <h2>الصدق مع النفس والله: رحلة إلى القلب النقي</h2>
+      <div class="meta">بقلم التحرير</div>
+      <figure>
+        <img src="https://almaaref.org/static/images/d64c8e140d07af8b34d63ecc32e4772d.jpg" alt="الصدق مع النفس والله">
+        <figcaption>صورة مرافقة للمقال الثاني</figcaption>
+      </figure>
+      <article class="article">
+        <p>الصدق هو البوابة الأولى للإيمان الحقيقي. إنه الصراحة الكاملة مع الذات، والاعتراف بالعيوب دون تزييف، وتصحيح المسار بثبات. فمن لم يصدق مع نفسه، كيف يصدق مع غيره؟ وكيف ينال رضا ربه؟</p>
+        <p>يقول الأمام علي عليه السلام: "مَن عرف نفسه جاهدها، ومن جهل نفسه أهملها". بداية الطريق هي معرفة النفس، فهي المفتاح الذي يُحررنا من أغلال الجهل والضلال.</p>
+        <p>ثم تأتي الخطوة التالية: التمييز بين الخير والشر. فالحسنات من فضل الله، والسيئات من صنع أيدينا. هذه المعرفة تدفعنا للمحاسبة اليومية، وهي الوقود الذي يضيء طريق التوبة والرجوع إلى الله.</p>
+        <p>أما الصدق مع الله فهو جوهر العبادة. هو الإخلاص الذي يطهر النية من أي شائبة. أن تعمل لوجه الله فقط، لا لمراءاة الناس. يقول تعالى: "فَلَوْ صَدَقُوا اللَّهَ لَكَانَ خَيْرًا لَّهُمْ". إنه الوعد الإلهي: من يصدق مع ربه، ينل الخيرية في الدنيا والآخرة.</p>
+        <p>إن الصادقين هم من يوفون بعهدهم مع الله، حتى لو كانت التضحيات جسام. فهم القدوة في الإيمان والتضحية، وقد وصفهم القرآن بأنهم "أُوْلَئِكَ هُمُ الصَّادِقُونَ".</p>
+        <p>ليكن شعارنا: محاسبة دائمة، ونية خالصة، وصدق لا يتزعزع. فهذا هو طريق النجاة.</p>
+      </article>
+    </section>
 
-      <p><strong>2) أبناء يعقوب عليه السلام:</strong>
-        لما بان أمرهم قالوا: <span class="verse">﴿قَالُوا يَا أَبَانَا اسْتَغْفِرْ لَنَا ذُنُوبَنَا إِنَّا كُنَّا خَاطِئِينَ﴾</span>،
-        فطلبوا وساطة دعاء نبيّ الله يعقوب عليه السلام في الاستغفار لهم.
-      </p>
+    <hr class="rule">
 
-      <p><strong>3) توسل يهود خيبر قبل البعثة:</strong>
-        رُوي أنّهم كانوا إذا قاتلوا غطفان هُزموا، فيعوذون قائلين:
-        «اللهم إنّا نسألك بحق محمد النبي الأمّي الذي وعدتنا أن تخرجه لنا آخر الزمان…»،
-        فيُنصرون، فلما بُعث ﷺ كفروا به، فنزل قوله تعالى:
-        <span class="verse">﴿وَلَمَّا جَاءهُمْ كِتَابٌ مِنْ عِنْدِ اللَّهِ مُصَدِّقٌ لِمَا مَعَهُمْ
-        وَكَانُوا مِنْ قَبْلُ يَسْتَفْتِحُونَ عَلَى الَّذِينَ كَفَرُوا فَلَمَّا جَاءَهُمْ مَا عَرَفُوا
-        كَفَرُوا بِهِ فَلَعْنَةُ اللَّهِ عَلَى الْكَافِرِينَ﴾</span>.
-      </p>
+    <!-- المقال الثالث -->
+    <section class="section">
+      <h2>الخطر الخفي: عندما يخبو نور الإيمان</h2>
+      <div class="meta">بقلم التحرير</div>
+      <article class="article">
+        <p>أخطر ما يهدد الإنسان هو العدو الداخلي. حين نستسلم للشهوات والأنانية، ونتخاذل عن محاربة الانحلال الأخلاقي في أنفسنا، فإننا نخاطر بفقدان أعظم نعمة: الإيمان.</p>
+        <p>لا يذهب الإيمان بين ليلة وضحاها، بل يتراجع شيئاً فشيئاً حتى يصبح القلب خالياً منه، بينما يظل المظهر إيمانياً. هذه الهوة بين الظاهر والباطن هي النفاق بعينه، وهو الخطر الأكبر على الفرد والأمة.</p>
+        <p>يحذرنا القرآن: "فَأَعْقَبَهُمْ نِفَاقًا فِي قُلُوبِهِمْ". عندما نخلد إلى الراحة ونتبع أهواءنا بدل أداء تكاليفنا، يصبح القلب مرتعاً للنفاق. العدو الخارجي قد يهزمك ولكنه لا يقتلع جذور الإيمان من القلب، أما العدو الداخلي – وهو ضعف النفس – فيفرغك من داخلك ويضلك عن الطريق.</p>
+        <p>العلاج يكمن في اليقظة الدائمة ومحاربة الهوى. حيثما حاربت أنانيتك وقدمت التكليف على هواك، تقدمت وانتصرت. وحيثما استسلمت للمنّ والتراخي، تكون الهزيمة من داخلك.</p>
+        <p>ليكن شعارنا: محاسبة دائمة، وجهاد متواصل ضد النفس الأمارة بالسوء. فهذا هو درع الوقاية من أسوأ العواقب: قلب خال من الإيمان.</p>
+      </article>
+    </section>
 
-      <h2>ثانياً: نصوص تشريعية صريحة</h2>
+    <hr class="rule">
 
-      <p><strong>1) الأمر بابتغاء الوسيلة:</strong>
-        قال تعالى:
-        <span class="verse">﴿يَا أَيُّهَا الَّذِينَ آمَنُوا اتَّقُوا اللَّهَ وَابْتَغُوا إِلَيْهِ الْوَسِيلَةَ
-        وَجَاهِدُوا فِي سَبِيلِهِ لَعَلَّكُمْ تُفْلِحُونَ﴾</span>.
-        والآية ليست إذناً فحسب، بل طلبٌ راجح بابتغاء الوسيلة.
-      </p>
-
-      <p><strong>2) المجيء إلى الرسول للاستغفار:</strong>
-        <span class="verse">﴿وَلَوْ أَنَّهُمْ إِذْ ظَلَمُوا أَنْفُسَهُمْ جَاءُوكَ فَاسْتَغْفَرُوا اللَّهَ
-        وَاسْتَغْفَرَ لَهُمُ الرَّسُولُ لَوَجَدُوا اللَّهَ تَوَّابًا رَحِيمًا﴾</span>.
-        تؤكد الآية أن مجيء العاصي إلى رسول الله ﷺ وطلب الاستغفار منه بابٌ إلى رحمة الله.
-      </p>
-
-      <p><strong>3) ذمّ الإعراض عن وساطة الرسول ﷺ:</strong>
-        <span class="verse">﴿وَإِذَا قِيلَ لَهُمْ تَعَالَوْا يَسْتَغْفِرْ لَكُمْ رَسُولُ اللَّهِ لَوَّوْا رُءُوسَهُمْ
-        وَرَأَيْتَهُمْ يَصُدُّونَ وَهُمْ مُسْتَكْبِرُونَ﴾</span>.
-        وفيه توبيخ لمن يأنف من هذا الباب.
-      </p>
-
-      <h2>نتيجة</h2>
-      <p>
-        يتبيّن من مجموع النصوص أنّ التوسل <em>بابٌ مشروع</em> من أبواب القرب إلى الله تعالى،
-        وأنّ رحمته أوسع من أن تُضيّق السبل على عباده؛
-        فمن ابتغى الوسيلة المشروعة نال حظّاً أوفر من المغفرة والقبول.
-      </p>
-
-      <p style="margin-top:1rem"><em>المصدر: من كتاب “معرفة أهل البيت (عليهم السلام)” – جمعية المعارف الإسلامية الثقافية.</em></p>
-    </article>
+    <!-- المقال الرابع -->
+    <section class="section">
+      <h2>الحياءُ شعاعٌ من نور الإيمان</h2>
+      <div class="meta">بقلم التحرير</div>
+      <article class="article">
+        <p>ليس الحياء مجرد خُلق نبيل نتزين به في تعاملاتنا، بل هو جوهرٌ من جوهر الإيمان، وعلامة صادقة على الشعور الحقيقي بقرب الله تعالى ومراقبته. عن الرسول الأكرم صلى الله عليه وآله أنه قال: "استحيوا من الله حق الحياء". وهذا النداء النبوي يطرح سؤالاً مهماً: كيف نستحي من الله حق الحياء؟</p>
+        <p>إن الإجابة تكمن في وصية النبي صلى الله عليه وآله التي ترسم لنا خريطة الطريق العملي لهذا الحياء الحقيقي. فأول خطوات هذا الطريق أن تبيت كل ليلة وأجلك بين عينيك، متذكراً الموت ولحظة الرحيل، فهذا الذكر يضيء القلب ويصفي النية. ثم تأتي الخطوة الثانية وهي حفظ الرأس وما حوى، من عين تنظر بها، وأذن تسمع بها، ولسان تنطق به، فتحرسها عن كل ما يغضب الله.</p>
+        <p>ولا يقتصر الحياء على حفظ الجوارح الظاهرة، بل يمتد ليشمل الباطن أيضاً، فتحفظ بطنك عن الحرام حتى القليل منه، وتحرص على أن يكون طعامك وشرابك من الحلال الطيب. وتتذكر دائماً القبر والبلوى، فتترك زينة الحياة الدنيا وزخرفها عندما تعيقك عن طريق الآخرة.</p>
+        <p>إن العلاقة بين الحياء والإيمان علاقة وثيقة، فهما كالتوأم الذي لا يفترق. فكلما قوي شعورك بمراقبة الله تعالى، قوي حياؤك، وكلما غفلت عن وجود الملكين الكاتبين اللذين يرافقانك ليل نهار، ضعف حياؤك. وقد أوصى الأئمة عليهم السلام بأن نستحي من الله في السر كما نستحي من الناس في العلن.</p>
+        <p>هذا الحياء الحقيقي هو الذي يصنع القلب النقي والإيمان الثابت، وهو الدرع الواقي من الوقوع في المعاصي، والبوصلة التي ترشدنا إلى طريق الرضا الإلهي. فليكن حياؤنا من الله شمساً تنير دربنا، وتقربنا من رحمة ربنا.</p>
+      </article>
+    </section>
   </main>
-
-  <footer class="footer" role="contentinfo">
-    نسخة منسّقة بأسلوب الصحف والكتب، متجاوبة مع الهواتف والأجهزة اللوحية والحواسيب.
-  </footer>
-
-  <script>
-    // لا نحتاج إلا لاستدعاء نافذة الطباعة.
-    // زر "حفظ PDF" يعتمد على اختيار "حفظ كملف PDF" من مربع حوار الطباعة.
-    // تم ضبط CSS للطباعة على A4 بلا هوامش، مع تنسيق أعمدة صحفية.
-  </script>
 </body>
 </html>
