@@ -1,449 +1,164 @@
-<!doctype html>
-<html lang="ar" dir="rtl">
+<!DOCTYPE html><html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>أخبار الآن — لوحة عربية احترافية</title>
-<style>
-  :root{
-    --bg:#0b0b0c;
-    --card:#15161a;
-    --text:#e9eaee;
-    --muted:#a7abbb;
-    --brand:#4da3ff;
-    --accent:#ffd166;
-    --border:#22242a;
-    --shadow: 0 10px 30px rgba(0,0,0,.25);
-  }
-  .light{
-    --bg:#f7f8fb;
-    --card:#ffffff;
-    --text:#0f1222;
-    --muted:#5a6072;
-    --brand:#1e63ff;
-    --accent:#ff8c00;
-    --border:#e8ebf2;
-    --shadow: 0 12px 28px rgba(16,24,40,.08);
-  }
-  *{box-sizing:border-box}
-  body{
-    margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,"Noto Sans Arabic",sans-serif;
-  }
-  header{
-    position:sticky;top:0;z-index:10;background:linear-gradient(180deg,var(--bg),color-mix(in oklab,var(--bg),transparent 30%));
-    backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid var(--border);
-  }
-  .bar{
-    max-width:1200px;margin:auto;display:flex;align-items:center;gap:12px;padding:14px 16px;
-  }
-  .logo{
-    display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;letter-spacing:.2px;
-  }
-  .logo i{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--brand),var(--accent));display:inline-block}
-  .controls{flex:1;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-  select, input, button{
-    background:var(--card);color:var(--text);border:1px solid var(--border);
-    padding:10px 12px;border-radius:10px;font:inherit;
-  }
-  input[type="search"]{flex:1;min-width:160px}
-  button{cursor:pointer;box-shadow:var(--shadow);border:none}
-  .chip{background:transparent;border:1px solid var(--border);box-shadow:none}
-  .danger{background:#a61e4d}
-  .ok{background:#176b49}
-  .ghost{background:transparent;box-shadow:none;border:1px solid var(--border)}
-  .grid{
-    max-width:1200px;margin:20px auto;padding:0 16px;
-    display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
-  }
-  .card{
-    background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;
-    display:flex;flex-direction:column;min-height:320px;box-shadow:var(--shadow);transition:transform .08s ease;
-  }
-  .card:hover{transform:translateY(-2px)}
-  .thumb{aspect-ratio:16/9;background:#0d0f14;object-fit:cover;width:100%}
-  .content{padding:14px 14px 8px 14px;display:flex;flex-direction:column;gap:8px}
-  .title{font-weight:700;line-height:1.3;font-size:16px}
-  .meta{display:flex;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:12px}
-  .footer{margin-top:auto;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);color:var(--muted)}
-  .skeleton{
-    position:relative;overflow:hidden;background:linear-gradient(90deg,#1b1e27 25%,#222633 37%,#1b1e27 63%);
-    background-size:400% 100%;animation:shimmer 1.2s infinite;
-  }
-  .sk-text{height:14px;border-radius:6px;margin:8px 0}
-  .sk-img{aspect-ratio:16/9;border-bottom:1px solid var(--border)}
-  @keyframes shimmer{0%{background-position:100% 0}100%{background-position:0 0}}
-  .empty{
-    max-width:800px;margin:60px auto;padding:24px;border:1px dashed var(--border);border-radius:14px;text-align:center;color:var(--muted)
-  }
-  .settings{
-    position:fixed;inset:0;background:rgba(0,0,0,.35);display:none;align-items:center;justify-content:center;padding:20px
-  }
-  .settings .box{
-    width:min(720px,95vw);background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;box-shadow:var(--shadow)
-  }
-  .row{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0}
-  .row label{font-size:13px;color:var(--muted)}
-  .help{font-size:12px;color:var(--muted)}
-  .badge{font-size:11px;border:1px solid var(--border);padding:3px 8px;border-radius:999px;color:var(--muted)}
-  footer.site{
-    max-width:1200px;margin:40px auto 80px;padding:0 16px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap
-  }
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>بركات ولادة الرسول الأكرم محمّد (صلى الله عليه وآله)</title>
+  <!-- خطوط مريحة للقراءة مع بدائل محلية -->
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --gold:#D4AF37; /* ذهبي أنيق */
+      --gold-soft:#E6CF86;
+      --black:#0d0d0d;
+      --white:#ffffff;
+      --ink:#111111;
+    }/* إعدادات الصفحة للطباعة بحجم A4 وهوامش تشبه الكتب */
+@page{ size: A4; margin: 0; }
+
+html,body{
+  background: var(--black);
+  color: var(--ink);
+  margin:0; padding:0;
+  font-family: 'Amiri', 'Noto Naskh Arabic', 'Scheherazade New', serif;
+  line-height: 1.9;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* حاوية الورقة */
+.sheet{
+  width: min(100%, 900px);
+  min-height: min(1400px, 100%);
+  margin: clamp(8px, 2vw, 20px) auto;
+  padding: clamp(16px, 4vw, 28px);
+  background: var(--white);
+  box-shadow: 0 24px 60px rgba(0,0,0,.45);
+  position: relative;
+  box-sizing: border-box;
+  border-radius: 14px;
+  outline: 1px solid rgba(212,175,55,.35);
+}
+
+/* إطار زخرفي ذهبي رقيق */
+.sheet:before{
+  content:"";
+  position:absolute; inset: clamp(8px, 2vw, 16px);
+  border: 1.6px solid var(--gold);
+  pointer-events:none;
+  border-radius: 10px;
+}
+
+/* شريط علوي ذهبي أنيق */
+.gilded-top{
+  position:absolute; left:0; right:0; top:0;
+  height: 6mm; background: linear-gradient(90deg, var(--gold), var(--gold-soft), var(--gold));
+}
+
+/* رأس الصفحة */
+header{ text-align:center; margin-bottom: clamp(16px, 4vw, 28px); margin-top: clamp(10px, 2vw, 18px);} 
+.title{
+  font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+  font-weight: 800; letter-spacing:.3px;
+  font-size: clamp(18pt, 4vw, 26pt); color: var(--black);
+}
+.subtitle{
+  font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+  color: var(--gold);
+  font-size: clamp(11pt, 2.6vw, 14pt); font-weight:700; margin-top:6px;
+}
+
+/* فاصل زخرفي */
+.divider{ display:flex; align-items:center; gap:8px; justify-content:center; margin: 8mm 0 5mm; }
+.divider .line{ height:1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); flex:1; }
+.divider .dot{ width:8px; height:8px; border-radius:50%; background: var(--gold); box-shadow:0 0 0 3px rgba(212,175,55,.25); }
+
+/* جسم النص: ضبط كامل مثل الكتب */
+article{ text-align: justify; text-justify: inter-word; font-size: clamp(11.2pt, 2.4vw, 12.6pt); }
+article p{ margin: 0 0 clamp(10px, 2.4vw, 14px); }
+article p:first-of-type::first-letter{ font-size:170%; font-weight:700; color: var(--gold); padding-left:2px; }
+
+/* عناوين الأقسام */
+h5, h4, h3{
+  font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+  color: var(--black); margin: 7mm 0 3mm; line-height:1.6;
+}
+h3{ font-size: 16pt; border-right: 4px solid var(--gold); padding-right: 6px; }
+h4{ font-size: 14pt; }
+h5{ font-size: 12.5pt; color: #333; }
+
+/* نقش خفيف أسفل الصفحة */
+footer{
+  position:absolute; left:22mm; right:22mm; bottom:12mm; display:flex; justify-content:space-between; align-items:center; color:#666; font-size:9pt;
+}
+.brand{ color: var(--gold); font-weight:600; }
+
+/* أزرار التحكم (لا تظهر في الطباعة) */
+.toolbar{ position: sticky; top:0; z-index:10; display:flex; gap:12px; justify-content:center; padding:10px; backdrop-filter: blur(8px); background: linear-gradient(180deg, rgba(0,0,0,.8), rgba(0,0,0,.35)); border-bottom:1px solid rgba(212,175,55,.35);} 
+.btn{ appearance:none; border:none; cursor:pointer; font-family:'Cairo', system-ui, sans-serif; font-weight:800; padding:10px 18px; border-radius:999px; background: linear-gradient(180deg, var(--gold), var(--gold-soft)); color: var(--black); box-shadow: 0 14px 30px rgba(212,175,55,.35), inset 0 1px 0 rgba(255,255,255,.5); transition: transform .12s ease, box-shadow .25s ease; }
+.btn:hover{ transform: translateY(-1px); box-shadow: 0 14px 26px rgba(212,175,55,.35), inset 0 1px 0 rgba(255,255,255,.45); }
+.btn:active{ transform: translateY(0); }
+
+/* للطباعة: إزالة الظلال والأزرار وضبط الهوامش تلقائياً */
+@media print{
+  body{ background: white; margin:0; }
+  .toolbar{ display:none !important; }
+  .sheet{ box-shadow:none; width:210mm; min-height:297mm; margin:0; padding:18mm; border-radius:0; outline: none; }
+  .sheet:before{ inset:0; border-width:0; }
+  .gilded-top{ height:0; }
+  h3, h4{ break-after: avoid; }
+  p{ orphans: 3; widows: 3; }
+}
+  .toolbar{ display:none !important; }
+  .sheet{ box-shadow:none; width:auto; min-height:auto; padding:0; }
+  .sheet:before{ inset:0; border-width:1.2px; }
+  .gilded-top{ height:4mm; }
+  footer{ color:#888; }
+  /* التحكم بالفواصل بين الصفحات إن لزم */
+  h3, h4{ break-after: avoid; }
+  p{ orphans: 3; widows: 3; }
+}
+
+  </style>
 </head>
 <body>
-<header>
-  <div class="bar">
-    <div class="logo"><i></i> أخبار الآن</div>
-    <div class="controls">
-      <select id="provider" title="مزود الأخبار">
-        <option value="newsapi">NewsAPI</option>
-        <option value="gnews">GNews</option>
-        <option value="newsdata">NewsData.io</option>
-      </select>
-      <select id="category" title="تصنيف">
-        <option value="">كل التصنيفات</option>
-        <option value="general">عام</option>
-        <option value="business">اقتصاد</option>
-        <option value="technology">تقنية</option>
-        <option value="sports">رياضة</option>
-        <option value="health">صحة</option>
-        <option value="science">علوم</option>
-        <option value="entertainment">منوعات</option>
-      </select>
-      <input id="q" type="search" placeholder="ابحث في الأخبار (مثال: الذكاء الاصطناعي)" />
-      <button id="searchBtn">بحث</button>
-      <button id="toggleTheme" class="ghost" title="الوضع الداكن/الفاتح">🌓</button>
-      <button id="openSettings" class="ghost" title="الإعدادات">⚙️</button>
-      <span class="badge" id="statusBadge">جاهز</span>
-    </div>
+  <!-- شريط أدوات للتنزيل/الطباعة -->
+  <div class="toolbar" aria-hidden="false">
+    <button class="btn" onclick="window.print()">تنزيل / طباعة PDF</button>
+  </div>  <main class="sheet">
+    <div class="gilded-top" aria-hidden="true"></div>
+    <header>
+      <div class="title">بركات ولادة الرسول الأكرم محمّد (صلى الله عليه وآله)</div>
+      <div class="subtitle">سيرة النبي الأكرم(ص)</div>
+      <div class="divider" aria-hidden="true">
+        <div class="line"></div><div class="dot"></div><div class="line"></div>
+      </div>
+    </header><article>
+  <p><strong>لولادة الرسول الأكرم محمّد (صلى الله عليه وآله) وقدومه المبارك إلى هذه الدنيا بركات لا حصر لها، وسنذكر فيما يلي بعضاً منها:</strong></p>
+
+  <h3>تزلزل أعلام الشرك وعبادة الأصنام</h3>
+  <p>إنّ ما جاء في الآثار والتواريخ حول تصدّع شرفات بلاط (قباب) كسرى وتزلزل أعلام عبادة الأصنام والشرك في كافّة أنحاء الدنيا - فيما إذا كانت هذه الآثار قطعية - لعلّه يكون ظهورًا للقدرة الإلهيّة، للإعلان الرمزي عن حضور هذه القوّة التي ستقضي على جذور الظلم والفساد وتطهّر العلم من الخرافة وتخلّص الحضارة من الفساد. لقد أرسل الله تعالى إلى عالم الوجود الذخيرة الإلهيّة الكبرى أي الوجود المقدّس للرسول الأكرم (صلى الله عليه وآله وسلم)، فكان منطلقًا إلى مرحلة حسّاسة بداية مرحلة أساسيّة في مصير البشريّة. ولقد جاء في شأن آيات (علامات) ولادة الرسول أنّه عندما ولد ذاك العظيم، تهدّمت شرفات إيوان كسرى، وانطفأت نيران معبد آذركشسب الذي بقي مشتعلًا مدة قرون وجَفّت بحيرة ساوة التي كان يعتبرها بعض الناس في ذاك الزمان مقدّسة، وهُدِّمت الأصنام التي كانت معلّقة حول الكعبة.</p>
+  <p>إنّ هذه الإشارات الرمزيّة والظاهريّة بالكامل، تشير إلى اتّجاه الإرادة والسنّة الإلهيّتين في إسباغ خلعة الوجود على هذا الموجود العظيم، وهذه الشخصيّة الرفيعة والفريدة. معنى هذه الأحداث الرمزيّة هو أنّه مع هذا القدوم المبارك، هو حتميّة طيّ بساط الذلّ عن البشريّة، سواء كان ذلك (الذلّ) من خلال حاكميّة الجبّارين والحكّام المستبدّين - من قبيل ما كان يجري آنذاك في إيران وروما القديمة - أو كان وليد عبادة غير الله. وعلى يدي هذا المولود المبارك، لا بدّ أن تتحرّر البشريّة من قيود الظلم الذي فرضه حكّام الجور على المظلومين من البشر طوال التاريخ، ومن قيود الخرافات والعقائد الباطلة والمذلّة التي جعلت الإنسان خاضعًا ذليلًا أمام الموجودات الأدنى منه أو في مقابل أفراد البشر الآخرين. لذلك جاء في الآية القرآنيّة في باب بعثة النبيّ الأكرم(صلى الله عليه وآله وسلم)، قوله تعالى: <strong>﴿هُوَ الَّذِي أَرْسَلَ رَسُولَهُ بِالْهُدَى وَدِينِ الْحَقِّ لِيُظْهِرَهُ عَلَى الدِّينِ كُلِّهِ وَكَفَى بِاللَّهِ شَهِيدًا﴾</strong></p>
+  <p>إنّ عبارة <strong>﴿لِيُظْهِرَهُ عَلَى الدِّينِ كُلِّهِ﴾</strong> ليست خاضعة لحدّ زماني، بل تشير إلى الوُجهة. يجب أن تتحرّك البشريّة بعد هذه الحادثة نحو الحريّة المعنوية والاجتماعيّة والحقيقيّة والعقلانيّة. لقد بدأ هذا العمل، وإنّ استمراره يكون بأيدينا نحن البشر. وهذه سُنّة أخرى في عالم الخلق.</p>
+
+  <h3>نزول الرحمة الإلهيّة على البشر</h3>
+  <p>إنّ هذه الولادة العظيمة، هي ولادة أرقى نماذج الرحمة الإلهيّة للبشريّة، لأنّ وجود ذاك العظيم وإرسال هذا النبيّ الكبير، هو رحمة الحقّ تعالى على العباد. وينبغي على البشريّة إدراك أنّ هذه الرحمة، هي رحمة غير منقطعة، بل هي رحمة مستمرّة.</p>
+
+  <h3>حركة المسلمين نحو التكامل</h3>
+  <p>ليس بمقدور أيّ إنسان بيان أبعاد شخصيّة النبيّ الأكرم (صلى الله عليه وآله وسلم) بنحو كامل وتقديم صورة قريبة من الواقع عن شخصيّة ذاك العظيم... إنّ ما نعرفه ونعلمه عن من اختاره واصطفاه إلهُ العالم وطليعة الأنبياء على امتداد التاريخ، هو ظلٌّ وشبحٌ للوجود المعنوي والباطني والحقيقي لذاك العظيم، إلّا أنّ هذا المقدار من المعرفة يكفي المسلمين لضمان استمرار حركتهم نحو الكمال ولصيرورة قمّة الإنسانيّة وأوجّ التكامل البشري أمامهم ويشجّعهم على التحرّك نحو الوحدة الإسلاميّة والاجتماع حول ذاك المحور. بناءً على ما تقدّم، نوصي كافّة المسلمين في العالم، بزيادة العمل حول أبعاد شخصيّة الرسول وحياته وسيرته وأخلاقه والتعاليم المأثورة والمنصوصة عن ذاك العظيم.</p>
+
+  <h3>الميل إلى الإسلام</h3>
+  <p>... هناك الكثير من البشر في العالم، ممّن إذا ما عرفوا رسول الإسلام بالقدر الذي عرفه المسلمون، أو حتّى أقلّ من ذلك - أي إذا ما تجلّى من تلك الشخصيّة النورانيّة في قلوبهم - فسيكون ذلك ضامنًا لعقيدتهم والتزامهم بالإسلام. يجب أن نعمل على هذه المسألة.</p>
+
+  <h3>وحدة المسلمين</h3>
+  <p>لقد كان وجود نبيّ الإسلام الأكرم (صلى الله عليه وآله وسلم)، أكبر عامل للوحدة في كافّة العصور الإسلاميّة واليوم يمكنه أن يكون كذلك، لأنّ عقيدة آحاد المسلمين بذاك الوجود الأقدس العظيم، توأم للعاطفة والعشق، لذلك كان ذاك العظيم، مركز ومحور العواطف والعقائد عند كافّة المسلمين. وهذه المحوريّة، من إحدى موجبات استئناس قلوب المسلمين وتقريب الفرق الإسلاميّة بعضها من بعض.</p>
+
+  <div class="divider" aria-hidden="true" style="margin-top:8mm;">
+    <div class="line"></div><div class="dot"></div><div class="line"></div>
   </div>
-</header>
+</article>
 
-<main id="app">
-  <div id="grid" class="grid"></div>
-  <div id="empty" class="empty" style="display:none">
-    لم يتم العثور على نتائج مطابقة. جرّب كلمات مفتاحية/تصنيف مختلفًا.
-  </div>
-</main>
-
-<footer class="site">
-  <div>مصمم بواجهة عربية عصرية. يدعم تعدد مزوّدي الأخبار.</div>
-  <div>تلميح: إن ظهرت مشكلة CORS من المتصفح، فعّل خيار البروكسي من الإعدادات.</div>
-</footer>
-
-<!-- نافذة الإعدادات -->
-<div class="settings" id="settings">
-  <div class="box">
-    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
-      <h3 style="margin:6px 0">الإعدادات</h3>
-      <button id="closeSettings" class="ghost">✖</button>
-    </div>
-    <div class="row">
-      <div style="flex:1 1 260px">
-        <label>مفتاح API — NewsAPI.org</label>
-        <input id="key-newsapi" placeholder="أدخل مفتاح NewsAPI" />
-        <div class="help">الحصول على المفتاح من newsapi.org (اختر language=ar)</div>
-      </div>
-      <div style="flex:1 1 260px">
-        <label>مفتاح API — GNews</label>
-        <input id="key-gnews" placeholder="أدخل مفتاح GNews" />
-        <div class="help">الحصول على المفتاح من gnews.io (اختر lang=ar)</div>
-      </div>
-      <div style="flex:1 1 260px">
-        <label>مفتاح API — NewsData.io</label>
-        <input id="key-newsdata" placeholder="أدخل مفتاح NewsData.io" />
-        <div class="help">الحصول على المفتاح من newsdata.io</div>
-      </div>
-    </div>
-    <div class="row">
-      <div style="flex:1 1 260px">
-        <label>بروكسي (اختياري لتجاوز CORS)</label>
-        <input id="proxy" placeholder="مثال: https://api.allorigins.win/raw?url=" />
-        <div class="help">اتركه فارغًا إن لم تواجه مشكلة CORS. استخدم على مسؤوليتك واحترم شروط الخدمة.</div>
-      </div>
-      <div style="flex:0 0 220px;display:flex;align-items:flex-end">
-        <button id="saveSettings" class="ok">حفظ</button>
-      </div>
-    </div>
-    <div class="row">
-      <span class="help">يُخزَّن كل ما سبق محليًا على جهازك (LocalStorage).</span>
-    </div>
-  </div>
-</div>
-
-<script>
-  // ========= تفضيلات الواجهة =========
-  const themeBtn = document.getElementById('toggleTheme');
-  const isLight = localStorage.getItem('theme') === 'light';
-  if(isLight) document.body.classList.add('light');
-  themeBtn.onclick = () => {
-    document.body.classList.toggle('light');
-    localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
-  };
-
-  // ========= عناصر التحكم =========
-  const grid = document.getElementById('grid');
-  const empty = document.getElementById('empty');
-  const providerSel = document.getElementById('provider');
-  const catSel = document.getElementById('category');
-  const qInput = document.getElementById('q');
-  const searchBtn = document.getElementById('searchBtn');
-  const statusBadge = document.getElementById('statusBadge');
-
-  // ========= نافذة الإعدادات =========
-  const settings = document.getElementById('settings');
-  const openSettings = document.getElementById('openSettings');
-  const closeSettings = document.getElementById('closeSettings');
-  const saveSettings = document.getElementById('saveSettings');
-  const keyNewsapi = document.getElementById('key-newsapi');
-  const keyGnews = document.getElementById('key-gnews');
-  const keyNewsdata = document.getElementById('key-newsdata');
-  const proxyInput = document.getElementById('proxy');
-
-  openSettings.onclick = () => { settings.style.display='flex'; loadSettings(); };
-  closeSettings.onclick = () => { settings.style.display='none'; };
-  function loadSettings(){
-    keyNewsapi.value = localStorage.getItem('key_newsapi') || '';
-    keyGnews.value = localStorage.getItem('key_gnews') || '';
-    keyNewsdata.value = localStorage.getItem('key_newsdata') || '';
-    proxyInput.value = localStorage.getItem('proxy_base') || '';
-  }
-  saveSettings.onclick = () => {
-    localStorage.setItem('key_newsapi', keyNewsapi.value.trim());
-    localStorage.setItem('key_gnews', keyGnews.value.trim());
-    localStorage.setItem('key_newsdata', keyNewsdata.value.trim());
-    localStorage.setItem('proxy_base', proxyInput.value.trim());
-    settings.style.display='none';
-    // إعادة تحميل النتائج بالمفاتيح الجديدة
-    resetAndSearch();
-  };
-
-  // ========= حالة البحث / ترقيم الصفحات =========
-  let page = 1;
-  let loading = false;
-  let done = false;
-
-  function setStatus(text, type=''){
-    statusBadge.textContent = text;
-    statusBadge.style.borderColor = type==='err' ? '#a61e4d' : 'var(--border)';
-    statusBadge.style.color = type==='err' ? '#ffb3c7' : 'var(--muted)';
-  }
-
-  // ========= مساعدات =========
-  function fmtRelative(dateStr){
-    try{
-      const d = new Date(dateStr);
-      const diff = (Date.now() - d.getTime())/1000;
-      if(diff < 60) return 'الآن';
-      if(diff < 3600) return `${Math.floor(diff/60)} دقيقة`;
-      if(diff < 86400) return `${Math.floor(diff/3600)} ساعة`;
-      const days = Math.floor(diff/86400);
-      return `${days} يوم`;
-    }catch(e){ return ''; }
-  }
-
-  function imgOrFallback(url){
-    return url || 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(`
-      <svg xmlns="http://www.w3.org/2000/svg" width="800" height="450">
-        <rect width="100%" height="100%" fill="#10131a"/>
-        <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="28" fill="#4da3ff" font-family="Arial, sans-serif">لا صورة</text>
-      </svg>
-    `);
-  }
-
-  function makeCard(a){
-    const el = document.createElement('article');
-    el.className = 'card';
-    el.innerHTML = `
-      <img class="thumb" loading="lazy" src="${imgOrFallback(a.image)}" alt="">
-      <div class="content">
-        <div class="title">${a.title || 'بدون عنوان'}</div>
-        <div class="meta">
-          <span>📰 ${a.source || 'غير معروف'}</span>
-          <span>⏱ ${a.published ? fmtRelative(a.published) : ''}</span>
-        </div>
-        <div style="color:var(--muted);font-size:13px;">${a.description || ''}</div>
-      </div>
-      <div class="footer">
-        <a href="${a.url}" target="_blank" rel="noopener">فتح الخبر ↗</a>
-        <span>${a.category || ''}</span>
-      </div>
-    `;
-    return el;
-  }
-
-  function makeSkeleton(){
-    const el = document.createElement('div');
-    el.className = 'card';
-    el.innerHTML = `
-      <div class="thumb skeleton sk-img"></div>
-      <div class="content">
-        <div class="skeleton sk-text" style="width:85%"></div>
-        <div class="skeleton sk-text" style="width:60%"></div>
-        <div class="skeleton sk-text" style="width:95%;height:36px;border-radius:10px"></div>
-      </div>
-      <div class="footer">
-        <span class="skeleton sk-text" style="width:100px;height:10px;margin:0"></span>
-        <span class="skeleton sk-text" style="width:60px;height:10px;margin:0"></span>
-      </div>
-    `;
-    return el;
-  }
-
-  function showSkeletons(n=8){
-    const fr = document.createDocumentFragment();
-    for(let i=0;i<n;i++) fr.appendChild(makeSkeleton());
-    grid.appendChild(fr);
-  }
-
-  function clearGrid(){ grid.innerHTML=''; }
-
-  // ======== خرائط التصنيفات لكل مزوّد ========
-  const categoryMap = {
-    newsapi: { // https://newsapi.org/docs/endpoints/top-headlines
-      general:'general',business:'business',technology:'technology',sports:'sports',health:'health',science:'science',entertainment:'entertainment'
-    },
-    gnews: { // https://gnews.io/docs/v4#parameters
-      general:'general',business:'business',technology:'technology',sports:'sports',health:'health',science:'science',entertainment:'entertainment'
-    },
-    newsdata: { // https://newsdata.io/documentation
-      general:'top',business:'business',technology:'technology',sports:'sports',health:'health',science:'science',entertainment:'entertainment'
-    }
-  };
-
-  // ========= بناء URL الطلب لكل مزوّد =========
-  function buildUrl(provider, pageNum, q, cat){
-    const proxy = (localStorage.getItem('proxy_base') || '').trim();
-    const enc = encodeURIComponent;
-    let raw = '';
-    if(provider==='newsapi'){
-      const key = (localStorage.getItem('key_newsapi')||'').trim();
-      raw = `https://newsapi.org/v2/top-headlines?language=ar&pageSize=20&page=${pageNum}`
-          + (q ? `&q=${enc(q)}`:'')
-          + (cat ? `&category=${enc(categoryMap.newsapi[cat]||'')}`:'')
-          + `&apiKey=${enc(key)}`;
-    }else if(provider==='gnews'){
-      const key = (localStorage.getItem('key_gnews')||'').trim();
-      raw = `https://gnews.io/api/v4/top-headlines?lang=ar&max=20&page=${pageNum}`
-          + (q ? `&q=${enc(q)}`:'')
-          + (cat ? `&topic=${enc(categoryMap.gnews[cat]||'')}`:'')
-          + `&token=${enc(key)}`;
-    }else if(provider==='newsdata'){
-      const key = (localStorage.getItem('key_newsdata')||'').trim();
-      raw = `https://newsdata.io/api/1/news?language=ar&page=${pageNum}`
-          + (q ? `&q=${enc(q)}`:'')
-          + (cat ? `&category=${enc(categoryMap.newsdata[cat]||'')}`:'')
-          + `&apikey=${enc(key)}`;
-    }
-    return proxy ? proxy + encodeURIComponent(raw) : raw;
-  }
-
-  // ========= توحيد شكل المقالات من كل مزوّد =========
-  function normalize(provider, data){
-    let items = [];
-    if(provider==='newsapi'){
-      // shape: { articles: [ {title, description, url, urlToImage, source:{name}, publishedAt} ] }
-      items = (data.articles || []).map(x => ({
-        title:x.title, description:x.description, url:x.url,
-        image:x.urlToImage, source:x.source?.name, published:x.publishedAt
-      }));
-    }else if(provider==='gnews'){
-      // shape: { articles: [ {title, description, url, image, source:{name}, publishedAt} ] }
-      items = (data.articles || []).map(x => ({
-        title:x.title, description:x.description, url:x.url,
-        image:x.image, source:x.source?.name, published:x.publishedAt
-      }));
-    }else if(provider==='newsdata'){
-      // shape: { results: [ {title, description, link, image_url, source_id, pubDate} ] }
-      items = (data.results || []).map(x => ({
-        title:x.title, description:x.description, url:x.link,
-        image:x.image_url, source:x.source_id, published:x.pubDate
-      }));
-    }
-    return items;
-  }
-
-  async function fetchNews(append=false){
-    if(loading || done) return;
-    loading = true;
-    setStatus('يجلب الأخبار…');
-    showSkeletons(6);
-    try{
-      const provider = providerSel.value;
-      const q = qInput.value.trim();
-      const cat = catSel.value || '';
-      const url = buildUrl(provider, page, q, cat);
-      // الحماية من الطلبات غير المهيأة
-      if(url.includes('apiKey=') && url.endsWith('apiKey=') ||
-         url.includes('token=')  && url.endsWith('token=')  ||
-         url.includes('apikey=') && url.endsWith('apikey=')){
-        throw new Error('أدخل مفتاح API للمزوّد المختار من إعدادات ⚙️');
-      }
-      const res = await fetch(url);
-      if(!res.ok){
-        throw new Error(`فشل الجلب (${res.status}) — قد يكون حد المعدّل أو CORS.`);
-      }
-      const data = await res.json();
-      const list = normalize(provider, data);
-      // إزالة الهياكل الوهمية
-      grid.querySelectorAll('.card .sk-img, .card .sk-text').forEach(el => el.closest('.card')?.remove());
-
-      if(!append) clearGrid();
-      if(list.length === 0 && page===1){
-        empty.style.display='block';
-      }else{
-        empty.style.display='none';
-        const fr = document.createDocumentFragment();
-        list.forEach(a => fr.appendChild(makeCard(a)));
-        grid.appendChild(fr);
-      }
-
-      // الكشف إن كنّا وصلنا للنهاية (تبسيطًا: إذا رجع أقل من 20 عنصرًا)
-      if(list.length < 20){ done = true; }
-      setStatus('تم التحديث');
-    }catch(err){
-      console.error(err);
-      setStatus(err.message || 'حدث خطأ', 'err');
-      // إزالة الهياكل الوهمية عند الخطأ
-      grid.querySelectorAll('.card .sk-img, .card .sk-text').forEach(el => el.closest('.card')?.remove());
-      if(grid.children.length===0){
-        const demo = [
-          { title:'عرض تجريبي — بطاقة خبر',
-            description:'هذه بطاقة لتوضيح التصميم فقط. أدخل مفاتيح API من الإعدادات لجلب أخبار حقيقية.',
-            url:'#', image:'', source:'Demo', published:new Date().toISOString() }
-        ];
-        const fr = document.createDocumentFragment();
-        demo.forEach(a => fr.appendChild(makeCard(a)));
-        grid.appendChild(fr);
-      }
-    }finally{
-      loading = false;
-    }
-  }
-
-  function resetAndSearch(){
-    page = 1; done = false; clearGrid(); fetchNews(false);
-  }
-
-  // ========= تشغيل البحث =========
-  searchBtn.onclick = resetAndSearch;
-  providerSel.onchange = resetAndSearch;
-  catSel.onchange = resetAndSearch;
-  qInput.addEventListener('keydown', e => { if(e.key==='Enter') resetAndSearch(); });
-
-  // ========= التمرير اللانهائي =========
-  window.addEventListener('scroll', () => {
-    if(loading || done) return;
-    const nearBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 300;
-    if(nearBottom){ page++; fetchNews(true); }
-  });
-
-  // ========= تحميل الإعدادات عند الفتح =========
-  (function init(){
-    loadSettings();
-    setStatus('جاهز');
-    resetAndSearch();
-  })();
-</script>
-</body>
+  </main>  <script>
+    // لا نستخدم أي مكتبات؛ زر واحد للطباعة/التنزيل PDF عبر نافذة الطباعة الافتراضية للمتصفح
+    // يمكن للمستخدم اختيار "Save as PDF" لحفظ الملف.
+  </script></body>
 </html>
