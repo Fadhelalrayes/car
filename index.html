@@ -4,85 +4,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>بركات ولادة الرسول الأكرم محمّد (صلى الله عليه وآله)</title>
   <!-- خطوط مريحة للقراءة مع بدائل محلية -->
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600;700&family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Noto+Kufi+Arabic:wght@500;700&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --gold:#D4AF37; /* ذهبي أنيق */
-      --gold-soft:#E6CF86;
-      --black:#0d0d0d;
-      --white:#ffffff;
-      --ink:#111111;
-    }/* إعدادات الصفحة للطباعة بحجم A4 وهوامش تشبه الكتب */
+    :root{ --gold:#D4AF37; --gold-soft:#E6CF86; --black:#0d0d0d; --white:#ffffff; --ink:#111111; } *{ box-sizing:border-box; }/* إعدادات الصفحة للطباعة بحجم A4 وهوامش تشبه الكتب */
 @page{ size: A4; margin: 0; }
 
-html,body{
-  background: var(--black);
-  color: #222;
-  margin:0; padding:0;
-  font-family: 'IBM Plex Sans Arabic', 'Tajawal', system-ui, -apple-system, sans-serif;
-  line-height: 2.0;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-}
+html,body{ background:#0b0b0b; color:#222; margin:0; padding:0; font-family:'Cairo','Noto Sans Arabic',system-ui,-apple-system,sans-serif; line-height:1.85; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
 
 /* حاوية الورقة */
-.sheet{
-  width: min(100%, 900px);
-  min-height: min(1400px, 100%);
-  margin: clamp(8px, 2vw, 20px) auto;
-  padding: clamp(16px, 4vw, 28px);
-  background: var(--white);
-  box-shadow: 0 24px 60px rgba(0,0,0,.45);
-  position: relative;
-  box-sizing: border-box;
-  border-radius: 14px;
-  outline: 1px solid rgba(212,175,55,.35);
-}
+.sheet{ width:100%; max-width: 760px; margin: clamp(12px, 3.5vw, 22px) auto; padding: clamp(18px, 5vw, 32px); background:#fff; box-shadow: 0 18px 46px rgba(0,0,0,.35); position:relative; border-radius: 16px; outline: 1px solid rgba(212,175,55,.28);}  
 
 /* إطار زخرفي ذهبي رقيق */
-.sheet:before{
-  content:"";
-  position:absolute; inset: clamp(8px, 2vw, 16px);
-  border: 1.6px solid var(--gold);
-  pointer-events:none;
-  border-radius: 10px;
-}
+.sheet:before{ content:""; position:absolute; inset: 10px; border:1px solid rgba(212,175,55,.35); border-radius:12px; pointer-events:none; } 
 
 /* شريط علوي ذهبي أنيق */
-.gilded-top{
-  position:absolute; left:0; right:0; top:0;
-  height: 6mm; background: linear-gradient(90deg, var(--gold), var(--gold-soft), var(--gold));
-}
+.gilded-top{ position:absolute; left:0; right:0; top:0; height: 3px; background: linear-gradient(90deg,#B9972F,#E6CF86,#B9972F); }
 
 /* رأس الصفحة */
-header{ text-align:center; margin-bottom: clamp(16px, 4vw, 28px); margin-top: clamp(10px, 2vw, 18px);} 
-.title{
-  font-family: 'Tajawal', system-ui, -apple-system, sans-serif;
-  font-weight: 800; letter-spacing:.2px;
-  font-size: clamp(20pt, 4.6vw, 28pt); color: var(--black);
-}
-.subtitle{
-  font-family: 'Tajawal', system-ui, -apple-system, sans-serif;
-  color: var(--gold);
-  font-size: clamp(12pt, 2.8vw, 15pt); font-weight:700; margin-top:6px;
-}
+header{ text-align:center; margin-bottom: clamp(14px, 3.5vw, 26px); margin-top: clamp(6px, 2vw, 12px);}   
+.title{ font-family:'Noto Kufi Arabic','Cairo',system-ui,-apple-system,sans-serif; font-weight:700; letter-spacing:.1px; font-size: clamp(20px, 6.5vw, 30px); color:#0d0d0d; line-height:1.35; } 
+.subtitle{ font-family:'Noto Kufi Arabic','Cairo',system-ui,-apple-system,sans-serif; color:#B9972F; font-size: clamp(14px, 3.8vw, 18px); font-weight:700; margin-top:8px;}  
 
 /* فاصل زخرفي */
-.divider{ display:flex; align-items:center; gap:8px; justify-content:center; margin: 8mm 0 5mm; }
+.divider{ display:none; }
 .divider .line{ height:1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); flex:1; }
 .divider .dot{ width:8px; height:8px; border-radius:50%; background: var(--gold); box-shadow:0 0 0 3px rgba(212,175,55,.25); }
 
 /* جسم النص: ضبط كامل مثل الكتب */
-article{ text-align: justify; text-justify: inter-word; font-size: clamp(12pt, 2.6vw, 13pt); hyphens:auto; overflow-wrap:anywhere; color:#111; }
-article p{ margin: 0 0 clamp(12px, 2.6vw, 16px); }
+article{ text-align: start; font-size: clamp(15px, 4.2vw, 18px); color:#161616; word-spacing:.02em; }
+article p{ margin: 0 0 clamp(10px, 3.2vw, 16px); overflow:visible; }
 article p{ margin: 0 0 clamp(10px, 2.4vw, 14px); }
 article p:first-of-type::first-letter{ font-size:170%; font-weight:700; color: var(--gold); padding-left:2px; }
 
 /* عناوين الأقسام */
-h5, h4, h3{
-  font-family: 'Cairo', system-ui, -apple-system, sans-serif;
-  color: var(--black); margin: 7mm 0 3mm; line-height:1.6;
-}
+h5, h4, h3{ font-family:'Noto Kufi Arabic','Cairo',sans-serif; font-weight:700; font-size: clamp(17px, 5.4vw, 24px); margin: clamp(14px, 4vw, 22px) 0 8px; line-height:1.5; color:#111; }
 h3{ font-size: 16pt; border-right: 4px solid var(--gold); padding-right: 6px; }
 h4{ font-size: 14pt; }
 h5{ font-size: 12.5pt; color: #333; }
@@ -100,8 +55,7 @@ footer{
 .btn:active{ transform: translateY(0); }
 
 /* للطباعة: إزالة الظلال والأزرار وضبط الهوامش تلقائياً */
-@media print{
-  body{ background: white; margin:0; }
+@media print{ body{ background:#fff; margin:0; } .sheet{ box-shadow:none; width:210mm; min-height:297mm; margin:0; padding:0; border-radius:0; outline:none; } h3, h4{ break-after: avoid; } p{ orphans:3; widows:3; } .fab-print{ display:none !important; } } .sheet{ box-shadow:none; width:210mm; min-height:297mm; margin:0; padding:0; border-radius:0; outline:none; } .sheet:before{ display:none; } .gilded-top{ display:none; } h3, h4{ break-after: avoid; } p{ orphans:3; widows:3; } }
   .sheet{ box-shadow:none; width:210mm; min-height:297mm; margin:0; padding:0; border-radius:0; outline: none; }
   .sheet:before{ display:none; }
   .gilded-top{ display:none; }
@@ -125,7 +79,7 @@ footer{
   p{ orphans: 3; widows: 3; }
 }
 
-.fab-print{ position: fixed; inset-inline-start: 14px; inset-block-end: 14px; z-index: 9999; display: inline-flex; align-items: center; gap:8px; padding: 12px 16px; border-radius: 999px; border:none; cursor:pointer; background: linear-gradient(180deg, var(--gold), var(--gold-soft)); color: var(--black); box-shadow: 0 10px 28px rgba(212,175,55,.35), 0 2px 6px rgba(0,0,0,.2); font-family: 'Tajawal', system-ui, sans-serif; font-weight:800; letter-spacing:.2px; } .fab-print:hover{ transform: translateY(-1px); box-shadow: 0 14px 34px rgba(212,175,55,.42), 0 2px 6px rgba(0,0,0,.22); } .fab-print:active{ transform: translateY(0); } @media print{ .fab-print{ display:none !important; } } </style>
+.fab-print{ position: fixed; inset-inline-start: 14px; inset-block-end: 14px; z-index: 9999; display: inline-flex; align-items: center; gap:8px; padding: 12px 16px; border-radius: 999px; border:none; cursor:pointer; background: linear-gradient(180deg, var(--gold), var(--gold-soft)); color: var(--black); box-shadow: 0 10px 28px rgba(212,175,55,.35), 0 2px 6px rgba(0,0,0,.2); font-family: 'Tajawal', system-ui, sans-serif; font-weight:800; letter-spacing:.2px; } .fab-print:hover{ transform: translateY(-1px); box-shadow: 0 14px 34px rgba(212,175,55,.42), 0 2px 6px rgba(0,0,0,.22); } .fab-print:active{ transform: translateY(0); } @media print{ .fab-print{ display:none !important; } } @media (max-width: 600px){ .sheet{ padding:18px 14px; } .title{ font-size: clamp(20px, 7vw, 26px);} article{ font-size: clamp(15px, 4.6vw, 17.5px);} } .title{ font-size: clamp(18px, 7vw, 24px);} article{ font-size: clamp(14px, 3.6vw, 16px);} } .fab-print{ position: fixed; inset-inline-start: 14px; inset-block-end: calc(14px + env(safe-area-inset-bottom, 0)); z-index: 9999; display: inline-flex; align-items: center; gap:8px; padding: 12px 16px; border-radius: 999px; border:none; cursor:pointer; background: linear-gradient(180deg, var(--gold), var(--gold-soft)); color: var(--black); box-shadow: 0 10px 28px rgba(212,175,55,.35), 0 2px 6px rgba(0,0,0,.2); font-family:'Noto Kufi Arabic', system-ui, sans-serif; font-weight:800; letter-spacing:.2px; } .fab-print:hover{ transform: translateY(-1px); box-shadow: 0 14px 34px rgba(212,175,55,.42), 0 2px 6px rgba(0,0,0,.22); } .fab-print:active{ transform: translateY(0); } @media print{ .fab-print{ display:none !important; } } </style>
 
 </head>
 <body>
