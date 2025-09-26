@@ -4,7 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>بركات ولادة الرسول الأكرم محمّد (صلى الله عليه وآله)</title>
   <!-- خطوط مريحة للقراءة مع بدائل محلية -->
-  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600;700&family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
   <style>
     :root{
       --gold:#D4AF37; /* ذهبي أنيق */
@@ -17,10 +17,10 @@
 
 html,body{
   background: var(--black);
-  color: var(--ink);
+  color: #222;
   margin:0; padding:0;
-  font-family: 'Amiri', 'Noto Naskh Arabic', 'Scheherazade New', serif;
-  line-height: 1.9;
+  font-family: 'IBM Plex Sans Arabic', 'Tajawal', system-ui, -apple-system, sans-serif;
+  line-height: 2.0;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -57,14 +57,14 @@ html,body{
 /* رأس الصفحة */
 header{ text-align:center; margin-bottom: clamp(16px, 4vw, 28px); margin-top: clamp(10px, 2vw, 18px);} 
 .title{
-  font-family: 'Cairo', system-ui, -apple-system, sans-serif;
-  font-weight: 800; letter-spacing:.3px;
-  font-size: clamp(18pt, 4vw, 26pt); color: var(--black);
+  font-family: 'Tajawal', system-ui, -apple-system, sans-serif;
+  font-weight: 800; letter-spacing:.2px;
+  font-size: clamp(20pt, 4.6vw, 28pt); color: var(--black);
 }
 .subtitle{
-  font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+  font-family: 'Tajawal', system-ui, -apple-system, sans-serif;
   color: var(--gold);
-  font-size: clamp(11pt, 2.6vw, 14pt); font-weight:700; margin-top:6px;
+  font-size: clamp(12pt, 2.8vw, 15pt); font-weight:700; margin-top:6px;
 }
 
 /* فاصل زخرفي */
@@ -73,7 +73,8 @@ header{ text-align:center; margin-bottom: clamp(16px, 4vw, 28px); margin-top: cl
 .divider .dot{ width:8px; height:8px; border-radius:50%; background: var(--gold); box-shadow:0 0 0 3px rgba(212,175,55,.25); }
 
 /* جسم النص: ضبط كامل مثل الكتب */
-article{ text-align: justify; text-justify: inter-word; font-size: clamp(11.2pt, 2.4vw, 12.6pt); }
+article{ text-align: justify; text-justify: inter-word; font-size: clamp(12pt, 2.6vw, 13pt); hyphens:auto; overflow-wrap:anywhere; color:#111; }
+article p{ margin: 0 0 clamp(12px, 2.6vw, 16px); }
 article p{ margin: 0 0 clamp(10px, 2.4vw, 14px); }
 article p:first-of-type::first-letter{ font-size:170%; font-weight:700; color: var(--gold); padding-left:2px; }
 
@@ -93,7 +94,7 @@ footer{
 .brand{ color: var(--gold); font-weight:600; }
 
 /* أزرار التحكم (لا تظهر في الطباعة) */
-.toolbar{ position: sticky; top:0; z-index:10; display:flex; gap:12px; justify-content:center; padding:10px; backdrop-filter: blur(8px); background: linear-gradient(180deg, rgba(0,0,0,.8), rgba(0,0,0,.35)); border-bottom:1px solid rgba(212,175,55,.35);} 
+.toolbar{ display:none; } 
 .btn{ appearance:none; border:none; cursor:pointer; font-family:'Cairo', system-ui, sans-serif; font-weight:800; padding:10px 18px; border-radius:999px; background: linear-gradient(180deg, var(--gold), var(--gold-soft)); color: var(--black); box-shadow: 0 14px 30px rgba(212,175,55,.35), inset 0 1px 0 rgba(255,255,255,.5); transition: transform .12s ease, box-shadow .25s ease; }
 .btn:hover{ transform: translateY(-1px); box-shadow: 0 14px 26px rgba(212,175,55,.35), inset 0 1px 0 rgba(255,255,255,.45); }
 .btn:active{ transform: translateY(0); }
@@ -101,6 +102,12 @@ footer{
 /* للطباعة: إزالة الظلال والأزرار وضبط الهوامش تلقائياً */
 @media print{
   body{ background: white; margin:0; }
+  .sheet{ box-shadow:none; width:210mm; min-height:297mm; margin:0; padding:0; border-radius:0; outline: none; }
+  .sheet:before{ display:none; }
+  .gilded-top{ display:none; }
+  h3, h4{ break-after: avoid; }
+  p{ orphans: 3; widows: 3; }
+}
   .toolbar{ display:none !important; }
   .sheet{ box-shadow:none; width:210mm; min-height:297mm; margin:0; padding:18mm; border-radius:0; outline: none; }
   .sheet:before{ inset:0; border-width:0; }
@@ -118,13 +125,11 @@ footer{
   p{ orphans: 3; widows: 3; }
 }
 
-  </style>
+.fab-print{ position: fixed; inset-inline-start: 14px; inset-block-end: 14px; z-index: 9999; display: inline-flex; align-items: center; gap:8px; padding: 12px 16px; border-radius: 999px; border:none; cursor:pointer; background: linear-gradient(180deg, var(--gold), var(--gold-soft)); color: var(--black); box-shadow: 0 10px 28px rgba(212,175,55,.35), 0 2px 6px rgba(0,0,0,.2); font-family: 'Tajawal', system-ui, sans-serif; font-weight:800; letter-spacing:.2px; } .fab-print:hover{ transform: translateY(-1px); box-shadow: 0 14px 34px rgba(212,175,55,.42), 0 2px 6px rgba(0,0,0,.22); } .fab-print:active{ transform: translateY(0); } @media print{ .fab-print{ display:none !important; } } </style>
+
 </head>
 <body>
-  <!-- شريط أدوات للتنزيل/الطباعة -->
-  <div class="toolbar" aria-hidden="false">
-    <button class="btn" onclick="window.print()">تنزيل / طباعة PDF</button>
-  </div>  <main class="sheet">
+  <!-- شريط أدوات للتنزيل/الطباعة -->  <main class="sheet">
     <div class="gilded-top" aria-hidden="true"></div>
     <header>
       <div class="title">بركات ولادة الرسول الأكرم محمّد (صلى الله عليه وآله)</div>
@@ -157,7 +162,10 @@ footer{
   </div>
 </article>
 
-  </main>  <script>
+  </main>  <!-- زر طباعة عائم مرئي دائماً -->  <button class="fab-print" onclick="window.print()" aria-label="طباعة PDF" title="طباعة أو حفظ PDF">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M6 9V3h12v6M6 17H4a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-2m-12 0v4h12v-4H6Z" stroke="black" stroke-width="1.6"/></svg>
+    <span>طباعة</span>
+  </button>  <script>
     // لا نستخدم أي مكتبات؛ زر واحد للطباعة/التنزيل PDF عبر نافذة الطباعة الافتراضية للمتصفح
     // يمكن للمستخدم اختيار "Save as PDF" لحفظ الملف.
   </script></body>
