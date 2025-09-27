@@ -49,11 +49,19 @@ textarea{min-height:120px;resize:vertical}
 .btn{border:0;border-radius:12px;padding:12px 14px;font-weight:800;font-size:15px;cursor:pointer}
 .btn.primary{background:var(--gold);color:#000}.btn.ghost{background:#eef2f7}
 
-/* تمركز الإعدادات + صندوق تعريفي */
+/* تمركز الإعدادات + وصف أبيض/ذهبي مُحاذى الأطراف */
 .settings .bd{max-width:520px;margin:0 auto}
-.settings .note{margin:8px 0 14px;padding:12px;border:1px solid #eceef3;border-radius:12px;background:linear-gradient(180deg,#0b0f19,#141c2b);color:#fff}
-.settings .note h3{margin:0 0 6px;font-size:16px}
-.settings .note p{margin:0;font-size:13.5px;color:#dfe6f6}
+.settings .note{
+  margin:8px 0 14px;padding:14px 16px;
+  background:#fff;border:1px solid rgba(198,161,74,.35);
+  border-radius:14px;box-shadow:0 10px 22px rgba(198,161,74,.08);
+}
+.settings .note h3{margin:0 0 8px;font-size:16px;color:var(--black);font-weight:800;position:relative}
+.settings .note h3::after{content:"";display:block;height:3px;background:linear-gradient(90deg,#ead89c,var(--gold),#a6842a);border-radius:2px;margin-top:6px;width:88px}
+.settings .note p{
+  margin:0;color:#222;
+  text-align:justify;text-justify:inter-word;text-align-last:start;line-height:1.9;
+}
 
 /* أدوات */
 .tools{display:flex;gap:10px;align-items:center;padding:10px 10px 0}
@@ -100,15 +108,26 @@ textarea{min-height:120px;resize:vertical}
 .sig-pad{background:#fff;border:1px dashed #cbd5e1;border-radius:12px;padding:10px}
 canvas#sigCanvas{width:100%;height:180px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;touch-action:none}
 
-/* شريط مشاركة الصفحة فوق الفوتر */
+/* شريط مشاركة الصفحة — صف واحد أنيق بأطراف ذهبية */
 .share-site{max-width:1200px;margin:6px auto 8px;padding:10px 12px}
 .share-box{border:1px solid #e7e9ef;background:#fff;border-radius:14px;box-shadow:0 8px 16px rgba(0,0,0,.05);padding:12px}
 .share-title{font-weight:800;margin:0 0 8px;color:var(--black)}
-.share-row{display:flex;flex-wrap:wrap;gap:10px}
-.share-row a{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:12px;border:1px solid #eceef3;text-decoration:none;font-weight:700}
-.share-row a svg{width:16px;height:16px}
-.share-row a:hover{box-shadow:0 6px 14px rgba(0,0,0,.06)}
-.share-wa{background:#e9fff1}.share-tg{background:#eaf5ff}.share-tw{background:#eef1ff}.share-fb{background:#eff6ff}.share-ln{background:#eef7f5}.share-em{background:#fff7ee}
+.share-row{
+  display:flex;align-items:center;gap:12px;
+  white-space:nowrap;overflow-x:auto;padding-bottom:6px;
+  scrollbar-width:thin
+}
+.share-row a{
+  flex:0 0 auto; display:inline-flex; align-items:center; gap:8px;
+  padding:8px 12px; border-radius:999px; text-decoration:none; font-weight:800;
+  background:#fff; color:var(--black); border:1px solid rgba(198,161,74,.45);
+  box-shadow:0 6px 12px rgba(198,161,74,.07);
+}
+.share-row a svg{width:18px;height:18px;fill:var(--gold)}
+.share-row a:hover{
+  background:linear-gradient(90deg,#fffbee,#fff);
+  box-shadow:0 10px 20px rgba(198,161,74,.18); transform:translateY(-1px)
+}
 
 /* مودال رسائل */
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:9999}
@@ -135,13 +154,14 @@ canvas#sigCanvas{width:100%;height:180px;background:#fff;border:1px solid #e5e7e
   <section class="card settings" aria-label="إعدادات اللتر هد">
     <div class="hd">إعدادات اللتر هد</div>
     <div class="bd">
+      <!-- وصف أبيض/ذهبي مُحاذى الأطراف -->
       <div class="note" role="note" aria-label="حول الخدمة">
         <h3>ما الذي يقدّمه الموقع؟</h3>
         <p>
           إنشاء <strong>لتر هد عربي/Letterhead</strong> احترافي بحجم A4:
-          شعار علوي أنيق، عنوان ومحتوى بمحاذاة مثالية، <strong>ختم أزرق رسمي</strong>،
-          توقيع إلكتروني، بيانات التواصل مرتّبة، ثم <strong>تحميل PDF</strong> أو
-          <strong>مشاركة الملف</strong> مباشرة عبر أي تطبيق.
+          شعار علوي أنيق، عنوان ومحتوى بمحاذاة مثالية (كما في الكتب)،
+          <strong>ختم أزرق رسمي</strong>، توقيع إلكتروني، بيانات التواصل مرتّبة،
+          ثم <strong>تحميل PDF</strong> أو <strong>مشاركة الملف</strong> مباشرة عبر أي تطبيق.
         </p>
       </div>
 
@@ -179,7 +199,6 @@ canvas#sigCanvas{width:100%;height:180px;background:#fff;border:1px solid #e5e7e
         </div>
 
         <div><label>البريد الإلكتروني</label><input id="email" type="email" placeholder="name@example.com"></div>
-
         <div><label>عنوان الرسالة</label><input id="titleIn" type="text" placeholder="عنوان الرسالة"></div>
         <div><label>المحتوى</label><textarea id="contentIn" placeholder="اكتب نص الرسالة هنا..."></textarea></div>
 
@@ -274,9 +293,7 @@ canvas#sigCanvas{width:100%;height:180px;background:#fff;border:1px solid #e5e7e
 <section class="share-site" aria-label="مشاركة الصفحة">
   <div class="share-box">
     <h3 class="share-title">مشاركة الصفحة</h3>
-    <div class="share-row" id="shareRow">
-      <!-- تُملأ تلقائيًا بالروابط الصحيحة -->
-    </div>
+    <div class="share-row" id="shareRow"><!-- تُملأ تلقائيًا --></div>
   </div>
 </section>
 
@@ -309,9 +326,8 @@ document.getElementById('msgOk').onclick=()=>modal.classList.remove('show');
 function showMsg(title, body){msgTitle.textContent=title; msgBody.innerHTML=body; modal.classList.add('show')}
 
 /* تخزين */
-const STORE_KEY='letterheadFormV10';
+const STORE_KEY='letterheadFormV11';
 const DM={'٠':'0','١':'1','٢':'2','٣':'3','٤':'4','٥':'5','٦':'6','٧':'7','٨':'8','٩':'9','۰':'0','۱':'1','۲':'2','۳':'3','۴':'4','۵':'5','۶':'6','۷':'7','۸':'8','۹':'9'};
-const normalize=s=>(s||'').replace(/[٠-٩۰-۹]/g,d=>DM[d]||d);
 const $=id=>document.getElementById(id);
 function saveState(extra={}){const ids=['company','countryCode','phone','email','titleIn','contentIn','personNameIn','personRoleIn','addressIn','cr','igIn','twIn','fbIn','lnIn','signatureDataURL'];const data={};ids.forEach(id=>{const el=$(id);if(el)data[id]=el.value??''});Object.assign(data,extra);localStorage.setItem(STORE_KEY,JSON.stringify(data))}
 function loadState(){try{const raw=localStorage.getItem(STORE_KEY);if(!raw)return{};const data=JSON.parse(raw);Object.entries(data).forEach(([k,v])=>{const el=$(k);if(el&&typeof v==='string')el.value=v});if(data.signatureDataURL){const img=new Image();img.src=data.signatureDataURL;img.alt='التوقيع';$('sigInStamp').innerHTML='';$('sigInStamp').appendChild(img)}return data}catch(e){return{}}}
@@ -325,48 +341,28 @@ const brandName=$('brandName'), titleOut=$('titleOut'), contentOut=$('contentOut
       stampCompany=$('stampCompany'), crOut=$('crOut'), phoneOut=$('phoneOut'),
       personName=$('personName'), personRole=$('personRole'), socialRow=$('socialRow');
 
-/* أيقونات المشاركة */
-const sv=(p)=>`<svg viewBox="0 0 24 24"><path d="${p}"/></svg>`;
-const I={
-  wa:'M. .', // placeholder—لن نستخدمه فعليًا لأننا نضع الألوان بالخلفيات
-};
+/* بناء شريط مشاركة الصفحة (صف واحد أنيق) */
 function buildShareBar(){
   const url=encodeURIComponent(location.href);
   const text=encodeURIComponent('جرّب إنشاء لتر هد أونلاين');
   const row=document.getElementById('shareRow');
   row.innerHTML='';
-  const links=[
-    {cls:'share-wa',label:'واتساب',href:`https://wa.me/?text=${text}%20${url}`,svg:'M..'},
-    {cls:'share-tg',label:'تلغرام',href:`https://t.me/share/url?url=${url}&text=${text}`,svg:'M..'},
-    {cls:'share-tw',label:'X (تويتر)',href:`https://twitter.com/intent/tweet?url=${url}&text=${text}`,svg:'M..'},
-    {cls:'share-fb',label:'فيسبوك',href:`https://www.facebook.com/sharer/sharer.php?u=${url}`,svg:'M..'},
-    {cls:'share-ln',label:'لينكدإن',href:`https://www.linkedin.com/sharing/share-offsite/?url=${url}`,svg:'M..'},
-    {cls:'share-em',label:'بريد',href:`mailto:?subject=${encodeURIComponent('لتر هد أونلاين')}&body=${text}%0A${url}`,svg:'M..'}
+  const items=[
+    {label:'واتساب', href:`https://wa.me/?text=${text}%20${url}`, path:"M16.6 14.4c-.2.6-1 1-1.6.7-1.8-.9-3.3-2.4-4.2-4.2-.3-.6.1-1.4.7-1.6l.8-.3c.3-.1.5 0 .7.3l.9 1.4c.2.3.1.6-.1.8l-.3.3c.6 1 1.5 1.8 2.5 2.5l.3-.3c.2-.2.5-.3.8-.1l1.4.9c.3.2.4.4.3.7l-.3.8ZM12 2a10 10 0 0 1 8.8 14.8L20 22l-5.2-.8A10 10 0 1 1 12 2Z"},
+    {label:'تلغرام', href:`https://t.me/share/url?url=${url}&text=${text}`, path:"M21.5 3.5 2.9 10.8c-1 .4-1 1.8 0 2.2l4.6 1.7 1.8 5.6c.3 1 1.6 1.2 2.2.3l2.7-3.5 5.1 3.7c.8.6 2 .2 2.2-.8l2.7-15.6c.2-1-1-1.8-2.3-1.1Z"},
+    {label:'X', href:`https://twitter.com/intent/tweet?url=${url}&text=${text}`, path:"M13.7 10.6 21 2h-1.7l-6.2 7.4L8.2 2H2l7.6 11L2 22h1.7l6.6-7.8L15.8 22H22l-8.3-11.4Z"},
+    {label:'فيسبوك', href:`https://www.facebook.com/sharer/sharer.php?u=${url}`, path:"M22 12a10 10 0 1 0-11.6 9.9v-7H7.7V12h2.7V9.7c0-2.7 1.6-4.2 4-4.2 1.2 0 2.4.2 2.4.2v2.6h-1.4c-1.3 0-1.7.8-1.7 1.6V12h2.9l-.46 2.9h-2.4v7A10 10 0 0 0 22 12"},
+    {label:'لينكدإن', href:`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, path:"M4.98 3.5a2.5 2.5 0 1 1 0 5.001 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.6h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.8 2.6 4.8 6v6H17v-5.3c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9V21H9z"},
+    {label:'بريد', href:`mailto:?subject=${encodeURIComponent('لتر هد أونلاين')}&body=${text}%0A${url}`, path:"M3 6h18v12H3z M3 8.2 12 13l9-4.8"}
   ];
-  // SVGs بسيطة
-  const paths={
-    wa:"M16.6 14.4c-.2.6-1 1-1.6.7-1.8-.9-3.3-2.4-4.2-4.2-.3-.6.1-1.4.7-1.6l.8-.3c.3-.1.5 0 .7.3l.9 1.4c.2.3.1.6-.1.8l-.3.3c.6 1 1.5 1.8 2.5 2.5l.3-.3c.2-.2.5-.3.8-.1l1.4.9c.3.2.4.4.3.7l-.3.8ZM12 2a10 10 0 0 1 8.8 14.8L20 22l-5.2-.8A10 10 0 1 1 12 2Z",
-    tg:"M21.5 3.5 2.9 10.8c-1 .4-1 1.8 0 2.2l4.6 1.7 1.8 5.6c.3 1 1.6 1.2 2.2.3l2.7-3.5 5.1 3.7c.8.6 2 .2 2.2-.8l2.7-15.6c.2-1-1-1.8-2.3-1.1Z",
-    tw:"M13.7 10.6 21 2h-1.7l-6.2 7.4L8.2 2H2l7.6 11L2 22h1.7l6.6-7.8L15.8 22H22l-8.3-11.4Z",
-    fb:"M22 12a10 10 0 1 0-11.6 9.9v-7H7.7V12h2.7V9.7c0-2.7 1.6-4.2 4-4.2 1.2 0 2.4.2 2.4.2v2.6h-1.4c-1.3 0-1.7.8-1.7 1.6V12h2.9l-.46 2.9h-2.4v7A10 10 0 0 0 22 12",
-    ln:"M4.98 3.5a2.5 2.5 0 1 1 0 5.001 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.6h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.8 2.6 4.8 6v6H17v-5.3c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9V21H9z",
-    em:"M3 6h18v12H3z M3 8.2 12 13l9-4.8"
-  };
-  function btn(cls,label,href,path){
-    const a=document.createElement('a');
-    a.className=cls; a.href=href; a.target="_blank"; a.rel="noopener";
-    a.innerHTML=`<svg viewBox="0 0 24 24" fill="currentColor"><path d="${path}"/></svg><span>${label}</span>`;
+  for(const it of items){
+    const a=document.createElement('a'); a.href=it.href; a.target="_blank"; a.rel="noopener";
+    a.innerHTML=`<svg viewBox="0 0 24 24" fill="currentColor"><path d="${it.path}"/></svg><span>${it.label}</span>`;
     row.appendChild(a);
   }
-  btn('share-wa','واتساب',links[0].href,paths.wa);
-  btn('share-tg','تلغرام',links[1].href,paths.tg);
-  btn('share-tw','X (تويتر)',links[2].href,paths.tw);
-  btn('share-fb','فيسبوك',links[3].href,paths.fb);
-  btn('share-ln','لينكدإن',links[4].href,paths.ln);
-  btn('share-em','بريد',links[5].href,paths.em);
 }
 
-/* بناء أيقونات تواصل الوثيقة (أسفل A4) */
+/* أيقونات تواصل داخل الوثيقة */
 const ICON=p=>`<svg viewBox="0 0 24 24"><g fill="#ffd777">${p}</g></svg>`;
 const icons={
   ig: ICON('<path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm6.5-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2Z"/><circle cx="12" cy="12" r="3.3"/>'),
@@ -376,7 +372,7 @@ const icons={
   mail: ICON('<path d="M3 6h18v12H3z"/><path fill="#0b0f19" d="M3 8.2 12 13l9-4.8V6H3v2.2z"/>'),
   phone: ICON('<path d="M6.6 2h2.7l1.1 4-2 1.2a13.5 13.5 0 0 0 6 6l1.2-2 4 1.1v2.7c0 1-0.8 1.9-1.8 1.9-7.8 0-14.1-6.3-14.1-14.1C4.7 2.8 5.6 2 6.6 2z"/>')
 };
-function fullPhone(){const cc=(country.value||''); const p=(phone.value||'').replace(/[٠-٩۰-۹]/g,d=>DM[d]); return (cc&&p)?`${cc}\u00A0${p}`:(p||'');}
+function fullPhone(){const p=(phone.value||'').replace(/[٠-٩۰-۹]/g,d=>DM[d]); return (country.value&&p)?`${country.value}\u00A0${p}`:(p||'');}
 function buildSocial(){
   socialRow.innerHTML='';
   const items=[];
@@ -394,12 +390,12 @@ function applyChanges(){
   brandName.textContent=company.value.trim()||'اسم الشركة';
   stampCompany.textContent=brandName.textContent;
   titleOut.textContent=titleIn.value.trim()||'عنوان الرسالة';
-  document.getElementById('contentOut').textContent=(contentIn.value||'').replace(/[٠-٩۰-۹]/g,d=>DM[d])||'—';
-  document.getElementById('addressOut').textContent=addressIn.value.trim()||'—';
-  document.getElementById('crOut').textContent='CR: '+((cr.value||'').replace(/[٠-٩۰-۹]/g,d=>DM[d])||'—');
-  document.getElementById('phoneOut').textContent='Tel: '+(fullPhone()||'—');
-  document.getElementById('personName').textContent=personNameIn.value.trim()||'الاسم الشخصي';
-  document.getElementById('personRole').textContent=personRoleIn.value.trim()||'الصفة / الوظيفة';
+  contentOut.textContent=(contentIn.value||'').replace(/[٠-٩۰-۹]/g,d=>DM[d])||'—';
+  addressOut.textContent=addressIn.value.trim()||'—';
+  crOut.textContent='CR: '+((cr.value||'').replace(/[٠-٩۰-۹]/g,d=>DM[d])||'—');
+  phoneOut.textContent='Tel: '+(fullPhone()||'—');
+  personName.textContent=personNameIn.value.trim()||'الاسم الشخصي';
+  personRole.textContent=personRoleIn.value.trim()||'الصفة / الوظيفة';
   buildSocial(); saveState();
 }
 
@@ -422,7 +418,7 @@ sigCanvas.addEventListener('touchend',()=>{drawing=false});
 $('clearSig').addEventListener('click',()=>{resizeSigCanvas();$('sigInStamp').innerHTML='';saveState({signatureDataURL:''})});
 $('useSig').addEventListener('click',()=>{const url=sigCanvas.toDataURL('image/png');$('sigInStamp').innerHTML='';const img=new Image();img.src=url;img.alt='التوقيع';$('sigInStamp').appendChild(img);saveState({signatureDataURL:url})});
 
-/* توليد PDF صفحة واحدة */
+/* PDF صفحة واحدة */
 async function renderA4Canvas(){
   const src=document.getElementById('page');
   const clone=src.cloneNode(true);
@@ -440,7 +436,7 @@ document.getElementById('downloadPdf').addEventListener('click',async ()=>{
   const a=document.createElement('a'); a.href=url; a.download='letterhead.pdf'; a.click(); URL.revokeObjectURL(url);
 });
 
-/* مشاركة (ملف PDF) */
+/* مشاركة ملف PDF */
 document.getElementById('sharePdf').addEventListener('click',async ()=>{
   try{
     const blob=await makePDFBlob(); const file=new File([blob],'letterhead.pdf',{type:'application/pdf'});
@@ -452,14 +448,13 @@ document.getElementById('sharePdf').addEventListener('click',async ()=>{
   }catch(e){showMsg('حدث خطأ','تعذّرت المشاركة الآن. حاول لاحقًا.')}
 });
 
-/* تحديث مباشر + حفظ */
+/* تحديث مباشر + حفظ + شريط المشاركة */
 ['input','change'].forEach(ev=>{
   document.querySelectorAll('input,textarea,select').forEach(el=>{
     el.addEventListener(ev,()=>{if(['phone','cr','contentIn','titleIn'].includes(el.id))el.value=(el.value||'').replace(/[٠-٩۰-۹]/g,d=>DM[d]);applyChanges()},{passive:true});
   });
 });
 
-/* تهيئة */
 (document.fonts?.ready || Promise.resolve()).then(()=>{
   resizeSigCanvas(); loadState(); applyChanges(); buildShareBar();
   const fit=()=>{const avail=viewport.clientWidth-6;const PAGE=210*96/25.4;const s=Math.min(1,avail/PAGE);scaleBox.style.transform=`scale(${s})`;viewport.style.height=(297*96/25.4*s)+'px'};
