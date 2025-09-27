@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <title>لتر هد أونلاين | توليد Letterhead A4 احترافي بالعربي</title>
-<meta name="description" content="صمم لتـر هد (Letterhead) عربي احترافي جاهز للطباعة A4: شعار، عنوان، محتوى، ختم أزرق رسمي، توقيع أونلاين، وشبكات التواصل. تحميل PDF أو مشاركة مباشرة.">
-<meta name="keywords" content="لتر هد, لتـر هد, Letterhead, نموذج خطاب, ورق رسمي, ختم, توقيع, A4, PDF, عربي, شركات">
-<link rel="canonical" href="https://example.com/letterhead" />
+<meta name="description" content="صمم لتـر هد (Letterhead) عربي احترافي جاهز للطباعة A4: شعار، عنوان، محتوى، ختم أزرق رسمي، توقيع أونلاين، شبكات التواصل، تحميل PDF أو مشاركة مباشرة.">
+<meta name="keywords" content="لتر هد, لتـر هد, Letterhead, ورق رسمي, نموذج خطاب, ختم, توقيع, A4, PDF, عربي, شركات">
 <meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://example.com/letterhead" />
 <meta property="og:title" content="لتر هد أونلاين — Letterhead A4 احترافي" />
 <meta property="og:description" content="أنشئ ورق رسمي عربي A4 مع ختم وتوقيع أونلاين، وحمّله PDF أو شاركه." />
 <meta property="og:type" content="website" />
@@ -22,7 +22,6 @@
   "description":"مولّد Letterhead عربي احترافي A4 مع ختم وتوقيع ومشاركة PDF.",
   "operatingSystem":"Any",
   "keywords":"لتر هد, Letterhead, ورق رسمي, A4, PDF, ختم, توقيع, عربي",
-  "url":"https://example.com/letterhead",
   "inLanguage":"ar"
 }
 </script>
@@ -35,10 +34,10 @@ html,body{height:100%}
 body{margin:0;background:#f6f7f9;color:var(--ink);font-family:"Cairo",system-ui}
 
 /* تخطيط عام */
-.wrap{max-width:1200px;margin:auto;padding:12px;display:grid;grid-template-columns:420px 1fr;gap:12px}
+.wrap{max-width:1200px;margin:auto;padding:12px;display:grid;gap:12px;grid-template-columns: clamp(320px,46vw,520px) 1fr}
 @media(max-width:1024px){.wrap{grid-template-columns:1fr}}
 .card{background:#fff;border:1px solid #e7e9ef;border-radius:14px;box-shadow:0 8px 16px rgba(0,0,0,.05);overflow:hidden}
-.hd{padding:12px 14px;background:linear-gradient(90deg,var(--black),#1b2335);color:#fff;font-weight:800}
+.hd{padding:14px;background:linear-gradient(90deg,var(--black),#1b2335);color:#fff;font-weight:800;text-align:center}
 .bd{padding:14px}
 label{display:block;font:600 13px/1 "Cairo";color:var(--muted);margin:8px 2px 6px}
 input,select,textarea{width:100%;padding:12px;border:1px solid #dfe3ea;border-radius:12px;font-size:15px;background:#fff}
@@ -50,7 +49,13 @@ textarea{min-height:120px;resize:vertical}
 .btn{border:0;border-radius:12px;padding:12px 14px;font-weight:800;font-size:15px;cursor:pointer}
 .btn.primary{background:var(--gold);color:#000}.btn.ghost{background:#eef2f7}
 
-/* شريط أدوات: موحّد الشكل */
+/* تمركز الإعدادات + صندوق تعريفي */
+.settings .bd{max-width:520px;margin:0 auto}
+.settings .note{margin:8px 0 14px;padding:12px;border:1px solid #eceef3;border-radius:12px;background:linear-gradient(180deg,#0b0f19,#141c2b);color:#fff}
+.settings .note h3{margin:0 0 6px;font-size:16px}
+.settings .note p{margin:0;font-size:13.5px;color:#dfe6f6}
+
+/* أدوات */
 .tools{display:flex;gap:10px;align-items:center;padding:10px 10px 0}
 .tool{display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 14px;border-radius:12px;border:1px solid #e4e7ef;background:#fff;cursor:pointer;font-weight:800;font-size:13.5px;white-space:nowrap;line-height:1}
 .tool.dark{background:linear-gradient(180deg,#1b2335,#0b0f19);color:#fff;border:0}
@@ -74,7 +79,7 @@ textarea{min-height:120px;resize:vertical}
 .title{text-align:center;font-size:24px;font-weight:800;margin:12px 0 8px}
 .content{font-size:15px;line-height:1.9;text-align:justify;text-justify:inter-word}
 
-/* تذييل */
+/* تذييل الوثيقة داخل A4 */
 .ft{position:absolute;left:0;right:0;bottom:0;height:64mm;padding:10mm 18mm 14mm;display:flex;align-items:flex-end;justify-content:space-between}
 .bar{position:absolute;left:0;right:0;bottom:0;height:42px;background:linear-gradient(90deg,var(--black),#121828);display:flex;align-items:center}
 .bar .social{display:flex;gap:16px;align-items:center;color:#fff;padding:0 18mm}
@@ -82,9 +87,9 @@ textarea{min-height:120px;resize:vertical}
 .bar .social .item span{color:#f6f6f6}
 .bar .social svg{width:15px;height:15px;fill:#ffd777}
 
-/* ختم أزرق رسمي بلا ظل */
+/* ختم */
 .left-col{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
-.stamp-box{width:60mm;min-height:33mm;padding:10px 12px;border-radius:12px;position:relative;border:2px solid var(--stamp);background:#fff;transform:none;box-shadow:none;overflow:hidden}
+.stamp-box{width:60mm;min-height:33mm;padding:10px 12px;border-radius:12px;position:relative;border:2px solid var(--stamp);background:#fff}
 .sig-overlay{position:absolute;left:10px;right:10px;top:8px;height:60px;display:flex;align-items:center;justify-content:flex-start}
 .sig-overlay img{max-height:60px;filter:grayscale(1) contrast(1.1)}
 .stamp-ink,.stamp-line{color:var(--stamp);font-weight:800}
@@ -95,8 +100,27 @@ textarea{min-height:120px;resize:vertical}
 .sig-pad{background:#fff;border:1px dashed #cbd5e1;border-radius:12px;padding:10px}
 canvas#sigCanvas{width:100%;height:180px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;touch-action:none}
 
-/* أسفل الموقع */
-.site-footer{max-width:1200px;margin:6px auto 8px;color:#6b7280;text-align:center;padding:0 10px}
+/* شريط مشاركة الصفحة فوق الفوتر */
+.share-site{max-width:1200px;margin:6px auto 8px;padding:10px 12px}
+.share-box{border:1px solid #e7e9ef;background:#fff;border-radius:14px;box-shadow:0 8px 16px rgba(0,0,0,.05);padding:12px}
+.share-title{font-weight:800;margin:0 0 8px;color:var(--black)}
+.share-row{display:flex;flex-wrap:wrap;gap:10px}
+.share-row a{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:12px;border:1px solid #eceef3;text-decoration:none;font-weight:700}
+.share-row a svg{width:16px;height:16px}
+.share-row a:hover{box-shadow:0 6px 14px rgba(0,0,0,.06)}
+.share-wa{background:#e9fff1}.share-tg{background:#eaf5ff}.share-tw{background:#eef1ff}.share-fb{background:#eff6ff}.share-ln{background:#eef7f5}.share-em{background:#fff7ee}
+
+/* مودال رسائل */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:9999}
+.modal.show{display:flex}
+.modal .box{width:min(92vw,520px);background:#fff;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.25);overflow:hidden}
+.modal .box .hd{background:linear-gradient(90deg,var(--black),#1b2335);color:#fff;text-align:center;padding:12px 16px}
+.modal .box .bd{padding:16px;font-size:15px}
+.modal .box .ft{padding:12px;display:flex;justify-content:center;background:#f6f7f9}
+.modal .box .ft button{border:0;background:var(--gold);color:#000;border-radius:10px;font-weight:800;padding:9px 16px;cursor:pointer}
+
+/* فوتر */
+.site-footer{max-width:1200px;margin:4px auto 12px;color:#6b7280;text-align:center;padding:0 10px}
 .site-footer a{color:var(--gold);text-decoration:none;font-weight:800}
 .site-footer a:hover{text-decoration:underline}
 
@@ -108,15 +132,25 @@ canvas#sigCanvas{width:100%;height:180px;background:#fff;border:1px solid #e5e7e
 
 <main class="wrap">
   <!-- الإعدادات -->
-  <section class="card" aria-label="إعدادات اللتر هد">
+  <section class="card settings" aria-label="إعدادات اللتر هد">
     <div class="hd">إعدادات اللتر هد</div>
     <div class="bd">
+      <div class="note" role="note" aria-label="حول الخدمة">
+        <h3>ما الذي يقدّمه الموقع؟</h3>
+        <p>
+          إنشاء <strong>لتر هد عربي/Letterhead</strong> احترافي بحجم A4:
+          شعار علوي أنيق، عنوان ومحتوى بمحاذاة مثالية، <strong>ختم أزرق رسمي</strong>،
+          توقيع إلكتروني، بيانات التواصل مرتّبة، ثم <strong>تحميل PDF</strong> أو
+          <strong>مشاركة الملف</strong> مباشرة عبر أي تطبيق.
+        </p>
+      </div>
+
       <div class="grid">
-        <div><label>اسم الشركة</label><input id="company" type="text" placeholder="مثال: شركة الأفق للتجارة" aria-label="اسم الشركة"></div>
+        <div><label>اسم الشركة</label><input id="company" type="text" placeholder="مثال: شركة الأفق للتجارة"></div>
 
         <div class="g2">
           <div><label>كود الدولة</label>
-            <select id="countryCode" aria-label="كود الدولة">
+            <select id="countryCode">
               <option value="+213">🇩🇿 الجزائر (+213)</option>
               <option value="+973" selected>🇧🇭 البحرين (+973)</option>
               <option value="+269">🇰🇲 جزر القمر (+269)</option>
@@ -141,22 +175,22 @@ canvas#sigCanvas{width:100%;height:180px;background:#fff;border:1px solid #e5e7e
               <option value="+967">🇾🇪 اليمن (+967)</option>
             </select>
           </div>
-          <div><label>رقم الاتصال</label><input id="phone" type="tel" placeholder="3333 3333" aria-label="رقم الاتصال"></div>
+          <div><label>رقم الاتصال</label><input id="phone" type="tel" placeholder="3333 3333"></div>
         </div>
 
-        <div><label>البريد الإلكتروني</label><input id="email" type="email" placeholder="name@example.com" aria-label="البريد الإلكتروني"></div>
+        <div><label>البريد الإلكتروني</label><input id="email" type="email" placeholder="name@example.com"></div>
 
-        <div><label>عنوان الرسالة</label><input id="titleIn" type="text" placeholder="عنوان الرسالة" aria-label="عنوان الرسالة"></div>
-        <div><label>المحتوى</label><textarea id="contentIn" placeholder="اكتب نص الرسالة هنا..." aria-label="المحتوى"></textarea></div>
+        <div><label>عنوان الرسالة</label><input id="titleIn" type="text" placeholder="عنوان الرسالة"></div>
+        <div><label>المحتوى</label><textarea id="contentIn" placeholder="اكتب نص الرسالة هنا..."></textarea></div>
 
         <div class="g2">
-          <div><label>الاسم الشخصي (للتوقيع)</label><input id="personNameIn" type="text" aria-label="الاسم الشخصي"></div>
-          <div><label>الصفة / الوظيفة</label><input id="personRoleIn" type="text" aria-label="الصفة"></div>
+          <div><label>الاسم الشخصي (للتوقيع)</label><input id="personNameIn" type="text"></div>
+          <div><label>الصفة / الوظيفة</label><input id="personRoleIn" type="text"></div>
         </div>
 
         <div class="g2">
-          <div><label>العنوان</label><input id="addressIn" type="text" placeholder="المنامة - البحرين" aria-label="العنوان"></div>
-          <div><label>السجل التجاري (CR)</label><input id="cr" type="text" placeholder="555432" aria-label="السجل التجاري"></div>
+          <div><label>العنوان</label><input id="addressIn" type="text" placeholder="المنامة - البحرين"></div>
+          <div><label>السجل التجاري (CR)</label><input id="cr" type="text" placeholder="555432"></div>
         </div>
 
         <div class="g4">
@@ -166,7 +200,7 @@ canvas#sigCanvas{width:100%;height:180px;background:#fff;border:1px solid #e5e7e
           <div><label>LinkedIn</label><input id="lnIn" type="text" placeholder="/company"></div>
         </div>
 
-        <!-- توقيع أونلاين -->
+        <!-- توقيع -->
         <div>
           <label>التوقيع أونلاين</label>
           <div class="sig-pad" aria-label="منطقة التوقيع">
@@ -177,7 +211,6 @@ canvas#sigCanvas{width:100%;height:180px;background:#fff;border:1px solid #e5e7e
             </div>
           </div>
         </div>
-        <!-- لا تطبيق/لا إعادة ضبط حسب طلبك -->
       </div>
     </div>
   </section>
@@ -186,7 +219,6 @@ canvas#sigCanvas{width:100%;height:180px;background:#fff;border:1px solid #e5e7e
   <section class="card" aria-label="معاينة A4">
     <div class="hd">المعاينة</div>
 
-    <!-- أدوات -->
     <div class="tools" role="toolbar" aria-label="أدوات">
       <button class="tool" id="printView" title="طباعة">
         <svg viewBox="0 0 24 24"><path d="M6 2h12v6H6zM6 14h12v8H6z"/></svg>
@@ -238,10 +270,29 @@ canvas#sigCanvas{width:100%;height:180px;background:#fff;border:1px solid #e5e7e
   </section>
 </main>
 
+<!-- شريط مشاركة الصفحة -->
+<section class="share-site" aria-label="مشاركة الصفحة">
+  <div class="share-box">
+    <h3 class="share-title">مشاركة الصفحة</h3>
+    <div class="share-row" id="shareRow">
+      <!-- تُملأ تلقائيًا بالروابط الصحيحة -->
+    </div>
+  </div>
+</section>
+
 <footer class="site-footer">
   برمجة وتطوير :
-  <a href="https://api.whatsapp.com/send/?phone=97333375858&text&type=phone_number&app_absent=0&wame_ctl=1" target="_blank" rel="noopener">فاضل الريس</a>
+  <a href="https://api.whatsapp.com/send/?phone=97333375858&text&type=phone_number&app_absent=0" target="_blank" rel="noopener">فاضل الريس</a>
 </footer>
+
+<!-- مودال رسائل -->
+<div class="modal" id="msgModal" aria-hidden="true">
+  <div class="box" role="dialog" aria-live="polite">
+    <div class="hd" id="msgTitle">تنويه</div>
+    <div class="bd" id="msgBody">نص الرسالة.</div>
+    <div class="ft"><button type="button" id="msgOk">حسنًا</button></div>
+  </div>
+</div>
 
 <!-- مكتبات -->
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
@@ -250,16 +301,22 @@ canvas#sigCanvas{width:100%;height:180px;background:#fff;border:1px solid #e5e7e
 /* التاريخ */
 document.getElementById("today").textContent=new Date().toLocaleDateString("en-GB");
 
-/* تخزين محلي */
-const STORE_KEY='letterheadFormV8';
+/* مودال رسائل */
+const modal=document.getElementById('msgModal');
+const msgTitle=document.getElementById('msgTitle');
+const msgBody=document.getElementById('msgBody');
+document.getElementById('msgOk').onclick=()=>modal.classList.remove('show');
+function showMsg(title, body){msgTitle.textContent=title; msgBody.innerHTML=body; modal.classList.add('show')}
+
+/* تخزين */
+const STORE_KEY='letterheadFormV10';
 const DM={'٠':'0','١':'1','٢':'2','٣':'3','٤':'4','٥':'5','٦':'6','٧':'7','٨':'8','٩':'9','۰':'0','۱':'1','۲':'2','۳':'3','۴':'4','۵':'5','۶':'6','۷':'7','۸':'8','۹':'9'};
 const normalize=s=>(s||'').replace(/[٠-٩۰-۹]/g,d=>DM[d]||d);
 const $=id=>document.getElementById(id);
-
 function saveState(extra={}){const ids=['company','countryCode','phone','email','titleIn','contentIn','personNameIn','personRoleIn','addressIn','cr','igIn','twIn','fbIn','lnIn','signatureDataURL'];const data={};ids.forEach(id=>{const el=$(id);if(el)data[id]=el.value??''});Object.assign(data,extra);localStorage.setItem(STORE_KEY,JSON.stringify(data))}
 function loadState(){try{const raw=localStorage.getItem(STORE_KEY);if(!raw)return{};const data=JSON.parse(raw);Object.entries(data).forEach(([k,v])=>{const el=$(k);if(el&&typeof v==='string')el.value=v});if(data.signatureDataURL){const img=new Image();img.src=data.signatureDataURL;img.alt='التوقيع';$('sigInStamp').innerHTML='';$('sigInStamp').appendChild(img)}return data}catch(e){return{}}}
 
-/* عناصر نموذج */
+/* عناصر */
 const company=$('company'), country=$('countryCode'), phone=$('phone'), email=$('email'),
       titleIn=$('titleIn'), contentIn=$('contentIn'), personNameIn=$('personNameIn'), personRoleIn=$('personRoleIn'),
       addressIn=$('addressIn'), cr=$('cr'), igIn=$('igIn'), twIn=$('twIn'), fbIn=$('fbIn'), lnIn=$('lnIn');
@@ -268,7 +325,48 @@ const brandName=$('brandName'), titleOut=$('titleOut'), contentOut=$('contentOut
       stampCompany=$('stampCompany'), crOut=$('crOut'), phoneOut=$('phoneOut'),
       personName=$('personName'), personRole=$('personRole'), socialRow=$('socialRow');
 
-/* سوشيال */
+/* أيقونات المشاركة */
+const sv=(p)=>`<svg viewBox="0 0 24 24"><path d="${p}"/></svg>`;
+const I={
+  wa:'M. .', // placeholder—لن نستخدمه فعليًا لأننا نضع الألوان بالخلفيات
+};
+function buildShareBar(){
+  const url=encodeURIComponent(location.href);
+  const text=encodeURIComponent('جرّب إنشاء لتر هد أونلاين');
+  const row=document.getElementById('shareRow');
+  row.innerHTML='';
+  const links=[
+    {cls:'share-wa',label:'واتساب',href:`https://wa.me/?text=${text}%20${url}`,svg:'M..'},
+    {cls:'share-tg',label:'تلغرام',href:`https://t.me/share/url?url=${url}&text=${text}`,svg:'M..'},
+    {cls:'share-tw',label:'X (تويتر)',href:`https://twitter.com/intent/tweet?url=${url}&text=${text}`,svg:'M..'},
+    {cls:'share-fb',label:'فيسبوك',href:`https://www.facebook.com/sharer/sharer.php?u=${url}`,svg:'M..'},
+    {cls:'share-ln',label:'لينكدإن',href:`https://www.linkedin.com/sharing/share-offsite/?url=${url}`,svg:'M..'},
+    {cls:'share-em',label:'بريد',href:`mailto:?subject=${encodeURIComponent('لتر هد أونلاين')}&body=${text}%0A${url}`,svg:'M..'}
+  ];
+  // SVGs بسيطة
+  const paths={
+    wa:"M16.6 14.4c-.2.6-1 1-1.6.7-1.8-.9-3.3-2.4-4.2-4.2-.3-.6.1-1.4.7-1.6l.8-.3c.3-.1.5 0 .7.3l.9 1.4c.2.3.1.6-.1.8l-.3.3c.6 1 1.5 1.8 2.5 2.5l.3-.3c.2-.2.5-.3.8-.1l1.4.9c.3.2.4.4.3.7l-.3.8ZM12 2a10 10 0 0 1 8.8 14.8L20 22l-5.2-.8A10 10 0 1 1 12 2Z",
+    tg:"M21.5 3.5 2.9 10.8c-1 .4-1 1.8 0 2.2l4.6 1.7 1.8 5.6c.3 1 1.6 1.2 2.2.3l2.7-3.5 5.1 3.7c.8.6 2 .2 2.2-.8l2.7-15.6c.2-1-1-1.8-2.3-1.1Z",
+    tw:"M13.7 10.6 21 2h-1.7l-6.2 7.4L8.2 2H2l7.6 11L2 22h1.7l6.6-7.8L15.8 22H22l-8.3-11.4Z",
+    fb:"M22 12a10 10 0 1 0-11.6 9.9v-7H7.7V12h2.7V9.7c0-2.7 1.6-4.2 4-4.2 1.2 0 2.4.2 2.4.2v2.6h-1.4c-1.3 0-1.7.8-1.7 1.6V12h2.9l-.46 2.9h-2.4v7A10 10 0 0 0 22 12",
+    ln:"M4.98 3.5a2.5 2.5 0 1 1 0 5.001 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.6h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.8 2.6 4.8 6v6H17v-5.3c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9V21H9z",
+    em:"M3 6h18v12H3z M3 8.2 12 13l9-4.8"
+  };
+  function btn(cls,label,href,path){
+    const a=document.createElement('a');
+    a.className=cls; a.href=href; a.target="_blank"; a.rel="noopener";
+    a.innerHTML=`<svg viewBox="0 0 24 24" fill="currentColor"><path d="${path}"/></svg><span>${label}</span>`;
+    row.appendChild(a);
+  }
+  btn('share-wa','واتساب',links[0].href,paths.wa);
+  btn('share-tg','تلغرام',links[1].href,paths.tg);
+  btn('share-tw','X (تويتر)',links[2].href,paths.tw);
+  btn('share-fb','فيسبوك',links[3].href,paths.fb);
+  btn('share-ln','لينكدإن',links[4].href,paths.ln);
+  btn('share-em','بريد',links[5].href,paths.em);
+}
+
+/* بناء أيقونات تواصل الوثيقة (أسفل A4) */
 const ICON=p=>`<svg viewBox="0 0 24 24"><g fill="#ffd777">${p}</g></svg>`;
 const icons={
   ig: ICON('<path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm6.5-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2Z"/><circle cx="12" cy="12" r="3.3"/>'),
@@ -296,21 +394,21 @@ function applyChanges(){
   brandName.textContent=company.value.trim()||'اسم الشركة';
   stampCompany.textContent=brandName.textContent;
   titleOut.textContent=titleIn.value.trim()||'عنوان الرسالة';
-  contentOut.textContent=(contentIn.value||'').replace(/[٠-٩۰-۹]/g,d=>DM[d])||'—';
-  addressOut.textContent=addressIn.value.trim()||'—';
-  crOut.textContent='CR: '+((cr.value||'').replace(/[٠-٩۰-۹]/g,d=>DM[d])||'—');
-  phoneOut.textContent='Tel: '+(fullPhone()||'—');
-  personName.textContent=personNameIn.value.trim()||'الاسم الشخصي';
-  personRole.textContent=personRoleIn.value.trim()||'الصفة / الوظيفة';
+  document.getElementById('contentOut').textContent=(contentIn.value||'').replace(/[٠-٩۰-۹]/g,d=>DM[d])||'—';
+  document.getElementById('addressOut').textContent=addressIn.value.trim()||'—';
+  document.getElementById('crOut').textContent='CR: '+((cr.value||'').replace(/[٠-٩۰-۹]/g,d=>DM[d])||'—');
+  document.getElementById('phoneOut').textContent='Tel: '+(fullPhone()||'—');
+  document.getElementById('personName').textContent=personNameIn.value.trim()||'الاسم الشخصي';
+  document.getElementById('personRole').textContent=personRoleIn.value.trim()||'الصفة / الوظيفة';
   buildSocial(); saveState();
 }
 
-/* تحجيم المعاينة لارتفاع A4 (لا فراغ سفلي) */
+/* تحجيم المعاينة */
 const viewport=$('viewport'), scaleBox=$('scaleBox');
 function scalePreview(){const avail=viewport.clientWidth-6;const PAGE=210*96/25.4;const s=Math.min(1,avail/PAGE);scaleBox.style.transform=`scale(${s})`;viewport.style.height=(297*96/25.4*s)+'px'}
 window.addEventListener('resize',()=>requestAnimationFrame(scalePreview),{passive:true});
 
-/* التوقيع */
+/* لوحة التوقيع */
 const sigCanvas=$('sigCanvas'), ctx=sigCanvas.getContext('2d');
 function resizeSigCanvas(){const DPR=Math.min(window.devicePixelRatio||1,1.75);const w=sigCanvas.clientWidth,h=sigCanvas.clientHeight;sigCanvas.width=w*DPR;sigCanvas.height=h*DPR;ctx.setTransform(DPR,0,0,DPR,0,0);ctx.lineWidth=2.8;ctx.lineCap='round';ctx.strokeStyle='#111';ctx.clearRect(0,0,w,h)}
 function pos(e){const r=sigCanvas.getBoundingClientRect();const t=e.touches?e.touches[0]:e;return{x:t.clientX-r.left,y:t.clientY-r.top}}
@@ -324,7 +422,7 @@ sigCanvas.addEventListener('touchend',()=>{drawing=false});
 $('clearSig').addEventListener('click',()=>{resizeSigCanvas();$('sigInStamp').innerHTML='';saveState({signatureDataURL:''})});
 $('useSig').addEventListener('click',()=>{const url=sigCanvas.toDataURL('image/png');$('sigInStamp').innerHTML='';const img=new Image();img.src=url;img.alt='التوقيع';$('sigInStamp').appendChild(img);saveState({signatureDataURL:url})});
 
-/* ===== توليد PDF صفحة واحدة A4 بالحجم الكامل ===== */
+/* توليد PDF صفحة واحدة */
 async function renderA4Canvas(){
   const src=document.getElementById('page');
   const clone=src.cloneNode(true);
@@ -332,47 +430,27 @@ async function renderA4Canvas(){
   const holder=document.createElement('div');Object.assign(holder.style,{position:'fixed',left:'-9999px',top:'0',background:'#ffffff'});
   holder.appendChild(clone);document.body.appendChild(holder);
   const canvas=await html2canvas(clone,{scale:2,backgroundColor:'#ffffff',useCORS:true});
-  document.body.removeChild(holder);
-  return canvas;
+  document.body.removeChild(holder); return canvas;
 }
-async function makePDFBlob(){
-  const {jsPDF}=window.jspdf;
-  const canvas=await renderA4Canvas();
-  const img=canvas.toDataURL('image/jpeg',0.96);
-  const pdf=new jsPDF('p','mm','a4');
-  pdf.addImage(img,'JPEG',0,0,210,297,'','FAST');        // صفحة واحدة فقط
-  return pdf.output('blob');
-}
+async function makePDFBlob(){const {jsPDF}=window.jspdf;const c=await renderA4Canvas();const img=c.toDataURL('image/jpeg',0.96);const pdf=new jsPDF('p','mm','a4');pdf.addImage(img,'JPEG',0,0,210,297,'','FAST');return pdf.output('blob')}
 
 /* تحميل */
-$('downloadPdf').addEventListener('click',async ()=>{
-  const blob=await makePDFBlob();
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement('a'); a.href=url; a.download='letterhead.pdf'; a.click();
-  URL.revokeObjectURL(url);
+document.getElementById('downloadPdf').addEventListener('click',async ()=>{
+  const blob=await makePDFBlob(); const url=URL.createObjectURL(blob);
+  const a=document.createElement('a'); a.href=url; a.download='letterhead.pdf'; a.click(); URL.revokeObjectURL(url);
 });
 
-/* مشاركة — تعرض كل التطبيقات */
-$('sharePdf').addEventListener('click',async ()=>{
+/* مشاركة (ملف PDF) */
+document.getElementById('sharePdf').addEventListener('click',async ()=>{
   try{
-    const blob=await makePDFBlob();
-    const file=new File([blob],'letterhead.pdf',{type:'application/pdf'});
+    const blob=await makePDFBlob(); const file=new File([blob],'letterhead.pdf',{type:'application/pdf'});
     if(navigator.canShare && navigator.canShare({files:[file]})){
       await navigator.share({title:'Letterhead',text:'لتر هد PDF',files:[file]});
     }else{
-      // بديل: تنزيل وفتح البريد
-      const url=URL.createObjectURL(blob);
-      const a=document.createElement('a'); a.href=url; a.download='letterhead.pdf'; a.click();
-      URL.revokeObjectURL(url);
-      const subject=encodeURIComponent('Letterhead PDF');
-      const body=encodeURIComponent('تم تنزيل الملف. أرفقه من مدير الملفات.');
-      location.href=`mailto:?subject=${subject}&body=${body}`;
+      showMsg('المشاركة غير مدعومة','المتصفح الحالي لا يدعم مشاركة الملفات مباشرة. استخدم زر <strong>تحميل PDF</strong> ثم شارك الملف من مدير الملفات.');
     }
-  }catch(e){alert('المشاركة غير مدعومة على هذا المتصفح.')}
+  }catch(e){showMsg('حدث خطأ','تعذّرت المشاركة الآن. حاول لاحقًا.')}
 });
-
-/* طباعة */
-$('printView').addEventListener('click',()=>window.print());
 
 /* تحديث مباشر + حفظ */
 ['input','change'].forEach(ev=>{
@@ -383,7 +461,7 @@ $('printView').addEventListener('click',()=>window.print());
 
 /* تهيئة */
 (document.fonts?.ready || Promise.resolve()).then(()=>{
-  resizeSigCanvas(); loadState(); applyChanges();
+  resizeSigCanvas(); loadState(); applyChanges(); buildShareBar();
   const fit=()=>{const avail=viewport.clientWidth-6;const PAGE=210*96/25.4;const s=Math.min(1,avail/PAGE);scaleBox.style.transform=`scale(${s})`;viewport.style.height=(297*96/25.4*s)+'px'};
   fit(); setTimeout(fit,40);
 });
