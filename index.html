@@ -31,7 +31,7 @@ textarea{min-height:120px;resize:vertical}
 .btn{border:0;border-radius:12px;padding:12px 14px;font-weight:800;font-size:15px;cursor:pointer}
 .btn.primary{background:var(--gold);color:#000}.btn.ghost{background:#eef2f7}
 
-/* وصف الخدمة: أبيض/ذهبي، محاذاة أطراف، حجم واحد */
+/* وصف الخدمة */
 .settings .bd{max-width:520px;margin:0 auto}
 .note{margin:8px 0 14px;padding:14px 16px;background:#fff;border:1px solid rgba(198,161,74,.35);border-radius:14px;box-shadow:0 10px 22px rgba(198,161,74,.08)}
 .note h3{margin:0 0 8px;font:800 16px/1.2 "Cairo";color:var(--black)}
@@ -69,7 +69,8 @@ textarea{min-height:120px;resize:vertical}
 .bar .social{display:flex;gap:16px;align-items:center;color:#fff;padding:0 18mm}
 .bar .social .item{display:flex;align-items:center;gap:6px;direction:ltr;white-space:nowrap}
 .bar .social .item span{color:#f6f6f6}
-.bar .social svg{width:15px;height:15px;fill:#ffd777}
+/* أيقونات تواصل التذييل ذهبية */
+.bar .social svg{width:15px;height:15px;fill:#C6A14A}
 
 /* ختم */
 .left-col{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
@@ -84,13 +85,14 @@ textarea{min-height:120px;resize:vertical}
 .sig-pad{background:#fff;border:1px dashed #cbd5e1;border-radius:12px;padding:10px}
 #sigCanvas{width:100%;height:180px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;touch-action:none}
 
-/* مشاركة الصفحة — أيقونات فقط، في الوسط */
+/* مشاركة الصفحة — أيقونات فقط وفي الوسط */
 .share-site{max-width:1200px;margin:6px auto 8px;padding:6px 12px;text-align:center}
 .share-box{border:1px solid #e7e9ef;background:#fff;border-radius:14px;box-shadow:0 8px 16px rgba(0,0,0,.05);padding:12px}
 .share-title{font:800 15px/1 "Cairo";margin:0 0 10px;color:var(--black)}
 .icon-row{display:flex;justify-content:center;gap:16px}
 .icon-row a{display:inline-grid;place-items:center;width:42px;height:42px;border-radius:50%;text-decoration:none;transition:.18s transform}
-.icon-row a svg{width:22px;height:22px;fill:var(--gold)}
+/* الأيقونات ذهبية */
+.icon-row a svg{width:22px;height:22px;fill:#C6A14A}
 .icon-row a:hover{transform:translateY(-2px)}
 
 /* مودال رسائل */
@@ -118,7 +120,7 @@ textarea{min-height:120px;resize:vertical}
   <section class="card settings" aria-label="إعدادات اللتر هد">
     <div class="hd">إعدادات اللتر هد</div>
     <div class="bd">
-      <!-- وصف بعد التعديل -->
+      <!-- الوصف بعد التعديل -->
       <div class="note">
         <h3>وصف الخدمة</h3>
         <p>
@@ -286,9 +288,9 @@ const modal=$("msgModal");$("msgOk").onclick=()=>modal.classList.remove("show");
 function showMsg(t,b){$("msgTitle").textContent=t;$("msgBody").innerHTML=b;modal.classList.add("show")}
 
 /* حفظ/تحميل */
-const STORE='letterheadFormV12';
+const STORE='letterheadFormV13';
 function saveState(extra={}){const ids=['company','countryCode','phone','email','titleIn','contentIn','personNameIn','personRoleIn','addressIn','cr','igIn','twIn','fbIn','lnIn','signatureDataURL'];const d={};ids.forEach(id=>{const el=$(id);if(el)d[id]=el.value??''});Object.assign(d,extra);localStorage.setItem(STORE,JSON.stringify(d))}
-function loadState(){try{const raw=localStorage.getItem(STORE);if(!raw)return{};const d=JSON.parse(raw);for(const [k,v] of Object.entries(d)){const el=$(k);if(el)el.value=v}if(d.signatureDataURL){const img=new Image();img.src=d.signatureDataURL;$("sigInStamp").innerHTML='';$("sigInStamp").appendChild(img)}return d}catch(e){return{}}}
+function loadState(){try{const raw=localStorage.getItem(STORE);if(!raw)return{};const d=JSON.parse(raw);for(const [k,v] of Object.entries(d)){const el=$(k);if(el)el.value=v}if(d.signatureDataURL){const img=new Image();img.src=d.signatureDataURL;img.alt='التوقيع';$("sigInStamp").innerHTML='';$("sigInStamp").appendChild(img)}return d}catch(e){return{}}}
 
 /* عناصر */
 const company=$("company"), country=$("countryCode"), phone=$("phone"), email=$("email"),
@@ -299,8 +301,8 @@ const brandName=$("brandName"), titleOut=$("titleOut"), contentOut=$("contentOut
       stampCompany=$("stampCompany"), crOut=$("crOut"), phoneOut=$("phoneOut"),
       personName=$("personName"), personRole=$("personRole"), socialRow=$("socialRow");
 
-/* سوشيال داخل الوثيقة */
-const ICON=p=>`<svg viewBox="0 0 24 24"><g fill="#ffd777">${p}</g></svg>`;
+/* أيقونات تواصل التذييل (ذهبية) */
+const ICON=p=>`<svg viewBox="0 0 24 24"><g fill="#C6A14A">${p}</g></svg>`;
 const icons={
   ig: ICON('<path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm6.5-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2Z"/><circle cx="12" cy="12" r="3.3"/>'),
   tw: ICON('<path d="M13.7 10.6 21 2h-1.7l-6.2 7.4L8.2 2H2l7.6 11L2 22h1.7l6.6-7.8L15.8 22H22l-8.3-11.4Z"/>'),
@@ -322,7 +324,7 @@ function buildSocial(){
   items.forEach(it=>{const d=document.createElement('div');d.className='item';d.innerHTML=it.icon+'<span>'+it.txt+'</span>';socialRow.appendChild(d)});
 }
 
-/* بناء أيقونات مشاركة الصفحة (أيقونات فقط) */
+/* أيقونات مشاركة الصفحة (ذهبية) */
 function buildShareBar(){
   const url=encodeURIComponent(location.href);
   const text=encodeURIComponent('جرّب إنشاء لتر هد أونلاين');
@@ -337,7 +339,7 @@ function buildShareBar(){
   ];
   for(const it of items){
     const a=document.createElement('a'); a.href=it.href; a.target="_blank"; a.rel="noopener"; a.setAttribute('aria-label',it.label);
-    a.innerHTML=`<svg viewBox="0 0 24 24"><path d="${it.path}" fill="currentColor"/></svg>`;
+    a.innerHTML=`<svg viewBox="0 0 24 24"><path d="${it.path}" fill="#C6A14A"/></svg>`;
     row.appendChild(a);
   }
 }
@@ -373,7 +375,7 @@ sig.addEventListener('touchstart',e=>{e.preventDefault();draw=true;const p=pos(e
 sig.addEventListener('touchmove',e=>{e.preventDefault();if(!draw)return;const p=pos(e);ctx.lineTo(p.x,p.y);ctx.stroke()},{passive:false});
 sig.addEventListener('touchend',()=>draw=false);
 $("clearSig").onclick=()=>{resizeSig();$("sigInStamp").innerHTML='';saveState({signatureDataURL:''})};
-$("useSig").onclick=()=>{const url=sig.toDataURL('image/png');$("sigInStamp").innerHTML='';const img=new Image();img.src=url;$("sigInStamp").appendChild(img);saveState({signatureDataURL:url})};
+$("useSig").onclick=()=>{const url=sig.toDataURL('image/png');$("sigInStamp").innerHTML='';const img=new Image();img.src=url;img.alt='التوقيع';$("sigInStamp").appendChild(img);saveState({signatureDataURL:url})};
 
 /* PDF */
 async function renderA4Canvas(){
@@ -386,6 +388,9 @@ async function renderA4Canvas(){
 async function makePDFBlob(){const {jsPDF}=window.jspdf;const c=await renderA4Canvas();const img=c.toDataURL('image/jpeg',0.96);const pdf=new jsPDF('p','mm','a4');pdf.addImage(img,'JPEG',0,0,210,297,'','FAST');return pdf.output('blob')}
 $("downloadPdf").onclick=async()=>{const blob=await makePDFBlob();const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='letterhead.pdf';a.click();URL.revokeObjectURL(url)};
 $("sharePdf").onclick=async()=>{try{const blob=await makePDFBlob();const file=new File([blob],'letterhead.pdf',{type:'application/pdf'});if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({title:'Letterhead',text:'لتر هد PDF',files:[file]});}else{showMsg('المشاركة غير مدعومة','حمّل ملف <strong>PDF</strong> ثم شاركه يدويًا.')}}catch(e){showMsg('خطأ','تعذّرت المشاركة الآن.')}};
+
+/* طباعة — تم تفعيل الزر */
+$("printView").addEventListener("click",()=>{window.focus();window.print()});
 
 /* تهيئة */
 (document.fonts?.ready||Promise.resolve()).then(()=>{
