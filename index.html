@@ -1,149 +1,110 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>مولّد خطاب احترافي</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>مولّد خطاب احترافي</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&family=Noto+Kufi+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --brand:#0f766e;     /* لون الهيدر */
+    --ink:#0f172a;       /* لون النص */
+    --muted:#6b7280;     /* نص ثانوي */
+    --paper:#fff;        /* خلفية الورقة */
+    --bg:#f5f7fb;        /* خلفية الموقع */
+    --stamp-ink:#0b5cff; /* حبر الختم الافتراضي */
+  }
+  *{box-sizing:border-box; -webkit-print-color-adjust:exact; print-color-adjust:exact}
+  html,body{height:100%}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Cairo","Noto Kufi Arabic",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+    line-height:1.6;
+  }
 
-  <!-- خطوط عربية جميلة -->
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&family=Noto+Kufi+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+  .wrap{max-width:1200px; margin-inline:auto; padding:16px; display:grid; gap:16px; grid-template-columns:1fr 2fr}
+  @media (max-width:980px){ .wrap{grid-template-columns:1fr} }
 
-  <style>
-    :root{
-      --brand:#0f766e;          /* لون الهيدر */
-      --ink:#0f172a;            /* لون النص */
-      --muted:#6b7280;          /* نص ثانوي */
-      --paper:#fff;             /* خلفية الورقة */
-      --bg:#f5f7fb;             /* خلفية الموقع */
-      --stamp-ink:#0b5cff;      /* حبر الختم الافتراضي (أزرق) */
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family:"Cairo","Noto Kufi Arabic",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-      background:var(--bg);
-      color:var(--ink);
-      line-height:1.6;
-    }
+  .card{background:#fff; border:1px solid #e5e7eb; border-radius:16px; box-shadow:0 12px 30px rgba(2,6,23,.06)}
+  .card .hd{padding:14px 16px; border-bottom:1px solid #eef2f7; display:flex; align-items:center; gap:10px; font-weight:800}
+  .card .bd{padding:16px}
 
-    /* تخطيط عام */
-    .wrap{
-      max-width:1200px; margin-inline:auto; padding:16px;
-      display:grid; gap:16px;
-      grid-template-columns: 1fr 2fr;
-    }
-    @media (max-width: 980px){
-      .wrap{grid-template-columns:1fr}
-    }
+  .grid{display:grid; gap:10px}
+  .g2{grid-template-columns:1fr 1fr}
+  @media (max-width:640px){ .g2{grid-template-columns:1fr} }
 
-    /* بطاقة */
-    .card{
-      background:#fff; border:1px solid #e5e7eb; border-radius:16px;
-      box-shadow:0 12px 30px rgba(2,6,23,.06);
-    }
-    .card .hd{
-      padding:14px 16px; border-bottom:1px solid #eef2f7; display:flex; align-items:center; gap:10px;
-      font-weight:800; letter-spacing:.2px;
-    }
-    .card .bd{ padding:16px }
+  label{font-size:13px; color:var(--muted); margin-bottom:6px; display:block}
+  input[type="text"],input[type="email"],input[type="tel"],input[type="color"],textarea,select{
+    width:100%; padding:10px 12px; border:1px solid #d7dde6; border-radius:10px; font-size:14px; background:#fff
+  }
+  textarea{min-height:140px; resize:vertical}
 
-    /* نموذج مبسّط */
-    .grid{ display:grid; gap:10px }
-    .g2{ grid-template-columns:1fr 1fr }
-    @media (max-width:640px){ .g2{grid-template-columns:1fr} }
+  .row{display:flex; gap:8px; flex-wrap:wrap}
+  .btn{border:0; border-radius:999px; padding:10px 16px; font-weight:700; cursor:pointer}
+  .btn.primary{background:var(--brand); color:#fff; box-shadow:0 10px 20px rgba(15,118,110,.22)}
+  .btn.ghost{background:#eef2f7}
+  .btn.alt{background:#0ea5e9; color:#fff}
 
-    label{ font-size:13px; color:var(--muted); margin-bottom:6px; display:block }
-    input[type="text"],input[type="email"],input[type="tel"],input[type="color"],textarea,select{
-      width:100%; padding:10px 12px; border:1px solid #d7dde6; border-radius:10px; background:#fff; font-size:14px
-    }
-    textarea{ min-height:140px; resize:vertical }
+  .page-wrap{padding:8px}
+  .page{
+    width:210mm; min-height:297mm; margin-inline:auto; background:var(--paper); color:var(--ink);
+    border:1px solid #e5e7eb; border-radius:16px; position:relative; overflow:hidden;
+    box-shadow:0 24px 60px rgba(2,6,23,.08)
+  }
+  @media (max-width:820px){ .page{width:100%; min-height:auto} }
 
-    .row{ display:flex; gap:8px; flex-wrap:wrap }
-    .btn{
-      border:0; border-radius:999px; padding:10px 16px; font-weight:700; cursor:pointer
-    }
-    .btn.primary{ background:var(--brand); color:#fff; box-shadow:0 10px 20px rgba(15,118,110,.22) }
-    .btn.ghost{ background:#eef2f7 }
-    .btn.alt{ background:#0ea5e9; color:#fff }
+  .lh{
+    background:var(--brand); color:#fff; padding:20px 22px; display:flex; align-items:center; justify-content:space-between;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+  .brand{display:flex; align-items:center; gap:12px; font-weight:800}
+  .logo{width:40px; height:40px; border-radius:10px; background:rgba(255,255,255,.22); display:grid; place-items:center; font-weight:800}
+  .contact{font-size:12px; text-align:left; direction:ltr}
 
-    /* صفحة A4 */
-    .page-wrap{ padding:8px }
-    .page{
-      width:210mm; min-height:297mm; margin-inline:auto; background:var(--paper); color:var(--ink);
-      border:1px solid #e5e7eb; border-radius:16px; overflow:hidden; position:relative;
-      box-shadow:0 24px 60px rgba(2,6,23,.08);
-    }
-    /* على الشاشات الصغيرة تمتد بعرض الشاشة */
-    @media (max-width: 820px){
-      .page{ width:100%; min-height:auto }
-    }
+  .doc{padding:22px; display:flex; flex-direction:column; gap:12px}
+  .meta{font-size:12px; color:var(--muted); display:flex; justify-content:space-between; gap:10px; border-bottom:1px dashed #e5e7eb; padding-bottom:8px}
+  .title{margin:6px auto 2px; text-align:center; font-size:26px; font-weight:800; letter-spacing:.2px}
+  .content{font-size:15px; text-align:justify; text-justify:inter-word}
 
-    /* الهيدر (Letterhead) */
-    .lh{
-      background:var(--brand); color:#fff; padding:20px 22px; display:flex; align-items:center; justify-content:space-between;
-      print-color-adjust: exact; -webkit-print-color-adjust: exact;
-    }
-    .brand{ display:flex; align-items:center; gap:12px; font-weight:800 }
-    .logo{
-      width:40px; height:40px; border-radius:10px; background:rgba(255,255,255,.22);
-      display:grid; place-items:center; font-weight:800
-    }
-    .contact{ font-size:12px; text-align:left; direction:ltr; opacity:.95 }
+  .social{margin-top:auto; border-top:1px dashed #e5e7eb; padding-top:10px; display:flex; gap:8px; flex-wrap:wrap; color:var(--muted); font-size:12px}
+  .badge{border:1px solid #d7dde6; padding:4px 8px; border-radius:999px; background:#fff}
 
-    /* جسم الخطاب */
-    .doc{ padding:22px; display:flex; flex-direction:column; gap:12px }
-    .meta{
-      font-size:12px; color:var(--muted); display:flex; justify-content:space-between; gap:10px;
-      border-bottom:1px dashed #e5e7eb; padding-bottom:8px
-    }
-    .title{
-      margin:6px auto 2px; text-align:center; font-size:26px; font-weight:800; letter-spacing:.2px
-    }
-    .content{ font-size:15px; text-align:justify; text-justify:inter-word }
+  .stamp-area{margin-top:18px; display:flex; gap:12px; align-items:flex-start; flex-wrap:wrap}
+  .stamp-box{
+    position:relative; width:70mm; min-height:28mm; padding:10px 12px; border-radius:10px;
+    border:2.5px solid var(--stamp-ink); color:var(--stamp-ink);
+    background:
+      radial-gradient(circle at 30% 30%, rgba(0,0,0,.03), transparent 45%),
+      repeating-linear-gradient(0deg, rgba(0,0,0,.02), rgba(0,0,0,.02) 2px, transparent 2px, transparent 4px);
+    box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.65), 0 6px 18px rgba(0,0,0,.06);
+    transform: rotate(-1.2deg); opacity:.92; filter: saturate(1.05) contrast(1.02);
+  }
+  .stamp-box::before{content:"ختم"; position:absolute; top:-11px; right:10px; background:var(--paper); color:#6b7280; padding:0 6px; font-size:12px}
+  .stamp-name{font-weight:800; font-size:14px}
+  .stamp-line{font-size:12px; direction:ltr; text-align:left}
 
-    .social{ margin-top:auto; border-top:1px dashed #e5e7eb; padding-top:10px; display:flex; gap:8px; flex-wrap:wrap; color:var(--muted); font-size:12px }
-    .badge{ border:1px solid #d7dde6; padding:4px 8px; border-radius:999px; background:#fff }
+  .ft{background:#fafbfe; border-top:1px solid #eef2f7; padding:10px 14px; font-size:12px; display:flex; justify-content:space-between; align-items:center}
+  .print-icons{display:none; gap:6px; align-items:center}
+  .print-icons svg{width:12px; height:12px; opacity:.9}
 
-    /* ختم واقعي */
-    .stamp-area{ margin-top:18px; display:flex; gap:12px; align-items:flex-start; flex-wrap:wrap }
-    .stamp-box{
-      position:relative; width:70mm; min-height:28mm; padding:10px 12px; border-radius:10px;
-      border:2.5px solid var(--stamp-ink); color:var(--stamp-ink);
-      background:
-        radial-gradient(circle at 30% 30%, rgba(0,0,0,.03), transparent 45%),
-        repeating-linear-gradient(0deg, rgba(0,0,0,.02), rgba(0,0,0,.02) 2px, transparent 2px, transparent 4px);
-      box-shadow:
-        inset 0 0 0 1.5px rgba(255,255,255,.65),
-        0 6px 18px rgba(0,0,0,.06);
-      transform: rotate(-1.2deg);
-      opacity:.92;
-      filter: saturate(1.1) contrast(1.02);
+  .toolbar{display:none; gap:8px; justify-content:center; padding:10px}
+
+  @page{size:A4; margin:12mm}
+  @media print{
+    body{background:#fff}
+    .wrap{display:block; padding:0; margin:0}
+    .card,.toolbar{display:none !important}
+    .page{border:none; border-radius:0; box-shadow:none}
+    .lh{-webkit-print-color-adjust:exact; print-color-adjust:exact}
+    /* إظهار أيقونات صغيرة أسفل يسار الصفحة عند الطباعة */
+    .print-icons{
+      display:flex !important; position:absolute; left:12mm; bottom:10mm;
+      background:transparent; padding:0; border:none
     }
-    .stamp-box::before{
-      content:"ختم"; position:absolute; top:-11px; right:10px; background:var(--paper);
-      color:#6b7280; padding:0 6px; font-size:12px
-    }
-    .stamp-name{ font-weight:800; font-size:14px }
-    .stamp-line{ font-size:12px; direction:ltr; text-align:left }
-
-    /* تذييل */
-    .ft{ background:#fafbfe; border-top:1px solid #eef2f7; padding:10px 14px; font-size:12px; display:flex; justify-content:space-between }
-
-    /* شريط المعاينة */
-    .toolbar{ display:flex; gap:8px; justify-content:center; padding:10px }
-
-    /* طباعة */
-    @page{ size:A4; margin:12mm }
-    @media print{
-      body{ background:#fff }
-      .wrap{ display:block; padding:0; margin:0 }
-      .card{ display:none !important }
-      .toolbar{ display:none !important }
-      .page{ border:none; border-radius:0; box-shadow:none }
-      .lh{ print-color-adjust: exact; -webkit-print-color-adjust: exact }
-    }
-  </style>
+    /* إخفاء البادجات النصية أثناء الطباعة */
+    .social{display:none}
+  }
+</style>
 </head>
 <body>
   <div class="wrap">
@@ -168,8 +129,9 @@
           </div>
 
           <div>
-            <label>شبكات التواصل (افصل بفاصلة)</label>
-            <input id="social" type="text" placeholder="X: @brand, Instagram: @brand, LinkedIn: /company/brand" />
+            <label>شبكات التواصل (اكتب: Instagram: @brand, Twitter: @brand, YouTube: /c/brand ...)</label>
+            <input id="social" type="text"
+              placeholder="Instagram: @brand, Twitter: @brand, Facebook: /brand, LinkedIn: /company/brand, TikTok: @brand, YouTube: /c/brand, Snapchat: @brand, WhatsApp: +973..." />
           </div>
 
           <div class="grid g2">
@@ -262,24 +224,26 @@
             <div class="social" id="socialOut"></div>
 
             <div class="stamp-area">
-              <!-- ختم مولّد -->
               <div class="stamp-box" id="stampBox">
                 <div class="stamp-name" id="stampNameOut">اسم الشركة</div>
                 <div class="stamp-line" id="crOut">CR: —</div>
                 <div class="stamp-line" id="stampPhoneOut">Tel: —</div>
               </div>
-              <!-- صورة ختم -->
-              <img id="stampImgOut" alt="صورة الختم" style="display:none; width:70mm; height:auto; border-radius:10px; transform:rotate(-1.2deg); filter:contrast(1.05) saturate(1.05) drop-shadow(0 6px 18px rgba(0,0,0,.06));" />
+              <img id="stampImgOut" alt="صورة الختم"
+                   style="display:none; width:70mm; height:auto; border-radius:10px; transform:rotate(-1.2deg);
+                          filter:contrast(1.05) saturate(1.05) drop-shadow(0 6px 18px rgba(0,0,0,.06));" />
             </div>
           </main>
 
           <footer class="ft">
             <div>Letterhead — تصميم مبسّط وأنيق</div>
             <div style="direction:ltr;">© <span id="year"></span></div>
+            <!-- أيقونات الطباعة أسفل يسار الصفحة -->
+            <div class="print-icons" id="printIcons" aria-hidden="true"></div>
           </footer>
         </div>
 
-        <div class="toolbar" id="toolbar" style="display:none">
+        <div class="toolbar" id="toolbar">
           <button class="btn ghost" id="backBtn" type="button">تعديل</button>
           <button class="btn alt" id="printBtn2" type="button">طباعة / PDF</button>
         </div>
@@ -287,131 +251,163 @@
     </section>
   </div>
 
-  <script>
-    // عناصر الإدخال
-    const company = document.getElementById('company');
-    const email = document.getElementById('email');
-    const phone = document.getElementById('phone');
-    const social = document.getElementById('social');
-    const titleIn = document.getElementById('title');
-    const brandColor = document.getElementById('brandColor');
-    const contentIn = document.getElementById('content');
+<script>
+  // عناصر الإدخال
+  const company = document.getElementById('company');
+  const email = document.getElementById('email');
+  const phone = document.getElementById('phone');
+  const social = document.getElementById('social');
+  const titleIn = document.getElementById('title');
+  const brandColor = document.getElementById('brandColor');
+  const contentIn = document.getElementById('content');
 
-    const stampName = document.getElementById('stampName');
-    const cr = document.getElementById('cr');
-    const stampPhone = document.getElementById('stampPhone');
-    const stampInk = document.getElementById('stampInk');
-    const stampImage = document.getElementById('stampImage');
+  const stampName = document.getElementById('stampName');
+  const cr = document.getElementById('cr');
+  const stampPhone = document.getElementById('stampPhone');
+  const stampInk = document.getElementById('stampInk');
+  const stampImage = document.getElementById('stampImage');
 
-    // عناصر الإخراج
-    const brandName = document.getElementById('brandName');
-    const emailOut = document.getElementById('emailOut');
-    const phoneOut = document.getElementById('phoneOut');
-    const titleOut = document.getElementById('titleOut');
-    const contentOut = document.getElementById('contentOut');
-    const socialOut = document.getElementById('socialOut');
+  // عناصر الإخراج
+  const brandName = document.getElementById('brandName');
+  const emailOut = document.getElementById('emailOut');
+  const phoneOut = document.getElementById('phoneOut');
+  const titleOut = document.getElementById('titleOut');
+  const contentOut = document.getElementById('contentOut');
+  const socialOut = document.getElementById('socialOut');
 
-    const stampBox = document.getElementById('stampBox');
-    const stampNameOut = document.getElementById('stampNameOut');
-    const crOut = document.getElementById('crOut');
-    const stampPhoneOut = document.getElementById('stampPhoneOut');
-    const stampImgOut = document.getElementById('stampImgOut');
+  const stampBox = document.getElementById('stampBox');
+  const stampNameOut = document.getElementById('stampNameOut');
+  const crOut = document.getElementById('crOut');
+  const stampPhoneOut = document.getElementById('stampPhoneOut');
+  const stampImgOut = document.getElementById('stampImgOut');
 
-    const lh = document.getElementById('lh');
-    const page = document.getElementById('page');
-    const formCard = document.getElementById('formCard');
-    const toolbar = document.getElementById('toolbar');
+  const lh = document.getElementById('lh');
+  const page = document.getElementById('page');
+  const formCard = document.getElementById('formCard');
+  const toolbar = document.getElementById('toolbar');
+  const printIcons = document.getElementById('printIcons');
 
-    const applyBtn = document.getElementById('applyBtn');
-    const finalBtn = document.getElementById('finalBtn');
-    const printBtn = document.getElementById('printBtn');
-    const printBtn2 = document.getElementById('printBtn2');
-    const backBtn = document.getElementById('backBtn');
-    const resetBtn = document.getElementById('resetBtn');
+  const applyBtn = document.getElementById('applyBtn');
+  const finalBtn = document.getElementById('finalBtn');
+  const printBtn = document.getElementById('printBtn');
+  const printBtn2 = document.getElementById('printBtn2');
+  const backBtn = document.getElementById('backBtn');
+  const resetBtn = document.getElementById('resetBtn');
 
-    // تاريخ/سنة
-    const today = new Date();
-    document.getElementById('today').textContent = today.toLocaleDateString('ar-EG');
-    document.getElementById('year').textContent = today.getFullYear();
+  // تاريخ/سنة
+  const today = new Date();
+  document.getElementById('today').textContent = today.toLocaleDateString('ar-EG');
+  document.getElementById('year').textContent = today.getFullYear();
 
-    // وظائف
-    const setBrand = (hex)=>{ document.documentElement.style.setProperty('--brand', hex) }
-    const setStampInk = (hex)=>{ document.documentElement.style.setProperty('--stamp-ink', hex) }
-    const parseSocial = (val)=> val.split(',').map(s=>s.trim()).filter(Boolean);
+  // منصات + أيقونات SVG صغيرة للطباعة
+  const platforms = [
+    {keys:['instagram','انستقرام','انستا'], name:'Instagram', icon:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.3 2.3.5.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1.1.5 2.3.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.9-.5 2.3-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1.1.4-2.3.5-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.3-2.3-.5-.6-.2-1-.5-1.4-.9a3.5 3.5 0 0 1-.9-1.4c-.2-.4-.4-1.1-.5-2.3C2 15.6 2 15.2 2 12s0-3.6.1-4.9c.1-1.2.3-1.9.5-2.3.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1.1-.4 2.3-.5C8.4 2 8.8 2 12 2Zm0 3.2c-3.1 0-3.5 0-4.7.1-.9.1-1.4.2-1.7.4-.4.1-.6.3-.9.6-.3.3-.4.5-.6.9-.1.3-.3.8-.4 1.7-.1 1.2-.1 1.6-.1 4.7s0 3.5.1 4.7c.1.9.2 1.4.4 1.7.1.4.3.6.6.9.3.3.5.4.9.6.3.1.8.3 1.7.4 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c.9-.1 1.4-.2 1.7-.4.4-.1.6-.3.9-.6.3-.3.4-.5.6-.9.1-.3.3-.8.4-1.7.1-1.2.1-1.6.1-4.7s0-3.5-.1-4.7c-.1-.9-.2-1.4-.4-1.7-.1-.4-.3-.6-.6-.9-.3-.3-.5-.4-.9-.6-.3-.1-.8-.3-1.7-.4-1.2-.1-1.6-.1-4.7-.1Zm0 3.7a4.9 4.9 0 1 1 0 9.8 4.9 4.9 0 0 1 0-9.8Zm0 3.2a1.7 1.7 0 1 0 0 3.4 1.7 1.7 0 0 0 0-3.4Zm5.2-3.8a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4Z"/></svg>'},
+    {keys:['twitter','x','تويتر'], name:'Twitter', icon:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.7 10.6 20.9 2h-1.7l-6.2 7.4L8.2 2H2l7.6 11L2 22h1.7l6.6-7.8L15.8 22H22l-8.3-11.4Zm-2.3 2.7-.76-.98L4 3.3h3.1l4.89 6.33.76.98 6.9 8.94H16.5l-5.1-6.25Z"/></svg>'},
+    {keys:['facebook','فيسبوك'], name:'Facebook', icon:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.7V12h2.7V9.7c0-2.7 1.6-4.2 4-4.2 1.2 0 2.4.2 2.4.2v2.6h-1.4c-1.3 0-1.7.8-1.7 1.6V12h2.9l-.46 2.9h-2.4v7A10 10 0 0 0 22 12"/></svg>'},
+    {keys:['linkedin','لينكد'], name:'LinkedIn', icon:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5.001 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.6h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.8 2.6 4.8 6v6H17v-5.3c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9V21H9z"/></svg>'},
+    {keys:['youtube','يوتيوب'], name:'YouTube', icon:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.5s-.2-1.6-.8-2.3c-.8-.8-1.6-.8-2-1C17.7 3.8 12 3.8 12 3.8h0s-5.7 0-8.2.4c-.4.2-1.2.2-2 1C1.2 5.9 1 7.5 1 7.5S.8 9.4.8 11.3v1.4C.8 14.6 1 16.5 1 16.5s.2 1.6.8 2.3c.8.8 1.8.8 2.2.9 1.6.2 7 .4 8 .4 0 0 5.7 0 8.2-.4.4-.1 1.2-.1 2-1 .6-.7.8-2.3.8-2.3s.2-1.9.2-3.8v-1.4c0-1.9-.2-3.8-.2-3.8zM9.8 14.8V7.8l6.2 3.5-6.2 3.5z"/></svg>'},
+    {keys:['tiktok','تيك'], name:'TikTok', icon:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 8.1a6.9 6.9 0 0 1-4.5-1.6v7.3a6 6 0 1 1-6-6c.4 0 .8 0 1.1.1v3.1a3 3 0 1 0 2.1 2.8V2h3a6.9 6.9 0 0 0 4.3 4.4V8z"/></svg>'},
+    {keys:['snapchat','سناب'], name:'Snapchat', icon:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c2.7 0 4.9 2.2 5 4.9 0 1.1.3 1.8 1.1 2.6.6.6 1.2.8 2 .9-.2.9-.9 1.6-2 1.7-1.4.1-1.8.7-1.9 1 .7.9 2 1.4 3.1 1.8-.6 1-2 1.8-3.5 1.8-.6 0-1.2-.1-1.7-.3-.8.8-1.9 1.4-3.1 1.4s-2.3-.6-3.1-1.4c-.5.2-1.1.3-1.7.3-1.5 0-2.9-.8-3.5-1.8 1.1-.4 2.4-.9 3.1-1.8-.1-.3-.5-.9-1.9-1-1.1-.1-1.8-.8-2-1.7.8-.1 1.4-.3 2-.9.8-.8 1.1-1.5 1.1-2.6C7.1 4.2 9.3 2 12 2z"/></svg>'},
+    {keys:['whatsapp','واتساب'], name:'WhatsApp', icon:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 3.9A10 10 0 0 0 4.2 18.5L3 22l3.6-1.1A10 10 0 1 0 20 3.9Zm-8 16.1a8 8 0 1 1 6.8-3.7l-.4.6-2.4-.7a6.7 6.7 0 0 1-3.9 1.3 6.7 6.7 0 0 1-6.7-6.7c0-1.4.4-2.7 1.2-3.8l.2-.3"/></svg>'},
+  ];
 
-    function applyChanges(){
-      // هيدر
-      brandName.textContent = company.value || 'اسم الشركة';
-      emailOut.textContent = email.value || 'name@example.com';
-      phoneOut.textContent = phone.value || '+973 0000 0000';
-      setBrand(brandColor.value || '#0f766e');
-
-      // عنوان ومحتوى
-      titleOut.textContent = titleIn.value || 'عنوان الرسالة';
-      contentOut.textContent = contentIn.value || '—';
-
-      // تواصل اجتماعي
-      socialOut.innerHTML = '';
-      parseSocial(social.value).forEach(txt=>{
-        const b = document.createElement('span');
-        b.className = 'badge';
-        b.textContent = txt;
-        socialOut.appendChild(b);
-      });
-
-      // ختم مولّد
-      stampNameOut.textContent = stampName.value || (company.value || 'اسم الشركة');
-      crOut.textContent = 'CR: ' + (cr.value || '—');
-      stampPhoneOut.textContent = 'Tel: ' + (stampPhone.value || (phone.value || '—'));
-      setStampInk(stampInk.value);
-
-      // صورة ختم (إن وُجدت)
-      if(stampImage.files && stampImage.files[0]){
-        const reader = new FileReader();
-        reader.onload = (e)=>{
-          stampImgOut.src = e.target.result;
-          stampImgOut.style.display = 'block';
-          stampBox.style.display = 'none';
-        };
-        reader.readAsDataURL(stampImage.files[0]);
-      }else{
-        stampImgOut.style.display = 'none';
-        stampBox.style.display = 'block';
-      }
+  const findPlatform = (chunk) => {
+    const s = chunk.toLowerCase();
+    for(const p of platforms){
+      if(p.keys.some(k => s.includes(k))) return p;
     }
+    // حالات خاصة: X كـ Twitter
+    if(/\b(x)\b/.test(s)) return platforms[1];
+    return null;
+  };
 
-    function finalizeView(state){
-      if(state){
-        formCard.style.display = 'none';
-        toolbar.style.display = 'flex';
-        window.scrollTo({top:0, behavior:'smooth'});
-      }else{
-        formCard.style.display = '';
-        toolbar.style.display = 'none';
-      }
+  const setBrand = (hex)=> document.documentElement.style.setProperty('--brand', hex || '#0f766e');
+  const setStampInk = (hex)=> document.documentElement.style.setProperty('--stamp-ink', hex || '#0b5cff');
+  const parseSocial = (val)=> val.split(',').map(s=>s.trim()).filter(Boolean);
+
+  function buildPrintIcons(items){
+    // إنشاء أيقونات صغيرة للطباعة أسفل يسار الصفحة
+    printIcons.innerHTML = '';
+    items.forEach(item=>{
+      const p = findPlatform(item) || {name:'', icon:''};
+      if(!p.icon) return;
+      const span = document.createElement('span');
+      span.innerHTML = p.icon;
+      printIcons.appendChild(span);
+    });
+  }
+
+  function applyChanges(){
+    // هيدر
+    brandName.textContent = company.value || 'اسم الشركة';
+    emailOut.textContent = email.value || 'name@example.com';
+    phoneOut.textContent = phone.value || '+973 0000 0000';
+    setBrand(brandColor.value);
+    // عنوان ومحتوى
+    titleOut.textContent = titleIn.value || 'عنوان الرسالة';
+    contentOut.textContent = contentIn.value || '—';
+    // تواصل اجتماعي (بادجات نصية)
+    socialOut.innerHTML = '';
+    const items = parseSocial(social.value);
+    items.forEach(txt=>{
+      const p = findPlatform(txt);
+      const label = p ? p.name : txt.split(':')[0] || 'Social';
+      const b = document.createElement('span');
+      b.className = 'badge';
+      b.textContent = label.trim();
+      socialOut.appendChild(b);
+    });
+    // أيقونات الطباعة
+    buildPrintIcons(items);
+    // الختم
+    stampNameOut.textContent = stampName.value || (company.value || 'اسم الشركة');
+    crOut.textContent = 'CR: ' + (cr.value || '—');
+    stampPhoneOut.textContent = 'Tel: ' + (stampPhone.value || (phone.value || '—'));
+    setStampInk(stampInk.value);
+    // صورة ختم
+    if(stampImage.files && stampImage.files[0]){
+      const reader = new FileReader();
+      reader.onload = e => {
+        stampImgOut.src = e.target.result;
+        stampImgOut.style.display = 'block';
+        stampBox.style.display = 'none';
+      };
+      reader.readAsDataURL(stampImage.files[0]);
+    }else{
+      stampImgOut.style.display = 'none';
+      stampBox.style.display = 'block';
     }
+  }
 
-    // أحداث
-    applyBtn.addEventListener('click', applyChanges);
-    finalBtn.addEventListener('click', ()=>{ applyChanges(); finalizeView(true); });
-    backBtn.addEventListener('click', ()=> finalizeView(false));
-    printBtn.addEventListener('click', ()=>{ applyChanges(); window.print(); });
-    printBtn2.addEventListener('click', ()=>{ applyChanges(); window.print(); });
+  function finalizeView(state){
+    if(state){ formCard.style.display='none'; toolbar.style.display='flex'; window.scrollTo({top:0,behavior:'smooth'}); }
+    else { formCard.style.display=''; toolbar.style.display='none'; }
+  }
 
-    resetBtn.addEventListener('click', ()=>{
-      document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"]').forEach(i=>i.value='');
-      contentIn.value = ''; brandColor.value='#0f766e'; stampInk.value='#0b5cff'; stampImage.value='';
-      setBrand('#0f766e'); setStampInk('#0b5cff');
-      applyChanges();
-    });
+  // أحداث
+  document.getElementById('applyBtn').addEventListener('click', applyChanges);
+  document.getElementById('finalBtn').addEventListener('click', ()=>{ applyChanges(); finalizeView(true); });
 
-    // تحديث مباشر عند إدخال بسيط (تحسين تجربة)
-    [company,email,phone,social,titleIn,brandColor,contentIn,stampName,cr,stampPhone,stampInk].forEach(el=>{
-      el.addEventListener('input', applyChanges);
-    });
+  const triggerPrint = ()=>{ applyChanges(); setTimeout(()=>window.print(), 50); };
+  document.getElementById('printBtn').addEventListener('click', triggerPrint);
+  document.getElementById('printBtn2').addEventListener('click', triggerPrint);
+  document.getElementById('backBtn').addEventListener('click', ()=> finalizeView(false));
+  document.getElementById('resetBtn').addEventListener('click', ()=>{
+    document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"]').forEach(i=>i.value='');
+    contentIn.value=''; brandColor.value='#0f766e'; stampInk.value='#0b5cff'; stampImage.value='';
+    setBrand('#0f766e'); setStampInk('#0b5cff'); applyChanges();
+  });
 
-    // تهيئة
-    applyChanges();
-  </script>
+  // تحديث مباشر أثناء الكتابة
+  [company,email,phone,social,titleIn,brandColor,contentIn,stampName,cr,stampPhone,stampInk].forEach(el=>{
+    el.addEventListener('input', applyChanges);
+  });
+
+  // تأكيد تلوين الهيدر وملء البيانات قبل الطباعة (حل مشكلة الهيدر الفارغ)
+  window.onbeforeprint = applyChanges;
+
+  // تهيئة
+  applyChanges();
+</script>
 </body>
 </html>
