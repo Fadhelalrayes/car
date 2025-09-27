@@ -25,17 +25,9 @@
   }
 
   /* الهيدر */
-  .lh{
-    background:linear-gradient(90deg,var(--black),#121828);
-    color:#fff;padding:14px 18px;
-    display:flex;align-items:center
-  }
+  .lh{background:linear-gradient(90deg,var(--black),#121828);color:#fff;padding:14px 18px;display:flex;align-items:center}
   .brand{display:flex;align-items:center;gap:10px}
-  .logo{
-    width:36px;height:36px;border-radius:9px;
-    background:linear-gradient(135deg,var(--gold),var(--gold-soft));
-    display:grid;place-items:center;font-weight:900;color:#000
-  }
+  .logo{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,var(--gold),var(--gold-soft));display:grid;place-items:center;font-weight:900;color:#000}
   .brand-name{font-weight:800;font-size:18px}
   .gold-line{height:6px;background:linear-gradient(90deg,var(--gold-soft),var(--gold),#a6842a)}
 
@@ -67,11 +59,7 @@
   @media print{
     body *{visibility:hidden}
     #page,#page *{visibility:visible}
-    #page{
-      position:absolute;left:0;top:0;
-      width:210mm;height:297mm;
-      box-shadow:none;border:none
-    }
+    #page{position:absolute;left:0;top:0;width:210mm;height:297mm;box-shadow:none;border:none}
   }
 </style>
 </head>
@@ -80,75 +68,59 @@
   <header class="lh">
     <div class="brand">
       <div class="logo">★</div>
-      <div class="brand-name" id="brandName">اسم الشركة</div>
+      <div class="brand-name">شركة المياه الوطنية</div>
     </div>
   </header>
   <div class="gold-line"></div>
 
   <main class="doc">
     <div class="meta">
-      <div id="metaDate">التاريخ: <span id="today"></span></div>
-      <div id="metaRef">مرجع: —</div>
+      <div>التاريخ: <span id="today"></span></div>
+      <div>مرجع: —</div>
     </div>
-    <h1 class="title" id="titleOut">عنوان الرسالة</h1>
-    <article class="content" id="contentOut">
-      محتوى الرسالة يظهر هنا بمحاذاة الأطراف.
+    <h1 class="title">طلب تحويل</h1>
+    <article class="content">
+      السلام عليكم ورحمة الله وبركاته،<br><br>
+      نتقدم إليكم بهذا الطلب، راجين تعاونكم وتفضلكم بالموافقة.
     </article>
   </main>
 
   <footer class="ft">
     <div class="stamp-box">
-      <div id="stampNameOut">اسم الشركة</div>
-      <div id="crOut">CR: —</div>
-      <div id="stampPhoneOut">Tel: —</div>
+      <div>شركة المياه الوطنية</div>
+      <div>CR: 555432</div>
+      <div>Tel: 33775858</div>
     </div>
     <div class="bottom-area">
       <div class="identity">
-        <strong id="personName">الاسم الشخصي</strong><br>
-        <span id="personRole">الصفة / الوظيفة</span>
+        <strong>فاضل الرئيس</strong><br>
+        المدير العام
       </div>
-      <div class="social-block" id="socialBottom"></div>
+      <div class="social-block">
+        <div class="social-item">
+          <svg fill="#E1306C" viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm5 5a5 5 0 1 0 .001 10.001A5 5 0 0 0 12 7Zm6.5-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2Z"/><circle cx="12" cy="12" r="3.3"/></svg>
+          <span>@company</span>
+        </div>
+        <div class="social-item">
+          <svg fill="#000" viewBox="0 0 24 24"><path d="M13.7 10.6 21 2h-1.7l-6.2 7.4L8.2 2H2l7.6 11L2 22h1.7l6.6-7.8L15.8 22H22l-8.3-11.4Z"/></svg>
+          <span>@company</span>
+        </div>
+        <div class="social-item">
+          <svg fill="#1877F2" viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.7V12h2.7V9.7c0-2.7 1.6-4.2 4-4.2 1.2 0 2.4.2 2.4.2v2.6h-1.4c-1.3 0-1.7.8-1.7 1.6V12h2.9l-.46 2.9h-2.4v7A10 10 0 0 0 22 12"/></svg>
+          <span>/company</span>
+        </div>
+        <div class="social-item">
+          <svg fill="#0A66C2" viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5.001 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.6h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.8 2.6 4.8 6v6H17v-5.3c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9V21H9z"/></svg>
+          <span>/company</span>
+        </div>
+      </div>
     </div>
   </footer>
 </div>
 
 <script>
-  // أرقام إنجليزية دائمًا
-  const digitMap={'٠':'0','١':'1','٢':'2','٣':'3','٤':'4','٥':'5','٦':'6','٧':'7','٨':'8','٩':'9','۰':'0','۱':'1','۲':'2','۳':'3','۴':'4','۵':'5','۶':'6','۷':'7','۸':'8','۹':'9'};
-  const normalizeDigits=str=>(str||'').replace(/[٠-٩۰-۹]/g,d=>digitMap[d]||d);
-
-  // التاريخ
+  // التاريخ (dd/mm/yyyy)
   document.getElementById("today").textContent=new Date().toLocaleDateString("en-GB");
-
-  // تعبئة بيانات مثال
-  document.getElementById("brandName").textContent="شركة المياه الوطنية";
-  document.getElementById("titleOut").textContent="طلب تحويل";
-  document.getElementById("contentOut").textContent="السلام عليكم ورحمة الله وبركاته، ...";
-  document.getElementById("stampNameOut").textContent="شركة المياه الوطنية";
-  document.getElementById("crOut").textContent="CR: "+normalizeDigits("555432");
-  document.getElementById("stampPhoneOut").textContent="Tel: "+normalizeDigits("33775858");
-  document.getElementById("personName").textContent="فاضل الرئيس";
-  document.getElementById("personRole").textContent="المدير العام";
-
-  // أيقونات سوشيال بالأسفل
-  const icons={
-    ig:'<svg fill="#E1306C" viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm5 5a5 5 0 1 0 .001 10.001A5 5 0 0 0 12 7Zm6.5-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2Z"/><circle cx="12" cy="12" r="3.3"/></svg>',
-    tw:'<svg fill="#000" viewBox="0 0 24 24"><path d="M13.7 10.6 21 2h-1.7l-6.2 7.4L8.2 2H2l7.6 11L2 22h1.7l6.6-7.8L15.8 22H22l-8.3-11.4Z"/></svg>',
-    fb:'<svg fill="#1877F2" viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.7V12h2.7V9.7c0-2.7 1.6-4.2 4-4.2 1.2 0 2.4.2 2.4.2v2.6h-1.4c-1.3 0-1.7.8-1.7 1.6V12h2.9l-.46 2.9h-2.4v7A10 10 0 0 0 22 12"/></svg>',
-    ln:'<svg fill="#0A66C2" viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5.001 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.6h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.8 2.6 4.8 6v6H17v-5.3c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9V21H9z"/></svg>'
-  };
-  const social=document.getElementById("socialBottom");
-  [
-    {key:"ig",text:"@company"},
-    {key:"tw",text:"@company"},
-    {key:"fb",text:"/company"},
-    {key:"ln",text:"/company"}
-  ].forEach(x=>{
-    const div=document.createElement("div");
-    div.className="social-item";
-    div.innerHTML=icons[x.key]+"<span>"+x.text+"</span>";
-    social.appendChild(div);
-  });
 </script>
 </body>
 </html>
