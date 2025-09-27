@@ -3,18 +3,38 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>لتر هد أونلاين — A4</title>
+
+<title>لتر هد أونلاين | توليد Letterhead A4 احترافي بالعربي</title>
+<meta name="description" content="صمم لتـر هد (Letterhead) عربي احترافي جاهز للطباعة A4: شعار، عنوان، محتوى، ختم أزرق رسمي، توقيع أونلاين، وشبكات التواصل. تحميل PDF أو مشاركة مباشرة.">
+<meta name="keywords" content="لتر هد, لتـر هد, Letterhead, نموذج خطاب, ورق رسمي, ختم, توقيع, A4, PDF, عربي, شركات">
+<link rel="canonical" href="https://example.com/letterhead" />
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:title" content="لتر هد أونلاين — Letterhead A4 احترافي" />
+<meta property="og:description" content="أنشئ ورق رسمي عربي A4 مع ختم وتوقيع أونلاين، وحمّله PDF أو شاركه." />
+<meta property="og:type" content="website" />
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"SoftwareApplication",
+  "name":"لتر هد أونلاين",
+  "applicationCategory":"WebApplication",
+  "description":"مولّد Letterhead عربي احترافي A4 مع ختم وتوقيع ومشاركة PDF.",
+  "operatingSystem":"Any",
+  "keywords":"لتر هد, Letterhead, ورق رسمي, A4, PDF, ختم, توقيع, عربي",
+  "url":"https://example.com/letterhead",
+  "inLanguage":"ar"
+}
+</script>
+
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-:root{
-  --gold:#C6A14A;--black:#0b0f19;--ink:#111827;--muted:#6b7280;--paper:#fff;
-  --stamp:#0a4ea6;
-}
+:root{--gold:#C6A14A;--black:#0b0f19;--ink:#111827;--muted:#6b7280;--paper:#fff;--stamp:#0a4ea6}
 *{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 html,body{height:100%}
 body{margin:0;background:#f6f7f9;color:var(--ink);font-family:"Cairo",system-ui}
 
-/* تخطيط */
+/* تخطيط عام */
 .wrap{max-width:1200px;margin:auto;padding:12px;display:grid;grid-template-columns:420px 1fr;gap:12px}
 @media(max-width:1024px){.wrap{grid-template-columns:1fr}}
 .card{background:#fff;border:1px solid #e7e9ef;border-radius:14px;box-shadow:0 8px 16px rgba(0,0,0,.05);overflow:hidden}
@@ -28,15 +48,15 @@ textarea{min-height:120px;resize:vertical}
 @media(max-width:720px){.g2,.g4{grid-template-columns:1fr}}
 .btns{display:grid;gap:8px;grid-template-columns:1fr 1fr}
 .btn{border:0;border-radius:12px;padding:12px 14px;font-weight:800;font-size:15px;cursor:pointer}
-.btn.primary{background:var(--gold);color:#000}.btn.dark{background:var(--black);color:#fff}.btn.ghost{background:#eef2f7}
+.btn.primary{background:var(--gold);color:#000}.btn.ghost{background:#eef2f7}
 
-/* شريط أدوات: أيقونة + نص ثابت في سطر واحد */
+/* شريط أدوات: موحّد الشكل */
 .tools{display:flex;gap:10px;align-items:center;padding:10px 10px 0}
-.tool{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 12px;border-radius:12px;border:1px solid #e4e7ef;background:#fff;cursor:pointer;font-weight:800;font-size:14px;white-space:nowrap}
+.tool{display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 14px;border-radius:12px;border:1px solid #e4e7ef;background:#fff;cursor:pointer;font-weight:800;font-size:13.5px;white-space:nowrap;line-height:1}
 .tool.dark{background:linear-gradient(180deg,#1b2335,#0b0f19);color:#fff;border:0}
-.tool svg{width:18px;height:18px}
+.tool svg{width:16px;height:16px;flex:0 0 16px}
 
-/* المعاينة (بدون فراغ أسفل) */
+/* المعاينة */
 .preview{padding:8px 10px 0}
 .viewport{width:100%;display:flex;justify-content:center;align-items:flex-start;overflow:hidden}
 .scale-box{transform-origin:top center;display:inline-block}
@@ -62,13 +82,13 @@ textarea{min-height:120px;resize:vertical}
 .bar .social .item span{color:#f6f6f6}
 .bar .social svg{width:15px;height:15px;fill:#ffd777}
 
-/* ختم رسمي أزرق — بلا ظل أو ميل */
+/* ختم أزرق رسمي بلا ظل */
 .left-col{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
 .stamp-box{width:60mm;min-height:33mm;padding:10px 12px;border-radius:12px;position:relative;border:2px solid var(--stamp);background:#fff;transform:none;box-shadow:none;overflow:hidden}
-.sig-overlay{position:absolute;left:10px;right:10px;top:8px;height:60px;display:flex;align-items:center;justify-content:flex-start;opacity:1}
+.sig-overlay{position:absolute;left:10px;right:10px;top:8px;height:60px;display:flex;align-items:center;justify-content:flex-start}
 .sig-overlay img{max-height:60px;filter:grayscale(1) contrast(1.1)}
-.stamp-ink{color:var(--stamp);font-weight:800;letter-spacing:.2px}
-.stamp-line{direction:ltr;text-align:left;font-weight:700;color:var(--stamp)}
+.stamp-ink,.stamp-line{color:var(--stamp);font-weight:800}
+.stamp-line{direction:ltr;text-align:left}
 .person{text-align:left;direction:ltr;margin-top:2px}.person strong{font-size:14.5px}
 
 /* لوحة التوقيع */
@@ -88,15 +108,15 @@ canvas#sigCanvas{width:100%;height:180px;background:#fff;border:1px solid #e5e7e
 
 <main class="wrap">
   <!-- الإعدادات -->
-  <section class="card">
-    <div class="hd">لتر هد أونلاين</div>
+  <section class="card" aria-label="إعدادات اللتر هد">
+    <div class="hd">إعدادات اللتر هد</div>
     <div class="bd">
       <div class="grid">
-        <div><label>اسم الشركة</label><input id="company" type="text" placeholder="مثال: شركة الأفق للتجارة"></div>
+        <div><label>اسم الشركة</label><input id="company" type="text" placeholder="مثال: شركة الأفق للتجارة" aria-label="اسم الشركة"></div>
 
         <div class="g2">
           <div><label>كود الدولة</label>
-            <select id="countryCode">
+            <select id="countryCode" aria-label="كود الدولة">
               <option value="+213">🇩🇿 الجزائر (+213)</option>
               <option value="+973" selected>🇧🇭 البحرين (+973)</option>
               <option value="+269">🇰🇲 جزر القمر (+269)</option>
@@ -121,22 +141,22 @@ canvas#sigCanvas{width:100%;height:180px;background:#fff;border:1px solid #e5e7e
               <option value="+967">🇾🇪 اليمن (+967)</option>
             </select>
           </div>
-          <div><label>رقم الاتصال</label><input id="phone" type="tel" placeholder="3333 3333"></div>
+          <div><label>رقم الاتصال</label><input id="phone" type="tel" placeholder="3333 3333" aria-label="رقم الاتصال"></div>
         </div>
 
-        <div><label>البريد الإلكتروني</label><input id="email" type="email" placeholder="name@example.com"></div>
+        <div><label>البريد الإلكتروني</label><input id="email" type="email" placeholder="name@example.com" aria-label="البريد الإلكتروني"></div>
 
-        <div><label>عنوان الرسالة</label><input id="titleIn" type="text" placeholder="عنوان الرسالة"></div>
-        <div><label>المحتوى</label><textarea id="contentIn" placeholder="اكتب نص الرسالة هنا..."></textarea></div>
+        <div><label>عنوان الرسالة</label><input id="titleIn" type="text" placeholder="عنوان الرسالة" aria-label="عنوان الرسالة"></div>
+        <div><label>المحتوى</label><textarea id="contentIn" placeholder="اكتب نص الرسالة هنا..." aria-label="المحتوى"></textarea></div>
 
         <div class="g2">
-          <div><label>الاسم الشخصي (للتوقيع)</label><input id="personNameIn" type="text"></div>
-          <div><label>الصفة / الوظيفة</label><input id="personRoleIn" type="text"></div>
+          <div><label>الاسم الشخصي (للتوقيع)</label><input id="personNameIn" type="text" aria-label="الاسم الشخصي"></div>
+          <div><label>الصفة / الوظيفة</label><input id="personRoleIn" type="text" aria-label="الصفة"></div>
         </div>
 
         <div class="g2">
-          <div><label>العنوان</label><input id="addressIn" type="text" placeholder="المنامة - البحرين"></div>
-          <div><label>السجل التجاري (CR)</label><input id="cr" type="text" placeholder="555432"></div>
+          <div><label>العنوان</label><input id="addressIn" type="text" placeholder="المنامة - البحرين" aria-label="العنوان"></div>
+          <div><label>السجل التجاري (CR)</label><input id="cr" type="text" placeholder="555432" aria-label="السجل التجاري"></div>
         </div>
 
         <div class="g4">
@@ -149,7 +169,7 @@ canvas#sigCanvas{width:100%;height:180px;background:#fff;border:1px solid #e5e7e
         <!-- توقيع أونلاين -->
         <div>
           <label>التوقيع أونلاين</label>
-          <div class="sig-pad">
+          <div class="sig-pad" aria-label="منطقة التوقيع">
             <canvas id="sigCanvas"></canvas>
             <div class="btns" style="margin-top:8px">
               <button type="button" class="btn ghost" id="clearSig">مسح التوقيع</button>
@@ -157,40 +177,36 @@ canvas#sigCanvas{width:100%;height:180px;background:#fff;border:1px solid #e5e7e
             </div>
           </div>
         </div>
-
-        <div class="btns">
-          <button class="btn primary" id="applyBtn" type="button">تطبيق</button>
-          <button class="btn dark" id="resetBtn" type="button">إعادة ضبط</button>
-        </div>
+        <!-- لا تطبيق/لا إعادة ضبط حسب طلبك -->
       </div>
     </div>
   </section>
 
   <!-- المعاينة -->
-  <section class="card">
+  <section class="card" aria-label="معاينة A4">
     <div class="hd">المعاينة</div>
 
-    <!-- أدوات (أيقونة + نص) -->
-    <div class="tools">
+    <!-- أدوات -->
+    <div class="tools" role="toolbar" aria-label="أدوات">
       <button class="tool" id="printView" title="طباعة">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 2h12v6H6zM6 14h12v8H6z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M6 2h12v6H6zM6 14h12v8H6z"/></svg>
         <span>طباعة</span>
       </button>
       <button class="tool dark" id="downloadPdf" title="تحميل PDF">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.59l3.3-3.3 1.4 1.42L12 17.41 7.3 11.7l1.4-1.41 3.3 3.3V3h2z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 3v10.59l3.3-3.3 1.4 1.42L12 17.41 7.3 11.7l1.4-1.41 3.3 3.3V3h2z"/></svg>
         <span>تحميل PDF</span>
       </button>
-      <button class="tool" id="sendMail" title="إرسال عبر الإيميل">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 6h18v12H3z"/><path d="M3 8.2 12 13l9-4.8V6H3z"/></svg>
-        <span>إرسال إيميل</span>
+      <button class="tool" id="sharePdf" title="مشاركة">
+        <svg viewBox="0 0 24 24"><path d="M16 8a3 3 0 1 0-2.8-4H13v8.3l-2.1-1.2-1 1.7 4 2.3V22h2V8zM6 9h3v2H8v9H6z"/></svg>
+        <span>مشاركة</span>
       </button>
     </div>
 
     <div class="bd preview">
       <div class="viewport" id="viewport">
         <div class="scale-box" id="scaleBox">
-          <div id="page">
-            <header class="lh"><div class="logo">★</div><div class="brand-name" id="brandName">اسم الشركة</div></header>
+          <div id="page" aria-label="ورقة A4">
+            <header class="lh"><div class="logo" aria-hidden="true">★</div><div class="brand-name" id="brandName">اسم الشركة</div></header>
             <div class="gold-line"></div>
 
             <main class="doc">
@@ -205,7 +221,7 @@ canvas#sigCanvas{width:100%;height:180px;background:#fff;border:1px solid #e5e7e
             <footer class="ft">
               <div class="bar"><div class="social" id="socialRow"></div></div>
               <div class="left-col">
-                <div class="stamp-box">
+                <div class="stamp-box" aria-label="الختم الرسمي">
                   <div class="sig-overlay" id="sigInStamp"></div>
                   <div class="stamp-ink" id="stampCompany">اسم الشركة</div>
                   <div class="stamp-line" id="crOut">CR: —</div>
@@ -224,39 +240,26 @@ canvas#sigCanvas{width:100%;height:180px;background:#fff;border:1px solid #e5e7e
 
 <footer class="site-footer">
   برمجة وتطوير :
-  <a href="https://api.whatsapp.com/send/?phone=97333375858&text&type=phone_number&app_absent=0&wame_ctl=1&fbclid=PAT01DUANFLKxleHRuA2FlbQIxMAABp_vYXolinbYrVrgjwMDHNxCYGKFpiJeBUuFC0MhtfiFkMcJeJEKE8e0AwJjg_aem_EVGJNd2lo-fMBHSv1xQG8Q"
-     target="_blank" rel="noopener noreferrer">فاضل الريس</a>
+  <a href="https://api.whatsapp.com/send/?phone=97333375858&text&type=phone_number&app_absent=0&wame_ctl=1" target="_blank" rel="noopener">فاضل الريس</a>
 </footer>
 
+<!-- مكتبات -->
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 <script>
 /* التاريخ */
 document.getElementById("today").textContent=new Date().toLocaleDateString("en-GB");
 
-/* تخزين */
-const STORE_KEY='letterheadFormV6';
+/* تخزين محلي */
+const STORE_KEY='letterheadFormV8';
 const DM={'٠':'0','١':'1','٢':'2','٣':'3','٤':'4','٥':'5','٦':'6','٧':'7','٨':'8','٩':'9','۰':'0','۱':'1','۲':'2','۳':'3','۴':'4','۵':'5','۶':'6','۷':'7','۸':'8','۹':'9'};
 const normalize=s=>(s||'').replace(/[٠-٩۰-۹]/g,d=>DM[d]||d);
 const $=id=>document.getElementById(id);
 
-/* حفظ/تحميل */
-function saveState(extra={}){
-  const ids=['company','countryCode','phone','email','titleIn','contentIn','personNameIn','personRoleIn','addressIn','cr','igIn','twIn','fbIn','lnIn','signatureDataURL'];
-  const data={}; ids.forEach(id=>{const el=$(id); if(el) data[id]=el.value??'';}); Object.assign(data,extra);
-  localStorage.setItem(STORE_KEY, JSON.stringify(data));
-}
-function loadState(){
-  try{
-    const raw=localStorage.getItem(STORE_KEY); if(!raw) return {};
-    const data=JSON.parse(raw);
-    Object.entries(data).forEach(([k,v])=>{const el=$(k); if(el && typeof v==='string') el.value=v;});
-    if(data.signatureDataURL){const img=new Image(); img.src=data.signatureDataURL; img.alt='التوقيع'; $('sigInStamp').innerHTML=''; $('sigInStamp').appendChild(img);}
-    return data;
-  }catch(e){return {}}
-}
+function saveState(extra={}){const ids=['company','countryCode','phone','email','titleIn','contentIn','personNameIn','personRoleIn','addressIn','cr','igIn','twIn','fbIn','lnIn','signatureDataURL'];const data={};ids.forEach(id=>{const el=$(id);if(el)data[id]=el.value??''});Object.assign(data,extra);localStorage.setItem(STORE_KEY,JSON.stringify(data))}
+function loadState(){try{const raw=localStorage.getItem(STORE_KEY);if(!raw)return{};const data=JSON.parse(raw);Object.entries(data).forEach(([k,v])=>{const el=$(k);if(el&&typeof v==='string')el.value=v});if(data.signatureDataURL){const img=new Image();img.src=data.signatureDataURL;img.alt='التوقيع';$('sigInStamp').innerHTML='';$('sigInStamp').appendChild(img)}return data}catch(e){return{}}}
 
-/* عناصر */
+/* عناصر نموذج */
 const company=$('company'), country=$('countryCode'), phone=$('phone'), email=$('email'),
       titleIn=$('titleIn'), contentIn=$('contentIn'), personNameIn=$('personNameIn'), personRoleIn=$('personRoleIn'),
       addressIn=$('addressIn'), cr=$('cr'), igIn=$('igIn'), twIn=$('twIn'), fbIn=$('fbIn'), lnIn=$('lnIn');
@@ -275,7 +278,7 @@ const icons={
   mail: ICON('<path d="M3 6h18v12H3z"/><path fill="#0b0f19" d="M3 8.2 12 13l9-4.8V6H3v2.2z"/>'),
   phone: ICON('<path d="M6.6 2h2.7l1.1 4-2 1.2a13.5 13.5 0 0 0 6 6l1.2-2 4 1.1v2.7c0 1-0.8 1.9-1.8 1.9-7.8 0-14.1-6.3-14.1-14.1C4.7 2.8 5.6 2 6.6 2z"/>')
 };
-function fullPhone(){const cc=(country.value||''); const p=normalize(phone.value||''); return (cc&&p)?`${cc}\u00A0${p}`:(p||'');}
+function fullPhone(){const cc=(country.value||''); const p=(phone.value||'').replace(/[٠-٩۰-۹]/g,d=>DM[d]); return (cc&&p)?`${cc}\u00A0${p}`:(p||'');}
 function buildSocial(){
   socialRow.innerHTML='';
   const items=[];
@@ -288,69 +291,46 @@ function buildSocial(){
   items.forEach(it=>{const d=document.createElement('div'); d.className='item'; d.innerHTML=it.icon+'<span>'+it.txt+'</span>'; socialRow.appendChild(d);});
 }
 
-/* تطبيق */
+/* تطبيق القيم */
 function applyChanges(){
   brandName.textContent=company.value.trim()||'اسم الشركة';
   stampCompany.textContent=brandName.textContent;
   titleOut.textContent=titleIn.value.trim()||'عنوان الرسالة';
-  contentOut.textContent=normalize(contentIn.value)||'—';
+  contentOut.textContent=(contentIn.value||'').replace(/[٠-٩۰-۹]/g,d=>DM[d])||'—';
   addressOut.textContent=addressIn.value.trim()||'—';
-  crOut.textContent='CR: '+(normalize(cr.value)||'—');
+  crOut.textContent='CR: '+((cr.value||'').replace(/[٠-٩۰-۹]/g,d=>DM[d])||'—');
   phoneOut.textContent='Tel: '+(fullPhone()||'—');
   personName.textContent=personNameIn.value.trim()||'الاسم الشخصي';
   personRole.textContent=personRoleIn.value.trim()||'الصفة / الوظيفة';
-  buildSocial();
-  saveState();
+  buildSocial(); saveState();
 }
 
-/* تحجيم المعاينة — نفس ارتفاع A4 */
+/* تحجيم المعاينة لارتفاع A4 (لا فراغ سفلي) */
 const viewport=$('viewport'), scaleBox=$('scaleBox');
-function scalePreview(){
-  const avail=viewport.clientWidth-6;
-  const PAGE=210*96/25.4, PHEIGHT=297*96/25.4;
-  const s=Math.min(1, avail / PAGE);
-  scaleBox.style.transform=`scale(${s})`;
-  viewport.style.height=Math.round(PHEIGHT*s)+'px';
-}
+function scalePreview(){const avail=viewport.clientWidth-6;const PAGE=210*96/25.4;const s=Math.min(1,avail/PAGE);scaleBox.style.transform=`scale(${s})`;viewport.style.height=(297*96/25.4*s)+'px'}
 window.addEventListener('resize',()=>requestAnimationFrame(scalePreview),{passive:true});
 
-/* توقيع */
+/* التوقيع */
 const sigCanvas=$('sigCanvas'), ctx=sigCanvas.getContext('2d');
-function resizeSigCanvas(){
-  const DPR=Math.min(window.devicePixelRatio||1, 1.75);
-  const w=sigCanvas.clientWidth, h=sigCanvas.clientHeight;
-  sigCanvas.width=w*DPR; sigCanvas.height=h*DPR;
-  ctx.setTransform(DPR,0,0,DPR,0,0);
-  ctx.lineWidth=2.8; ctx.lineCap='round'; ctx.strokeStyle='#111';
-  ctx.clearRect(0,0,w,h);
-}
+function resizeSigCanvas(){const DPR=Math.min(window.devicePixelRatio||1,1.75);const w=sigCanvas.clientWidth,h=sigCanvas.clientHeight;sigCanvas.width=w*DPR;sigCanvas.height=h*DPR;ctx.setTransform(DPR,0,0,DPR,0,0);ctx.lineWidth=2.8;ctx.lineCap='round';ctx.strokeStyle='#111';ctx.clearRect(0,0,w,h)}
 function pos(e){const r=sigCanvas.getBoundingClientRect();const t=e.touches?e.touches[0]:e;return{x:t.clientX-r.left,y:t.clientY-r.top}}
 let drawing=false;
-sigCanvas.addEventListener('mousedown',e=>{drawing=true;const p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y)},{passive:true});
-sigCanvas.addEventListener('mousemove',e=>{if(!drawing)return;const p=pos(e);ctx.lineTo(p.x,p.y);ctx.stroke()},{passive:true});
-window.addEventListener('mouseup',()=>{drawing=false},{passive:true});
+sigCanvas.addEventListener('mousedown',e=>{drawing=true;const p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y)});
+sigCanvas.addEventListener('mousemove',e=>{if(!drawing)return;const p=pos(e);ctx.lineTo(p.x,p.y);ctx.stroke()});
+window.addEventListener('mouseup',()=>{drawing=false});
 sigCanvas.addEventListener('touchstart',e=>{e.preventDefault();drawing=true;const p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y)},{passive:false});
 sigCanvas.addEventListener('touchmove',e=>{e.preventDefault();if(!drawing)return;const p=pos(e);ctx.lineTo(p.x,p.y);ctx.stroke()},{passive:false});
-sigCanvas.addEventListener('touchend',()=>{drawing=false},{passive:true});
+sigCanvas.addEventListener('touchend',()=>{drawing=false});
+$('clearSig').addEventListener('click',()=>{resizeSigCanvas();$('sigInStamp').innerHTML='';saveState({signatureDataURL:''})});
+$('useSig').addEventListener('click',()=>{const url=sigCanvas.toDataURL('image/png');$('sigInStamp').innerHTML='';const img=new Image();img.src=url;img.alt='التوقيع';$('sigInStamp').appendChild(img);saveState({signatureDataURL:url})});
 
-$('clearSig').addEventListener('click',()=>{resizeSigCanvas(); $('sigInStamp').innerHTML=''; saveState({signatureDataURL:''});});
-$('useSig').addEventListener('click',()=>{
-  const url=sigCanvas.toDataURL('image/png');
-  $('sigInStamp').innerHTML='';
-  const img=new Image(); img.src=url; img.alt='التوقيع';
-  $('sigInStamp').appendChild(img);
-  saveState({signatureDataURL:url});
-});
-
-/* ===== PDF بحجم A4 من نسخة غير مُكبَّرة ===== */
+/* ===== توليد PDF صفحة واحدة A4 بالحجم الكامل ===== */
 async function renderA4Canvas(){
   const src=document.getElementById('page');
   const clone=src.cloneNode(true);
   Object.assign(clone.style,{width:'210mm',height:'297mm',transform:'none',boxShadow:'none',position:'static'});
-  const holder=document.createElement('div');
-  Object.assign(holder.style,{position:'fixed',left:'-9999px',top:'0',background:'#ffffff',zIndex:-1});
-  holder.appendChild(clone);
-  document.body.appendChild(holder);
+  const holder=document.createElement('div');Object.assign(holder.style,{position:'fixed',left:'-9999px',top:'0',background:'#ffffff'});
+  holder.appendChild(clone);document.body.appendChild(holder);
   const canvas=await html2canvas(clone,{scale:2,backgroundColor:'#ffffff',useCORS:true});
   document.body.removeChild(holder);
   return canvas;
@@ -360,50 +340,51 @@ async function makePDFBlob(){
   const canvas=await renderA4Canvas();
   const img=canvas.toDataURL('image/jpeg',0.96);
   const pdf=new jsPDF('p','mm','a4');
-  pdf.addImage(img,'JPEG',0,0,210,297,'','FAST');
+  pdf.addImage(img,'JPEG',0,0,210,297,'','FAST');        // صفحة واحدة فقط
   return pdf.output('blob');
 }
-document.getElementById('downloadPdf').addEventListener('click',async ()=>{
+
+/* تحميل */
+$('downloadPdf').addEventListener('click',async ()=>{
   const blob=await makePDFBlob();
   const url=URL.createObjectURL(blob);
   const a=document.createElement('a'); a.href=url; a.download='letterhead.pdf'; a.click();
   URL.revokeObjectURL(url);
 });
 
-/* طباعة و إيميل (مشاركة الملف كمرفق إن أمكن) */
-document.getElementById('printView').addEventListener('click',()=>window.print());
-document.getElementById('sendMail').addEventListener('click',async ()=>{
+/* مشاركة — تعرض كل التطبيقات */
+$('sharePdf').addEventListener('click',async ()=>{
   try{
     const blob=await makePDFBlob();
     const file=new File([blob],'letterhead.pdf',{type:'application/pdf'});
     if(navigator.canShare && navigator.canShare({files:[file]})){
-      await navigator.share({title:'Letterhead',text:'مرفق اللتر هد (PDF).',files:[file]});
-      return;
+      await navigator.share({title:'Letterhead',text:'لتر هد PDF',files:[file]});
+    }else{
+      // بديل: تنزيل وفتح البريد
+      const url=URL.createObjectURL(blob);
+      const a=document.createElement('a'); a.href=url; a.download='letterhead.pdf'; a.click();
+      URL.revokeObjectURL(url);
+      const subject=encodeURIComponent('Letterhead PDF');
+      const body=encodeURIComponent('تم تنزيل الملف. أرفقه من مدير الملفات.');
+      location.href=`mailto:?subject=${subject}&body=${body}`;
     }
-  }catch(e){}
-  // احتياطي: فتح البريد بدون مرفق
-  const subject=encodeURIComponent('Letterhead PDF');
-  const body=encodeURIComponent('مرفق خطاب اللتر هد. حمّل PDF ثم أرفقه برسالتك.');
-  window.location.href=`mailto:?subject=${subject}&body=${body}`;
+  }catch(e){alert('المشاركة غير مدعومة على هذا المتصفح.')}
 });
 
-/* تفاعل الحقول */
+/* طباعة */
+$('printView').addEventListener('click',()=>window.print());
+
+/* تحديث مباشر + حفظ */
 ['input','change'].forEach(ev=>{
   document.querySelectorAll('input,textarea,select').forEach(el=>{
-    el.addEventListener(ev,()=>{
-      if(['phone','cr','contentIn','titleIn'].includes(el.id)) el.value=normalize(el.value);
-      applyChanges();
-    },{passive:true});
+    el.addEventListener(ev,()=>{if(['phone','cr','contentIn','titleIn'].includes(el.id))el.value=(el.value||'').replace(/[٠-٩۰-۹]/g,d=>DM[d]);applyChanges()},{passive:true});
   });
 });
 
 /* تهيئة */
 (document.fonts?.ready || Promise.resolve()).then(()=>{
-  resizeSigCanvas();
-  loadState();
-  applyChanges();
-  // تحجيم المعاينة بدقة لمنع أي فراغ
-  const fit=()=>{const avail=viewport.clientWidth-6;const PAGE=210*96/25.4;const s=Math.min(1,avail/PAGE);scaleBox.style.transform=`scale(${s})`;viewport.style.height=(297*96/25.4*s)+'px';};
+  resizeSigCanvas(); loadState(); applyChanges();
+  const fit=()=>{const avail=viewport.clientWidth-6;const PAGE=210*96/25.4;const s=Math.min(1,avail/PAGE);scaleBox.style.transform=`scale(${s})`;viewport.style.height=(297*96/25.4*s)+'px'};
   fit(); setTimeout(fit,40);
 });
 </script>
