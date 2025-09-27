@@ -8,51 +8,50 @@
 <style>
   :root{--gold:#C6A14A;--gold-soft:#ead89c;--black:#0b0f19;--ink:#111827;--muted:#6b7280;}
   *{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  body{margin:0;background:#f7f7f8;font-family:"Cairo",sans-serif;color:var(--ink)}
+  body{margin:0;background:#f7f7f8;font-family:"Cairo",sans-serif;color:var(--ink);font-size:16px;line-height:1.6}
 
-  .wrap{max-width:1200px;margin:auto;padding:16px;display:grid;grid-template-columns:360px 1fr;gap:16px}
+  .wrap{max-width:1200px;margin:auto;padding:16px;display:grid;grid-template-columns:380px 1fr;gap:16px}
   @media(max-width:900px){.wrap{grid-template-columns:1fr}}
 
-  .card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,.05)}
-  .hd{padding:12px;background:linear-gradient(90deg,var(--black),#1b2335);color:#fff;font-weight:700;border-radius:12px 12px 0 0}
-  .bd{padding:14px}
-  label{display:block;font-size:13px;color:var(--muted);margin-bottom:4px}
-  input,select,textarea{width:100%;padding:10px;border:1px solid #ddd;border-radius:8px;font-size:14px}
-  textarea{min-height:100px}
-  .grid{display:grid;gap:10px}
+  .card{background:#fff;border:1px solid #e5e7eb;border-radius:14px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+  .hd{padding:14px;background:linear-gradient(90deg,var(--black),#1b2335);color:#fff;font-weight:700;border-radius:14px 14px 0 0}
+  .bd{padding:16px}
+  label{display:block;font-size:14px;color:var(--muted);margin-bottom:4px}
+  input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;font-size:15px}
+  textarea{min-height:110px}
+  .grid{display:grid;gap:12px}
   .g2{grid-template-columns:1fr 1fr}
   @media(max-width:600px){.g2{grid-template-columns:1fr}}
-  .btn{padding:10px 16px;border:none;border-radius:8px;font-weight:700;cursor:pointer}
+
+  .btn{padding:14px 18px;border:none;border-radius:10px;font-weight:700;cursor:pointer;font-size:16px;width:100%}
   .btn.primary{background:var(--gold);color:#000}
   .btn.dark{background:var(--black);color:#fff}
 
   /* المعاينة */
   .preview{width:100%;overflow-x:auto;text-align:center}
-  #page{
-    width:210mm;height:297mm;background:#fff;margin:auto;
-    border:1px solid #ccc;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.08);
-    transform-origin:top center;
-  }
+  #page{width:210mm;height:297mm;background:#fff;margin:auto;
+    border:1px solid #ccc;border-radius:10px;box-shadow:0 6px 20px rgba(0,0,0,.08);
+    transform-origin:top center;}
 
   /* الهيدر */
   .lh{background:linear-gradient(90deg,var(--black),#121828);color:#fff;padding:14px;display:flex;align-items:center}
-  .logo{width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,var(--gold),var(--gold-soft));display:grid;place-items:center;font-weight:900;color:#000;margin-inline-end:10px}
-  .brand-name{font-weight:800;font-size:18px}
+  .logo{width:40px;height:40px;border-radius:9px;background:linear-gradient(135deg,var(--gold),var(--gold-soft));display:grid;place-items:center;font-weight:900;color:#000;margin-inline-end:10px}
+  .brand-name{font-weight:800;font-size:20px}
   .gold-line{height:6px;background:linear-gradient(90deg,var(--gold-soft),var(--gold),#a6842a)}
 
   .doc{padding:12mm 18mm 42mm;height:calc(297mm - 56px - 6px - 42mm);overflow:auto}
-  .meta{font-size:12px;color:var(--muted);display:flex;justify-content:space-between;border-bottom:1px dashed #ccc;padding-bottom:4px}
-  .title{text-align:center;font-size:24px;font-weight:800;margin:10px 0}
-  .content{font-size:15px;line-height:1.9;text-align:justify}
+  .meta{font-size:13px;color:var(--muted);display:flex;justify-content:space-between;border-bottom:1px dashed #ccc;padding-bottom:4px}
+  .title{text-align:center;font-size:26px;font-weight:800;margin:12px 0}
+  .content{font-size:16px;line-height:1.9;text-align:justify}
 
   .ft{position:absolute;left:0;right:0;bottom:0;height:42mm;border-top:3px solid var(--gold);padding:6mm 18mm 10mm;display:flex;justify-content:space-between;align-items:flex-end}
-  .stamp-box{width:45mm;min-height:20mm;padding:8px;border:2px solid var(--ink);border-radius:8px;transform:rotate(-1.2deg);font-size:12px;font-weight:600;color:var(--ink)}
-  .social-block{display:flex;gap:10px;font-size:11px}
+  .stamp-box{width:48mm;min-height:22mm;padding:8px;border:2px solid var(--ink);border-radius:9px;transform:rotate(-1.2deg);font-size:13px;font-weight:600;color:var(--ink)}
+  .social-block{display:flex;gap:12px;font-size:12px}
   .social-item{display:flex;gap:4px;align-items:center}
-  .social-item svg{width:13px;height:13px}
-  .identity{text-align:right;font-size:12px}
-  .identity strong{font-size:13px}
-  .contact-line{direction:ltr;font-size:12px}
+  .social-item svg{width:14px;height:14px}
+  .identity{text-align:right;font-size:13px}
+  .identity strong{font-size:14px}
+  .contact-line{direction:ltr;font-size:13px}
 
   @page{size:A4;margin:0}
   @media print{body *{visibility:hidden}#page,#page *{visibility:visible}#page{position:absolute;left:0;top:0;transform:none;box-shadow:none}}
@@ -68,12 +67,28 @@
       <div class="g2">
         <div><label>كود الدولة</label>
           <select id="countryCode">
+            <option value="+213">🇩🇿 الجزائر (+213)</option>
             <option value="+973" selected>🇧🇭 البحرين (+973)</option>
-            <option value="+966">🇸🇦 السعودية (+966)</option>
-            <option value="+971">🇦🇪 الإمارات (+971)</option>
+            <option value="+269">🇰🇲 جزر القمر (+269)</option>
+            <option value="+253">🇩🇯 جيبوتي (+253)</option>
             <option value="+20">🇪🇬 مصر (+20)</option>
             <option value="+964">🇮🇶 العراق (+964)</option>
             <option value="+962">🇯🇴 الأردن (+962)</option>
+            <option value="+965">🇰🇼 الكويت (+965)</option>
+            <option value="+961">🇱🇧 لبنان (+961)</option>
+            <option value="+218">🇱🇾 ليبيا (+218)</option>
+            <option value="+222">🇲🇷 موريتانيا (+222)</option>
+            <option value="+212">🇲🇦 المغرب (+212)</option>
+            <option value="+968">🇴🇲 عُمان (+968)</option>
+            <option value="+970">🇵🇸 فلسطين (+970)</option>
+            <option value="+974">🇶🇦 قطر (+974)</option>
+            <option value="+966">🇸🇦 السعودية (+966)</option>
+            <option value="+252">🇸🇴 الصومال (+252)</option>
+            <option value="+249">🇸🇩 السودان (+249)</option>
+            <option value="+963">🇸🇾 سوريا (+963)</option>
+            <option value="+216">🇹🇳 تونس (+216)</option>
+            <option value="+971">🇦🇪 الإمارات (+971)</option>
+            <option value="+967">🇾🇪 اليمن (+967)</option>
           </select>
         </div>
         <div><label>رقم الاتصال</label><input id="phone" type="tel" placeholder="3333 3333"></div>
@@ -83,15 +98,13 @@
       <label>المحتوى</label><textarea id="contentIn"></textarea>
       <label>الاسم الشخصي</label><input id="personNameIn" type="text">
       <label>الصفة</label><input id="personRoleIn" type="text">
-      <label>السجل التجاري</label><input id="cr" type="text">
+      <label>السجل التجاري (CR)</label><input id="cr" type="text">
       <label>Instagram</label><input id="igIn" type="text" placeholder="@brand">
       <label>Twitter</label><input id="twIn" type="text">
       <label>Facebook</label><input id="fbIn" type="text">
       <label>LinkedIn</label><input id="lnIn" type="text">
-      <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <button class="btn primary" onclick="apply()">تطبيق</button>
-        <button class="btn dark" onclick="window.print()">طباعة / PDF</button>
-      </div>
+      <button class="btn primary" onclick="apply()">تطبيق</button>
+      <button class="btn dark" onclick="window.print()">طباعة / PDF</button>
     </div>
   </div>
 
