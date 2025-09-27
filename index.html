@@ -3,124 +3,152 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Letterhead A4</title>
+<title>Letterhead مع خانات إدخال</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --gold:#C6A14A;
-    --gold-soft:#ead89c;
-    --black:#0b0f19;
-    --ink:#111827;
-    --paper:#fff;
-    --stamp-ink:#111827;
-  }
+  :root{--gold:#C6A14A;--gold-soft:#ead89c;--black:#0b0f19;--ink:#111827;--muted:#6b7280;--paper:#fff;--stamp-ink:#111827;}
   *{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  body{margin:0;background:#fff;font-family:"Cairo",sans-serif;color:var(--ink)}
+  html,body{height:100%} body{margin:0;background:#f7f7f8;color:var(--ink);font-family:"Cairo",sans-serif}
 
-  /* صفحة A4 */
-  #page{
-    width:210mm;height:297mm;margin:auto;background:var(--paper);
-    border:1px solid #e5e7eb;border-radius:14px;box-shadow:0 18px 48px rgba(0,0,0,.07);
-    position:relative;overflow:hidden;
-  }
+  .wrap{max-width:1200px;margin:auto;padding:18px;display:grid;grid-template-columns:360px 1fr;gap:18px}
+  @media(max-width:980px){.wrap{grid-template-columns:1fr}}
+  .card{background:#fff;border:1px solid #e5e7eb;border-radius:14px;box-shadow:0 10px 26px rgba(0,0,0,.06)}
+  .hd{padding:12px 14px;background:linear-gradient(90deg,var(--black),#1b2335);color:#fff;font-weight:800;display:flex;justify-content:space-between}
+  .bd{padding:14px}
+  label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
+  input,select,textarea{width:100%;padding:10px;border:1px solid #ddd;border-radius:8px}
+  textarea{min-height:120px}
+  .grid{display:grid;gap:10px}
+  .g2{grid-template-columns:1fr 1fr}
+  @media(max-width:640px){.g2{grid-template-columns:1fr}}
+  .btn{padding:10px 16px;border:none;border-radius:8px;cursor:pointer;font-weight:700}
+  .btn.primary{background:var(--gold);color:#000}
+  .btn.dark{background:var(--black);color:#fff}
 
-  /* الهيدر */
+  /* A4 */
+  #page{width:210mm;height:297mm;margin:auto;background:#fff;border:1px solid #ddd;border-radius:10px;position:relative;overflow:hidden}
   .lh{background:linear-gradient(90deg,var(--black),#121828);color:#fff;padding:14px 18px;display:flex;align-items:center}
-  .brand{display:flex;align-items:center;gap:10px}
-  .logo{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,var(--gold),var(--gold-soft));display:grid;place-items:center;font-weight:900;color:#000}
+  .logo{width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,var(--gold),var(--gold-soft));color:#000;display:grid;place-items:center;font-weight:900;margin-inline-end:10px}
   .brand-name{font-weight:800;font-size:18px}
   .gold-line{height:6px;background:linear-gradient(90deg,var(--gold-soft),var(--gold),#a6842a)}
-
-  /* المحتوى */
-  .doc{padding:12mm 18mm 40mm;height:calc(297mm - 56px - 6px - 40mm);overflow:auto}
-  .meta{font-size:12px;color:#6b7280;display:flex;justify-content:space-between;border-bottom:1px dashed #ccc;padding-bottom:4px}
+  .doc{padding:12mm 18mm 42mm;height:calc(297mm - 56px - 6px - 42mm);overflow:auto}
+  .meta{font-size:12px;color:var(--muted);display:flex;justify-content:space-between;border-bottom:1px dashed #ccc;padding-bottom:4px}
   .title{text-align:center;font-size:26px;font-weight:800;margin:10px 0}
-  .content{font-size:15px;line-height:1.9;text-align:justify;text-justify:inter-word}
-
-  /* التذييل */
-  .ft{
-    position:absolute;left:0;right:0;bottom:0;height:40mm;
-    border-top:3px solid var(--gold);
-    padding:6mm 18mm 8mm;
-    display:flex;justify-content:space-between;align-items:flex-end
-  }
-  .stamp-box{
-    width:45mm;min-height:20mm;padding:8px 10px;border:2px solid var(--stamp-ink);
-    border-radius:9px;transform:rotate(-1.3deg);
-    font-size:12px;font-weight:600;color:var(--stamp-ink)
-  }
-  .identity{text-align:right;font-size:12px;line-height:1.4}
-  .identity strong{font-size:13px}
-  .social-block{display:flex;gap:16px;font-size:11px}
+  .content{font-size:15px;line-height:1.9;text-align:justify}
+  .ft{position:absolute;left:0;right:0;bottom:0;height:42mm;border-top:3px solid var(--gold);padding:6mm 18mm 10mm;display:flex;justify-content:space-between;align-items:flex-end}
+  .stamp-box{width:45mm;min-height:20mm;padding:8px;border:2px solid var(--stamp-ink);border-radius:9px;transform:rotate(-1.3deg);font-size:12px;font-weight:600;color:var(--stamp-ink)}
+  .social-block{display:flex;gap:12px;font-size:11px}
   .social-item{display:flex;gap:4px;align-items:center}
-  .social-item svg{width:14px;height:14px}
-
+  .social-item svg{width:13px;height:13px}
+  .identity{text-align:right;font-size:12px}
+  .identity strong{font-size:13px}
+  .contact-line{direction:ltr;font-size:12px}
   @page{size:A4;margin:0}
-  @media print{
-    body *{visibility:hidden}
-    #page,#page *{visibility:visible}
-    #page{position:absolute;left:0;top:0;width:210mm;height:297mm;box-shadow:none;border:none}
-  }
+  @media print{body *{visibility:hidden}#page,#page *{visibility:visible}#page{position:absolute;left:0;top:0;width:210mm;height:297mm;box-shadow:none;border:none}}
 </style>
 </head>
 <body>
-<div id="page">
-  <header class="lh">
-    <div class="brand">
-      <div class="logo">★</div>
-      <div class="brand-name">شركة المياه الوطنية</div>
-    </div>
-  </header>
-  <div class="gold-line"></div>
-
-  <main class="doc">
-    <div class="meta">
-      <div>التاريخ: <span id="today"></span></div>
-      <div>مرجع: —</div>
-    </div>
-    <h1 class="title">طلب تحويل</h1>
-    <article class="content">
-      السلام عليكم ورحمة الله وبركاته،<br><br>
-      نتقدم إليكم بهذا الطلب، راجين تعاونكم وتفضلكم بالموافقة.
-    </article>
-  </main>
-
-  <footer class="ft">
-    <div class="stamp-box">
-      <div>شركة المياه الوطنية</div>
-      <div>CR: 555432</div>
-      <div>Tel: 33775858</div>
-    </div>
-    <div class="bottom-area">
-      <div class="identity">
-        <strong>فاضل الرئيس</strong><br>
-        المدير العام
+<div class="wrap">
+  <!-- الخانات -->
+  <div class="card">
+    <div class="hd">إعدادات الخطاب</div>
+    <div class="bd grid">
+      <label>اسم الشركة</label><input id="company" type="text" placeholder="شركة ...">
+      <div class="g2">
+        <div><label>الدولة</label>
+          <select id="countryCode">
+            <option value="+973">🇧🇭 البحرين (+973)</option>
+            <option value="+966">🇸🇦 السعودية (+966)</option>
+            <option value="+971">🇦🇪 الإمارات (+971)</option>
+            <option value="+20">🇪🇬 مصر (+20)</option>
+            <option value="+964">🇮🇶 العراق (+964)</option>
+            <option value="+962">🇯🇴 الأردن (+962)</option>
+            <option value="+965">🇰🇼 الكويت (+965)</option>
+            <option value="+961">🇱🇧 لبنان (+961)</option>
+            <option value="+218">🇱🇾 ليبيا (+218)</option>
+            <option value="+212">🇲🇦 المغرب (+212)</option>
+            <option value="+974">🇶🇦 قطر (+974)</option>
+            <option value="+963">🇸🇾 سوريا (+963)</option>
+            <option value="+216">🇹🇳 تونس (+216)</option>
+            <option value="+967">🇾🇪 اليمن (+967)</option>
+          </select>
+        </div>
+        <div><label>رقم الاتصال</label><input id="phone" type="tel"></div>
       </div>
-      <div class="social-block">
-        <div class="social-item">
-          <svg fill="#E1306C" viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm5 5a5 5 0 1 0 .001 10.001A5 5 0 0 0 12 7Zm6.5-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2Z"/><circle cx="12" cy="12" r="3.3"/></svg>
-          <span>@company</span>
-        </div>
-        <div class="social-item">
-          <svg fill="#000" viewBox="0 0 24 24"><path d="M13.7 10.6 21 2h-1.7l-6.2 7.4L8.2 2H2l7.6 11L2 22h1.7l6.6-7.8L15.8 22H22l-8.3-11.4Z"/></svg>
-          <span>@company</span>
-        </div>
-        <div class="social-item">
-          <svg fill="#1877F2" viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.7V12h2.7V9.7c0-2.7 1.6-4.2 4-4.2 1.2 0 2.4.2 2.4.2v2.6h-1.4c-1.3 0-1.7.8-1.7 1.6V12h2.9l-.46 2.9h-2.4v7A10 10 0 0 0 22 12"/></svg>
-          <span>/company</span>
-        </div>
-        <div class="social-item">
-          <svg fill="#0A66C2" viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5.001 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.6h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.8 2.6 4.8 6v6H17v-5.3c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9V21H9z"/></svg>
-          <span>/company</span>
-        </div>
+      <label>البريد الإلكتروني</label><input id="email" type="email">
+      <label>عنوان الرسالة</label><input id="titleIn" type="text" placeholder="طلب ...">
+      <label>المحتوى</label><textarea id="contentIn"></textarea>
+      <label>الاسم الشخصي</label><input id="personNameIn" type="text" placeholder="مثال: أحمد علي">
+      <label>الصفة</label><input id="personRoleIn" type="text" placeholder="مدير / محاسب ...">
+      <label>السجل التجاري CR</label><input id="cr" type="text">
+      <label>Instagram</label><input id="igIn" type="text" placeholder="@brand">
+      <label>Twitter</label><input id="twIn" type="text" placeholder="@brand">
+      <label>Facebook</label><input id="fbIn" type="text" placeholder="/brand">
+      <label>LinkedIn</label><input id="lnIn" type="text" placeholder="/company">
+      <button class="btn primary" onclick="apply()">تطبيق</button>
+      <button class="btn dark" onclick="window.print()">طباعة / PDF</button>
+    </div>
+  </div>
+
+  <!-- المعاينة -->
+  <div class="card">
+    <div class="bd">
+      <div id="page">
+        <header class="lh">
+          <div class="logo">★</div>
+          <div class="brand-name" id="brandName">اسم الشركة</div>
+        </header>
+        <div class="gold-line"></div>
+        <main class="doc">
+          <div class="meta">
+            <div>التاريخ: <span id="today"></span></div>
+            <div>مرجع: —</div>
+          </div>
+          <h1 class="title" id="titleOut">عنوان الرسالة</h1>
+          <div class="content" id="contentOut">النص سيظهر هنا...</div>
+        </main>
+        <footer class="ft">
+          <div class="stamp-box">
+            <div id="stampCompany">اسم الشركة</div>
+            <div id="crOut">CR: —</div>
+            <div id="phoneOut">Tel: —</div>
+          </div>
+          <div class="social-block" id="socialBottom"></div>
+          <div class="identity">
+            <strong id="personName">الاسم الشخصي</strong><br>
+            <span id="personRole">الصفة</span><br>
+            <span class="contact-line" id="emailOut">email@example.com</span>
+          </div>
+        </footer>
       </div>
     </div>
-  </footer>
+  </div>
 </div>
 
 <script>
-  // التاريخ (dd/mm/yyyy)
   document.getElementById("today").textContent=new Date().toLocaleDateString("en-GB");
+  const icons={
+    ig:'<svg fill="#E1306C" viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm5 5a5 5 0 1 0 .001 10.001A5 5 0 0 0 12 7Zm6.5-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2Z"/><circle cx="12" cy="12" r="3.3"/></svg>',
+    tw:'<svg fill="#000" viewBox="0 0 24 24"><path d="M13.7 10.6 21 2h-1.7l-6.2 7.4L8.2 2H2l7.6 11L2 22h1.7l6.6-7.8L15.8 22H22l-8.3-11.4Z"/></svg>',
+    fb:'<svg fill="#1877F2" viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.7V12h2.7V9.7c0-2.7 1.6-4.2 4-4.2 1.2 0 2.4.2 2.4.2v2.6h-1.4c-1.3 0-1.7.8-1.7 1.6V12h2.9l-.46 2.9h-2.4v7A10 10 0 0 0 22 12"/></svg>',
+    ln:'<svg fill="#0A66C2" viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5.001 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.6h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.8 2.6 4.8 6v6H17v-5.3c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9V21H9z"/></svg>'
+  };
+  function apply(){
+    document.getElementById("brandName").textContent=document.getElementById("company").value;
+    document.getElementById("titleOut").textContent=document.getElementById("titleIn").value;
+    document.getElementById("contentOut").textContent=document.getElementById("contentIn").value;
+    document.getElementById("stampCompany").textContent=document.getElementById("company").value;
+    document.getElementById("crOut").textContent="CR: "+document.getElementById("cr").value;
+    document.getElementById("phoneOut").textContent="Tel: "+document.getElementById("phone").value;
+    document.getElementById("personName").textContent=document.getElementById("personNameIn").value;
+    document.getElementById("personRole").textContent=document.getElementById("personRoleIn").value;
+    document.getElementById("emailOut").textContent=document.getElementById("email").value;
+    const social=document.getElementById("socialBottom"); social.innerHTML="";
+    if(document.getElementById("igIn").value) social.innerHTML+=`<div class="social-item">${icons.ig}<span>${document.getElementById("igIn").value}</span></div>`;
+    if(document.getElementById("twIn").value) social.innerHTML+=`<div class="social-item">${icons.tw}<span>${document.getElementById("twIn").value}</span></div>`;
+    if(document.getElementById("fbIn").value) social.innerHTML+=`<div class="social-item">${icons.fb}<span>${document.getElementById("fbIn").value}</span></div>`;
+    if(document.getElementById("lnIn").value) social.innerHTML+=`<div class="social-item">${icons.ln}<span>${document.getElementById("lnIn").value}</span></div>`;
+  }
 </script>
 </body>
 </html>
