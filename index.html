@@ -7,411 +7,148 @@
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --gold:#C6A14A; --gold-soft:#ead89c; --black:#0b0f19; --ink:#111827; --muted:#6b7280; --paper:#fff; --stamp-ink:#111827;
+    --gold:#C6A14A;
+    --gold-soft:#ead89c;
+    --black:#0b0f19;
+    --ink:#111827;
+    --paper:#fff;
+    --stamp-ink:#111827;
   }
-  *{box-sizing:border-box; -webkit-print-color-adjust:exact; print-color-adjust:exact}
-  html,body{height:100%}
-  body{margin:0; background:#fff; color:var(--ink); font-family:"Cairo",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
-
-  .wrap{max-width:1100px; margin:auto; padding:16px; display:grid; gap:16px; grid-template-columns:330px 1fr}
-  @media (max-width:980px){ .wrap{grid-template-columns:1fr} }
-  .card{background:#fff; border:1px solid #e5e7eb; border-radius:14px; box-shadow:0 10px 26px rgba(0,0,0,.06); overflow:hidden}
-  .hd{padding:12px 14px; background:linear-gradient(90deg,var(--black),#1b2335); color:#fff; font-weight:800; display:flex; align-items:center; justify-content:space-between}
-  .bd{padding:14px}
-  label{display:block; font-size:13px; color:var(--muted); margin-bottom:6px}
-  input,select,textarea{width:100%; padding:10px 12px; border:1px solid #e5e7eb; border-radius:10px; font-size:14px; background:#fff}
-  textarea{min-height:140px; resize:vertical}
-  .grid{display:grid; gap:10px}
-  .g2{grid-template-columns:1fr 1fr} .g4{grid-template-columns:1fr 1fr 1fr 1fr}
-  @media (max-width:640px){ .g2,.g4{grid-template-columns:1fr} }
-  .row{display:flex; gap:8px; flex-wrap:wrap}
-  .btn{border:0; border-radius:999px; padding:10px 16px; font-weight:700; cursor:pointer}
-  .btn.primary{background:var(--gold); color:#000; box-shadow:0 8px 18px rgba(198,161,74,.25)}
-  .btn.dark{background:var(--black); color:#fff}
-  .btn.ghost{background:#f3f4f6}
+  *{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{margin:0;background:#fff;font-family:"Cairo",sans-serif;color:var(--ink)}
 
   /* صفحة A4 */
   #page{
-    width:210mm; height:297mm; margin:auto; background:var(--paper); color:var(--ink);
-    border:1px solid #e5e7eb; border-radius:16px; box-shadow:0 18px 48px rgba(0,0,0,.07);
-    position:relative; overflow:hidden;
+    width:210mm;height:297mm;margin:auto;background:var(--paper);
+    border:1px solid #e5e7eb;border-radius:14px;box-shadow:0 18px 48px rgba(0,0,0,.07);
+    position:relative;overflow:hidden;
   }
 
   /* الهيدر */
-  .lh{background:linear-gradient(90deg,var(--black),#121828); color:#fff; padding:14px 18px; display:flex; align-items:center; justify-content:space-between}
-  .brand{display:flex; align-items:center; gap:10px; min-width:0}
-  .logo{width:36px; height:36px; border-radius:9px; background:linear-gradient(135deg,var(--gold),var(--gold-soft)); color:#000; display:grid; place-items:center; font-weight:900}
-  .brand-name{font-weight:800; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:260px}
-  .gold-line{
-    height:6px; background:linear-gradient(90deg,var(--gold-soft),var(--gold),#a6842a);
-    display:flex; align-items:center; justify-content:flex-end; gap:10px; padding:0 12mm;
+  .lh{
+    background:linear-gradient(90deg,var(--black),#121828);
+    color:#fff;padding:14px 18px;
+    display:flex;align-items:center
   }
-  .social-top{display:flex; gap:10px; align-items:center}
-  .social-top .ico{display:flex; align-items:center; gap:6px; background:rgba(255,255,255,.9); border:1px solid #e5e7eb; border-radius:999px; padding:2px 6px; font-size:11px}
-  .social-top svg{width:12px; height:12px}
+  .brand{display:flex;align-items:center;gap:10px}
+  .logo{
+    width:36px;height:36px;border-radius:9px;
+    background:linear-gradient(135deg,var(--gold),var(--gold-soft));
+    display:grid;place-items:center;font-weight:900;color:#000
+  }
+  .brand-name{font-weight:800;font-size:18px}
+  .gold-line{height:6px;background:linear-gradient(90deg,var(--gold-soft),var(--gold),#a6842a)}
 
   /* المحتوى */
-  .doc{
-    padding:12mm 18mm 34mm;
-    height:calc(297mm - 56px - 6px - 34mm);
-    overflow:auto;
-  }
-  .meta{font-size:12px; color:var(--muted); display:flex; justify-content:space-between; border-bottom:1px dashed #e5e7eb; padding-bottom:6px}
-  .title{margin:10px auto 6px; text-align:center; font-size:26px; font-weight:800}
-  .content{font-size:15px; line-height:1.9; text-align:justify; text-justify:inter-word}
+  .doc{padding:12mm 18mm 40mm;height:calc(297mm - 56px - 6px - 40mm);overflow:auto}
+  .meta{font-size:12px;color:#6b7280;display:flex;justify-content:space-between;border-bottom:1px dashed #ccc;padding-bottom:4px}
+  .title{text-align:center;font-size:26px;font-weight:800;margin:10px 0}
+  .content{font-size:15px;line-height:1.9;text-align:justify;text-justify:inter-word}
 
-  /* تذييل ثابت */
+  /* التذييل */
   .ft{
-    position:absolute; left:0; right:0; bottom:0;
-    height:34mm; padding:6mm 18mm 10mm;
-    display:flex; align-items:flex-end; justify-content:space-between; gap:10px; border-top:1px solid #e5e7eb;
+    position:absolute;left:0;right:0;bottom:0;height:40mm;
+    border-top:3px solid var(--gold);
+    padding:6mm 18mm 8mm;
+    display:flex;justify-content:space-between;align-items:flex-end
   }
-  .stamp-block{display:flex; flex-direction:column; gap:6px; align-items:flex-start}
   .stamp-box{
-    width:45mm; min-height:20mm; padding:8px 10px; border-radius:9px;
-    border:2.2px solid var(--stamp-ink); color:var(--stamp-ink);
-    background:radial-gradient(circle at 30% 30%, rgba(0,0,0,.03), transparent 45%),
-               repeating-linear-gradient(0deg, rgba(0,0,0,.02), rgba(0,0,0,.02) 2px, transparent 2px, transparent 4px);
-    box-shadow:inset 0 0 0 1.2px rgba(255,255,255,.65), 0 6px 16px rgba(0,0,0,.05);
-    transform:rotate(-1.3deg); opacity:.94; filter:saturate(1.04) contrast(1.02);
+    width:45mm;min-height:20mm;padding:8px 10px;border:2px solid var(--stamp-ink);
+    border-radius:9px;transform:rotate(-1.3deg);
+    font-size:12px;font-weight:600;color:var(--stamp-ink)
   }
-  .stamp-name{font-weight:800; font-size:13px}
-  .stamp-line{font-size:11px; direction:ltr; text-align:left}
-  .site-under{font-size:11px; color:#374151}
-  .site-under strong{font-weight:800}
-  .contact-line{display:flex; gap:12px; flex-wrap:wrap; direction:ltr; color:#111; align-items:center}
+  .identity{text-align:right;font-size:12px;line-height:1.4}
+  .identity strong{font-size:13px}
+  .social-block{display:flex;gap:16px;font-size:11px}
+  .social-item{display:flex;gap:4px;align-items:center}
+  .social-item svg{width:14px;height:14px}
 
-  /* طباعة صفحة واحدة */
-  @page{ size:A4; margin:0 }
+  @page{size:A4;margin:0}
   @media print{
-    body *{ visibility:hidden }
-    #page, #page *{ visibility:visible }
-    #page{ position:absolute; left:0; top:0; width:210mm !important; height:297mm !important; border:none; border-radius:0; box-shadow:none; overflow:hidden !important }
+    body *{visibility:hidden}
+    #page,#page *{visibility:visible}
+    #page{
+      position:absolute;left:0;top:0;
+      width:210mm;height:297mm;
+      box-shadow:none;border:none
+    }
   }
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <!-- الإعدادات -->
-    <section class="card" id="formCard">
-      <div class="hd">
-        <span id="panelTitle">إعدادات الخطاب</span>
-        <div style="display:flex; gap:8px; align-items:center">
-          <label style="color:#e5e7eb; font-size:12px;">Language / اللغة</label>
-          <select id="langSelect" style="padding:6px 10px; border-radius:8px;">
-            <option value="ar" selected>العربية (افتراضي)</option>
-            <option value="en">English</option>
-          </select>
-        </div>
+<div id="page">
+  <header class="lh">
+    <div class="brand">
+      <div class="logo">★</div>
+      <div class="brand-name" id="brandName">اسم الشركة</div>
+    </div>
+  </header>
+  <div class="gold-line"></div>
+
+  <main class="doc">
+    <div class="meta">
+      <div id="metaDate">التاريخ: <span id="today"></span></div>
+      <div id="metaRef">مرجع: —</div>
+    </div>
+    <h1 class="title" id="titleOut">عنوان الرسالة</h1>
+    <article class="content" id="contentOut">
+      محتوى الرسالة يظهر هنا بمحاذاة الأطراف.
+    </article>
+  </main>
+
+  <footer class="ft">
+    <div class="stamp-box">
+      <div id="stampNameOut">اسم الشركة</div>
+      <div id="crOut">CR: —</div>
+      <div id="stampPhoneOut">Tel: —</div>
+    </div>
+    <div class="bottom-area">
+      <div class="identity">
+        <strong id="personName">الاسم الشخصي</strong><br>
+        <span id="personRole">الصفة / الوظيفة</span>
       </div>
-      <div class="bd">
-        <div class="grid">
-          <div><label id="l_company">اسم الشركة</label><input id="company" type="text" placeholder="مثال: شركة الأفق للتجارة" /></div>
-
-          <div class="g2">
-            <div>
-              <label id="l_country">الدولة (كود)</label>
-              <select id="countryCode">
-                <!-- جميع الدول العربية -->
-                <option value="+213">🇩🇿 الجزائر (+213)</option>
-                <option value="+973">🇧🇭 البحرين (+973)</option>
-                <option value="+269">🇰🇲 جزر القمر (+269)</option>
-                <option value="+253">🇩🇯 جيبوتي (+253)</option>
-                <option value="+20">🇪🇬 مصر (+20)</option>
-                <option value="+964">🇮🇶 العراق (+964)</option>
-                <option value="+962">🇯🇴 الأردن (+962)</option>
-                <option value="+965">🇰🇼 الكويت (+965)</option>
-                <option value="+961">🇱🇧 لبنان (+961)</option>
-                <option value="+218">🇱🇾 ليبيا (+218)</option>
-                <option value="+222">🇲🇷 موريتانيا (+222)</option>
-                <option value="+212">🇲🇦 المغرب (+212)</option>
-                <option value="+968">🇴🇲 عُمان (+968)</option>
-                <option value="+970">🇵🇸 فلسطين (+970)</option>
-                <option value="+974">🇶🇦 قطر (+974)</option>
-                <option value="+966">🇸🇦 السعودية (+966)</option>
-                <option value="+252">🇸🇴 الصومال (+252)</option>
-                <option value="+249">🇸🇩 السودان (+249)</option>
-                <option value="+963">🇸🇾 سوريا (+963)</option>
-                <option value="+216">🇹🇳 تونس (+216)</option>
-                <option value="+971">🇦🇪 الإمارات (+971)</option>
-                <option value="+967">🇾🇪 اليمن (+967)</option>
-              </select>
-            </div>
-            <div><label id="l_phone">رقم الاتصال</label><input id="phone" type="tel" placeholder="3333 3333" /></div>
-          </div>
-
-          <div class="g2">
-            <div><label id="l_email">البريد الإلكتروني</label><input id="email" type="email" placeholder="name@example.com" /></div>
-            <div><label id="l_title">عنوان الرسالة</label>
-              <div style="display:flex; gap:6px">
-                <input id="title" type="text" placeholder="عنوان الرسالة" />
-                <select id="templateSelect" title="قوالب" style="min-width:140px">
-                  <option value="none" selected>— اختر قالب —</option>
-                  <option value="formal">رسمي</option>
-                  <option value="quote">عرض سعر</option>
-                  <option value="auth">تفويض</option>
-                  <option value="complaint">شكوى</option>
-                  <option value="thanks">شكر وتقدير</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-          <div><label id="l_content">محتوى الرسالة</label><textarea id="content" placeholder="اكتب نص الرسالة هنا..."></textarea></div>
-
-          <div class="g4">
-            <div><label>Instagram</label><input id="ig" type="text" placeholder="@brand" /></div>
-            <div><label>Twitter / X</label><input id="tw" type="text" placeholder="@brand" /></div>
-            <div><label>Facebook</label><input id="fb" type="text" placeholder="/brand" /></div>
-            <div><label>LinkedIn</label><input id="ln" type="text" placeholder="/company/brand" /></div>
-          </div>
-
-          <div class="g2">
-            <div><label id="l_stampname">اسم الشركة (للختم)</label><input id="stampName" type="text" placeholder="اسم الشركة" /></div>
-            <div><label id="l_cr">السجل التجاري (CR)</label><input id="cr" type="text" placeholder="555432" /></div>
-          </div>
-          <div class="g2">
-            <div><label id="l_stampphone">رقم الاتصال (للختم)</label><input id="stampPhone" type="tel" placeholder="3333 3333" /></div>
-            <div><label id="l_sitename">اسم الموقع (أسفل الختم)</label><input id="siteName" type="text" placeholder="example.com" /></div>
-          </div>
-          <div><label id="l_sitetag">صفة/وصف قصير للموقع</label><input id="siteTag" type="text" placeholder="خدمات وحلول متكاملة" /></div>
-
-          <div class="row">
-            <button class="btn primary" id="applyBtn" type="button">تطبيق</button>
-            <button class="btn dark" id="printBtn" type="button">طباعة / PDF</button>
-            <button class="btn ghost" id="resetBtn" type="button">إعادة ضبط</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- المعاينة / العنصر المطبوع -->
-    <section class="card">
-      <div class="bd">
-        <div class="page" id="page">
-          <header class="lh">
-            <div class="brand">
-              <div class="logo">★</div>
-              <div class="brand-name" id="brandName">اسم الشركة</div>
-            </div>
-            <div></div>
-          </header>
-          <div class="gold-line"><div class="social-top" id="socialTop"></div></div>
-
-          <main class="doc">
-            <div class="meta">
-              <div id="metaDateLbl">التاريخ: <span id="today"></span></div>
-              <div id="metaRefLbl">مرجع: <span id="ref">—</span></div>
-            </div>
-            <h1 class="title" id="titleOut">عنوان الرسالة</h1>
-            <article class="content" id="contentOut">اكتب نص الرسالة من الحقول، وسيظهر هنا بمحاذاة الأطراف.</article>
-          </main>
-
-          <footer class="ft">
-            <div class="stamp-block">
-              <div class="stamp-box">
-                <div class="stamp-name" id="stampNameOut">اسم الشركة</div>
-                <div class="stamp-line" id="crOut">CR: —</div>
-                <div class="stamp-line" id="stampPhoneOut">Tel: —</div>
-              </div>
-              <div class="site-under" id="siteUnder"><strong>example.com</strong> — خدمات وحلول متكاملة</div>
-            </div>
-            <div class="contact-line">
-              <span id="emailOut">name@example.com</span>
-              <span>•</span>
-              <span id="phoneOut">+973 0000 0000</span>
-            </div>
-          </footer>
-        </div>
-      </div>
-    </section>
-  </div>
+      <div class="social-block" id="socialBottom"></div>
+    </div>
+  </footer>
+</div>
 
 <script>
-  // عناصر
-  const company = document.getElementById('company');
-  const email = document.getElementById('email');
-  const phone = document.getElementById('phone');
-  const countryCode = document.getElementById('countryCode');
-  const titleIn = document.getElementById('title');
-  const contentIn = document.getElementById('content');
-  const ig = document.getElementById('ig');
-  const tw = document.getElementById('tw');
-  const fb = document.getElementById('fb');
-  const ln = document.getElementById('ln');
-  const stampName = document.getElementById('stampName');
-  const cr = document.getElementById('cr');
-  const stampPhone = document.getElementById('stampPhone');
-  const siteName = document.getElementById('siteName');
-  const siteTag = document.getElementById('siteTag');
-  const langSelect = document.getElementById('langSelect');
-  const templateSelect = document.getElementById('templateSelect');
+  // أرقام إنجليزية دائمًا
+  const digitMap={'٠':'0','١':'1','٢':'2','٣':'3','٤':'4','٥':'5','٦':'6','٧':'7','٨':'8','٩':'9','۰':'0','۱':'1','۲':'2','۳':'3','۴':'4','۵':'5','۶':'6','۷':'7','۸':'8','۹':'9'};
+  const normalizeDigits=str=>(str||'').replace(/[٠-٩۰-۹]/g,d=>digitMap[d]||d);
 
-  const brandName = document.getElementById('brandName');
-  const emailOut = document.getElementById('emailOut');
-  const phoneOut = document.getElementById('phoneOut');
-  const titleOut = document.getElementById('titleOut');
-  const contentOut = document.getElementById('contentOut');
-  const stampNameOut = document.getElementById('stampNameOut');
-  const crOut = document.getElementById('crOut');
-  const stampPhoneOut = document.getElementById('stampPhoneOut');
-  const siteUnder = document.getElementById('siteUnder');
-  const socialTop = document.getElementById('socialTop');
-  const todayEl = document.getElementById('today');
-  const metaDateLbl = document.getElementById('metaDateLbl');
-  const metaRefLbl = document.getElementById('metaRefLbl');
+  // التاريخ
+  document.getElementById("today").textContent=new Date().toLocaleDateString("en-GB");
 
-  // ترجمة
-  const T = {
-    ar: {
-      panelTitle:'إعدادات الخطاب', company:'اسم الشركة', country:'الدولة (كود)', phone:'رقم الاتصال',
-      email:'البريد الإلكتروني', title:'عنوان الرسالة', content:'محتوى الرسالة',
-      stampname:'اسم الشركة (للختم)', cr:'السجل التجاري (CR)', stampphone:'رقم الاتصال (للختم)',
-      sitename:'اسم الموقع (أسفل الختم)', sitetag:'صفة/وصف قصير للموقع',
-      placeholders:{ company:'مثال: شركة الأفق للتجارة', title:'عنوان الرسالة', content:'اكتب نص الرسالة هنا...' },
-      metaDate:'التاريخ', metaRefPrefix:'مرجع: ',
-      templates:{
-        formal:{title:'خطاب رسمي', body:`السلام عليكم ورحمة الله وبركاته،\n\nنتقدم إليكم بهذا الخطاب بشأن ...... راجين تعاونكم الكريم،\nويسرّنا تزويدكم بأي معلومات إضافية عند الحاجة.\n\nوتفضلوا بقبول فائق الاحترام.`},
-        quote:{title:'عرض سعر', body:`السادة المحترمون،\n\nنفيدكم بعرض السعر التالي:\n- البند الأول: ......\n- البند الثاني: ......\n- الإجمالي: ......\n\nالعرض ساري لمدة 7 أيام من تاريخ الخطاب.`},
-        auth:{title:'تفويض', body:`أفوّض أنا الموقع أدناه ...... بحضور/إنهاء الإجراءات المتعلقة بـ ...... لدى جهاتكم الموقرة،\nوذلك خلال الفترة من ... إلى ...، وجميع ما يقوم به يعتبر نافذًا على مسؤوليتي.`},
-        complaint:{title:'خطاب شكوى', body:`إلى الجهة المختصة،\n\nأتقدم إليكم بهذه الشكوى بخصوص ......، ونأمل من سيادتكم اتخاذ اللازم وفق الأنظمة المتبعة.\n\nشاكرين تعاونكم.`},
-        thanks:{title:'شكر وتقدير', body:`نود أن نتقدم بخالص الشكر والتقدير إلى ...... على جهوده وتعاونه المثمر، متمنين له دوام التوفيق والنجاح.`}
-      }
-    },
-    en: {
-      panelTitle:'Letterhead Settings', company:'Company Name', country:'Country Code', phone:'Phone Number',
-      email:'Email', title:'Subject', content:'Letter Content',
-      stampname:'Company (Stamp)', cr:'Commercial Reg. (CR)', stampphone:'Phone (Stamp)',
-      sitename:'Website (under stamp)', sitetag:'Website tagline/role',
-      placeholders:{ company:'e.g., Horizon Trading Co.', title:'Subject', content:'Write your letter here...' },
-      metaDate:'Date', metaRefPrefix:'Ref: ',
-      templates:{
-        formal:{title:'Formal Letter', body:`Dear Sir/Madam,\n\nWe would like to address the matter of ...... and appreciate your kind cooperation.\nPlease let us know if you require any additional information.\n\nSincerely,`},
-        quote:{title:'Quotation', body:`Dear Client,\n\nPlease find our quotation:\n- Item 1: ......\n- Item 2: ......\n- Total: ......\n\nThis offer is valid for 7 days from the letter date.`},
-        auth:{title:'Authorization', body:`I, the undersigned, hereby authorize ...... to handle the procedures related to ...... with your esteemed entity from ... to ... . All actions taken are under my responsibility.`},
-        complaint:{title:'Complaint', body:`To whom it may concern,\n\nThis is to file a complaint regarding ...... Kindly take the necessary actions as per applicable regulations.\n\nThank you.`},
-        thanks:{title:'Appreciation', body:`We would like to express our sincere thanks and appreciation to ...... for the great efforts and fruitful cooperation. Wishing continued success.`}
-      }
-    }
+  // تعبئة بيانات مثال
+  document.getElementById("brandName").textContent="شركة المياه الوطنية";
+  document.getElementById("titleOut").textContent="طلب تحويل";
+  document.getElementById("contentOut").textContent="السلام عليكم ورحمة الله وبركاته، ...";
+  document.getElementById("stampNameOut").textContent="شركة المياه الوطنية";
+  document.getElementById("crOut").textContent="CR: "+normalizeDigits("555432");
+  document.getElementById("stampPhoneOut").textContent="Tel: "+normalizeDigits("33775858");
+  document.getElementById("personName").textContent="فاضل الرئيس";
+  document.getElementById("personRole").textContent="المدير العام";
+
+  // أيقونات سوشيال بالأسفل
+  const icons={
+    ig:'<svg fill="#E1306C" viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm5 5a5 5 0 1 0 .001 10.001A5 5 0 0 0 12 7Zm6.5-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2Z"/><circle cx="12" cy="12" r="3.3"/></svg>',
+    tw:'<svg fill="#000" viewBox="0 0 24 24"><path d="M13.7 10.6 21 2h-1.7l-6.2 7.4L8.2 2H2l7.6 11L2 22h1.7l6.6-7.8L15.8 22H22l-8.3-11.4Z"/></svg>',
+    fb:'<svg fill="#1877F2" viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.7V12h2.7V9.7c0-2.7 1.6-4.2 4-4.2 1.2 0 2.4.2 2.4.2v2.6h-1.4c-1.3 0-1.7.8-1.7 1.6V12h2.9l-.46 2.9h-2.4v7A10 10 0 0 0 22 12"/></svg>',
+    ln:'<svg fill="#0A66C2" viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5.001 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.6h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.8 2.6 4.8 6v6H17v-5.3c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9V21H9z"/></svg>'
   };
-
-  // خرائط العناوين للعربية/إنجليزي
-  const labels = {
-    l_company:'company', l_country:'country', l_phone:'phone', l_email:'email', l_title:'title',
-    l_content:'content', l_stampname:'stampname', l_cr:'cr', l_stampphone:'stampphone',
-    l_sitename:'sitename', l_sitetag:'sitetag'
-  };
-
-  // تحويل أرقام عربية/فارسي إلى إنجليزي
-  const digitMap = {'٠':'0','١':'1','٢':'2','٣':'3','٤':'4','٥':'5','٦':'6','٧':'7','٨':'8','٩':'9','۰':'0','۱':'1','۲':'2','۳':'3','۴':'4','۵':'5','۶':'6','۷':'7','۸':'8','۹':'9'};
-  function normalizeDigits(str){ return (str||'').replace(/[٠-٩۰-۹]/g, d => digitMap[d] || d); }
-
-  function formatDateEN(){
-    const d = new Date();
-    return d.toLocaleDateString('en-GB'); // dd/mm/yyyy
-  }
-
-  function applyLanguage(){
-    const lang = langSelect.value;
-    const pack = T[lang];
-    document.getElementById('panelTitle').textContent = pack.panelTitle;
-    Object.entries(labels).forEach(([id,key])=>{ const el=document.getElementById(id); if(el) el.textContent = pack[key]; });
-    company.placeholder = pack.placeholders.company;
-    titleIn.placeholder = pack.placeholders.title;
-    contentIn.placeholder = pack.placeholders.content;
-    document.documentElement.lang = lang;
-    document.documentElement.dir  = (lang==='ar') ? 'rtl' : 'ltr';
-    // تحديث مسميات الميتا
-    document.getElementById('metaDateLbl').innerHTML = `${pack.metaDate}: <span id="today">${formatDateEN()}</span>`;
-    document.getElementById('metaRefLbl').childNodes[0].nodeValue = pack.metaRefPrefix;
-  }
-
-  // أيقونات
-  const icons = {
-    ig:'<svg viewBox="0 0 24 24" fill="#E1306C"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm5 5a5 5 0 1 0 .001 10.001A5 5 0 0 0 12 7Zm6.5-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2Z"/><circle cx="12" cy="12" r="3.3"/></svg>',
-    tw:'<svg viewBox="0 0 24 24" fill="#000"><path d="M13.7 10.6 21 2h-1.7l-6.2 7.4L8.2 2H2l7.6 11L2 22h1.7l6.6-7.8L15.8 22H22l-8.3-11.4Z"/></svg>',
-    fb:'<svg viewBox="0 0 24 24" fill="#1877F2"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.7V12h2.7V9.7c0-2.7 1.6-4.2 4-4.2 1.2 0 2.4.2 2.4.2v2.6h-1.4c-1.3 0-1.7.8-1.7 1.6V12h2.9l-.46 2.9h-2.4v7A10 10 0 0 0 22 12"/></svg>',
-    ln:'<svg viewBox="0 0 24 24" fill="#0A66C2"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5.001 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.6h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.8 2.6 4.8 6v6H17v-5.3c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9V21H9z"/></svg>'
-  };
-
-  function buildSocialTop(){
-    socialTop.innerHTML = '';
-    [{val:ig.value.trim(),key:'ig'},{val:tw.value.trim(),key:'tw'},{val:fb.value.trim(),key:'fb'},{val:ln.value.trim(),key:'ln'}]
-      .forEach(x=>{
-        if(!x.val) return;
-        const el=document.createElement('span'); el.className='ico';
-        el.innerHTML = icons[x.key] + '<span>'+ x.val + '</span>';
-        socialTop.appendChild(el);
-      });
-  }
-
-  function fullPhone(){
-    const cc = normalizeDigits(countryCode.value || '');
-    const p  = normalizeDigits(phone.value || '');
-    return (cc && p) ? `${cc} ${p}` : (p || '');
-  }
-
-  function insertTemplate(){
-    const lang = langSelect.value;
-    const val = templateSelect.value;
-    if(val==='none') return;
-    const pack = T[lang].templates[val];
-    titleIn.value = pack.title;
-    contentIn.value = pack.body;
-  }
-
-  function applyChanges(){
-    // واجهة ولغة
-    applyLanguage();
-
-    // مخرجات أساسية
-    const lang = langSelect.value;
-    brandName.textContent = company.value || (lang==='ar' ? 'اسم الشركة' : 'Company');
-    emailOut.textContent = email.value || 'name@example.com';
-    phoneOut.textContent = fullPhone() || '+973 0000 0000';
-
-    titleOut.textContent = titleIn.value || (lang==='ar' ? 'عنوان الرسالة' : 'Subject');
-    contentOut.textContent = normalizeDigits(contentIn.value || (lang==='ar' ? '—' : '—'));
-
-    // الختم
-    stampNameOut.textContent = stampName.value || brandName.textContent;
-    crOut.textContent = 'CR: ' + (normalizeDigits(cr.value) || '—');
-    stampPhoneOut.textContent = 'Tel: ' + (normalizeDigits(stampPhone.value) || (fullPhone() || '—'));
-
-    // أسفل الختم
-    const sName = siteName.value.trim() || 'example.com';
-    const sTag  = siteTag.value.trim();
-    siteUnder.innerHTML = `<strong>${sName}</strong>${sTag ? ' — ' + sTag : ''}`;
-
-    // التاريخ بأرقام إنجليزية
-    todayEl.textContent = formatDateEN();
-
-    // سوشيال
-    buildSocialTop();
-  }
-
-  // إجبار الأرقام الإنجليزية أثناء الكتابة
-  [phone,countryCode,cr,stampPhone,contentIn,titleIn,siteTag].forEach(el=>{
-    el.addEventListener('input', ()=>{ el.value = normalizeDigits(el.value); });
+  const social=document.getElementById("socialBottom");
+  [
+    {key:"ig",text:"@company"},
+    {key:"tw",text:"@company"},
+    {key:"fb",text:"/company"},
+    {key:"ln",text:"/company"}
+  ].forEach(x=>{
+    const div=document.createElement("div");
+    div.className="social-item";
+    div.innerHTML=icons[x.key]+"<span>"+x.text+"</span>";
+    social.appendChild(div);
   });
-
-  // أحداث
-  [company,email,phone,countryCode,titleIn,contentIn,ig,tw,fb,ln,stampName,cr,stampPhone,siteName,siteTag,langSelect]
-    .forEach(el=> el.addEventListener('input', applyChanges));
-  templateSelect.addEventListener('change', ()=>{ insertTemplate(); applyChanges(); });
-
-  // طباعة صفحة واحدة
-  const triggerPrint = ()=>{ applyChanges(); requestAnimationFrame(()=> setTimeout(()=>window.print(), 40)); };
-  document.getElementById('applyBtn').addEventListener('click', applyChanges);
-  document.getElementById('printBtn').addEventListener('click', triggerPrint);
-  document.getElementById('resetBtn').addEventListener('click', ()=>{
-    document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"]').forEach(i=>i.value='');
-    [ig,tw,fb,ln,siteName,siteTag,contentIn,titleIn].forEach(i=> i.value='');
-    langSelect.value='ar'; templateSelect.value='none'; applyChanges();
-  });
-
-  // تهيئة
-  (document.fonts?.ready || Promise.resolve()).then(()=>{ applyLanguage(); todayEl.textContent = formatDateEN(); applyChanges(); });
 </script>
 </body>
 </html>
