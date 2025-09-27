@@ -3,168 +3,331 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Letterhead Responsive</title>
+<title>Letterhead — صفحة رئيسية متوافقة</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-  :root{--gold:#C6A14A;--gold-soft:#ead89c;--black:#0b0f19;--ink:#111827;--muted:#6b7280;}
-  *{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  body{margin:0;background:#f7f7f8;font-family:"Cairo",sans-serif;color:var(--ink);font-size:16px;line-height:1.6}
+  :root{
+    --gold:#C6A14A; --gold-soft:#ead89c; --black:#0b0f19; --ink:#111827; --muted:#6b7280; --paper:#fff;
+  }
+  *{box-sizing:border-box; -webkit-print-color-adjust:exact; print-color-adjust:exact}
+  html,body{height:100%}
+  body{margin:0; background:#f6f7f9; color:var(--ink); font-family:"Cairo",system-ui,Segoe UI,Roboto,Helvetica,Arial; font-size:16px; line-height:1.6}
 
-  .wrap{max-width:1200px;margin:auto;padding:16px;display:grid;grid-template-columns:380px 1fr;gap:16px}
-  @media(max-width:900px){.wrap{grid-template-columns:1fr}}
+  /* تخطيط عام */
+  .wrap{
+    max-width:1200px; margin:auto; padding:14px;
+    display:grid; grid-template-columns:420px 1fr; gap:14px;
+  }
+  @media (max-width:1024px){ .wrap{grid-template-columns:1fr} }
 
-  .card{background:#fff;border:1px solid #e5e7eb;border-radius:14px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
-  .hd{padding:14px;background:linear-gradient(90deg,var(--black),#1b2335);color:#fff;font-weight:700;border-radius:14px 14px 0 0}
+  /* بطاقات */
+  .card{background:#fff; border:1px solid #e5e7eb; border-radius:14px; box-shadow:0 8px 22px rgba(0,0,0,.06); overflow:hidden}
+  .hd{padding:14px 16px; background:linear-gradient(90deg,var(--black),#1b2335); color:#fff; font-weight:800}
   .bd{padding:16px}
-  label{display:block;font-size:14px;color:var(--muted);margin-bottom:4px}
-  input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;font-size:15px}
-  textarea{min-height:110px}
-  .grid{display:grid;gap:12px}
+
+  /* حقول */
+  label{display:block; font-size:14px; color:var(--muted); margin:10px 2px 6px}
+  input,select,textarea{
+    width:100%; padding:14px 12px; border:1px solid #dfe3ea; border-radius:12px; font-size:16px; background:#fff;
+  }
+  textarea{min-height:130px; resize:vertical}
+  .grid{display:grid; gap:12px}
   .g2{grid-template-columns:1fr 1fr}
-  @media(max-width:600px){.g2{grid-template-columns:1fr}}
+  .g4{grid-template-columns:1fr 1fr 1fr 1fr}
+  @media (max-width:700px){ .g2,.g4{grid-template-columns:1fr} }
 
-  .btn{padding:14px 18px;border:none;border-radius:10px;font-weight:700;cursor:pointer;font-size:16px;width:100%}
-  .btn.primary{background:var(--gold);color:#000}
-  .btn.dark{background:var(--black);color:#fff}
+  /* أزرار كبيرة ملائمة للمس */
+  .btn{border:0; border-radius:12px; padding:16px; font-weight:800; font-size:17px; cursor:pointer; width:100%}
+  .btn.primary{background:var(--gold); color:#000; box-shadow:0 10px 20px rgba(198,161,74,.25)}
+  .btn.dark{background:var(--black); color:#fff}
+  .btns{display:grid; gap:10px; grid-template-columns:1fr 1fr}
+  @media (max-width:700px){ .btns{grid-template-columns:1fr} }
 
-  /* المعاينة */
-  .preview{width:100%;overflow-x:auto;text-align:center}
-  #page{width:210mm;height:297mm;background:#fff;margin:auto;
-    border:1px solid #ccc;border-radius:10px;box-shadow:0 6px 20px rgba(0,0,0,.08);
-    transform-origin:top center;}
+  /* ========================================
+     المعاينة على الصفحة الرئيسية (Responsive)
+     ======================================== */
+  .preview{width:100%; text-align:center; overflow:hidden; padding:10px}
+  .scale-box{display:inline-block; transform-origin:top center}
+
+  /* الورقة (مقاس A4 لكن سنقوم بتصغيرها على الجوال) */
+  #page{
+    width:210mm; height:297mm; background:var(--paper); margin:auto; position:relative; overflow:hidden;
+    border:1px solid #e5e7eb; border-radius:14px; box-shadow:0 18px 48px rgba(0,0,0,.08);
+  }
 
   /* الهيدر */
-  .lh{background:linear-gradient(90deg,var(--black),#121828);color:#fff;padding:14px;display:flex;align-items:center}
-  .logo{width:40px;height:40px;border-radius:9px;background:linear-gradient(135deg,var(--gold),var(--gold-soft));display:grid;place-items:center;font-weight:900;color:#000;margin-inline-end:10px}
-  .brand-name{font-weight:800;font-size:20px}
-  .gold-line{height:6px;background:linear-gradient(90deg,var(--gold-soft),var(--gold),#a6842a)}
+  .lh{background:linear-gradient(90deg,var(--black),#121828); color:#fff; padding:14px 18px; display:flex; align-items:center; gap:10px}
+  .logo{width:40px; height:40px; border-radius:10px; background:linear-gradient(135deg,var(--gold),var(--gold-soft)); color:#000; display:grid; place-items:center; font-weight:900}
+  .brand-name{font-weight:800; font-size:20px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:70%}
+  .gold-line{height:6px; background:linear-gradient(90deg,var(--gold-soft),var(--gold),#a6842a)}
 
-  .doc{padding:12mm 18mm 42mm;height:calc(297mm - 56px - 6px - 42mm);overflow:auto}
-  .meta{font-size:13px;color:var(--muted);display:flex;justify-content:space-between;border-bottom:1px dashed #ccc;padding-bottom:4px}
-  .title{text-align:center;font-size:26px;font-weight:800;margin:12px 0}
-  .content{font-size:16px;line-height:1.9;text-align:justify}
+  /* المحتوى */
+  .doc{padding:12mm 18mm 44mm; height:calc(297mm - 56px - 6px - 44mm); overflow:auto}
+  .meta{font-size:13px; color:var(--muted); display:flex; justify-content:space-between; border-bottom:1px dashed #e5e7eb; padding-bottom:6px}
+  .title{text-align:center; font-size:26px; font-weight:800; margin:12px 0 8px}
+  .content{font-size:16px; line-height:1.9; text-align:justify; text-justify:inter-word}
 
-  .ft{position:absolute;left:0;right:0;bottom:0;height:42mm;border-top:3px solid var(--gold);padding:6mm 18mm 10mm;display:flex;justify-content:space-between;align-items:flex-end}
-  .stamp-box{width:48mm;min-height:22mm;padding:8px;border:2px solid var(--ink);border-radius:9px;transform:rotate(-1.2deg);font-size:13px;font-weight:600;color:var(--ink)}
-  .social-block{display:flex;gap:12px;font-size:12px}
-  .social-item{display:flex;gap:4px;align-items:center}
-  .social-item svg{width:14px;height:14px}
-  .identity{text-align:right;font-size:13px}
+  /* التذييل */
+  .ft{
+    position:absolute; left:0; right:0; bottom:0; height:44mm; padding:8mm 18mm 10mm;
+    border-top:3px solid var(--gold);
+    display:flex; align-items:flex-end; justify-content:space-between; gap:10px;
+  }
+  .stamp-box{
+    width:48mm; min-height:22mm; padding:8px 10px; border:2px solid #111; border-radius:10px;
+    transform:rotate(-1.2deg); color:#111; font-size:13px; font-weight:700;
+    background:radial-gradient(circle at 30% 30%, rgba(0,0,0,.03), transparent 45%),
+               repeating-linear-gradient(0deg, rgba(0,0,0,.02), rgba(0,0,0,.02) 2px, transparent 2px, transparent 4px);
+  }
+  .stamp-line{direction:ltr; text-align:left}
+
+  .social-block{display:flex; gap:12px; font-size:12px; align-items:center}
+  .social-item{display:flex; gap:4px; align-items:center}
+  .social-item svg{width:14px; height:14px}
+
+  .identity{text-align:right; font-size:13px; line-height:1.5}
   .identity strong{font-size:14px}
-  .contact-line{direction:ltr;font-size:13px}
+  .contact-line{direction:ltr; font-size:13px}
 
-  @page{size:A4;margin:0}
-  @media print{body *{visibility:hidden}#page,#page *{visibility:visible}#page{position:absolute;left:0;top:0;transform:none;box-shadow:none}}
+  /* الطباعة (فقط لو استخدمت طباعة لاحقاً) */
+  @page{size:A4; margin:0}
+  @media print{
+    body *{visibility:hidden}
+    #page, #page *{visibility:visible}
+    #page{position:absolute; left:0; top:0; transform:none; box-shadow:none}
+  }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <!-- الخانات -->
-  <div class="card">
-    <div class="hd">إعدادات الخطاب</div>
-    <div class="bd grid">
-      <label>اسم الشركة</label><input id="company" type="text" placeholder="شركة ...">
-      <div class="g2">
-        <div><label>كود الدولة</label>
-          <select id="countryCode">
-            <option value="+213">🇩🇿 الجزائر (+213)</option>
-            <option value="+973" selected>🇧🇭 البحرين (+973)</option>
-            <option value="+269">🇰🇲 جزر القمر (+269)</option>
-            <option value="+253">🇩🇯 جيبوتي (+253)</option>
-            <option value="+20">🇪🇬 مصر (+20)</option>
-            <option value="+964">🇮🇶 العراق (+964)</option>
-            <option value="+962">🇯🇴 الأردن (+962)</option>
-            <option value="+965">🇰🇼 الكويت (+965)</option>
-            <option value="+961">🇱🇧 لبنان (+961)</option>
-            <option value="+218">🇱🇾 ليبيا (+218)</option>
-            <option value="+222">🇲🇷 موريتانيا (+222)</option>
-            <option value="+212">🇲🇦 المغرب (+212)</option>
-            <option value="+968">🇴🇲 عُمان (+968)</option>
-            <option value="+970">🇵🇸 فلسطين (+970)</option>
-            <option value="+974">🇶🇦 قطر (+974)</option>
-            <option value="+966">🇸🇦 السعودية (+966)</option>
-            <option value="+252">🇸🇴 الصومال (+252)</option>
-            <option value="+249">🇸🇩 السودان (+249)</option>
-            <option value="+963">🇸🇾 سوريا (+963)</option>
-            <option value="+216">🇹🇳 تونس (+216)</option>
-            <option value="+971">🇦🇪 الإمارات (+971)</option>
-            <option value="+967">🇾🇪 اليمن (+967)</option>
-          </select>
-        </div>
-        <div><label>رقم الاتصال</label><input id="phone" type="tel" placeholder="3333 3333"></div>
-      </div>
-      <label>البريد الإلكتروني</label><input id="email" type="email" placeholder="name@example.com">
-      <label>عنوان الرسالة</label><input id="titleIn" type="text">
-      <label>المحتوى</label><textarea id="contentIn"></textarea>
-      <label>الاسم الشخصي</label><input id="personNameIn" type="text">
-      <label>الصفة</label><input id="personRoleIn" type="text">
-      <label>السجل التجاري (CR)</label><input id="cr" type="text">
-      <label>Instagram</label><input id="igIn" type="text" placeholder="@brand">
-      <label>Twitter</label><input id="twIn" type="text">
-      <label>Facebook</label><input id="fbIn" type="text">
-      <label>LinkedIn</label><input id="lnIn" type="text">
-      <button class="btn primary" onclick="apply()">تطبيق</button>
-      <button class="btn dark" onclick="window.print()">طباعة / PDF</button>
-    </div>
-  </div>
 
-  <!-- المعاينة -->
-  <div class="card">
-    <div class="bd preview">
-      <div id="page">
-        <header class="lh">
-          <div class="logo">★</div>
-          <div class="brand-name" id="brandName">اسم الشركة</div>
-        </header>
-        <div class="gold-line"></div>
-        <main class="doc">
-          <div class="meta"><div>التاريخ: <span id="today"></span></div><div>مرجع: —</div></div>
-          <h1 class="title" id="titleOut">عنوان الرسالة</h1>
-          <div class="content" id="contentOut">النص سيظهر هنا...</div>
-        </main>
-        <footer class="ft">
-          <div class="stamp-box">
-            <div id="stampCompany">اسم الشركة</div>
-            <div id="crOut">CR: —</div>
-            <div id="phoneOut">Tel: —</div>
+<div class="wrap">
+  <!-- النموذج: كبير ومريح على الجوال -->
+  <section class="card">
+    <div class="hd">إعدادات الخطاب</div>
+    <div class="bd">
+      <div class="grid">
+        <div><label>اسم الشركة</label><input id="company" type="text" placeholder="مثال: شركة الأفق للتجارة"></div>
+
+        <div class="g2">
+          <div>
+            <label>كود الدولة</label>
+            <select id="countryCode">
+              <!-- جميع الدول العربية (البحرين افتراضي) -->
+              <option value="+213">🇩🇿 الجزائر (+213)</option>
+              <option value="+973" selected>🇧🇭 البحرين (+973)</option>
+              <option value="+269">🇰🇲 جزر القمر (+269)</option>
+              <option value="+253">🇩🇯 جيبوتي (+253)</option>
+              <option value="+20">🇪🇬 مصر (+20)</option>
+              <option value="+964">🇮🇶 العراق (+964)</option>
+              <option value="+962">🇯🇴 الأردن (+962)</option>
+              <option value="+965">🇰🇼 الكويت (+965)</option>
+              <option value="+961">🇱🇧 لبنان (+961)</option>
+              <option value="+218">🇱🇾 ليبيا (+218)</option>
+              <option value="+222">🇲🇷 موريتانيا (+222)</option>
+              <option value="+212">🇲🇦 المغرب (+212)</option>
+              <option value="+968">🇴🇲 عُمان (+968)</option>
+              <option value="+970">🇵🇸 فلسطين (+970)</option>
+              <option value="+974">🇶🇦 قطر (+974)</option>
+              <option value="+966">🇸🇦 السعودية (+966)</option>
+              <option value="+252">🇸🇴 الصومال (+252)</option>
+              <option value="+249">🇸🇩 السودان (+249)</option>
+              <option value="+963">🇸🇾 سوريا (+963)</option>
+              <option value="+216">🇹🇳 تونس (+216)</option>
+              <option value="+971">🇦🇪 الإمارات (+971)</option>
+              <option value="+967">🇾🇪 اليمن (+967)</option>
+            </select>
           </div>
-          <div class="social-block" id="socialBottom"></div>
-          <div class="identity">
-            <strong id="personName">الاسم الشخصي</strong><br>
-            <span id="personRole">الصفة</span><br>
-            <span class="contact-line" id="emailOut">email@example.com</span>
-          </div>
-        </footer>
+          <div><label>رقم الاتصال</label><input id="phone" type="tel" placeholder="3333 3333"></div>
+        </div>
+
+        <div><label>البريد الإلكتروني</label><input id="email" type="email" placeholder="name@example.com"></div>
+        <div><label>عنوان الرسالة</label><input id="titleIn" type="text" placeholder="عنوان الرسالة"></div>
+        <div><label>المحتوى</label><textarea id="contentIn" placeholder="اكتب نص الرسالة هنا..."></textarea></div>
+
+        <div class="g2">
+          <div><label>الاسم الشخصي</label><input id="personNameIn" type="text" placeholder="مثال: فاضل الرئيس"></div>
+          <div><label>الصفة / الوظيفة</label><input id="personRoleIn" type="text" placeholder="مثال: المدير العام"></div>
+        </div>
+
+        <div class="g2">
+          <div><label>السجل التجاري (CR)</label><input id="cr" type="text" placeholder="555432"></div>
+          <div><label>مرجع (اختياري)</label><input id="refIn" type="text" placeholder="—"></div>
+        </div>
+
+        <div class="g4">
+          <div><label>Instagram</label><input id="igIn" type="text" placeholder="@brand"></div>
+          <div><label>Twitter / X</label><input id="twIn" type="text" placeholder="@brand"></div>
+          <div><label>Facebook</label><input id="fbIn" type="text" placeholder="/brand"></div>
+          <div><label>LinkedIn</label><input id="lnIn" type="text" placeholder="/company/brand"></div>
+        </div>
+
+        <div class="btns">
+          <button class="btn primary" id="applyBtn" type="button">تطبيق</button>
+          <button class="btn dark" id="clearBtn" type="button">إعادة ضبط</button>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
+
+  <!-- المعاينة: تُصغّر تلقائياً للجوال -->
+  <section class="card">
+    <div class="hd">المعاينة</div>
+    <div class="bd preview">
+      <div class="scale-box" id="scaleBox">
+        <div id="page">
+          <header class="lh">
+            <div class="logo">★</div>
+            <div class="brand-name" id="brandName">اسم الشركة</div>
+          </header>
+          <div class="gold-line"></div>
+
+          <main class="doc">
+            <div class="meta">
+              <div>التاريخ: <span id="today"></span></div>
+              <div>مرجع: <span id="refOut">—</span></div>
+            </div>
+            <h1 class="title" id="titleOut">عنوان الرسالة</h1>
+            <article class="content" id="contentOut">سيظهر نص الرسالة هنا بمحاذاة الأطراف.</article>
+          </main>
+
+          <footer class="ft">
+            <!-- يسار: الختم -->
+            <div class="stamp-box">
+              <div class="stamp-name" id="stampCompany">اسم الشركة</div>
+              <div class="stamp-line" id="crOut">CR: —</div>
+              <div class="stamp-line" id="phoneOut">Tel: —</div>
+            </div>
+
+            <!-- وسط: سوشيال -->
+            <div class="social-block" id="socialBottom"></div>
+
+            <!-- يمين: هوية -->
+            <div class="identity">
+              <strong id="personName">الاسم الشخصي</strong><br>
+              <span id="personRole">الصفة / الوظيفة</span><br>
+              <span class="contact-line" id="emailOut">name@example.com</span>
+            </div>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
 
 <script>
-  document.getElementById("today").textContent=new Date().toLocaleDateString("en-GB");
-  const icons={
-    ig:'<svg fill="#E1306C" viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm5 5a5 5 0 1 0 .001 10.001A5 5 0 0 0 12 7Zm6.5-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2Z"/><circle cx="12" cy="12" r="3.3"/></svg>',
-    tw:'<svg fill="#000" viewBox="0 0 24 24"><path d="M13.7 10.6 21 2h-1.7l-6.2 7.4L8.2 2H2l7.6 11L2 22h1.7l6.6-7.8L15.8 22H22l-8.3-11.4Z"/></svg>',
-    fb:'<svg fill="#1877F2" viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.7V12h2.7V9.7c0-2.7 1.6-4.2 4-4.2 1.2 0 2.4.2 2.4.2v2.6h-1.4c-1.3 0-1.7.8-1.7 1.6V12h2.9l-.46 2.9h-2.4v7A10 10 0 0 0 22 12"/></svg>',
-    ln:'<svg fill="#0A66C2" viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5.001 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.6h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.8 2.6 4.8 6v6H17v-5.3c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9V21H9z"/></svg>'
-  };
-  function apply(){
-    document.getElementById("brandName").textContent=document.getElementById("company").value;
-    document.getElementById("titleOut").textContent=document.getElementById("titleIn").value;
-    document.getElementById("contentOut").textContent=document.getElementById("contentIn").value;
-    document.getElementById("stampCompany").textContent=document.getElementById("company").value;
-    document.getElementById("crOut").textContent="CR: "+document.getElementById("cr").value;
-    document.getElementById("phoneOut").textContent="Tel: "+document.getElementById("countryCode").value+" "+document.getElementById("phone").value;
-    document.getElementById("personName").textContent=document.getElementById("personNameIn").value;
-    document.getElementById("personRole").textContent=document.getElementById("personRoleIn").value;
-    document.getElementById("emailOut").textContent=document.getElementById("email").value;
+  // التاريخ بصيغة إنجليزية (أرقام إنجليزية)
+  document.getElementById("today").textContent = new Date().toLocaleDateString("en-GB");
 
-    const sb=document.getElementById("socialBottom"); sb.innerHTML="";
-    if(document.getElementById("igIn").value) sb.innerHTML+=`<div class="social-item">${icons.ig}<span>${document.getElementById("igIn").value}</span></div>`;
-    if(document.getElementById("twIn").value) sb.innerHTML+=`<div class="social-item">${icons.tw}<span>${document.getElementById("twIn").value}</span></div>`;
-    if(document.getElementById("fbIn").value) sb.innerHTML+=`<div class="social-item">${icons.fb}<span>${document.getElementById("fbIn").value}</span></div>`;
-    if(document.getElementById("lnIn").value) sb.innerHTML+=`<div class="social-item">${icons.ln}<span>${document.getElementById("lnIn").value}</span></div>`;
+  // خريطة تحويل الأرقام العربية/الفارسية -> إنجليزية
+  const digitMap={'٠':'0','١':'1','٢':'2','٣':'3','٤':'4','٥':'5','٦':'6','٧':'7','٨':'8','٩':'9','۰':'0','۱':'1','۲':'2','۳':'3','۴':'4','۵':'5','۶':'6','۷':'7','۸':'8','۹':'9'};
+  const normalizeDigits = s => (s||'').replace(/[٠-٩۰-۹]/g, d => digitMap[d] || d);
+
+  // عناصر الإدخال
+  const company = document.getElementById('company');
+  const countryCode = document.getElementById('countryCode');
+  const phone = document.getElementById('phone');
+  const email = document.getElementById('email');
+  const titleIn = document.getElementById('titleIn');
+  const contentIn = document.getElementById('contentIn');
+  const personNameIn = document.getElementById('personNameIn');
+  const personRoleIn = document.getElementById('personRoleIn');
+  const cr = document.getElementById('cr');
+  const refIn = document.getElementById('refIn');
+  const igIn = document.getElementById('igIn'); const twIn = document.getElementById('twIn');
+  const fbIn = document.getElementById('fbIn'); const lnIn = document.getElementById('lnIn');
+
+  // عناصر الإخراج
+  const brandName = document.getElementById('brandName');
+  const titleOut = document.getElementById('titleOut');
+  const contentOut = document.getElementById('contentOut');
+  const refOut = document.getElementById('refOut');
+  const stampCompany = document.getElementById('stampCompany');
+  const crOut = document.getElementById('crOut');
+  const phoneOut = document.getElementById('phoneOut');
+  const personName = document.getElementById('personName');
+  const personRole = document.getElementById('personRole');
+  const emailOut = document.getElementById('emailOut');
+  const socialBottom = document.getElementById('socialBottom');
+
+  // أيقونات
+  const icons = {
+    ig:'<svg viewBox="0 0 24 24" fill="#E1306C"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm5 5a5 5 0 1 0 .001 10.001A5 5 0 0 0 12 7Zm6.5-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2Z"/><circle cx="12" cy="12" r="3.3"/></svg>',
+    tw:'<svg viewBox="0 0 24 24" fill="#000"><path d="M13.7 10.6 21 2h-1.7l-6.2 7.4L8.2 2H2l7.6 11L2 22h1.7l6.6-7.8L15.8 22H22l-8.3-11.4Z"/></svg>',
+    fb:'<svg viewBox="0 0 24 24" fill="#1877F2"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.7V12h2.7V9.7c0-2.7 1.6-4.2 4-4.2 1.2 0 2.4.2 2.4.2v2.6h-1.4c-1.3 0-1.7.8-1.7 1.6V12h2.9l-.46 2.9h-2.4v7A10 10 0 0 0 22 12"/></svg>',
+    ln:'<svg viewBox="0 0 24 24" fill="#0A66C2"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5.001 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.6h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.8 2.6 4.8 6v6H17v-5.3c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9V21H9z"/></svg>'
+  };
+
+  function fullPhone(){
+    const cc = normalizeDigits(countryCode.value || '');
+    const p  = normalizeDigits(phone.value || '');
+    return (cc && p) ? `${cc} ${p}` : (p || '');
   }
+
+  function buildSocial(){
+    socialBottom.innerHTML='';
+    const items=[
+      {val:igIn.value.trim(), key:'ig'},
+      {val:twIn.value.trim(), key:'tw'},
+      {val:fbIn.value.trim(), key:'fb'},
+      {val:lnIn.value.trim(), key:'ln'}
+    ];
+    items.forEach(x=>{
+      if(!x.val) return;
+      const el=document.createElement('div');
+      el.className='social-item';
+      el.innerHTML=icons[x.key] + '<span>'+ x.val +'</span>';
+      socialBottom.appendChild(el);
+    });
+  }
+
+  function applyChanges(){
+    brandName.textContent = company.value.trim() || 'اسم الشركة';
+    titleOut.textContent  = titleIn.value.trim() || 'عنوان الرسالة';
+    contentOut.textContent= normalizeDigits(contentIn.value) || '—';
+    refOut.textContent    = normalizeDigits(refIn.value.trim() || '—');
+
+    stampCompany.textContent = company.value.trim() || 'اسم الشركة';
+    crOut.textContent        = 'CR: ' + (normalizeDigits(cr.value) || '—');
+    phoneOut.textContent     = 'Tel: ' + (fullPhone() || '—');
+
+    personName.textContent = personNameIn.value.trim() || 'الاسم الشخصي';
+    personRole.textContent = personRoleIn.value.trim() || 'الصفة / الوظيفة';
+    emailOut.textContent   = (email.value.trim() || 'name@example.com');
+
+    buildSocial();
+  }
+
+  // تكبير/تصغير المعاينة تلقائياً لتناسب عرض البطاقة
+  function scalePreview(){
+    const scaleBox = document.getElementById('scaleBox');
+    const page     = document.getElementById('page');
+    const parentW  = scaleBox.parentElement.clientWidth;     // عرض بطاقة المعاينة
+    const desired  = Math.min( parentW - 16, 980 );          // لا نتجاوز عرض كبير
+    const scale    = Math.min(1, desired / page.offsetWidth);
+    scaleBox.style.transform = `scale(${scale})`;
+  }
+
+  // أحداث
+  ['input','change'].forEach(evt=>{
+    [company,countryCode,phone,email,titleIn,contentIn,personNameIn,personRoleIn,cr,refIn,igIn,twIn,fbIn,lnIn]
+      .forEach(el=> el.addEventListener(evt, ()=>{ if(['phone','cr','contentIn','titleIn','refIn'].includes(el.id)) el.value=normalizeDigits(el.value); applyChanges(); }));
+  });
+
+  document.getElementById('applyBtn').addEventListener('click', ()=>{ applyChanges(); });
+  document.getElementById('clearBtn').addEventListener('click', ()=>{
+    document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], textarea').forEach(i=> i.value='');
+    countryCode.value = '+973'; // البحرين افتراضيًا
+    applyChanges();
+  });
+
+  // تهيئة أولية
+  (document.fonts?.ready || Promise.resolve()).then(()=>{
+    applyChanges();
+    scalePreview();
+    window.addEventListener('resize', scalePreview, {passive:true});
+    // أحيانًا النص يغير الارتفاع بعد أول رسم
+    setTimeout(scalePreview, 60);
+  });
 </script>
 </body>
 </html>
