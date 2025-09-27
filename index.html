@@ -3,21 +3,43 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>لتر هد أونلاين — إنشاء خطاب احترافي</title>
-<meta name="description" content="لتر هد أونلاين: صمّم خطاب A4 عربي احترافي مع توقيع أونلاين وختم وشريط سوشيال أبيض فوق خط ذهبي. متجاوب وخفيف.">
+<title>لتر هد أونلاين — إنشاء خطاب A4 احترافي</title>
+<meta name="description" content="لتر هد أونلاين: أنشئ خطاب A4 احترافي بالعربية مع ختم، توقيع أونلاين داخل الختم، وشبكات التواصل والإيميل ورقم الشركة بأسفل الصفحة. متجاوب وخفيف." />
+<meta name="keywords" content="لتر هد, خطاب رسمي, Letterhead, توقيع اونلاين, ختم, عربي, A4, سوشيال, شركة" />
+<link rel="canonical" href="https://example.com/letterhead-online" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="لتر هد أونلاين — إنشاء خطاب A4 احترافي" />
+<meta property="og:description" content="مولّد لتر هد عربي مع توقيع داخل الختم، وشبكات التواصل بأسفل الصفحة." />
+<meta property="og:locale" content="ar_AR" />
+<meta name="robots" content="index,follow" />
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebApplication",
+  "name":"لتر هد أونلاين",
+  "applicationCategory":"BusinessApplication",
+  "operatingSystem":"Web",
+  "url":"https://example.com/letterhead-online",
+  "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+}
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
   :root{--gold:#C6A14A;--gold-soft:#ead89c;--black:#0b0f19;--ink:#111827;--muted:#6b7280;--paper:#fff}
+
   *{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   html,body{height:100%}
   body{margin:0;background:#f6f7f9;color:var(--ink);font-family:"Cairo",system-ui;line-height:1.6}
 
+  /* تخطيط عام */
   .wrap{max-width:1200px;margin:auto;padding:14px;display:grid;grid-template-columns:430px 1fr;gap:14px}
   @media(max-width:1024px){.wrap{grid-template-columns:1fr}}
+
   .card{background:#fff;border:1px solid #e7e9ef;border-radius:14px;box-shadow:0 8px 16px rgba(0,0,0,.05);overflow:hidden}
   .hd{padding:14px 16px;background:linear-gradient(90deg,var(--black),#1b2335);color:#fff;font-weight:800}
   .bd{padding:16px}
 
+  /* حقول */
   label{display:block;font-size:14px;color:var(--muted);margin:10px 2px 6px}
   input,select,textarea{width:100%;padding:14px 12px;border:1px solid #dfe3ea;border-radius:12px;font-size:16px;background:#fff}
   textarea{min-height:130px;resize:vertical}
@@ -25,6 +47,7 @@
   .g2{grid-template-columns:1fr 1fr}
   .g4{grid-template-columns:1fr 1fr 1fr 1fr}
   @media(max-width:720px){.g2,.g4{grid-template-columns:1fr}}
+
   .btns{display:grid;gap:10px;grid-template-columns:1fr 1fr}
   @media(max-width:720px){.btns{grid-template-columns:1fr}}
   .btn{border:0;border-radius:12px;padding:16px;font-weight:800;font-size:17px;cursor:pointer;width:100%}
@@ -37,7 +60,7 @@
   .viewport{width:100%;display:flex;justify-content:center;align-items:flex-start;overflow:hidden;contain:layout paint}
   .scale-box{transform-origin:top center;display:inline-block;will-change:transform}
 
-  /* صفحة A4 */
+  /* الورقة A4 */
   #page{width:210mm;height:297mm;background:var(--paper);position:relative;overflow:hidden;
         border:1px solid #e6e7ec;border-radius:14px;box-shadow:0 10px 26px rgba(0,0,0,.06)}
 
@@ -46,42 +69,36 @@
   .brand-name{font-weight:800;font-size:20px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:70%}
   .gold-line{height:6px;background:linear-gradient(90deg,var(--gold-soft),var(--gold),#a6842a)}
 
-  .doc{padding:12mm 18mm 54mm;height:calc(297mm - 56px - 6px - 54mm);overflow:auto}
+  .doc{padding:12mm 18mm 56mm;height:calc(297mm - 56px - 6px - 56mm);overflow:auto}
   .meta{font-size:13px;color:var(--muted);display:flex;justify-content:space-between;border-bottom:1px dashed #e5e7eb;padding-bottom:6px}
   .title{text-align:center;font-size:26px;font-weight:800;margin:12px 0 8px}
   .content{font-size:16px;line-height:1.9;text-align:justify;text-justify:inter-word}
 
   /* التذييل */
-  .ft{position:absolute;left:0;right:0;bottom:0;height:54mm;padding:14mm 18mm 10mm 18mm;border-top:0;
-      display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
-  /* شريط السوشيال الأبيض */
-  .social-bar{position:absolute;left:18mm;right:18mm;top:6mm;height:38px;background:linear-gradient(90deg,#0b0f19,#131b2e);
-    border-radius:999px;display:flex;justify-content:center;align-items:center;gap:18px;color:#fff}
-  .social-bar .icon{display:flex;align-items:center;gap:6px;font-size:13px}
-  .social-bar svg{width:16px;height:16px;color:#fff}
-  .gold-line-bottom{position:absolute;left:0;right:0;top:calc(6mm + 38px + 4px);height:4px;background:linear-gradient(90deg,var(--gold-soft),var(--gold),#a6842a)}
+  .ft{position:absolute;left:0;right:0;bottom:0;height:56mm;padding:10mm 18mm 10mm;display:flex;align-items:flex-end;justify-content:space-between;gap:12px;border-top:3px solid var(--gold)}
 
-  /* يسار: التوقيع الكبير فوق الختم */
-  .left-col{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
-  .sig{min-height:78px}
-  .sig img{max-height:78px;display:block}
-  .stamp-box{width:50mm;min-height:22mm;padding:8px 10px;border:2px solid #111;border-radius:10px;transform:rotate(-1.2deg);font-size:13px;font-weight:700}
+  /* يسار: توقيع داخل الختم */
+  .stamp-box{width:56mm;min-height:28mm;padding:8px 10px;border:2px solid #111;border-radius:10px;transform:rotate(-1.2deg);font-size:13px;font-weight:700;position:relative;background:
+    radial-gradient(circle at 30% 30%, rgba(0,0,0,.03), transparent 45%), repeating-linear-gradient(0deg, rgba(0,0,0,.02), rgba(0,0,0,.02) 2px, transparent 2px, transparent 4px)}
+  .sig-in-stamp{position:absolute;left:6px;right:6px;top:4px;height:40px;display:flex;align-items:center;justify-content:flex-start}
+  .sig-in-stamp img{max-height:40px}
 
-  /* يمين */
+  .stamp-lines{margin-top:46px} /* يترك مساحة للتوقيع */
+  .stamp-line{direction:ltr;text-align:left;font-weight:700}
+
+  /* يمين: هوية */
   .identity{text-align:right;font-size:13px;line-height:1.5}
   .identity strong{font-size:14px}
   .contact-line{direction:ltr;font-size:13px}
 
-  /* مودال التوقيع */
-  .modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;padding:16px;z-index:50}
-  .modal.show{display:flex}
-  .modal .sheet{background:#fff;border-radius:14px;max-width:520px;width:100%;padding:16px;border:1px solid #e6e7ec;box-shadow:0 18px 40px rgba(0,0,0,.2)}
-  .sig-pad{background:#fff;border:1px dashed #cbd5e1;border-radius:12px;padding:10px}
-  canvas#sigCanvas{width:100%;height:200px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;touch-action:none}
+  /* شريط اتصالات سفلي (يسار) */
+  .contacts{position:absolute;left:18mm;right:18mm;bottom:6mm;display:flex;gap:16px;align-items:center;justify-content:flex-start;flex-wrap:wrap}
+  .contacts .item{display:flex;align-items:center;gap:6px;direction:ltr} /* من اليسار: الأيقونة ثم الاسم */
+  .contacts svg{width:15px;height:15px}
 
-  @media (prefers-reduced-motion: reduce){
-    .scale-box{transition:none}
-  }
+  /* توقيع أونلاين (في نفس الصفحة) */
+  .sig-pad{background:#fff;border:1px dashed #cbd5e1;border-radius:12px;padding:10px}
+  canvas#sigCanvas{width:100%;height:180px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;touch-action:none}
 
   @page{size:A4;margin:0}
   @media print{body *{visibility:hidden}#page,#page *{visibility:visible}#page{position:absolute;left:0;top:0;transform:none;box-shadow:none}}
@@ -92,7 +109,7 @@
 <main class="wrap">
   <!-- النموذج -->
   <section class="card">
-    <div class="hd">إعدادات الخطاب</div>
+    <div class="hd">لتر هد أونلاين</div>
     <div class="bd">
       <div class="grid">
         <div><label>اسم الشركة</label><input id="company" type="text" placeholder="مثال: شركة الأفق للتجارة"></div>
@@ -135,13 +152,10 @@
           <div><label>الاسم الشخصي (للتوقيع)</label><input id="personNameIn" type="text"></div>
           <div><label>الصفة / الوظيفة</label><input id="personRoleIn" type="text"></div>
         </div>
+
         <div class="g2">
-          <div><label>صفة عمل الموقع</label><input id="siteRoleIn" type="text"></div>
-          <div><label>العنوان</label><input id="addressIn" type="text"></div>
-        </div>
-        <div class="g2">
-          <div><label>السجل التجاري (CR)</label><input id="cr" type="text"></div>
-          <div><label>مرجع (اختياري)</label><input id="refIn" type="text" placeholder="—"></div>
+          <div><label>العنوان</label><input id="addressIn" type="text" placeholder="المنامة - البحرين"></div>
+          <div><label>السجل التجاري (CR)</label><input id="cr" type="text" placeholder="555432"></div>
         </div>
 
         <div class="g4">
@@ -151,10 +165,16 @@
           <div><label>LinkedIn</label><input id="lnIn" type="text" placeholder="/company"></div>
         </div>
 
-        <!-- زر فتح نافذة التوقيع -->
-        <div class="btns">
-          <button class="btn ghost" id="openSign">ابدأ التوقيع أونلاين</button>
-          <span></span>
+        <!-- توقيع أونلاين (ظاهر بنفس الصفحة) -->
+        <div>
+          <label>التوقيع أونلاين</label>
+          <div class="sig-pad">
+            <canvas id="sigCanvas"></canvas>
+            <div class="btns" style="margin-top:10px">
+              <button type="button" class="btn ghost" id="clearSig">مسح التوقيع</button>
+              <button type="button" class="btn primary" id="useSig">إدراج التوقيع داخل الختم</button>
+            </div>
+          </div>
         </div>
 
         <div class="btns">
@@ -176,31 +196,31 @@
             <div class="gold-line"></div>
 
             <main class="doc">
-              <div class="meta"><div>التاريخ: <span id="today"></span></div><div>مرجع: <span id="refOut">—</span></div></div>
-              <div id="addressOut" style="margin-top:6px;font-size:12px;color:#4b5563"></div>
+              <div class="meta"><div>التاريخ: <span id="today"></span></div><div>العنوان: <span id="addressOut">—</span></div></div>
               <h1 class="title" id="titleOut">عنوان الرسالة</h1>
               <article class="content" id="contentOut">سيظهر نص الرسالة هنا بمحاذاة الأطراف.</article>
             </main>
 
             <footer class="ft">
-              <div class="social-bar" id="socialBar"></div>
-              <div class="gold-line-bottom"></div>
-
-              <div class="left-col">
-                <div class="sig" id="sigHolder"></div>
-                <div class="stamp-box">
+              <!-- يسار: الختم مع التوقيع داخله -->
+              <div class="stamp-box">
+                <div class="sig-in-stamp" id="sigInStamp"></div>
+                <div class="stamp-lines">
                   <div id="stampCompany">اسم الشركة</div>
-                  <div id="crOut">CR: —</div>
-                  <div id="phoneOut">Tel: —</div>
+                  <div class="stamp-line" id="crOut">CR: —</div>
+                  <div class="stamp-line" id="phoneOut">Tel: —</div>
                 </div>
               </div>
 
+              <!-- يمين: الهوية -->
               <div class="identity">
                 <strong id="personName">الاسم الشخصي</strong><br>
                 <span id="personRole">الصفة / الوظيفة</span><br>
-                <span id="siteRoleOut"></span><br>
                 <span class="contact-line" id="emailOut">name@example.com</span>
               </div>
+
+              <!-- أسفل: اتصالات يسار (أيقونة ثم الاسم/المعرف) -->
+              <div class="contacts" id="contactsRow"></div>
             </footer>
           </div>
         </div>
@@ -209,155 +229,139 @@
   </section>
 </main>
 
-<!-- نافذة التوقيع (Modal) -->
-<div class="modal" id="signModal" aria-hidden="true">
-  <div class="sheet">
-    <h3 style="margin:0 0 10px;font-weight:800">ارسم توقيعك</h3>
-    <div class="sig-pad">
-      <canvas id="sigCanvas"></canvas>
-    </div>
-    <div class="btns" style="margin-top:10px">
-      <button class="btn ghost" id="clearSig">مسح</button>
-      <button class="btn primary" id="saveSig">حفظ التوقيع</button>
-    </div>
-    <div class="btns" style="margin-top:8px">
-      <button class="btn dark" id="closeSig">إغلاق</button>
-    </div>
-  </div>
-</div>
-
 <script>
-  // أبعاد A4 بالبكسل
+  // A4 px @96dpi
   const MM2PX=96/25.4, PAGE_W=Math.round(210*MM2PX), PAGE_H=Math.round(297*MM2PX);
 
-  // تاريخ أرقام إنجليزية
+  // التاريخ (أرقام إنجليزية)
   document.getElementById("today").textContent=new Date().toLocaleDateString("en-GB");
 
-  // تحويل الأرقام
+  // تحويل الأرقام العربية/الفارسية
   const digitMap={'٠':'0','١':'1','٢':'2','٣':'3','٤':'4','٥':'5','٦':'6','٧':'7','٨':'8','٩':'9','۰':'0','۱':'1','۲':'2','۳':'3','۴':'4','۵':'5','۶':'6','۷':'7','۸':'8','۹':'9'};
   const normalizeDigits=s=>(s||'').replace(/[٠-٩۰-۹]/g,d=>digitMap[d]||d);
 
-  // عناصر إدخال/إخراج
+  // عناصر
   const q=id=>document.getElementById(id);
   const company=q('company'), countryCode=q('countryCode'), phone=q('phone'), email=q('email'), titleIn=q('titleIn'),
         contentIn=q('contentIn'), personNameIn=q('personNameIn'), personRoleIn=q('personRoleIn'),
-        siteRoleIn=q('siteRoleIn'), addressIn=q('addressIn'), cr=q('cr'), refIn=q('refIn'),
+        addressIn=q('addressIn'), cr=q('cr'),
         igIn=q('igIn'), twIn=q('twIn'), fbIn=q('fbIn'), lnIn=q('lnIn');
 
-  const brandName=q('brandName'), titleOut=q('titleOut'), contentOut=q('contentOut'), refOut=q('refOut'),
+  const brandName=q('brandName'), titleOut=q('titleOut'), contentOut=q('contentOut'),
         addressOut=q('addressOut'), stampCompany=q('stampCompany'), crOut=q('crOut'), phoneOut=q('phoneOut'),
-        personName=q('personName'), personRole=q('personRole'), siteRoleOut=q('siteRoleOut'), emailOut=q('emailOut'),
-        socialBar=q('socialBar'), sigHolder=q('sigHolder');
+        personName=q('personName'), personRole=q('personRole'), emailOut=q('emailOut'),
+        contactsRow=q('contactsRow'), sigInStamp=q('sigInStamp');
 
-  // أيقونات بيضاء (currentColor)
-  const iconW={
-    ig:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm5 5a5 5 0 1 0 .001 10.001A5 5 0 0 0 12 7Zm6.5-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2Z"/><circle cx="12" cy="12" r="3.3"/></svg>',
-    tw:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.7 10.6 21 2h-1.7l-6.2 7.4L8.2 2H2l7.6 11L2 22h1.7l6.6-7.8L15.8 22H22l-8.3-11.4Z"/></svg>',
-    fb:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.7V12h2.7V9.7c0-2.7 1.6-4.2 4-4.2 1.2 0 2.4.2 2.4.2v2.6h-1.4c-1.3 0-1.7.8-1.7 1.6V12h2.9l-.46 2.9h-2.4v7A10 10 0 0 0 22 12"/></svg>',
-    ln:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5.001 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.6h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.8 2.6 4.8 6v6H17v-5.3c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9V21H9z"/></svg>'
+  // أيقونات (أبيض/أسود متوافق مع النص)
+  const ICON=(p)=>`<svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor">${p}</svg>`;
+  const icons = {
+    ig: ICON('<path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm6.5-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2Z"/><circle cx="12" cy="12" r="3.3"/>'),
+    tw: ICON('<path d="M13.7 10.6 21 2h-1.7l-6.2 7.4L8.2 2H2l7.6 11L2 22h1.7l6.6-7.8L15.8 22H22l-8.3-11.4Z"/>'),
+    fb: ICON('<path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.7V12h2.7V9.7c0-2.7 1.6-4.2 4-4.2 1.2 0 2.4.2 2.4.2v2.6h-1.4c-1.3 0-1.7.8-1.7 1.6V12h2.9l-.46 2.9h-2.4v7A10 10 0 0 0 22 12"/>'),
+    ln: ICON('<path d="M4.98 3.5a2.5 2.5 0 1 1 0 5.001 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.6h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.8 2.6 4.8 6v6H17v-5.3c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9V21H9z"/>'),
+    mail: ICON('<path d="M3 6h18v12H3z"/><path fill="#fff" d="M3 8.2 12 13l9-4.8V6H3v2.2z"/>'),
+    phone: ICON('<path d="M6.6 2h2.7l1.1 4-2 1.2a13.5 13.5 0 0 0 6 6l1.2-2 4 1.1v2.7c0 1-0.8 1.9-1.8 1.9-7.8 0-14.1-6.3-14.1-14.1C4.7 2.8 5.6 2 6.6 2z"/>')
   };
-
-  function buildSocialWhite(){
-    socialBar.innerHTML='';
-    socialBar.style.color='#fff';
-    [{v:igIn.value.trim(),k:'ig'},{v:twIn.value.trim(),k:'tw'},{v:fbIn.value.trim(),k:'fb'},{v:lnIn.value.trim(),k:'ln'}]
-      .filter(x=>x.v).forEach(x=>{
-        const d=document.createElement('div'); d.className='icon';
-        d.innerHTML=iconW[x.k]+'<span>'+x.v+'</span>'; socialBar.appendChild(d);
-      });
-  }
 
   function fullPhone(){
     const cc=normalizeDigits(countryCode.value||''), p=normalizeDigits(phone.value||'');
     return (cc&&p)?`${cc} ${p}`:(p||'');
   }
 
-  function applyChanges(){
-    brandName.textContent=company.value.trim()||'اسم الشركة';
-    stampCompany.textContent=brandName.textContent;
-    titleOut.textContent=titleIn.value.trim()||'عنوان الرسالة';
-    contentOut.textContent=normalizeDigits(contentIn.value)||'—';
-    addressOut.textContent=addressIn.value.trim()?('العنوان: '+addressIn.value.trim()):'';
-    refOut.textContent=normalizeDigits(refIn.value.trim()||'—');
-    crOut.textContent='CR: '+(normalizeDigits(cr.value)||'—');
-    phoneOut.textContent='Tel: '+(fullPhone()||'—');
-    personName.textContent=personNameIn.value.trim()||'الاسم الشخصي';
-    personRole.textContent=personRoleIn.value.trim()||'الصفة / الوظيفة';
-    siteRoleOut.textContent=siteRoleIn.value.trim()?('صفة الموقع: '+siteRoleIn.value.trim()):'';
-    emailOut.textContent=email.value.trim()||'name@example.com';
-    buildSocialWhite();
+  function buildContacts(){
+    contactsRow.innerHTML='';
+    const items=[];
+    if(igIn.value.trim()) items.push({icon:icons.ig, txt:igIn.value.trim()});
+    if(twIn.value.trim()) items.push({icon:icons.tw, txt:twIn.value.trim()});
+    if(fbIn.value.trim()) items.push({icon:icons.fb, txt:fbIn.value.trim()});
+    if(lnIn.value.trim()) items.push({icon:icons.ln, txt:lnIn.value.trim()});
+    if(email.value.trim()) items.push({icon:icons.mail, txt:email.value.trim()});
+    const ph=fullPhone(); if(ph) items.push({icon:icons.phone, txt:ph});
+
+    items.forEach(it=>{
+      const d=document.createElement('div');
+      d.className='item';
+      d.innerHTML = it.icon + '<span>'+ it.txt +'</span>';
+      contactsRow.appendChild(d);
+    });
   }
 
-  // تحديث حي (مخفف)
-  const liveInputs=[company,countryCode,phone,email,titleIn,contentIn,personNameIn,personRoleIn,siteRoleIn,addressIn,cr,refIn,igIn,twIn,fbIn,lnIn];
-  liveInputs.forEach(el=>{
+  function applyChanges(){
+    brandName.textContent = company.value.trim() || 'اسم الشركة';
+    stampCompany.textContent = brandName.textContent;
+
+    titleOut.textContent  = titleIn.value.trim() || 'عنوان الرسالة';
+    contentOut.textContent= normalizeDigits(contentIn.value) || '—';
+
+    addressOut.textContent= addressIn.value.trim() || '—';
+    crOut.textContent     = 'CR: ' + (normalizeDigits(cr.value) || '—');
+    phoneOut.textContent  = 'Tel: ' + (fullPhone() || '—');
+
+    personName.textContent= personNameIn.value.trim() || 'الاسم الشخصي';
+    personRole.textContent= personRoleIn.value.trim() || 'الصفة / الوظيفة';
+    emailOut.textContent  = email.value.trim() || 'name@example.com';
+
+    buildContacts();
+  }
+
+  // تحديث مباشر وخفيف + إجبار أرقام إنجليزية
+  const live=[company,countryCode,phone,email,titleIn,contentIn,personNameIn,personRoleIn,addressIn,cr,igIn,twIn,fbIn,lnIn];
+  live.forEach(el=>{
     el.addEventListener('input',()=>{
-      if(['phone','cr','contentIn','titleIn','refIn'].includes(el.id)) el.value=normalizeDigits(el.value);
+      if(['phone','cr','contentIn','titleIn'].includes(el.id)) el.value=normalizeDigits(el.value);
       applyChanges();
     },{passive:true});
     el.addEventListener('change',applyChanges,{passive:true});
   });
+
+  // تحجيم المعاينة (rAF لمنع إرهاق الواجهة)
+  const viewport=q('viewport'), scaleBox=q('scaleBox');
+  function scalePreview(){
+    const avail = viewport.clientWidth - 8;
+    const s = Math.min(1, avail / (210*96/25.4));
+    scaleBox.style.transform = `scale(${s})`;
+    viewport.style.minHeight = Math.round((297*96/25.4)*s) + 'px';
+  }
+  window.addEventListener('resize',()=>requestAnimationFrame(scalePreview),{passive:true});
+
+  // التوقيع في نفس الصفحة — تحسين أداء
+  const sigCanvas=q('sigCanvas'), ctx=sigCanvas.getContext('2d');
+  const clearSig=q('clearSig'), useSig=q('useSig');
+  let drawing=false, sigDataURL='';
+
+  function resizeSigCanvas(){
+    const DPR=Math.min(window.devicePixelRatio||1, 1.75); // تقليل الحمل
+    const w=sigCanvas.clientWidth, h=sigCanvas.clientHeight;
+    sigCanvas.width=w*DPR; sigCanvas.height=h*DPR;
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+    ctx.lineWidth=2.4; ctx.lineCap='round'; ctx.strokeStyle='#111';
+    ctx.clearRect(0,0,w,h);
+  }
+  function pos(e){const r=sigCanvas.getBoundingClientRect();const t=e.touches?e.touches[0]:e;return{x:t.clientX-r.left,y:t.clientY-r.top}}
+  sigCanvas.addEventListener('mousedown',e=>{drawing=true;const p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y)},{passive:true});
+  sigCanvas.addEventListener('mousemove',e=>{if(!drawing)return;const p=pos(e);ctx.lineTo(p.x,p.y);ctx.stroke()},{passive:true});
+  window.addEventListener('mouseup',()=>{drawing=false},{passive:true});
+  sigCanvas.addEventListener('touchstart',e=>{e.preventDefault();drawing=true;const p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y)},{passive:false});
+  sigCanvas.addEventListener('touchmove',e=>{e.preventDefault();if(!drawing)return;const p=pos(e);ctx.lineTo(p.x,p.y);ctx.stroke()},{passive:false});
+  sigCanvas.addEventListener('touchend',()=>{drawing=false},{passive:true});
+
+  clearSig.addEventListener('click',()=>{resizeSigCanvas(); sigDataURL=''; sigInStamp.innerHTML='';});
+  useSig.addEventListener('click',()=>{
+    sigDataURL=sigCanvas.toDataURL('image/png');
+    sigInStamp.innerHTML='';
+    const img=new Image(); img.src=sigDataURL; img.alt='التوقيع'; sigInStamp.appendChild(img);
+  });
+
+  // أزرار عامة
   q('applyBtn').addEventListener('click',applyChanges);
   q('resetBtn').addEventListener('click',()=>{
     document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], textarea').forEach(i=> i.value='');
-    countryCode.value='+973'; sigDataURL=''; applyChanges();
+    countryCode.value='+973'; sigDataURL=''; sigInStamp.innerHTML=''; applyChanges();
   });
 
-  // تحجيم المعاينة (مُرشّح عبر rAF)
-  const viewport=q('viewport'), scaleBox=q('scaleBox');
-  function computeScale(){const avail=viewport.clientWidth-8;return Math.min(1, avail / PAGE_W)}
-  let raf=0;
-  function scalePreview(){
-    cancelAnimationFrame(raf);
-    raf=requestAnimationFrame(()=>{
-      const s=computeScale();
-      scaleBox.style.transform=`scale(${s})`;
-      viewport.style.minHeight=Math.round(PAGE_H*s)+'px';
-    });
-  }
-  window.addEventListener('resize',scalePreview,{passive:true});
-
-  // ====== نافذة التوقيع (Modal) ======
-  const modal=q('signModal'), openBtn=q('openSign'), closeBtn=q('closeSig'), saveBtn=q('saveSig'), clearBtn=q('clearSig');
-  const canvas=q('sigCanvas'), ctx=canvas.getContext('2d');
-  let drawing=false, sigDataURL='';
-
-  function openModal(){ modal.classList.add('show'); lockScroll(true); initCanvas(); }
-  function closeModal(){ modal.classList.remove('show'); lockScroll(false); }
-  function lockScroll(on){ document.body.style.overflow = on ? 'hidden' : '' }
-
-  // تقييد DPR لتقليل الحمل
-  function initCanvas(){
-    const DPR=Math.min(window.devicePixelRatio||1, 2); // سقف 2
-    const w=canvas.clientWidth, h=canvas.clientHeight;
-    canvas.width=w*DPR; canvas.height=h*DPR;
-    ctx.setTransform(DPR,0,0,DPR,0,0);
-    ctx.lineWidth=2.6; ctx.lineCap='round'; ctx.strokeStyle='#111';
-    ctx.clearRect(0,0,w,h);
-  }
-  function pos(e){const r=canvas.getBoundingClientRect();const t=e.touches?e.touches[0]:e;return{x:t.clientX-r.left,y:t.clientY-r.top}}
-
-  canvas.addEventListener('mousedown',e=>{drawing=true;const p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y)},{passive:true});
-  canvas.addEventListener('mousemove',e=>{if(!drawing)return;const p=pos(e);ctx.lineTo(p.x,p.y);ctx.stroke()},{passive:true});
-  window.addEventListener('mouseup',()=>{drawing=false},{passive:true});
-
-  canvas.addEventListener('touchstart',e=>{e.preventDefault();drawing=true;const p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y)},{passive:false});
-  canvas.addEventListener('touchmove',e=>{e.preventDefault();if(!drawing)return;const p=pos(e);ctx.lineTo(p.x,p.y);ctx.stroke()},{passive:false});
-  canvas.addEventListener('touchend',()=>{drawing=false},{passive:true});
-
-  clearBtn.addEventListener('click',()=>{initCanvas()});
-  saveBtn.addEventListener('click',()=>{
-    sigDataURL=canvas.toDataURL('image/png');
-    const img=new Image(); img.src=sigDataURL; img.alt='التوقيع';
-    sigHolder.innerHTML=''; sigHolder.appendChild(img);
-    closeModal();
-  });
-  openBtn.addEventListener('click',openModal);
-  closeBtn.addEventListener('click',closeModal);
-  modal.addEventListener('click',(e)=>{ if(e.target===modal) closeModal(); });
-
-  // تهيئة أولية
+  // تهيئة
   (document.fonts?.ready || Promise.resolve()).then(()=>{
+    resizeSigCanvas();
     applyChanges();
     scalePreview();
     setTimeout(scalePreview, 60);
