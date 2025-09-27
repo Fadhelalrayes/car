@@ -8,14 +8,14 @@
 <style>
 :root{
   --gold:#C6A14A;--black:#0b0f19;--ink:#111827;--muted:#6b7280;--paper:#fff;
-  --stamp:#0a4ea6; /* أزرق رسمي للختم */
+  --stamp:#0a4ea6;
 }
 *{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 html,body{height:100%}
 body{margin:0;background:#f6f7f9;color:var(--ink);font-family:"Cairo",system-ui}
 
 /* تخطيط */
-.wrap{max-width:1200px;margin:auto;padding:12px 12px 6px;display:grid;grid-template-columns:420px 1fr;gap:12px}
+.wrap{max-width:1200px;margin:auto;padding:12px;display:grid;grid-template-columns:420px 1fr;gap:12px}
 @media(max-width:1024px){.wrap{grid-template-columns:1fr}}
 .card{background:#fff;border:1px solid #e7e9ef;border-radius:14px;box-shadow:0 8px 16px rgba(0,0,0,.05);overflow:hidden}
 .hd{padding:12px 14px;background:linear-gradient(90deg,var(--black),#1b2335);color:#fff;font-weight:800}
@@ -30,14 +30,14 @@ textarea{min-height:120px;resize:vertical}
 .btn{border:0;border-radius:12px;padding:12px 14px;font-weight:800;font-size:15px;cursor:pointer}
 .btn.primary{background:var(--gold);color:#000}.btn.dark{background:var(--black);color:#fff}.btn.ghost{background:#eef2f7}
 
-/* شريط أدوات (أيقونة + نص) */
+/* شريط أدوات: أيقونة + نص ثابت في سطر واحد */
 .tools{display:flex;gap:10px;align-items:center;padding:10px 10px 0}
-.tool{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 12px;border-radius:12px;border:1px solid #e4e7ef;background:#fff;cursor:pointer;font-weight:800;font-size:14px}
+.tool{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 12px;border-radius:12px;border:1px solid #e4e7ef;background:#fff;cursor:pointer;font-weight:800;font-size:14px;white-space:nowrap}
 .tool.dark{background:linear-gradient(180deg,#1b2335,#0b0f19);color:#fff;border:0}
 .tool svg{width:18px;height:18px}
 
 /* المعاينة (بدون فراغ أسفل) */
-.preview{padding:8px 10px 0;margin:0}
+.preview{padding:8px 10px 0}
 .viewport{width:100%;display:flex;justify-content:center;align-items:flex-start;overflow:hidden}
 .scale-box{transform-origin:top center;display:inline-block}
 
@@ -64,13 +64,7 @@ textarea{min-height:120px;resize:vertical}
 
 /* ختم رسمي أزرق — بلا ظل أو ميل */
 .left-col{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
-.stamp-box{
-  width:60mm;min-height:33mm;padding:10px 12px;border-radius:12px;position:relative;
-  border:2px solid var(--stamp); background:#fff; /* بلا تدرّج */
-  transform:none; /* بلا ميل */
-  box-shadow:none; /* بلا ظل */
-  overflow:hidden;
-}
+.stamp-box{width:60mm;min-height:33mm;padding:10px 12px;border-radius:12px;position:relative;border:2px solid var(--stamp);background:#fff;transform:none;box-shadow:none;overflow:hidden}
 .sig-overlay{position:absolute;left:10px;right:10px;top:8px;height:60px;display:flex;align-items:center;justify-content:flex-start;opacity:1}
 .sig-overlay img{max-height:60px;filter:grayscale(1) contrast(1.1)}
 .stamp-ink{color:var(--stamp);font-weight:800;letter-spacing:.2px}
@@ -82,7 +76,7 @@ textarea{min-height:120px;resize:vertical}
 canvas#sigCanvas{width:100%;height:180px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;touch-action:none}
 
 /* أسفل الموقع */
-.site-footer{max-width:1200px;margin:6px auto 6px;color:#6b7280;text-align:center;padding:0 10px}
+.site-footer{max-width:1200px;margin:6px auto 8px;color:#6b7280;text-align:center;padding:0 10px}
 .site-footer a{color:var(--gold);text-decoration:none;font-weight:800}
 .site-footer a:hover{text-decoration:underline}
 
@@ -234,24 +228,27 @@ canvas#sigCanvas{width:100%;height:180px;background:#fff;border:1px solid #e5e7e
      target="_blank" rel="noopener noreferrer">فاضل الريس</a>
 </footer>
 
-<!-- html2canvas + jsPDF (مضمّنة داخل html2pdf.bundle) -->
-<script src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 <script>
 /* التاريخ */
 document.getElementById("today").textContent=new Date().toLocaleDateString("en-GB");
 
-/* حفظ/استرجاع */
-const STORE_KEY='letterheadFormV5';
+/* تخزين */
+const STORE_KEY='letterheadFormV6';
 const DM={'٠':'0','١':'1','٢':'2','٣':'3','٤':'4','٥':'5','٦':'6','٧':'7','٨':'8','٩':'9','۰':'0','۱':'1','۲':'2','۳':'3','۴':'4','۵':'5','۶':'6','۷':'7','۸':'8','۹':'9'};
 const normalize=s=>(s||'').replace(/[٠-٩۰-۹]/g,d=>DM[d]||d);
 const $=id=>document.getElementById(id);
+
+/* حفظ/تحميل */
 function saveState(extra={}){
   const ids=['company','countryCode','phone','email','titleIn','contentIn','personNameIn','personRoleIn','addressIn','cr','igIn','twIn','fbIn','lnIn','signatureDataURL'];
   const data={}; ids.forEach(id=>{const el=$(id); if(el) data[id]=el.value??'';}); Object.assign(data,extra);
   localStorage.setItem(STORE_KEY, JSON.stringify(data));
 }
 function loadState(){
-  try{const raw=localStorage.getItem(STORE_KEY); if(!raw) return {};
+  try{
+    const raw=localStorage.getItem(STORE_KEY); if(!raw) return {};
     const data=JSON.parse(raw);
     Object.entries(data).forEach(([k,v])=>{const el=$(k); if(el && typeof v==='string') el.value=v;});
     if(data.signatureDataURL){const img=new Image(); img.src=data.signatureDataURL; img.alt='التوقيع'; $('sigInStamp').innerHTML=''; $('sigInStamp').appendChild(img);}
@@ -268,7 +265,7 @@ const brandName=$('brandName'), titleOut=$('titleOut'), contentOut=$('contentOut
       stampCompany=$('stampCompany'), crOut=$('crOut'), phoneOut=$('phoneOut'),
       personName=$('personName'), personRole=$('personRole'), socialRow=$('socialRow');
 
-/* أيقونات ذهبية */
+/* سوشيال */
 const ICON=p=>`<svg viewBox="0 0 24 24"><g fill="#ffd777">${p}</g></svg>`;
 const icons={
   ig: ICON('<path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm6.5-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2Z"/><circle cx="12" cy="12" r="3.3"/>'),
@@ -278,8 +275,6 @@ const icons={
   mail: ICON('<path d="M3 6h18v12H3z"/><path fill="#0b0f19" d="M3 8.2 12 13l9-4.8V6H3v2.2z"/>'),
   phone: ICON('<path d="M6.6 2h2.7l1.1 4-2 1.2a13.5 13.5 0 0 0 6 6l1.2-2 4 1.1v2.7c0 1-0.8 1.9-1.8 1.9-7.8 0-14.1-6.3-14.1-14.1C4.7 2.8 5.6 2 6.6 2z"/>')
 };
-
-/* هاتف بسطر واحد */
 function fullPhone(){const cc=(country.value||''); const p=normalize(phone.value||''); return (cc&&p)?`${cc}\u00A0${p}`:(p||'');}
 function buildSocial(){
   socialRow.innerHTML='';
@@ -308,14 +303,14 @@ function applyChanges(){
   saveState();
 }
 
-/* تحجيم المعاينة — بدون أي مسافة */
+/* تحجيم المعاينة — نفس ارتفاع A4 */
 const viewport=$('viewport'), scaleBox=$('scaleBox');
 function scalePreview(){
   const avail=viewport.clientWidth-6;
   const PAGE=210*96/25.4, PHEIGHT=297*96/25.4;
   const s=Math.min(1, avail / PAGE);
   scaleBox.style.transform=`scale(${s})`;
-  viewport.style.height=Math.round(PHEIGHT*s)+'px';   // ارتفاع ثابت = ارتفاع الورقة
+  viewport.style.height=Math.round(PHEIGHT*s)+'px';
 }
 window.addEventListener('resize',()=>requestAnimationFrame(scalePreview),{passive:true});
 
@@ -347,33 +342,52 @@ $('useSig').addEventListener('click',()=>{
   saveState({signatureDataURL:url});
 });
 
-/* تنزيل PDF — html2canvas + jsPDF مباشرة (لا صفحات بيضاء) */
-function downloadPDF(){
-  const el=document.getElementById('page');
-  const html2canvas=window.html2pdf().get('html2canvas');
-  const jsPDF=window.jspdf.jsPDF;
-  window.html2canvas(el,{scale:2,useCORS:true,backgroundColor:'#ffffff'})
-    .then(canvas=>{
-      const img=canvas.toDataURL('image/jpeg',0.96);
-      const pdf=new jsPDF('p','mm','a4');
-      const pageW=210, pageH=297;
-      const imgW=pageW;
-      const imgH=canvas.height*imgW/canvas.width;
-      pdf.addImage(img,'JPEG',0,0,imgW,imgH,'','FAST');
-      pdf.save('letterhead.pdf');
-    });
+/* ===== PDF بحجم A4 من نسخة غير مُكبَّرة ===== */
+async function renderA4Canvas(){
+  const src=document.getElementById('page');
+  const clone=src.cloneNode(true);
+  Object.assign(clone.style,{width:'210mm',height:'297mm',transform:'none',boxShadow:'none',position:'static'});
+  const holder=document.createElement('div');
+  Object.assign(holder.style,{position:'fixed',left:'-9999px',top:'0',background:'#ffffff',zIndex:-1});
+  holder.appendChild(clone);
+  document.body.appendChild(holder);
+  const canvas=await html2canvas(clone,{scale:2,backgroundColor:'#ffffff',useCORS:true});
+  document.body.removeChild(holder);
+  return canvas;
 }
+async function makePDFBlob(){
+  const {jsPDF}=window.jspdf;
+  const canvas=await renderA4Canvas();
+  const img=canvas.toDataURL('image/jpeg',0.96);
+  const pdf=new jsPDF('p','mm','a4');
+  pdf.addImage(img,'JPEG',0,0,210,297,'','FAST');
+  return pdf.output('blob');
+}
+document.getElementById('downloadPdf').addEventListener('click',async ()=>{
+  const blob=await makePDFBlob();
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a'); a.href=url; a.download='letterhead.pdf'; a.click();
+  URL.revokeObjectURL(url);
+});
 
-/* أزرار */
-document.getElementById('downloadPdf').addEventListener('click',downloadPDF);
+/* طباعة و إيميل (مشاركة الملف كمرفق إن أمكن) */
 document.getElementById('printView').addEventListener('click',()=>window.print());
-document.getElementById('sendMail').addEventListener('click',()=>{
+document.getElementById('sendMail').addEventListener('click',async ()=>{
+  try{
+    const blob=await makePDFBlob();
+    const file=new File([blob],'letterhead.pdf',{type:'application/pdf'});
+    if(navigator.canShare && navigator.canShare({files:[file]})){
+      await navigator.share({title:'Letterhead',text:'مرفق اللتر هد (PDF).',files:[file]});
+      return;
+    }
+  }catch(e){}
+  // احتياطي: فتح البريد بدون مرفق
   const subject=encodeURIComponent('Letterhead PDF');
   const body=encodeURIComponent('مرفق خطاب اللتر هد. حمّل PDF ثم أرفقه برسالتك.');
   window.location.href=`mailto:?subject=${subject}&body=${body}`;
 });
 
-/* حفظ مباشر + تطبيق */
+/* تفاعل الحقول */
 ['input','change'].forEach(ev=>{
   document.querySelectorAll('input,textarea,select').forEach(el=>{
     el.addEventListener(ev,()=>{
@@ -388,8 +402,9 @@ document.getElementById('sendMail').addEventListener('click',()=>{
   resizeSigCanvas();
   loadState();
   applyChanges();
-  scalePreview();
-  setTimeout(scalePreview,40);
+  // تحجيم المعاينة بدقة لمنع أي فراغ
+  const fit=()=>{const avail=viewport.clientWidth-6;const PAGE=210*96/25.4;const s=Math.min(1,avail/PAGE);scaleBox.style.transform=`scale(${s})`;viewport.style.height=(297*96/25.4*s)+'px';};
+  fit(); setTimeout(fit,40);
 });
 </script>
 </body>
