@@ -1,257 +1,448 @@
-# build_magazine.py
-# يصنع مجلة PDF A4 احترافية بالعربية (غلاف + فهرس + 4 مقالات + صور + ذهبيات)
-# المتطلبات: fpdf2, arabic-reshaper, python-bidi, pillow, requests
-# الخطوط المقترحة بجانب السكريبت:
-#   - NotoNaskhArabic-Regular.ttf  (نصوص)
-#   - Cairo-Bold.ttf               (عناوين)
-from fpdf import FPDF
-from PIL import Image
-import requests, io, os, textwrap
-import arabic_reshaper
-from bidi.algorithm import get_display
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>توصيات البورصة — مباشر</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{--gold:#D4AF37;--bg:#fff;--bg-soft:#faf8f3;--text:#161616;--muted:#6b7280;--card:#fff;--border:#e9e9ef;--pos:#0a7a2f;--neg:#b11a1a;--neu:#555;--shadow:0 8px 24px rgba(0,0,0,.08);--radius:16px}
+  @media (prefers-color-scheme: dark){:root{--bg:#0c0c0e;--bg-soft:#131318;--text:#f5f5f5;--card:#141419;--border:#292933;--shadow:0 10px 30px rgba(0,0,0,.35)}}
+  *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font-family:"Cairo","Tajawal","Noto Kufi Arabic",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.65}
+  .container{max-width:1160px;margin:0 auto;padding:12px}
+  header{position:sticky;top:0;z-index:80;background:linear-gradient(180deg,rgba(212,175,55,.08),transparent),var(--bg);border-bottom:1px solid var(--border);backdrop-filter:blur(6px) saturate(130%)}
+  .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 0}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:20px}
+  .logo{width:28px;height:28px;border-radius:8px;background:conic-gradient(from 0deg,var(--gold),#caa42a,var(--gold))}
+  .meta{font-size:13px;color:var(--muted)}
+  .newsbar{display:none;overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg-soft)}
+  .news-track{display:flex;gap:28px;white-space:nowrap;animation:scroll 26s linear infinite;padding:8px 4px}
+  .news-item{flex:0 0 auto;padding:6px 12px;border:1px solid var(--border);border-radius:999px;background:var(--card);font-size:13px;font-weight:700}
+  @keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+  main{padding:12px}
+  .grid{display:grid;gap:14px}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+  .head{padding:12px 14px;border-bottom:1px solid var(--border);font-weight:800;background:linear-gradient(180deg,rgba(212,175,55,.10),transparent)}
+  .body{padding:12px}
+  table{width:100%;border-collapse:collapse;table-layout:fixed}
+  th,td{padding:10px;border-bottom:1px solid var(--border);text-align:center;font-size:14px;vertical-align:middle}
+  th{font-size:12px;color:var(--muted)}
+  tr:hover td{background:rgba(212,175,55,.06)}
+  .prices-table th:nth-child(1){width:40%}.prices-table th:nth-child(2){width:22%}.prices-table th:nth-child(3){width:18%}.prices-table th:nth-child(4){width:20%}
+  .forecast-table th:nth-child(1){width:52%}.forecast-table th:nth-child(2){width:24%}.forecast-table th:nth-child(3){width:12%}.forecast-table th:nth-child(4){width:12%}
+  td.num{white-space:nowrap} td.sym{white-space:normal;word-break:keep-all}
+  .alert{border:1px solid var(--border);border-radius:12px;padding:10px;margin-bottom:10px;background:var(--bg-soft);display:flex;align-items:center;gap:8px;justify-content:space-between}
+  .empty{text-align:center;color:var(--muted);padding:12px}
+  .sigcell{display:flex;align-items:center;justify-content:center}
+  .sigbox{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:6px;border:1px solid var(--border);box-shadow:var(--shadow);overflow:hidden}
+  .sig-bull{background:#e6f8ec}.sig-bear{background:#fde8e8}.sig-neutral{background:#f1f1f1}
+  .sigbox svg{display:block;width:16px;height:16px}
+  @media (max-width:480px){th,td{padding:8px 6px;font-size:13px}.sigbox{width:26px;height:26px}.sigbox svg{width:14px;height:14px}}
+  .tips{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px;margin-top:6px}
+  .links-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px}
+  .select-wrap{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .select-wrap select{padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:var(--bg-soft);font-family:inherit}
+  .select-wrap a{padding:10px 12px;border:1px solid var(--border);border-radius:10px;text-decoration:none}
+  .select-wrap a:hover{background:rgba(212,175,55,.10)}
+  footer{margin-top:16px;padding:18px;border-top:1px solid var(--border);text-align:center;color:var(--muted);font-size:13px}
+  #devCredit{user-select:none;cursor:pointer}
+</style>
+</head>
+<body>
+<header>
+  <div class="container topbar">
+    <div class="brand"><div class="logo"></div>توصيات البورصة</div>
+    <div class="meta">آخر تحديث: <span id="lastUpdated">—:—:—</span></div>
+  </div>
+  <div class="newsbar" id="newsbar"><div id="newsScroller" class="news-track"></div></div>
+</header>
 
-# ---------- إعدادات عامة ----------
-A4_W, A4_H = 210, 297  # mm
-MARGIN = 12            # mm
-BODY_SIZE = 14
-TITLE_SIZE = 22
-SUB_SIZE = 12
-GOLD = (182, 140, 43)  # ذهبي أنيق
-INK  = (27, 27, 27)
-TEAL = (10, 92, 85)
+<main class="container grid">
+  <section class="card">
+    <div class="head">الأسعار الحالية</div>
+    <div class="body">
+      <table class="prices-table">
+        <thead><tr><th>الأصل</th><th>السعر</th><th>التغير %</th><th>الحجم</th></tr></thead>
+        <tbody id="pricesTbody"><tr><td colspan="4" class="empty">جاري التحميل…</td></tr></tbody>
+      </table>
+    </div>
+  </section>
 
-FONT_TEXT = "NotoNaskhArabic-Regular.ttf"
-FONT_TITLE = "Cairo-Bold.ttf"
+  <section class="card">
+    <div class="head">التنبؤات</div>
+    <div class="body">
+      <table class="forecast-table">
+        <thead><tr><th>الأصل</th><th>1س</th><th>1ي</th><th>الإشارة</th></tr></thead>
+        <tbody id="forecastTbody"><tr><td colspan="4" class="empty">جاري التحميل…</td></tr></tbody>
+      </table>
+    </div>
+  </section>
 
-# صور
-IMG_COVER = "https://almaaref.org/static/images/d64c8e140d07af8b34d63ecc32e4772d.jpg"
-IMG_HAND  = "https://almaaref.org/static/images/3f3fc3d1ae67b79efaccd5783f2e91bc.jpg"
+  <section class="card" id="card-buy" style="display:none">
+    <div class="head">الأصول الموصى بشرائها</div>
+    <div class="body" id="buyList"></div>
+  </section>
 
-# ---------- أدوات مساعدة ----------
-def ar(s: str) -> str:
-    """تشكيل واتجاه نص عربي لعرض صحيح في PDF."""
-    if not s:
-        return ""
-    return get_display(arabic_reshaper.reshape(s))
+  <section class="card" id="card-sell" style="display:none">
+    <div class="head">الأصول الموصى ببيعها</div>
+    <div class="body" id="sellList"></div>
+  </section>
 
-def mm(pdf: FPDF, x=None, y=None):
-    """تحويل بسيط: لا حاجة الآن، مجرد تلميح مرجعي."""
+  <section class="card" id="card-alerts">
+    <div class="head">التنبيهات</div>
+    <div class="body" id="alertsList"><div class="empty">لا توجد تنبيهات حاليًا</div></div>
+  </section>
 
-def fetch_image(url: str) -> io.BytesIO:
-    r = requests.get(url, timeout=30)
-    r.raise_for_status()
-    return io.BytesIO(r.content)
+  <section class="tips" id="tipsBox">
+    <h3 style="margin:0 0 8px;font-weight:900">نصيحة تداول مثبتة</h3>
+    <p id="tipOfTheDay" style="margin:0;padding:10px;border:1px dashed var(--border);border-radius:12px;background:var(--bg-soft)">…</p>
+  </section>
 
-def add_fonts(pdf: FPDF):
-    pdf.add_font("title", "", FONT_TITLE, uni=True)
-    pdf.add_font("body", "", FONT_TEXT, uni=True)
+  <section class="links-card">
+    <h3 style="margin:0 0 8px;font-weight:900">مواقع تداول عالمية</h3>
+    <div class="select-wrap">
+      <select id="siteSelect" aria-label="اختر موقع تداول">
+        <option value="" selected disabled>اختر موقعًا</option>
+        <option value="https://www.interactivebrokers.com/">Interactive Brokers</option>
+        <option value="https://www.saxobank.com/">Saxo Bank</option>
+        <option value="https://www.ig.com/">IG</option>
+        <option value="https://www.cmcmarkets.com/">CMC Markets</option>
+        <option value="https://www.etoro.com/">eToro</option>
+        <option value="https://www.plus500.com/">Plus500</option>
+        <option value="https://www.xtb.com/">XTB</option>
+        <option value="https://www.avatrade.com/">AvaTrade</option>
+        <option value="https://www.fidelity.com/">Fidelity</option>
+        <option value="https://www.schwab.com/">Charles Schwab</option>
+        <option value="https://www.tdameritrade.com/">TD Ameritrade</option>
+        <option value="https://www.robinhood.com/">Robinhood</option>
+      </select>
+      <a id="openSite" href="#" target="_blank" rel="noopener" style="color:var(--text)">فتح الموقع</a>
+    </div>
+  </section>
+</main>
 
-def header_gold(pdf: FPDF, title_right: str, title_left: str = ""):
-    """ترويسة ذهبية لكل صفحة داخلية"""
-    pdf.set_fill_color(*GOLD)
-    pdf.rect(0, 0, A4_W, 8, style="F")
-    pdf.set_xy(MARGIN, 3)
-    pdf.set_text_color(255, 255, 255)
-    pdf.set_font("title", size=12)
-    pdf.cell(0, 0, ar(title_left), align="L")
-    pdf.set_xy(A4_W - MARGIN, 3)
-    pdf.cell(0, 0, ar(title_right), align="R")
-    pdf.set_text_color(*INK)
+<footer>
+  <span id="devCredit" title="انقر للتواصل">برمجة وتطوير فاضل الريس</span>
+</footer>
 
-def footer_page_no(pdf: FPDF):
-    pdf.set_y(-12)
-    pdf.set_font("body", size=10)
-    pdf.set_text_color(*GOLD)
-    pdf.cell(0, 6, ar(f"ص {pdf.page_no()}"), 0, 0, "C")
-    pdf.set_text_color(*INK)
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  /* ========= أدوات مساعدة ========= */
+  const $=s=>document.querySelector(s);
+  const fmt=(n,d=2)=> (n==null||Number.isNaN(n))?"—":Number(n).toLocaleString('en-US',{maximumFractionDigits:d});
+  const now=()=>{const d=new Date(),p=n=>String(n).padStart(2,"0");$("#lastUpdated").textContent=`${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`;};
 
-def new_page(pdf: FPDF, header_right="", header_left=""):
-    pdf.add_page()
-    header_gold(pdf, header_right, header_left)
-    pdf.set_auto_page_break(auto=True, margin=15)
+  // جلب مرن بمحاولات متعددة
+  async function fetchCascade(rawUrl, timeout=12000){
+    const ctrl=new AbortController(); 
+    const timer=setTimeout(()=>ctrl.abort(),timeout);
+    const tries = [
+      rawUrl,
+      `https://r.jina.ai/http/${rawUrl.replace(/^https?:\/\//,'')}`,
+      `https://r.jina.ai/https/${rawUrl.replace(/^https?:\/\//,'')}`,
+      `https://api.allorigins.win/raw?url=${encodeURIComponent(rawUrl)}`
+    ];
+    let lastErr;
+    for(const u of tries){
+      try{
+        const r = await fetch(u,{signal:ctrl.signal,headers:{'Cache-Control':'no-cache'}});
+        if(!r.ok) throw new Error(`HTTP error: ${r.status}`);
+        const txt=await r.text(); 
+        clearTimeout(timer); 
+        return txt;
+      }catch(e){
+        lastErr=e;
+        console.error(`Failed to fetch ${u}: ${e.message}`);
+      }
+    }
+    console.error(`All fetch attempts failed for ${rawUrl}: ${lastErr.message}`);
+    throw lastErr||new Error('fetch failed');
+  }
 
-def add_title(pdf: FPDF, title: str, subtitle: str = "", color=TEAL):
-    pdf.ln(10)
-    pdf.set_font("title", size=TITLE_SIZE)
-    pdf.set_text_color(*color)
-    pdf.cell(0, 9, ar(title), ln=1, align="R")
-    if subtitle:
-        pdf.set_font("body", size=SUB_SIZE)
-        pdf.set_text_color(110, 106, 91)
-        pdf.cell(0, 7, ar(subtitle), ln=1, align="R")
-    pdf.set_text_color(*INK)
-    pdf.ln(2)
-    # خط فاصل ذهبي
-    pdf.set_draw_color(*GOLD)
-    pdf.set_line_width(0.6)
-    pdf.line(MARGIN, pdf.get_y(), A4_W - MARGIN, pdf.get_y())
-    pdf.ln(3)
+  /* ========= الخرائط والمصادر ========= */
+  const STOOQ_JSON = (s) => {
+    const base = `stooq.com/q/l/?s=${encodeURIComponent(s)}&f=sd2t2ohlcv&h&e=JSON`;
+    return [
+      `https://${base}`,
+      `https://r.jina.ai/https/${base}`,
+      `https://r.jina.ai/http/${base}`
+    ];
+  };
+  const MAPS = { GOLD:['gc.f','xauusd'], SILVER:['si.f','xagusd'] };
 
-def add_image_full(pdf: FPDF, img_bytes: io.BytesIO, max_h=120):
-    """إدراج صورة عرض كامل المنطقة النصية مع الحفاظ على الأبعاد."""
-    with Image.open(img_bytes) as im:
-        w, h = im.size
-    page_w = A4_W - 2*MARGIN
-    # حساب الارتفاع المتاح
-    target_w = page_w
-    target_h = target_w * h / w
-    if target_h > max_h:
-        target_h = max_h
-        target_w = target_h * w / h
-    x = (A4_W - target_w) / 2
-    pdf.image(img_bytes, x=x, y=pdf.get_y(), w=target_w, h=target_h)
-    pdf.ln(target_h + 2)
+  const FX_SOURCES = [
+    "https://open.er-api.com/v6/latest/USD",
+    "https://api.frankfurter.app/latest?from=USD",
+    "https://api.exchangerate-api.com/v4/latest/USD"
+  ];
 
-def add_article(pdf: FPDF, title: str, image_url: str, paragraphs: list, section_label="باب"):
-    """يبدأ المقال على صفحة جديدة وينساب في عمودين داخل كل صفحة."""
-    new_page(pdf, header_right="مجلة المعرفة", header_left=section_label)
-    add_title(pdf, title)
-    # صورة المقال
-    if image_url:
-        add_image_full(pdf, fetch_image(image_url), max_h=95)
+  const NEWS_RSS = [
+    "https://www.cnbcarabia.com/rss/latest",
+    "https://www.asharqbusiness.com/ar/rss",
+    "https://www.mubasher.info/rss/news/all",
+    "https://www.alarabiya.net/tools/rss?cat=aswaq",
+    "https://www.argaam.com/rss/rss.xml",
+    "https://www.alborsanews.com/feed",
+    "https://www.skynewsarabia.com/rss/business"
+  ];
 
-    # إعداد النص
-    pdf.set_font("body", size=BODY_SIZE)
-    col_gap = 7  # mm
-    col_width = (A4_W - 2*MARGIN - col_gap) / 2
-    left_x = MARGIN
-    right_x = MARGIN + col_width + col_gap
-    top_y = pdf.get_y()
+  /* ========= التسميات العربية ========= */
+  function arabicName(s){
+    const m={"EURUSD":"يورو/دولار","GBPUSD":"جنيه إسترليني/دولار","USDJPY":"دولار/ين","XAUUSD":"ذهب/دولار","XAGUSD":"فضة/دولار"};
+    return m[s]||s;
+  }
 
-    def write_paragraphs(pars):
-        nonlocal top_y
-        x, y = left_x, top_y
-        col = 0  # 0=يسار (RTL منطقياً عمود أيمن بصرياً)، 1=يمين
-        for p in pars:
-            text = ar(p)
-            # تقسيم إلى أسطر تناسب عرض العمود
-            # fpdf2 يحسب تلقائياً مع multi_cell
-            while text:
-                pdf.set_xy((right_x if col else left_x), y)
-                # نستخدم multi_cell لاتجاه RTL
-                pdf.multi_cell(col_width, 7, text, align="R")
-                new_y = pdf.get_y()
-                # تأكد من عدم النزول تحت الهامش
-                if new_y > (A4_H - 15):  # قريب من أسفل الصفحة
-                    # عمود جديد أو صفحة جديدة
-                    if col == 0:
-                        # انتقل للعمود الثاني
-                        col = 1
-                        y = top_y
-                    else:
-                        # صفحة جديدة للمقال ذاته (لا خلط)
-                        new_page(pdf, header_right="مجلة المعرفة", header_left=section_label)
-                        pdf.set_font("body", size=BODY_SIZE)
-                        # إعادة أعمدة الصفحة
-                        top_y = pdf.get_y()
-                        y = top_y
-                        col = 0
-                    # أعد كتابة الفقرة من البداية في الموضع الجديد
-                else:
-                    # انتقل لسطر التالي ضمن نفس العمود
-                    y = new_y
-                    break
+  /* ========= الحالة ========= */
+  let FX=[], COMM=[];
 
-    write_paragraphs(paragraphs)
+  /* ========= جلب البيانات ========= */
+  async function loadFX(){
+    for(const url of FX_SOURCES){
+      try{
+        const txt=await fetchCascade(`${url}?_=${Date.now()}`);
+        const d=JSON.parse(txt);
+        const r=d.rates||d.data||{}, o=[], add=(k,v)=>o.push({symbol:k,last:+v,change:0,vol:0});
+        if(r.EUR) add("EURUSD",1/r.EUR); 
+        if(r.GBP) add("GBPUSD",1/r.GBP); 
+        if(r.JPY) add("USDJPY",r.JPY);
+        if(o.length){
+          FX=o;
+          console.log(`FX data loaded from ${url}`);
+          return;
+        }
+      }catch(e){
+        console.error(`Failed to load FX from ${url}: ${e.message}`);
+      }
+    }
+    FX=[];
+    console.warn("All FX sources failed");
+  }
 
-def add_cover(pdf: FPDF):
-    pdf.add_page()
-    # خلفية ذهبية رقيقة
-    pdf.set_fill_color(255, 248, 224)
-    pdf.rect(0, 0, A4_W, A4_H, "F")
-    # صورة الغلاف
-    add_image_full(pdf, fetch_image(IMG_COVER), max_h=160)
-    # عنوان الغلاف
-    pdf.set_font("title", size=28)
-    pdf.set_text_color(*GOLD)
-    pdf.cell(0, 14, ar("مجلة المعرفة"), ln=1, align="C")
-    pdf.set_font("body", size=14)
-    pdf.set_text_color(80, 72, 55)
-    pdf.cell(0, 10, ar("فصلية ثقافية تصدر عن مجلس الشيخ عباس الريس"), ln=1, align="C")
-    pdf.cell(0, 8, ar("العدد الأول – ربيع الثاني 1447"), ln=1, align="C")
-    pdf.set_text_color(*INK)
+  function parseStooqJSON(txt){
+    try{
+      const d=JSON.parse(txt);
+      if(!d || !d.symbols || !d.symbols.length) {
+        console.warn("Invalid Stooq JSON structure");
+        return null;
+      }
+      const r=d.symbols[0], num=v=>(v&&v!=='N/D')?+v:null;
+      const open=num(r.open), close=num(r.close), vol=num(r.volume)||0;
+      if(!close && !open) {
+        console.warn("No valid price data in Stooq response");
+        return null;
+      }
+      const last=close??open, ch=(open&&close)?((close-open)/open*100):0;
+      return { last, change: ch, vol };
+    }catch(e){
+      console.error(`Error parsing Stooq JSON: ${e.message}`);
+      return null;
+    }
+  }
 
-def add_toc(pdf: FPDF, items):
-    new_page(pdf, header_right="فهرس المحتويات", header_left="TOC")
-    add_title(pdf, "فهرس المحتويات", color=GOLD)
-    pdf.set_font("body", size=14)
-    for label, page in items:
-        # سطر فهرس بنمط نقاط
-        line = f"{label}"
-        dots = " . " * max(3, 35 - len(label))
-        entry = f"{line}{dots}{page}"
-        pdf.cell(0, 8, ar(entry), ln=1, align="R")
+  async function firstOk(symbols, mapTo){
+    for(const s of symbols){
+      const tries = STOOQ_JSON(s);
+      for(const u of tries){
+        try{
+          const txt = await fetchCascade(u);
+          const rec = parseStooqJSON(txt);
+          if(rec) {
+            console.log(`Data for ${mapTo} loaded from ${u}`);
+            return {symbol:mapTo, last:rec.last, change:rec.change, vol:rec.vol};
+          }
+        }catch(e){
+          console.error(`Failed to fetch ${mapTo} from ${u}: ${e.message}`);
+        }
+      }
+    }
+    console.warn(`No data available for ${mapTo}`);
+    return null;
+  }
 
-# ---------- محتوى المجلة ----------
-mag_title = "مجلة المعرفة"
-mag_tag   = "فصلية ثقافية تصدر عن مجلس الشيخ عباس الريس"
-edition   = "العدد الأول – ربيع الثاني 1447"
+  async function loadCommodities(){
+    const out = [];
+    const g = await firstOk(MAPS.GOLD, 'XAUUSD');
+    const ag = await firstOk(MAPS.SILVER, 'XAGUSD');
+    [g, ag].forEach(x => x && out.push(x));
+    COMM = out;
+    console.log(`Commodities loaded: ${out.length} items`);
+  }
 
-art1_title = "الأسرة في الإسلام: حصن يواجه العولمة"
-art1_pars = [
-"في زمن العولمة والاتصال المفتوح، تواجه أسرنا تحدياً وجودياً. ابتعاد عن القيم الإلهية يقابله غزو ثقافي غربي، يجعل بناء مناعة ذاتية ضرورة حتمية. فبدون جهوزية روحية، يصبح السقوط في متاهات الضلال أمراً محتوماً.",
-"يساء فهم دائرة المسؤولية العائلية لدى الكثيرين. يعتقد البعض أن «الحلقة الأضيق» تقتصر على الزوجة والأبناء، مستبعدين الوالدين بعد استقلال الأبناء. هذا الفهم خاطئ جملة وتفصيلاً في الرؤية الإسلامية، التي تجعل للوالدين مكاناً أساسياً في قلب هذه الدائرة ومسؤوليتنا تجاههما دائمة.",
-"تنطلق الرؤية الإسلامية من تربية الفرد كأصل لبناء أي مجتمع، وبناء الأسرة المتعاونة المتراحمة كخلية سليمة تُشكّل نسيج المجتمع القوي. من هنا جاءت التشريعات التي تحث على الزواج وتسهله، وتنظم شؤون الأسرة وتحافظ على كيانها.",
-"ما نستورده من ثقافات عبر الشاشات ليس مثالاً يُحتذى. ففي المجتمعات الغربية، رغم تقدمها المادي، نرى مأساة إنسانية من ارتفاع مخيف في نسب الطلاق والعزوبية وتفكك الروابط الأسرية. هذا النموذج المأزوم هو ما يُسوَّق لنا، ويجب أن يكون جرس إنذار لنا جميعاً.",
-"المواجهة لا تكون بالانغلاق، بل بالوعي والبناء من خلال تعزيز علاقتنا مع الله تعالى والتمسك بقيمنا الإسلامية الأصيلة في التربية والمسؤولية. الأسرة هي حصن الأمة، وحمايتها مسؤولية جماعية."
-]
+  /* ========= اشتقاقات/عرض ========= */
+  function buildForecastRows(list){
+    return list.map(p=>{
+      const m=((p.change ?? 0))/100;
+      const sig=m>0.003?"bull":m<-0.003?"bear":"neutral";
+      return {symbol:p.symbol, f1h:p.last*(1+m*0.6), f1d:p.last*(1+m*1.2), sig};
+    });
+  }
 
-art2_title = "الصدق مع النفس والله: رحلة إلى القلب النقي"
-art2_pars = [
-"الصدق هو البوابة الأولى للإيمان الحقيقي. إنه الصراحة الكاملة مع الذات، والاعتراف بالعيوب دون تزييف، وتصحيح المسار بثبات. فمن لم يصدق مع نفسه، كيف يصدق مع غيره؟ وكيف ينال رضا ربه؟",
-"يقول الإمام علي عليه السلام: «مَن عرف نفسه جاهدها، ومن جهل نفسه أهملها». بداية الطريق هي معرفة النفس، فهي المفتاح الذي يُحررنا من أغلال الجهل والضلال.",
-"ثم تأتي الخطوة التالية: التمييز بين الخير والشر. فالحسنات من فضل الله، والسيئات من صنع أيدينا. هذه المعرفة تدفعنا للمحاسبة اليومية، وهي الوقود الذي يضيء طريق التوبة والرجوع إلى الله.",
-"أما الصدق مع الله فهو جوهر العبادة. هو الإخلاص الذي يطهر النية من أي شائبة. أن تعمل لوجه الله فقط، لا لمراءاة الناس. يقول تعالى: «فَلَوْ صَدَقُوا اللَّهَ لَكَانَ خَيْرًا لَّهُمْ». إنه الوعد الإلهي: من يصدق مع ربه، ينل الخيرية في الدنيا والآخرة.",
-"إن الصادقين هم من يوفون بعهدهم مع الله، حتى لو كانت التضحيات جسام. فهم القدوة في الإيمان والتضحية، وقد وصفهم القرآن بأنهم «أُوْلَئِكَ هُمُ الصَّادِقُونَ».",
-"ليكن شعارنا: محاسبة دائمة، ونية خالصة، وصدق لا يتزعزع. فهذا هو طريق النجاة."
-]
+  const NS='http://www.w3.org/2000/svg';
+  const make=(d,fill)=>{const s=document.createElementNS(NS,'svg');s.setAttribute('width','16');s.setAttribute('height','16');s.setAttribute('viewBox','0 0 24 24');const p=document.createElementNS(NS,'path');p.setAttribute('d',d);p.setAttribute('fill',fill);s.appendChild(p);return s};
+  const up = ()=>make('M12 4l6 6h-4v10h-4V10H6z','#0a7a2f');
+  const dn = ()=>make('M12 20l-6-6h4V4h4v10h4z','#b11a1a');
+  const fl = ()=>{const s=document.createElementNS(NS,'svg');s.setAttribute('width','16');s.setAttribute('height','16');s.setAttribute('viewBox','0 0 24 24');const r=document.createElementNS(NS,'rect');r.setAttribute('x','4');r.setAttribute('y','11');r.setAttribute('width','16');r.setAttribute('height','2');r.setAttribute('fill','#555');s.appendChild(r);return s};
 
-art3_title = "الخطر الخفي: عندما يخبو نور الإيمان"
-art3_pars = [
-"أخطر ما يهدد الإنسان هو العدو الداخلي. حين نستسلم للشهوات والأنانية، ونتخاذل عن محاربة الانحلال الأخلاقي في أنفسنا، فإننا نخاطر بفقدان أعظم نعمة: الإيمان.",
-"لا يذهب الإيمان بين ليلة وضحاها، بل يتراجع شيئاً فشيئاً حتى يصبح القلب خالياً منه، بينما يظل المظهر إيمانياً. هذه الهوة بين الظاهر والباطن هي النفاق بعينه، وهو الخطر الأكبر على الفرد والأمة.",
-"يحذرنا القرآن: «فَأَعْقَبَهُمْ نِفَاقًا فِي قُلُوبِهِمْ». عندما نخلد إلى الراحة ونتبع أهواءنا بدل أداء تكاليفنا، يصبح القلب مرتعاً للنفاق. العدو الخارجي قد يهزمك ولكنه لا يقتلع جذور الإيمان من القلب، أما العدو الداخلي – وهو ضعف النفس – فيفرغك من داخلك ويضلك عن الطريق.",
-"العلاج يكمن في اليقظة الدائمة ومحاربة الهوى. حيثما حاربت أنانيتك وقدمت التكليف على هواك، تقدمت وانتصرت. وحيثما استسلمت للمنّ والتراخي، تكون الهزيمة من داخلك.",
-"ليكن شعارنا: محاسبة دائمة، وجهاد متواصل ضد النفس الأمارة بالسوء. فهذا هو درع الوقاية من أسوأ العواقب: قلب خال من الإيمان."
-]
+  function arabicNameWrap(s){return arabicName(s)}
 
-art4_title = "الحياءُ شعاعٌ من نور الإيمان"
-art4_pars = [
-"ليس الحياء مجرد خُلق نبيل نتزين به في تعاملاتنا، بل هو جوهرٌ من جوهر الإيمان، وعلامة صادقة على الشعور الحقيقي بقرب الله تعالى ومراقبته. عن الرسول الأكرم صلى الله عليه وآله أنه قال: «استحيوا من الله حق الحياء». وهذا النداء النبوي يطرح سؤالاً مهماً: كيف نستحي من الله حق الحياء؟",
-"إن الإجابة تكمن في وصية النبي صلى الله عليه وآله التي ترسم لنا خريطة الطريق العملي لهذا الحياء الحقيقي. فأول خطوات هذا الطريق أن تبيت كل ليلة وأجلك بين عينيك، متذكراً الموت ولحظة الرحيل، فهذا الذكر يضيء القلب ويصفي النية. ثم تأتي الخطوة الثانية وهي حفظ الرأس وما حوى، من عين تنظر بها، وأذن تسمع بها، ولسان تنطق به، فتحرسها عن كل ما يغضب الله.",
-"ولا يقتصر الحياء على حفظ الجوارح الظاهرة، بل يمتد ليشمل الباطن أيضاً، فتحفظ بطنك عن الحرام حتى القليل منه، وتحرص على أن يكون طعامك وشرابك من الحلال الطيب. وتتذكر دائماً القبر والبلوى، فتترك زينة الحياة الدنيا وزخرفها عندما تعيقك عن طريق الآخرة.",
-"إن العلاقة بين الحياء والإيمان علاقة وثيقة، فهما كالتوأم الذي لا يفترق. فكلما قوي شعورك بمراقبة الله تعالى، قوي حياؤك، وكلما غفلت عن وجود الملكين الكاتبين اللذين يرافقانك ليل نهار، ضعف حياؤك. وقد أوصى الأئمة عليهم السلام بأن نستحي من الله في السر كما نستحي من الناس في العلن.",
-"هذا الحياء الحقيقي هو الذي يصنع القلب النقي والإيمان الثابت، وهو الدرع الواقي من الوقوع في المعاصي، والبوصلة التي ترشدنا إلى طريق الرضا الإلهي. فليكن حياؤنا من الله شمساً تنير دربنا، وتقربنا من رحمة ربنا."
-]
+  function renderPrices(list){
+    const tb=$("#pricesTbody"); tb.innerHTML="";
+    if(!list.length){
+      tb.innerHTML='<tr><td colspan="4" class="empty">لا توجد بيانات متاحة حاليًا، يرجى التحقق من الاتصال</td></tr>';
+      return;
+    }
+    for(const p of list){
+      const tr=document.createElement("tr");
+      const digits=p.symbol.endsWith("USD")?(p.symbol.startsWith("USD")?5:(p.symbol==='USDJPY'?3:2)):2;
+      tr.innerHTML=`<td class="sym"><b>${arabicNameWrap(p.symbol)}</b></td>
+        <td class="num">${fmt(p.last,digits)}</td>
+        <td class="num" style="font-weight:800;color:${(p.change??0)>=0?'#0a7a2f':'#b11a1a'}">${(p.change??0)>=0?'↑':'↓'} ${fmt(Math.abs(p.change??0),2)}%</td>
+        <td class="num">${fmt(p.vol??0,0)}</td>`;
+      tb.appendChild(tr);
+    }
+  }
 
-# ---------- إنشاء PDF ----------
-pdf = FPDF(orientation="P", unit="mm", format="A4")
-pdf.set_auto_page_break(auto=False)
-add_fonts(pdf)
+  function renderForecast(list){
+    const tb=$("#forecastTbody"); tb.innerHTML="";
+    if(!list.length){
+      tb.innerHTML='<tr><td colspan="4" class="empty">لا توجد بيانات متاحة حاليًا، يرجى التحقق من الاتصال</td></tr>';
+      return;
+    }
+    for(const f of buildForecastRows(list)){
+      let cls,icon;
+      if(f.sig==='bull'){cls='sig-bull';icon=up()}
+      else if(f.sig==='bear'){cls='sig-bear';icon=dn()}
+      else {cls='sig-neutral';icon=fl()}
+      const sigBox=document.createElement('span');sigBox.className=`sigbox ${cls}`;sigBox.appendChild(icon);
+      const tr=document.createElement("tr");
+      tr.innerHTML=`<td class="sym"><b>${arabicNameWrap(f.symbol)}</b></td>
+                    <td class="num">${fmt(f.f1h,2)}</td>
+                    <td class="num">${fmt(f.f1d,2)}</td>`;
+      const td=document.createElement('td');td.className='sigcell';td.appendChild(sigBox);tr.appendChild(td);
+      tb.appendChild(tr);
+    }
+  }
 
-# غلاف
-add_cover(pdf)
+  function buildRecommendations(list){
+    const buy=[],sell=[];
+    for(const p of list){
+      if((p.change??0)>=1.5) buy.push(p);
+      if((p.change??0)<=-1.5) sell.push(p);
+    }
+    return {buy,sell};
+  }
 
-# فهرس (سيظهر بدون أرقام صفحات دقيقة — نبدأ كل مقال في صفحة جديدة لتسهيل العثور عليه)
-toc_items = [
-    (art1_title, "—"),
-    (art2_title, "—"),
-    (art3_title, "—"),
-    (art4_title, "—"),
-]
-add_toc(pdf, toc_items)
+  function renderRecommendations(list){
+    const {buy,sell}=buildRecommendations(list),b=$("#buyList"),s=$("#sellList"),cb=$("#card-buy"),cs=$("#card-sell");
+    b.innerHTML="";s.innerHTML="";
+    if(!buy.length) cb.style.display="none";
+    else {
+      cb.style.display="block";
+      for(const r of buy){
+        const d=document.createElement("div");d.className="alert";
+        d.innerHTML=`<span><b>${arabicNameWrap(r.symbol)}</b> — إشارة شراء</span>`;
+        const sig=document.createElement('span');sig.className='sigbox sig-bull';sig.appendChild(up());
+        d.appendChild(sig);b.appendChild(d);
+      }
+    }
+    if(!sell.length) cs.style.display="none";
+    else {
+      cs.style.display="block";
+      for(const r of sell){
+        const d=document.createElement("div");d.className="alert";
+        d.innerHTML=`<span><b>${arabicNameWrap(r.symbol)}</b> — إشارة بيع</span>`;
+        const sig=document.createElement('span');sig.className='sigbox sig-bear';sig.appendChild(dn());
+        d.appendChild(sig);s.appendChild(d);
+      }
+    }
+  }
 
-# المقالات (كل مقال يبدأ صفحة جديدة ولا يختلط بغيره)
-add_article(pdf, art1_title, IMG_COVER, art1_pars, section_label="قضايا المجتمع")
-add_article(pdf, art2_title, IMG_HAND, art2_pars, section_label="تزكية النفس")
-add_article(pdf, art3_title, IMG_HAND, art3_pars, section_label="إيمانيات")
-add_article(pdf, art4_title, IMG_COVER, art4_pars, section_label="الأخلاق")
+  function renderAlerts(list){
+    const arr=list.filter(p=>p.change!=null&&Math.abs(p.change)>=3).map(p=>({symbol:p.symbol,change:p.change,dir:p.change>=0?'bull':'bear'})),
+          a=$("#alertsList"); a.innerHTML="";
+    if(!arr.length){
+      a.innerHTML='<div class="empty">لا توجد تنبيهات حاليًا</div>';
+      return;
+    }
+    for(const x of arr){
+      const row=document.createElement("div");row.className="alert";
+      const left=document.createElement('span');left.innerHTML=`<b>${arabicNameWrap(x.symbol)}</b> — ${x.change>=0?'ارتفع':'انخفض'} ${fmt(Math.abs(x.change),2)}%`;
+      const sig=document.createElement('span');sig.className=`sigbox ${x.dir==='bull'?'sig-bull':'sig-bear'}`;sig.appendChild(x.dir==='bull'?up():dn());
+      row.appendChild(left);row.appendChild(sig);a.appendChild(row);
+    }
+  }
 
-# ترقيم الصفحات (تذييل)
-for n in range(1, pdf.page_no()+1):
-    pdf.page = n
-    footer_page_no(pdf)
+  function renderAll(){
+    const combined=[...FX,...COMM];
+    renderPrices(combined); 
+    renderForecast(combined); 
+    renderRecommendations(combined); 
+    renderAlerts(combined); 
+    now();
+    console.log("Rendered data:", combined);
+  }
 
-out_name = "مجلة-المعرفة-العدد-الأول.pdf"
-pdf.output(out_name)
-print(f"تم إنشاء الملف: {out_name}")
+  /* ========= نصيحة واحدة ========= */
+  const TIPS=["ضع خطة مكتوبة للدخول والخروج وإدارة المخاطر قبل فتح الصفقة.","لا تخاطر بأكثر من 1–2% من رأس المال في صفقة واحدة.","استخدم أوامر وقف الخسارة دائمًا واحترمها.","جمّد عواطفك: لا تدع الخوف أو الطمع يقودان قرارك.","التزم بإستراتيجية مجرَّبة ولا تغيّرها بعد كل صفقة.","قيّم الصفقات على سلسلة نتائج، لا على صفقة منفردة.","تداول مع الاتجاه العام بدلًا من مصارعة السوق.","لا تُطارد الحركة بعد فواتها؛ انتظر إعادة اختبار منطقية.","نوّع محفظتك ولا تركّز كل المخاطر في أصل واحد.","احسب العائد إلى المخاطرة قبل الدخول (مثلاً 1:2 على الأقل).","تجنّب الإفراط في التداول؛ الجودة أهم من الكثرة.","تاجر بأموال يمكنك تحمل خسارتها دون ضغط نفسي.","استخدم أحجام صفقة ثابتة ومنضبطة.","دوّن أسباب الدخول والخروج وتعلّم من المراجعة الدورية.","لا تتداول وقت الأخبار عالية التقلّب دون خطة واضحة.","احذر من مضاعفة الحجم لتعويض الخسائر.","راقب السيولة والسبريد قبل التنفيذ.","اختبر الاستراتيجية تاريخيًا وعلى حساب تجريبي أولًا.","لا تدع صفقة رابحة تتحول إلى خاسرة—حرّك الوقف بحكمة.","احترم مستويات الدعم والمقاومة على الأطر الزمنية الأكبر.","اتبع إشارة واحدة واضحة بدل تكديس مؤشرات كثيرة.","تذكّر أن عدم الدخول قرار تداول أيضًا.","اعرف ما تتداول: العوامل المؤثرة والمخاطر الخاصة بالأصل.","اضبط توقيتك مع جلسات السوق النشطة.","لا تُهمل التكاليف: العمولات والانزلاق تؤثر على الأداء.","تقبّل الخسارة الصغيرة سريعًا لتجنب الخسارة الكبيرة.","لا تتداول بدافع الملل؛ انتظر فرصًا ذات ميزة واضحة.","راجع الخطة عند تغيّر هيكل السوق، لا بعد كل تذبذب.","تدرّج في زيادة الحجم بعد ثبات الأداء لا بعد صفقة واحدة.","احمِ رأس المال أولًا—الفرص لا تنتهي."];
+  $("#tipOfTheDay").textContent=TIPS[Math.floor(Math.random()*TIPS.length)];
+
+  // روابط
+  $("#openSite").addEventListener('click',e=>{e.preventDefault();const v=$("#siteSelect").value;if(v)window.open(v,'_blank','noopener')});
+  $("#devCredit").addEventListener('click',()=>window.open("https://api.whatsapp.com/send/?phone=97333375858&text&type=phone_number&app_absent=0&wame_ctl=1&fbclid=PAQ0xDSwM47SBleHRuA2FlbQIxMAABp_kyX38pB0gsODjRzVhQKTeY5ocu-YY5ziN9ajBUo-CdUWXFjvN0KmeCrDlS_aem_XeaTlriA2lW1NAuZYhhppw",'_blank','noopener'));
+
+  /* ========= الأخبار العربية ========= */
+  async function loadNews(){
+    const titles=[]; const seen=new Set(); const RE=/\b(بورصة|تداول|سوق(?:\s*الأسهم)?|الأسهم|أسهم|مؤشر|أرباح|سهم|جلسة|إغلاق|توزيعات)\b/i;
+    for(const u of NEWS_RSS){
+      try{
+        const txt=await fetchCascade(u);
+        const doc=new DOMParser().parseFromString(txt,"text/xml");
+        if(doc.querySelector("parsererror")) continue;
+        const arr=[...doc.querySelectorAll("item>title,entry>title")].map(n=>(n.textContent||"").trim());
+        for(const t of arr){
+          if(RE.test(t) && !seen.has(t)){
+            seen.add(t); titles.push(t);
+          }
+        }
+      }catch(e){
+        console.error(`Failed to load news from ${u}: ${e.message}`);
+      }
+    }
+    const bar=$("#newsbar"), track=$("#newsScroller");
+    if(!titles.length){
+      bar.style.display="none"; track.innerHTML="";
+      console.warn("No news items loaded");
+      return;
+    }
+    bar.style.display="block"; track.innerHTML="";
+    for(const t of titles.concat(titles)){
+      const d=document.createElement("div"); d.className="news-item"; d.textContent=t; track.appendChild(d);
+    }
+    console.log(`News loaded: ${titles.length} items`);
+  }
+
+  /* ========= تشغيل ========= */
+  (async function init(){
+    try{
+      await Promise.all([loadFX(), loadCommodities()]);
+      await loadNews();
+      renderAll();
+      setInterval(async()=>{
+        try{
+          await Promise.all([loadCommodities()]);
+          renderAll();
+        }catch(e){
+          console.error("Error in periodic update:", e.message);
+        }
+      }, 15000);
+      setInterval(loadNews, 120000);
+    }catch(e){
+      console.error("Initialization error:", e.message);
+      $("#pricesTbody").innerHTML='<tr><td colspan="4" class="empty">فشل تحميل البيانات، يرجى التحقق من الاتصال</td></tr>';
+      $("#forecastTbody").innerHTML='<tr><td colspan="4" class="empty">فشل تحميل البيانات، يرجى التحقق من الاتصال</td></tr>';
+    }
+  })();
+});
+</script>
+</body>
+</html>
