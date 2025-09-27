@@ -7,12 +7,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --gold:#C6A14A;     /* الذهبي */
-    --black:#0f172a;    /* الأسود */
-    --white:#ffffff;    /* الأبيض */
+    --gold:#C6A14A;
+    --black:#0f172a;
+    --white:#ffffff;
     --muted:#6b7280;
     --paper:#fff;
-    --bg:#ffffff;       /* الصفحة الرئيسية بيضاء */
+    --bg:#ffffff;
     --stamp-ink:#111827;
   }
   *{box-sizing:border-box; -webkit-print-color-adjust:exact; print-color-adjust:exact}
@@ -23,7 +23,6 @@
     line-height:1.6;
   }
 
-  /* تخطيط مبسّط */
   .wrap{max-width:1100px; margin-inline:auto; padding:16px; display:grid; gap:16px; grid-template-columns:1fr 1.5fr}
   @media (max-width:980px){ .wrap{grid-template-columns:1fr} }
 
@@ -34,7 +33,6 @@
   .hd{padding:12px 14px; background:linear-gradient(90deg,var(--black),#1f2937); color:#fff; font-weight:800; letter-spacing:.2px}
   .bd{padding:14px}
 
-  /* نموذج صغير وواضح */
   .grid{display:grid; gap:10px}
   .g2{grid-template-columns:1fr 1fr}
   .g4{grid-template-columns:1fr 1fr 1fr 1fr}
@@ -53,7 +51,6 @@
   .btn.ghost{background:#f3f4f6; color:#111}
   .btn.dark{background:var(--black); color:#fff}
 
-  /* مربع منصة صغير */
   .soc-field{display:flex; align-items:center; gap:8px}
   .soc-icon{
     width:32px; height:32px; border-radius:8px; display:grid; place-items:center;
@@ -61,7 +58,6 @@
   }
   .soc-icon svg{width:16px; height:16px}
 
-  /* الصفحة A4 */
   .page-wrap{padding:8px}
   .page{
     width:210mm; min-height:297mm; margin-inline:auto; background:var(--paper); color:var(--black);
@@ -70,72 +66,67 @@
   }
   @media (max-width:820px){ .page{width:100%; min-height:auto} }
 
-  /* الهيدر (ذهبي/أسود) */
   .lh{
     background:linear-gradient(90deg, var(--black), #111827);
     color:#fff; padding:18px 20px; display:flex; align-items:center; justify-content:space-between;
   }
-  .brand{display:flex; align-items:center; gap:10px}
+  .brand{display:flex; align-items:center; gap:10px; min-width:0}
   .logo{
     width:40px; height:40px; border-radius:10px;
     background:linear-gradient(135deg, var(--gold), #e6cf85);
     color:#000; display:grid; place-items:center; font-weight:800
   }
-  .brand-name{font-weight:800}
-  .contact{font-size:12px; text-align:left; direction:ltr; opacity:.95}
-
-  .gold-bar{
-    height:6px; background:linear-gradient(90deg, #e6cf85, var(--gold), #a98526)
+  .brand-name{
+    font-weight:800; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:220px;
   }
+  @media (max-width:480px){ .brand-name{max-width:160px} }
+  .gold-bar{ height:6px; background:linear-gradient(90deg, #e6cf85, var(--gold), #a98526) }
 
-  /* الجسم */
   .doc{padding:20px; display:flex; flex-direction:column; gap:12px}
   .meta{font-size:12px; color:#6b7280; display:flex; justify-content:space-between; gap:10px; border-bottom:1px dashed #e5e7eb; padding-bottom:8px}
   .title{margin:6px auto 0; text-align:center; font-size:26px; font-weight:800; letter-spacing:.2px}
   .content{font-size:15px; text-align:justify; text-justify:inter-word}
 
-  /* بادجات المنصات للشاشة */
-  .social{margin-top:auto; border-top:1px dashed #e5e7eb; padding-top:10px; display:flex; gap:8px; flex-wrap:wrap}
-  .badge{display:inline-flex; align-items:center; gap:6px; border:1px solid #e5e7eb; padding:4px 8px; border-radius:999px; background:#fff; font-size:12px}
-  .badge svg{width:12px; height:12px}
+  .social{display:none} /* لم نعد نعرض بادجات نصية في الأعلى */
 
-  /* ختم واقعي */
-  .stamp-area{margin-top:16px; display:flex; gap:12px; align-items:flex-start; flex-wrap:wrap}
+  /* ختم صغير طبيعي تقريباً (قطر ~ 40-45mm) */
+  .stamp-area{margin-top:12px; display:flex; gap:12px; align-items:flex-start; flex-wrap:wrap}
   .stamp-box{
-    position:relative; width:70mm; min-height:28mm; padding:10px 12px; border-radius:10px;
-    border:2.5px solid var(--stamp-ink); color:var(--stamp-ink);
+    position:relative; width:45mm; min-height:20mm; padding:8px 10px; border-radius:9px;
+    border:2.2px solid var(--stamp-ink); color:var(--stamp-ink);
     background:
       radial-gradient(circle at 30% 30%, rgba(0,0,0,.03), transparent 45%),
       repeating-linear-gradient(0deg, rgba(0,0,0,.02), rgba(0,0,0,.02) 2px, transparent 2px, transparent 4px);
-    box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.65), 0 6px 18px rgba(0,0,0,.06);
-    transform: rotate(-1.2deg); opacity:.93; filter:saturate(1.05) contrast(1.02)
+    box-shadow: inset 0 0 0 1.2px rgba(255,255,255,.65), 0 6px 16px rgba(0,0,0,.05);
+    transform: rotate(-1.3deg); opacity:.94; filter:saturate(1.04) contrast(1.02)
   }
-  .stamp-box::before{content:"ختم"; position:absolute; top:-11px; right:10px; background:#fff; color:#6b7280; padding:0 6px; font-size:12px}
-  .stamp-name{font-weight:800; font-size:14px}
-  .stamp-line{font-size:12px; direction:ltr; text-align:left}
-  .stamp-img{display:none; width:70mm; height:auto; border-radius:10px; transform:rotate(-1.2deg); filter:contrast(1.05) saturate(1.05) drop-shadow(0 6px 18px rgba(0,0,0,.06))}
+  .stamp-box::before{content:"ختم"; position:absolute; top:-10px; right:8px; background:#fff; color:#6b7280; padding:0 6px; font-size:11px}
+  .stamp-name{font-weight:800; font-size:13px}
+  .stamp-line{font-size:11px; direction:ltr; text-align:left}
+  .stamp-img{display:none; width:45mm; height:auto; border-radius:9px; transform:rotate(-1.3deg); filter:contrast(1.04) saturate(1.04) drop-shadow(0 6px 16px rgba(0,0,0,.05))}
 
-  .ft{background:#0b0f19; color:#fff; padding:10px 14px; font-size:12px; display:flex; justify-content:space-between; align-items:center}
-  .ft .brand-mini{font-weight:700}
-  .print-icons{display:none; gap:8px; align-items:center}
-  .print-icons .pi{display:flex; align-items:center; gap:4px}
-  .print-icons svg{width:11px; height:11px}
-
-  /* شريط بسيط */
-  .toolbar{display:flex; gap:8px; justify-content:center; padding:10px}
+  /* تذييل جديد: شبكات + إيميل + رقم فقط */
+  .ft{
+    background:#0b0f19; color:#fff; padding:10px 14px; font-size:12px;
+    display:flex; align-items:center; justify-content:space-between; gap:10px; position:relative
+  }
+  .ft .contact-line{display:flex; gap:12px; flex-wrap:wrap; direction:ltr}
+  .ft .print-icons{display:flex; gap:10px; align-items:center}
+  .ft .print-icons .pi{display:flex; align-items:center; gap:4px}
+  .ft .print-icons svg{width:11px; height:11px}
 
   /* طباعة */
   @page{size:A4; margin:12mm}
   @media print{
     body{background:#fff}
     .wrap{display:block; padding:0; margin:0}
-    .card,.toolbar{display:none !important}
+    .card{display:none !important}
     .page{border:none; border-radius:0; box-shadow:none}
-    .social{display:none}              /* إخفاء البادجات النصية */
-    .print-icons{
-      display:flex !important;         /* إظهار أيقونات صغيرة + الاسم أسفل يسار */
-      position:absolute; left:12mm; bottom:10mm; background:transparent
-    }
+    /* إبقاء الهيدر ملون */
+    .lh{-webkit-print-color-adjust:exact; print-color-adjust:exact}
+    /* في الطباعة: الأيقونات الصغيرة + الأسامي أسفل اليسار داخل التذييل */
+    .ft .print-icons{position:absolute; left:12mm; bottom:8mm}
+    .ft .contact-line{margin-inline-start:auto}
   }
 </style>
 </head>
@@ -195,7 +186,6 @@
               <label>Instagram</label>
               <div class="soc-field">
                 <span class="soc-icon" title="Instagram">
-                  <!-- IG -->
                   <svg viewBox="0 0 24 24" fill="#E1306C"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm5 5a5 5 0 1 0 .001 10.001A5 5 0 0 0 12 7Zm6.5-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2Z"/><circle cx="12" cy="12" r="3.3"/></svg>
                 </span>
                 <input id="ig" type="text" placeholder="@brand" />
@@ -205,7 +195,6 @@
               <label>Twitter / X</label>
               <div class="soc-field">
                 <span class="soc-icon" title="Twitter">
-                  <!-- X -->
                   <svg viewBox="0 0 24 24" fill="#000"><path d="M13.7 10.6 21 2h-1.7l-6.2 7.4L8.2 2H2l7.6 11L2 22h1.7l6.6-7.8L15.8 22H22l-8.3-11.4Z"/></svg>
                 </span>
                 <input id="tw" type="text" placeholder="@brand" />
@@ -215,7 +204,6 @@
               <label>Facebook</label>
               <div class="soc-field">
                 <span class="soc-icon" title="Facebook">
-                  <!-- FB -->
                   <svg viewBox="0 0 24 24" fill="#1877F2"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.7V12h2.7V9.7c0-2.7 1.6-4.2 4-4.2 1.2 0 2.4.2 2.4.2v2.6h-1.4c-1.3 0-1.7.8-1.7 1.6V12h2.9l-.46 2.9h-2.4v7A10 10 0 0 0 22 12"/></svg>
                 </span>
                 <input id="fb" type="text" placeholder="/brand" />
@@ -225,7 +213,6 @@
               <label>LinkedIn</label>
               <div class="soc-field">
                 <span class="soc-icon" title="LinkedIn">
-                  <!-- IN -->
                   <svg viewBox="0 0 24 24" fill="#0A66C2"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5.001 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.6h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.8 2.6 4.8 6v6H17v-5.3c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9V21H9z"/></svg>
                 </span>
                 <input id="in" type="text" placeholder="/company/brand" />
@@ -269,20 +256,16 @@
       <div class="hd">المعاينة</div>
       <div class="bd page-wrap">
         <div class="page" id="page">
-          <!-- الهيدر -->
+          <!-- الهيدر (أزلنا الإيميل والرقم من الأعلى) -->
           <header class="lh">
             <div class="brand">
               <div class="logo">★</div>
               <div class="brand-name" id="brandName">اسم الشركة</div>
             </div>
-            <div class="contact">
-              <div id="emailOut">name@example.com</div>
-              <div id="phoneOut">+973 0000 0000</div>
-            </div>
+            <div><!-- فارغ عمداً كي يبقى الهيدر نظيفاً --></div>
           </header>
           <div class="gold-bar"></div>
 
-          <!-- الجسم -->
           <main class="doc">
             <div class="meta">
               <div>التاريخ: <span id="today"></span></div>
@@ -295,10 +278,7 @@
               اكتب نص الرسالة من الحقول أعلاه، وسيظهر هنا بمحاذاة الأطراف.
             </article>
 
-            <!-- بادجات المنصات للشاشة -->
-            <div class="social" id="socialBadges"></div>
-
-            <!-- الختم -->
+            <!-- الختم الصغير -->
             <div class="stamp-area">
               <div class="stamp-box" id="stampBox">
                 <div class="stamp-name" id="stampNameOut">اسم الشركة</div>
@@ -309,26 +289,29 @@
             </div>
           </main>
 
+          <!-- تذييل يحتوي الشبكات + الإيميل + الهاتف فقط -->
           <footer class="ft">
-            <div class="brand-mini">Letterhead — أبيض/ذهبي/أسود</div>
-            <div style="direction:ltr;">© <span id="year"></span></div>
-            <!-- أيقونات الطباعة أسفل يسار -->
+            <!-- أيقونات صغيرة + الاسم (تظهر دائماً، وتتموضع يساراً في الطباعة) -->
             <div class="print-icons" id="printIcons"></div>
+
+            <!-- خط تواصل: الإيميل + الهاتف -->
+            <div class="contact-line">
+              <span id="emailOut">name@example.com</span>
+              <span>•</span>
+              <span id="phoneOut">+973 0000 0000</span>
+            </div>
           </footer>
         </div>
-
-        <div class="toolbar" id="toolbar" hidden></div>
       </div>
     </section>
   </div>
 
 <script>
-  // عناصر إدخال
+  // إدخال
   const company = document.getElementById('company');
   const email = document.getElementById('email');
   const phone = document.getElementById('phone');
   const countryCode = document.getElementById('countryCode');
-
   const titleIn = document.getElementById('title');
   const contentIn = document.getElementById('content');
 
@@ -342,7 +325,7 @@
   const stampPhone = document.getElementById('stampPhone');
   const stampImage = document.getElementById('stampImage');
 
-  // عناصر إخراج
+  // إخراج
   const brandName = document.getElementById('brandName');
   const emailOut = document.getElementById('emailOut');
   const phoneOut = document.getElementById('phoneOut');
@@ -350,7 +333,6 @@
   const titleOut = document.getElementById('titleOut');
   const contentOut = document.getElementById('contentOut');
 
-  const socialBadges = document.getElementById('socialBadges');
   const printIcons = document.getElementById('printIcons');
 
   const stampBox = document.getElementById('stampBox');
@@ -359,17 +341,14 @@
   const crOut = document.getElementById('crOut');
   const stampPhoneOut = document.getElementById('stampPhoneOut');
 
-  // أزرار
   const applyBtn = document.getElementById('applyBtn');
   const printBtn = document.getElementById('printBtn');
   const resetBtn = document.getElementById('resetBtn');
 
-  // تاريخ/سنة
   const today = new Date();
   document.getElementById('today').textContent = today.toLocaleDateString('ar-EG');
-  document.getElementById('year').textContent = today.getFullYear();
 
-  // أيقونات SVG
+  // أيقونات
   const icons = {
     ig:'<svg viewBox="0 0 24 24" fill="#E1306C"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm5 5a5 5 0 1 0 .001 10.001A5 5 0 0 0 12 7Zm6.5-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2Z"/><circle cx="12" cy="12" r="3.3"/></svg>',
     tw:'<svg viewBox="0 0 24 24" fill="#000"><path d="M13.7 10.6 21 2h-1.7l-6.2 7.4L8.2 2H2l7.6 11L2 22h1.7l6.6-7.8L15.8 22H22l-8.3-11.4Z"/></svg>',
@@ -377,25 +356,22 @@
     ln:'<svg viewBox="0 0 24 24" fill="#0A66C2"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5.001 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.6h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.8 2.6 4.8 6v6H17v-5.3c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9V21H9z"/></svg>'
   };
 
-  function buildSocial(){
-    socialBadges.innerHTML = '';
+  function fullPhone(){
+    const cc = (countryCode.value || '').trim();
+    const p = (phone.value || '').trim();
+    return (cc && p) ? `${cc} ${p}` : (p || '');
+  }
+
+  function buildFooterIcons(){
     printIcons.innerHTML = '';
-    const map = [
+    const items = [
       {val: ig.value.trim(), key:'ig', label:'Instagram'},
       {val: tw.value.trim(), key:'tw', label:'Twitter'},
       {val: fb.value.trim(), key:'fb', label:'Facebook'},
       {val: ln.value.trim(), key:'ln', label:'LinkedIn'},
     ];
-
-    map.forEach(x=>{
+    items.forEach(x=>{
       if(!x.val) return;
-      // شاشة: بادج مع أيقونة واسم
-      const badge = document.createElement('span');
-      badge.className = 'badge';
-      badge.innerHTML = icons[x.key] + '<span>'+ x.label + ' ' + x.val + '</span>';
-      socialBadges.appendChild(badge);
-
-      // طباعة: أيقونة صغيرة + الاسم أسفل اليسار
       const pi = document.createElement('span');
       pi.className = 'pi';
       pi.innerHTML = icons[x.key] + '<span>'+ x.label + ' ' + x.val + '</span>';
@@ -403,17 +379,14 @@
     });
   }
 
-  function fullPhone(){
-    const cc = (countryCode.value || '').trim();
-    const p = (phone.value || '').trim();
-    return (cc && p) ? `${cc} ${p}` : (p || '—');
-    }
-
   function applyChanges(){
-    // هيدر
+    // اسم الشركة (سطر واحد)
     brandName.textContent = company.value || 'اسم الشركة';
+
+    // التذييل: إيميل + هاتف فقط (العرض)
+    const fp = fullPhone();
     emailOut.textContent = email.value || 'name@example.com';
-    phoneOut.textContent = fullPhone();
+    phoneOut.textContent = fp || '+973 0000 0000';
 
     // عنوان ومحتوى
     titleOut.textContent = titleIn.value || 'عنوان الرسالة';
@@ -422,7 +395,7 @@
     // ختم
     stampNameOut.textContent = stampName.value || (company.value || 'اسم الشركة');
     crOut.textContent = 'CR: ' + (cr.value || '—');
-    stampPhoneOut.textContent = 'Tel: ' + (stampPhone.value || phoneOut.textContent || '—');
+    stampPhoneOut.textContent = 'Tel: ' + (stampPhone.value || (fp || '—'));
 
     // صورة ختم
     if(stampImage.files && stampImage.files[0]){
@@ -438,8 +411,8 @@
       stampBox.style.display = 'block';
     }
 
-    // منصات
-    buildSocial();
+    // أيقونات المنصات في التذييل
+    buildFooterIcons();
   }
 
   // تحديث مباشر
@@ -447,10 +420,23 @@
     el.addEventListener('input', applyChanges);
   });
 
-  // أزرار
+  // زر الطباعة (مع ضمان تعبئة البيانات قبل الطباعة وحل مشكلة الصفحة الفارغة)
+  function triggerPrint(){
+    // إذا كانت هناك صورة ختم قيد التحميل انتظر اكتمالها
+    const waitImages = [];
+    if(stampImgOut.src && stampImgOut.style.display !== 'none'){
+      if(!stampImgOut.complete) {
+        waitImages.push(new Promise(res=>{ stampImgOut.onload = res; stampImgOut.onerror = res; }));
+      }
+    }
+    Promise.all(waitImages).then(()=>{
+      applyChanges();
+      requestAnimationFrame(()=>window.print());
+    });
+  }
+
   document.getElementById('applyBtn').addEventListener('click', applyChanges);
-  const doPrint = ()=>{ applyChanges(); setTimeout(()=>window.print(), 50); };
-  document.getElementById('printBtn').addEventListener('click', doPrint);
+  document.getElementById('printBtn').addEventListener('click', triggerPrint);
   window.onbeforeprint = applyChanges;
 
   document.getElementById('resetBtn').addEventListener('click', ()=>{
@@ -458,6 +444,9 @@
     countryCode.value = '+973';
     applyChanges();
   });
+
+  // سنة في التذييل (أزلنا عرضها النصي كما طلبت، لكن لا نستخدمها الآن)
+  document.getElementById('year')?.remove();
 
   // تهيئة
   applyChanges();
