@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<!DOCTYPE html><html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,8 +7,6 @@
 <meta name="robots" content="noindex,nofollow">
 <style>
 :root{--gold:#C6A14A;--black:#0b0f19;--ink:#111827;--muted:#6b7280;--paper:#fff;--stamp:#0a4ea6;--green:#16a34a}
-*{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-html,body{height:100%}
 body{margin:0;background:#f6f7f9;color:var(--ink);font-family:"Cairo",system-ui}
 .wrap{max-width:1280px;margin:auto;padding:12px;display:grid;gap:12px;grid-template-columns:clamp(320px,40vw,520px) 1fr}
 @media(max-width:1024px){.wrap{grid-template-columns:1fr}}
@@ -19,331 +16,127 @@ body{margin:0;background:#f6f7f9;color:var(--ink);font-family:"Cairo",system-ui}
 label{display:block;font:700 13px/1 "Cairo";color:var(--muted);margin:8px 2px 6px}
 input,select,textarea{width:100%;padding:12px;border:1px solid #dfe3ea;border-radius:12px;font-size:15px;background:#fff}
 textarea{min-height:100px;resize:vertical}
-.grid{display:grid;gap:10px}
-.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}
-@media(max-width:720px){.g2,.g3{grid-template-columns:1fr}}
-.btns{display:grid;gap:8px;grid-template-columns:1fr 1fr}
 .btn{border:0;border-radius:12px;padding:12px 14px;font-weight:800;font-size:15px;cursor:pointer}
 .btn.primary{background:var(--gold);color:#000}.btn.ghost{background:#eef2f7}
-.tool{display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 14px;border-radius:12px;border:1px solid #e4e7ef;background:#fff;cursor:pointer;font-weight:800;font-size:13.5px;white-space:nowrap}
+.tool{display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 14px;border-radius:12px;border:1px solid #e4e7ef;background:#fff;cursor:pointer;font-weight:800;font-size:13.5px}
 .tool.dark{background:linear-gradient(180deg,#1b2335,#0b0f19);color:#fff;border:0}
-.tool svg{width:16px;height:16px}
-.tools{display:flex;gap:10px;align-items:center;padding:10px 10px 0}
 .preview{padding:8px 10px 0}
 .viewport{width:100%;display:flex;justify-content:center;align-items:flex-start;overflow:hidden}
 .scale-box{transform-origin:top center;display:inline-block}
-/* صفحة A4 */
 #page{width:210mm;height:297mm;background:var(--paper);position:relative;overflow:hidden;border:1px solid #e6e7ec;border-radius:14px;box-shadow:0 10px 26px rgba(0,0,0,.06)}
 /* رأس الإيصال */
-.lh{background:linear-gradient(90deg,var(--black),#121828);color:#fff;padding:12px 18px;display:flex;align-items:center;gap:10px}
-.logo{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--gold),#ffe9a6);display:grid;place-items:center;color:#000;font-weight:900}
-.brand-name{font-weight:800;font-size:20px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:60%}
-.receipt-meta{margin-inline-start:auto;text-align:left;direction:ltr;font-size:12px;line-height:1.5}
+.lh{background:linear-gradient(90deg,var(--black),#121828);color:#fff;padding:12px 18px;display:flex;align-items:center;gap:10px;justify-content:space-between}
+.brand-block{display:flex;align-items:center;gap:10px}
+.brand-name{font-weight:800;font-size:20px}
+.receipt-meta{text-align:left;direction:ltr;font-size:12px;line-height:1.5}
 .gold-line{height:5px;background:linear-gradient(90deg,#ead89c,var(--gold),#a6842a)}
 .doc{padding:12mm 18mm 64mm;height:calc(297mm - 53px - 5px - 64mm);overflow:auto}
 .title{text-align:center;font-size:22px;font-weight:800;margin:12px 0 10px}
 .meta{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .box{border:1px solid #e9ecf3;border-radius:12px;padding:10px;background:#fff}
-.box h4{margin:0 0 6px;font:800 14px/1 "Cairo";color:#0b0f19}
 .kv{font-size:14px;line-height:1.8}
 .kv .row{display:flex;gap:6px}
 .kv .row b{min-width:100px;color:#374151}
 .badge{font-size:12px;color:#fff;background:var(--green);border-radius:999px;padding:2px 8px}
-/* تفاصيل الدفع */
-.pay-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
-@media(max-width:900px){.pay-grid{grid-template-columns:1fr}}
 .note{margin-top:10px;border:1px dashed #e5e7eb;border-radius:12px;padding:10px;background:#fafafa;color:#374151}
-/* تذييل */
-.ft{position:absolute;left:0;right:0;bottom:0;height:64mm;padding:10mm 18mm 14mm;display:flex;align-items:flex-end;justify-content:space-between}
-.bar{position:absolute;left:0;right:0;bottom:0;height:42px;background:linear-gradient(90deg,var(--black),#121828);display:flex;align-items:center}
-.bar .social{display:flex;gap:16px;align-items:center;color:#fff;padding:0 18mm}
-.bar .social .item{display:flex;align-items:center;gap:6px;direction:ltr;white-space:nowrap}
-.bar .social svg{width:15px;height:15px;fill:#C6A14A}
-.left-col{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
-.stamp-box{width:60mm;min-height:33mm;padding:10px 12px;border-radius:12px;position:relative;border:2px solid var(--stamp);background:#fff}
-.stamp-ink,.stamp-line{color:var(--stamp);font-weight:800}
-.stamp-line{direction:ltr;text-align:left}
-.sig-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
-.sig{border:1px dashed #cbd5e1;border-radius:10px;padding:8px;height:90px;display:grid;align-items:end}
-.qr{width:84px;height:84px;border:1px dashed #cbd5e1;border-radius:10px;display:grid;place-items:center}
-/* طباعة */
+.sig-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
+.sig{border:1px dashed #cbd5e1;border-radius:10px;padding:8px;height:90px;display:flex;justify-content:center;align-items:end;font-size:13px;color:#374151}
+.ft{position:absolute;left:0;right:0;bottom:0;height:64mm;padding:10mm 18mm 14mm;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px}
+.stamp-box{min-width:70mm;min-height:33mm;padding:10px 12px;border-radius:12px;position:relative;border:2px solid var(--stamp);background:#fff;text-align:center}
+.stamp-ink{color:var(--stamp);font-weight:800;font-size:16px}
+.stamp-line{color:var(--stamp);font-weight:700;margin-top:4px}
+.qr{position:absolute;top:10mm;left:18mm;width:84px;height:84px;border:1px dashed #cbd5e1;border-radius:10px;display:grid;place-items:center}
 @page{size:A4;margin:0}
 @media print{body *{visibility:hidden}#page,#page *{visibility:visible}#page{position:absolute;inset:0;transform:none;box-shadow:none}}
 </style>
 </head>
 <body>
 <main class="wrap">
-  <!-- إعدادات الإيصال -->
   <section class="card">
-    <div class="hd">إعدادات رصيد/إيصال الاستلام</div>
+    <div class="hd">إعدادات الإيصال</div>
     <div class="bd">
-      <div class="grid g2">
-        <div><label>اسم المؤسسة (المستلم)</label><input id="sellerName" placeholder="شركة الأفق للتجارة"></div>
-        <div><label>اسم الدافع (العميل)</label><input id="buyerName" placeholder="اسم العميل"></div>
-      </div>
-      <div class="grid g2">
-        <div><label>هاتف المؤسسة</label><input id="sellerPhone" placeholder="+973 3333 3333"></div>
-        <div><label>بريد المؤسسة</label><input id="sellerEmail" placeholder="name@example.com"></div>
-      </div>
-      <div><label>عنوان المؤسسة</label><input id="sellerAddr" placeholder="المنامة - البحرين"></div>
-
-      <div class="grid g3">
-        <div><label>رقم الإيصال</label><input id="rcpNo" placeholder="RCPT-2025-001"></div>
-        <div><label>تاريخ الإيصال</label><input id="rcpDate" type="date"></div>
-        <div><label>العملة</label>
-          <select id="currency">
-            <option value="BHD">دينار بحريني (BHD)</option>
-            <option value="SAR">ريال سعودي (SAR)</option>
-            <option value="AED">درهم إماراتي (AED)</option>
-            <option value="USD">دولار (USD)</option>
-            <option value="EUR">يورو (EUR)</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="grid g3">
-        <div><label>طريقة الدفع</label>
-          <select id="payMethod">
-            <option>نقدًا</option>
-            <option>تحويل بنكي</option>
-            <option>بطاقة</option>
-            <option>شيك</option>
-            <option>محفظة إلكترونية</option>
-          </select>
-        </div>
-        <div><label>رقم مرجع الدفع (تحويل/شيك/تفويض)</label><input id="payRef" placeholder="REF/CHK-12345"></div>
-        <div><label>المبلغ (أرقام)</label><input id="amountNum" type="number" step="0.001" placeholder="0.000"></div>
-      </div>
-
-      <div class="grid g2">
-        <div><label>المبلغ كتابةً (اختياري)</label><input id="amountWords" placeholder="مثال: خمسة وعشرون دينارًا و..."></div>
-        <div><label>السجل التجاري (CR) إن وجد</label><input id="cr" placeholder="555432"></div>
-      </div>
-
-      <div><label>مقابل ماذا؟ (وصف السلع/الخدمة/رقم الطلب/الفاتورة إن وجدت)</label>
-        <textarea id="forWhat" placeholder="مقابل توريد عدد (2) حاسوب محمول طراز ... أو استحقاق فاتورة رقم ..."></textarea>
-      </div>
-
-      <div class="grid g2">
-        <div>
-          <label>إقرار الاستلام</label>
-          <textarea id="ack" placeholder="أُقِرّ أنا ممثل المؤسسة باستلام المبلغ الموضّح أعلاه، وتسليم السلع/الخدمة حسب الوصف، ولا يوجد للمستلم أي مبالغ متبقية تخص هذا الإيصال."></textarea>
-        </div>
-        <div>
-          <label>ملاحظات</label>
-          <textarea id="notes" placeholder="سياسة الإرجاع، أو أي تعقيب إضافي..."></textarea>
-        </div>
-      </div>
-
-      <div class="btns" style="margin-top:8px">
-        <button class="btn ghost" id="printView">طباعة</button>
-        <button class="btn primary" id="downloadPdf">تحميل PDF</button>
-      </div>
+      <label>اسم المؤسسة</label><input id="sellerName">
+      <label>الهاتف</label><input id="sellerPhone">
+      <label>البريد</label><input id="sellerEmail">
+      <label>العنوان</label><input id="sellerAddr">
+      <label>السجل التجاري CR</label><input id="cr">
+      <label>اسم الدافع</label><input id="buyerName">
+      <label>رقم الإيصال</label><input id="rcpNo">
+      <label>تاريخ الإيصال</label><input id="rcpDate" type="date">
+      <label>المبلغ</label><input id="amountNum" type="number" step="0.001">
+      <label>طريقة الدفع</label><select id="payMethod"><option>نقدًا</option><option>تحويل بنكي</option><option>بطاقة</option><option>شيك</option></select>
+      <label>مرجع الدفع</label><input id="payRef">
     </div>
   </section>
-
-  <!-- المعاينة -->
   <section class="card">
-    <div class="hd">معاينة الإيصال</div>
-    <div class="tools">
-      <button class="tool dark" id="sharePdf" title="مشاركة"><svg viewBox="0 0 24 24"><path d="M16 8a3 3 0 1 0-2.8-4H13v8.3l-2.1-1.2-1 1.7 4 2.3V22h2V8zM6 9h3v2H8v9H6z"/></svg><span>مشاركة</span></button>
-    </div>
-    <div class="bd preview">
-      <div class="viewport" id="viewport">
-        <div class="scale-box" id="scaleBox">
-          <div id="page" aria-label="A4">
-            <header class="lh">
-              <div class="logo">★</div>
-              <div class="brand-name" id="brandName">اسم المؤسسة</div>
-              <div class="receipt-meta">
-                <div><b>Receipt No:</b> <span id="outNo">—</span></div>
-                <div><b>Date:</b> <span id="outDate">—</span></div>
-              </div>
-            </header>
-            <div class="gold-line"></div>
-
-            <main class="doc">
-              <h1 class="title">إيصال / رصيد استلام مبلغ</h1>
-
-              <div class="meta">
-                <div class="box">
-                  <h4>المؤسسة (المستلم)</h4>
-                  <div class="kv" id="sellerBlock"></div>
-                </div>
-                <div class="box">
-                  <h4>الدافع (العميل)</h4>
-                  <div class="kv" id="buyerBlock"></div>
-                </div>
-              </div>
-
-              <div class="pay-grid">
-                <div class="box">
-                  <h4>طريقة الدفع</h4>
-                  <div class="kv"><div class="row"><b>الطريقة:</b><span id="outMethod">—</span></div>
-                    <div class="row"><b>مرجع:</b><span id="outRef">—</span></div></div>
-                </div>
-                <div class="box">
-                  <h4>المبلغ</h4>
-                  <div class="kv">
-                    <div class="row"><b>رقمياً:</b><span id="outAmountNum">0.000</span> <span class="badge" id="currencyBadge">BHD</span></div>
-                    <div class="row"><b>كتابةً:</b><span id="outAmountWords">—</span></div>
-                  </div>
-                </div>
-                <div class="box">
-                  <h4>معلومات إضافية</h4>
-                  <div class="kv">
-                    <div class="row"><b>المقابل:</b><span id="outFor">—</span></div>
-                    <div class="row"><b>CR:</b><span id="outCR">—</span></div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="note" id="outAck"></div>
-              <div class="note" id="outNotes"></div>
-
-              <div class="sig-row">
-                <div class="sig"><div>توقيع المستلم / ختم المؤسسة</div></div>
-                <div class="sig"><div>توقيع الدافع (اختياري)</div></div>
-              </div>
-            </main>
-
-            <footer class="ft">
-              <div class="bar"><div class="social" id="socialRow"></div></div>
-              <div class="left-col">
-                <div class="stamp-box">
-                  <div class="stamp-ink" id="stampCompany">اسم المؤسسة</div>
-                  <div class="stamp-line" id="stampPhone">Tel: —</div>
-                </div>
-              </div>
-              <div class="qr" id="qrBox">QR</div>
-            </footer>
+    <div class="hd">معاينة</div>
+    <div class="preview"><div class="viewport" id="viewport"><div class="scale-box" id="scaleBox">
+      <div id="page">
+        <header class="lh">
+          <div class="brand-block">
+            <div class="brand-name" id="brandName">اسم المؤسسة</div>
           </div>
-        </div>
+          <div class="receipt-meta">
+            <div><b>Receipt No:</b> <span id="outNo">—</span></div>
+            <div><b>Date:</b> <span id="outDate">—</span></div>
+          </div>
+        </header>
+        <div class="gold-line"></div>
+        <main class="doc">
+          <h1 class="title">إيصال استلام مبلغ</h1>
+          <div class="kv"><div class="row"><b>الدافع:</b><span id="buyerBlock">—</span></div></div>
+          <div class="kv"><div class="row"><b>المبلغ:</b><span id="outAmountNum">0.000</span> <span class="badge" id="currencyBadge">BHD</span></div></div>
+          <div class="kv"><div class="row"><b>كتابةً:</b><span id="outAmountWords">—</span></div></div>
+          <div class="sig-row">
+            <div class="sig">توقيع المستلم</div>
+            <div class="sig">توقيع الدافع</div>
+          </div>
+        </main>
+        <footer class="ft">
+          <div class="stamp-box">
+            <div class="stamp-ink" id="stampCompany">اسم المؤسسة</div>
+            <div class="stamp-line" id="stampPhone">Tel: —</div>
+            <div class="stamp-line" id="stampCR">CR: —</div>
+          </div>
+        </footer>
       </div>
-    </div>
+    </div></div>
   </section>
 </main>
-
-<!-- مكتبات -->
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
 <script>
 const DM={'٠':'0','١':'1','٢':'2','٣':'3','٤':'4','٥':'5','٦':'6','٧':'7','٨':'8','٩':'9','۰':'0','۱':'1','۲':'2','۳':'3','۴':'4','۵':'5','۶':'6','۷':'7','۸':'8','۹':'9'};
 const $=id=>document.getElementById(id);
-const NF=n=>new Intl.NumberFormat('ar-EG',{minimumFractionDigits:3,maximumFractionDigits:3}).format(n);
-
-// عناصر الإدخال
-const sellerName=$('sellerName'), sellerPhone=$('sellerPhone'), sellerEmail=$('sellerEmail'), sellerAddr=$('sellerAddr');
-const buyerName=$('buyerName');
-const rcpNo=$('rcpNo'), rcpDate=$('rcpDate'), currency=$('currency');
-const payMethod=$('payMethod'), payRef=$('payRef'), amountNum=$('amountNum'), amountWords=$('amountWords');
-const cr=$('cr'), forWhat=$('forWhat'), ack=$('ack'), notes=$('notes');
-
-// مخرجات
-const brandName=$('brandName'), outNo=$('outNo'), outDate=$('outDate');
-const sellerBlock=$('sellerBlock'), buyerBlock=$('buyerBlock');
-const outMethod=$('outMethod'), outRef=$('outRef'), outAmountNum=$('outAmountNum'), outAmountWords=$('outAmountWords');
-const outFor=$('outFor'), outCR=$('outCR'), currencyBadge=$('currencyBadge'), outAck=$('outAck'), outNotes=$('outNotes');
-const stampCompany=$('stampCompany'), stampPhone=$('stampPhone');
-const socialRow=$('socialRow'), qrBox=$('qrBox');
-
-// حفظ/تحميل
-const STORE='receiptV1';
-function saveState(){
-  const data={
-    sellerName:sellerName.value,sellerPhone:sellerPhone.value,sellerEmail:sellerEmail.value,sellerAddr:sellerAddr.value,
-    buyerName:buyerName.value,rcpNo:rcpNo.value,rcpDate:rcpDate.value,currency:currency.value,
-    payMethod:payMethod.value,payRef:payRef.value,amountNum:amountNum.value,amountWords:amountWords.value,
-    cr:cr.value,forWhat:forWhat.value,ack:ack.value,notes:notes.value
-  };
-  localStorage.setItem(STORE,JSON.stringify(data));
+const NF=n=>new Intl.NumberFormat('en-US',{minimumFractionDigits:3,maximumFractionDigits:3}).format(n);
+function numToWordsAr(num,dec=0){
+  const ones=["","واحد","اثنان","ثلاثة","أربعة","خمسة","ستة","سبعة","ثمانية","تسعة"];
+  const tens=["","عشرة","عشرون","ثلاثون","أربعون","خمسون","ستون","سبعون","ثمانون","تسعون"];
+  if(num===0) return "صفر";
+  let words="";
+  if(num>=1000){words+=ones[Math.floor(num/1000)]+" آلاف ";num%=1000;}
+  if(num>=100){words+=ones[Math.floor(num/100)]+" مائة ";num%=100;}
+  if(num>=20){words+=ones[Math.floor(num/10)]+" "+tens[Math.floor(num/10)];num%=10;}
+  else if(num>=10){words+="";}
+  if(num>0) words+=ones[num];
+  return words.trim();
 }
-function loadState(){
-  const raw=localStorage.getItem(STORE); if(!raw) return;
-  const d=JSON.parse(raw);
-  for(const k in d){ if($(k)) $(k).value=d[k]; }
-}
-
-// بناء الكتل
-function buildBlocks(){
-  const sPhone=(sellerPhone.value||'').replace(/[٠-٩۰-۹]/g,d=>DM[d]);
-  sellerBlock.innerHTML=`
-    <div class="kv">
-      <div class="row"><b>الاسم:</b><span>${sellerName.value||'—'}</span></div>
-      <div class="row"><b>الهاتف:</b><span>${sPhone||'—'}</span></div>
-      <div class="row"><b>البريد:</b><span>${sellerEmail.value||'—'}</span></div>
-      <div class="row"><b>العنوان:</b><span>${sellerAddr.value||'—'}</span></div>
-    </div>`;
-  buyerBlock.innerHTML=`<div class="kv"><div class="row"><b>الاسم:</b><span>${buyerName.value||'—'}</span></div></div>`;
-  socialRow.innerHTML='';
-  if(sellerEmail.value){const d=document.createElement('div');d.className='item';d.innerHTML='<svg viewBox="0 0 24 24"><path d="M3 6h18v12H3z"/><path fill="#0b0f19" d="M3 8.2 12 13l9-4.8V6H3v2.2z"/></svg><span>'+sellerEmail.value+'</span>';socialRow.appendChild(d)}
-  if(sPhone){const d=document.createElement('div');d.className='item';d.innerHTML='<svg viewBox="0 0 24 24"><path d="M6.6 2h2.7l1.1 4-2 1.2a13.5 13.5 0 0 0 6 6l1.2-2 4 1.1v2.7c0 1-0.8 1.9-1.8 1.9-7.8 0-14.1-6.3-14.1-14.1C4.7 2.8 5.6 2 6.6 2z"/></svg><span>'+sPhone+'</span>';socialRow.appendChild(d)}
-  stampCompany.textContent=sellerName.value||'—';
-  stampPhone.textContent='Tel: '+(sPhone||'—');
-}
-
 function apply(){
-  // تنظيف أرقام عربية
-  ['sellerPhone','amountNum','cr'].forEach(id=>{const el=$(id); el.value=(el.value||'').replace(/[٠-٩۰-۹]/g,d=>DM[d]);});
-  brandName.textContent=sellerName.value||'اسم المؤسسة';
-  outNo.textContent=rcpNo.value||'—';
-  outDate.textContent=rcpDate.value||new Date().toLocaleDateString('en-GB');
-  buildBlocks();
-
-  const amt=parseFloat(amountNum.value)||0;
-  outAmountNum.textContent=NF(amt);
-  currencyBadge.textContent=currency.value;
-  outAmountWords.textContent=amountWords.value||'—';
-  outMethod.textContent=payMethod.value||'—';
-  outRef.textContent=payRef.value||'—';
-  outFor.textContent=forWhat.value||'—';
-  outCR.textContent=cr.value||'—';
-  outAck.textContent=ack.value||'';
-  outNotes.textContent=notes.value||'';
-
-  // QR: ملخص الإيصال
-  try{
-    const qr=new QRious({
-      value:`RCPT:${rcpNo.value||'-'}\nDATE:${rcpDate.value||'-'}\nAMOUNT:${amt.toFixed(3)} ${currency.value}\nPAYER:${buyerName.value||'-'}\nPAY:${payMethod.value||'-'} ${payRef.value||''}`,
-      size:84
-    });
-    qrBox.innerHTML=''; const img=new Image(); img.src=qr.toDataURL(); img.alt='QR'; qrBox.appendChild(img);
-  }catch(e){qrBox.textContent='QR'}
-  saveState();
+  const name=$('sellerName').value; const phone=$('sellerPhone').value; const cr=$('cr').value;
+  $('brandName').textContent=name||'—';
+  $('outNo').textContent=$('rcpNo').value||'—';
+  $('outDate').textContent=$('rcpDate').value||new Date().toLocaleDateString('en-GB');
+  const amt=parseFloat(($('amountNum').value||'').replace(/[٠-٩۰-۹]/g,d=>DM[d]))||0;
+  $('outAmountNum').textContent=NF(amt);
+  $('outAmountWords').textContent=numToWordsAr(Math.floor(amt));
+  $('buyerBlock').textContent=$('buyerName').value||'—';
+  $('stampCompany').textContent=name||'—';
+  $('stampPhone').textContent='Tel: '+(phone||'—');
+  $('stampCR').textContent='CR: '+(cr||'—');
 }
-
-// PDF
-async function renderA4Canvas(){
-  const src=$('page'); const clone=src.cloneNode(true);
-  Object.assign(clone.style,{width:'210mm',height:'297mm',transform:'none',boxShadow:'none',position:'static'});
-  const holder=document.createElement('div');Object.assign(holder.style,{position:'fixed',left:'-9999px',top:'0',background:'#fff'});holder.appendChild(clone);document.body.appendChild(holder);
-  const canvas=await html2canvas(clone,{scale:2,backgroundColor:'#ffffff',useCORS:true});
-  document.body.removeChild(holder); return canvas;
-}
-async function makePDFBlob(){const {jsPDF}=window.jspdf;const c=await renderA4Canvas();const img=c.toDataURL('image/jpeg',0.96);const pdf=new jsPDF('p','mm','a4');pdf.addImage(img,'JPEG',0,0,210,297,'','FAST');return pdf.output('blob')}
-$('downloadPdf').onclick=async()=>{const blob=await makePDFBlob();const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`receipt-${(rcpNo.value||'A4').replace(/\W+/g,'_')}.pdf`;a.click();URL.revokeObjectURL(url)};
-$('sharePdf').onclick=async()=>{try{const blob=await makePDFBlob();const file=new File([blob],`receipt-${(rcpNo.value||'A4')}.pdf`,{type:'application/pdf'});if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({title:'Receipt',text:'إيصال PDF',files:[file]});}else{alert('المشاركة غير مدعومة على هذا الجهاز. حمّل الملف ثم شاركه يدويًا.')}}catch(e){alert('تعذّرت المشاركة الآن.')}};
-$('printView').addEventListener('click',()=>{window.focus();window.print()});
-
-// تحجيم المعاينة
-const viewport=$('viewport'), scaleBox=$('scaleBox');
-function fit(){const avail=viewport.clientWidth-6;const PAGE=210*96/25.4;const s=Math.min(1,avail/PAGE);scaleBox.style.transform=`scale(${s})`;viewport.style.height=(297*96/25.4*s)+'px'}
-addEventListener('resize',()=>requestAnimationFrame(fit),{passive:true});
-
-// أحداث
-['input','change'].forEach(ev=>{
-  document.querySelectorAll('input,textarea,select').forEach(el=>{
-    el.addEventListener(ev,apply,{passive:true});
-  });
-});
-
-// بدء التشغيل
-(document.fonts?.ready||Promise.resolve()).then(()=>{
-  loadState();
-  if(!rcpDate.value){const d=new Date();rcpDate.value = new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10)}
-  apply(); fit(); setTimeout(fit,40);
-});
+['input','change'].forEach(ev=>{document.querySelectorAll('input,textarea,select').forEach(el=>{el.addEventListener(ev,apply,{passive:true})})});
+(document.fonts?.ready||Promise.resolve()).then(()=>{apply()});
 </script>
 </body>
 </html>
