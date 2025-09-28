@@ -3,246 +3,219 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-<title>لتر هد أونلاين | Letterhead A4 بالعربي</title>
-<meta name="description" content="إنشاء لتر هد عربي A4 مع ختم أزرق رسمي وتوقيع إلكتروني وشبكات تواصل، ثم تحميل PDF أو مشاركة الملف مباشرة.">
-<meta name="robots" content="index,follow">
+<title>إيصال/رصيد استلام مبلغ - A4</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&display=swap" rel="stylesheet">
-
+<meta name="robots" content="noindex,nofollow">
 <style>
-:root{--gold:#C6A14A;--black:#0b0f19;--ink:#111827;--muted:#6b7280;--paper:#fff;--stamp:#0a4ea6}
+:root{--gold:#C6A14A;--black:#0b0f19;--ink:#111827;--muted:#6b7280;--paper:#fff;--stamp:#0a4ea6;--green:#16a34a}
 *{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 html,body{height:100%}
 body{margin:0;background:#f6f7f9;color:var(--ink);font-family:"Cairo",system-ui}
-
-/* تخطيط */
-.wrap{max-width:1200px;margin:auto;padding:12px;display:grid;gap:12px;grid-template-columns:clamp(320px,46vw,520px) 1fr}
+.wrap{max-width:1280px;margin:auto;padding:12px;display:grid;gap:12px;grid-template-columns:clamp(320px,40vw,520px) 1fr}
 @media(max-width:1024px){.wrap{grid-template-columns:1fr}}
 .card{background:#fff;border:1px solid #e7e9ef;border-radius:14px;box-shadow:0 8px 16px rgba(0,0,0,.05);overflow:hidden}
 .hd{padding:14px;background:linear-gradient(90deg,var(--black),#1b2335);color:#fff;font-weight:800;text-align:center}
 .bd{padding:14px}
 label{display:block;font:700 13px/1 "Cairo";color:var(--muted);margin:8px 2px 6px}
 input,select,textarea{width:100%;padding:12px;border:1px solid #dfe3ea;border-radius:12px;font-size:15px;background:#fff}
-textarea{min-height:120px;resize:vertical}
+textarea{min-height:100px;resize:vertical}
 .grid{display:grid;gap:10px}
-.g2{grid-template-columns:1fr 1fr}.g4{grid-template-columns:repeat(4,1fr)}
-@media(max-width:720px){.g2,.g4{grid-template-columns:1fr}}
+.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:720px){.g2,.g3{grid-template-columns:1fr}}
 .btns{display:grid;gap:8px;grid-template-columns:1fr 1fr}
 .btn{border:0;border-radius:12px;padding:12px 14px;font-weight:800;font-size:15px;cursor:pointer}
 .btn.primary{background:var(--gold);color:#000}.btn.ghost{background:#eef2f7}
-
-/* وصف الخدمة */
-.settings .bd{max-width:520px;margin:0 auto}
-.note{margin:8px 0 14px;padding:14px 16px;background:#fff;border:1px solid rgba(198,161,74,.35);border-radius:14px;box-shadow:0 10px 22px rgba(198,161,74,.08)}
-.note h3{margin:0 0 8px;font:800 16px/1.2 "Cairo";color:var(--black)}
-.note p{margin:0;color:#222;line-height:1.9;text-align:justify;text-justify:inter-word}
-.note p,strong{font-size:14.5px}
-.note p strong{font-weight:700}
-
-/* أدوات */
-.tools{display:flex;gap:10px;align-items:center;padding:10px 10px 0}
 .tool{display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 14px;border-radius:12px;border:1px solid #e4e7ef;background:#fff;cursor:pointer;font-weight:800;font-size:13.5px;white-space:nowrap}
 .tool.dark{background:linear-gradient(180deg,#1b2335,#0b0f19);color:#fff;border:0}
 .tool svg{width:16px;height:16px}
-
-/* المعاينة */
+.tools{display:flex;gap:10px;align-items:center;padding:10px 10px 0}
 .preview{padding:8px 10px 0}
 .viewport{width:100%;display:flex;justify-content:center;align-items:flex-start;overflow:hidden}
 .scale-box{transform-origin:top center;display:inline-block}
-
 /* صفحة A4 */
 #page{width:210mm;height:297mm;background:var(--paper);position:relative;overflow:hidden;border:1px solid #e6e7ec;border-radius:14px;box-shadow:0 10px 26px rgba(0,0,0,.06)}
+/* رأس الإيصال */
 .lh{background:linear-gradient(90deg,var(--black),#121828);color:#fff;padding:12px 18px;display:flex;align-items:center;gap:10px}
-.logo{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--gold),#ffe9a6);display:grid;place-items:center;color:#000;font-weight:900}
-.brand-name{font-weight:800;font-size:19px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:70%}
+.logo{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--gold),#ffe9a6);display:grid;place-items:center;color:#000;font-weight:900}
+.brand-name{font-weight:800;font-size:20px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:60%}
+.receipt-meta{margin-inline-start:auto;text-align:left;direction:ltr;font-size:12px;line-height:1.5}
 .gold-line{height:5px;background:linear-gradient(90deg,#ead89c,var(--gold),#a6842a)}
-
-/* جسم الخطاب */
 .doc{padding:12mm 18mm 64mm;height:calc(297mm - 53px - 5px - 64mm);overflow:auto}
-.meta{font-size:12px;color:var(--muted);display:flex;justify-content:space-between;border-bottom:1px dashed #e5e7eb;padding-bottom:6px}
-.title{text-align:center;font-size:24px;font-weight:800;margin:12px 0 8px}
-.content{font-size:15px;line-height:1.9;text-align:justify;text-justify:inter-word}
-
-/* تذييل داخل A4 */
+.title{text-align:center;font-size:22px;font-weight:800;margin:12px 0 10px}
+.meta{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.box{border:1px solid #e9ecf3;border-radius:12px;padding:10px;background:#fff}
+.box h4{margin:0 0 6px;font:800 14px/1 "Cairo";color:#0b0f19}
+.kv{font-size:14px;line-height:1.8}
+.kv .row{display:flex;gap:6px}
+.kv .row b{min-width:100px;color:#374151}
+.badge{font-size:12px;color:#fff;background:var(--green);border-radius:999px;padding:2px 8px}
+/* تفاصيل الدفع */
+.pay-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+@media(max-width:900px){.pay-grid{grid-template-columns:1fr}}
+.note{margin-top:10px;border:1px dashed #e5e7eb;border-radius:12px;padding:10px;background:#fafafa;color:#374151}
+/* تذييل */
 .ft{position:absolute;left:0;right:0;bottom:0;height:64mm;padding:10mm 18mm 14mm;display:flex;align-items:flex-end;justify-content:space-between}
 .bar{position:absolute;left:0;right:0;bottom:0;height:42px;background:linear-gradient(90deg,var(--black),#121828);display:flex;align-items:center}
 .bar .social{display:flex;gap:16px;align-items:center;color:#fff;padding:0 18mm}
 .bar .social .item{display:flex;align-items:center;gap:6px;direction:ltr;white-space:nowrap}
-.bar .social .item span{color:#f6f6f6}
-/* أيقونات تواصل التذييل ذهبية */
 .bar .social svg{width:15px;height:15px;fill:#C6A14A}
-
-/* ختم */
 .left-col{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
 .stamp-box{width:60mm;min-height:33mm;padding:10px 12px;border-radius:12px;position:relative;border:2px solid var(--stamp);background:#fff}
-.sig-overlay{position:absolute;left:10px;right:10px;top:8px;height:60px;display:flex;align-items:center}
-.sig-overlay img{max-height:60px;filter:grayscale(1) contrast(1.1)}
 .stamp-ink,.stamp-line{color:var(--stamp);font-weight:800}
 .stamp-line{direction:ltr;text-align:left}
-.person{text-align:left;direction:ltr;margin-top:2px}.person strong{font-size:14.5px}
-
-/* التوقيع */
-.sig-pad{background:#fff;border:1px dashed #cbd5e1;border-radius:12px;padding:10px}
-#sigCanvas{width:100%;height:180px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;touch-action:none}
-
-/* مشاركة الصفحة — أيقونات فقط وفي الوسط */
-.share-site{max-width:1200px;margin:6px auto 8px;padding:6px 12px;text-align:center}
-.share-box{border:1px solid #e7e9ef;background:#fff;border-radius:14px;box-shadow:0 8px 16px rgba(0,0,0,.05);padding:12px}
-.share-title{font:800 15px/1 "Cairo";margin:0 0 10px;color:var(--black)}
-.icon-row{display:flex;justify-content:center;gap:16px}
-.icon-row a{display:inline-grid;place-items:center;width:42px;height:42px;border-radius:50%;text-decoration:none;transition:.18s transform}
-/* الأيقونات ذهبية */
-.icon-row a svg{width:22px;height:22px;fill:#C6A14A}
-.icon-row a:hover{transform:translateY(-2px)}
-
-/* مودال رسائل */
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:9999}
-.modal.show{display:flex}
-.modal .box{width:min(92vw,520px);background:#fff;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.25);overflow:hidden}
-.modal .box .hd{background:linear-gradient(90deg,var(--black),#1b2335);color:#fff;text-align:center;padding:12px 16px}
-.modal .box .bd{padding:16px;font-size:15px}
-.modal .box .ft{padding:12px;display:flex;justify-content:center;background:#f6f7f9}
-.modal .box .ft button{border:0;background:var(--gold);color:#000;border-radius:10px;font-weight:800;padding:9px 16px;cursor:pointer}
-
-/* فوتر */
-.site-footer{max-width:1200px;margin:4px auto 12px;color:#6b7280;text-align:center;padding:0 10px}
-.site-footer a{color:var(--gold);text-decoration:none;font-weight:800}
-.site-footer a:hover{text-decoration:underline}
-
+.sig-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.sig{border:1px dashed #cbd5e1;border-radius:10px;padding:8px;height:90px;display:grid;align-items:end}
+.qr{width:84px;height:84px;border:1px dashed #cbd5e1;border-radius:10px;display:grid;place-items:center}
+/* طباعة */
 @page{size:A4;margin:0}
 @media print{body *{visibility:hidden}#page,#page *{visibility:visible}#page{position:absolute;inset:0;transform:none;box-shadow:none}}
 </style>
 </head>
 <body>
-
 <main class="wrap">
-  <!-- الإعدادات -->
-  <section class="card settings" aria-label="إعدادات اللتر هد">
-    <div class="hd">إعدادات اللتر هد</div>
+  <!-- إعدادات الإيصال -->
+  <section class="card">
+    <div class="hd">إعدادات رصيد/إيصال الاستلام</div>
     <div class="bd">
-      <!-- الوصف بعد التعديل -->
-      <div class="note">
-        <h3>وصف الخدمة</h3>
-        <p>
-          إنشاء لتر هد /Letterhead بحجم A4: شعار علوي، عنوان ومحتوى،
-          <strong>ختم أزرق رسمي</strong>، توقيع إلكتروني، بيانات التواصل،
-          ثم <strong>تحميل PDF</strong> أو <strong>مشاركة الملف</strong> مباشرة عبر أي تطبيق.
-        </p>
+      <div class="grid g2">
+        <div><label>اسم المؤسسة (المستلم)</label><input id="sellerName" placeholder="شركة الأفق للتجارة"></div>
+        <div><label>اسم الدافع (العميل)</label><input id="buyerName" placeholder="اسم العميل"></div>
+      </div>
+      <div class="grid g2">
+        <div><label>هاتف المؤسسة</label><input id="sellerPhone" placeholder="+973 3333 3333"></div>
+        <div><label>بريد المؤسسة</label><input id="sellerEmail" placeholder="name@example.com"></div>
+      </div>
+      <div><label>عنوان المؤسسة</label><input id="sellerAddr" placeholder="المنامة - البحرين"></div>
+
+      <div class="grid g3">
+        <div><label>رقم الإيصال</label><input id="rcpNo" placeholder="RCPT-2025-001"></div>
+        <div><label>تاريخ الإيصال</label><input id="rcpDate" type="date"></div>
+        <div><label>العملة</label>
+          <select id="currency">
+            <option value="BHD">دينار بحريني (BHD)</option>
+            <option value="SAR">ريال سعودي (SAR)</option>
+            <option value="AED">درهم إماراتي (AED)</option>
+            <option value="USD">دولار (USD)</option>
+            <option value="EUR">يورو (EUR)</option>
+          </select>
+        </div>
       </div>
 
-      <div class="grid">
-        <div><label>اسم الشركة</label><input id="company" type="text" placeholder="مثال: شركة الأفق للتجارة"></div>
-
-        <div class="g2">
-          <div><label>كود الدولة</label>
-            <select id="countryCode">
-              <option value="+213">🇩🇿 الجزائر (+213)</option>
-              <option value="+973" selected>🇧🇭 البحرين (+973)</option>
-              <option value="+269">🇰🇲 جزر القمر (+269)</option>
-              <option value="+253">🇩🇯 جيبوتي (+253)</option>
-              <option value="+20">🇪🇬 مصر (+20)</option>
-              <option value="+964">🇮🇶 العراق (+964)</option>
-              <option value="+962">🇯🇴 الأردن (+962)</option>
-              <option value="+965">🇰🇼 الكويت (+965)</option>
-              <option value="+961">🇱🇧 لبنان (+961)</option>
-              <option value="+218">🇱🇾 ليبيا (+218)</option>
-              <option value="+222">🇲🇷 موريتانيا (+222)</option>
-              <option value="+212">🇲🇦 المغرب (+212)</option>
-              <option value="+968">🇴🇲 عُمان (+968)</option>
-              <option value="+970">🇵🇸 فلسطين (+970)</option>
-              <option value="+974">🇶🇦 قطر (+974)</option>
-              <option value="+966">🇸🇦 السعودية (+966)</option>
-              <option value="+252">🇸🇴 الصومال (+252)</option>
-              <option value="+249">🇸🇩 السودان (+249)</option>
-              <option value="+963">🇸🇾 سوريا (+963)</option>
-              <option value="+216">🇹🇳 تونس (+216)</option>
-              <option value="+971">🇦🇪 الإمارات (+971)</option>
-              <option value="+967">🇾🇪 اليمن (+967)</option>
-            </select>
-          </div>
-          <div><label>رقم الاتصال</label><input id="phone" type="tel" placeholder="3333 3333"></div>
+      <div class="grid g3">
+        <div><label>طريقة الدفع</label>
+          <select id="payMethod">
+            <option>نقدًا</option>
+            <option>تحويل بنكي</option>
+            <option>بطاقة</option>
+            <option>شيك</option>
+            <option>محفظة إلكترونية</option>
+          </select>
         </div>
+        <div><label>رقم مرجع الدفع (تحويل/شيك/تفويض)</label><input id="payRef" placeholder="REF/CHK-12345"></div>
+        <div><label>المبلغ (أرقام)</label><input id="amountNum" type="number" step="0.001" placeholder="0.000"></div>
+      </div>
 
-        <div><label>البريد الإلكتروني</label><input id="email" type="email" placeholder="name@example.com"></div>
-        <div><label>عنوان الرسالة</label><input id="titleIn" type="text" placeholder="عنوان الرسالة"></div>
-        <div><label>المحتوى</label><textarea id="contentIn" placeholder="اكتب نص الرسالة هنا..."></textarea></div>
+      <div class="grid g2">
+        <div><label>المبلغ كتابةً (اختياري)</label><input id="amountWords" placeholder="مثال: خمسة وعشرون دينارًا و..."></div>
+        <div><label>السجل التجاري (CR) إن وجد</label><input id="cr" placeholder="555432"></div>
+      </div>
 
-        <div class="g2">
-          <div><label>الاسم الشخصي (للتوقيع)</label><input id="personNameIn" type="text"></div>
-          <div><label>الصفة / الوظيفة</label><input id="personRoleIn" type="text"></div>
-        </div>
+      <div><label>مقابل ماذا؟ (وصف السلع/الخدمة/رقم الطلب/الفاتورة إن وجدت)</label>
+        <textarea id="forWhat" placeholder="مقابل توريد عدد (2) حاسوب محمول طراز ... أو استحقاق فاتورة رقم ..."></textarea>
+      </div>
 
-        <div class="g2">
-          <div><label>العنوان</label><input id="addressIn" type="text" placeholder="المنامة - البحرين"></div>
-          <div><label>السجل التجاري (CR)</label><input id="cr" type="text" placeholder="555432"></div>
-        </div>
-
-        <div class="g4">
-          <div><label>Instagram</label><input id="igIn" type="text" placeholder="@brand"></div>
-          <div><label>Twitter / X</label><input id="twIn" type="text" placeholder="@brand"></div>
-          <div><label>Facebook</label><input id="fbIn" type="text" placeholder="/brand"></div>
-          <div><label>LinkedIn</label><input id="lnIn" type="text" placeholder="/company"></div>
-        </div>
-
-        <!-- توقيع -->
+      <div class="grid g2">
         <div>
-          <label>التوقيع أونلاين</label>
-          <div class="sig-pad">
-            <canvas id="sigCanvas"></canvas>
-            <div class="btns" style="margin-top:8px">
-              <button type="button" class="btn ghost" id="clearSig">مسح التوقيع</button>
-              <button type="button" class="btn primary" id="useSig">استخدام التوقيع</button>
-            </div>
-          </div>
+          <label>إقرار الاستلام</label>
+          <textarea id="ack" placeholder="أُقِرّ أنا ممثل المؤسسة باستلام المبلغ الموضّح أعلاه، وتسليم السلع/الخدمة حسب الوصف، ولا يوجد للمستلم أي مبالغ متبقية تخص هذا الإيصال."></textarea>
         </div>
+        <div>
+          <label>ملاحظات</label>
+          <textarea id="notes" placeholder="سياسة الإرجاع، أو أي تعقيب إضافي..."></textarea>
+        </div>
+      </div>
+
+      <div class="btns" style="margin-top:8px">
+        <button class="btn ghost" id="printView">طباعة</button>
+        <button class="btn primary" id="downloadPdf">تحميل PDF</button>
       </div>
     </div>
   </section>
 
   <!-- المعاينة -->
-  <section class="card" aria-label="معاينة A4">
-    <div class="hd">المعاينة</div>
-
-    <div class="tools" role="toolbar" aria-label="أدوات">
-      <button class="tool" id="printView" title="طباعة">
-        <svg viewBox="0 0 24 24"><path d="M6 2h12v6H6zM6 14h12v8H6z"/></svg><span>طباعة</span>
-      </button>
-      <button class="tool dark" id="downloadPdf" title="تحميل PDF">
-        <svg viewBox="0 0 24 24"><path d="M12 3v10.59l3.3-3.3 1.4 1.42L12 17.41 7.3 11.7l1.4-1.41 3.3 3.3V3h2z"/></svg><span>تحميل PDF</span>
-      </button>
-      <button class="tool" id="sharePdf" title="مشاركة">
-        <svg viewBox="0 0 24 24"><path d="M16 8a3 3 0 1 0-2.8-4H13v8.3l-2.1-1.2-1 1.7 4 2.3V22h2V8zM6 9h3v2H8v9H6z"/></svg><span>مشاركة</span>
-      </button>
+  <section class="card">
+    <div class="hd">معاينة الإيصال</div>
+    <div class="tools">
+      <button class="tool dark" id="sharePdf" title="مشاركة"><svg viewBox="0 0 24 24"><path d="M16 8a3 3 0 1 0-2.8-4H13v8.3l-2.1-1.2-1 1.7 4 2.3V22h2V8zM6 9h3v2H8v9H6z"/></svg><span>مشاركة</span></button>
     </div>
-
     <div class="bd preview">
       <div class="viewport" id="viewport">
         <div class="scale-box" id="scaleBox">
-          <div id="page" aria-label="ورقة A4">
-            <header class="lh"><div class="logo" aria-hidden="true">★</div><div class="brand-name" id="brandName">اسم الشركة</div></header>
+          <div id="page" aria-label="A4">
+            <header class="lh">
+              <div class="logo">★</div>
+              <div class="brand-name" id="brandName">اسم المؤسسة</div>
+              <div class="receipt-meta">
+                <div><b>Receipt No:</b> <span id="outNo">—</span></div>
+                <div><b>Date:</b> <span id="outDate">—</span></div>
+              </div>
+            </header>
             <div class="gold-line"></div>
 
             <main class="doc">
+              <h1 class="title">إيصال / رصيد استلام مبلغ</h1>
+
               <div class="meta">
-                <div>التاريخ: <span id="today"></span></div>
-                <div>العنوان: <span id="addressOut">—</span></div>
+                <div class="box">
+                  <h4>المؤسسة (المستلم)</h4>
+                  <div class="kv" id="sellerBlock"></div>
+                </div>
+                <div class="box">
+                  <h4>الدافع (العميل)</h4>
+                  <div class="kv" id="buyerBlock"></div>
+                </div>
               </div>
-              <h1 class="title" id="titleOut">عنوان الرسالة</h1>
-              <article class="content" id="contentOut">سيظهر نص الرسالة هنا بمحاذاة الأطراف.</article>
+
+              <div class="pay-grid">
+                <div class="box">
+                  <h4>طريقة الدفع</h4>
+                  <div class="kv"><div class="row"><b>الطريقة:</b><span id="outMethod">—</span></div>
+                    <div class="row"><b>مرجع:</b><span id="outRef">—</span></div></div>
+                </div>
+                <div class="box">
+                  <h4>المبلغ</h4>
+                  <div class="kv">
+                    <div class="row"><b>رقمياً:</b><span id="outAmountNum">0.000</span> <span class="badge" id="currencyBadge">BHD</span></div>
+                    <div class="row"><b>كتابةً:</b><span id="outAmountWords">—</span></div>
+                  </div>
+                </div>
+                <div class="box">
+                  <h4>معلومات إضافية</h4>
+                  <div class="kv">
+                    <div class="row"><b>المقابل:</b><span id="outFor">—</span></div>
+                    <div class="row"><b>CR:</b><span id="outCR">—</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="note" id="outAck"></div>
+              <div class="note" id="outNotes"></div>
+
+              <div class="sig-row">
+                <div class="sig"><div>توقيع المستلم / ختم المؤسسة</div></div>
+                <div class="sig"><div>توقيع الدافع (اختياري)</div></div>
+              </div>
             </main>
 
             <footer class="ft">
               <div class="bar"><div class="social" id="socialRow"></div></div>
               <div class="left-col">
-                <div class="stamp-box" aria-label="الختم">
-                  <div class="sig-overlay" id="sigInStamp"></div>
-                  <div class="stamp-ink" id="stampCompany">اسم الشركة</div>
-                  <div class="stamp-line" id="crOut">CR: —</div>
-                  <div class="stamp-line" id="phoneOut">Tel: —</div>
+                <div class="stamp-box">
+                  <div class="stamp-ink" id="stampCompany">اسم المؤسسة</div>
+                  <div class="stamp-line" id="stampPhone">Tel: —</div>
                 </div>
-                <div class="person"><strong id="personName">الاسم الشخصي</strong> — <span id="personRole">الصفة / الوظيفة</span></div>
               </div>
-              <div class="identity"></div>
+              <div class="qr" id="qrBox">QR</div>
             </footer>
           </div>
         </div>
@@ -251,157 +224,125 @@ textarea{min-height:120px;resize:vertical}
   </section>
 </main>
 
-<!-- مشاركة الصفحة: أيقونات فقط وفي الوسط -->
-<section class="share-site" aria-label="مشاركة الصفحة">
-  <div class="share-box">
-    <h3 class="share-title">مشاركة الصفحة</h3>
-    <div class="icon-row" id="shareRow"></div>
-  </div>
-</section>
-
-<footer class="site-footer">
-  برمجة وتطوير :
-  <a href="https://api.whatsapp.com/send/?phone=97333375858&text&type=phone_number&app_absent=0" target="_blank" rel="noopener">فاضل الريس</a>
-</footer>
-
-<!-- مودال الرسائل -->
-<div class="modal" id="msgModal">
-  <div class="box" role="dialog" aria-live="polite">
-    <div class="hd" id="msgTitle">تنويه</div>
-    <div class="bd" id="msgBody">نص الرسالة.</div>
-    <div class="ft"><button type="button" id="msgOk">حسنًا</button></div>
-  </div>
-</div>
-
 <!-- مكتبات -->
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
 <script>
 const DM={'٠':'0','١':'1','٢':'2','٣':'3','٤':'4','٥':'5','٦':'6','٧':'7','٨':'8','٩':'9','۰':'0','۱':'1','۲':'2','۳':'3','۴':'4','۵':'5','۶':'6','۷':'7','۸':'8','۹':'9'};
 const $=id=>document.getElementById(id);
+const NF=n=>new Intl.NumberFormat('ar-EG',{minimumFractionDigits:3,maximumFractionDigits:3}).format(n);
 
-/* التاريخ */
-$("today").textContent=new Date().toLocaleDateString("en-GB");
+// عناصر الإدخال
+const sellerName=$('sellerName'), sellerPhone=$('sellerPhone'), sellerEmail=$('sellerEmail'), sellerAddr=$('sellerAddr');
+const buyerName=$('buyerName');
+const rcpNo=$('rcpNo'), rcpDate=$('rcpDate'), currency=$('currency');
+const payMethod=$('payMethod'), payRef=$('payRef'), amountNum=$('amountNum'), amountWords=$('amountWords');
+const cr=$('cr'), forWhat=$('forWhat'), ack=$('ack'), notes=$('notes');
 
-/* مودال */
-const modal=$("msgModal");$("msgOk").onclick=()=>modal.classList.remove("show");
-function showMsg(t,b){$("msgTitle").textContent=t;$("msgBody").innerHTML=b;modal.classList.add("show")}
+// مخرجات
+const brandName=$('brandName'), outNo=$('outNo'), outDate=$('outDate');
+const sellerBlock=$('sellerBlock'), buyerBlock=$('buyerBlock');
+const outMethod=$('outMethod'), outRef=$('outRef'), outAmountNum=$('outAmountNum'), outAmountWords=$('outAmountWords');
+const outFor=$('outFor'), outCR=$('outCR'), currencyBadge=$('currencyBadge'), outAck=$('outAck'), outNotes=$('outNotes');
+const stampCompany=$('stampCompany'), stampPhone=$('stampPhone');
+const socialRow=$('socialRow'), qrBox=$('qrBox');
 
-/* حفظ/تحميل */
-const STORE='letterheadFormV13';
-function saveState(extra={}){const ids=['company','countryCode','phone','email','titleIn','contentIn','personNameIn','personRoleIn','addressIn','cr','igIn','twIn','fbIn','lnIn','signatureDataURL'];const d={};ids.forEach(id=>{const el=$(id);if(el)d[id]=el.value??''});Object.assign(d,extra);localStorage.setItem(STORE,JSON.stringify(d))}
-function loadState(){try{const raw=localStorage.getItem(STORE);if(!raw)return{};const d=JSON.parse(raw);for(const [k,v] of Object.entries(d)){const el=$(k);if(el)el.value=v}if(d.signatureDataURL){const img=new Image();img.src=d.signatureDataURL;img.alt='التوقيع';$("sigInStamp").innerHTML='';$("sigInStamp").appendChild(img)}return d}catch(e){return{}}}
+// حفظ/تحميل
+const STORE='receiptV1';
+function saveState(){
+  const data={
+    sellerName:sellerName.value,sellerPhone:sellerPhone.value,sellerEmail:sellerEmail.value,sellerAddr:sellerAddr.value,
+    buyerName:buyerName.value,rcpNo:rcpNo.value,rcpDate:rcpDate.value,currency:currency.value,
+    payMethod:payMethod.value,payRef:payRef.value,amountNum:amountNum.value,amountWords:amountWords.value,
+    cr:cr.value,forWhat:forWhat.value,ack:ack.value,notes:notes.value
+  };
+  localStorage.setItem(STORE,JSON.stringify(data));
+}
+function loadState(){
+  const raw=localStorage.getItem(STORE); if(!raw) return;
+  const d=JSON.parse(raw);
+  for(const k in d){ if($(k)) $(k).value=d[k]; }
+}
 
-/* عناصر */
-const company=$("company"), country=$("countryCode"), phone=$("phone"), email=$("email"),
-      titleIn=$("titleIn"), contentIn=$("contentIn"), personNameIn=$("personNameIn"), personRoleIn=$("personRoleIn"),
-      addressIn=$("addressIn"), cr=$("cr"), igIn=$("igIn"), twIn=$("twIn"), fbIn=$("fbIn"), lnIn=$("lnIn");
-
-const brandName=$("brandName"), titleOut=$("titleOut"), contentOut=$("contentOut"), addressOut=$("addressOut"),
-      stampCompany=$("stampCompany"), crOut=$("crOut"), phoneOut=$("phoneOut"),
-      personName=$("personName"), personRole=$("personRole"), socialRow=$("socialRow");
-
-/* أيقونات تواصل التذييل (ذهبية) */
-const ICON=p=>`<svg viewBox="0 0 24 24"><g fill="#C6A14A">${p}</g></svg>`;
-const icons={
-  ig: ICON('<path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm6.5-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2Z"/><circle cx="12" cy="12" r="3.3"/>'),
-  tw: ICON('<path d="M13.7 10.6 21 2h-1.7l-6.2 7.4L8.2 2H2l7.6 11L2 22h1.7l6.6-7.8L15.8 22H22l-8.3-11.4Z"/>'),
-  fb: ICON('<path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.7V12h2.7V9.7c0-2.7 1.6-4.2 4-4.2 1.2 0 2.4.2 2.4.2v2.6h-1.4c-1.3 0-1.7.8-1.7 1.6V12h2.9l-.46 2.9h-2.4v7A10 10 0 0 0 22 12"/>'),
-  ln: ICON('<path d="M4.98 3.5a2.5 2.5 0 1 1 0 5.001 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.6h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.8 2.6 4.8 6v6H17v-5.3c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9V21H9z"/>'),
-  mail: ICON('<path d="M3 6h18v12H3z"/><path fill="#0b0f19" d="M3 8.2 12 13l9-4.8V6H3v2.2z"/>'),
-  phone: ICON('<path d="M6.6 2h2.7l1.1 4-2 1.2a13.5 13.5 0 0 0 6 6l1.2-2 4 1.1v2.7c0 1-0.8 1.9-1.8 1.9-7.8 0-14.1-6.3-14.1-14.1C4.7 2.8 5.6 2 6.6 2z"/>')
-};
-function fullPhone(){const p=(phone.value||'').replace(/[٠-٩۰-۹]/g,d=>DM[d]);return (country.value&&p)?`${country.value}\u00A0${p}`:(p||'')}
-function buildSocial(){
+// بناء الكتل
+function buildBlocks(){
+  const sPhone=(sellerPhone.value||'').replace(/[٠-٩۰-۹]/g,d=>DM[d]);
+  sellerBlock.innerHTML=`
+    <div class="kv">
+      <div class="row"><b>الاسم:</b><span>${sellerName.value||'—'}</span></div>
+      <div class="row"><b>الهاتف:</b><span>${sPhone||'—'}</span></div>
+      <div class="row"><b>البريد:</b><span>${sellerEmail.value||'—'}</span></div>
+      <div class="row"><b>العنوان:</b><span>${sellerAddr.value||'—'}</span></div>
+    </div>`;
+  buyerBlock.innerHTML=`<div class="kv"><div class="row"><b>الاسم:</b><span>${buyerName.value||'—'}</span></div></div>`;
   socialRow.innerHTML='';
-  const items=[];
-  if(igIn.value.trim()) items.push({icon:icons.ig,txt:igIn.value.trim()});
-  if(twIn.value.trim()) items.push({icon:icons.tw,txt:twIn.value.trim()});
-  if(fbIn.value.trim()) items.push({icon:icons.fb,txt:fbIn.value.trim()});
-  if(lnIn.value.trim()) items.push({icon:icons.ln,txt:lnIn.value.trim()});
-  if(email.value.trim()) items.push({icon:icons.mail,txt:email.value.trim()});
-  const ph=fullPhone(); if(ph) items.push({icon:icons.phone,txt:ph});
-  items.forEach(it=>{const d=document.createElement('div');d.className='item';d.innerHTML=it.icon+'<span>'+it.txt+'</span>';socialRow.appendChild(d)});
+  if(sellerEmail.value){const d=document.createElement('div');d.className='item';d.innerHTML='<svg viewBox="0 0 24 24"><path d="M3 6h18v12H3z"/><path fill="#0b0f19" d="M3 8.2 12 13l9-4.8V6H3v2.2z"/></svg><span>'+sellerEmail.value+'</span>';socialRow.appendChild(d)}
+  if(sPhone){const d=document.createElement('div');d.className='item';d.innerHTML='<svg viewBox="0 0 24 24"><path d="M6.6 2h2.7l1.1 4-2 1.2a13.5 13.5 0 0 0 6 6l1.2-2 4 1.1v2.7c0 1-0.8 1.9-1.8 1.9-7.8 0-14.1-6.3-14.1-14.1C4.7 2.8 5.6 2 6.6 2z"/></svg><span>'+sPhone+'</span>';socialRow.appendChild(d)}
+  stampCompany.textContent=sellerName.value||'—';
+  stampPhone.textContent='Tel: '+(sPhone||'—');
 }
 
-/* أيقونات مشاركة الصفحة (ذهبية) */
-function buildShareBar(){
-  const url=encodeURIComponent(location.href);
-  const text=encodeURIComponent('جرّب إنشاء لتر هد أونلاين');
-  const row=$("shareRow"); row.innerHTML='';
-  const items=[
-    {label:'واتساب',href:`https://wa.me/?text=${text}%20${url}`,path:"M16.6 14.4c-.2.6-1 1-1.6.7-1.8-.9-3.3-2.4-4.2-4.2-.3-.6.1-1.4.7-1.6l.8-.3c.3-.1.5 0 .7.3l.9 1.4c.2.3.1.6-.1.8l-.3.3c.6 1 1.5 1.8 2.5 2.5l.3-.3c.2-.2.5-.3.8-.1l1.4.9c.3.2.4.4.3.7l-.3.8ZM12 2a10 10 0 0 1 8.8 14.8L20 22l-5.2-.8A10 10 0 1 1 12 2Z"},
-    {label:'تلغرام',href:`https://t.me/share/url?url=${url}&text=${text}`,path:"M21.5 3.5 2.9 10.8c-1 .4-1 1.8 0 2.2l4.6 1.7 1.8 5.6c.3 1 1.6 1.2 2.2.3l2.7-3.5 5.1 3.7c.8.6 2 .2 2.2-.8l2.7-15.6c.2-1-1-1.8-2.3-1.1Z"},
-    {label:'X',href:`https://twitter.com/intent/tweet?url=${url}&text=${text}`,path:"M13.7 10.6 21 2h-1.7l-6.2 7.4L8.2 2H2l7.6 11L2 22h1.7l6.6-7.8L15.8 22H22l-8.3-11.4Z"},
-    {label:'فيسبوك',href:`https://www.facebook.com/sharer/sharer.php?u=${url}`,path:"M22 12a10 10 0 1 0-11.6 9.9v-7H7.7V12h2.7V9.7c0-2.7 1.6-4.2 4-4.2 1.2 0 2.4.2 2.4.2v2.6h-1.4c-1.3 0-1.7.8-1.7 1.6V12h2.9l-.46 2.9h-2.4v7A10 10 0 0 0 22 12"},
-    {label:'لينكدإن',href:`https://www.linkedin.com/sharing/share-offsite/?url=${url}`,path:"M4.98 3.5a2.5 2.5 0 1 1 0 5.001 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.6h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.8 2.6 4.8 6v6H17v-5.3c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9V21H9z"},
-    {label:'بريد',href:`mailto:?subject=${encodeURIComponent('لتر هد أونلاين')}&body=${text}%0A${url}`,path:"M3 6h18v12H3z M3 8.2 12 13l9-4.8"}
-  ];
-  for(const it of items){
-    const a=document.createElement('a'); a.href=it.href; a.target="_blank"; a.rel="noopener"; a.setAttribute('aria-label',it.label);
-    a.innerHTML=`<svg viewBox="0 0 24 24"><path d="${it.path}" fill="#C6A14A"/></svg>`;
-    row.appendChild(a);
-  }
+function apply(){
+  // تنظيف أرقام عربية
+  ['sellerPhone','amountNum','cr'].forEach(id=>{const el=$(id); el.value=(el.value||'').replace(/[٠-٩۰-۹]/g,d=>DM[d]);});
+  brandName.textContent=sellerName.value||'اسم المؤسسة';
+  outNo.textContent=rcpNo.value||'—';
+  outDate.textContent=rcpDate.value||new Date().toLocaleDateString('en-GB');
+  buildBlocks();
+
+  const amt=parseFloat(amountNum.value)||0;
+  outAmountNum.textContent=NF(amt);
+  currencyBadge.textContent=currency.value;
+  outAmountWords.textContent=amountWords.value||'—';
+  outMethod.textContent=payMethod.value||'—';
+  outRef.textContent=payRef.value||'—';
+  outFor.textContent=forWhat.value||'—';
+  outCR.textContent=cr.value||'—';
+  outAck.textContent=ack.value||'';
+  outNotes.textContent=notes.value||'';
+
+  // QR: ملخص الإيصال
+  try{
+    const qr=new QRious({
+      value:`RCPT:${rcpNo.value||'-'}\nDATE:${rcpDate.value||'-'}\nAMOUNT:${amt.toFixed(3)} ${currency.value}\nPAYER:${buyerName.value||'-'}\nPAY:${payMethod.value||'-'} ${payRef.value||''}`,
+      size:84
+    });
+    qrBox.innerHTML=''; const img=new Image(); img.src=qr.toDataURL(); img.alt='QR'; qrBox.appendChild(img);
+  }catch(e){qrBox.textContent='QR'}
+  saveState();
 }
 
-/* تطبيق القيم */
-function applyChanges(){
-  $("brandName").textContent=company.value.trim()||'اسم الشركة';
-  $("stampCompany").textContent=$("brandName").textContent;
-  $("titleOut").textContent=titleIn.value.trim()||'عنوان الرسالة';
-  $("contentOut").textContent=(contentIn.value||'').replace(/[٠-٩۰-۹]/g,d=>DM[d])||'—';
-  $("addressOut").textContent=addressIn.value.trim()||'—';
-  $("crOut").textContent='CR: '+((cr.value||'').replace(/[٠-٩۰-۹]/g,d=>DM[d])||'—');
-  $("phoneOut").textContent='Tel: '+(((country.value||'')+' '+(phone.value||'').replace(/[٠-٩۰-۹]/g,d=>DM[d])).trim()||'—');
-  $("personName").textContent=personNameIn.value.trim()||'الاسم الشخصي';
-  $("personRole").textContent=personRoleIn.value.trim()||'الصفة / الوظيفة';
-  buildSocial(); saveState();
-}
-
-/* تحجيم المعاينة */
-const viewport=$("viewport"), scaleBox=$("scaleBox");
-function fit(){const avail=viewport.clientWidth-6;const PAGE=210*96/25.4;const s=Math.min(1,avail/PAGE);scaleBox.style.transform=`scale(${s})`;viewport.style.height=(297*96/25.4*s)+'px'}
-addEventListener("resize",()=>requestAnimationFrame(fit),{passive:true});
-
-/* توقيع */
-const sig=$("sigCanvas"), ctx=sig.getContext("2d");
-function resizeSig(){const DPR=Math.min(devicePixelRatio||1,1.75);const w=sig.clientWidth,h=sig.clientHeight;sig.width=w*DPR;sig.height=h*DPR;ctx.setTransform(DPR,0,0,DPR,0,0);ctx.lineWidth=2.8;ctx.lineCap='round';ctx.strokeStyle='#111';ctx.clearRect(0,0,w,h)}
-function pos(e){const r=sig.getBoundingClientRect();const t=e.touches?e.touches[0]:e;return{x:t.clientX-r.left,y:t.clientY-r.top}}
-let draw=false;
-sig.addEventListener('mousedown',e=>{draw=true;const p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y)});
-sig.addEventListener('mousemove',e=>{if(!draw)return;const p=pos(e);ctx.lineTo(p.x,p.y);ctx.stroke()});
-addEventListener('mouseup',()=>draw=false);
-sig.addEventListener('touchstart',e=>{e.preventDefault();draw=true;const p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y)},{passive:false});
-sig.addEventListener('touchmove',e=>{e.preventDefault();if(!draw)return;const p=pos(e);ctx.lineTo(p.x,p.y);ctx.stroke()},{passive:false});
-sig.addEventListener('touchend',()=>draw=false);
-$("clearSig").onclick=()=>{resizeSig();$("sigInStamp").innerHTML='';saveState({signatureDataURL:''})};
-$("useSig").onclick=()=>{const url=sig.toDataURL('image/png');$("sigInStamp").innerHTML='';const img=new Image();img.src=url;img.alt='التوقيع';$("sigInStamp").appendChild(img);saveState({signatureDataURL:url})};
-
-/* PDF */
+// PDF
 async function renderA4Canvas(){
-  const src=$("page"); const clone=src.cloneNode(true);
+  const src=$('page'); const clone=src.cloneNode(true);
   Object.assign(clone.style,{width:'210mm',height:'297mm',transform:'none',boxShadow:'none',position:'static'});
   const holder=document.createElement('div');Object.assign(holder.style,{position:'fixed',left:'-9999px',top:'0',background:'#fff'});holder.appendChild(clone);document.body.appendChild(holder);
   const canvas=await html2canvas(clone,{scale:2,backgroundColor:'#ffffff',useCORS:true});
   document.body.removeChild(holder); return canvas;
 }
 async function makePDFBlob(){const {jsPDF}=window.jspdf;const c=await renderA4Canvas();const img=c.toDataURL('image/jpeg',0.96);const pdf=new jsPDF('p','mm','a4');pdf.addImage(img,'JPEG',0,0,210,297,'','FAST');return pdf.output('blob')}
-$("downloadPdf").onclick=async()=>{const blob=await makePDFBlob();const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='letterhead.pdf';a.click();URL.revokeObjectURL(url)};
-$("sharePdf").onclick=async()=>{try{const blob=await makePDFBlob();const file=new File([blob],'letterhead.pdf',{type:'application/pdf'});if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({title:'Letterhead',text:'لتر هد PDF',files:[file]});}else{showMsg('المشاركة غير مدعومة','حمّل ملف <strong>PDF</strong> ثم شاركه يدويًا.')}}catch(e){showMsg('خطأ','تعذّرت المشاركة الآن.')}};
+$('downloadPdf').onclick=async()=>{const blob=await makePDFBlob();const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`receipt-${(rcpNo.value||'A4').replace(/\W+/g,'_')}.pdf`;a.click();URL.revokeObjectURL(url)};
+$('sharePdf').onclick=async()=>{try{const blob=await makePDFBlob();const file=new File([blob],`receipt-${(rcpNo.value||'A4')}.pdf`,{type:'application/pdf'});if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({title:'Receipt',text:'إيصال PDF',files:[file]});}else{alert('المشاركة غير مدعومة على هذا الجهاز. حمّل الملف ثم شاركه يدويًا.')}}catch(e){alert('تعذّرت المشاركة الآن.')}};
+$('printView').addEventListener('click',()=>{window.focus();window.print()});
 
-/* طباعة — تم تفعيل الزر */
-$("printView").addEventListener("click",()=>{window.focus();window.print()});
+// تحجيم المعاينة
+const viewport=$('viewport'), scaleBox=$('scaleBox');
+function fit(){const avail=viewport.clientWidth-6;const PAGE=210*96/25.4;const s=Math.min(1,avail/PAGE);scaleBox.style.transform=`scale(${s})`;viewport.style.height=(297*96/25.4*s)+'px'}
+addEventListener('resize',()=>requestAnimationFrame(fit),{passive:true});
 
-/* تهيئة */
-(document.fonts?.ready||Promise.resolve()).then(()=>{
-  resizeSig(); loadState(); applyChanges(); buildShareBar(); fit(); setTimeout(fit,40);
-});
-
-/* استماع للتغييرات */
+// أحداث
 ['input','change'].forEach(ev=>{
   document.querySelectorAll('input,textarea,select').forEach(el=>{
-    el.addEventListener(ev,()=>{if(['phone','cr','contentIn','titleIn'].includes(el.id))el.value=(el.value||'').replace(/[٠-٩۰-۹]/g,d=>DM[d]);applyChanges()},{passive:true});
+    el.addEventListener(ev,apply,{passive:true});
   });
+});
+
+// بدء التشغيل
+(document.fonts?.ready||Promise.resolve()).then(()=>{
+  loadState();
+  if(!rcpDate.value){const d=new Date();rcpDate.value = new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10)}
+  apply(); fit(); setTimeout(fit,40);
 });
 </script>
 </body>
