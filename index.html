@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
 <title>إنشاء رصيد استلام فوري | إيصال عربي جاهز للطباعة وPDF</title>
-<meta name="description" content="إنشاء رصيد استلام فوري بالعربية مع توقيع يدوي وختم المؤسسة وتحويل المبلغ إلى حروف تلقائيًا. جاهز للطباعة، التنزيل PDF، والمشاركة.">
+<meta name="description" content="إنشاء رصيد استلام فوري بالعربية مع توقيع يدوي داخل الختم وتحويل المبلغ إلى حروف تلقائيًا. جاهز للطباعة، التنزيل PDF، والمشاركة.">
 <link rel="canonical" href="https://example.com/receipt/">
 
 <!-- أمان أساسي لتطبيق ثابت -->
@@ -20,6 +20,7 @@
 *{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 html,body{height:100%}
 body{margin:0;background:#f3f5f8;color:var(--ink);font-family:"Cairo",system-ui}
+a{color:#0a4ea6;text-decoration:none}
 
 /* عنوان وسط */
 .header{display:flex;justify-content:center;padding:12px}
@@ -42,7 +43,7 @@ textarea{min-height:84px;resize:vertical}
 .row2{display:grid;gap:8px;grid-template-columns:1fr 1fr}
 @media (max-width:640px){.row2{grid-template-columns:1fr}}
 
-/* أزرار صغيرة مستطيلة */
+/* أزرار مستطيلة صغيرة */
 .pillbar{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:10px}
 .btnpill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid #e6e8ee;border-radius:10px;background:#fff;font-weight:800;font-size:13px;cursor:pointer;transition:transform .15s,box-shadow .15s,background .2s}
 .btnpill:hover{transform:translateY(-1px);box-shadow:0 3px 8px rgba(0,0,0,.06)}
@@ -67,35 +68,35 @@ textarea{min-height:84px;resize:vertical}
 .chip{border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-weight:800;font-size:14px}
 .amount-text{margin-top:6px;font-size:13px;color:#444}
 
-/* لوحة التوقيع (في النموذج فقط) */
+/* لوحة التوقيع */
 .sign{display:flex;justify-content:center;align-items:center;margin:12px auto 0;max-width:420px}
 .sig-pad{flex:1;border:2px dashed #cbd5e1;border-radius:12px;padding:10px;background:#fff}
 .sig-box{height:120px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;overflow:hidden}
 #sigCanvas{display:block;width:100%;height:100%;touch-action:none;background:#fff}
 
-/* الختم الواقعي + التوقيع بداخله */
+/* الختم والتوقيع بداخله */
 .stamp{
-  width:70mm;               /* ثابت للطباعة */
-  min-height:33mm;
-  margin:10px auto 0;
-  position:relative;
-  border:2px solid var(--stamp);
-  border-radius:10px;
-  background:#fff;
-  color:var(--stamp);
-  padding:8px 10px 10px;
-  font-weight:800;
-  box-sizing:border-box;
+  width:70mm;min-height:33mm;margin:10px auto 0;position:relative;
+  border:2px solid var(--stamp);border-radius:10px;background:#fff;color:var(--stamp);
+  padding:8px 10px 10px;font-weight:800;box-sizing:border-box;
 }
-.stamp .sig-in{           /* مكان التوقيع داخل الختم */
-  position:absolute; inset:6px 8px auto 8px; height:20mm;
-  display:flex; align-items:center; justify-content:center; overflow:hidden;
-}
-.stamp .sig-in img{
-  max-width:95%; max-height:100%; display:block; filter:grayscale(1) contrast(1.05);
-}
-.stamp .lines{position:absolute; left:10px; right:10px; bottom:7px; font-size:11.5px}
+.stamp .sig-in{position:absolute;inset:6px 8px auto 8px;height:20mm;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.stamp .sig-in img{max-width:95%;max-height:100%;filter:grayscale(1) contrast(1.05);display:none}
+.stamp .sig-in img.show{display:block}
+.stamp .lines{position:absolute;left:10px;right:10px;bottom:7px;font-size:11.5px}
 .stamp .lines div{line-height:1.35}
+
+/* مشاركة الصفحة (أسفل) */
+.share{max-width:1100px;margin:8px auto 6px;padding:0 12px}
+.share .box{display:flex;align-items:center;justify-content:center;gap:10px;border:1px solid #e6e8ee;background:#fff;border-radius:12px;padding:10px;box-shadow:0 6px 14px rgba(0,0,0,.04)}
+.share h2{font:800 13px/1 "Cairo";margin:0;color:#111;white-space:nowrap}
+.icons{display:flex;gap:10px;flex-wrap:wrap}
+.icons a,.icons button.copy{padding:7px 10px;border:1px solid #e6e8ee;border-radius:10px;background:#fff;font-weight:800;font-size:12px;cursor:pointer}
+.icons a:hover,.icons button.copy:hover{box-shadow:0 3px 8px rgba(0,0,0,.06)}
+
+/* تذييل */
+.footer{margin:8px auto 14px;text-align:center;color:#444;font-size:13px}
+.footer a{color:#0a4ea6}
 
 /* طباعة */
 @page{size:A4;margin:12mm}
@@ -104,7 +105,7 @@ textarea{min-height:84px;resize:vertical}
 </head>
 <body>
 
-<!-- عنوان وسط -->
+<!-- عنوان -->
 <div class="header no-print">
   <div class="h1wrap">
     <div class="h1cap"></div>
@@ -140,7 +141,7 @@ textarea{min-height:84px;resize:vertical}
       </div>
       <div><label>هاتف الختم (اختياري)</label><input id="inStampPhone" placeholder="33375858"></div>
 
-      <!-- لوحة التوقيع -->
+      <!-- التوقيع -->
       <div>
         <label>التوقيع اليدوي</label>
         <div class="sign">
@@ -214,7 +215,7 @@ textarea{min-height:84px;resize:vertical}
 
           <!-- الختم والتوقيع بداخله -->
           <div class="stamp" aria-label="ختم المؤسسة">
-            <div class="sig-in"><img id="sigImg" alt="التوقيع داخل الختم"></div>
+            <div class="sig-in"><img id="sigImg" alt=""></div>
             <div class="lines">
               <div id="outStampName">اسم المؤسسة</div>
               <div id="outStampCR">CR: —</div>
@@ -229,16 +230,19 @@ textarea{min-height:84px;resize:vertical}
   </section>
 </div>
 
-<!-- مودال رسائل بسيط -->
-<div id="msgModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:9999;align-items:center;justify-content:center">
-  <div style="width:min(92vw,520px);background:#fff;border:1px solid #e6e8ee;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.25);overflow:hidden">
-    <div style="background:linear-gradient(90deg,var(--brand),#1b2334);color:#fff;text-align:center;padding:10px 14px;font-weight:800">تنبيه</div>
-    <div id="msgBody" style="padding:14px;font-size:15px;color:#111">رسالة.</div>
-    <div style="padding:12px;display:flex;justify-content:center;background:#f7f8fb">
-      <button type="button" id="msgOk" style="border:1px solid #e6e8ee;background:#fff;border-radius:10px;font-weight:800;padding:8px 12px;cursor:pointer">حسنًا</button>
-    </div>
+<!-- مشاركة الصفحة -->
+<div class="share no-print">
+  <div class="box">
+    <h2>مشاركة الصفحة</h2>
+    <div class="icons" id="shareRow"></div>
   </div>
 </div>
+
+<!-- فوتر -->
+<p class="footer no-print">
+  برمجة وتطوير :
+  <a href="https://wa.me/97333375858" target="_blank" rel="noopener">فاضل الريس</a>
+</p>
 
 <!-- مكتبات -->
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
@@ -248,11 +252,39 @@ textarea{min-height:84px;resize:vertical}
 'use strict';
 const $=id=>document.getElementById(id);
 
-/* مودال */
-const modal=$("msgModal"), msgBody=$("msgBody"); $("msgOk").onclick=()=>modal.style.display="none";
-function showMsg(html){msgBody.innerHTML=html;modal.style.display="flex"}
+/* ===== حفظ واسترجاع الحالة ===== */
+const STORE='receiptForm_v1';
+function saveState(extra={}) {
+  const ids=['inCompany','inPhone','inAddr','inNo','inDate','inFrom','inAmt','inCur','inFor','inStampName','inStampCR','inStampPhone','sigData'];
+  const d={}; ids.forEach(k=>{const el=$(k); d[k]=el?el.value:''}); Object.assign(d,extra);
+  localStorage.setItem(STORE, JSON.stringify(d));
+}
+function loadState(){
+  try{
+    const raw=localStorage.getItem(STORE); if(!raw) return {};
+    const d=JSON.parse(raw);
+    for(const [k,v] of Object.entries(d)){const el=$(k); if(el) el.value=v}
+    if(d.sigData){const img=$("sigImg"); img.src=d.sigData; img.classList.add('show')}
+    return d;
+  }catch(e){return {}}
+}
 
-/* مدخلات/مخرجات */
+/* مودال بسيط */
+function showMsg(html){
+  const modal=document.createElement('div');
+  modal.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:9999;display:flex;align-items:center;justify-content:center';
+  modal.innerHTML=`<div style="width:min(92vw,520px);background:#fff;border:1px solid #e6e8ee;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.25);overflow:hidden">
+    <div style="background:linear-gradient(90deg,#0b0f19,#1b2334);color:#fff;text-align:center;padding:10px 14px;font-weight:800">تنبيه</div>
+    <div style="padding:14px;font-size:15px;color:#111">${html}</div>
+    <div style="padding:12px;display:flex;justify-content:center;background:#f7f8fb">
+      <button type="button" style="border:1px solid #e6e8ee;background:#fff;border-radius:10px;font-weight:800;padding:8px 12px;cursor:pointer">حسنًا</button>
+    </div>
+  </div>`;
+  modal.querySelector('button').onclick=()=>document.body.removeChild(modal);
+  document.body.appendChild(modal);
+}
+
+/* عناصر الإدخال/الإخراج */
 const inCompany=$("inCompany"), inPhone=$("inPhone"), inAddr=$("inAddr"),
       inNo=$("inNo"), inDate=$("inDate"), inFrom=$("inFrom"),
       inAmt=$("inAmt"), inCur=$("inCur"), inFor=$("inFor"),
@@ -265,15 +297,15 @@ const outCompany=$("outCompany"), outPhone=$("outPhone"), outAddr=$("outAddr"),
       outStampCR=$("outStampCR"), outStampPhone=$("outStampPhone"),
       sigImg=$("sigImg");
 
-/* تاريخ اليوم افتراضيًا */
+/* تاريخ افتراضي */
 (function(){const t=new Date(),y=t.getFullYear(),m=String(t.getMonth()+1).padStart(2,'0'),d=String(t.getDate()).padStart(2,'0');if(!inDate.value)inDate.value=`${y}-${m}-${d}`})();
 
-/* تحويل الأرقام العربية/الفارسية إلى إنجليزية */
+/* أرقام عربية/فارسية -> إنجليزية */
 const DM={'٠':'0','١':'1','٢':'2','٣':'3','٤':'4','٥':'5','٦':'6','٧':'7','٨':'8','٩':'9','۰':'0','۱':'1','۲':'2','۳':'3','۴':'4','۵':'5','۶':'6','۷':'7','۸':'8','۹':'9'};
 function normalizeDigits(s){return String(s||'').replace(/[٠-٩۰-۹]/g,d=>DM[d]||d)}
 function clean(s){return normalizeDigits(s).replace(/[<>]/g,'').replace(/[\u0000-\u001F\u007F]/g,'').trim()}
 
-/* رقم إلى حروف عربية مبسّط */
+/* رقم إلى حروف عربية (مبسّط) */
 const U=["","واحد","اثنان","ثلاثة","أربعة","خمسة","ستة","سبعة","ثمانية","تسعة"];
 const T=["","عشرة","عشرون","ثلاثون","أربعون","خمسون","ستون","سبعون","ثمانون","تسعون"];
 const TE=["عشرة","أحد عشر","اثنا عشر","ثلاثة عشر","أربعة عشر","خمسة عشر","ستة عشر","سبعة عشر","ثمانية عشر","تسعة عشر"];
@@ -287,38 +319,34 @@ function numberToArabicWords(n){
   const parts=[]; for(let i=ch.length-1;i>=0;i--){const c=ch[i]; if(!c) continue; const w=three(c), nm=chunkName(i,c); parts.push(w+(nm?(" "+nm):"")); }
   return parts.join(" و ");
 }
-
-/* تنسيق إنجليزي للأرقام */
 function formatAmount(v){
   const num=Number(normalizeDigits(v).replace(/[^\d.]/g,''));
   return isNaN(num) ? "0.000" : num.toLocaleString('en-US',{minimumFractionDigits:3,maximumFractionDigits:3});
 }
 
-/* تطبيق المعاينة مع أرقام إنجليزية */
+/* تطبيق المعاينة + حفظ */
 function apply(){
   outCompany.textContent=clean(inCompany.value)||"اسم الجهة";
   outPhone.textContent=clean(inPhone.value)||"—";
   outAddr.textContent=clean(inAddr.value)||"—";
-  outNo.textContent=clean(inNo.value)||"—";                               // إنجليزي عبر normalizeDigits
-  outDate.textContent=inDate.value?new Date(inDate.value+"T00:00:00").toLocaleDateString("en-GB"):"—"; // تاريخ بأرقام إنجليزية
-
+  outNo.textContent=clean(inNo.value)||"—";
+  outDate.textContent=inDate.value?new Date(inDate.value+"T00:00:00").toLocaleDateString("en-GB"):"—";
   outFrom.textContent=clean(inFrom.value)||"—";
 
   outAmt.textContent=formatAmount(inAmt.value||"");
   outCur.textContent=inCur.value;
-
   const num=Number(normalizeDigits(inAmt.value||"").replace(/[^\d.]/g,''));
   outAmtTxt.textContent=(!isNaN(num)&&num>=0)?(numberToArabicWords(Math.round(num))+" "+inCur.value+" فقط لا غير"):"—";
 
   outFor.textContent=clean(inFor.value)||"—";
-
   outStampName.textContent=clean(inStampName.value)||"اسم المؤسسة";
-  outStampCR.textContent="CR: "+(clean(inStampCR.value)||"—");            // أرقام إنجليزية
-  outStampPhone.textContent="Tel: "+(clean(inStampPhone.value)||"—");     // أرقام إنجليزية
+  outStampCR.textContent="CR: "+(clean(inStampCR.value)||"—");
+  outStampPhone.textContent="Tel: "+(clean(inStampPhone.value)||"—");
+  saveState();
 }
-["input","change"].forEach(ev=>document.querySelectorAll("input,textarea,select").forEach(el=>el.addEventListener(ev,apply,{passive:true})));
+["input","change"].forEach(ev=>document.querySelectorAll("input,textarea,select").forEach(el=>el.addEventListener(ev,()=>{apply()}, {passive:true})));
 
-/* التوقيع: Pointer + DPI */
+/* التوقيع على الكانفس */
 const sigCanvas=$("sigCanvas"), ctx=sigCanvas.getContext("2d",{willReadFrequently:true}); let drawing=false;
 function paintBg(){ctx.save();ctx.fillStyle="#fff";ctx.fillRect(0,0,sigCanvas.width,sigCanvas.height);ctx.restore()}
 function resizeSignature(){const DPR=Math.min(window.devicePixelRatio||1,2);const r=sigCanvas.getBoundingClientRect();const w=Math.max(280,Math.floor(r.width)),h=Math.max(120,Math.floor(r.height));sigCanvas.width=w*DPR;sigCanvas.height=h*DPR;ctx.setTransform(DPR,0,0,DPR,0,0);ctx.lineWidth=2.6;ctx.lineCap='round';ctx.strokeStyle='#111';paintBg()}
@@ -328,9 +356,8 @@ sigCanvas.addEventListener("pointermove",e=>{if(!drawing)return;e.preventDefault
 window.addEventListener("pointerup",()=>{drawing=false},{passive:true});
 new ResizeObserver(()=>{const prev=sigCanvas.toDataURL();resizeSignature();if(prev){const img=new Image();img.onload=()=>{const dpr=window.devicePixelRatio||1;ctx.drawImage(img,0,0,sigCanvas.width/dpr,sigCanvas.height/dpr)};img.src=prev}}).observe(sigCanvas.parentElement);
 
-/* أزرار التوقيع */
-$("btnClearSig").onclick=()=>{paintBg();sigImg.removeAttribute("src")};
-$("btnUseSig").onclick=()=>{sigImg.src=sigCanvas.toDataURL("image/png")};
+$("btnClearSig").onclick=()=>{paintBg();sigImg.classList.remove("show");sigImg.removeAttribute("src");saveState({sigData:""})};
+$("btnUseSig").onclick=()=>{const data=sigCanvas.toDataURL("image/png");sigImg.src=data;sigImg.classList.add("show");saveState({sigData:data})};
 
 /* PDF (الرصيد فقط) */
 async function renderReceiptCanvas(){
@@ -346,8 +373,24 @@ $("btnDownload").onclick=async()=>{try{const b=await makePDFBlob();const url=URL
 $("btnPrint").onclick=()=>window.print();
 $("btnSharePdf").onclick=async()=>{try{const blob=await makePDFBlob();const file=new File([blob],`receipt-${(clean(inNo.value)||'no')}.pdf`,{type:'application/pdf'});if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({title:'رصيد استلام',text:'PDF',files:[file]})}else{showMsg("المتصفح لا يدعم مشاركة الملفات مباشرة — قم بتنزيل PDF ثم شاركه يدويًا.")}}catch(e){showMsg("تعذّرت مشاركة PDF الآن.")}};
 
+/* مشاركة الصفحة */
+function buildShare(){
+  const url=encodeURIComponent(location.href), row=$("shareRow"); row.textContent='';
+  const links=[
+    ["واتساب",`https://wa.me/?text=${url}`],
+    ["تلغرام",`https://t.me/share/url?url=${url}`],
+    ["X",`https://twitter.com/intent/tweet?url=${url}`],
+    ["فيسبوك",`https://www.facebook.com/sharer/sharer.php?u=${url}`],
+    ["لينكدإن",`https://www.linkedin.com/sharing/share-offsite/?url=${url}`]
+  ];
+  for(const [t,h] of links){const a=document.createElement('a');a.textContent=t;a.href=h;a.target="_blank";a.rel="noopener";row.appendChild(a)}
+  const btn=document.createElement('button');btn.type="button";btn.className="copy";btn.textContent="نسخ الرابط";
+  btn.onclick=async()=>{try{await navigator.clipboard.writeText(location.href);btn.textContent="تم النسخ";setTimeout(()=>btn.textContent="نسخ الرابط",1200)}catch(e){showMsg("تعذّر نسخ الرابط. انسخه يدويًا.")}};
+  row.appendChild(btn);
+}
+
 /* تشغيل */
-function onReady(){resizeSignature();apply()}
+function onReady(){loadState();resizeSignature();apply();buildShare()}
 if(document.readyState!=="loading") onReady(); else document.addEventListener('DOMContentLoaded', onReady);
 window.addEventListener('orientationchange', ()=>setTimeout(resizeSignature,300), {passive:true});
 </script>
