@@ -3,18 +3,43 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>وصل استلام</title>
+
+<title>إنشاء رصيد استلام فوري — عربي</title>
+<meta name="description" content="أنشئ رصيد استلام فوري بالعربية: تعبئة سريعة، توقيع يدوي، بيانات ختم المؤسسة، تحويل المبلغ من أرقام إلى حروف تلقائيًا، طباعة/تنزيل/مشاركة الرصيد كملف PDF.">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
+<link rel="canonical" href="https://example.com/instant-receipt-ar" />
+<meta property="og:title" content="إنشاء رصيد استلام فوري — عربي">
+<meta property="og:description" content="توقيع يدوي، ختم المؤسسة، وتحويل المبلغ إلى حروف تلقائيًا. تنزيل وطباعة ومشاركة الرصيد كـ PDF.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ar_AR">
+<meta property="og:url" content="https://example.com/instant-receipt-ar">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="إنشاء رصيد استلام فوري — عربي">
+<meta name="twitter:description" content="رصيد استلام احترافي مع تحويل الأرقام إلى حروف ومشاركة PDF.">
+
+<!-- أمان -->
+<meta http-equiv="Content-Security-Policy" content="
+  default-src 'self' https:;
+  img-src 'self' data: blob: https:;
+  script-src 'self' https://cdn.jsdelivr.net 'wasm-unsafe-eval';
+  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+  font-src https://fonts.gstatic.com;
+  connect-src 'self';
+  frame-ancestors 'none';
+  base-uri 'self';
+  form-action 'self';
+  upgrade-insecure-requests
+">
+
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&display=swap" rel="stylesheet">
+
 <style>
 :root{--ink:#0f172a;--muted:#6b7280;--line:#e5e7eb;--brand:#0b0f19;--accent:#C6A14A;--paper:#fff;--stamp:#0a4ea6}
 *{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 html,body{height:100%}
 body{margin:0;background:#f2f4f8;color:var(--ink);font-family:"Cairo",system-ui}
-
-/* تخطيط عام */
 .wrap{max-width:1100px;margin:auto;padding:12px;display:grid;gap:12px;grid-template-columns:minmax(300px,1fr) 1.2fr}
 @media(max-width:980px){.wrap{grid-template-columns:1fr}}
-
 .card{background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 6px 16px rgba(0,0,0,.04);overflow:hidden}
 .hd{padding:12px 14px;background:linear-gradient(90deg,var(--brand),#1a2233);color:#fff;font-weight:800;text-align:center}
 .bd{padding:12px}
@@ -30,14 +55,16 @@ small.help{color:var(--muted);display:block;margin-top:4px}
 .btn.primary{background:var(--accent);color:#000}
 .btn.ghost{background:#eef2f7;color:#0b0f19}
 
-/* ورقة الوصل */
+/* أدوات المعاينة */
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.tool{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px 12px;font-weight:800;cursor:pointer}
+
+/* ورقة الرصيد */
 .preview{padding:10px;background:#fafafa}
 .viewport{width:100%;display:flex;justify-content:center;align-items:flex-start;overflow:auto}
 .print-area{width:210mm;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:12px;box-shadow:0 10px 26px rgba(0,0,0,.06)}
 .receipt{padding:16mm 16mm 14mm}
 .rec-head{display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:2px solid var(--line);padding-bottom:8px}
-.brand{display:flex;align-items:center;gap:10px}
-.logo{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#ffe9a6);display:grid;place-items:center;color:#000;font-weight:900}
 .brand .name{font-weight:800;font-size:18px;color:#111}
 .brand .sub{font-size:12px;color:var(--muted)}
 .rec-title{font-weight:800;font-size:18px}
@@ -50,44 +77,58 @@ small.help{color:var(--muted);display:block;margin-top:4px}
 @media(max-width:520px){.row{grid-template-columns:1fr}.row .label{border-inline-end:none;border-bottom:1px solid var(--line)}}
 .amount-box{display:flex;gap:10px;flex-wrap:wrap}
 .amount-chip{border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-weight:700}
-.rec-foot{display:flex;justify-content:space-between;gap:12px;align-items:flex-end;margin-top:14px}
-.sign{position:relative;width:48%;min-height:90px;border:1px dashed #cbd5e1;border-radius:10px;padding:8px;font-size:12px}
-.sign .pad{position:relative;margin-top:6px;border:1px solid #e5e7eb;border-radius:10px;height:120px;background:#fff;overflow:hidden}
-#sigCanvas{width:100%;height:100%;touch-action:none;background:#fff}
-.sign .who{border-top:1px solid #cfd8e3;margin-top:6px;padding-top:4px;font-size:11px;color:#6b7280}
-.stamp{width:48%;min-height:90px;border:2px solid var(--stamp);border-radius:10px;padding:8px;font-size:12px;color:var(--stamp);font-weight:800;background:#fff}
+
+/* التوقيع فوق الختم */
+.rec-foot{display:flex;flex-direction:column;gap:12px;align-items:stretch;margin-top:14px}
+.sign{min-height:90px;border:1px dashed #cbd5e1;border-radius:10px;padding:8px}
+#sigCanvas{width:100%;height:90px;touch-action:none;background:#fff;border:1px solid #e5e7eb;border-radius:10px}
+#sigImg{max-height:86px;max-width:100%;display:block;object-fit:contain}
+.stamp{min-height:90px;border:2px solid var(--stamp);border-radius:10px;padding:8px;font-size:12px;color:var(--stamp);font-weight:800;background:#fff}
 .stamp .who{margin-top:6px;border-top:2px solid var(--stamp);padding-top:4px;font-size:11px}
+
 .note{margin-top:10px;font-size:12.5px;color:#555;background:#fff8e6;border:1px solid rgba(198,161,74,.5);border-radius:10px;padding:10px}
 
-/* طباعة: إظهار الوصل فقط */
+/* شريط مشاركة الشبكات */
+.share-site{max-width:1100px;margin:6px auto 8px;padding:6px 12px}
+.share-box{border:1px solid var(--line);background:#fff;border-radius:14px;box-shadow:0 6px 16px rgba(0,0,0,.04);padding:12px;text-align:center}
+.share-title{font:800 15px/1 "Cairo";margin:0 0 10px;color:#111}
+.icon-row{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+.icon-row a{display:inline-grid;place-items:center;width:42px;height:42px;border-radius:50%;text-decoration:none;border:1px solid var(--line)}
+.icon-row a svg{width:22px;height:22px}
+.icon-row a:hover{transform:translateY(-2px)}
+
+/* طباعة: يظهر الرصيد فقط */
 @page{size:A4;margin:12mm}
 @media print{
   .no-print{display:none !important}
+  .share-site{display:none !important}
   .print-area{border:none;box-shadow:none;page-break-inside:avoid}
 }
 </style>
 </head>
 <body>
 
+<header class="no-print" style="max-width:1100px;margin:8px auto 0;padding:0 12px">
+  <h1 style="margin:6px 0 0;font-size:20px">إنشاء رصيد استلام فوري</h1>
+  <p style="margin:4px 0 10px;color:#4b5563">توقيع يدوي، بيانات ختم المؤسسة، وتحويل المبلغ إلى حروف تلقائيًا — جاهز للطباعة وتنزيل/مشاركة الرصيد كـ PDF.</p>
+</header>
+
 <main class="wrap">
   <!-- النموذج -->
-  <section class="card no-print" aria-label="بيانات الوصل">
-    <div class="hd">بيانات الوصل</div>
+  <section class="card no-print" aria-label="إنشاء رصيد استلام فوري">
+    <div class="hd">إنشاء رصيد استلام فوري</div>
     <div class="bd">
       <div class="grid">
-        <div><label>اسم الجهة/الشركة</label><input id="inCompany" placeholder="مثال: شركة الأفق للمقاولات"></div>
+        <div><label>اسم الجهة/الشركة</label><input id="inCompany" autocomplete="organization" placeholder="مثال: شركة الأفق للمقاولات"></div>
         <div class="g2">
-          <div><label>الهاتف</label><input id="inPhone" inputmode="tel" placeholder="33375858"></div>
-          <div><label>العنوان</label><input id="inAddr" placeholder="المنامة – البحرين"></div>
+          <div><label>الهاتف</label><input id="inPhone" inputmode="tel" autocomplete="tel" placeholder="33375858"></div>
+          <div><label>العنوان</label><input id="inAddr" autocomplete="address-level1" placeholder="المنامة – البحرين"></div>
         </div>
-
         <div class="g2">
-          <div><label>رقم الوصل</label><input id="inNo" placeholder="2025-0001"></div>
+          <div><label>رقم الرصيد</label><input id="inNo" placeholder="2025-0001"></div>
           <div><label>التاريخ</label><input id="inDate" type="date"></div>
         </div>
-
         <div><label>استلمنا من</label><input id="inFrom" placeholder="اسم العميل / الجهة"></div>
-
         <div class="g2">
           <div><label>المبلغ (أرقام)</label><input id="inAmt" inputmode="decimal" placeholder="300"></div>
           <div>
@@ -100,23 +141,7 @@ small.help{color:var(--muted);display:block;margin-top:4px}
             </select>
           </div>
         </div>
-
-        <div><label>المبلغ كتابة (اختياري)</label><input id="inAmtTxt" placeholder="ثلاثمائة دينار بحريني فقط لا غير"></div>
-
         <div><label>وذلك عن</label><textarea id="inFor" placeholder="سداد مستحقات فاتورة رقم 145"></textarea></div>
-
-        <div class="g2">
-          <div>
-            <label>طريقة الدفع</label>
-            <select id="inPay">
-              <option>نقدًا</option>
-              <option>بطاقة</option>
-              <option>تحويل بنكي</option>
-              <option>شيك</option>
-            </select>
-          </div>
-          <div><label>ملاحظات (اختياري)</label><input id="inNote" placeholder="مرجع التحويل/رقم الشيك…"></div>
-        </div>
 
         <!-- بيانات الختم -->
         <div class="g2">
@@ -125,66 +150,56 @@ small.help{color:var(--muted);display:block;margin-top:4px}
         </div>
         <div><label>هاتف الختم (اختياري)</label><input id="inStampPhone" placeholder="33375858"></div>
 
-        <!-- خانة التوقيع اليدوي -->
+        <!-- توقيع يدوي -->
         <div>
           <label>التوقيع اليدوي</label>
-          <div class="grid">
-            <div class="pad" style="border:1px dashed #cbd5e1;border-radius:12px;padding:8px;background:#fff">
-              <div class="pad" style="height:180px">
-                <canvas id="sigCanvas"></canvas>
-              </div>
-              <div class="btns" style="margin-top:8px">
-                <button class="btn ghost" id="btnClearSig">مسح التوقيع</button>
-                <button class="btn primary" id="btnUseSig">استخدام التوقيع</button>
-              </div>
-              <small class="help">ارسم التوقيع بالقلم/الماوس ثم اضغط "استخدام التوقيع".</small>
+          <div style="border:1px dashed #cbd5e1;border-radius:12px;padding:8px;background:#fff">
+            <canvas id="sigCanvas" aria-label="مساحة رسم التوقيع"></canvas>
+            <div class="btns" style="margin-top:8px">
+              <button class="btn ghost" id="btnClearSig" type="button">مسح التوقيع</button>
+              <button class="btn primary" id="btnUseSig" type="button">استخدام التوقيع</button>
             </div>
+            <small class="help">ارسم التوقيع بالقلم/الماوس ثم اضغط "استخدام التوقيع".</small>
           </div>
         </div>
 
-        <!-- تعريف الموقّع -->
-        <div class="g2">
-          <div><label>اسم الموقّع</label><input id="inSigner" placeholder="اسم المستلم"></div>
-          <div><label>صفة الموقّع (اختياري)</label><input id="inSignerRole" placeholder="المحاسب / المسؤول"></div>
-        </div>
-
         <div class="btns" style="margin-top:6px">
-          <button class="btn primary" id="btnPrint">طباعة / حفظ PDF</button>
-          <button class="btn ghost" id="btnShare">مشاركة نصية</button>
-          <button class="btn ghost" id="btnClear">مسح الكل</button>
+          <button class="btn primary" id="btnDownload" type="button">تنزيل الرصيد PDF</button>
+          <button class="btn ghost" id="btnPrint" type="button">طباعة الرصيد</button>
+          <button class="btn ghost" id="btnSharePdf" type="button">مشاركة الرصيد</button>
+          <button class="btn ghost" id="btnClear" type="button">مسح الكل</button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- المعاينة / الطباعة -->
+  <!-- المعاينة -->
   <section class="card" aria-label="المعاينة">
     <div class="hd no-print">المعاينة</div>
     <div class="bd preview">
+      <div class="tools no-print">
+        <button class="tool" id="tPrint" type="button">🖨️ طباعة الرصيد</button>
+        <button class="tool" id="tPdf" type="button">⬇️ تنزيل الرصيد PDF</button>
+        <button class="tool" id="tSharePdf" type="button">📤 مشاركة الرصيد</button>
+      </div>
       <div class="viewport">
-        <div class="print-area" id="printArea">
+        <div class="print-area" id="printArea" aria-label="رصيد الاستلام">
           <div class="receipt">
             <div class="rec-head">
               <div class="brand">
-                <div class="logo">★</div>
-                <div>
-                  <div class="name" id="outCompany">اسم الجهة</div>
-                  <div class="sub"><span id="outPhone">—</span> • <span id="outAddr">—</span></div>
-                </div>
+                <div class="name" id="outCompany">اسم الجهة</div>
+                <div class="sub"><span id="outPhone">—</span> • <span id="outAddr">—</span></div>
               </div>
-              <div class="rec-title">وصل استلام</div>
+              <div class="rec-title">رصيد استلام</div>
             </div>
 
             <div class="rec-meta">
-              <div class="meta-item">رقم الوصل: <strong id="outNo">—</strong></div>
+              <div class="meta-item">رقم الرصيد: <strong id="outNo">—</strong></div>
               <div class="meta-item">التاريخ: <strong id="outDate">—</strong></div>
             </div>
 
             <div class="rec-body" style="margin-top:12px">
-              <div class="row">
-                <div class="label">استلمنا من</div>
-                <div class="val" id="outFrom">—</div>
-              </div>
+              <div class="row"><div class="label">استلمنا من</div><div class="val" id="outFrom">—</div></div>
               <div class="row">
                 <div class="label">المبلغ</div>
                 <div class="val">
@@ -195,27 +210,15 @@ small.help{color:var(--muted);display:block;margin-top:4px}
                   <div id="outAmtTxt" style="margin-top:6px;color:#374151;font-size:13px">—</div>
                 </div>
               </div>
-              <div class="row">
-                <div class="label">وذلك عن</div>
-                <div class="val" id="outFor">—</div>
-              </div>
-              <div class="row">
-                <div class="label">طريقة الدفع</div>
-                <div class="val"><span id="outPay">نقدًا</span> — <span id="outNote">—</span></div>
-              </div>
+              <div class="row"><div class="label">وذلك عن</div><div class="val" id="outFor">—</div></div>
             </div>
 
             <div class="rec-foot">
+              <!-- التوقيع فوق الختم -->
               <div class="sign">
-                توقيع المستلم
-                <div class="pad" style="height:90px;border:0;background:transparent">
-                  <!-- صورة التوقيع للمعاينة/الطباعة -->
-                  <img id="sigImg" alt="التوقيع" style="max-height:86px;max-width:100%;display:block;object-fit:contain">
-                </div>
-                <div class="who" id="outSigner">الاسم والتوقيع</div>
+                <img id="sigImg" alt="التوقيع">
               </div>
               <div class="stamp">
-                ختم المؤسسة
                 <div class="who">
                   <div id="outStampName">اسم المؤسسة</div>
                   <div id="outStampCR">CR: —</div>
@@ -224,7 +227,7 @@ small.help{color:var(--muted);display:block;margin-top:4px}
               </div>
             </div>
 
-            <div class="note">هذا الوصل صالح كإثبات استلام. يُرجى الاحتفاظ به.</div>
+            <div class="note">هذا الرصيد صالح كإثبات استلام. يُرجى الاحتفاظ به.</div>
           </div>
         </div>
       </div>
@@ -232,162 +235,134 @@ small.help{color:var(--muted);display:block;margin-top:4px}
   </section>
 </main>
 
+<section class="share-site no-print" aria-label="مشاركة الرصيد عبر الشبكات">
+  <div class="share-box">
+    <h2 class="share-title">مشاركة الرصيد عبر الشبكات</h2>
+    <div class="icon-row" id="shareRow"></div>
+  </div>
+</section>
+
+<!-- مكتبات PDF -->
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 <script>
+'use strict';
 const $=id=>document.getElementById(id);
 
 /* إدخالات */
 const inCompany=$("inCompany"), inPhone=$("inPhone"), inAddr=$("inAddr"),
       inNo=$("inNo"), inDate=$("inDate"), inFrom=$("inFrom"),
-      inAmt=$("inAmt"), inCur=$("inCur"), inAmtTxt=$("inAmtTxt"),
-      inFor=$("inFor"), inPay=$("inPay"), inNote=$("inNote"),
-      inStampName=$("inStampName"), inStampCR=$("inStampCR"), inStampPhone=$("inStampPhone"),
-      inSigner=$("inSigner"), inSignerRole=$("inSignerRole");
+      inAmt=$("inAmt"), inCur=$("inCur"), inFor=$("inFor"),
+      inStampName=$("inStampName"), inStampCR=$("inStampCR"), inStampPhone=$("inStampPhone");
 
 /* مخرجات */
 const outCompany=$("outCompany"), outPhone=$("outPhone"), outAddr=$("outAddr"),
       outNo=$("outNo"), outDate=$("outDate"), outFrom=$("outFrom"),
       outAmt=$("outAmt"), outCur=$("outCur"), outAmtTxt=$("outAmtTxt"),
-      outFor=$("outFor"), outPay=$("outPay"), outNote=$("outNote"),
-      outStampName=$("outStampName"), outStampCR=$("outStampCR"), outStampPhone=$("outStampPhone"),
-      outSigner=$("outSigner"), sigImg=$("sigImg");
+      outFor=$("outFor"), outStampName=$("outStampName"), outStampCR=$("outStampCR"),
+      outStampPhone=$("outStampPhone"), sigImg=$("sigImg");
 
-/* تاريخ اليوم */
-(function(){
-  const t=new Date(), yyyy=t.getFullYear(), mm=String(t.getMonth()+1).padStart(2,'0'), dd=String(t.getDate()).padStart(2,'0');
-  if(!inDate.value) inDate.value=`${yyyy}-${mm}-${dd}`;
-})();
+/* اليوم افتراضيًا */
+(function(){const t=new Date(),yyyy=t.getFullYear(),mm=String(t.getMonth()+1).padStart(2,'0'),dd=String(t.getDate()).padStart(2,'0');if(!inDate.value)inDate.value=`${yyyy}-${mm}-${dd}`;})();
 
-/* تخزين محلي */
-const STORE="receipt_with_sig_v1";
-function save(obj){
-  const data={
-    inCompany:inCompany.value,inPhone:inPhone.value,inAddr:inAddr.value,inNo:inNo.value,inDate:inDate.value,inFrom:inFrom.value,
-    inAmt:inAmt.value,inCur:inCur.value,inAmtTxt:inAmtTxt.value,inFor:inFor.value,inPay:inPay.value,inNote:inNote.value,
-    inStampName:inStampName.value,inStampCR:inStampCR.value,inStampPhone:inStampPhone.value,
-    inSigner:inSigner.value,inSignerRole:inSignerRole.value,
-    sigData: (obj&&obj.sigData)||localStorage.getItem(STORE+"_sig")||""
-  };
-  localStorage.setItem(STORE, JSON.stringify(data));
-}
-function load(){
-  try{
-    const raw=localStorage.getItem(STORE); if(!raw) return;
-    const d=JSON.parse(raw);
-    for(const k in d){ if($(k)) $(k).value=d[k]; }
-    if(d.sigData){ localStorage.setItem(STORE+"_sig", d.sigData); sigImg.src=d.sigData; sigImg.style.display='block'; }
-  }catch(e){}
-}
+/* تنظيف مدخلات */
+function clean(s){return (typeof s==='string'?s:'').replace(/[<>]/g,'').replace(/[\u0000-\u001F\u007F]/g,'').slice(0,300).trim();}
 
-/* المبلغ بصيغة منسّقة */
-function formatAmount(v){
-  if(!v) return "0.000";
-  const num=Number(String(v).replace(/[^\d.]/g,''));
-  if(isNaN(num)) return "0.000";
-  return num.toLocaleString('en-US',{minimumFractionDigits:3,maximumFractionDigits:3});
-}
+/* أرقام إلى حروف (مبسّط حتى ملايين) */
+const U=["","واحد","اثنان","ثلاثة","أربعة","خمسة","ستة","سبعة","ثمانية","تسعة"];
+const T=["","عشرة","عشرون","ثلاثون","أربعون","خمسون","ستون","سبعون","ثمانون","تسعون"];
+const TE=["عشرة","أحد عشر","اثنا عشر","ثلاثة عشر","أربعة عشر","خمسة عشر","ستة عشر","سبعة عشر","ثمانية عشر","تسعة عشر"];
+const H=["","مائة","مائتان","ثلاثمائة","أربعمائة","خمسمائة","ستمائة","سبعمائة","ثمانمائة","تسعمائة"];
+function two(n){if(n===0)return"";if(n<10)return U[n];if(n<20)return TE[n-10];const u=n%10,t=Math.floor(n/10);return (u?U[u]+" و ":"")+T[t]}
+function three(n){const h=Math.floor(n/100),r=n%100;return (H[h]?(H[h]+(r?" و ":"")):"")+two(r)}
+function chunkName(i,n){if(i===1){if(n===1)return"ألف";if(n===2)return"ألفان";if(n>=3&&n<=10)return"آلاف";return"ألف"}if(i===2){if(n===1)return"مليون";if(n===2)return"مليونان";if(n>=3&&n<=10)return"ملايين";return"مليون"}return""}
+function numberToArabicWords(n){n=Math.floor(Math.abs(n));if(n===0)return"صفر";const ch=[n%1000,Math.floor(n/1000)%1000,Math.floor(n/1e6)%1000];const parts=[];for(let i=ch.length-1;i>=0;i--){const c=ch[i];if(!c)continue;const w=three(c), nm=chunkName(i,c);parts.push(w+(nm?(" "+nm):""))}return parts.join(" و ")}
 
-/* تطبيق على المعاينة */
+/* تنسيق مبلغ */
+function formatAmount(v){const num=Number(String(v).replace(/[^\d.]/g,''));return isNaN(num)?"0.000":num.toLocaleString('en-US',{minimumFractionDigits:3,maximumFractionDigits:3})}
+
+/* تطبيق */
 function apply(){
-  outCompany.textContent = inCompany.value.trim() || "اسم الجهة";
-  outPhone.textContent   = inPhone.value.trim()   || "—";
-  outAddr.textContent    = inAddr.value.trim()    || "—";
-  outNo.textContent      = inNo.value.trim()      || "—";
-  outDate.textContent    = inDate.value ? new Date(inDate.value+"T00:00:00").toLocaleDateString("ar-EG") : "—";
-  outFrom.textContent    = inFrom.value.trim()    || "—";
+  outCompany.textContent=clean(inCompany.value)||"اسم الجهة";
+  outPhone.textContent=clean(inPhone.value)||"—";
+  outAddr.textContent=clean(inAddr.value)||"—";
+  outNo.textContent=clean(inNo.value)||"—";
+  outDate.textContent=inDate.value?new Date(inDate.value+"T00:00:00").toLocaleDateString("ar-EG"):"—";
+  outFrom.textContent=clean(inFrom.value)||"—";
 
-  outAmt.textContent     = formatAmount(inAmt.value);
-  outCur.textContent     = inCur.value;
-  outAmtTxt.textContent  = inAmtTxt.value.trim() || "—";
+  outAmt.textContent=formatAmount(inAmt.value||"");
+  outCur.textContent=inCur.value;
 
-  outFor.textContent     = inFor.value.trim()     || "—";
-  outPay.textContent     = inPay.value;
-  outNote.textContent    = inNote.value.trim()    || "—";
+  const num=Number(String(inAmt.value||"").replace(/[^\d.]/g,'')); // يُكتب بالحروف تلقائيًا
+  outAmtTxt.textContent = (!isNaN(num) && num>=0)
+    ? (numberToArabicWords(Math.round(num))+" "+inCur.value+" فقط لا غير")
+    : "—";
 
-  /* الختم */
-  outStampName.textContent = inStampName.value.trim() || "اسم المؤسسة";
-  outStampCR.textContent   = "CR: " + (inStampCR.value.trim() || "—");
-  outStampPhone.textContent= "Tel: " + (inStampPhone.value.trim() || "—");
+  outFor.textContent=clean(inFor.value)||"—";
 
-  /* التوقيع */
-  const signer = (inSigner.value.trim() || "الاسم والتوقيع") +
-                 (inSignerRole.value.trim()? (" — "+inSignerRole.value.trim()):"");
-  outSigner.textContent = signer;
-
-  save();
+  outStampName.textContent=clean(inStampName.value)||"اسم المؤسسة";
+  outStampCR.textContent="CR: "+(clean(inStampCR.value)||"—");
+  outStampPhone.textContent="Tel: "+(clean(inStampPhone.value)||"—");
 }
 
-/* استماع للتغييرات */
+/* أحداث الإدخال */
 ["input","change"].forEach(ev=>{
-  document.querySelectorAll("input,textarea,select").forEach(el=>{
-    el.addEventListener(ev, apply, {passive:true});
-  });
+  document.querySelectorAll("input,textarea,select").forEach(el=>el.addEventListener(ev,apply,{passive:true}));
 });
 
-/* التوقيع اليدوي (Canvas) */
-const canvas=$("sigCanvas"); const ctx=canvas.getContext("2d");
-function resizeCanvas(){
-  const DPR=Math.min(window.devicePixelRatio||1,2);
-  const w=canvas.clientWidth||canvas.parentElement.clientWidth;
-  const h=canvas.clientHeight||canvas.parentElement.clientHeight;
-  canvas.width=w*DPR; canvas.height=h*DPR; ctx.setTransform(DPR,0,0,DPR,0,0);
-  ctx.lineWidth=2.6; ctx.lineCap='round'; ctx.strokeStyle='#111'; ctx.fillStyle='#fff';
-  ctx.fillRect(0,0,w,h);
-}
-function relPos(e){
-  const r=canvas.getBoundingClientRect();
-  const t=e.touches?e.touches[0]:e;
-  return {x:t.clientX-r.left, y:t.clientY-r.top};
-}
-let drawing=false;
-function start(e){e.preventDefault(); drawing=true; const p=relPos(e); ctx.beginPath(); ctx.moveTo(p.x,p.y);}
-function move(e){if(!drawing) return; e.preventDefault(); const p=relPos(e); ctx.lineTo(p.x,p.y); ctx.stroke();}
-function end(){drawing=false;}
+/* توقيع Canvas */
+const canvas=document.getElementById('sigCanvas'), ctx=canvas.getContext('2d');
+function resizeCanvas(){const DPR=Math.min(window.devicePixelRatio||1,2);const w=canvas.clientWidth||canvas.parentElement.clientWidth;const h=90;canvas.width=w*DPR;canvas.height=h*DPR;ctx.setTransform(DPR,0,0,DPR,0,0);ctx.lineWidth=2.6;ctx.lineCap='round';ctx.strokeStyle='#111';ctx.fillStyle='#fff';ctx.fillRect(0,0,w,h)}
+function P(e){const r=canvas.getBoundingClientRect(),t=e.touches?e.touches[0]:e;return{x:t.clientX-r.left,y:t.clientY-r.top}}
+let draw=false;
+function down(e){e.preventDefault();draw=true;const m=P(e);ctx.beginPath();ctx.moveTo(m.x,m.y)}
+function move(e){if(!draw)return;e.preventDefault();const m=P(e);ctx.lineTo(m.x,m.y);ctx.stroke()}
+function up(){draw=false}
+canvas.addEventListener('mousedown',down);canvas.addEventListener('mousemove',move);window.addEventListener('mouseup',up);
+canvas.addEventListener('touchstart',down,{passive:false});canvas.addEventListener('touchmove',move,{passive:false});canvas.addEventListener('touchend',up);
 
-canvas.addEventListener('mousedown',start);
-canvas.addEventListener('mousemove',move);
-window.addEventListener('mouseup',end);
-canvas.addEventListener('touchstart',start,{passive:false});
-canvas.addEventListener('touchmove',move,{passive:false});
-canvas.addEventListener('touchend',end);
+document.getElementById('btnClearSig').onclick=()=>{resizeCanvas();document.getElementById('sigImg').removeAttribute('src')};
+document.getElementById('btnUseSig').onclick=()=>{document.getElementById('sigImg').src=canvas.toDataURL('image/png')};
 
-function clearSig(){
-  const w=canvas.clientWidth, h=canvas.clientHeight;
-  ctx.clearRect(0,0,w,h); ctx.fillStyle='#fff'; ctx.fillRect(0,0,w,h);
-  sigImg.removeAttribute('src'); sigImg.style.display='none';
-  localStorage.removeItem(STORE+"_sig"); save({sigData:""});
-}
-function useSig(){
-  const url=canvas.toDataURL('image/png');
-  sigImg.src=url; sigImg.style.display='block';
-  localStorage.setItem(STORE+"_sig", url);
-  save({sigData:url});
-}
-$("btnClearSig").onclick=clearSig;
-$("btnUseSig").onclick=useSig;
+/* PDF (الرصيد فقط) */
+async function renderReceiptCanvas(){const src=document.getElementById('printArea');const clone=src.cloneNode(true);Object.assign(clone.style,{width:'210mm',transform:'none',boxShadow:'none',position:'static'});const holder=document.createElement('div');Object.assign(holder.style,{position:'fixed',left:'-10000px',top:'0',background:'#fff'});holder.appendChild(clone);document.body.appendChild(holder);const canvas=await html2canvas(clone,{scale:2,backgroundColor:'#ffffff',useCORS:true});document.body.removeChild(holder);return canvas}
+async function makePDFBlob(){const {jsPDF}=window.jspdf;const c=await renderReceiptCanvas();const img=c.toDataURL('image/jpeg',0.96);const pdf=new jsPDF('p','mm','a4');pdf.addImage(img,'JPEG',0,0,210,297,'','FAST');return pdf.output('blob')}
+async function downloadPDF(){const blob=await makePDFBlob();const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`receipt-${(clean(inNo.value)||'no')}.pdf`;a.click();URL.revokeObjectURL(url)}
+async function sharePDF(){try{const blob=await makePDFBlob();const file=new File([blob],`receipt-${(clean(inNo.value)||'no')}.pdf`,{type:'application/pdf'});if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({title:'رصيد استلام',text:'ملف PDF للرصد',files:[file]});}else{alert("المشاركة بالملف غير مدعومة على هذا المتصفح. استخدم أزرار الشبكات أو نزّل الرصيد PDF.");}}catch(e){alert("تعذّرت مشاركة الرصيد الآن.");}}
 
-/* أزرار عامة */
-$("btnPrint").onclick=()=>window.print();
-$("btnShare").onclick=async ()=>{
-  const text=`وصل استلام
-الجهة: ${outCompany.textContent}
-رقم الوصل: ${outNo.textContent} — التاريخ: ${outDate.textContent}
-استلمنا من: ${outFrom.textContent}
-المبلغ: ${outAmt.textContent} ${outCur.textContent}
-عن: ${outFor.textContent}
-طريقة الدفع: ${outPay.textContent} — ملاحظات: ${outNote.textContent}`;
-  if(navigator.share){try{await navigator.share({title:"وصل استلام",text});}catch{}}
-  else alert("المشاركة غير مدعومة على هذا المتصفح. استخدم الطباعة لحفظ PDF.");
-};
-$("btnClear").onclick=()=>{
-  if(!confirm("مسح جميع الحقول؟")) return;
-  document.querySelectorAll("input,textarea").forEach(el=>{ if(el.type!=="date") el.value=""; });
-  inPay.value="نقدًا"; inCur.value="دينار بحريني";
-  clearSig(); apply();
-};
+/* أزرار */
+document.getElementById('btnPrint').onclick=()=>window.print();
+document.getElementById('tPrint').onclick=()=>window.print();
+document.getElementById('btnDownload').onclick=downloadPDF;
+document.getElementById('tPdf').onclick=downloadPDF;
+document.getElementById('btnSharePdf').onclick=sharePDF;
+document.getElementById('tSharePdf').onclick=sharePDF;
+document.getElementById('btnClear').onclick=()=>{if(!confirm("مسح جميع الحقول؟"))return;document.querySelectorAll("input,textarea").forEach(el=>{if(el.type!=="date")el.value="";});document.getElementById('sigImg').removeAttribute('src');resizeCanvas();apply();};
+
+/* شريط الشبكات: مشاركة الرصيد */
+function buildShareBar(){
+  const url=encodeURIComponent(location.href);
+  const text=encodeURIComponent('إنشاء رصيد استلام فوري — عربي');
+  const row=document.getElementById('shareRow'); row.textContent='';
+  const items=[
+    {label:'واتساب',href:`https://wa.me/?text=${text}%20${url}`,svg:'M16.6 14.4c-.2.6-1 1-1.6.7-1.8-.9-3.3-2.4-4.2-4.2-.3-.6.1-1.4.7-1.6l.8-.3c.3-.1.5 0 .7.3l.9 1.4c.2.3.1.6-.1.8l-.3.3c.6 1 1.5 1.8 2.5 2.5l.3-.3c.2-.2.5-.3.8-.1l1.4.9c.3.2.4.4.3.7l-.3.8ZM12 2a10 10 0 0 1 8.8 14.8L20 22l-5.2-.8A10 10 0 1 1 12 2Z'},
+    {label:'تلغرام',href:`https://t.me/share/url?url=${url}&text=${text}`,svg:'M21.5 3.5 2.9 10.8c-1 .4-1 1.8 0 2.2l4.6 1.7 1.8 5.6c.3 1 1.6 1.2 2.2.3l2.7-3.5 5.1 3.7c.8.6 2 .2 2.2-.8l2.7-15.6c.2-1-1-1.8-2.3-1.1Z'},
+    {label:'X',href:`https://twitter.com/intent/tweet?url=${url}&text=${text}`,svg:'M13.7 10.6 21 2h-1.7l-6.2 7.4L8.2 2H2l7.6 11L2 22h1.7l6.6-7.8L15.8 22H22l-8.3-11.4Z'},
+    {label:'فيسبوك',href:`https://www.facebook.com/sharer/sharer.php?u=${url}`,svg:'M22 12a10 10 0 1 0-11.6 9.9v-7H7.7V12h2.7V9.7c0-2.7 1.6-4.2 4-4.2 1.2 0 2.4.2 2.4.2v2.6h-1.4c-1.3 0-1.7.8-1.7 1.6V12h2.9l-.46 2.9h-2.4v7A10 10 0 0 0 22 12'},
+    {label:'لينكدإن',href:`https://www.linkedin.com/sharing/share-offsite/?url=${url}`,svg:'M4.98 3.5a2.5 2.5 0 1 1 0 5.001 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.6h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.8 2.6 4.8 6v6H17v-5.3c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9V21H9z'},
+    {label:'البريد',href:`mailto:?subject=${encodeURIComponent('مشاركة الرصيد')}&body=${text}%0A${url}`,svg:'M3 6h18v12H3z'}
+  ];
+  for(const it of items){
+    const a=document.createElement('a'); a.href=it.href; a.target="_blank"; a.rel="noopener"; a.setAttribute('aria-label',it.label);
+    const svg=document.createElementNS('http://www.w3.org/2000/svg','svg'); svg.setAttribute('viewBox','0 0 24 24');
+    const p=document.createElementNS('http://www.w3.org/2000/svg','path'); p.setAttribute('d',it.svg);
+    svg.appendChild(p); a.appendChild(svg); row.appendChild(a);
+  }
+}
 
 /* تشغيل */
-window.addEventListener('resize',()=>requestAnimationFrame(resizeCanvas),{passive:true});
-resizeCanvas(); load(); apply();
+function onReady(){resizeCanvas();apply();buildShareBar();}
+if(document.readyState!=="loading") onReady(); else document.addEventListener('DOMContentLoaded',onReady);
 </script>
 </body>
 </html>
