@@ -26,7 +26,7 @@
 }
 </script>
 
-<!-- أمان ثابت -->
+<!-- سياسات أمان -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob:; font-src https://fonts.gstatic.com data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' https://cdn.jsdelivr.net https://cdn.jsdelivr.net/npm 'unsafe-inline'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
 <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=(), usb=(), payment=()">
 <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -47,7 +47,7 @@ a{color:#0a4ea6;text-decoration:none}
 .h1cap{height:6px;background:linear-gradient(90deg,var(--brand),#1b2335)}
 h1{margin:12px;text-align:center;font:800 22px/1.25 "Cairo"}
 
-/* تخطيط */
+/* تخطيط عام */
 .container{max-width:1100px;margin:auto;padding:12px}
 .grid{display:grid;gap:12px;grid-template-columns:minmax(280px,1fr) minmax(280px,1.2fr)}
 @media (max-width:980px){.grid{grid-template-columns:1fr}}
@@ -55,7 +55,7 @@ h1{margin:12px;text-align:center;font:800 22px/1.25 "Cairo"}
 .card .hd{padding:12px;background:linear-gradient(90deg,var(--brand),#1b2334);color:#fff;font-weight:800;text-align:center}
 .card .bd{padding:12px}
 
-/* وصف قصير */
+/* وصف */
 .note{border:1px solid #e6e8ee;background:#fcfcff;border-radius:12px;padding:10px;margin-bottom:10px;font-size:14px;color:#111}
 
 /* نموذج */
@@ -72,7 +72,7 @@ textarea{min-height:84px;resize:vertical}
 .btnpill svg{width:18px;height:18px;fill:currentColor}
 .btnpill.primary{background:#fff8e6;border-color:#f1e0ad;color:#5b430a}
 
-/* المعاينة */
+/* المعاينة/الرصيد */
 .preview{padding:10px;background:#fafafa}
 .paper{width:100%;max-width:210mm;margin:auto;background:var(--paper);border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 22px rgba(0,0,0,.06)}
 .receipt{padding:14mm 14mm 12mm}
@@ -98,25 +98,26 @@ textarea{min-height:84px;resize:vertical}
 
 /* الختم المستطيل الرسمي + التوقيع داخله */
 .stamp{
-  width:70mm; min-height:33mm; margin:12px auto 0; position:relative;
-  border:2px solid var(--stamp); border-radius:10px; background:#fff; color:var(--stamp);
-  padding:8px 10px 10px; font-weight:800; box-sizing:border-box;
+  width:70mm; min-height:36mm; margin:12px auto 0; position:relative;
+  border:2.4px solid var(--stamp); border-radius:12px; background:#fff; color:var(--stamp);
+  padding:6px 8px 8px; font-weight:800; box-sizing:border-box;
 }
-.stamp .sig-in{position:absolute;left:10px;right:10px;top:8px;height:20mm;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.stamp .sig-in{position:absolute;left:10px;right:10px;top:6px;height:18mm;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .stamp .sig-in img{max-height:100%;max-width:100%;filter:grayscale(1) contrast(1.05);display:none}
 .stamp .sig-in img.show{display:block}
-.stamp .lines{position:absolute;left:10px;right:10px;bottom:7px;font-size:11.5px}
-.stamp .lines div{line-height:1.35}
 
-/* مشاركة الصفحة — أيقونات صغيرة في سطر واحد */
+/* نصوص الختم تتلاءم مع العرض */
+.stamp .lines{position:absolute; left:8px; right:8px; bottom:6px; display:flex; flex-direction:column; align-items:center; gap:2px}
+.stamp .line{width:100%; text-align:center; white-space:nowrap; overflow:hidden}
+.stamp .name{font-weight:900; color:var(--stamp)}
+.stamp .meta{font-weight:800; opacity:.95}
+
+/* مشاركة الصفحة */
 .share{max-width:1100px;margin:8px auto 6px;padding:0 12px}
-.share .box{display:flex;align-items:center;justify-content:center;gap:12px;border:1px solid #e6e8ee;background:#fff;border-radius:12px;padding:10px;box-shadow:0 6px 14px rgba(0,0,0,.04)}
-.share h2{font:800 13px/1 "Cairo";margin:0;color:#111;white-space:nowrap}
-.iconrow{display:flex;gap:10px;flex-wrap:nowrap;overflow:auto}
-.iconrow a,.iconrow button{
-  width:36px;height:36px;border-radius:50%;display:grid;place-items:center;
-  border:1px solid #e6e8ee;background:#fff;cursor:pointer;transition:transform .15s,box-shadow .15s
-}
+.share .box{display:flex;flex-direction:column;align-items:center;gap:10px;border:1px solid #e6e8ee;background:#fff;border-radius:12px;padding:10px;box-shadow:0 6px 14px rgba(0,0,0,.04)}
+.share h2{font:800 13px/1 "Cairo";margin:0;color:#111}
+.iconrow{display:flex;gap:10px;flex-wrap:nowrap;overflow:auto;max-width:100%}
+.iconrow a,.iconrow button{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;border:1px solid #e6e8ee;background:#fff;cursor:pointer;transition:transform .15s,box-shadow .15s}
 .iconrow a:hover,.iconrow button:hover{transform:translateY(-2px);box-shadow:0 4px 10px rgba(0,0,0,.06)}
 .iconrow svg{width:20px;height:20px;fill:#0a4ea6}
 .copybtn{border:1px solid #e6e8ee;background:#fff}
@@ -203,7 +204,7 @@ textarea{min-height:84px;resize:vertical}
           طباعة
         </button>
         <button class="btnpill" id="btnSharePdf" type="button">
-          <svg viewBox="0 0 24 24"><path d="M16 8a3 3 0 1 0-2.8-4H13v8.3l-2.1-1.2-1 1.7 4 2.3V22h2V8zM6 9h3v2H8v9H6z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M16 8a3 3 0 1 0-2.8-4H13v8.3l-2.1-1.2-1 1.7 4 2.3V22h2V8زM6 9h3v2H8v9H6z"/></svg>
           مشاركة PDF
         </button>
       </div>
@@ -244,13 +245,13 @@ textarea{min-height:84px;resize:vertical}
             <div class="row"><div class="k">وذلك عن</div><div class="v" id="outFor">—</div></div>
           </div>
 
-          <!-- الختم المستطيل والتوقيع داخله -->
+          <!-- الختم: توقيع داخل الختم + بيانات فقط (بدون رقم الرصيد) -->
           <div class="stamp" aria-label="ختم المؤسسة">
             <div class="sig-in"><img id="sigImg" alt=""></div>
             <div class="lines">
-              <div id="outStampName">اسم المؤسسة</div>
-              <div id="outStampCR">CR: —</div>
-              <div id="outStampPhone">Tel: —</div>
+              <div class="line name" id="outStampName">اسم المؤسسة</div>
+              <div class="line meta" id="outStampCR">CR: —</div>
+              <div class="line meta" id="outStampPhone">Tel: —</div>
             </div>
           </div>
 
@@ -261,7 +262,7 @@ textarea{min-height:84px;resize:vertical}
   </section>
 </div>
 
-<!-- مشاركة الصفحة (سطر واحد) -->
+<!-- مشاركة الصفحة -->
 <div class="share no-print" aria-label="مشاركة الصفحة">
   <div class="box">
     <h2>مشاركة الصفحة</h2>
@@ -283,8 +284,8 @@ textarea{min-height:84px;resize:vertical}
 'use strict';
 const $=id=>document.getElementById(id);
 
-/* ===== حفظ واسترجاع ===== */
-const STORE='receiptForm_rect_v1';
+/* حفظ/استرجاع */
+const STORE='receiptForm_rect_v4';
 function saveState(extra={}) {
   const ids=['inCompany','inPhone','inAddr','inNo','inDate','inFrom','inAmt','inCur','inFor','inStampName','inStampCR','inStampPhone','sigData'];
   const d={}; ids.forEach(k=>{const el=$(k); d[k]=el?el.value:''}); Object.assign(d,extra);
@@ -300,22 +301,7 @@ function loadState(){
   }catch(e){return {}}
 }
 
-/* مودال بسيط */
-function showMsg(html){
-  const modal=document.createElement('div');
-  modal.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:9999;display:flex;align-items:center;justify-content:center';
-  modal.innerHTML=`<div style="width:min(92vw,520px);background:#fff;border:1px solid #e6e8ee;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.25);overflow:hidden">
-    <div style="background:linear-gradient(90deg,#0b0f19,#1b2334);color:#fff;text-align:center;padding:10px 14px;font-weight:800">تنبيه</div>
-    <div style="padding:14px;font-size:15px;color:#111">${html}</div>
-    <div style="padding:12px;display:flex;justify-content:center;background:#f7f8fb">
-      <button type="button" style="border:1px solid #e6e8ee;background:#fff;border-radius:10px;font-weight:800;padding:8px 12px;cursor:pointer">حسنًا</button>
-    </div>
-  </div>`;
-  modal.querySelector('button').onclick=()=>document.body.removeChild(modal);
-  document.body.appendChild(modal);
-}
-
-/* عناصر الإدخال/الإخراج */
+/* عناصر */
 const inCompany=$("inCompany"), inPhone=$("inPhone"), inAddr=$("inAddr"),
       inNo=$("inNo"), inDate=$("inDate"), inFrom=$("inFrom"),
       inAmt=$("inAmt"), inCur=$("inCur"), inFor=$("inFor"),
@@ -331,7 +317,7 @@ const outCompany=$("outCompany"), outPhone=$("outPhone"), outAddr=$("outAddr"),
 /* تاريخ افتراضي */
 (function(){const t=new Date(),y=t.getFullYear(),m=String(t.getMonth()+1).padStart(2,'0'),d=String(t.getDate()).padStart(2,'0');if(!inDate.value)inDate.value=`${y}-${m}-${d}`})();
 
-/* تحويل الأرقام إلى إنجليزية + تنظيف */
+/* أرقام إنجليزية + تنظيف */
 const DM={'٠':'0','١':'1','٢':'2','٣':'3','٤':'4','٥':'5','٦':'6','٧':'7','٨':'8','٩':'9','۰':'0','۱':'1','۲':'2','۳':'3','۴':'4','۵':'5','۶':'6','۷':'7','۸':'8','۹':'9'};
 function normalizeDigits(s){return String(s||'').replace(/[٠-٩۰-۹]/g,d=>DM[d]||d)}
 function clean(s){return normalizeDigits(s).replace(/[<>]/g,'').replace(/[\u0000-\u001F\u007F]/g,'').trim()}
@@ -355,11 +341,21 @@ function formatAmount(v){
   return isNaN(num) ? "0.000" : num.toLocaleString('en-US',{minimumFractionDigits:3,maximumFractionDigits:3});
 }
 
+/* ملاءمة نص الختم لعرضه */
+function fitLine(el, basePx, minPx=10){
+  el.style.fontSize = basePx + "px";
+  while(el.scrollWidth > el.clientWidth && basePx > minPx){
+    basePx -= 0.5;
+    el.style.fontSize = basePx + "px";
+  }
+}
+
 /* تطبيق المعاينة + حفظ */
 function apply(){
   outCompany.textContent=clean(inCompany.value)||"اسم الجهة";
   outPhone.textContent=clean(inPhone.value)||"—";
   outAddr.textContent=clean(inAddr.value)||"—";
+
   outNo.textContent=clean(inNo.value)||"—";
   outDate.textContent=inDate.value?new Date(inDate.value+"T00:00:00").toLocaleDateString("en-GB"):"—";
   outFrom.textContent=clean(inFrom.value)||"—";
@@ -370,9 +366,17 @@ function apply(){
   outAmtTxt.textContent=(!isNaN(num)&&num>=0)?(numberToArabicWords(Math.round(num))+" "+inCur.value+" فقط لا غير"):"—";
 
   outFor.textContent=clean(inFor.value)||"—";
-  outStampName.textContent=clean(inStampName.value)||"اسم المؤسسة";
-  outStampCR.textContent="CR: "+(clean(inStampCR.value)||"—");
-  outStampPhone.textContent="Tel: "+(clean(inStampPhone.value)||"—");
+  const n=clean(inStampName.value)||"اسم المؤسسة";
+  const cr=clean(inStampCR.value)||"—";
+  const ph=clean(inStampPhone.value)||"—";
+  outStampName.textContent=n;
+  outStampCR.textContent="CR: "+cr;
+  outStampPhone.textContent="Tel: "+ph;
+
+  fitLine(outStampName, 14, 9);
+  fitLine(outStampCR, 12, 9);
+  fitLine(outStampPhone, 12, 9);
+
   saveState();
 }
 ["input","change"].forEach(ev=>document.querySelectorAll("input,textarea,select").forEach(el=>el.addEventListener(ev,apply,{passive:true})));
@@ -400,32 +404,32 @@ async function renderReceiptCanvas(){
   document.body.removeChild(holder); return canvas;
 }
 async function makePDFBlob(){const {jsPDF}=window.jspdf;const c=await renderReceiptCanvas();const img=c.toDataURL('image/jpeg',0.96);const pdf=new jsPDF('p','mm','a4');pdf.addImage(img,'JPEG',0,0,210,297,'','FAST');return pdf.output('blob')}
-$("btnDownload").onclick=async()=>{try{const b=await makePDFBlob();const url=URL.createObjectURL(b);const a=document.createElement('a');a.href=url;a.download=`receipt-${(clean(inNo.value)||'no')}.pdf`;a.rel='noopener';a.click();URL.revokeObjectURL(url)}catch(e){showMsg("تعذّر إنشاء PDF. حاول مجددًا.")}};
+$("btnDownload").onclick=async()=>{try{const b=await makePDFBlob();const url=URL.createObjectURL(b);const a=document.createElement('a');a.href=url;a.download=`receipt-${(clean(inNo.value)||'no')}.pdf`;a.rel='noopener';a.click();URL.revokeObjectURL(url)}catch(e){alert("تعذّر إنشاء PDF. حاول مجددًا.")}};
 $("btnPrint").onclick=()=>window.print();
-$("btnSharePdf").onclick=async()=>{try{const blob=await makePDFBlob();const file=new File([blob],`receipt-${(clean(inNo.value)||'no')}.pdf`,{type:'application/pdf'});if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({title:'رصيد استلام',text:'ملف PDF للرصد',files:[file]})}else{showMsg("المتصفح لا يدعم مشاركة الملفات مباشرة — قم بتنزيل PDF ثم شاركه يدويًا.")}}catch(e){showMsg("تعذّرت مشاركة PDF الآن.")}};
+$("btnSharePdf").onclick=async()=>{try{const blob=await makePDFBlob();const file=new File([blob],`receipt-${(clean(inNo.value)||'no')}.pdf`,{type:'application/pdf'});if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({title:'رصيد استلام',text:'ملف PDF للرصد',files:[file]})}else{alert("المتصفح لا يدعم مشاركة الملفات مباشرة — قم بتنزيل PDF ثم شاركه يدويًا.")}}catch(e){alert("تعذّرت مشاركة PDF الآن.")}};
 
-/* مشاركة الصفحة — سطر واحد صغير */
+/* مشاركة الصفحة */
 function buildShare(){
   const url=encodeURIComponent(location.href), row=$("shareRow"); row.textContent='';
   const make=(label,href,svgPath)=>{
     const a=document.createElement('a'); a.href=href; a.target="_blank"; a.rel="noopener"; a.setAttribute('aria-label',label);
     a.innerHTML=`<svg viewBox="0 0 24 24"><path d="${svgPath}"/></svg>`; row.appendChild(a);
   };
-  make("واتساب",`https://wa.me/?text=${url}`,"M16.6 14.4c-.2.6-1 1-1.6.7-1.8-.9-3.3-2.4-4.2-4.2-.3-.6.1-1.4.7-1.6l.8-.3c.3-.1.5 0 .7.3l.9 1.4c.2.3.1.6-.1.8l-.3.3c.6 1 1.5 1.8 2.5 2.5l.3-.3c.2-.2.5-.3.8-.1l1.4.9c.3.2.4.4.3.7l-.3.8ZM12 2a10 10 0 0 1 8.8 14.8L20 22l-5.2-.8A10 10 0 1 1 12 2Z");
+  make("واتساب",`https://wa.me/?text=${url}`,"M16.6 14.4c-.2.6-1 1-1.6.7-1.8-.9-3.3-2.4-4.2-4.2-.3-.6.1-1.4.7-1.6l.8-.3c.3-.1.5 0 .7.3l.9 1.4c.2.3.1.6-.1.8l-.3.3c.6 1 1.5 1.8 2.5 2.5ل.3-.3c.2-.2.5-.3.8-.1l1.4.9c.3.2.4.4.3.7ل-.3.8ZM12 2a10 10 0 0 1 8.8 14.8L20 22l-5.2-.8A10 10 0 1 1 12 2Z");
   make("تلغرام",`https://t.me/share/url?url=${url}`,"M21.5 3.5 2.9 10.8c-1 .4-1 1.8 0 2.2l4.6 1.7 1.8 5.6c.3 1 1.6 1.2 2.2.3l2.7-3.5 5.1 3.7c.8.6 2 .2 2.2-.8l2.7-15.6c.2-1-1-1.8-2.3-1.1Z");
   make("X",`https://twitter.com/intent/tweet?url=${url}`,"M13.7 10.6 21 2h-1.7l-6.2 7.4L8.2 2H2l7.6 11L2 22h1.7l6.6-7.8L15.8 22H22l-8.3-11.4Z");
-  make("فيسبوك",`https://www.facebook.com/sharer/sharer.php?u=${url}`,"M22 12a10 10 0 1 0-11.6 9.9v-7H7.7V12h2.7V9.7c0-2.7 1.6-4.2 4-4.2 1.2 0 2.4.2 2.4.2v2.6h-1.4c-1.3 0-1.7.8-1.7 1.6V12h2.9l-.46 2.9h-2.4v7A10 10 0 0 0 22 12");
+  make("فيسبوك",`https://www.facebook.com/sharer/sharer.php?u=${url}`,"M22 12a10 10 0 1 0-11.6 9.9v-7H7.7V12h2.7V9.7c0-2.7 1.6-4.2 4-4.2 1.2 0 2.4.2 2.4.2v2.6h-1.4c-1.3 0-1.7.8-1.7 1.6V12h2.9ل-.46 2.9h-2.4v7A10 10 0 0 0 22 12");
   make("لينكدإن",`https://www.linkedin.com/sharing/share-offsite/?url=${url}`,"M4.98 3.5a2.5 2.5 0 1 1 0 5.001 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.6h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.8 2.6 4.8 6v6H17v-5.3c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9V21H9z");
   const copy=document.createElement('button'); copy.className="copybtn"; copy.setAttribute('aria-label','نسخ الرابط');
   copy.innerHTML='<svg viewBox="0 0 24 24"><path d="M16 1H4a2 2 0 0 0-2 2v12h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14h13a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/></svg>';
-  copy.onclick=async()=>{try{await navigator.clipboard.writeText(location.href);copy.style.opacity=.6;setTimeout(()=>copy.style.opacity=1,900)}catch(e){showMsg("تعذّر نسخ الرابط.")}};
+  copy.onclick=async()=>{try{await navigator.clipboard.writeText(location.href);copy.style.opacity=.6;setTimeout(()=>copy.style.opacity=1,900)}catch(e){alert("تعذّر نسخ الرابط.")}};
   row.appendChild(copy);
 }
 
 /* بدء */
 function onReady(){loadState();resizeSignature();apply();buildShare()}
 if(document.readyState!=="loading") onReady(); else document.addEventListener('DOMContentLoaded', onReady);
-window.addEventListener('orientationchange', ()=>setTimeout(resizeSignature,300), {passive:true});
+window.addEventListener('orientationchange', ()=>{setTimeout(()=>{resizeSignature();apply()},300)}, {passive:true});
 </script>
 </body>
 </html>
