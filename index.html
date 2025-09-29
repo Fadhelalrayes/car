@@ -1,469 +1,698 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
-<meta charset="utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="format-detection" content="telephone=no">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bahrain Travel Guide | Luxury Tourism, Attractions, Museums & Experiences</title>
+  <meta name="description" content="Discover Bahrain tourism: a luxury travel guide to Manama, Muharraq, Riffa and the Southern Governorate. Explore malls, museums, Bahrain Fort, Bahrain National Museum, Formula 1, beaches, wildlife, cuisine and more. Live currency rates, itineraries, FAQs, and map included." />
 
-<title>إنشاء رصيد استلام فوري | إيصال عربي PDF + طباعة</title>
-<meta name="description" content="أنشئ رصيد استلام فوري بالعربية: إدخال بيانات الجهة والمبلغ، تحويل المبلغ إلى حروف تلقائيًا، توقيع يدوي داخل ختم رسمي، تنزيل/طباعة/مشاركة PDF.">
-<meta name="keywords" content="رصيد استلام, إيصال, PDF عربي, ختم رسمي, توقيع إلكتروني, تحويل المبلغ إلى حروف, طباعة إيصال, مشاركة PDF">
-<meta name="robots" content="index,follow">
-<link rel="canonical" href="https://example.com/receipt/" />
+  <!-- Open Graph -->
+  <meta property="og:title" content="Bahrain Travel Guide | Luxury Tourism & Culture" />
+  <meta property="og:description" content="Explore Bahrain’s top attractions, museums, shopping, experiences, cuisine and itineraries—with live currency rates and interactive map." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1558980664-10a5c78a1c34?q=80&w=1200&auto=format&fit=crop" />
+  <meta property="og:url" content="https://example.com/bahrain-travel-guide" />
 
-<!-- Open Graph -->
-<meta property="og:title" content="إنشاء رصيد استلام فوري">
-<meta property="og:description" content="رصيد استلام عربي مع توقيع داخل ختم رسمي وتحويل المبلغ إلى حروف تلقائيًا. تنزيل/طباعة/مشاركة PDF.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://example.com/receipt/">
-<meta property="og:locale" content="ar_AR">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Bahrain Travel Guide | Luxury Tourism & Culture" />
+  <meta name="twitter:description" content="Top things to do in Bahrain—forts, islands, malls, museums, Formula 1, beaches, cuisine, map & more." />
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1558980664-10a5c78a1c34?q=80&w=1200&auto=format&fit=crop" />
 
-<!-- JSON-LD (WebApplication + Organization) -->
-<script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"WebApplication",
-  "name":"إنشاء رصيد استلام فوري",
-  "applicationCategory":"BusinessApplication",
-  "operatingSystem":"Any",
-  "description":"إنشاء رصيد استلام فوري بالعربية مع توقيع داخل ختم رسمي، وتحويل المبلغ إلى حروف تلقائيًا، وتنزيل/طباعة/مشاركة PDF."
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"Organization",
-  "name":"فاضل الريس",
-  "url":"https://example.com/",
-  "sameAs":[
-    "https://wa.me/97333375858"
-  ]
-}
-</script>
+  <!-- Favicons (optional placeholders) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E🇧🇭%3C/text%3E%3C/svg%3E">
 
-<!-- سياسات أمان قوية (قد تُستكمل من السيرفر) -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob:; font-src https://fonts.gstatic.com data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' https://cdn.jsdelivr.net https://cdn.jsdelivr.net/npm 'unsafe-inline'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
-<meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=(), usb=(), payment=(), interest-cohort=()">
-<meta name="referrer" content="strict-origin-when-cross-origin">
-<meta http-equiv="X-Content-Type-Options" content="nosniff">
-<meta http-equiv="X-Frame-Options" content="DENY">
+  <!-- Leaflet (lightweight map) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-xwE/HOIjx0p3rV1i6G2UeBmL4YQ+Jr3I2C1xRl9qD8M=" crossorigin="anonymous">
+  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-o9N1jzTgF8qM4d5mA7lD3m4Yw1nYy2m0+3k5jv2G8Dk=" crossorigin="anonymous"></script>
 
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* --------------------------
+       Luxury Bahrain — Minified CSS (with comments for clarity)
+       Palette: turquoise/blue #1fb6ff / #0ea5e9, gold #e6b800, white #ffffff; dark mode uses deep slate.
+       -------------------------- */
 
-<style>
-:root{
-  --ink:#0f172a;--muted:#6b7280;--line:#e5e7eb;--brand:#0b0f19;--paper:#fff;
-  --stamp:#0a4ea6;--accent:#C6A14A;--radius:14px
-}
-*{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-html,body{height:100%}
-body{margin:0;background:#f3f5f8;color:var(--ink);font-family:"Cairo",system-ui}
-a{color:#0a4ea6;text-decoration:none}
+    :root{
+      --bg:#ffffff;--text:#0f172a;--muted:#475569;--brand:#0ea5e9;--brand-2:#1fb6ff;--gold:#e6b800;
+      --card:#f8fafc;--border:#e2e8f0;--shadow:0 10px 25px rgba(2,6,23,.08);
+      --radius:18px;--radius-sm:12px;--max:1200px
+    }
+    @media (prefers-color-scheme:dark){
+      :root{--bg:#0b1220;--text:#e6edf6;--muted:#9fb0c3;--card:#0f172a;--border:#1e293b;--shadow:0 10px 25px rgba(0,0,0,.35)}
+    }
+    [data-theme="light"]{--bg:#ffffff;--text:#0f172a;--muted:#475569;--card:#f8fafc;--border:#e2e8f0;--shadow:0 10px 25px rgba(2,6,23,.08)}
+    [data-theme="dark"]{--bg:#0b1220;--text:#e6edf6;--muted:#9fb0c3;--card:#0f172a;--border:#1e293b;--shadow:0 10px 25px rgba(0,0,0,.35)}
 
-/* رأس */
-.header{display:flex;justify-content:center;padding:12px}
-.h1wrap{min-width:min(96%,1100px);max-width:1100px;border:1px solid var(--line);border-radius:16px;background:#fff;box-shadow:0 6px 16px rgba(0,0,0,.05);overflow:hidden}
-.h1cap{height:6px;background:linear-gradient(90deg,var(--brand),#1b2335)}
-h1{margin:12px;text-align:center;font:800 22px/1.25 "Cairo"}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font:16px/1.7 "Inter", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji";background:var(--bg);color:var(--text)}
+    a{color:var(--brand);text-decoration:none}
+    a:focus,button:focus,input:focus,select:focus,textarea:focus{outline:3px solid rgba(31,182,255,.45);outline-offset:2px}
+    img{max-width:100%;display:block}
+    .container{max-width:var(--max);margin-inline:auto;padding:0 1rem}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
-/* تخطيط */
-.container{max-width:1100px;margin:auto;padding:12px}
-.grid{display:grid;gap:12px;grid-template-columns:minmax(280px,1fr) minmax(280px,1.2fr)}
-@media (max-width:980px){.grid{grid-template-columns:1fr}}
-.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 6px 16px rgba(0,0,0,.05);overflow:hidden}
-.card .hd{padding:12px;background:linear-gradient(90deg,var(--brand),#1b2334);color:#fff;font-weight:800;text-align:center}
-.card .bd{padding:12px}
-.note{border:1px solid #e6e8ee;background:#fcfcff;border-radius:12px;padding:10px;margin-bottom:10px;font-size:14px;color:#111}
+    /* Header/Nav */
+    .topbar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.75);backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--border)}
+    @media (prefers-color-scheme:dark){.topbar{background:rgba(10,16,30,.6)}}
+    .nav{display:flex;align-items:center;gap:.75rem;justify-content:space-between;height:64px}
+    .brand{display:flex;align-items:center;gap:.5rem;font-weight:800}
+    .brand .dot{width:14px;height:14px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand-2))}
+    .brand span{letter-spacing:.3px}
+    .links{display:flex;gap:.75rem;flex-wrap:wrap}
+    .links a{padding:.4rem .7rem;border-radius:999px;border:1px solid transparent}
+    .links a:hover{border-color:var(--border);background:var(--card)}
+    .actions{display:flex;gap:.5rem;align-items:center}
+    .btn,button{cursor:pointer}
+    .btn-ghost{border:1px solid var(--border);background:transparent;padding:.45rem .75rem;border-radius:999px;color:var(--text)}
+    .btn-ghost:hover{background:var(--card)}
+    .btn-primary{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#fff;border:0;padding:.55rem .9rem;border-radius:999px;box-shadow:var(--shadow)}
+    .badge{display:inline-flex;align-items:center;gap:.35rem;padding:.25rem .5rem;border-radius:999px;border:1px solid var(--border);font-size:.75rem;color:var(--muted)}
+    .gold{color:#000;background:linear-gradient(135deg,#ffe083,#e6b800);border:0}
 
-/* نموذج */
-label{display:block;font:700 12.5px/1 "Cairo";color:var(--muted);margin:8px 2px 6px}
-input,select,textarea{width:100%;padding:11px 12px;border:1px solid #dfe3ea;border-radius:12px;font-size:15px;background:#fff;min-height:44px}
-textarea{min-height:84px;resize:vertical}
-.row2{display:grid;gap:8px;grid-template-columns:1fr 1fr}
-@media (max-width:640px){.row2{grid-template-columns:1fr}}
+    /* Hero */
+    .hero{position:relative;min-height:62vh;display:grid;place-items:center;overflow:hidden}
+    .hero picture,.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(105%) contrast(102%) brightness(90%)}
+    .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.45),rgba(0,0,0,.35) 35%,rgba(0,0,0,.55));}
+    .hero-inner{position:relative;z-index:2;color:#fff;text-align:center;padding:3.5rem 1rem}
+    .hero h1{font-size:clamp(2rem,6vw,3.5rem);margin:.25rem 0 .5rem;font-weight:900;letter-spacing:.3px}
+    .hero p{max-width:850px;margin:.5rem auto 1.25rem;opacity:.95}
+    .hero-cta{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
 
-/* أزرار صغيرة أنيقة */
-.pillbar{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:10px}
-.btnpill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid #e6e8ee;border-radius:10px;background:#fff;font-weight:800;font-size:13px;cursor:pointer;transition:transform .15s,box-shadow .15s,background .2s}
-.btnpill:hover{transform:translateY(-1px);box-shadow:0 3px 8px rgba(0,0,0,.06)}
-.btnpill svg{width:18px;height:18px;fill:currentColor}
-.btnpill.primary{background:#fff8e6;border-color:#f1e0ad;color:#5b430a}
+    /* Utility */
+    section{padding:3.25rem 0}
+    h2{font-size:clamp(1.4rem,3.5vw,2rem);margin:0 0 .75rem}
+    .sub{color:var(--muted);margin:0 0 1.5rem}
+    .grid{display:grid;gap:1rem}
+    @media (min-width:720px){.grid.cols-3{grid-template-columns:repeat(3,1fr)}.grid.cols-2{grid-template-columns:repeat(2,1fr)}}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;min-height:100%}
+    .card .media{position:relative;overflow:hidden}
+    .card .media img{transition:transform .6s ease}
+    .card:hover .media img{transform:scale(1.05)}
+    .card .body{padding:1rem}
+    .tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.5rem}
+    .tag{font-size:.72rem;padding:.2rem .45rem;border-radius:999px;border:1px solid var(--border);color:var(--muted)}
+    .tag.paid{background:rgba(230,184,0,.14);border-color:rgba(230,184,0,.45);color:#7a5b00}
+    .tag.free{background:rgba(14,165,233,.12);border-color:rgba(14,165,233,.45);color:#075985}
 
-/* رصيد */
-.preview{padding:10px;background:#fafafa}
-.paper{width:100%;max-width:210mm;margin:auto;background:var(--paper);border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 22px rgba(0,0,0,.06)}
-.receipt{padding:14mm 14mm 12mm}
-.head{display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:2px solid var(--line);padding-bottom:8px}
-.brand .name{font-weight:800;font-size:18px}
-.title{font-weight:800}
-.meta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
-.meta .m{font-size:13px;background:#fcfcfd;border:1px solid var(--line);border-radius:10px;padding:8px}
-.block{margin-top:12px;border:1px solid var(--line);border-radius:12px;overflow:hidden}
-.row{display:grid;grid-template-columns:160px 1fr}
-.row .k{background:#fafafa;border-inline-end:1px solid var(--line);padding:10px;font-weight:700}
-.row .v{padding:10px}
-@media (max-width:520px){.row{grid-template-columns:1fr}.row .k{border-inline-end:none;border-bottom:1px solid var(--line)}}
-.amount{display:flex;gap:8px;flex-wrap:wrap}
-.chip{border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-weight:800;font-size:14px}
-.amount-text{margin-top:6px;font-size:13px;color:#444}
+    /* Search & filters */
+    .toolbar{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;margin-bottom:1rem}
+    .input{border:1px solid var(--border);background:var(--bg);padding:.6rem .75rem;border-radius:999px;color:var(--text)}
+    select.input{padding-right:2rem}
 
-/* توقيع */
-.sign{display:flex;justify-content:center;align-items:center;margin:12px auto 0;max-width:420px}
-.sig-pad{flex:1;border:2px dashed #cbd5e1;border-radius:12px;padding:10px;background:#fff}
-.sig-box{height:120px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;overflow:hidden}
-#sigCanvas{display:block;width:100%;height:100%;touch-action:none;background:#fff}
+    /* Table of contents */
+    .toc{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1rem}
+    .toc a{display:block;padding:.25rem 0;color:var(--text)}
+    .toc a:hover{text-decoration:underline}
 
-/* *** الختم: في الوسط وبحجم أصغر *** */
-.stamp-wrap{display:flex;justify-content:center;margin-top:12px}
-.stamp{
-  width:62mm; min-height:30mm; /* أصغر */
-  position:relative; border:2.4px solid var(--stamp); border-radius:12px;
-  background:#fff; color:var(--stamp); padding:6px 8px 8px; font-weight:800;
-  box-sizing:border-box;
-}
-.stamp .sig-in{
-  position:absolute;left:8px;right:8px;top:5px;height:15mm;
-  display:flex;align-items:center;justify-content:center;overflow:hidden
-}
-.stamp .sig-in img{max-height:100%;max-width:100%;filter:grayscale(1) contrast(1.05);display:none}
-.stamp .sig-in img.show{display:block}
-.stamp .lines{position:absolute;left:8px;right:8px;bottom:6px;display:flex;flex-direction:column;align-items:center;gap:1.5px}
-.stamp .line{width:100%;text-align:center;white-space:nowrap;overflow:hidden}
-.stamp .name{font-weight:900}
-.stamp .meta{font-weight:800;opacity:.95}
+    /* Map */
+    #map{height:360px;border-radius:var(--radius);border:1px solid var(--border);box-shadow:var(--shadow);overflow:hidden}
 
-/* مشاركة الصفحة */
-.share{max-width:1100px;margin:8px auto 6px;padding:0 12px}
-.share .box{display:flex;flex-direction:column;align-items:center;gap:10px;border:1px solid #e6e8ee;background:#fff;border-radius:12px;padding:10px;box-shadow:0 6px 14px rgba(0,0,0,.04)}
-.share h2{font:800 13px/1 "Cairo";margin:0;color:#111}
-.iconrow{display:flex;gap:10px;flex-wrap:nowrap;overflow:auto;max-width:100%}
-.iconrow a,.iconrow button{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;border:1px solid #e6e8ee;background:#fff;cursor:pointer;transition:transform .15s,box-shadow .15s}
-.iconrow a:hover,.iconrow button:hover{transform:translateY(-2px);box-shadow:0 4px 10px rgba(0,0,0,.06)}
-.iconrow svg{width:20px;height:20px;fill:#0a4ea6}
-.copybtn{border:1px solid #e6e8ee;background:#fff}
+    /* FAQ accordion (native details) */
+    details{border:1px solid var(--border);border-radius:var(--radius-sm);padding:1rem;background:var(--card)}
+    details+details{margin-top:.75rem}
+    summary{cursor:pointer;font-weight:700}
 
-/* فوتر */
-.footer{margin:8px auto 14px;text-align:center;color:#444;font-size:13px}
-.footer a{color:#0a4ea6}
+    /* Modal */
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;padding:1rem}
+    .modal[open]{display:flex}
+    .modal-card{width:min(860px,95vw);max-height:90vh;overflow:auto;background:var(--bg);border-radius:var(--radius);border:1px solid var(--border);box-shadow:var(--shadow)}
+    .modal-head{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;border-bottom:1px solid var(--border)}
+    .modal-body{padding:1rem 1.25rem}
+    .modal-close{background:transparent;border:0;font-size:1rem}
 
-/* طباعة */
-@page{size:A4;margin:12mm}
-@media print{.no-print{display:none !important}.paper{border:none;box-shadow:none}}
-</style>
+    /* Footer */
+    footer{border-top:1px solid var(--border);padding:1.5rem 0;color:var(--muted)}
+    .small{font-size:.88rem}
+
+    /* Gold underline accent */
+    .accent{position:relative;display:inline-block}
+    .accent::after{content:"";position:absolute;left:0;bottom:-6px;width:100%;height:6px;background:linear-gradient(90deg,#ffe083, #e6b800 55%, #ffd24d);border-radius:6px;opacity:.7}
+
+    /* Keyframe micro-anim */
+    @keyframes floatY{from{transform:translateY(0)}50%{transform:translateY(-4px)}to{transform:translateY(0)}}
+    .float{animation:floatY 5.5s ease-in-out infinite}
+
+    /* Responsive tables (if any) */
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:.5rem;border-bottom:1px solid var(--border);text-align:left}
+  </style>
 </head>
 <body>
+  <!-- Skip link -->
+  <a class="sr-only" href="#main">Skip to content</a>
 
-<!-- رأس -->
-<div class="header no-print">
-  <div class="h1wrap">
-    <div class="h1cap"></div>
-    <h1>إنشاء رصيد استلام فوري</h1>
-  </div>
-</div>
+  <!-- Sticky Nav -->
+  <header class="topbar" role="banner">
+    <div class="container nav" aria-label="Primary">
+      <div class="brand" aria-label="Site brand">
+        <span class="dot" aria-hidden="true"></span><span>Bahrain Travel Guide</span>
+        <span class="badge gold" title="Luxury">Luxury</span>
+      </div>
+      <nav class="links" aria-label="Main navigation">
+        <a href="#about">About Bahrain</a>
+        <a href="#malls">Malls</a>
+        <a href="#attractions">Attractions</a>
+        <a href="#museums">Museums</a>
+        <a href="#experiences">Experiences</a>
+        <a href="#currency">Currency</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="actions">
+        <button id="themeToggle" class="btn-ghost" aria-pressed="false" aria-label="Toggle dark mode">🌓</button>
+        <a href="#itineraries" class="btn-primary">Suggested Itineraries</a>
+      </div>
+    </div>
+  </header>
 
-<div class="container grid">
-  <!-- النموذج -->
-  <section class="card no-print" aria-label="البيانات">
-    <div class="hd">البيانات</div>
-    <div class="bd">
-      <div class="note">أدخل بيانات الجهة والمبلغ؛ المبلغ بالأرقام يُكتب تلقائيًا بالحروف في الرصيد. يمكنك رسم توقيعك ثم إدراجه داخل الختم.</div>
-
-      <div><label>اسم الجهة/الشركة</label><input id="inCompany" placeholder="مثال: شركة الأفق للمقاولات" autocomplete="organization"></div>
-      <div class="row2">
-        <div><label>الهاتف</label><input id="inPhone" inputmode="tel" placeholder="33375858" autocomplete="tel"></div>
-        <div><label>العنوان</label><input id="inAddr" placeholder="المنامة – البحرين" autocomplete="address-line1"></div>
-      </div>
-      <div class="row2">
-        <div><label>رقم الرصيد</label><input id="inNo" placeholder="2025-0001" autocomplete="off"></div>
-        <div><label>التاريخ</label><input id="inDate" type="date"></div>
-      </div>
-      <div><label>استلمنا من</label><input id="inFrom" placeholder="اسم العميل / الجهة" autocomplete="off"></div>
-      <div class="row2">
-        <div><label>المبلغ (أرقام)</label><input id="inAmt" inputmode="decimal" placeholder="300" autocomplete="off"></div>
-        <div><label>العملة</label>
-          <select id="inCur" aria-label="العملة">
-            <option>دينار بحريني</option><option>ريال سعودي</option><option>درهم إماراتي</option><option>دولار أمريكي</option>
-          </select>
-        </div>
-      </div>
-      <div><label>وذلك عن</label><textarea id="inFor" placeholder="سداد مستحقات ..." autocomplete="off"></textarea></div>
-      <div class="row2">
-        <div><label>اسم المؤسسة على الختم</label><input id="inStampName" placeholder="اسم المؤسسة" autocomplete="organization"></div>
-        <div><label>السجل التجاري (CR)</label><input id="inStampCR" placeholder="34234-2025" autocomplete="off"></div>
-      </div>
-      <div><label>هاتف الختم (اختياري)</label><input id="inStampPhone" placeholder="33375858" autocomplete="off"></div>
-
-      <!-- توقيع -->
-      <div>
-        <label>التوقيع اليدوي</label>
-        <div class="sign">
-          <div class="sig-pad" style="width:100%">
-            <div class="sig-box"><canvas id="sigCanvas" aria-label="مساحة رسم التوقيع"></canvas></div>
-            <div class="pillbar">
-              <button class="btnpill" id="btnClearSig" type="button">
-                <svg viewBox="0 0 24 24"><path d="M7 7h10v12a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V7Zm2-4h6l1 3H8l1-3Z"/></svg>
-                مسح التوقيع
-              </button>
-              <button class="btnpill primary" id="btnUseSig" type="button">
-                <svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
-                استخدام التوقيع
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- إجراءات -->
-      <div class="pillbar">
-        <button class="btnpill primary" id="btnDownload" type="button">
-          <svg viewBox="0 0 24 24"><path d="M12 3v10.6l3.3-3.3 1.4 1.4L12 17.4 7.3 11.7l1.4-1.4 3.3 3.3V3zM5 19h14v2H5z"/></svg>
-          تنزيل PDF
-        </button>
-        <button class="btnpill" id="btnPrint" type="button">
-          <svg viewBox="0 0 24 24"><path d="M6 2h12v6H6zM6 14h12v8H6zM4 9h16v5H4z"/></svg>
-          طباعة
-        </button>
-        <button class="btnpill" id="btnSharePdf" type="button">
-          <svg viewBox="0 0 24 24"><path d="M16 8a3 3 0 1 0-2.8-4H13v8.3l-2.1-1.2-1 1.7 4 2.3V22h2V8zM6 9h3v2H8v9H6z"/></svg>
-          مشاركة PDF
-        </button>
+  <!-- Hero -->
+  <section class="hero" role="presentation" aria-label="Hero banner">
+    <picture>
+      <source srcset="https://images.unsplash.com/photo-1603468317724-fb0d4f6b31d3?q=80&w=1800&auto=format&fit=crop" type="image/jpeg" />
+      <img alt="Bahrain skyline by the sea" loading="eager" src="https://images.unsplash.com/photo-1603468317724-fb0d4f6b31d3?q=80&w=1800&auto=format&fit=crop">
+    </picture>
+    <div class="hero-inner">
+      <span class="badge" aria-hidden="true">Bahrain tourism • Bahrain travel guide</span>
+      <h1 class="accent">Welcome to Bahrain — The Island of Pearls</h1>
+      <p>Where modern luxury meets a storied maritime heritage. From the lively souqs of Manama and waterfront promenades to UNESCO-listed forts, museums, wildlife reserves and Formula 1 thrills, Bahrain invites you to explore at an easy, elegant pace.</p>
+      <div class="hero-cta">
+        <a href="#toc" class="btn-ghost">Explore the guide ↓</a>
+        <a href="#mapwrap" class="btn-primary">View Map</a>
       </div>
     </div>
   </section>
 
-  <!-- المعاينة -->
-  <section class="card" aria-label="المعاينة">
-    <div class="hd no-print">المعاينة</div>
-    <div class="bd preview">
-      <div class="paper" id="printArea" aria-label="رصيد الاستلام">
-        <div class="receipt">
-          <div class="head">
-            <div class="brand">
-              <div class="name" id="outCompany">اسم الجهة</div>
-              <div class="sub"><span id="outPhone">—</span> • <span id="outAddr">—</span></div>
-            </div>
-            <div class="title">رصيد استلام</div>
-          </div>
-
-          <div class="meta">
-            <div class="m">رقم: <strong id="outNo">—</strong></div>
-            <div class="m">التاريخ: <strong id="outDate">—</strong></div>
-          </div>
-
-          <div class="block">
-            <div class="row"><div class="k">استلمنا من</div><div class="v" id="outFrom">—</div></div>
-            <div class="row">
-              <div class="k">المبلغ</div>
-              <div class="v">
-                <div class="amount">
-                  <div class="chip" id="outAmt">0.000</div>
-                  <div class="chip" id="outCur">دينار بحريني</div>
-                </div>
-                <div class="amount-text" id="outAmtTxt">—</div>
-              </div>
-            </div>
-            <div class="row"><div class="k">وذلك عن</div><div class="v" id="outFor">—</div></div>
-          </div>
-
-          <!-- الختم في الوسط وبحجم أصغر -->
-          <div class="stamp-wrap">
-            <div class="stamp" aria-label="ختم المؤسسة">
-              <div class="sig-in"><img id="sigImg" alt=""></div>
-              <div class="lines">
-                <div class="line name" id="outStampName">اسم المؤسسة</div>
-                <div class="line meta" id="outStampCR">CR: —</div>
-                <div class="line meta" id="outStampPhone">Tel: —</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="amount-text" style="margin-top:10px">هذا الرصيد صالح كإثبات استلام.</div>
+  <main id="main" class="container" role="main">
+    <!-- TOC -->
+    <section id="toc" aria-labelledby="toc-h">
+      <h2 id="toc-h">Content Index</h2>
+      <p class="sub">Jump to any section.</p>
+      <div class="toc grid cols-3" role="navigation" aria-label="Table of contents">
+        <div>
+          <a href="#about">About Bahrain</a>
+          <a href="#weather">Weather & Best Time</a>
+          <a href="#malls">Shopping Malls</a>
+          <a href="#attractions">Tourist & Leisure Places</a>
+        </div>
+        <div>
+          <a href="#museums">Museums & Cultural Landmarks</a>
+          <a href="#experiences">Events & Experiences</a>
+          <a href="#itineraries">Suggested Itineraries</a>
+          <a href="#currency">Currency & Live Rates</a>
+        </div>
+        <div>
+          <a href="#faq">FAQs</a>
+          <a href="#mapwrap">Interactive Map</a>
+          <a href="#contact">Contact</a>
         </div>
       </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" aria-labelledby="about-h">
+      <h2 id="about-h">About Bahrain</h2>
+      <p class="sub">Main cities and areas: <strong>Manama</strong> (capital & commercial heart), <strong>Muharraq</strong> (heritage core & arts), <strong>Riffa</strong> (residential elegance & Riffa Fort), and the <strong>Southern Governorate</strong> (desert vistas, wildlife, beaches, and the Bahrain International Circuit).</p>
+      <p>Bahrain—an archipelago in the Arabian Gulf—blends cosmopolitan comfort with intimate scale. Expect gleaming malls, cutting-edge dining, quiet heritage lanes, and warm hospitality. Distances are short, allowing you to see a surprising amount in a weekend while still having time to unwind by the water.</p>
+    </section>
+
+    <!-- Weather -->
+    <section id="weather" aria-labelledby="weather-h">
+      <h2 id="weather-h">Weather & Best Time to Visit</h2>
+      <p class="sub">Pleasant season: <strong>November–April</strong>. Hot season: <strong>May–September</strong> (plan indoor attractions midday). Light layers in winter evenings, sun protection year-round.</p>
+      <ul>
+        <li><strong>Winter (Dec–Feb):</strong> Mild (~15–24°C). Ideal for forts, outdoor strolls and cultural districts.</li>
+        <li><strong>Spring/Autumn:</strong> Warm (~22–32°C). Great for islands, bay walks, boat trips.</li>
+        <li><strong>Summer (Jun–Aug):</strong> Hot (~35–42°C). Schedule museums/malls by day; beaches/harbors at sunrise/sunset.</li>
+      </ul>
+    </section>
+
+    <!-- Search/Filters -->
+    <section aria-labelledby="filter-h">
+      <h2 id="filter-h">Find Places Instantly</h2>
+      <p class="sub">Search by name, filter by type or city.</p>
+      <div class="toolbar" role="search">
+        <label class="sr-only" for="q">Search</label>
+        <input id="q" class="input" type="search" placeholder="Search attractions…" aria-label="Search attractions by name" />
+        <label class="sr-only" for="type">Type</label>
+        <select id="type" class="input" aria-label="Filter by type">
+          <option value="">All Types</option>
+          <option>Mall</option>
+          <option>Attraction</option>
+          <option>Museum</option>
+          <option>Experience</option>
+        </select>
+        <label class="sr-only" for="city">City/Area</label>
+        <select id="city" class="input" aria-label="Filter by city">
+          <option value="">All Cities/Areas</option>
+          <option>Manama</option>
+          <option>Muharraq</option>
+          <option>Riffa</option>
+          <option>Southern Governorate</option>
+          <option>Amwaj Islands</option>
+          <option>Bahrain Bay</option>
+        </select>
+        <button id="clearFilters" class="btn-ghost">Clear</button>
+      </div>
+    </section>
+
+    <!-- Malls -->
+    <section id="malls" aria-labelledby="malls-h">
+      <h2 id="malls-h">Shopping Malls</h2>
+      <p class="sub">Air-conditioned comfort, blockbuster dining, and family fun.</p>
+      <div class="grid cols-3" id="list-malls"></div>
+    </section>
+
+    <!-- Attractions -->
+    <section id="attractions" aria-labelledby="att-h">
+      <h2 id="att-h">Tourist & Leisure Places</h2>
+      <p class="sub">Historic forts, waterfronts and desert escapes—Bahrain in every mood.</p>
+      <div class="grid cols-3" id="list-attractions"></div>
+    </section>
+
+    <!-- Museums -->
+    <section id="museums" aria-labelledby="mus-h">
+      <h2 id="mus-h">Museums & Cultural Landmarks</h2>
+      <p class="sub">From Dilmun civilization to pearl-trading heritage.</p>
+      <div class="grid cols-3" id="list-museums"></div>
+    </section>
+
+    <!-- Experiences -->
+    <section id="experiences" aria-labelledby="exp-h">
+      <h2 id="exp-h">Events & Experiences</h2>
+      <p class="sub">Feel the speed, taste the flavors, sail the islands.</p>
+      <div class="grid cols-3" id="list-experiences"></div>
+
+      <h3 style="margin-top:1.5rem">Bahraini Cuisine (Must-Try)</h3>
+      <div class="grid cols-3">
+        <article class="card">
+          <div class="media"><img loading="lazy" src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1200&auto=format&fit=crop" alt="Machboos with rice and spices"></div>
+          <div class="body">
+            <h4>Machboos</h4>
+            <p>Fragrant rice spiced with saffron and baharat, often served with chicken, lamb or seafood—comforting and celebratory.</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="media"><img loading="lazy" src="https://images.unsplash.com/photo-1544025162-43fd1c4f7c13?q=80&w=1200&auto=format&fit=crop" alt="Sweet Muhammar rice dessert"></div>
+          <div class="body">
+            <h4>Muhammar</h4>
+            <p>Sweet date-molasses rice scented with cardamom—pair with fried fish for a classic contrast.</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="media"><img loading="lazy" src="https://images.unsplash.com/photo-1569058242567-94c2981f57c2?q=80&w=1200&auto=format&fit=crop" alt="Harees wheat and meat dish"></div>
+          <div class="body">
+            <h4>Harees</h4>
+            <p>Slow-cooked cracked wheat with tender meat, silky and nourishing—popular in festive seasons.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Itineraries -->
+    <section id="itineraries" aria-labelledby="it-h">
+      <h2 id="it-h">Suggested Itineraries</h2>
+      <p class="sub">Plan smart routes that link our listed attractions.</p>
+      <div class="grid cols-3">
+        <article class="card">
+          <div class="body">
+            <h3>1 Day in Bahrain</h3>
+            <ul class="small">
+              <li>Morning: <a href="#attraction-qalabahrain">Qal’at al-Bahrain</a> → <a href="#museum-bnm">Bahrain National Museum</a></li>
+              <li>Lunch: Seaside dining at <a href="#attraction-bahrainbay">Bahrain Bay</a></li>
+              <li>Afternoon: <a href="#attraction-babalbahrain">Bab Al Bahrain</a> & souq</li>
+              <li>Evening: <a href="#mall-avenues">The Avenues Bahrain</a> waterfront stroll</li>
+            </ul>
+          </div>
+        </article>
+        <article class="card">
+          <div class="body">
+            <h3>3 Days in Bahrain</h3>
+            <ul class="small">
+              <li>Day 1: Manama highlights (museum, bay, souq, Avenues).</li>
+              <li>Day 2: <a href="#attraction-alareen">Al Areen Wildlife Park</a> & <a href="#experience-bic">BIC</a>; sunset at <a href="#attraction-bilaj">Bilaj Al Jazayer</a>.</li>
+              <li>Day 3: <a href="#attraction-muharraqtrails">Muharraq heritage trails</a>, <a href="#museum-shaikhEbrahim">Shaikh Ebrahim Center</a>, cafés at <a href="#attraction-amwaj">Amwaj Islands</a>.</li>
+            </ul>
+          </div>
+        </article>
+        <article class="card">
+          <div class="body">
+            <h3>1 Week in Bahrain</h3>
+            <ul class="small">
+              <li>Mix culture, beaches, malls and desert drives; add boat trips, <a href="#experience-festivals">seasonal festivals</a>, and leisurely meals with Gulf views.</li>
+              <li>Include <a href="#attraction-adhari">Adhari Park</a> for families and <a href="#museum-oil">Oil Museum</a> near Jebel Dukhan.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Currency -->
+    <section id="currency" aria-labelledby="cur-h">
+      <h2 id="cur-h">Currency</h2>
+      <p class="sub">The <strong>Bahraini Dinar (BHD)</strong> is subdivided into 1,000 fils. Cards are widely accepted; ATMs are common. Taxis and small vendors may prefer cash.</p>
+      <div class="card" role="region" aria-labelledby="cur-widget-h">
+        <div class="body">
+          <h3 id="cur-widget-h" class="float">Live Exchange Rate — BHD to USD</h3>
+          <p class="small">Updates every minute. Shows last saved value if offline.</p>
+          <div class="grid cols-2">
+            <div>
+              <div class="badge">1 BHD = <strong id="rate">…</strong> USD</div>
+              <div class="small" id="rate-ts" aria-live="polite"></div>
+            </div>
+            <div>
+              <button class="btn-ghost" id="refreshRate">Refresh Now</button>
+            </div>
+          </div>
+          <p class="small" id="rate-status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Map -->
+    <section id="mapwrap" aria-labelledby="map-h">
+      <h2 id="map-h">Interactive Map</h2>
+      <p class="sub">Pinch/scroll to explore. Markers show select highlights.</p>
+      <div id="map" role="application" aria-label="Map of Bahrain attractions"></div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" aria-labelledby="faq-h">
+      <h2 id="faq-h">Frequently Asked Questions</h2>
+      <details>
+        <summary>Do I need a visa to visit Bahrain?</summary>
+        <p>Many nationalities can obtain eVisas or visas on arrival. Always check the latest requirements on official government portals before you travel.</p>
+      </details>
+      <details>
+        <summary>Is Bahrain family-friendly?</summary>
+        <p>Yes—malls, parks, wildlife reserves and beaches make it easy to plan for all ages. Look for “Family” tags in this guide.</p>
+      </details>
+      <details>
+        <summary>What’s the dress code?</summary>
+        <p>Smart-casual works almost everywhere. In mosques or heritage spaces, dress modestly and be respectful when taking photos.</p>
+      </details>
+      <details>
+        <summary>Is public transport available?</summary>
+        <p>Yes—public buses connect major areas. Taxis and ride-hailing apps are widely used; renting a car is convenient for day trips.</p>
+      </details>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" aria-labelledby="contact-h">
+      <h2 id="contact-h">Contact</h2>
+      <p class="sub">Questions or feedback? Send a note. (Demo only—no backend.)</p>
+      <form id="contactForm" novalidate aria-describedby="contactHelp" class="card" style="padding:1rem">
+        <div class="grid cols-2">
+          <label>Full Name
+            <input class="input" name="name" required placeholder="Your name" aria-required="true">
+          </label>
+          <label>Email
+            <input class="input" type="email" name="email" required placeholder="you@example.com" aria-required="true">
+          </label>
+        </div>
+        <label>Message
+          <textarea class="input" name="message" rows="5" required placeholder="How can we help?" aria-required="true"></textarea>
+        </label>
+        <div class="small" id="contactHelp">We only validate inputs in the browser; no data is stored.</div>
+        <div style="margin-top:.75rem">
+          <button class="btn-primary" type="submit">Send</button>
+          <span id="contactStatus" class="small" role="status" aria-live="polite"></span>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="container" role="contentinfo">
+    <div class="grid cols-2">
+      <div>&copy; <span id="year"></span> Bahrain Travel Guide. All rights reserved.</div>
+      <div style="text-align:right">Built for speed • Accessible • SEO-ready</div>
     </div>
-  </section>
-</div>
+  </footer>
 
-<!-- مشاركة الصفحة -->
-<div class="share no-print" aria-label="مشاركة الصفحة">
-  <div class="box">
-    <h2>مشاركة الصفحة</h2>
-    <div class="iconrow" id="shareRow"></div>
-  </div>
-</div>
+  <!-- Modal -->
+  <dialog class="modal" id="modal" aria-labelledby="modal-title" aria-modal="true">
+    <div class="modal-card" role="document">
+      <div class="modal-head">
+        <h3 id="modal-title">Details</h3>
+        <button class="modal-close" aria-label="Close details" onclick="closeModal()">✕</button>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </dialog>
 
-<!-- فوتر -->
-<p class="footer no-print">
-  برمجة وتطوير :
-  <a href="https://wa.me/97333375858" target="_blank" rel="noopener">فاضل الريس</a>
-</p>
-
-<!-- مكتبات -->
-<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
-
-<script>
-'use strict';
-const $=id=>document.getElementById(id);
-
-/* تخزين محلي */
-const STORE='receipt_secure_v1';
-function saveState(extra={}) {
-  const ids=['inCompany','inPhone','inAddr','inNo','inDate','inFrom','inAmt','inCur','inFor','inStampName','inStampCR','inStampPhone','sigData'];
-  const d={}; ids.forEach(k=>{const el=$(k); d[k]=el?el.value:''}); Object.assign(d,extra);
-  localStorage.setItem(STORE, JSON.stringify(d));
-}
-function loadState(){
-  try{
-    const raw=localStorage.getItem(STORE); if(!raw) return {};
-    const d=JSON.parse(raw);
-    for(const [k,v] of Object.entries(d)){const el=$(k); if(el) el.value=v}
-    if(d.sigData){const img=$("sigImg"); img.src=d.sigData; img.classList.add('show')}
-    return d;
-  }catch(e){return {}}
-}
-
-/* عناصر */
-const inCompany=$("inCompany"), inPhone=$("inPhone"), inAddr=$("inAddr"),
-      inNo=$("inNo"), inDate=$("inDate"), inFrom=$("inFrom"),
-      inAmt=$("inAmt"), inCur=$("inCur"), inFor=$("inFor"),
-      inStampName=$("inStampName"), inStampCR=$("inStampCR"), inStampPhone=$("inStampPhone");
-
-const outCompany=$("outCompany"), outPhone=$("outPhone"), outAddr=$("outAddr"),
-      outNo=$("outNo"), outDate=$("outDate"), outFrom=$("outFrom"),
-      outAmt=$("outAmt"), outCur=$("outCur"), outAmtTxt=$("outAmtTxt"),
-      outFor=$("outFor"), outStampName=$("outStampName"),
-      outStampCR=$("outStampCR"), outStampPhone=$("outStampPhone"),
-      sigImg=$("sigImg");
-
-/* تاريخ افتراضي */
-(function(){
-  const t=new Date(),y=t.getFullYear(),m=String(t.getMonth()+1).padStart(2,'0'),d=String(t.getDate()).padStart(2,'0');
-  if(!inDate.value) inDate.value=`${y}-${m}-${d}`;
-})();
-
-/* أرقام إنجليزية + تنظيف */
-const DM={'٠':'0','١':'1','٢':'2','٣':'3','٤':'4','٥':'5','٦':'6','٧':'7','٨':'8','٩':'9','۰':'0','۱':'1','۲':'2','۳':'3','۴':'4','۵':'5','۶':'6','۷':'7','۸':'8','۹':'9'};
-function normalizeDigits(s){return String(s||'').replace(/[٠-٩۰-۹]/g,d=>DM[d]||d)}
-function clean(s){return normalizeDigits(s).replace(/[<>]/g,'').replace(/[\u0000-\u001F\u007F]/g,'').trim()}
-
-/* رقم -> حروف عربية (مبسّط) */
-const U=["","واحد","اثنان","ثلاثة","أربعة","خمسة","ستة","سبعة","ثمانية","تسعة"];
-const T=["","عشرة","عشرون","ثلاثون","أربعون","خمسون","ستون","سبعون","ثمانون","تسعون"];
-const TE=["عشرة","أحد عشر","اثنا عشر","ثلاثة عشر","أربعة عشر","خمسة عشر","ستة عشر","سبعة عشر","ثمانية عشر","تسعة عشر"];
-const H=["","مائة","مائتان","ثلاثمائة","أربعمائة","خمسمائة","ستمائة","سبعمائة","ثمانمائة","تسعمائة"];
-function two(n){if(n===0)return"";if(n<10)return U[n];if(n<20)return TE[n-10];const u=n%10,t=Math.floor(n/10);return (u?U[u]+" و ":"")+T[t]}
-function three(n){const h=Math.floor(n/100),r=n%100;return (H[h]?(H[h]+(r?" و ":"")):"")+two(r)}
-function chunkName(i,n){if(i===1){if(n===1)return"ألف";if(n===2)return"ألفان";if(n>=3&&n<=10)return"آلاف";return"ألف"}if(i===2){if(n===1)return"مليون";if(n===2)return"مليونان";if(n>=3&&n<=10)return"ملايين";return"مليون"}return""}
-function numberToArabicWords(n){
-  n=Math.floor(Math.abs(n)); if(n===0) return "صفر";
-  const ch=[n%1000, Math.floor(n/1000)%1000, Math.floor(n/1e6)%1000];
-  const parts=[]; for(let i=ch.length-1;i>=0;i--){const c=ch[i]; if(!c) continue; const w=three(c), nm=chunkName(i,c); parts.push(w+(nm?(" "+nm):"")); }
-  return parts.join(" و ");
-}
-function formatAmount(v){
-  const num=Number(normalizeDigits(v).replace(/[^\d.]/g,''));
-  return isNaN(num) ? "0.000" : num.toLocaleString('en-US',{minimumFractionDigits:3,maximumFractionDigits:3});
-}
-
-/* ملاءمة نص الختم */
-function fitLine(el, basePx, minPx=10){
-  el.style.fontSize = basePx + "px";
-  while(el.scrollWidth > el.clientWidth && basePx > minPx){
-    basePx -= 0.5;
-    el.style.fontSize = basePx + "px";
+  <!-- Structured Data (JSON-LD): WebSite, TouristDestination, Places, Breadcrumb, FAQ -->
+  <script type="application/ld+json" id="ld-root">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"WebSite",
+        "@id":"https://example.com/#website",
+        "url":"https://example.com/bahrain-travel-guide",
+        "name":"Bahrain Travel Guide",
+        "description":"Luxury Bahrain tourism guide: attractions, museums, shopping, experiences, itineraries and live currency.",
+        "inLanguage":"en",
+        "potentialAction":{"@type":"SearchAction","target":"https://example.com/bahrain-travel-guide?q={search_term_string}","query-input":"required name=search_term_string"}
+      },
+      {
+        "@type":"TouristDestination",
+        "name":"Kingdom of Bahrain",
+        "description":"A modern island nation with UNESCO sites, waterfront promenades, luxury shopping and Gulf hospitality.",
+        "touristType":["Cultural tourist","Family traveler","Luxury traveler","Adventure traveler"],
+        "geo":{"@type":"GeoCoordinates","latitude":26.0667,"longitude":50.5577},
+        "image":"https://images.unsplash.com/photo-1603468317724-fb0d4f6b31d3?q=80&w=1200&auto=format&fit=crop"
+      },
+      {
+        "@type":"BreadcrumbList",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"About Bahrain","item":"https://example.com/bahrain-travel-guide#about"},
+          {"@type":"ListItem","position":2,"name":"Attractions","item":"https://example.com/bahrain-travel-guide#attractions"},
+          {"@type":"ListItem","position":3,"name":"Museums","item":"https://example.com/bahrain-travel-guide#museums"},
+          {"@type":"ListItem","position":4,"name":"Experiences","item":"https://example.com/bahrain-travel-guide#experiences"},
+          {"@type":"ListItem","position":5,"name":"Currency","item":"https://example.com/bahrain-travel-guide#currency"}
+        ]
+      }
+    ]
   }
-}
+  </script>
 
-/* تطبيق المعاينة + حفظ */
-function apply(){
-  outCompany.textContent=clean(inCompany.value)||"اسم الجهة";
-  outPhone.textContent=clean(inPhone.value)||"—";
-  outAddr.textContent=clean(inAddr.value)||"—";
-  outNo.textContent=clean(inNo.value)||"—";
-  outDate.textContent=inDate.value?new Date(inDate.value+"T00:00:00").toLocaleDateString("en-GB"):"—";
-  outFrom.textContent=clean(inFrom.value)||"—";
+  <script>
+    /* ============================================================
+       Bahrain Travel Guide — Single-file JS (minified + commented)
+       ============================================================ */
 
-  outAmt.textContent=formatAmount(inAmt.value||"");
-  outCur.textContent=inCur.value;
-  const num=Number(normalizeDigits(inAmt.value||"").replace(/[^\d.]/g,''));
-  outAmtTxt.textContent=(!isNaN(num)&&num>=0)?(numberToArabicWords(Math.round(num))+" "+inCur.value+" فقط لا غير"):"—";
+    // 1) Data: All attractions/malls/museums/experiences with metadata
+    const DATA = [
+      // ---------- MALLS ----------
+      {id:"mall-citycentre",type:"Mall",city:"Manama",name:"City Centre Bahrain",img:"https://images.unsplash.com/photo-1520975682031-3a6c8c0c8c48?q=80&w=1400&auto=format&fit=crop",tags:["Family","Paid"],desc:"Bahrain’s flagship mall with global brands, multiplex cinema and family entertainment.",history:"Opened in 2008, it anchors the Seef area’s retail scene.",activities:"Shopping, movies, casual & upscale dining, kids’ play zones.",best:"Year-round; summer afternoons are perfect.",fees:"Free entry; paid entertainment.",tips:"Arrive early on weekends; use rideshare for convenience."},
+      {id:"mall-seef-manama",type:"Mall",city:"Manama",name:"Seef Mall (Manama)",img:"https://images.unsplash.com/photo-1491553895911-0055eca6402d?q=80&w=1400&auto=format&fit=crop",tags:["Family","Paid"],desc:"A long-loved destination with fashion, cafés and indoor fun.",history:"One of Bahrain’s earliest major malls in the Seef district.",activities:"Shopping, cafés, events.",best:"Afternoons/evenings.",fees:"Free entry.",tips:"Combine with nearby City Centre for a full retail day."},
+      {id:"mall-seef-muharraq",type:"Mall",city:"Muharraq",name:"Seef Mall (Muharraq)",img:"https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?q=80&w=1400&auto=format&fit=crop",tags:["Family","Paid"],desc:"Convenient for airport area; boutiques and eateries.",history:"Sister property to Seef Manama.",activities:"Shopping, kids’ amusements.",best:"Year-round.",fees:"Free entry.",tips:"Good stop before/after flights."},
+      {id:"mall-avenues",type:"Mall",city:"Manama",name:"The Avenues Bahrain",img:"https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1400&auto=format&fit=crop",tags:["Family","Paid","Waterfront"],desc:"A waterfront mall with a seafront promenade, boat-like architecture and sunset views.",history:"Inspired by The Avenues concept with a Bahrain twist.",activities:"Shopping, dining by the bay, outdoor strolls.",best:"Late afternoon to sunset.",fees:"Free entry.",tips:"Reserve outdoor seating for golden-hour dining."},
+      {id:"mall-bahrain",type:"Mall",city:"Manama",name:"Bahrain Mall",img:"https://images.unsplash.com/photo-1456394555490-ef1bf0aedc46?q=80&w=1400&auto=format&fit=crop",tags:["Family","Paid"],desc:"Community-friendly mall with hypermarket and essentials.",history:"A practical stop for everyday needs.",activities:"Shopping, cafés.",best:"Anytime.",fees:"Free entry.",tips:"Useful for quick errands."},
+      {id:"mall-dana",type:"Mall",city:"Manama",name:"Dana Mall",img:"https://images.unsplash.com/photo-1491555103944-7c647fd857e6?q=80&w=1400&auto=format&fit=crop",tags:["Family","Paid"],desc:"Compact mall near Seef with cinema and eateries.",history:"A classic favorite for locals.",activities:"Cinema, casual dining, shopping.",best:"Evenings.",fees:"Free entry.",tips:"Pair with nearby attractions in Seef/Manama."},
 
-  outFor.textContent=clean(inFor.value)||"—";
+      // ---------- ATTRACTIONS ----------
+      {id:"attraction-qalabahrain",type:"Attraction",city:"Manama",name:"Bahrain Fort (Qal’at al-Bahrain)",img:"https://images.unsplash.com/photo-1598274767726-1e3ae59a1ce6?q=80&w=1400&auto=format&fit=crop",tags:["Historical","Family","UNESCO"],desc:"UNESCO-listed archaeological site tracing Dilmun civilization with seafront views.",history:"Layers from c. 2300 BCE to Portuguese era.",activities:"Fort ruins walk, museum nearby, sunset photos.",best:"Nov–Apr, late afternoon for cooler light.",fees:"Nominal museum fee; fort grounds often free.",tips:"Wear comfortable shoes; read site panels for context."},
+      {id:"attraction-babalbahrain",type:"Attraction",city:"Manama",name:"Bab Al Bahrain",img:"https://images.unsplash.com/photo-1523712999610-f77fbcfc3843?q=80&w=1400&auto=format&fit=crop",tags:["Historical","Free"],desc:"Gateway arch to the old Manama souq—handicrafts, spices and gold.",history:"Built in 1949 as the customs house entrance.",activities:"Souq shopping, cafés, photo stops.",best:"Morning or evening.",fees:"Free.",tips:"Haggle politely; stay hydrated in summer."},
+      {id:"attraction-alareen",type:"Attraction",city:"Southern Governorate",name:"Al Areen Wildlife Park & Reserve",img:"https://images.unsplash.com/photo-1546182990-dffeafbe841d?q=80&w=1400&auto=format&fit=crop",tags:["Family","Nature","Paid"],desc:"Conservation park home to Arabian oryx, gazelles and birds.",history:"Established to protect native fauna.",activities:"Wildlife viewing, landscaped trails.",best:"Nov–Apr mornings.",fees:"Paid entry.",tips:"Plan 2–3 hours; follow park guidelines."},
+      {id:"attraction-amwaj",type:"Attraction",city:"Amwaj Islands",name:"Amwaj Islands",img:"https://images.unsplash.com/photo-1531853121101-cb39b80c39d0?q=80&w=1400&auto=format&fit=crop",tags:["Waterfront","Family"],desc:"Lagoon lifestyle with cafés, water sports and relaxed beach vibes.",history:"Master-planned island community northeast of Muharraq.",activities:"Kayaking, seaside dining, strolling.",best:"Afternoons to sunset.",fees:"Activities priced individually.",tips:"Book water activities in advance on weekends."},
+      {id:"attraction-bilaj",type:"Attraction",city:"Southern Governorate",name:"Bilaj Al Jazayer Beach Resort",img:"https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=1400&auto=format&fit=crop",tags:["Beach","Family"],desc:"Wide sandy beach on Bahrain’s west coast with developing resorts.",history:"A classic local beach, now revitalized.",activities:"Swimming, beach walks, sunsets.",best:"Oct–May; early mornings in summer.",fees:"Public beach access; some facilities paid.",tips:"Bring sunscreen and water; weekdays are quieter."},
+      {id:"attraction-corniche",type:"Attraction",city:"Manama",name:"Manama Corniche",img:"https://images.unsplash.com/photo-1529101091764-c3526daf38fe?q=80&w=1400&auto=format&fit=crop",tags:["Waterfront","Family"],desc:"Harborfront promenade with skyline views.",history:"A long-time local favorite for evening strolls.",activities:"Walking, casual dining, boat rides nearby.",best:"Sunset and evening.",fees:"Free.",tips:"Great for skyline photos."},
+      {id:"attraction-bahrainbay",type:"Attraction",city:"Bahrain Bay",name:"Bahrain Bay",img:"https://images.unsplash.com/photo-1520975682031-3a6c8c0c8c48?q=80&w=1400&auto=format&fit=crop",tags:["Waterfront","Luxury"],desc:"Iconic waterfront with sculptural architecture and five-star hotels.",history:"Master-planned district north of Manama.",activities:"Fine dining, boardwalks, boat tours.",best:"Golden hour to night.",fees:"Public access; venues priced individually.",tips:"Reserve popular restaurants in advance."},
+      {id:"attraction-adhari",type:"Attraction",city:"Manama",name:"Adhari Park",img:"https://images.unsplash.com/photo-1506806732259-39c2d0268443?q=80&w=1400&auto=format&fit=crop",tags:["Family","Amusement","Paid"],desc:"Outdoor amusement park near the historic Adhari spring.",history:"Named after a freshwater spring known for centuries.",activities:"Rides, games, family fun.",best:"Evenings, cooler months.",fees:"Paid rides and passes.",tips:"Check ride maintenance schedule."},
+      {id:"attraction-muharraqtrails",type:"Attraction",city:"Muharraq",name:"Muharraq Heritage Trails",img:"https://images.unsplash.com/photo-1544816155-c71ea1b60c67?q=80&w=1400&auto=format&fit=crop",tags:["Historical","Family"],desc:"Restored houses, art spaces and pearling history across lanes and courtyards.",history:"Reflects Bahrain’s pearl-trading legacy.",activities:"Walking tour, cultural centers, cafés.",best:"Morning or late afternoon.",fees:"Mostly free; some houses ticketed.",tips:"Carry water; modest attire appreciated."},
 
-  outStampName.textContent=clean(inStampName.value)||"اسم المؤسسة";
-  outStampCR.textContent="CR: "+(clean(inStampCR.value)||"—");
-  outStampPhone.textContent="Tel: "+(clean(inStampPhone.value)||"—");
-  fitLine(outStampName, 14, 9); fitLine(outStampCR, 12, 9); fitLine(outStampPhone, 12, 9);
+      // ---------- MUSEUMS ----------
+      {id:"museum-bnm",type:"Museum",city:"Manama",name:"Bahrain National Museum",img:"https://images.unsplash.com/photo-1523731407965-2430cd12f5e4?q=80&w=1400&auto=format&fit=crop",tags:["Museum","Paid","Family"],desc:"Signature museum exploring Dilmun artifacts, traditional crafts and island life.",history:"Opened 1988; landmark modernist design.",activities:"Permanent galleries, outdoor sculptures, café, gift shop.",best:"Year-round, midday escape.",fees:"Paid entry.",tips:"Start here for context before forts and heritage areas."},
+      {id:"museum-beit",type:"Museum",city:"Manama",name:"Beit Al Qur’an",img:"https://images.unsplash.com/photo-1526312426976-593c128eea49?q=80&w=1400&auto=format&fit=crop",tags:["Museum","Free","Cultural"],desc:"Architectural gem housing rare Qur’anic manuscripts and Islamic art.",history:"Founded in 1990s to preserve manuscripts.",activities:"Galleries and cultural programs.",best:"Year-round.",fees:"Often free; donations welcome.",tips:"Dress modestly; respectful visiting etiquette."},
+      {id:"museum-oil",type:"Museum",city:"Southern Governorate",name:"Oil Museum",img:"https://images.unsplash.com/photo-1502663656924-89eac1e3b68f?q=80&w=1400&auto=format&fit=crop",tags:["Museum","Industrial"],desc:"Tells the story of Bahrain’s pioneering oil discovery near Jebel Dukhan.",history:"Near the first oil well (1932).",activities:"Exhibits and heritage equipment.",best:"Nov–Apr.",fees:"Nominal fee.",tips:"Combine with desert viewpoints."},
+      {id:"museum-aradfort",type:"Museum",city:"Muharraq",name:"Arad Fort",img:"https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1400&auto=format&fit=crop",tags:["Historical","Family"],desc:"A compact coastal fort with classic Arab military architecture.",history:"Likely 15th–16th century; restored with traditional methods.",activities:"Courtyard walks, viewpoints, cultural events.",best:"Late afternoon.",fees:"Small fee.",tips:"Pair with Muharraq trails and seaside cafés."},
+      {id:"museum-siyadi",type:"Museum",city:"Muharraq",name:"Siyadi House",img:"https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?q=80&w=1400&auto=format&fit=crop",tags:["Historical","Cultural"],desc:"Merchant family house tied to Bahrain’s pearling past.",history:"Part of the Pearling Path ensemble.",activities:"Guided tours when available.",best:"Cooler months.",fees:"Often free/nominal when open.",tips:"Check opening times; some areas may be under restoration."},
+      {id:"museum-post",type:"Museum",city:"Manama",name:"Post Museum",img:"https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1400&auto=format&fit=crop",tags:["Museum","Family"],desc:"Stamps and postal history revealing Bahrain’s global links.",history:"Showcases philatelic collections.",activities:"Exhibits and learning displays.",best:"Year-round.",fees:"Usually free/nominal.",tips:"Great short stop in Manama."},
+      {id:"museum-shaikhEbrahim",type:"Museum",city:"Muharraq",name:"Shaikh Ebrahim Cultural Center",img:"https://images.unsplash.com/photo-1496171367470-9ed9a91ea931?q=80&w=1400&auto=format&fit=crop",tags:["Cultural","Free"],desc:"Network of restored houses and exhibitions supporting literature and the arts.",history:"Founded to preserve heritage through contemporary programs.",activities:"Talks, galleries, seasonal events.",best:"Event days; cooler months.",fees:"Often free; some exhibits ticketed.",tips:"Check calendar for talks and performances."},
 
-  saveState();
-}
-["input","change"].forEach(ev=>document.querySelectorAll("input,textarea,select").forEach(el=>el.addEventListener(ev,apply,{passive:true})));
+      // ---------- EXPERIENCES ----------
+      {id:"experience-bic",type:"Experience",city:"Southern Governorate",name:"Bahrain International Circuit (Formula 1)",img:"https://images.unsplash.com/photo-1526948128573-703ee1aeb6fa?q=80&w=1400&auto=format&fit=crop",tags:["Motorsport","Paid","Seasonal"],desc:"Host of the Bahrain Grand Prix with year-round track experiences.",history:"Opened 2004; night races create spectacular atmospherics.",activities:"Grand Prix, track days, karting.",best:"Race week (Mar–Apr typical) and cool months.",fees:"Ticketed.",tips:"Book early; consider hospitality packages."},
+      {id:"experience-festivals",type:"Experience",city:"Manama",name:"Seasonal Festivals",img:"https://images.unsplash.com/photo-1541844053589-346841d0b34a?q=80&w=1400&auto=format&fit=crop",tags:["Seasonal","Family"],desc:"Cultural festivals, concerts and food events enliven cooler months.",history:"Programming evolves each year.",activities:"Street shows, markets, arts.",best:"Nov–Apr.",fees:"Mostly free/varied.",tips:"Follow official calendars and book headline events."},
+      {id:"experience-boat",type:"Experience",city:"Bahrain Bay",name:"Boat Trips & Island Cruises",img:"https://images.unsplash.com/photo-1533929736458-ca588d08c8be?q=80&w=1400&auto=format&fit=crop",tags:["Waterfront","Family","Paid"],desc:"Harbor cruises, island hops and sunset sails.",history:"Bahrain’s maritime soul shines from the water.",activities:"Private charters, group cruises, fishing.",best:"Late afternoon into sunset.",fees:"Operator-dependent.",tips:"Confirm safety gear and departure points in advance."}
+    ];
 
-/* توقيع */
-const sigCanvas=$("sigCanvas"), ctx=sigCanvas.getContext("2d",{willReadFrequently:true}); let drawing=false;
-function paintBg(){ctx.save();ctx.fillStyle="#fff";ctx.fillRect(0,0,sigCanvas.width,sigCanvas.height);ctx.restore()}
-function resizeSignature(){
-  const DPR=Math.min(window.devicePixelRatio||1,2);
-  const r=sigCanvas.getBoundingClientRect();
-  const w=Math.max(280,Math.floor(r.width)),h=Math.max(120,Math.floor(r.height));
-  sigCanvas.width=w*DPR; sigCanvas.height=h*DPR; ctx.setTransform(DPR,0,0,DPR,0,0);
-  ctx.lineWidth=2.6; ctx.lineCap='round'; ctx.strokeStyle='#111'; paintBg();
-}
-function xy(e){const r=sigCanvas.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top}}
-sigCanvas.addEventListener("pointerdown",e=>{e.preventDefault();drawing=true;ctx.beginPath();const p=xy(e);ctx.moveTo(p.x,p.y)},{passive:false});
-sigCanvas.addEventListener("pointermove",e=>{if(!drawing)return;e.preventDefault();const p=xy(e);ctx.lineTo(p.x,p.y);ctx.stroke()},{passive:false});
-window.addEventListener("pointerup",()=>{drawing=false},{passive:true});
-new ResizeObserver(()=>{const prev=sigCanvas.toDataURL();resizeSignature();if(prev){const img=new Image();img.onload=()=>{const dpr=window.devicePixelRatio||1;ctx.drawImage(img,0,0,sigCanvas.width/dpr,sigCanvas.height/dpr)};img.src=prev}}).observe(sigCanvas.parentElement);
+    // 2) Render helpers
+    const $ = sel => document.querySelector(sel);
+    const $$ = sel => document.querySelectorAll(sel);
 
-$("btnClearSig").onclick=()=>{paintBg();$("sigImg").classList.remove("show");$("sigImg").removeAttribute("src");saveState({sigData:""})};
-$("btnUseSig").onclick=()=>{const data=sigCanvas.toDataURL("image/png");$("sigImg").src=data;$("sigImg").classList.add("show");saveState({sigData:data})};
+    function tagHTML(tags){return `<div class="tags">${tags.map(t=>`<span class="tag ${/free/i.test(t)?'free':/paid/i.test(t)?'paid':''}">${t}</span>`).join("")}</div>`}
 
-/* PDF (الرصيد فقط) */
-async function renderReceiptCanvas(){
-  const src=$("printArea"); const clone=src.cloneNode(true);
-  Object.assign(clone.style,{width:'210mm',transform:'none',boxShadow:'none',position:'static'});
-  const holder=document.createElement('div');Object.assign(holder.style,{position:'fixed',left:'-10000px',top:'0',background:'#fff'});
-  holder.appendChild(clone);document.body.appendChild(holder);
-  const canvas=await html2canvas(clone,{scale:2,backgroundColor:'#ffffff',useCORS:true});
-  document.body.removeChild(holder); return canvas;
-}
-async function makePDFBlob(){const {jsPDF}=window.jspdf;const c=await renderReceiptCanvas();const img=c.toDataURL('image/jpeg',0.96);const pdf=new jsPDF('p','mm','a4');pdf.addImage(img,'JPEG',0,0,210,297,'','FAST');return pdf.output('blob')}
-$("btnDownload").onclick=async()=>{try{const b=await makePDFBlob();const url=URL.createObjectURL(b);const a=document.createElement('a');a.href=url;a.download=`receipt-${(clean(inNo.value)||'no')}.pdf`;a.rel='noopener';a.click();URL.revokeObjectURL(url)}catch(e){alert("تعذّر إنشاء PDF. حاول مجددًا.")}};
-$("btnPrint").onclick=()=>window.print();
-$("btnSharePdf").onclick=async()=>{try{
-  const blob=await makePDFBlob();
-  const file=new File([blob],`receipt-${(clean(inNo.value)||'no')}.pdf`,{type:'application/pdf'});
-  if(navigator.canShare&&navigator.canShare({files:[file]})){
-    await navigator.share({title:'رصيد استلام',text:'ملف PDF للرصد',files:[file]})
-  }else{
-    alert("المتصفح لا يدعم مشاركة الملفات مباشرة — قم بتنزيل PDF ثم شاركه يدويًا.")
-  }
-}catch(e){alert("تعذّرت مشاركة PDF الآن.")}};
+    function cardHTML(item){
+      return `
+      <article class="card place" data-type="${item.type}" data-city="${item.city}" data-name="${item.name.toLowerCase()}" id="${item.id}">
+        <div class="media"><img loading="lazy" src="${item.img}" alt="${item.name}"></div>
+        <div class="body">
+          <h3>${item.name}</h3>
+          <p>${item.desc}</p>
+          ${tagHTML(item.tags||[])}
+          <div style="margin-top:.6rem;display:flex;gap:.5rem;flex-wrap:wrap">
+            <button class="btn-ghost" onclick='openDetails(${JSON.stringify(item).replaceAll("'","&#39;")})' aria-label="Open details for ${item.name}">Details</button>
+            <a class="btn-primary" href="#mapwrap" aria-label="Locate ${item.name} on map">Map</a>
+          </div>
+        </div>
+      </article>`;
+    }
 
-/* مشاركة الصفحة */
-function buildShare(){
-  const url=encodeURIComponent(location.href), row=$("shareRow"); row.textContent='';
-  const make=(label,href,svgPath)=>{
-    const a=document.createElement('a'); a.href=href; a.target="_blank"; a.rel="noopener"; a.setAttribute('aria-label',label);
-    a.innerHTML=`<svg viewBox="0 0 24 24"><path d="${svgPath}"/></svg>`; row.appendChild(a);
-  };
-  make("واتساب",`https://wa.me/?text=${url}`,"M16.6 14.4c-.2.6-1 1-1.6.7-1.8-.9-3.3-2.4-4.2-4.2-.3-.6.1-1.4.7-1.6l.8-.3c.3-.1.5 0 .7.3l.9 1.4c.2.3.1.6-.1.8l-.3.3c.6 1 1.5 1.8 2.5 2.5l.3-.3c.2-.2.5-.3.8-.1l1.4.9c.3.2.4.4.3.7ل-.3.8ZM12 2a10 10 0 0 1 8.8 14.8L20 22l-5.2-.8A10 10 0 1 1 12 2Z");
-  make("تلغرام",`https://t.me/share/url?url=${url}`,"M21.5 3.5 2.9 10.8c-1 .4-1 1.8 0 2.2ل4.6 1.7 1.8 5.6c.3 1 1.6 1.2 2.2.3l2.7-3.5 5.1 3.7c.8.6 2 .2 2.2-.8ل2.7-15.6c.2-1-1-1.8-2.3-1.1Z");
-  make("X",`https://twitter.com/intent/tweet?url=${url}`,"M13.7 10.6 21 2h-1.7l-6.2 7.4L8.2 2H2l7.6 11L2 22h1.7l6.6-7.8L15.8 22H22l-8.3-11.4Z");
-  make("فيسبوك",`https://www.facebook.com/sharer/sharer.php?u=${url}`,"M22 12a10 10 0 1 0-11.6 9.9v-7H7.7V12h2.7V9.7c0-2.7 1.6-4.2 4-4.2 1.2 0 2.4.2 2.4.2v2.6h-1.4c-1.3 0-1.7.8-1.7 1.6V12h2.9ل-.46 2.9h-2.4v7A10 10 0 0 0 22 12");
-  make("لينكدإن",`https://www.linkedin.com/sharing/share-offsite/?url=${url}`,"M4.98 3.5a2.5 2.5 0 1 1 0 5.001 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.6h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.8 2.6 4.8 6v6H17v-5.3c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9V21H9z");
-  const copy=document.createElement('button'); copy.className="copybtn"; copy.setAttribute('aria-label','نسخ الرابط');
-  copy.innerHTML='<svg viewBox="0 0 24 24"><path d="M16 1H4a2 2 0 0 0-2 2v12h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14h13a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/></svg>';
-  copy.onclick=async()=>{try{await navigator.clipboard.writeText(location.href);copy.style.opacity=.6;setTimeout(()=>copy.style.opacity=1,900)}catch(e){alert("تعذّر نسخ الرابط.")}};
-  row.appendChild(copy);
-}
+    // 3) Mount lists
+    function mountLists(){
+      const mount = (sel,fn) => $(sel).innerHTML = DATA.filter(fn).map(cardHTML).join("");
+      mount("#list-malls", i=>i.type==="Mall");
+      mount("#list-attractions", i=>i.type==="Attraction");
+      mount("#list-museums", i=>i.type==="Museum");
+      mount("#list-experiences", i=>i.type==="Experience");
+    }
+    mountLists();
 
-/* تشغيل */
-function onReady(){loadState();resizeSignature();apply();buildShare()}
-if(document.readyState!=="loading") onReady(); else document.addEventListener('DOMContentLoaded', onReady);
-window.addEventListener('orientationchange', ()=>{setTimeout(()=>{resizeSignature();apply()},300)}, {passive:true});
-</script>
+    // 4) Instant search/filter
+    const q = $("#q"), type=$("#type"), city=$("#city");
+    function applyFilters(){
+      const query = (q.value||"").trim().toLowerCase();
+      const t = (type.value||"").toLowerCase();
+      const c = (city.value||"").toLowerCase();
+      $$(".place").forEach(card=>{
+        const matches = (!query || card.dataset.name.includes(query))
+          && (!t || card.dataset.type.toLowerCase()===t)
+          && (!c || card.dataset.city.toLowerCase()===c);
+        card.style.display = matches ? "" : "none";
+      });
+    }
+    [q,type,city].forEach(el=>el.addEventListener("input", applyFilters));
+    $("#clearFilters").addEventListener("click", ()=>{q.value="";type.value="";city.value="";applyFilters()});
+
+    // 5) Modal details builder
+    function openDetails(item){
+      const html = `
+        <p><strong>Overview:</strong> ${item.desc}</p>
+        <p><strong>History:</strong> ${item.history||"—"}</p>
+        <p><strong>Activities:</strong> ${item.activities||"—"}</p>
+        <p><strong>Best time to visit:</strong> ${item.best||"—"}</p>
+        <p><strong>Entry fees:</strong> ${item.fees||"—"}</p>
+        <p><strong>Travel tips:</strong> ${item.tips||"—"}</p>`;
+      $("#modal-title").textContent = item.name;
+      $("#modal-body").innerHTML = html;
+      $("#modal").setAttribute("open","true");
+    }
+    function closeModal(){ $("#modal").removeAttribute("open") }
+    window.closeModal = closeModal; // to button onclick
+    window.openDetails = openDetails;
+
+    // 6) Theme: prefers-color-scheme + toggle
+    const root = document.documentElement;
+    const savedTheme = localStorage.getItem("theme");
+    if(savedTheme) root.setAttribute("data-theme", savedTheme);
+    const themeBtn = $("#themeToggle");
+    function setTheme(mode){
+      root.setAttribute("data-theme", mode);
+      localStorage.setItem("theme", mode);
+      themeBtn.setAttribute("aria-pressed", String(mode==="dark"));
+    }
+    themeBtn.addEventListener("click", ()=>{
+      const cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches? "dark":"light");
+      setTheme(cur==="dark"? "light":"dark");
+    });
+
+    // 7) Live Exchange Rate widget with caching & offline fallback
+    const RATE_KEY="bhd_usd_rate_v1";
+    const RATE_TS="bhd_usd_rate_ts_v1";
+    const rateEl=$("#rate"), tsEl=$("#rate-ts"), statusEl=$("#rate-status");
+    async function fetchRate(){
+      statusEl.textContent="Updating…";
+      try{
+        // Replace with a real provider. Example (no key): https://open.er-api.com/v6/latest/BHD
+        const res = await fetch("YOUR_EXCHANGE_API_URL", {cache:"no-store"});
+        if(!res.ok) throw new Error("HTTP "+res.status);
+        const data = await res.json();
+        // Normalize: expect USD value from BHD base. Adjust mapping to provider.
+        const rate = data?.rates?.USD || data?.result?.USD || data?.USD || null;
+        if(!rate) throw new Error("No USD rate found");
+        const val = Number(rate).toFixed(4);
+        const ts = new Date().toISOString();
+        localStorage.setItem(RATE_KEY, val);
+        localStorage.setItem(RATE_TS, ts);
+        rateEl.textContent = val;
+        tsEl.textContent = "Last updated: " + new Date(ts).toLocaleString();
+        statusEl.textContent="Live rate loaded.";
+      }catch(e){
+        const cached = localStorage.getItem(RATE_KEY);
+        const cts = localStorage.getItem(RATE_TS);
+        if(cached){
+          rateEl.textContent = cached;
+          tsEl.textContent = "Offline • showing saved rate from " + (cts? new Date(cts).toLocaleString():"earlier");
+          statusEl.textContent="Could not fetch new rate. Check your connection.";
+        }else{
+          rateEl.textContent="N/A";
+          tsEl.textContent="";
+          statusEl.textContent="No network and no cached rate available.";
+        }
+      }
+    }
+    $("#refreshRate").addEventListener("click", fetchRate);
+    fetchRate();
+    setInterval(fetchRate, 60*1000);
+
+    // 8) Map (Leaflet) with selected markers
+    let map;
+    function initMap(){
+      map = L.map('map',{scrollWheelZoom:false}).setView([26.2235,50.58], 11);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+        attribution:'&copy; OpenStreetMap contributors'
+      }).addTo(map);
+      const spots = [
+        {name:"Bahrain National Museum", coords:[26.2235,50.6012], anchor:"#museum-bnm"},
+        {name:"Bahrain Fort (Qal’at al-Bahrain)", coords:[26.2330,50.5200], anchor:"#attraction-qalabahrain"},
+        {name:"Bab Al Bahrain", coords:[26.2285,50.5750], anchor:"#attraction-babalbahrain"},
+        {name:"City Centre Bahrain", coords:[26.2330,50.5760], anchor:"#mall-citycentre"},
+        {name:"Bahrain Bay", coords:[26.2440,50.5960], anchor:"#attraction-bahrainbay"}
+      ];
+      spots.forEach(s=>{
+        const m = L.marker(s.coords).addTo(map);
+        m.bindPopup(`<strong>${s.name}</strong><br><a href="${s.anchor}">View in list</a>`);
+      });
+    }
+    window.addEventListener("load", initMap, {once:true});
+
+    // 9) Contact form validation (client-side only)
+    $("#contactForm").addEventListener("submit", (e)=>{
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      const name = (fd.get("name")+"").trim();
+      const email = (fd.get("email")+"").trim();
+      const msg = (fd.get("message")+"").trim();
+      const status = $("#contactStatus");
+      if(!name || !email || !msg){
+        status.textContent="Please complete all fields.";
+        return;
+      }
+      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      if(!emailOk){ status.textContent="Please enter a valid email."; return; }
+      status.textContent="Thanks! Your message was validated locally (demo only).";
+      e.target.reset();
+    });
+
+    // 10) Dynamic year
+    $("#year").textContent = new Date().getFullYear();
+
+    // 11) Build JSON-LD Place entities for all items (SEO)
+    (function buildPlacesLD(){
+      const base = JSON.parse(document.getElementById("ld-root").textContent);
+      const places = DATA.map(p=>({
+        "@type": ["Place", p.type==="Museum"?"Museum":(p.type==="Mall"?"ShoppingCenter":"TouristAttraction")],
+        "name": p.name,
+        "description": p.desc,
+        "url": "https://example.com/bahrain-travel-guide#"+p.id,
+        "image": p.img,
+        "address": {"@type":"PostalAddress","addressCountry":"BH","addressLocality": p.city},
+        "tags": p.tags
+      }));
+      base["@graph"].push(...places);
+      document.getElementById("ld-root").textContent = JSON.stringify(base);
+    })();
+  </script>
 </body>
 </html>
