@@ -4,7 +4,6 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>وصل استلام</title>
-<meta name="description" content="إنشاء وطباعة وصل استلام بسيط ومتوافق مع الجوال.">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -12,9 +11,12 @@
 }
 *{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 html,body{height:100%}
-body{margin:0;background:#f7f7fb;color:var(--ink);font-family:"Cairo",system-ui}
-.wrap{max-width:1100px;margin:auto;padding:12px;display:grid;gap:12px;grid-template-columns:minmax(280px,1fr) 1.2fr}
+body{margin:0;background:#f2f4f8;color:var(--ink);font-family:"Cairo",system-ui}
+
+/* تخطيط عام */
+.wrap{max-width:1100px;margin:auto;padding:12px;display:grid;gap:12px;grid-template-columns:minmax(300px,1fr) 1.2fr}
 @media(max-width:980px){.wrap{grid-template-columns:1fr}}
+
 .card{background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 6px 16px rgba(0,0,0,.04);overflow:hidden}
 .hd{padding:12px 14px;background:linear-gradient(90deg,var(--brand),#1a2233);color:#fff;font-weight:800;text-align:center}
 .bd{padding:12px}
@@ -29,34 +31,17 @@ textarea{min-height:90px;resize:vertical}
 .btn.primary{background:var(--accent);color:#000}
 .btn.ghost{background:#eef2f7;color:#0b0f19}
 
-/* المعاينة */
+/* ورقة الوصل */
 .preview{padding:10px;background:#fafafa}
 .viewport{width:100%;display:flex;justify-content:center;align-items:flex-start;overflow:auto}
-.sheet{
-  width:210mm; /* A4 */
-  max-width:100%;
-  background:var(--paper);
-  color:var(--ink);
-  border:1px solid var(--line);
-  border-radius:12px;
-  box-shadow:0 10px 26px rgba(0,0,0,.06);
+.print-area{ /* هذه هي المنطقة التي تُطبع فقط */
+  width:210mm; background:var(--paper); color:var(--ink);
+  border:1px solid var(--line); border-radius:12px; box-shadow:0 10px 26px rgba(0,0,0,.06);
 }
-@media (max-width:520px){.sheet{border-radius:10px}}
-/* قابل للطباعة كـ A4 أو A5 (اختيار من إعدادات الطباعة) */
-.receipt{
-  padding:16mm 16mm 14mm;
-}
-.rec-head{
-  display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:2px solid var(--line);padding-bottom:8px
-}
-.brand{
-  display:flex;align-items:center;gap:10px
-}
-.logo{
-  width:40px;height:40px;border-radius:10px;
-  background:linear-gradient(135deg,var(--accent),#ffe9a6);
-  display:grid;place-items:center;color:#000;font-weight:900
-}
+.receipt{padding:16mm 16mm 14mm}
+.rec-head{display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:2px solid var(--line);padding-bottom:8px}
+.brand{display:flex;align-items:center;gap:10px}
+.logo{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#ffe9a6);display:grid;place-items:center;color:#000;font-weight:900}
 .brand .name{font-weight:800;font-size:18px;color:#111}
 .brand .sub{font-size:12px;color:var(--muted)}
 .rec-title{font-weight:800;font-size:18px}
@@ -70,31 +55,33 @@ textarea{min-height:90px;resize:vertical}
 .amount-box{display:flex;gap:10px;flex-wrap:wrap}
 .amount-chip{border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-weight:700}
 .rec-foot{display:flex;justify-content:space-between;gap:12px;align-items:flex-end;margin-top:14px}
-.sign{width:48%;min-height:70px;border:1px dashed #cbd5e1;border-radius:10px;padding:8px;font-size:12px}
-.stamp{width:48%;min-height:70px;border:2px solid #0a4ea6;border-radius:10px;padding:8px;font-size:12px;color:#0a4ea6;font-weight:800;background:#fff}
+.sign{width:48%;min-height:78px;border:1px dashed #cbd5e1;border-radius:10px;padding:8px;font-size:12px}
+.sign .who{margin-top:44px;border-top:1px solid #cfd8e3;padding-top:4px;font-size:11px;color:#6b7280}
+.stamp{width:48%;min-height:78px;border:2px solid #0a4ea6;border-radius:10px;padding:8px;font-size:12px;color:#0a4ea6;font-weight:800;background:#fff}
+.stamp .who{margin-top:38px;border-top:2px solid #0a4ea6;padding-top:4px;font-size:11px}
 .note{margin-top:10px;font-size:12.5px;color:#555;background:#fff8e6;border:1px solid rgba(198,161,74,.5);border-radius:10px;padding:10px}
 
-/* طباعة */
+/* طباعة: إظهار .print-area فقط */
 @page{size:A4;margin:12mm}
 @media print{
   body{background:#fff}
-  .wrap > :not(.printable){display:none !important}
-  .sheet{border:none;box-shadow:none}
+  .no-print{display:none !important}
+  .print-area{border:none;box-shadow:none;page-break-inside:avoid}
 }
 </style>
 </head>
 <body>
 
 <main class="wrap">
-  <!-- الإعدادات -->
-  <section class="card printable" aria-label="إعدادات وصل الاستلام">
+  <!-- نموذج مبسّط -->
+  <section class="card no-print" aria-label="بيانات الوصل">
     <div class="hd">بيانات الوصل</div>
     <div class="bd">
       <div class="grid">
-        <div><label>اسم الجهة/الشركة</label><input id="inCompany" placeholder="مثال: شركة الأفق للتجارة"></div>
+        <div><label>اسم الجهة/الشركة</label><input id="inCompany" placeholder="مثال: شركة الأفق للمقاولات"></div>
         <div class="g2">
-          <div><label>الهاتف</label><input id="inPhone" inputmode="tel" placeholder="973 3xx xxxx"></div>
-          <div><label>العنوان</label><input id="inAddr" placeholder="المنامة - البحرين"></div>
+          <div><label>الهاتف</label><input id="inPhone" inputmode="tel" placeholder="33375858"></div>
+          <div><label>العنوان</label><input id="inAddr" placeholder="المنامة – البحرين"></div>
         </div>
         <div class="g2">
           <div><label>رقم الوصل</label><input id="inNo" placeholder="2025-0001"></div>
@@ -103,7 +90,7 @@ textarea{min-height:90px;resize:vertical}
 
         <div><label>استلمنا من</label><input id="inFrom" placeholder="اسم العميل / الجهة"></div>
         <div class="g2">
-          <div><label>المبلغ (أرقام)</label><input id="inAmt" inputmode="decimal" placeholder="مثال: 150.000"></div>
+          <div><label>المبلغ (أرقام)</label><input id="inAmt" inputmode="decimal" placeholder="300"></div>
           <div>
             <label>العملة</label>
             <select id="inCur">
@@ -114,9 +101,9 @@ textarea{min-height:90px;resize:vertical}
             </select>
           </div>
         </div>
-        <div><label>المبلغ كتابة (اختياري)</label><input id="inAmtTxt" placeholder="مائة وخمسون دينارًا فقط لا غير"></div>
+        <div><label>المبلغ كتابة (اختياري)</label><input id="inAmtTxt" placeholder="ثلاثمائة دينار بحريني فقط لا غير"></div>
 
-        <div><label>وذلك عن</label><textarea id="inFor" placeholder="مثال: سداد مستحقات فاتورة رقم 145"></textarea></div>
+        <div><label>وذلك عن</label><textarea id="inFor" placeholder="سداد مستحقات فاتورة رقم 145"></textarea></div>
 
         <div class="g2">
           <div>
@@ -131,21 +118,34 @@ textarea{min-height:90px;resize:vertical}
           <div><label>ملاحظات (اختياري)</label><input id="inNote" placeholder="مرجع التحويل/رقم الشيك…"></div>
         </div>
 
+        <!-- بيانات الختم -->
+        <div class="g2">
+          <div><label>اسم المؤسسة على الختم</label><input id="inStampName" placeholder="اسم المؤسسة"></div>
+          <div><label>السجل التجاري (CR)</label><input id="inStampCR" placeholder="34234-2025"></div>
+        </div>
+        <div><label>هاتف الختم (اختياري)</label><input id="inStampPhone" placeholder="33375858"></div>
+
+        <!-- خانة التوقيع -->
+        <div class="g2">
+          <div><label>اسم الموقّع</label><input id="inSigner" placeholder="اسم المستلم"></div>
+          <div><label>صفة الموقّع (اختياري)</label><input id="inSignerRole" placeholder="المحاسب / المسؤول"></div>
+        </div>
+
         <div class="btns" style="margin-top:6px">
           <button class="btn primary" id="btnPrint">طباعة / حفظ PDF</button>
-          <button class="btn ghost" id="btnShare">مشاركة</button>
-          <button class="btn ghost" id="btnClear">مسح الحقول</button>
+          <button class="btn ghost" id="btnShare">مشاركة نصية</button>
+          <button class="btn ghost" id="btnClear">مسح الكل</button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- المعاينة -->
-  <section class="card printable" aria-label="المعاينة">
-    <div class="hd">المعاينة</div>
+  <!-- المعاينة / منطقة الطباعة الوحيدة -->
+  <section class="card" aria-label="المعاينة">
+    <div class="hd no-print">المعاينة</div>
     <div class="bd preview">
       <div class="viewport">
-        <div class="sheet" id="sheet">
+        <div class="print-area" id="printArea">
           <div class="receipt">
             <div class="rec-head">
               <div class="brand">
@@ -190,14 +190,16 @@ textarea{min-height:90px;resize:vertical}
 
             <div class="rec-foot">
               <div class="sign">
-                توقيع المستلم<br>
-                <div style="height:55px"></div>
-                <div style="border-top:1px solid #cfd8e3;margin-top:6px;padding-top:4px;font-size:11px;color:#6b7280">الاسم والتوقيع</div>
+                توقيع المستلم
+                <div class="who" id="outSigner">الاسم والتوقيع</div>
               </div>
               <div class="stamp">
-                ختم المؤسسة (اختياري)
-                <div style="height:45px"></div>
-                <div style="border-top:2px solid #0a4ea6;margin-top:6px;padding-top:4px;font-size:11px;">اسم المؤسسة / CR</div>
+                ختم المؤسسة
+                <div class="who">
+                  <div id="outStampName">اسم المؤسسة</div>
+                  <div id="outStampCR">CR: —</div>
+                  <div id="outStampPhone">Tel: —</div>
+                </div>
               </div>
             </div>
 
@@ -212,35 +214,36 @@ textarea{min-height:90px;resize:vertical}
 <script>
 const $ = id => document.getElementById(id);
 
-// عناصر الإدخال
-const inCompany = $("inCompany"), inPhone=$("inPhone"), inAddr=$("inAddr"),
+// إدخالات
+const inCompany=$("inCompany"), inPhone=$("inPhone"), inAddr=$("inAddr"),
       inNo=$("inNo"), inDate=$("inDate"), inFrom=$("inFrom"),
       inAmt=$("inAmt"), inCur=$("inCur"), inAmtTxt=$("inAmtTxt"),
-      inFor=$("inFor"), inPay=$("inPay"), inNote=$("inNote");
+      inFor=$("inFor"), inPay=$("inPay"), inNote=$("inNote"),
+      inStampName=$("inStampName"), inStampCR=$("inStampCR"), inStampPhone=$("inStampPhone"),
+      inSigner=$("inSigner"), inSignerRole=$("inSignerRole");
 
-// عناصر الخرج
+// مخرجات
 const outCompany=$("outCompany"), outPhone=$("outPhone"), outAddr=$("outAddr"),
       outNo=$("outNo"), outDate=$("outDate"), outFrom=$("outFrom"),
       outAmt=$("outAmt"), outCur=$("outCur"), outAmtTxt=$("outAmtTxt"),
-      outFor=$("outFor"), outPay=$("outPay"), outNote=$("outNote");
+      outFor=$("outFor"), outPay=$("outPay"), outNote=$("outNote"),
+      outStampName=$("outStampName"), outStampCR=$("outStampCR"), outStampPhone=$("outStampPhone"),
+      outSigner=$("outSigner");
 
-// تهيئة التاريخ الافتراضي لليوم
+// تاريخ افتراضي
 (function setToday(){
-  const t = new Date();
-  const yyyy = t.getFullYear();
-  const mm = String(t.getMonth()+1).padStart(2,'0');
-  const dd = String(t.getDate()).padStart(2,'0');
-  inDate.value = `${yyyy}-${mm}-${dd}`;
+  const t=new Date(), yyyy=t.getFullYear(), mm=String(t.getMonth()+1).padStart(2,'0'), dd=String(t.getDate()).padStart(2,'0');
+  if(!inDate.value) inDate.value=`${yyyy}-${mm}-${dd}`;
 })();
 
-// حفظ الحالة محليًا
-const STORE="simpleReceiptV1";
+// حفظ/تحميل
+const STORE="receiptSimpleV2";
 function save(){
   const data={
-    inCompany:inCompany.value, inPhone:inPhone.value, inAddr:inAddr.value,
-    inNo:inNo.value, inDate:inDate.value, inFrom:inFrom.value,
-    inAmt:inAmt.value, inCur:inCur.value, inAmtTxt:inAmtTxt.value,
-    inFor:inFor.value, inPay:inPay.value, inNote:inNote.value
+    inCompany:inCompany.value,inPhone:inPhone.value,inAddr:inAddr.value,inNo:inNo.value,inDate:inDate.value,inFrom:inFrom.value,
+    inAmt:inAmt.value,inCur:inCur.value,inAmtTxt:inAmtTxt.value,inFor:inFor.value,inPay:inPay.value,inNote:inNote.value,
+    inStampName:inStampName.value,inStampCR:inStampCR.value,inStampPhone:inStampPhone.value,
+    inSigner:inSigner.value,inSignerRole:inSignerRole.value
   };
   localStorage.setItem(STORE, JSON.stringify(data));
 }
@@ -248,19 +251,19 @@ function load(){
   try{
     const raw=localStorage.getItem(STORE); if(!raw) return;
     const d=JSON.parse(raw);
-    for(const k in d){ if($(k)) $(k).value = d[k]; }
+    for(const k in d){ if($(k)) $(k).value=d[k]; }
   }catch(e){}
 }
 
-// تنسيق المبلغ 1,234.000 (ثلاث منازل عشرية اختيارية)
+// تنسيق المبلغ
 function formatAmount(v){
   if(!v) return "0.000";
-  const num = Number(String(v).replace(/[^\d.]/g, ''));
+  const num=Number(String(v).replace(/[^\d.]/g,''));
   if(isNaN(num)) return "0.000";
-  return num.toLocaleString('en-US', {minimumFractionDigits:3, maximumFractionDigits:3});
+  return num.toLocaleString('en-US',{minimumFractionDigits:3,maximumFractionDigits:3});
 }
 
-// تطبيق إلى المعاينة
+// تطبيق على المعاينة
 function apply(){
   outCompany.textContent = inCompany.value.trim() || "اسم الجهة";
   outPhone.textContent   = inPhone.value.trim()   || "—";
@@ -277,6 +280,16 @@ function apply(){
   outPay.textContent     = inPay.value;
   outNote.textContent    = inNote.value.trim()    || "—";
 
+  // الختم
+  outStampName.textContent = inStampName.value.trim() || "اسم المؤسسة";
+  outStampCR.textContent   = "CR: " + (inStampCR.value.trim() || "—");
+  outStampPhone.textContent= "Tel: " + (inStampPhone.value.trim() || "—");
+
+  // التوقيع
+  const signerLine = (inSigner.value.trim() || "الاسم والتوقيع") +
+                     (inSignerRole.value.trim()? (" — "+inSignerRole.value.trim()):"");
+  outSigner.textContent = signerLine;
+
   save();
 }
 
@@ -291,10 +304,9 @@ function apply(){
 load(); apply();
 
 // أزرار
-$("btnPrint").onclick = ()=>{ window.print(); };
+$("btnPrint").onclick = ()=> window.print();
 
 $("btnShare").onclick = async ()=>{
-  // مشاركة نصية (للأجهزة التي تدعم Web Share API)
   const text = `وصل استلام
 الجهة: ${outCompany.textContent}
 رقم الوصل: ${outNo.textContent} — التاريخ: ${outDate.textContent}
@@ -302,11 +314,8 @@ $("btnShare").onclick = async ()=>{
 المبلغ: ${outAmt.textContent} ${outCur.textContent}
 عن: ${outFor.textContent}
 طريقة الدفع: ${outPay.textContent} — ملاحظات: ${outNote.textContent}`;
-  if(navigator.share){
-    try{ await navigator.share({title:"وصل استلام", text}); }catch(e){}
-  }else{
-    alert("المشاركة غير مدعومة على هذا المتصفح. يمكنك استخدام زر الطباعة لحفظ PDF.");
-  }
+  if(navigator.share){ try{ await navigator.share({title:"وصل استلام", text}); }catch(e){} }
+  else{ alert("المشاركة غير مدعومة على هذا المتصفح. استخدم الطباعة لحفظ PDF."); }
 };
 
 $("btnClear").onclick = ()=>{
