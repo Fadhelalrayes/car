@@ -1,142 +1,407 @@
-<!DOCTYPE html><html lang="ar" dir="rtl">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>إيصال/رصيد استلام مبلغ - A4</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&display=swap" rel="stylesheet">
-<meta name="robots" content="noindex,nofollow">
-<style>
-:root{--gold:#C6A14A;--black:#0b0f19;--ink:#111827;--muted:#6b7280;--paper:#fff;--stamp:#0a4ea6;--green:#16a34a}
-body{margin:0;background:#f6f7f9;color:var(--ink);font-family:"Cairo",system-ui}
-.wrap{max-width:1280px;margin:auto;padding:12px;display:grid;gap:12px;grid-template-columns:clamp(320px,40vw,520px) 1fr}
-@media(max-width:1024px){.wrap{grid-template-columns:1fr}}
-.card{background:#fff;border:1px solid #e7e9ef;border-radius:14px;box-shadow:0 8px 16px rgba(0,0,0,.05);overflow:hidden}
-.hd{padding:14px;background:linear-gradient(90deg,var(--black),#1b2335);color:#fff;font-weight:800;text-align:center}
-.bd{padding:14px}
-label{display:block;font:700 13px/1 "Cairo";color:var(--muted);margin:8px 2px 6px}
-input,select,textarea{width:100%;padding:12px;border:1px solid #dfe3ea;border-radius:12px;font-size:15px;background:#fff}
-textarea{min-height:100px;resize:vertical}
-.btn{border:0;border-radius:12px;padding:12px 14px;font-weight:800;font-size:15px;cursor:pointer}
-.btn.primary{background:var(--gold);color:#000}.btn.ghost{background:#eef2f7}
-.tool{display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 14px;border-radius:12px;border:1px solid #e4e7ef;background:#fff;cursor:pointer;font-weight:800;font-size:13.5px}
-.tool.dark{background:linear-gradient(180deg,#1b2335,#0b0f19);color:#fff;border:0}
-.preview{padding:8px 10px 0}
-.viewport{width:100%;display:flex;justify-content:center;align-items:flex-start;overflow:hidden}
-.scale-box{transform-origin:top center;display:inline-block}
-#page{width:210mm;height:297mm;background:var(--paper);position:relative;overflow:hidden;border:1px solid #e6e7ec;border-radius:14px;box-shadow:0 10px 26px rgba(0,0,0,.06)}
-/* رأس الإيصال */
-.lh{background:linear-gradient(90deg,var(--black),#121828);color:#fff;padding:12px 18px;display:flex;align-items:center;gap:10px;justify-content:space-between}
-.brand-block{display:flex;align-items:center;gap:10px}
-.brand-name{font-weight:800;font-size:20px}
-.receipt-meta{text-align:left;direction:ltr;font-size:12px;line-height:1.5}
-.gold-line{height:5px;background:linear-gradient(90deg,#ead89c,var(--gold),#a6842a)}
-.doc{padding:12mm 18mm 64mm;height:calc(297mm - 53px - 5px - 64mm);overflow:auto}
-.title{text-align:center;font-size:22px;font-weight:800;margin:12px 0 10px}
-.meta{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.box{border:1px solid #e9ecf3;border-radius:12px;padding:10px;background:#fff}
-.kv{font-size:14px;line-height:1.8}
-.kv .row{display:flex;gap:6px}
-.kv .row b{min-width:100px;color:#374151}
-.badge{font-size:12px;color:#fff;background:var(--green);border-radius:999px;padding:2px 8px}
-.note{margin-top:10px;border:1px dashed #e5e7eb;border-radius:12px;padding:10px;background:#fafafa;color:#374151}
-.sig-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
-.sig{border:1px dashed #cbd5e1;border-radius:10px;padding:8px;height:90px;display:flex;justify-content:center;align-items:end;font-size:13px;color:#374151}
-.ft{position:absolute;left:0;right:0;bottom:0;height:64mm;padding:10mm 18mm 14mm;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px}
-.stamp-box{min-width:70mm;min-height:33mm;padding:10px 12px;border-radius:12px;position:relative;border:2px solid var(--stamp);background:#fff;text-align:center}
-.stamp-ink{color:var(--stamp);font-weight:800;font-size:16px}
-.stamp-line{color:var(--stamp);font-weight:700;margin-top:4px}
-.qr{position:absolute;top:10mm;left:18mm;width:84px;height:84px;border:1px dashed #cbd5e1;border-radius:10px;display:grid;place-items:center}
-@page{size:A4;margin:0}
-@media print{body *{visibility:hidden}#page,#page *{visibility:visible}#page{position:absolute;inset:0;transform:none;box-shadow:none}}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>إيصال استلام مبلغ | Receipt Voucher</title>
+  <style>
+    :root {
+      --primary: #0e7490; /* teal-700 */
+      --accent: #0891b2;  /* cyan-600 */
+      --ink: #0f172a;     /* slate-900 */
+      --muted: #475569;   /* slate-600 */
+      --line: #e2e8f0;    /* slate-200 */
+      --bg: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; background: var(--bg); color: var(--ink);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Naskh Arabic", "Noto Sans Arabic", Tahoma, Arial, sans-serif;
+      line-height: 1.55;
+    }
+    .container { max-width: 1100px; margin: 24px auto; padding: 0 16px; }
+    .card { background: #fff; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,.05); }
+    .header {
+      display:flex; gap:16px; align-items:center; justify-content:space-between;
+      padding: 20px 24px; background: linear-gradient(90deg, var(--primary), var(--accent)); color: #fff;
+    }
+    .brand { display:flex; align-items:center; gap:14px; }
+    .brand .logo { width:48px; height:48px; border-radius:12px; background:#fff2; display:grid; place-items:center; font-weight:700; }
+    .brand h1 { margin:0; font-size:20px; }
+    .controls { display:flex; gap:8px; flex-wrap:wrap; }
+    .controls button, .controls a {
+      border: 1px solid #fff8; background:#fff1; color:#fff;
+      padding:8px 12px; border-radius:10px; cursor:pointer; font-weight:600; text-decoration:none;
+    }
+    .controls button:hover, .controls a:hover { background:#fff2; }
+
+    .body { padding: 20px 24px; display:grid; grid-template-columns: 1.1fr .9fr; gap: 20px; }
+    .panel { border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+    .panel h2 { margin:0 0 12px; font-size:16px; color: var(--primary); }
+
+    .grid { display:grid; grid-template-columns: repeat(12, 1fr); gap:10px; }
+    .field { grid-column: span 6; display:flex; flex-direction:column; gap:6px; }
+    .field.full { grid-column: 1 / -1; }
+    .field.third { grid-column: span 4; }
+    label { font-size: 13px; color: var(--muted); }
+    input, select, textarea {
+      width:100%; border:1px solid var(--line); border-radius:10px; padding:10px 12px; font: inherit; background:#fff;
+    }
+    textarea { min-height: 68px; resize: vertical; }
+
+    .voucher { background:#fff; border:1px solid var(--line); border-radius:12px; padding:18px; }
+    .voucher header { display:flex; justify-content:space-between; align-items:flex-start; gap:16px; border-bottom:1px dashed var(--line); padding-bottom:12px; margin-bottom:12px; }
+    .voucher h3 { margin:0; font-size:18px; color: var(--primary); }
+    .meta { display:grid; gap:6px; font-size:14px; color:var(--muted); }
+    .voucher table { width:100%; border-collapse: collapse; margin-top:12px; }
+    .voucher th, .voucher td { border:1px solid var(--line); padding:10px; font-size:14px; }
+    .voucher tfoot td { font-weight:700; }
+    .signs { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:18px; }
+    .sig { border:1px dashed var(--line); border-radius:10px; padding:10px; height:96px; display:flex; flex-direction:column; justify-content:space-between; }
+    .watermark { text-align:center; font-size:12px; color:var(--muted); margin-top:10px; }
+
+    .footer { padding: 12px 24px 20px; display:flex; gap:10px; flex-wrap:wrap; }
+    .footer button { border:1px solid var(--line); background:#f8fafc; padding:10px 14px; border-radius:10px; cursor:pointer; }
+
+    /* Print styles */
+    @page { size: A4; margin: 14mm; }
+    @media print {
+      body { background:#fff; }
+      .header, .footer, .panel.settings { display:none !important; }
+      .body { grid-template-columns: 1fr !important; }
+      .panel.form { display:none !important; }
+      .voucher { box-shadow:none; border-color:#0002; }
+    }
+  </style>
 </head>
 <body>
-<main class="wrap">
-  <section class="card">
-    <div class="hd">إعدادات الإيصال</div>
-    <div class="bd">
-      <label>اسم المؤسسة</label><input id="sellerName">
-      <label>الهاتف</label><input id="sellerPhone">
-      <label>البريد</label><input id="sellerEmail">
-      <label>العنوان</label><input id="sellerAddr">
-      <label>السجل التجاري CR</label><input id="cr">
-      <label>اسم الدافع</label><input id="buyerName">
-      <label>رقم الإيصال</label><input id="rcpNo">
-      <label>تاريخ الإيصال</label><input id="rcpDate" type="date">
-      <label>المبلغ</label><input id="amountNum" type="number" step="0.001">
-      <label>طريقة الدفع</label><select id="payMethod"><option>نقدًا</option><option>تحويل بنكي</option><option>بطاقة</option><option>شيك</option></select>
-      <label>مرجع الدفع</label><input id="payRef">
-    </div>
-  </section>
-  <section class="card">
-    <div class="hd">معاينة</div>
-    <div class="preview"><div class="viewport" id="viewport"><div class="scale-box" id="scaleBox">
-      <div id="page">
-        <header class="lh">
-          <div class="brand-block">
-            <div class="brand-name" id="brandName">اسم المؤسسة</div>
-          </div>
-          <div class="receipt-meta">
-            <div><b>Receipt No:</b> <span id="outNo">—</span></div>
-            <div><b>Date:</b> <span id="outDate">—</span></div>
-          </div>
-        </header>
-        <div class="gold-line"></div>
-        <main class="doc">
-          <h1 class="title">إيصال استلام مبلغ</h1>
-          <div class="kv"><div class="row"><b>الدافع:</b><span id="buyerBlock">—</span></div></div>
-          <div class="kv"><div class="row"><b>المبلغ:</b><span id="outAmountNum">0.000</span> <span class="badge" id="currencyBadge">BHD</span></div></div>
-          <div class="kv"><div class="row"><b>كتابةً:</b><span id="outAmountWords">—</span></div></div>
-          <div class="sig-row">
-            <div class="sig">توقيع المستلم</div>
-            <div class="sig">توقيع الدافع</div>
-          </div>
-        </main>
-        <footer class="ft">
-          <div class="stamp-box">
-            <div class="stamp-ink" id="stampCompany">اسم المؤسسة</div>
-            <div class="stamp-line" id="stampPhone">Tel: —</div>
-            <div class="stamp-line" id="stampCR">CR: —</div>
-          </div>
-        </footer>
+  <div class="container card">
+    <div class="header">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">LOGO</div>
+        <div>
+          <h1>إيصال استلام مبلغ</h1>
+          <div style="opacity:.9; font-size:12px">Receipt Voucher</div>
+        </div>
       </div>
-    </div></div>
-  </section>
-</main>
-<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
-<script>
-const DM={'٠':'0','١':'1','٢':'2','٣':'3','٤':'4','٥':'5','٦':'6','٧':'7','٨':'8','٩':'9','۰':'0','۱':'1','۲':'2','۳':'3','۴':'4','۵':'5','۶':'6','۷':'7','۸':'8','۹':'9'};
-const $=id=>document.getElementById(id);
-const NF=n=>new Intl.NumberFormat('en-US',{minimumFractionDigits:3,maximumFractionDigits:3}).format(n);
-function numToWordsAr(num,dec=0){
-  const ones=["","واحد","اثنان","ثلاثة","أربعة","خمسة","ستة","سبعة","ثمانية","تسعة"];
-  const tens=["","عشرة","عشرون","ثلاثون","أربعون","خمسون","ستون","سبعون","ثمانون","تسعون"];
-  if(num===0) return "صفر";
-  let words="";
-  if(num>=1000){words+=ones[Math.floor(num/1000)]+" آلاف ";num%=1000;}
-  if(num>=100){words+=ones[Math.floor(num/100)]+" مائة ";num%=100;}
-  if(num>=20){words+=ones[Math.floor(num/10)]+" "+tens[Math.floor(num/10)];num%=10;}
-  else if(num>=10){words+="";}
-  if(num>0) words+=ones[num];
-  return words.trim();
-}
-function apply(){
-  const name=$('sellerName').value; const phone=$('sellerPhone').value; const cr=$('cr').value;
-  $('brandName').textContent=name||'—';
-  $('outNo').textContent=$('rcpNo').value||'—';
-  $('outDate').textContent=$('rcpDate').value||new Date().toLocaleDateString('en-GB');
-  const amt=parseFloat(($('amountNum').value||'').replace(/[٠-٩۰-۹]/g,d=>DM[d]))||0;
-  $('outAmountNum').textContent=NF(amt);
-  $('outAmountWords').textContent=numToWordsAr(Math.floor(amt));
-  $('buyerBlock').textContent=$('buyerName').value||'—';
-  $('stampCompany').textContent=name||'—';
-  $('stampPhone').textContent='Tel: '+(phone||'—');
-  $('stampCR').textContent='CR: '+(cr||'—');
-}
-['input','change'].forEach(ev=>{document.querySelectorAll('input,textarea,select').forEach(el=>{el.addEventListener(ev,apply,{passive:true})})});
-(document.fonts?.ready||Promise.resolve()).then(()=>{apply()});
-</script>
+      <div class="controls">
+        <button type="button" id="btnPrint">طباعة</button>
+        <button type="button" id="btnNewId" title="إنشاء رقم إيصال تلقائي">توليد رقم</button>
+        <button type="button" id="btnFillDemo" title="ملء بيانات تجريبية" style="display:none">بيانات تجريبية</button>
+        <button type="button" id="btnClear">مسح</button>
+      </div>
+    </div>
+
+    <div class="body">
+      <!-- Form -->
+      <section class="panel form">
+        <h2>بيانات الإدخال</h2>
+        <div class="grid">
+          <div class="field third">
+            <label for="voucherId">رقم الإيصال</label>
+            <input id="voucherId" placeholder="مثال: RV-2025-0001" />
+          </div>
+          <div class="field third">
+            <label for="date">تاريخ الاستلام</label>
+            <input id="date" type="date" />
+          </div>
+          <div class="field third">
+            <label for="currency">العملة</label>
+            <select id="currency">
+              <option value="BHD">BHD</option>
+              <option value="USD">USD</option>
+              <option value="SAR">SAR</option>
+              <option value="AED">AED</option>
+              <option value="IQD">IQD</option>
+            </select>
+          </div>
+
+          <div class="field full"><h3 style="margin:4px 0 0; font-size:14px; color:var(--muted)">بيانات البائع</h3></div>
+          <div class="field third">
+            <label for="sellerName">اسم البائع / الشركة</label>
+            <input id="sellerName" />
+          </div>
+          <div class="field third">
+            <label for="sellerPhone">هاتف</label>
+            <input id="sellerPhone" />
+          </div>
+          <div class="field third">
+            <label for="sellerEmail">البريد الإلكتروني</label>
+            <input id="sellerEmail" type="email" />
+          </div>
+          <div class="field full">
+            <label for="sellerAddress">العنوان</label>
+            <input id="sellerAddress" />
+          </div>
+
+          <div class="field full"><h3 style="margin:6px 0 0; font-size:14px; color:var(--muted)">بيانات المستلم</h3></div>
+          <div class="field third">
+            <label for="buyerName">اسم المستلم</label>
+            <input id="buyerName" />
+          </div>
+          <div class="field third">
+            <label for="buyerId">رقم الهوية / السجل</label>
+            <input id="buyerId" />
+          </div>
+          <div class="field third">
+            <label for="buyerPhone">هاتف</label>
+            <input id="buyerPhone" />
+          </div>
+
+          <div class="field full"><h3 style="margin:6px 0 0; font-size:14px; color:var(--muted)">تفاصيل الاستلام</h3></div>
+          <div class="field third">
+            <label for="amountNum">المبلغ (أرقام)</label>
+            <input id="amountNum" type="number" step="0.01" placeholder="0.00" />
+          </div>
+          <div class="field third">
+            <label for="paymentMethod">طريقة الدفع</label>
+            <select id="paymentMethod">
+              <option>نقدًا</option>
+              <option>حوالة بنكية</option>
+              <option>شيك</option>
+              <option>بطاقة</option>
+              <option>أخرى</option>
+            </select>
+          </div>
+          <div class="field third">
+            <label for="transactionNo">رقم العملية / المرجع</label>
+            <input id="transactionNo" />
+          </div>
+
+          <div class="field full">
+            <label for="purpose">الغرض من الاستلام</label>
+            <textarea id="purpose" placeholder="مثل: دفعة مقدمة، تسوية حساب، شراء بضاعة…"></textarea>
+          </div>
+          <div class="field full">
+            <label for="amountWords">المبلغ كتابة (يمكن تعديله يدويًا)</label>
+            <input id="amountWords" placeholder="(يتم تعبئته تلقائيًا بالإنجليزية ويمكن تعديله)" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Receipt Preview -->
+      <section class="panel">
+        <h2>معاينة الإيصال</h2>
+        <div class="voucher" id="voucher">
+          <header>
+            <div>
+              <h3>إيصال استلام مبلغ</h3>
+              <div class="meta">
+                <div><strong>رقم الإيصال:</strong> <span id="vId">—</span></div>
+                <div><strong>التاريخ:</strong> <span id="vDate">—</span></div>
+                <div><strong>العملة:</strong> <span id="vCurrency">BHD</span></div>
+              </div>
+            </div>
+            <div class="meta">
+              <div><strong>البائع:</strong> <span id="vSeller">—</span></div>
+              <div><strong>هاتف:</strong> <span id="vSellerPhone">—</span></div>
+              <div><strong>بريد:</strong> <span id="vSellerEmail">—</span></div>
+              <div><strong>العنوان:</strong> <span id="vSellerAddress">—</span></div>
+            </div>
+          </header>
+
+          <table>
+            <thead>
+              <tr>
+                <th>المستلم</th>
+                <th>هوية/سجل</th>
+                <th>هاتف</th>
+                <th>طريقة الدفع</th>
+                <th>رقم العملية</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td id="vBuyer">—</td>
+                <td id="vBuyerId">—</td>
+                <td id="vBuyerPhone">—</td>
+                <td id="vPay">—</td>
+                <td id="vTxn">—</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="3">المبلغ كتابة</td>
+                <td colspan="2" id="vWords">—</td>
+              </tr>
+              <tr>
+                <td colspan="3">المبلغ (أرقام)</td>
+                <td colspan="2"><span id="vAmount">0.00</span> <span id="vCur2">BHD</span></td>
+              </tr>
+              <tr>
+                <td colspan="3">الغرض</td>
+                <td colspan="2" id="vPurpose">—</td>
+              </tr>
+            </tfoot>
+          </table>
+
+          <div class="signs">
+            <div class="sig">
+              <div><strong>توقيع المستلم</strong></div>
+              <div style="opacity:.7; font-size:12px">الاسم: <span id="vBuyer2">—</span></div>
+            </div>
+            <div class="sig">
+              <div><strong>توقيع البائع</strong></div>
+              <div style="opacity:.7; font-size:12px">الاسم: <span id="vSeller2">—</span></div>
+            </div>
+          </div>
+
+          <div class="watermark">تم إصدار هذا الإيصال إلكترونيًا ولا يحتاج إلى ختم.</div>
+        </div>
+      </section>
+    </div>
+
+    <div class="footer">
+      <button type="button" id="btnCopyText">نسخ المبلغ كتابة</button>
+      <button type="button" id="btnToday">تاريخ اليوم</button>
+      <button type="button" id="btnRTL">اتجاه RTL (عربي)</button>
+      <button type="button" id="btnLTR">اتجاه LTR (English)</button>
+    </div>
+  </div>
+
+  <script>
+    // --- Helpers ---
+    const $ = (id) => document.getElementById(id);
+
+    function formatMoney(n) {
+      if (n === '' || n === null || isNaN(+n)) return '0.00';
+      return Number(n).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    // Basic English number-to-words for currency (0 .. 999,999,999)
+    // For Arabic, keep manual override through the input field.
+    (function(){
+      const a = ["","one","two","three","four","five","six","seven","eight","nine","ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen"];
+      const b = ["","","twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety"];
+      function inWords(num){
+        if ((num = num.toString()).length > 9) return "";
+        const n = ("000000000" + num).substr(-9).match(/^(\d{3})(\d{3})(\d{3})$/);
+        if(!n) return '';
+        let str = '';
+        const toHundreds = (s)=>{
+          const x = parseInt(s,10);
+          if(!x) return '';
+          const h = Math.floor(x/100), r = x%100;
+          return (h? a[h] + " hundred" + (r? " and ": "") : "") + (r < 20? a[r] : b[Math.floor(r/10)] + (r%10? "-"+a[r%10]:""));
+        }
+        const g = parseInt(n[1],10), m=parseInt(n[2],10), k=parseInt(n[3],10);
+        if(g) str += toHundreds(n[1]) + " million";
+        if(m) str += (str? ", ":"") + toHundreds(n[2]) + " thousand";
+        if(k) str += (str? ", ":"") + toHundreds(n[3]);
+        return str || 'zero';
+      }
+      window.amountInEnglish = function(amount, cur){
+        const p = Math.floor(Math.abs(amount));
+        const c = Math.round((Math.abs(amount) - p) * 100);
+        const main = inWords(p);
+        const cents = c ? ` and ${c}/100` : '';
+        return `${main} ${cur}${cents}`.trim();
+      }
+    })();
+
+    // Generate ID like RV-2025-0929-134512
+    function generateVoucherId(){
+      const d = new Date();
+      const pad = (n)=> String(n).padStart(2,'0');
+      return `RV-${d.getFullYear()}-${pad(d.getMonth()+1)}${pad(d.getDate())}-${pad(d.getHours())}${pad(d.getMinutes())}${pad(d.getSeconds())}`;
+    }
+
+    // Bind form → preview
+    const bindings = [
+      ['voucherId','vId'],
+      ['date','vDate'],
+      ['currency','vCurrency'],
+      ['sellerName','vSeller'],
+      ['sellerPhone','vSellerPhone'],
+      ['sellerEmail','vSellerEmail'],
+      ['sellerAddress','vSellerAddress'],
+      ['buyerName','vBuyer'],
+      ['buyerId','vBuyerId'],
+      ['buyerPhone','vBuyerPhone'],
+      ['paymentMethod','vPay'],
+      ['transactionNo','vTxn'],
+      ['purpose','vPurpose']
+    ];
+
+    function sync(){
+      bindings.forEach(([src, dst])=> {
+        const el = $(src), out = $(dst);
+        if (!el || !out) return;
+        let val = el.value || '—';
+        if (src === 'date' && el.value) {
+          // Format date in Arabic locale
+          const d = new Date(el.value);
+          if (!isNaN(d)) val = d.toLocaleDateString('ar-EG');
+        }
+        out.textContent = val;
+      });
+
+      const cur = $('currency').value || 'BHD';
+      $('vCur2').textContent = cur;
+
+      // Amount numeric
+      const amt = $('amountNum').value;
+      $('vAmount').textContent = formatMoney(amt);
+
+      // Words
+      const words = $('amountWords').value;
+      $('vWords').textContent = words || '—';
+
+      // Sign names
+      $('vBuyer2').textContent = $('buyerName').value || '—';
+      $('vSeller2').textContent = $('sellerName').value || '—';
+    }
+
+    // Auto-fill words in EN when number changes
+    $('amountNum').addEventListener('input', () => {
+      const n = parseFloat($('amountNum').value || '0');
+      const cur = $('currency').value || 'BHD';
+      const en = window.amountInEnglish(isNaN(n)?0:n, cur);
+      if (!$('amountWords').dataset.touched) {
+        $('amountWords').value = en;
+      }
+      sync();
+    });
+    $('amountWords').addEventListener('input', ()=>{
+      $('amountWords').dataset.touched = '1';
+      sync();
+    });
+
+    // Bind generic inputs
+    [
+      'voucherId','date','currency','sellerName','sellerPhone','sellerEmail','sellerAddress',
+      'buyerName','buyerId','buyerPhone','paymentMethod','transactionNo','purpose'
+    ].forEach(id => $(id).addEventListener('input', sync));
+
+    // Buttons
+    $('btnPrint').addEventListener('click', ()=> window.print());
+    $('btnToday').addEventListener('click', ()=> { $('date').valueAsDate = new Date(); sync(); });
+    $('btnNewId').addEventListener('click', ()=> { $('voucherId').value = generateVoucherId(); sync(); });
+    $('btnClear').addEventListener('click', ()=>{
+      document.querySelectorAll('input, textarea, select').forEach(el=>{
+        if (el.type === 'date') { el.value = ''; }
+        else if (el.tagName === 'SELECT') { el.selectedIndex = 0; }
+        else { el.value = ''; }
+      });
+      $('amountWords').dataset.touched = '';
+      sync();
+    });
+    $('btnCopyText').addEventListener('click', async ()=>{
+      try {
+        await navigator.clipboard.writeText($('amountWords').value || '');
+        alert('تم نسخ نص المبلغ كتابة.');
+      } catch(e){ alert('تعذر النسخ تلقائيًا. انسخ يدويًا.'); }
+    });
+
+    $('btnRTL').addEventListener('click', ()=> { document.documentElement.setAttribute('dir','rtl'); document.documentElement.setAttribute('lang','ar'); });
+    $('btnLTR').addEventListener('click', ()=> { document.documentElement.setAttribute('dir','ltr'); document.documentElement.setAttribute('lang','en'); });
+
+    // Initialize defaults
+    (function init(){
+      $('date').valueAsDate = new Date();
+      $('voucherId').value = generateVoucherId();
+      sync();
+    })();
+  </script>
 </body>
 </html>
