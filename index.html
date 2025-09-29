@@ -6,9 +6,7 @@
 <title>وصل استلام</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
-:root{
-  --ink:#0f172a; --muted:#6b7280; --line:#e5e7eb; --brand:#0b0f19; --accent:#C6A14A; --paper:#fff;
-}
+:root{--ink:#0f172a;--muted:#6b7280;--line:#e5e7eb;--brand:#0b0f19;--accent:#C6A14A;--paper:#fff;--stamp:#0a4ea6}
 *{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 html,body{height:100%}
 body{margin:0;background:#f2f4f8;color:var(--ink);font-family:"Cairo",system-ui}
@@ -23,6 +21,7 @@ body{margin:0;background:#f2f4f8;color:var(--ink);font-family:"Cairo",system-ui}
 label{display:block;font:700 13px/1 "Cairo";color:var(--muted);margin:10px 2px 6px}
 input,select,textarea{width:100%;padding:12px;border:1px solid #dfe3ea;border-radius:12px;font-size:15px;background:#fff}
 textarea{min-height:90px;resize:vertical}
+small.help{color:var(--muted);display:block;margin-top:4px}
 .grid{display:grid;gap:10px}
 .g2{grid-template-columns:1fr 1fr}
 @media(max-width:720px){.g2{grid-template-columns:1fr}}
@@ -34,10 +33,7 @@ textarea{min-height:90px;resize:vertical}
 /* ورقة الوصل */
 .preview{padding:10px;background:#fafafa}
 .viewport{width:100%;display:flex;justify-content:center;align-items:flex-start;overflow:auto}
-.print-area{ /* هذه هي المنطقة التي تُطبع فقط */
-  width:210mm; background:var(--paper); color:var(--ink);
-  border:1px solid var(--line); border-radius:12px; box-shadow:0 10px 26px rgba(0,0,0,.06);
-}
+.print-area{width:210mm;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:12px;box-shadow:0 10px 26px rgba(0,0,0,.06)}
 .receipt{padding:16mm 16mm 14mm}
 .rec-head{display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:2px solid var(--line);padding-bottom:8px}
 .brand{display:flex;align-items:center;gap:10px}
@@ -55,16 +51,17 @@ textarea{min-height:90px;resize:vertical}
 .amount-box{display:flex;gap:10px;flex-wrap:wrap}
 .amount-chip{border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-weight:700}
 .rec-foot{display:flex;justify-content:space-between;gap:12px;align-items:flex-end;margin-top:14px}
-.sign{width:48%;min-height:78px;border:1px dashed #cbd5e1;border-radius:10px;padding:8px;font-size:12px}
-.sign .who{margin-top:44px;border-top:1px solid #cfd8e3;padding-top:4px;font-size:11px;color:#6b7280}
-.stamp{width:48%;min-height:78px;border:2px solid #0a4ea6;border-radius:10px;padding:8px;font-size:12px;color:#0a4ea6;font-weight:800;background:#fff}
-.stamp .who{margin-top:38px;border-top:2px solid #0a4ea6;padding-top:4px;font-size:11px}
+.sign{position:relative;width:48%;min-height:90px;border:1px dashed #cbd5e1;border-radius:10px;padding:8px;font-size:12px}
+.sign .pad{position:relative;margin-top:6px;border:1px solid #e5e7eb;border-radius:10px;height:120px;background:#fff;overflow:hidden}
+#sigCanvas{width:100%;height:100%;touch-action:none;background:#fff}
+.sign .who{border-top:1px solid #cfd8e3;margin-top:6px;padding-top:4px;font-size:11px;color:#6b7280}
+.stamp{width:48%;min-height:90px;border:2px solid var(--stamp);border-radius:10px;padding:8px;font-size:12px;color:var(--stamp);font-weight:800;background:#fff}
+.stamp .who{margin-top:6px;border-top:2px solid var(--stamp);padding-top:4px;font-size:11px}
 .note{margin-top:10px;font-size:12.5px;color:#555;background:#fff8e6;border:1px solid rgba(198,161,74,.5);border-radius:10px;padding:10px}
 
-/* طباعة: إظهار .print-area فقط */
+/* طباعة: إظهار الوصل فقط */
 @page{size:A4;margin:12mm}
 @media print{
-  body{background:#fff}
   .no-print{display:none !important}
   .print-area{border:none;box-shadow:none;page-break-inside:avoid}
 }
@@ -73,7 +70,7 @@ textarea{min-height:90px;resize:vertical}
 <body>
 
 <main class="wrap">
-  <!-- نموذج مبسّط -->
+  <!-- النموذج -->
   <section class="card no-print" aria-label="بيانات الوصل">
     <div class="hd">بيانات الوصل</div>
     <div class="bd">
@@ -83,12 +80,14 @@ textarea{min-height:90px;resize:vertical}
           <div><label>الهاتف</label><input id="inPhone" inputmode="tel" placeholder="33375858"></div>
           <div><label>العنوان</label><input id="inAddr" placeholder="المنامة – البحرين"></div>
         </div>
+
         <div class="g2">
           <div><label>رقم الوصل</label><input id="inNo" placeholder="2025-0001"></div>
           <div><label>التاريخ</label><input id="inDate" type="date"></div>
         </div>
 
         <div><label>استلمنا من</label><input id="inFrom" placeholder="اسم العميل / الجهة"></div>
+
         <div class="g2">
           <div><label>المبلغ (أرقام)</label><input id="inAmt" inputmode="decimal" placeholder="300"></div>
           <div>
@@ -101,6 +100,7 @@ textarea{min-height:90px;resize:vertical}
             </select>
           </div>
         </div>
+
         <div><label>المبلغ كتابة (اختياري)</label><input id="inAmtTxt" placeholder="ثلاثمائة دينار بحريني فقط لا غير"></div>
 
         <div><label>وذلك عن</label><textarea id="inFor" placeholder="سداد مستحقات فاتورة رقم 145"></textarea></div>
@@ -125,7 +125,24 @@ textarea{min-height:90px;resize:vertical}
         </div>
         <div><label>هاتف الختم (اختياري)</label><input id="inStampPhone" placeholder="33375858"></div>
 
-        <!-- خانة التوقيع -->
+        <!-- خانة التوقيع اليدوي -->
+        <div>
+          <label>التوقيع اليدوي</label>
+          <div class="grid">
+            <div class="pad" style="border:1px dashed #cbd5e1;border-radius:12px;padding:8px;background:#fff">
+              <div class="pad" style="height:180px">
+                <canvas id="sigCanvas"></canvas>
+              </div>
+              <div class="btns" style="margin-top:8px">
+                <button class="btn ghost" id="btnClearSig">مسح التوقيع</button>
+                <button class="btn primary" id="btnUseSig">استخدام التوقيع</button>
+              </div>
+              <small class="help">ارسم التوقيع بالقلم/الماوس ثم اضغط "استخدام التوقيع".</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- تعريف الموقّع -->
         <div class="g2">
           <div><label>اسم الموقّع</label><input id="inSigner" placeholder="اسم المستلم"></div>
           <div><label>صفة الموقّع (اختياري)</label><input id="inSignerRole" placeholder="المحاسب / المسؤول"></div>
@@ -140,7 +157,7 @@ textarea{min-height:90px;resize:vertical}
     </div>
   </section>
 
-  <!-- المعاينة / منطقة الطباعة الوحيدة -->
+  <!-- المعاينة / الطباعة -->
   <section class="card" aria-label="المعاينة">
     <div class="hd no-print">المعاينة</div>
     <div class="bd preview">
@@ -191,6 +208,10 @@ textarea{min-height:90px;resize:vertical}
             <div class="rec-foot">
               <div class="sign">
                 توقيع المستلم
+                <div class="pad" style="height:90px;border:0;background:transparent">
+                  <!-- صورة التوقيع للمعاينة/الطباعة -->
+                  <img id="sigImg" alt="التوقيع" style="max-height:86px;max-width:100%;display:block;object-fit:contain">
+                </div>
                 <div class="who" id="outSigner">الاسم والتوقيع</div>
               </div>
               <div class="stamp">
@@ -212,9 +233,9 @@ textarea{min-height:90px;resize:vertical}
 </main>
 
 <script>
-const $ = id => document.getElementById(id);
+const $=id=>document.getElementById(id);
 
-// إدخالات
+/* إدخالات */
 const inCompany=$("inCompany"), inPhone=$("inPhone"), inAddr=$("inAddr"),
       inNo=$("inNo"), inDate=$("inDate"), inFrom=$("inFrom"),
       inAmt=$("inAmt"), inCur=$("inCur"), inAmtTxt=$("inAmtTxt"),
@@ -222,28 +243,29 @@ const inCompany=$("inCompany"), inPhone=$("inPhone"), inAddr=$("inAddr"),
       inStampName=$("inStampName"), inStampCR=$("inStampCR"), inStampPhone=$("inStampPhone"),
       inSigner=$("inSigner"), inSignerRole=$("inSignerRole");
 
-// مخرجات
+/* مخرجات */
 const outCompany=$("outCompany"), outPhone=$("outPhone"), outAddr=$("outAddr"),
       outNo=$("outNo"), outDate=$("outDate"), outFrom=$("outFrom"),
       outAmt=$("outAmt"), outCur=$("outCur"), outAmtTxt=$("outAmtTxt"),
       outFor=$("outFor"), outPay=$("outPay"), outNote=$("outNote"),
       outStampName=$("outStampName"), outStampCR=$("outStampCR"), outStampPhone=$("outStampPhone"),
-      outSigner=$("outSigner");
+      outSigner=$("outSigner"), sigImg=$("sigImg");
 
-// تاريخ افتراضي
-(function setToday(){
+/* تاريخ اليوم */
+(function(){
   const t=new Date(), yyyy=t.getFullYear(), mm=String(t.getMonth()+1).padStart(2,'0'), dd=String(t.getDate()).padStart(2,'0');
   if(!inDate.value) inDate.value=`${yyyy}-${mm}-${dd}`;
 })();
 
-// حفظ/تحميل
-const STORE="receiptSimpleV2";
-function save(){
+/* تخزين محلي */
+const STORE="receipt_with_sig_v1";
+function save(obj){
   const data={
     inCompany:inCompany.value,inPhone:inPhone.value,inAddr:inAddr.value,inNo:inNo.value,inDate:inDate.value,inFrom:inFrom.value,
     inAmt:inAmt.value,inCur:inCur.value,inAmtTxt:inAmtTxt.value,inFor:inFor.value,inPay:inPay.value,inNote:inNote.value,
     inStampName:inStampName.value,inStampCR:inStampCR.value,inStampPhone:inStampPhone.value,
-    inSigner:inSigner.value,inSignerRole:inSignerRole.value
+    inSigner:inSigner.value,inSignerRole:inSignerRole.value,
+    sigData: (obj&&obj.sigData)||localStorage.getItem(STORE+"_sig")||""
   };
   localStorage.setItem(STORE, JSON.stringify(data));
 }
@@ -252,10 +274,11 @@ function load(){
     const raw=localStorage.getItem(STORE); if(!raw) return;
     const d=JSON.parse(raw);
     for(const k in d){ if($(k)) $(k).value=d[k]; }
+    if(d.sigData){ localStorage.setItem(STORE+"_sig", d.sigData); sigImg.src=d.sigData; sigImg.style.display='block'; }
   }catch(e){}
 }
 
-// تنسيق المبلغ
+/* المبلغ بصيغة منسّقة */
 function formatAmount(v){
   if(!v) return "0.000";
   const num=Number(String(v).replace(/[^\d.]/g,''));
@@ -263,7 +286,7 @@ function formatAmount(v){
   return num.toLocaleString('en-US',{minimumFractionDigits:3,maximumFractionDigits:3});
 }
 
-// تطبيق على المعاينة
+/* تطبيق على المعاينة */
 function apply(){
   outCompany.textContent = inCompany.value.trim() || "اسم الجهة";
   outPhone.textContent   = inPhone.value.trim()   || "—";
@@ -280,50 +303,91 @@ function apply(){
   outPay.textContent     = inPay.value;
   outNote.textContent    = inNote.value.trim()    || "—";
 
-  // الختم
+  /* الختم */
   outStampName.textContent = inStampName.value.trim() || "اسم المؤسسة";
   outStampCR.textContent   = "CR: " + (inStampCR.value.trim() || "—");
   outStampPhone.textContent= "Tel: " + (inStampPhone.value.trim() || "—");
 
-  // التوقيع
-  const signerLine = (inSigner.value.trim() || "الاسم والتوقيع") +
-                     (inSignerRole.value.trim()? (" — "+inSignerRole.value.trim()):"");
-  outSigner.textContent = signerLine;
+  /* التوقيع */
+  const signer = (inSigner.value.trim() || "الاسم والتوقيع") +
+                 (inSignerRole.value.trim()? (" — "+inSignerRole.value.trim()):"");
+  outSigner.textContent = signer;
 
   save();
 }
 
-// أحداث
+/* استماع للتغييرات */
 ["input","change"].forEach(ev=>{
   document.querySelectorAll("input,textarea,select").forEach(el=>{
     el.addEventListener(ev, apply, {passive:true});
   });
 });
 
-// تحميل قديم ثم تطبيق
-load(); apply();
+/* التوقيع اليدوي (Canvas) */
+const canvas=$("sigCanvas"); const ctx=canvas.getContext("2d");
+function resizeCanvas(){
+  const DPR=Math.min(window.devicePixelRatio||1,2);
+  const w=canvas.clientWidth||canvas.parentElement.clientWidth;
+  const h=canvas.clientHeight||canvas.parentElement.clientHeight;
+  canvas.width=w*DPR; canvas.height=h*DPR; ctx.setTransform(DPR,0,0,DPR,0,0);
+  ctx.lineWidth=2.6; ctx.lineCap='round'; ctx.strokeStyle='#111'; ctx.fillStyle='#fff';
+  ctx.fillRect(0,0,w,h);
+}
+function relPos(e){
+  const r=canvas.getBoundingClientRect();
+  const t=e.touches?e.touches[0]:e;
+  return {x:t.clientX-r.left, y:t.clientY-r.top};
+}
+let drawing=false;
+function start(e){e.preventDefault(); drawing=true; const p=relPos(e); ctx.beginPath(); ctx.moveTo(p.x,p.y);}
+function move(e){if(!drawing) return; e.preventDefault(); const p=relPos(e); ctx.lineTo(p.x,p.y); ctx.stroke();}
+function end(){drawing=false;}
 
-// أزرار
-$("btnPrint").onclick = ()=> window.print();
+canvas.addEventListener('mousedown',start);
+canvas.addEventListener('mousemove',move);
+window.addEventListener('mouseup',end);
+canvas.addEventListener('touchstart',start,{passive:false});
+canvas.addEventListener('touchmove',move,{passive:false});
+canvas.addEventListener('touchend',end);
 
-$("btnShare").onclick = async ()=>{
-  const text = `وصل استلام
+function clearSig(){
+  const w=canvas.clientWidth, h=canvas.clientHeight;
+  ctx.clearRect(0,0,w,h); ctx.fillStyle='#fff'; ctx.fillRect(0,0,w,h);
+  sigImg.removeAttribute('src'); sigImg.style.display='none';
+  localStorage.removeItem(STORE+"_sig"); save({sigData:""});
+}
+function useSig(){
+  const url=canvas.toDataURL('image/png');
+  sigImg.src=url; sigImg.style.display='block';
+  localStorage.setItem(STORE+"_sig", url);
+  save({sigData:url});
+}
+$("btnClearSig").onclick=clearSig;
+$("btnUseSig").onclick=useSig;
+
+/* أزرار عامة */
+$("btnPrint").onclick=()=>window.print();
+$("btnShare").onclick=async ()=>{
+  const text=`وصل استلام
 الجهة: ${outCompany.textContent}
 رقم الوصل: ${outNo.textContent} — التاريخ: ${outDate.textContent}
 استلمنا من: ${outFrom.textContent}
 المبلغ: ${outAmt.textContent} ${outCur.textContent}
 عن: ${outFor.textContent}
 طريقة الدفع: ${outPay.textContent} — ملاحظات: ${outNote.textContent}`;
-  if(navigator.share){ try{ await navigator.share({title:"وصل استلام", text}); }catch(e){} }
-  else{ alert("المشاركة غير مدعومة على هذا المتصفح. استخدم الطباعة لحفظ PDF."); }
+  if(navigator.share){try{await navigator.share({title:"وصل استلام",text});}catch{}}
+  else alert("المشاركة غير مدعومة على هذا المتصفح. استخدم الطباعة لحفظ PDF.");
 };
-
-$("btnClear").onclick = ()=>{
+$("btnClear").onclick=()=>{
   if(!confirm("مسح جميع الحقول؟")) return;
   document.querySelectorAll("input,textarea").forEach(el=>{ if(el.type!=="date") el.value=""; });
   inPay.value="نقدًا"; inCur.value="دينار بحريني";
-  apply();
+  clearSig(); apply();
 };
+
+/* تشغيل */
+window.addEventListener('resize',()=>requestAnimationFrame(resizeCanvas),{passive:true});
+resizeCanvas(); load(); apply();
 </script>
 </body>
 </html>
