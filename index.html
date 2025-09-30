@@ -49,7 +49,6 @@ textarea{min-height:110px;resize:vertical}
 .gold-line{height:4px;background:linear-gradient(90deg,#ead89c,var(--gold),#a6842a)}
 
 .doc{display:grid;grid-template-columns:1fr 1.1fr;gap:10mm;padding:10mm 18mm 16mm;height:calc(297mm - 52px - 4px - 16mm);overflow:auto}
-@media print {.doc{overflow:visible;height:auto}}
 @media(max-width:1024px){.doc{grid-template-columns:1fr}}
 
 .section{margin-bottom:8mm}
@@ -92,8 +91,33 @@ textarea{min-height:110px;resize:vertical}
 .modal .box .ft{padding:12px;display:flex;justify-content:center;background:#f6f7f9}
 .modal .box .ft button{border:0;background:var(--gold);color:#000;border-radius:10px;font-weight:800;padding:9px 16px;cursor:pointer}
 
-@page{size:A4;margin:0}
-@media print{body *{visibility:hidden}#page,#page *{visibility:visible}#page{position:absolute;inset:0;transform:none;boxShadow:none}}
+/* —— طباعة A4 صحيحة صفحة واحدة —— */
+@page { size: A4; margin: 0; }
+@media print {
+  body { margin: 0 !important; }
+  /* إخفاء كل شيء خارج صفحة الـCV (حتى لا يحجز مساحة ويصنع صفحات إضافية) */
+  .wrap, .share-site, .site-footer, .modal { display: none !important; }
+
+  /* عرض صفحة الـCV فقط بالحجم الكامل */
+  #page {
+    display: block !important;
+    position: static !important;
+    width: 210mm !important;
+    height: 297mm !important;
+    margin: 0 auto !important;
+    transform: none !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    page-break-after: avoid !important;
+    -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+  }
+
+  /* إلغاء أي تصغير من الحاوية أثناء الطباعة */
+  .scale-box { transform: none !important; }
+  .viewport { height: auto !important; overflow: visible !important; }
+}
 </style>
 </head>
 <body>
@@ -212,7 +236,6 @@ textarea{min-height:110px;resize:vertical}
 <section class="share-site" aria-label="مشاركة الصفحة">
   <div class="share-box">
     <h3 class="share-title">مشاركة الصفحة</h3>
-    <div class="icon-row" id="shareRow"></div>
   </div>
 </section>
 
@@ -236,7 +259,7 @@ textarea{min-height:110px;resize:vertical}
 const $=id=>document.getElementById(id);
 const STORE='cvBuilderV2';
 
-/* أيقونات */
+/* أيقونات صغيرة للتواصل */
 const ICON=p=>`<svg viewBox="0 0 24 24"><g fill="#C6A14A">${p}</g></svg>`;
 const icons={
   mail: ICON('<path d="M3 6h18v12H3z"/><path fill="#0b0f19" d="M3 8.2 12 13l9-4.8V6H3v2.2z"/>'),
@@ -349,8 +372,8 @@ function saveState(){
 function loadState(){
   const raw=localStorage.getItem(STORE); 
   if(!raw){
-    expList.appendChild(expField({role:'مهندس برمجيات',company:'شركة التقانة',place:'المنامة',from:'06/2022',to:'الحالي',bullets:['بنيت خدمات REST موثوقة','خفضت زمن الاستجابة 40%']})); 
-    eduList.appendChild(eduField({degree:'بكالوريوس علوم الحاسوب',school:'جامعة الخليج',place:'المنامة',from:'2018',to:'2022',bullets:['معدل تراكمي 3.6/4']})); 
+    expList.appendChild(expField({role:'مهندس برمجيات',company:'شركة التقانة',place:'المنامة',from:'06/2022',to:'الحالي',bullets:['بنيت خدمات REST موثوقة','خفضت زمن الاستجابة 40%']}));
+    eduList.appendChild(eduField({degree:'بكالوريوس علوم الحاسوب',school:'جامعة الخليج',place:'المنامة',from:'2018',to:'2022',bullets:['معدل تراكمي 3.6/4']}));
     return;
   }
   const d=JSON.parse(raw);
@@ -372,7 +395,7 @@ function renderContact(){
 
 function renderLanguages(){
   const grid=$("vLangs"); grid.innerHTML='';
-  // كل سطر = بطاقة لغة "اللغة — المستوى"
+  // كل سطر = "اللغة — المستوى"
   const rows=(languages.value||'').split('\n').map(s=>s.trim()).filter(Boolean);
   rows.forEach(r=>{
     const [name, level]=r.split('—').map(x=>x?.trim());
@@ -417,32 +440,12 @@ function renderLists(){
 
 function render(){renderContact(); renderLanguages(); renderLists(); fit()}
 
-/* مشاركة */
-function buildShareBar(){
-  const url=encodeURIComponent(location.href);
-  const text=encodeURIComponent('جرّب منشئ السيرة الذاتية');
-  const row=$("shareRow"); row.innerHTML='';
-  const items=[
-    {label:'واتساب',href:`https://wa.me/?text=${text}%20${url}`,path:"M16.6 14.4c-.2.6-1 1-1.6.7-1.8-.9-3.3-2.4-4.2-4.2-.3-.6.1-1.4.7-1.6l.8-.3c.3-.1.5 0 .7.3l.9 1.4c.2.3.1.6-.1.8l-.3.3c.6 1 1.5 1.8 2.5 2.5l.3-.3c.2-.2.5-.3.8-.1ل1.4.9c.3.2.4.4.3.7l-.3.8ZM12 2a10 10 0 0 1 8.8 14.8L20 22l-5.2-.8A10 10 0 1 1 12 2Z"},
-    {label:'تلغرام',href:`https://t.me/share/url?url=${url}&text=${text}`,path:"M21.5 3.5 2.9 10.8c-1 .4-1 1.8 0 2.2l4.6 1.7 1.8 5.6c.3 1 1.6 1.2 2.2.3l2.7-3.5 5.1 3.7c.8.6 2 .2 2.2-.8l2.7-15.6c.2-1-1-1.8-2.3-1.1Z"},
-    {label:'X',href:`https://twitter.com/intent/tweet?url=${url}&text=${text}`,path:"M13.7 10.6 21 2h-1.7l-6.2 7.4L8.2 2H2l7.6 11L2 22h1.7l6.6-7.8L15.8 22H22l-8.3-11.4Z"},
-    {label:'فيسبوك',href:`https://www.facebook.com/sharer/sharer.php?u=${url}`,path:"M22 12a10 10 0 1 0-11.6 9.9v-7H7.7V12h2.7V9.7c0-2.7 1.6-4.2 4-4.2 1.2 0 2.4.2 2.4.2v2.6h-1.4c-1.3 0-1.7.8-1.7 1.6V12h2.9l-.46 2.9h-2.4v7A10 10 0 0 0 22 12"},
-    {label:'لينكدإن',href:`https://www.linkedin.com/sharing/share-offsite/?url=${url}`,path:"M4.98 3.5a2.5 2.5 0 1 1 0 5.001 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.6h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.8 2.6 4.8 6v6H17v-5.3c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9V21H9z"},
-    {label:'بريد',href:`mailto:?subject=${encodeURIComponent('سيرة ذاتية')}&body=${text}%0A${url}`,path:"M3 6h18v12H3z M3 8.2 12 13l9-4.8"}
-  ];
-  for(const it of items){
-    const a=document.createElement('a'); a.href=it.href; a.target="_blank"; a.rel="noopener"; a.setAttribute('aria-label',it.label);
-    a.innerHTML=`<svg viewBox="0 0 24 24"><path d="${it.path}" fill="#C6A14A"/></svg>`;
-    row.appendChild(a);
-  }
-}
-
 /* تحجيم المعاينة */
 const viewport=$("viewport"), scaleBox=$("scaleBox");
 function fit(){const avail=viewport.clientWidth-6;const PAGE=210*96/25.4;const s=Math.min(1,avail/PAGE);scaleBox.style.transform=`scale(${s})`;viewport.style.height=(297*96/25.4*s)+'px'}
 addEventListener("resize",()=>requestAnimationFrame(fit),{passive:true});
 
-/* PDF */
+/* PDF عبر html2canvas + jsPDF */
 async function renderA4Canvas(){
   const src=$("page"); const clone=src.cloneNode(true);
   Object.assign(clone.style,{width:'210mm',height:'297mm',transform:'none',boxShadow:'none',position:'static'});
@@ -459,8 +462,7 @@ $("printView").addEventListener("click",()=>{window.focus();window.print()});
 const modal=$("msgModal");$("msgOk").onclick=()=>modal.classList.remove("show");
 function showMsg(t,b){$("msgTitle").textContent=t;$("msgBody").innerHTML=b;modal.classList.add("show")}
 
-/* تهيئة وحفظ تلقائي */
-function renderAll(){render(); buildShareBar()}
+/* تهيئة */
 function renderSeed(){
   expList.appendChild(expField({role:'مهندس برمجيات',company:'شركة التقانة',place:'المنامة',from:'06/2022',to:'الحالي',bullets:['بنيت خدمات REST موثوقة','خفضت زمن الاستجابة 40%']}));
   eduList.appendChild(eduField({degree:'بكالوريوس علوم الحاسوب',school:'جامعة الخليج',place:'المنامة',from:'2018',to:'2022',bullets:['معدل تراكمي 3.6/4']}));
@@ -468,8 +470,10 @@ function renderSeed(){
 document.addEventListener('DOMContentLoaded',()=>{
   const raw=localStorage.getItem(STORE);
   if(!raw) renderSeed(); else loadState();
-  renderAll(); fit(); setTimeout(fit,40);
+  render(); fit(); setTimeout(fit,40);
 });
+
+/* استماع للتغييرات */
 ['input','change'].forEach(ev=>{
   document.querySelectorAll('input,textarea').forEach(el=>{
     el.addEventListener(ev,()=>{saveState(); render()},{passive:true});
