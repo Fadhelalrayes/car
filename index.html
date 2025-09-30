@@ -1,45 +1,75 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>السيرة الذاتية – اسمك</title>
-    <style>
-      body{font-family:Arial, sans-serif;max-width:800px;margin:40px auto;padding:0 16px;line-height:1.6}
-      h1{margin-bottom:.2rem} .muted{color:#666} section{margin:24px 0}
-      ul{margin:0;padding-inline-start:18px}
-    </style>
-  </head>
-  <body>
-    <header>
-      <h1>اسمك الكامل</h1>
-      <div class="muted">المسمّى الوظيفي · المدينة · 
-        <a href="mailto:you@example.com">you@example.com</a>
-      </div>
-    </header>
+<head>
+  <meta charset="utf-8" />
+  <title>منشئ السيرة الذاتية</title>
+  <style>
+    body {font-family: Arial, sans-serif; margin: 20px; line-height: 1.6;}
+    h1,h2 {color:#333;}
+    form {max-width: 500px; margin-bottom: 30px;}
+    label {display:block; margin-top:10px;}
+    input, textarea {width:100%; padding:8px; margin-top:4px;}
+    button {margin-top:15px; padding:10px 20px; cursor:pointer;}
+    #cv {border:1px solid #ccc; padding:20px; margin-top:30px; max-width:700px;}
+  </style>
+</head>
+<body>
 
-    <section>
-      <h2>الملخص</h2>
-      <p>3–4 أسطر عن خبرتك ومهاراتك.</p>
-    </section>
+  <h1>منشئ السيرة الذاتية</h1>
+  <form id="cvForm">
+    <label>الاسم الكامل:
+      <input type="text" id="name" required>
+    </label>
+    <label>المسمى الوظيفي:
+      <input type="text" id="title">
+    </label>
+    <label>البريد الإلكتروني:
+      <input type="email" id="email">
+    </label>
+    <label>الملخص:
+      <textarea id="summary"></textarea>
+    </label>
+    <label>الخبرات:
+      <textarea id="experience"></textarea>
+    </label>
+    <label>التعليم:
+      <textarea id="education"></textarea>
+    </label>
+    <label>المهارات:
+      <textarea id="skills"></textarea>
+    </label>
+    <button type="submit">إنشاء السيرة</button>
+  </form>
 
-    <section>
-      <h2>الخبرات</h2>
-      <h3>المسمّى الوظيفي – الشركة (2022–حتى الآن)</h3>
-      <ul>
-        <li>إنجاز مهم أو مسؤولية بارزة.</li>
-        <li>شيء آخر يوضح دورك.</li>
-      </ul>
-    </section>
+  <div id="cv" style="display:none">
+    <h2>السيرة الذاتية</h2>
+    <p><strong id="cvName"></strong> – <span id="cvTitle"></span></p>
+    <p><a id="cvEmail" href=""></a></p>
+    <h3>الملخص</h3>
+    <p id="cvSummary"></p>
+    <h3>الخبرات</h3>
+    <p id="cvExperience"></p>
+    <h3>التعليم</h3>
+    <p id="cvEducation"></p>
+    <h3>المهارات</h3>
+    <p id="cvSkills"></p>
+  </div>
 
-    <section>
-      <h2>التعليم</h2>
-      <p>بكالوريوس … – الجامعة – 2021</p>
-    </section>
+<script>
+document.getElementById("cvForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  document.getElementById("cvName").innerText = document.getElementById("name").value;
+  document.getElementById("cvTitle").innerText = document.getElementById("title").value;
+  document.getElementById("cvEmail").innerText = document.getElementById("email").value;
+  document.getElementById("cvEmail").href = "mailto:" + document.getElementById("email").value;
+  document.getElementById("cvSummary").innerText = document.getElementById("summary").value;
+  document.getElementById("cvExperience").innerText = document.getElementById("experience").value;
+  document.getElementById("cvEducation").innerText = document.getElementById("education").value;
+  document.getElementById("cvSkills").innerText = document.getElementById("skills").value;
+  document.getElementById("cv").style.display = "block";
+  window.scrollTo(0, document.getElementById("cv").offsetTop);
+});
+</script>
 
-    <section>
-      <h2>المهارات</h2>
-      <p>JavaScript, Python, SQL, …</p>
-    </section>
-  </body>
+</body>
 </html>
