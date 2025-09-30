@@ -4,10 +4,10 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>منشئ السيرة الذاتية | عربي</title>
-<meta name="description" content="منشئ سيرة ذاتية عربي A4 — متوافق مع الجوال، إضافة خبرات وتعليم ومهارات ولغات ومشاريع، تصدير PDF ومشاركة.">
+<meta name="description" content="منشئ سيرة ذاتية عربي A4 — متوافق مع الجوال، إضافة خبرات وتعليم ولغات كبطاقات، تصدير PDF ومشاركة.">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--gold:#C6A14A;--black:#0b0f19;--ink:#111827;--muted:#6b7280;--paper:#fff;--accent:#0a4ea6}
+:root{--gold:#C6A14A;--black:#0b0f19;--ink:#111827;--muted:#6b7280;--paper:#fff}
 *{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 html,body{height:100%}
 body{margin:0;background:#f6f7f9;color:var(--ink);font-family:"Cairo",system-ui}
@@ -17,16 +17,15 @@ body{margin:0;background:#f6f7f9;color:var(--ink);font-family:"Cairo",system-ui}
 .hd{padding:14px;background:linear-gradient(90deg,var(--black),#1b2335);color:#fff;font-weight:800;text-align:center}
 .bd{padding:14px}
 label{display:block;font:700 13px/1 "Cairo";color:var(--muted);margin:8px 2px 6px}
-input,select,textarea{width:100%;padding:12px;border:1px solid #dfe3ea;border-radius:12px;font-size:15px;background:#fff}
+input,textarea{width:100%;padding:12px;border:1px solid #dfe3ea;border-radius:12px;font-size:15px;background:#fff}
 textarea{min-height:110px;resize:vertical}
 .grid{display:grid;gap:10px}
-.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}
-@media(max-width:720px){.g2,.g3{grid-template-columns:1fr}}
+.g2{grid-template-columns:1fr 1fr}
+@media(max-width:720px){.g2{grid-template-columns:1fr}}
 .btns{display:grid;gap:8px;grid-template-columns:1fr 1fr}
 .btn{border:0;border-radius:12px;padding:12px 14px;font-weight:800;font-size:15px;cursor:pointer}
 .btn.primary{background:var(--gold);color:#000}.btn.ghost{background:#eef2f7}.btn.warn{background:#ffe9e9;color:#b91c1c}
 .small{font-size:12.5px;color:var(--muted)}
-.tag-hint{font-size:12.5px;color:#6b7280;margin-top:4px}
 
 /* أدوات أعلى المعاينة */
 .tools{display:flex;gap:10px;align-items:center;padding:10px 10px 0;flex-wrap:wrap}
@@ -41,16 +40,15 @@ textarea{min-height:110px;resize:vertical}
 
 /* A4 */
 #page{width:210mm;height:297mm;background:var(--paper);position:relative;overflow:hidden;border:1px solid #e6e7ec;border-radius:14px;box-shadow:0 10px 26px rgba(0,0,0,.06)}
-.resume-hd{padding:14px 18mm 8px;background:linear-gradient(90deg,var(--black),#121828);color:#fff}
+.resume-hd{padding:14px 18mm 10px;background:linear-gradient(90deg,var(--black),#121828);color:#fff}
 .resume-name{font-weight:800;font-size:28px;margin:0}
-.resume-title{color:#e5e7eb;margin:4px 0 0;font-size:15px}
-.resume-contact{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px;font-size:12.5px;color:#f3f4f6}
+.resume-contact{display:flex;flex-wrap:wrap;gap:12px;margin-top:10px;font-size:12.5px;color:#f3f4f6}
 .resume-contact .item{display:flex;align-items:center;gap:6px}
 .resume-contact svg{width:14px;height:14px;fill:#C6A14A}
 
 .gold-line{height:4px;background:linear-gradient(90deg,#ead89c,var(--gold),#a6842a)}
 
-.doc{display:grid;grid-template-columns:1fr 1.1fr;gap:10mm;padding:10mm 18mm 16mm;height:calc(297mm - 58px - 4px - 16mm);overflow:auto}
+.doc{display:grid;grid-template-columns:1fr 1.1fr;gap:10mm;padding:10mm 18mm 16mm;height:calc(297mm - 52px - 4px - 16mm);overflow:auto}
 @media print {.doc{overflow:visible;height:auto}}
 @media(max-width:1024px){.doc{grid-template-columns:1fr}}
 
@@ -58,9 +56,14 @@ textarea{min-height:110px;resize:vertical}
 .section h3{margin:0 0 6px;font:800 16px/1.2 "Cairo";color:#111;border-bottom:1px dashed #e5e7eb;padding-bottom:6px}
 .summary{font-size:14.5px;line-height:1.9;text-align:justify;text-justify:inter-word;color:#111}
 
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{padding:6px 10px;border:1px solid #e5e7eb;border-radius:999px;font-size:12.5px}
+/* لغات كبطاقات صغيرة */
+.lang-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+@media(max-width:1024px){.lang-grid{grid-template-columns:repeat(2,1fr)}}
+.lang-card{border:1px solid #e5e7eb;border-radius:12px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center}
+.lang-card .name{font-weight:700}
+.lang-card .level{font-size:12px;color:#6b7280}
 
+/* عناصر الخبرة والتعليم */
 .item{margin:10px 0}
 .item .top{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
 .item .role{font-weight:800}
@@ -68,7 +71,7 @@ textarea{min-height:110px;resize:vertical}
 .item ul{margin:6px 0 0 18px;padding:0}
 .item li{margin:3px 0;font-size:14px}
 
-/* تذييل مشاركة */
+/* مشاركة */
 .share-site{max-width:1200px;margin:6px auto 8px;padding:6px 12px;text-align:center}
 .share-box{border:1px solid #e7e9ef;background:#fff;border-radius:14px;box-shadow:0 8px 16px rgba(0,0,0,.05);padding:12px}
 .share-title{font:800 15px/1 "Cairo";margin:0 0 10px;color:var(--black)}
@@ -90,7 +93,7 @@ textarea{min-height:110px;resize:vertical}
 .modal .box .ft button{border:0;background:var(--gold);color:#000;border-radius:10px;font-weight:800;padding:9px 16px;cursor:pointer}
 
 @page{size:A4;margin:0}
-@media print{body *{visibility:hidden}#page,#page *{visibility:visible}#page{position:absolute;inset:0;transform:none;box-shadow:none}}
+@media print{body *{visibility:hidden}#page,#page *{visibility:visible}#page{position:absolute;inset:0;transform:none;boxShadow:none}}
 </style>
 </head>
 <body>
@@ -103,34 +106,17 @@ textarea{min-height:110px;resize:vertical}
       <div class="grid">
         <div class="g2">
           <div><label>الاسم الكامل</label><input id="fullName" placeholder="مثال: أحمد محمد علي"></div>
-          <div><label>المسمّى الوظيفي</label><input id="headline" placeholder="مثال: مهندس برمجيات"></div>
-        </div>
-
-        <div class="g2">
           <div><label>الهاتف</label><input id="phone" type="tel" placeholder="+973 3xxxxxxx"></div>
-          <div><label>البريد الإلكتروني</label><input id="email" type="email" placeholder="name@example.com"></div>
         </div>
 
         <div class="g2">
+          <div><label>البريد الإلكتروني</label><input id="email" type="email" placeholder="name@example.com"></div>
           <div><label>المدينة / الدولة</label><input id="location" placeholder="المنامة، البحرين"></div>
-          <div><label>روابط (لينكدإن/جيتهب/موقع)</label><input id="links" placeholder="linkedin.com/in/… , github.com/…"></div>
         </div>
 
         <div>
           <label>الملخص المهني</label>
-          <textarea id="summary" placeholder="ملخص قصير يوضح خبرتك ومهاراتك الرئيسية وقيمتك المضافة. 2-4 جمل."></textarea>
-        </div>
-
-        <div>
-          <label>المهارات (افصل بينها بفواصل)</label>
-          <input id="skills" placeholder="Python, SQL, إدارة مشاريع, تواصل, قيادة فريق">
-          <div class="tag-hint">اكتب المهارات الأساسية التقنية والناعمة مفصولة بفواصل.</div>
-        </div>
-
-        <div class="g3">
-          <div><label>اللغات</label><input id="languages" placeholder="العربية (أم), الإنجليزية (جيد جداً)"></div>
-          <div><label>الشهادات / الدورات</label><input id="certs" placeholder="PMP (2024), AWS CCP (2023)"></div>
-          <div><label>المشاريع البارزة</label><input id="projects" placeholder="منصة متاجر سحابية، تطبيق تتبع مهام"></div>
+          <textarea id="summary" placeholder=""></textarea>
         </div>
 
         <!-- الخبرات -->
@@ -152,6 +138,12 @@ textarea{min-height:110px;resize:vertical}
             <button type="button" class="btn primary" id="addEdu">+ إضافة مؤهل</button>
             <button type="button" class="btn ghost" id="clearEdu">مسح التعليم</button>
           </div>
+        </div>
+
+        <!-- اللغات -->
+        <div class="section">
+          <label>اللغات (اكتب كل لغة مع المستوى، سطر لكل لغة)</label>
+          <textarea id="languages" placeholder="العربية — أم&#10;الإنجليزية — جيد جداً"></textarea>
         </div>
       </div>
     </div>
@@ -178,7 +170,6 @@ textarea{min-height:110px;resize:vertical}
           <div id="page" aria-label="ورقة A4">
             <header class="resume-hd">
               <h1 class="resume-name" id="vName">اسم المرشّح</h1>
-              <div class="resume-title" id="vHeadline">المسمّى الوظيفي</div>
               <div class="resume-contact" id="vContact"></div>
             </header>
             <div class="gold-line"></div>
@@ -188,27 +179,12 @@ textarea{min-height:110px;resize:vertical}
               <aside>
                 <section class="section">
                   <h3>ملخص</h3>
-                  <div class="summary" id="vSummary">اكتب ملخصك المهني المختصر هنا.</div>
-                </section>
-
-                <section class="section">
-                  <h3>مهارات</h3>
-                  <div class="chips" id="vSkills"></div>
+                  <div class="summary" id="vSummary"></div>
                 </section>
 
                 <section class="section">
                   <h3>اللغات</h3>
-                  <div id="vLangs" class="chips"></div>
-                </section>
-
-                <section class="section">
-                  <h3>الشهادات والدورات</h3>
-                  <div id="vCerts" class="chips"></div>
-                </section>
-
-                <section class="section">
-                  <h3>المشاريع</h3>
-                  <div id="vProjects" class="chips"></div>
+                  <div id="vLangs" class="lang-grid"></div>
                 </section>
               </aside>
 
@@ -258,23 +234,21 @@ textarea{min-height:110px;resize:vertical}
 <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 <script>
 const $=id=>document.getElementById(id);
-const STORE='cvBuilderV1';
+const STORE='cvBuilderV2';
 
-/* أيقونات تواصل */
+/* أيقونات */
 const ICON=p=>`<svg viewBox="0 0 24 24"><g fill="#C6A14A">${p}</g></svg>`;
 const icons={
   mail: ICON('<path d="M3 6h18v12H3z"/><path fill="#0b0f19" d="M3 8.2 12 13l9-4.8V6H3v2.2z"/>'),
   phone: ICON('<path d="M6.6 2h2.7l1.1 4-2 1.2a13.5 13.5 0 0 0 6 6l1.2-2 4 1.1v2.7c0 1-0.8 1.9-1.8 1.9-7.8 0-14.1-6.3-14.1-14.1C4.7 2.8 5.6 2 6.6 2z"/>'),
-  loc: ICON('<path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5z"/>'),
-  link: ICON('<path d="M10 14a3 3 0 0 1 0-4l2-2a3 3 0 1 1 4 4l-1 1h-2l2-2a1 1 0 1 0-2-2l-2 2a1 1 0 1 0 2 2l.3-.3H16l-2 2a3 3 0 0 1-4 0z"/>')
+  loc: ICON('<path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5z"/>')
 };
 
 /* عناصر النموذج */
-const fullName=$("fullName"), headline=$("headline"), phone=$("phone"), email=$("email"), locationIn=$("location"), links=$("links"), summary=$("summary"), skills=$("skills"), languages=$("languages"), certs=$("certs"), projects=$("projects");
+const fullName=$("fullName"), phone=$("phone"), email=$("email"), locationIn=$("location"), summary=$("summary"), languages=$("languages");
 
-/* قوالب حقول ديناميكية */
+/* قوالب ديناميكية للخبرة والتعليم */
 function expField(data={}) {
-  const id=crypto.randomUUID();
   const wrap=document.createElement('div');
   wrap.className='card';
   wrap.style.margin='8px 0';
@@ -300,12 +274,11 @@ function expField(data={}) {
         <button type="button" class="btn warn" data-act="del">حذف</button>
       </div>
     </div>`;
-  wrap.dataset.type='exp'; wrap.dataset.id=id;
+  wrap.dataset.type='exp';
   return wrap;
 }
 
 function eduField(data={}) {
-  const id=crypto.randomUUID();
   const wrap=document.createElement('div');
   wrap.className='card';
   wrap.style.margin='8px 0';
@@ -331,7 +304,7 @@ function eduField(data={}) {
         <button type="button" class="btn warn" data-act="del">حذف</button>
       </div>
     </div>`;
-  wrap.dataset.type='edu'; wrap.dataset.id=id;
+  wrap.dataset.type='edu';
   return wrap;
 }
 
@@ -341,7 +314,7 @@ $("clearExp").onclick=()=>{expList.innerHTML=''; saveState(); render()};
 $("addEdu").onclick=()=>{eduList.appendChild(eduField()); saveState(); render()};
 $("clearEdu").onclick=()=>{eduList.innerHTML=''; saveState(); render()};
 
-/* استنساخ/حذف حقول ديناميكية */
+/* أحداث ديناميكية */
 [expList, eduList].forEach(box=>{
   box.addEventListener('click',e=>{
     const btn=e.target.closest('button[data-act]'); if(!btn) return;
@@ -358,7 +331,7 @@ function readDynamic(box){
   return [...box.children].map(card=>{
     const data={};
     card.querySelectorAll('[data-k]').forEach(inp=>{
-      const k=inp.dataset.k; 
+      const k=inp.dataset.k;
       if(k==='bullets'){ data[k]=inp.value.split('\n').map(s=>s.replace(/^•?\s*/,'').trim()).filter(Boolean)}
       else{ data[k]=inp.value }
     });
@@ -367,45 +340,51 @@ function readDynamic(box){
 }
 function saveState(){
   const payload={
-    fullName:fullName.value, headline:headline.value, phone:phone.value, email:email.value, location:locationIn.value, links:links.value,
-    summary:summary.value, skills:skills.value, languages:languages.value, certs:certs.value, projects:projects.value,
+    fullName:fullName.value, phone:phone.value, email:email.value, location:locationIn.value,
+    summary:summary.value, languages:languages.value,
     exp:readDynamic(expList), edu:readDynamic(eduList)
   };
   localStorage.setItem(STORE, JSON.stringify(payload));
 }
 function loadState(){
-  const raw=localStorage.getItem(STORE); if(!raw){ // seed مثال
+  const raw=localStorage.getItem(STORE); 
+  if(!raw){
     expList.appendChild(expField({role:'مهندس برمجيات',company:'شركة التقانة',place:'المنامة',from:'06/2022',to:'الحالي',bullets:['بنيت خدمات REST موثوقة','خفضت زمن الاستجابة 40%']})); 
     eduList.appendChild(eduField({degree:'بكالوريوس علوم الحاسوب',school:'جامعة الخليج',place:'المنامة',from:'2018',to:'2022',bullets:['معدل تراكمي 3.6/4']})); 
     return;
   }
   const d=JSON.parse(raw);
-  fullName.value=d.fullName||''; headline.value=d.headline||''; phone.value=d.phone||''; email.value=d.email||''; locationIn.value=d.location||''; links.value=d.links||'';
-  summary.value=d.summary||''; skills.value=d.skills||''; languages.value=d.languages||''; certs.value=d.certs||''; projects.value=d.projects||'';
+  fullName.value=d.fullName||''; phone.value=d.phone||''; email.value=d.email||''; locationIn.value=d.location||'';
+  summary.value=d.summary||''; languages.value=d.languages||'';
   expList.innerHTML=''; (d.exp||[]).forEach(x=>expList.appendChild(expField(x)));
   eduList.innerHTML=''; (d.edu||[]).forEach(x=>eduList.appendChild(eduField(x)));
 }
 
 /* بناء المعاينة */
-function toChips(str){return (str||'').split(',').map(s=>s.trim()).filter(Boolean)}
 function renderContact(){
   const c=$("vContact"); c.innerHTML='';
   const items=[];
   if(email.value) items.push({icon:icons.mail,txt:email.value});
   if(phone.value) items.push({icon:icons.phone,txt:phone.value});
   if(locationIn.value) items.push({icon:icons.loc,txt:locationIn.value});
-  if(links.value) toChips(links.value).forEach(l=>items.push({icon:icons.link,txt:l}));
   items.forEach(it=>{const d=document.createElement('div');d.className='item';d.innerHTML=it.icon+`<span>${it.txt}</span>`;c.appendChild(d)});
 }
+
+function renderLanguages(){
+  const grid=$("vLangs"); grid.innerHTML='';
+  // كل سطر = بطاقة لغة "اللغة — المستوى"
+  const rows=(languages.value||'').split('\n').map(s=>s.trim()).filter(Boolean);
+  rows.forEach(r=>{
+    const [name, level]=r.split('—').map(x=>x?.trim());
+    const card=document.createElement('div'); card.className='lang-card';
+    card.innerHTML=`<div class="name">${name||r}</div><div class="level">${level||''}</div>`;
+    grid.appendChild(card);
+  });
+}
+
 function renderLists(){
   $("vName").textContent=fullName.value||'اسم المرشّح';
-  $("vHeadline").textContent=headline.value||'المسمّى الوظيفي';
-  $("vSummary").textContent=summary.value||'—';
-
-  const sk=$("vSkills"); sk.innerHTML=''; toChips(skills.value).forEach(s=>{const el=document.createElement('span');el.className='chip';el.textContent=s;sk.appendChild(el)});
-  const lg=$("vLangs"); lg.innerHTML=''; toChips(languages.value).forEach(s=>{const el=document.createElement('span');el.className='chip';el.textContent=s;lg.appendChild(el)});
-  const ct=$("vCerts"); ct.innerHTML=''; toChips(certs.value).forEach(s=>{const el=document.createElement('span');el.className='chip';el.textContent=s;ct.appendChild(el)});
-  const pj=$("vProjects"); pj.innerHTML=''; toChips(projects.value).forEach(s=>{const el=document.createElement('span');el.className='chip';el.textContent=s;pj.appendChild(el)});
+  $("vSummary").textContent=summary.value||'';
 
   const vExp=$("vExp"); vExp.innerHTML='';
   readDynamic(expList).forEach(x=>{
@@ -435,7 +414,8 @@ function renderLists(){
     vEdu.appendChild(box);
   });
 }
-function render(){renderContact(); renderLists(); fit()}
+
+function render(){renderContact(); renderLanguages(); renderLists(); fit()}
 
 /* مشاركة */
 function buildShareBar(){
@@ -443,7 +423,7 @@ function buildShareBar(){
   const text=encodeURIComponent('جرّب منشئ السيرة الذاتية');
   const row=$("shareRow"); row.innerHTML='';
   const items=[
-    {label:'واتساب',href:`https://wa.me/?text=${text}%20${url}`,path:"M16.6 14.4c-.2.6-1 1-1.6.7-1.8-.9-3.3-2.4-4.2-4.2-.3-.6.1-1.4.7-1.6l.8-.3c.3-.1.5 0 .7.3l.9 1.4c.2.3.1.6-.1.8l-.3.3c.6 1 1.5 1.8 2.5 2.5l.3-.3c.2-.2.5-.3.8-.1l1.4.9c.3.2.4.4.3.7l-.3.8ZM12 2a10 10 0 0 1 8.8 14.8L20 22l-5.2-.8A10 10 0 1 1 12 2Z"},
+    {label:'واتساب',href:`https://wa.me/?text=${text}%20${url}`,path:"M16.6 14.4c-.2.6-1 1-1.6.7-1.8-.9-3.3-2.4-4.2-4.2-.3-.6.1-1.4.7-1.6l.8-.3c.3-.1.5 0 .7.3l.9 1.4c.2.3.1.6-.1.8l-.3.3c.6 1 1.5 1.8 2.5 2.5l.3-.3c.2-.2.5-.3.8-.1ل1.4.9c.3.2.4.4.3.7l-.3.8ZM12 2a10 10 0 0 1 8.8 14.8L20 22l-5.2-.8A10 10 0 1 1 12 2Z"},
     {label:'تلغرام',href:`https://t.me/share/url?url=${url}&text=${text}`,path:"M21.5 3.5 2.9 10.8c-1 .4-1 1.8 0 2.2l4.6 1.7 1.8 5.6c.3 1 1.6 1.2 2.2.3l2.7-3.5 5.1 3.7c.8.6 2 .2 2.2-.8l2.7-15.6c.2-1-1-1.8-2.3-1.1Z"},
     {label:'X',href:`https://twitter.com/intent/tweet?url=${url}&text=${text}`,path:"M13.7 10.6 21 2h-1.7l-6.2 7.4L8.2 2H2l7.6 11L2 22h1.7l6.6-7.8L15.8 22H22l-8.3-11.4Z"},
     {label:'فيسبوك',href:`https://www.facebook.com/sharer/sharer.php?u=${url}`,path:"M22 12a10 10 0 1 0-11.6 9.9v-7H7.7V12h2.7V9.7c0-2.7 1.6-4.2 4-4.2 1.2 0 2.4.2 2.4.2v2.6h-1.4c-1.3 0-1.7.8-1.7 1.6V12h2.9l-.46 2.9h-2.4v7A10 10 0 0 0 22 12"},
@@ -481,9 +461,17 @@ function showMsg(t,b){$("msgTitle").textContent=t;$("msgBody").innerHTML=b;modal
 
 /* تهيئة وحفظ تلقائي */
 function renderAll(){render(); buildShareBar()}
-(document.fonts?.ready||Promise.resolve()).then(()=>{loadState(); renderAll(); fit(); setTimeout(fit,40);});
+function renderSeed(){
+  expList.appendChild(expField({role:'مهندس برمجيات',company:'شركة التقانة',place:'المنامة',from:'06/2022',to:'الحالي',bullets:['بنيت خدمات REST موثوقة','خفضت زمن الاستجابة 40%']}));
+  eduList.appendChild(eduField({degree:'بكالوريوس علوم الحاسوب',school:'جامعة الخليج',place:'المنامة',from:'2018',to:'2022',bullets:['معدل تراكمي 3.6/4']}));
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  const raw=localStorage.getItem(STORE);
+  if(!raw) renderSeed(); else loadState();
+  renderAll(); fit(); setTimeout(fit,40);
+});
 ['input','change'].forEach(ev=>{
-  document.querySelectorAll('input,textarea,select').forEach(el=>{
+  document.querySelectorAll('input,textarea').forEach(el=>{
     el.addEventListener(ev,()=>{saveState(); render()},{passive:true});
   });
 });
