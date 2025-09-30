@@ -3,339 +3,69 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>منشئ السيرة الذاتية | CV A4 بالعربي</title>
-<meta name="description" content="اصنع سيرة ذاتية عربية احترافية من صفحة واحدة، بصيغة A4، مع معاينة فورية وتحميل PDF ومشاركة مباشرة.">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--gold:#C6A14A;--ink:#111827;--muted:#6b7280;--paper:#fff;--black:#0b0f19;--line:#e7e9ef;--pill:#f3f4f6}
 *{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-html,body{height:100%}
 body{margin:0;background:#f6f7f9;color:var(--ink);font-family:"Cairo",system-ui}
-.wrap{max-width:1200px;margin:auto;padding:12px;display:grid;gap:12px;grid-template-columns:clamp(320px,46vw,520px) 1fr}
-@media(max-width:1024px){.wrap{grid-template-columns:1fr}}
-.card{background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 8px 16px rgba(0,0,0,.05);overflow:hidden}
+.wrap{max-width:1200px;margin:auto;padding:12px;display:grid;gap:12px;grid-template-columns:1fr}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 8px 16px rgba(0,0,0,.05)}
 .hd{padding:14px;background:linear-gradient(90deg,var(--black),#1b2335);color:#fff;font-weight:800;text-align:center}
 .bd{padding:14px}
 label{display:block;font:700 13px/1 "Cairo";color:var(--muted);margin:8px 2px 6px}
-input,select,textarea{width:100%;padding:12px;border:1px solid #dfe3ea;border-radius:12px;font-size:15px;background:#fff}
-textarea{min-height:120px;resize:vertical}
-.small{font-size:12.75px;color:var(--muted)}
-.grid{display:grid;gap:10px}
-.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}
-@media(max-width:720px){.g2,.g3{grid-template-columns:1fr}}
-.btns{display:grid;gap:8px;grid-template-columns:1fr 1fr}
-.btn{border:0;border-radius:12px;padding:12px 14px;font-weight:800;font-size:15px;cursor:pointer}
-.btn.primary{background:var(--gold);color:#000}.btn.ghost{background:#eef2f7}.btn.warn{background:#fee2e2}
-.pill{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;background:var(--pill);font-weight:700;font-size:12.5px}
-.action-row{display:flex;gap:8px;flex-wrap:wrap}
-.rule{height:1px;background:var(--line);margin:8px 0}
-.item{padding:10px;border:1px dashed #dfe3ea;border-radius:12px;background:#fff}
-.item .row{display:grid;gap:10px}
-.item .row.g2{grid-template-columns:1fr 1fr}
-.item .row.g3{grid-template-columns:repeat(3,1fr)}
-.item .tools{display:flex;gap:8px;margin-top:8px}
-.item .tools .mini{padding:8px 10px;border-radius:10px;border:0;font-weight:800;font-size:12.5px}
-.mini.ghost{background:#eef2f7}.mini.danger{background:#ffe2e2}/* أدوات أعلى المعاينة */ .tools{display:flex;gap:10px;align-items:center;padding:10px 10px 0} .tool{display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 14px;border-radius:12px;border:1px solid #e4e7ef;background:#fff;cursor:pointer;font-weight:800;font-size:13.5px;white-space:nowrap} .tool.dark{background:linear-gradient(180deg,#1b2335,#0b0f19);color:#fff;border:0} .tool svg{width:16px;height:16px}
+input,textarea{width:100%;padding:12px;border:1px solid #dfe3ea;border-radius:12px;font-size:15px;background:#fff}
+textarea{min-height:100px}
+.btn{border:0;border-radius:12px;padding:10px 14px;font-weight:800;font-size:15px;cursor:pointer;background:var(--gold);color:#000}/* صفحة A4 */ #page{width:210mm;height:297mm;background:var(--paper);margin:auto;border:1px solid #e6e7ec;border-radius:14px;box-shadow:0 8px 20px rgba(0,0,0,.05);overflow:hidden;position:relative} .cv-head{padding:20px;background:linear-gradient(90deg,var(--black),#121828);color:#fff;text-align:center} .cv-head .cv-name{font-size:22px;font-weight:800}
 
-/* المعاينة */ .preview{padding:8px 10px 0} .viewport{width:100%;display:flex;justify-content:center;align-items:flex-start;overflow:hidden} .scale-box{transform-origin:top center;display:inline-block}
+.cv-body{padding:18px} .cv-body h2{font:800 16px "Cairo";margin:10px 0;color:#0b1224} .cv-body p,.cv-body li{font-size:14px;line-height:1.7;color:#1f2937} .section{margin-bottom:16px}
 
-/* صفحة A4 CV */ #page{width:210mm;height:297mm;background:var(--paper);position:relative;overflow:hidden;border:1px solid #e6e7ec;border-radius:14px;box-shadow:0 10px 26px rgba(0,0,0,.06)}
+/* أيقونات المشاركة */ .share{display:flex;justify-content:center;gap:20px;margin:16px 0} .share a{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;background:#f3f4f6;transition:.2s} .share a:hover{transform:translateY(-3px)} .share svg{width:22px;height:22px;fill:#C6A14A}
 
-/* رأس CV */ .cv-head{display:flex;align-items:center;gap:14px;padding:14px 18mm;background:linear-gradient(90deg,var(--black),#121828);color:#fff} .cv-photo{width:58px;height:58px;border-radius:14px;background:#ffffff12;border:2px solid #ffffff26;overflow:hidden;display:grid;place-items:center} .cv-photo img{width:100%;height:100%;object-fit:cover} .cv-name{font-weight:800;font-size:22px} .cv-role{font-weight:700;color:#dbe3ff} .cv-head .right{margin-inline-start:auto;text-align:left;direction:ltr} .cv-head .right .pill{background:#ffffff10;color:#fff;border:1px solid #ffffff20}
+.footer{padding:14px;text-align:center;font-size:14px;color:#6b7280} .footer a{color:#C6A14A;font-weight:800;text-decoration:none} .footer a:hover{text-decoration:underline}
 
-/* جسم CV: عمودان */ .cv-body{display:grid;grid-template-columns:68mm 1fr;gap:0;padding:0} @media print{.cv-body{grid-template-columns:68mm 1fr}}
-
-/* الشريط الجانبي */ .aside{background:#0f1524;color:#e5e7eb;min-height:calc(297mm - 100px)} .aside .section{padding:10px 12mm 6px} .aside h3{margin:8px 0 10px;font:800 13.5px/1 "Cairo";letter-spacing:.4px;color:#f3f4f6} .aside .line{height:2px;background:linear-gradient(90deg,#ead89c,var(--gold),#a6842a);opacity:.9;border-radius:2px;margin:6px 0 10px} .info{display:grid;gap:6px} .info .row{display:flex;align-items:center;gap:8px} .info .row svg{width:14px;height:14px;fill:#C6A14A} .skill-list,.lang-list{display:flex;flex-wrap:wrap;gap:6px} .skill-list .pill,.lang-list .pill{background:#1b2335;color:#fff;border:1px solid #2a3450}
-
-/* القسم الرئيسي */ .main{padding:12mm 18mm} .main h2{font:800 16px/1 "Cairo";color:#0b1224;margin:0 0 8px} .main .sec-rule{height:2px;background:#eef1f6;border-radius:2px;margin:8px 0 12px} .summary{font-size:14.5px;line-height:1.9;color:#1a2135;text-align:justify} .job{margin:0 0 12px} .job .top{display:flex;gap:8px;flex-wrap:wrap;align-items:baseline} .job .title{font-weight:800} .job .at{color:var(--muted);font-weight:700} .job .period{margin-inline-start:auto;color:#475569;font-weight:700} .job .desc{font-size:14px;color:#1f2937;line-height:1.8;margin-top:6px} .edu .item{margin:0 0 10px} .edu strong{font-weight:800}
-
-/* فوتر قصير */ .bar{position:absolute;left:0;right:0;bottom:0;height:38px;background:linear-gradient(90deg,var(--black),#121828);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
-
-@page{size:A4;margin:0} @media print{body *{visibility:hidden}#page,#page *{visibility:visible}#page{position:absolute;inset:0;transform:none;box-shadow:none}} </style>
+@page{size:A4;margin:0} </style>
 
 </head>
-<body>
-<main class="wrap">
-  <!-- الإعدادات -->
-  <section class="card settings" aria-label="إعدادات السيرة الذاتية">
-    <div class="hd">إعدادات السيرة الذاتية (CV)</div>
-    <div class="bd">
-      <div class="grid">
-        <div><label>الاسم الكامل</label><input id="fullName" type="text" placeholder="مثال: أحمد محمد علي"></div>
-        <div><label>المسمى الوظيفي</label><input id="jobTitle" type="text" placeholder="مثال: مطوّر واجهات أمامية"></div><div class="g2">
-      <div><label>البلد/المدينة</label><input id="location" type="text" placeholder="المنامة - البحرين"></div>
-      <div><label>الموقع الشخصي</label><input id="website" type="text" placeholder="example.com"></div>
-    </div>
-
-    <div class="g2">
-      <div><label>كود الدولة</label>
-        <select id="countryCode">
-          <option value="+973" selected>🇧🇭 البحرين (+973)</option>
-          <option value="+966">🇸🇦 السعودية (+966)</option>
-          <option value="+971">🇦🇪 الإمارات (+971)</option>
-          <option value="+20">🇪🇬 مصر (+20)</option>
-          <option value="+964">🇮🇶 العراق (+964)</option>
-          <option value="+212">🇲🇦 المغرب (+212)</option>
-          <option value="+961">🇱🇧 لبنان (+961)</option>
-          <option value="+962">🇯🇴 الأردن (+962)</option>
-        </select>
-      </div>
-      <div><label>رقم الاتصال</label><input id="phone" type="tel" placeholder="3333 3333"></div>
-    </div>
-
-    <div class="g2">
-      <div><label>البريد الإلكتروني</label><input id="email" type="email" placeholder="name@example.com"></div>
-      <div><label>لينكدإن</label><input id="linkedin" type="text" placeholder="linkedin.com/in/username"></div>
-    </div>
-
-    <div><label>نبذة مختصرة</label><textarea id="summary" placeholder="ملخص قصير يعرّف بخبراتك ومهاراتك ويبرز قيمتك للشركة."></textarea></div>
-
-    <div><label>المهارات (افصلها بفواصل)</label><input id="skills" type="text" placeholder="JavaScript, React, UX, إدارة فرق"></div>
-    <div><label>اللغات (افصلها بفواصل)</label><input id="languages" type="text" placeholder="العربية (أم)، الإنجليزية (جيد جدًا)"></div>
-
-    <div class="rule"></div>
-
-    <!-- الخبرات -->
-    <div class="action-row"><span class="pill">الخبرات العملية</span><button type="button" class="btn ghost" id="addExp">+ إضافة خبرة</button></div>
-    <div id="expList" class="grid"></div>
-
-    <div class="rule"></div>
-
-    <!-- التعليم -->
-    <div class="action-row"><span class="pill">التعليم</span><button type="button" class="btn ghost" id="addEdu">+ إضافة مؤهل</button></div>
-    <div id="eduList" class="grid"></div>
-
-    <div class="rule"></div>
-
-    <!-- صورة شخصية -->
-    <div class="g2">
-      <div>
-        <label>الصورة الشخصية (اختياري)</label>
-        <input id="photo" type="file" accept="image/*">
-        <div class="small">جودة مربّعة أفضل (مثال 600×600).</div>
-      </div>
-      <div>
-        <label>روابط إضافية (GitHub/Behance… اختياري)</label>
-        <input id="links" type="text" placeholder="github.com/user, behance.net/user">
-      </div>
-    </div>
-  </div>
+<body><div id="page">
+  <header class="cv-head">
+    <div class="cv-name" id="nameOut">اسم المرشح</div>
+  </header>  <div class="cv-body">
+    <div class="section">
+      <h2>معلومات الاتصال</h2>
+      <p>📞 <span id="phoneOut">—</span></p>
+      <p>✉️ <span id="emailOut">—</span></p>
+      <p>🔗 <span id="linkedinOut">—</span></p>
+    </div><div class="section">
+  <h2>الملخص المهني</h2>
+  <p id="summaryOut">اكتب ملخصًا قصيرًا هنا...</p>
 </div>
 
-  </section>  <!-- المعاينة -->  <section class="card" aria-label="معاينة A4">
-    <div class="hd">معاينة السيرة الذاتية</div>
-    <div class="tools" role="toolbar" aria-label="أدوات">
-      <button class="tool" id="printView" title="طباعة">
-        <svg viewBox="0 0 24 24"><path d="M6 2h12v6H6zM6 14h12v8H6z"/></svg><span>طباعة</span>
-      </button>
-      <button class="tool dark" id="downloadPdf" title="تحميل PDF">
-        <svg viewBox="0 0 24 24"><path d="M12 3v10.59l3.3-3.3 1.4 1.42L12 17.41 7.3 11.7l1.4-1.41 3.3 3.3V3h2z"/></svg><span>تحميل PDF</span>
-      </button>
-      <button class="tool" id="sharePdf" title="مشاركة">
-        <svg viewBox="0 0 24 24"><path d="M16 8a3 3 0 1 0-2.8-4H13v8.3l-2.1-1.2-1 1.7 4 2.3V22h2V8zM6 9h3v2H8v9H6z"/></svg><span>مشاركة</span>
-      </button>
-    </div><div class="bd preview">
-  <div class="viewport" id="viewport">
-    <div class="scale-box" id="scaleBox">
-      <div id="page" aria-label="ورقة A4">
-        <header class="cv-head">
-          <div class="cv-photo" id="photoBox">📷</div>
-          <div>
-            <div class="cv-name" id="nameOut">اسم المرشّح</div>
-            <div class="cv-role" id="roleOut">المسمى الوظيفي</div>
-          </div>
-          <div class="right">
-            <span class="pill" id="locOut">—</span>
-          </div>
-        </header>
-
-        <section class="cv-body">
-          <!-- الشريط الجانبي -->
-          <aside class="aside">
-            <div class="section">
-              <h3>بيانات الاتصال</h3>
-              <div class="line"></div>
-              <div class="info" id="contactList"></div>
-            </div>
-            <div class="section">
-              <h3>المهارات</h3>
-              <div class="line"></div>
-              <div class="skill-list" id="skillsOut"></div>
-            </div>
-            <div class="section">
-              <h3>اللغات</h3>
-              <div class="line"></div>
-              <div class="lang-list" id="langsOut"></div>
-            </div>
-            <div class="section" id="linksOutWrap" style="display:none">
-              <h3>روابط</h3>
-              <div class="line"></div>
-              <div class="info" id="linksOut"></div>
-            </div>
-          </aside>
-
-          <!-- القسم الرئيسي -->
-          <main class="main">
-            <section>
-              <h2>نبذة</h2>
-              <div class="sec-rule"></div>
-              <p class="summary" id="summaryOut">اكتب نبذة قصيرة لعرض خبرتك وقيمتك.</p>
-            </section>
-
-            <section style="margin-top:12px">
-              <h2>الخبرات العملية</h2>
-              <div class="sec-rule"></div>
-              <div id="expOut"></div>
-            </section>
-
-            <section style="margin-top:12px">
-              <h2>التعليم</h2>
-              <div class="sec-rule"></div>
-              <div class="edu" id="eduOut"></div>
-            </section>
-          </main>
-        </section>
-
-        <div class="bar">سيرة ذاتية — صفحة واحدة</div>
-      </div>
-    </div>
-  </div>
+<div class="section">
+  <h2>الخبرة العملية</h2>
+  <ul id="expOut"><li>أحدث وظيفة — تفاصيل</li></ul>
 </div>
 
-  </section>
-</main><!-- مودال تنبيه بسيط --><div class="card" style="max-width:1200px;margin:6px auto;padding:10px 14px;text-align:center;color:#6b7280">
-  تلميح: احرص على الاختصار. صفحة واحدة تُفضَّل للشركات عادةً.
-</div><!-- مكتبات --><script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script><script>
-const DM={'٠':'0','١':'1','٢':'2','٣':'3','٤':'4','٥':'5','٦':'6','٧':'7','٨':'8','٩':'9','۰':'0','۱':'1','۲':'2','۳':'3','۴':'4','۵':'5','۶':'6','۷':'7','۸':'8','۹':'9'};
-const $=id=>document.getElementById(id);
-const STORE='cvFormV1';
+<div class="section">
+  <h2>التعليم</h2>
+  <ul id="eduOut"><li>أحدث شهادة — تفاصيل</li></ul>
+</div>
 
-// عناصر أساسية
-const fullName=$('fullName'), jobTitle=$('jobTitle'), locationIn=$('location'), website=$('website');
-const country=$('countryCode'), phone=$('phone'), email=$('email'), linkedin=$('linkedin');
-const summary=$('summary'), skills=$('skills'), languages=$('languages'), links=$('links');
-const photo=$('photo');
-// معاينة
-const nameOut=$('nameOut'), roleOut=$('roleOut'), locOut=$('locOut');
-const contactList=$('contactList'), skillsOut=$('skillsOut'), langsOut=$('langsOut');
-const linksOutWrap=$('linksOutWrap'), linksOut=$('linksOut');
-const summaryOut=$('summaryOut');
-const expOut=$('expOut'), eduOut=$('eduOut');
-const photoBox=$('photoBox');
+<div class="section">
+  <h2>المهارات</h2>
+  <ul id="skillsOut"><li>مهارة 1</li><li>مهارة 2</li></ul>
+</div>
 
-// أدوات
-function text(v){return (v||'').trim()}
-function arabicDigitsToLatin(v){return (v||'').replace(/[٠-٩۰-۹]/g,d=>DM[d])}
-function splitList(v){return text(v).split(',').map(s=>s.trim()).filter(Boolean)}
-function fullPhone(){const p=arabicDigitsToLatin(phone.value);return (country.value && p)?`${country.value}\u00A0${p}`:(p||'')}
+<!-- مشاركة -->
+<div class="share">
+  <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5..."/></svg></a>
+  <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M22 5.9c-.8.3-1.6.6-2.4.7..."/></svg></a>
+</div>
 
-// حفظ/تحميل
-function saveState(extra={}){
-  const ids=['fullName','jobTitle','location','website','countryCode','phone','email','linkedin','summary','skills','languages','links'];
-  const d={}; ids.forEach(id=>{const el=$(id); if(el) d[id]=el.value??''});
-  Object.assign(d, extra);
-  // قوائم الخبرات والتعليم
-  d.experiences=[...document.querySelectorAll('[data-exp]')].map(item=>({
-    role:item.querySelector('.in-role').value,
-    company:item.querySelector('.in-company').value,
-    start:item.querySelector('.in-start').value,
-    end:item.querySelector('.in-end').value,
-    desc:item.querySelector('.in-desc').value,
-  }));
-  d.education=[...document.querySelectorAll('[data-edu]')].map(item=>({
-    degree:item.querySelector('.in-degree').value,
-    school:item.querySelector('.in-school').value,
-    start:item.querySelector('.in-edu-start').value,
-    end:item.querySelector('.in-edu-end').value,
-    detail:item.querySelector('.in-detail').value,
-  }));
-  localStorage.setItem(STORE, JSON.stringify(d));
-}
-function loadState(){
-  try{
-    const raw=localStorage.getItem(STORE); if(!raw) return {};
-    const d=JSON.parse(raw);
-    for(const [k,v] of Object.entries(d)){
-      if(['experiences','education','photoDataURL'].includes(k)) continue; // handled later
-      const el=$(k); if(el) el.value=v;
-    }
-    if(d.experiences?.length){ d.experiences.forEach(addExpItem); }
-    if(d.education?.length){ d.education.forEach(addEduItem); }
-    if(d.photoDataURL){ setPhoto(d.photoDataURL); }
-    return d;
-  }catch(e){ return {}; }
-}
+<!-- برمجة -->
+<div class="footer">
+  برمجة وتطوير : <a href="https://api.whatsapp.com/send/?phone=97333375858" target="_blank">فاضل الريس</a>
+</div>
 
-// بناء المعاينة
-function buildContact(){
-  contactList.innerHTML='';
-  const rows=[];
-  if(text(email.value)) rows.push({icon:'<path d="M3 6h18v12H3z"/><path fill="#0b0f19" d="M3 8.2 12 13l9-4.8V6H3v2.2z"/>', txt: text(email.value)});
-  const ph=fullPhone(); if(ph) rows.push({icon:'<path d="M6.6 2h2.7l1.1 4-2 1.2a13.5 13.5 0 0 0 6 6l1.2-2 4 1.1v2.7c0 1-0.8 1.9-1.8 1.9-7.8 0-14.1-6.3-14.1-14.1C4.7 2.8 5.6 2 6.6 2z"/>', txt: ph});
-  if(text(linkedin.value)) rows.push({icon:'<path d="M4.98 3.5a2.5 2.5 0 1 1 0 5.001 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.6h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.8 2.6 4.8 6v6H17v-5.3c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9V21H9z"/>', txt: text(linkedin.value)});
-  if(text(website.value)) rows.push({icon:'<path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm-1 3.1a8.1 8.1 0 0 0-6.5 6.5H11V5.1Zm2 0V11h6.5A8.1 8.1 0 0 0 13 5.1ZM5.5 12A8.1 8.1 0 0 0 11 18.9V12H5.5ZM13 12v6.9a8.1 8.1 0 0 0 6.5-6.9H13Z"/>', txt: text(website.value)});
-  if(text(links.value)){
-    linksOutWrap.style.display='block';
-    linksOut.innerHTML='';
-    splitList(links.value).forEach(l=>{
-      const row=document.createElement('div'); row.className='row';
-      row.innerHTML=`<svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 1 0-7l1.4-1.4a5 5 0 0 1 7 7L17 13"/></svg><div>${l}</div>`;
-      linksOut.appendChild(row);
-    });
-  } else {
-    linksOutWrap.style.display='none';
-  }
-  rows.forEach(r=>{
-    const row=document.createElement('div'); row.className='row';
-    row.innerHTML=`<svg viewBox="0 0 24 24">${r.icon}</svg><div>${r.txt}</div>`;
-    contactList.appendChild(row);
-  })
-}
-function buildTags(src, out){ out.innerHTML=''; splitList(src.value).forEach(s=>{ const sp=document.createElement('span'); sp.className='pill'; sp.textContent=s; out.appendChild(sp); }); }
-function applyHeader(){ nameOut.textContent=text(fullName.value)||'اسم المرشّح'; roleOut.textContent=text(jobTitle.value)||'المسمى الوظيفي'; locOut.textContent=text(locationIn.value)||'—'; }
-function applySummary(){ summaryOut.textContent=text(summary.value)||'اكتب نبذة قصيرة لعرض خبرتك وقيمتك.'; }
-
-// خبرة — نموذج عنصر
-const expList=$('expList');
-function expItemTemplate(v={}){
-  return `<div class="item" data-exp>
-    <div class="row g2">
-      <div><label>المسمى</label><input class="in-role" type="text" value="${v.role||''}" placeholder="مثال: مهندس برمجيات"></div>
-      <div><label>الشركة</label><input class="in-company" type="text" value="${v.company||''}" placeholder="مثال: شركة التقنية"></div>
-    </div>
-    <div class="row g3" style="margin-top:6px">
-      <div><label>بداية</label><input class="in-start" type="text" value="${v.start||''}" placeholder="2022"></div>
-      <div><label>نهاية</label><input class="in-end" type="text" value="${v.end||''}" placeholder="الحالي"></div>
-      <div><label>موقع العمل</label><input class="in-loc" type="text" value="${v.loc||''}" placeholder="عن بُعد/المكتب"></div>
-    </div>
-    <div style="margin-top:6px"><label>وصف مختصر (نقاط/جمل)</label><textarea class="in-desc" placeholder="إنجازات ومسؤوليات رئيسية">${v.desc||''}</textarea></div><div class="tools"><button type="button" class="mini ghost" onclick="moveUp(this)">▲ نقل لأعلى</button><button type="button" class="mini ghost" onclick="moveDown(this)">▼ نقل لأسفل</button><button type="button" class="mini danger" onclick="removeItem(this)">حذف</button></div>
-
-  </div>`
-}
-function addExpItem(v={}){ const wrap=document.createElement('div'); wrap.innerHTML=expItemTemplate(v); const node=wrap.firstElementChild; expList.appendChild(node); bindChange(node); buildExp(); saveState(); }
-$('addExp').onclick=()=>addExpItem({});function buildExp(){ expOut.innerHTML=''; [...document.querySelectorAll('[data-exp]')].forEach(item=>{ const role=item.querySelector('.in-role').value; const company=item.querySelector('.in-company').value; const start=arabicDigitsToLatin(item.querySelector('.in-start').value); const end=arabicDigitsToLatin(item.querySelector('.in-end').value)||'الحالي'; const loc=item.querySelector('.in-loc').value; const desc=item.querySelector('.in-desc').value; const div=document.createElement('div'); div.className='job'; div.innerHTML=<div class="top"><span class="title">${role||'—'}</span><span class="at">في ${company||'—'}</span><span class="period">${start||'—'} — ${end}${loc? • ${loc}:''}</span></div><div class="desc">${(desc||'').replace(/\n/g,'<br>')}</div>; expOut.appendChild(div); }); }
-
-// تعليم — نموذج عنصر const eduList=$('eduList'); function eduItemTemplate(v={}){ return `<div class="item" data-edu> <div class="row g2"> <div><label>المؤهل</label><input class="in-degree" type="text" value="${v.degree||''}" placeholder="بكالوريوس هندسة برمجيات"></div> <div><label>الجهة</label><input class="in-school" type="text" value="${v.school||''}" placeholder="جامعة ..."></div> </div> <div class="row g3" style="margin-top:6px"> <div><label>بداية</label><input class="in-edu-start" type="text" value="${v.start||''}" placeholder="2018"></div> <div><label>نهاية</label><input class="in-edu-end" type="text" value="${v.end||''}" placeholder="2022"></div> <div><label>تفاصيل</label><input class="in-detail" type="text" value="${v.detail||''}" placeholder="مرتبة الشرف / المعدل"></div> </div> <div class="tools"><button type="button" class="mini ghost" onclick="moveUp(this)">▲ نقل لأعلى</button><button type="button" class="mini ghost" onclick="moveDown(this)">▼ نقل لأسفل</button><button type="button" class="mini danger" onclick="removeItem(this)">حذف</button></div>
-
-  </div>`
-}
-function addEduItem(v={}){ const wrap=document.createElement('div'); wrap.innerHTML=eduItemTemplate(v); const node=wrap.firstElementChild; eduList.appendChild(node); bindChange(node); buildEdu(); saveState(); }
-$('addEdu').onclick=()=>addEduItem({});function buildEdu(){ eduOut.innerHTML=''; [...document.querySelectorAll('[data-edu]')].forEach(item=>{ const degree=item.querySelector('.in-degree').value; const school=item.querySelector('.in-school').value; const start=arabicDigitsToLatin(item.querySelector('.in-edu-start').value); const end=arabicDigitsToLatin(item.querySelector('.in-edu-end').value); const detail=item.querySelector('.in-detail').value; const div=document.createElement('div'); div.className='item'; div.innerHTML=<div><strong>${degree||'—'}</strong> — ${school||'—'}</div><div class="small">${start||'—'} — ${end||'—'} ${detail?('• '+detail):''}</div>; eduOut.appendChild(div); }); }
-
-// ترتيب/حذف عناصر ديناميكية window.removeItem=function(btn){ const item=btn.closest('.item'); const isExp=item.hasAttribute('data-exp'); item.remove(); isExp?buildExp():buildEdu(); saveState(); } window.moveUp=function(btn){ const item=btn.closest('.item'); const prev=item.previousElementSibling; if(prev){ item.parentElement.insertBefore(item, prev); const isExp=item.hasAttribute('data-exp'); isExp?buildExp():buildEdu(); saveState(); } } window.moveDown=function(btn){ const item=btn.closest('.item'); const next=item.nextElementSibling; if(next){ item.parentElement.insertBefore(next, item); const isExp=item.hasAttribute('data-exp'); isExp?buildExp():buildEdu(); saveState(); } }
-
-// صورة شخصية function setPhoto(url){ photoBox.innerHTML=''; const img=new Image(); img.src=url; img.alt='photo'; photoBox.appendChild(img); saveState({photoDataURL:url}); } photo.addEventListener('change',e=>{ const f=e.target.files?.[0]; if(!f) return; const r=new FileReader(); r.onload=()=>setPhoto(r.result); r.readAsDataURL(f); });
-
-// تطبيق التغييرات العامة function apply(){ applyHeader(); buildContact(); buildTags(skills, skillsOut); buildTags(languages, langsOut); applySummary(); buildExp(); buildEdu(); saveState(); }
-
-// تحجيم المعاينة const viewport=$('viewport'), scaleBox=$('scaleBox'); function fit(){ const avail=viewport.clientWidth-6; const PAGE=21096/25.4; const s=Math.min(1, avail/PAGE); scaleBox.style.transform=scale(${s}); viewport.style.height=(29796/25.4*s)+'px' } addEventListener('resize',()=>requestAnimationFrame(fit),{passive:true});
-
-// PDF async function renderA4Canvas(){ const src=$('page'); const clone=src.cloneNode(true); Object.assign(clone.style,{width:'210mm',height:'297mm',transform:'none',boxShadow:'none',position:'static'}); const holder=document.createElement('div');Object.assign(holder.style,{position:'fixed',left:'-9999px',top:'0',background:'#fff'});holder.appendChild(clone);document.body.appendChild(holder); const canvas=await html2canvas(clone,{scale:2,backgroundColor:'#ffffff',useCORS:true}); document.body.removeChild(holder); return canvas; } async function makePDFBlob(){ const {jsPDF}=window.jspdf; const c=await renderA4Canvas(); const img=c.toDataURL('image/jpeg',0.96); const pdf=new jsPDF('p','mm','a4'); pdf.addImage(img,'JPEG',0,0,210,297,'','FAST'); return pdf.output('blob'); } $('downloadPdf').onclick=async()=>{ const blob=await makePDFBlob(); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='cv.pdf'; a.click(); URL.revokeObjectURL(url); }; $('sharePdf').onclick=async()=>{ try{ const blob=await makePDFBlob(); const file=new File([blob],'cv.pdf',{type:'application/pdf'}); if(navigator.canShare&&navigator.canShare({files:[file]})){ await navigator.share({title:'CV',text:'السيرة الذاتية PDF',files:[file]}); } else { alert('المشاركة غير مدعومة على هذا الجهاز. حمّل الملف ثم شاركه يدويًا.'); } }catch(e){ alert('تعذّرت المشاركة الآن.'); } }; $('printView').addEventListener('click',()=>{ window.focus(); window.print(); });
-
-// استماع للتغييرات ['input','change'].forEach(ev=>{ document.addEventListener(ev,(e)=>{ const id=e.target?.id; if(['phone'].includes(id)) e.target.value=arabicDigitsToLatin(e.target.value); apply(); },{passive:true}); });
-
-// ربط تغييرات داخل العناصر المُضافة function bindChange(scope){ ['input','change'].forEach(ev=>{ scope.addEventListener(ev,()=>apply(),{passive:true}); }); }
-
-// تهيئة افتراضية (document.fonts?.ready||Promise.resolve()).then(()=>{ // إضافة عنصرين افتراضيين إن لم تكن محفوظة const d=loadState(); if(!d.experiences){ addExpItem({role:'مطوّر برمجيات',company:'شركة التقنية',start:'2023',end:'الحالي',loc:'عن بُعد',desc:'- بناء واجهات حديثة باستخدام React.\n- تحسين الأداء وتقليل زمن التحميل بنسبة 30%.'}); } if(!d.education){ addEduItem({degree:'بكالوريوس علوم الحاسب',school:'جامعة المنامة',start:'2019',end:'2023',detail:'معدل: 3.6/4.0'}); } apply(); fit(); setTimeout(fit,40); }); </script>
-
-</body>
+  </div>
+</div></body>
 </html>
