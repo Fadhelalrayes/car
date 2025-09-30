@@ -1,75 +1,403 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <title>منشئ السيرة الذاتية</title>
-  <style>
-    body {font-family: Arial, sans-serif; margin: 20px; line-height: 1.6;}
-    h1,h2 {color:#333;}
-    form {max-width: 500px; margin-bottom: 30px;}
-    label {display:block; margin-top:10px;}
-    input, textarea {width:100%; padding:8px; margin-top:4px;}
-    button {margin-top:15px; padding:10px 20px; cursor:pointer;}
-    #cv {border:1px solid #ccc; padding:20px; margin-top:30px; max-width:700px;}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>منشئ سيرة ذاتية احترافية</title>
+<style>
+  :root{
+    --bg:#f7f7fb;--text:#222;--muted:#6b7280;--pri:#1f6feb;--card:#fff;--line:#e5e7eb;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial}
+  a{color:var(--pri)}
+  /* Top bar */
+  header.app{
+    position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);
+    padding:10px 16px;display:flex;gap:10px;align-items:center;z-index:5
+  }
+  header.app h1{font-size:18px;margin:0}
+  .container{display:grid;grid-template-columns:380px 1fr;gap:18px;max-width:1200px;margin:18px auto;padding:0 16px}
+  /* Form card */
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px}
+  .card h2{font-size:16px;margin:0 0 8px}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  label{font-size:13px;color:var(--muted)}
+  input,textarea,select{
+    width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;background:#fff;font-size:14px
+  }
+  textarea{min-height:90px;resize:vertical}
+  .btn{border:0;border-radius:8px;padding:10px 14px;background:var(--pri);color:#fff;cursor:pointer;font-weight:600}
+  .btn.secondary{background:#1118270d;color:#111}
+  .btn.ghost{background:transparent;border:1px dashed var(--line);color:#111}
+  .stack{display:flex;gap:8px;flex-wrap:wrap}
+  .small{font-size:12px;color:var(--muted)}
+  .section{margin-top:14px;border-top:1px dashed var(--line);padding-top:14px}
+  .item{border:1px dashed var(--line);border-radius:8px;padding:10px;margin-top:10px;background:#fafafa;position:relative}
+  .item .remove{position:absolute;inset-inline-start:8px;top:8px;background:#fff;border:1px solid #ef4444;color:#ef4444}
+  /* CV preview */
+  .cv-wrap{padding:0}
+  .sheet{
+    width:210mm;min-height:297mm;margin:0 auto;background:#fff;color:#111;box-shadow:0 10px 30px rgba(0,0,0,.06);
+    display:grid;grid-template-columns:7cm 1fr
+  }
+  .side{
+    background:#0f172a;color:#f8fafc;padding:18mm 14mm;border-inline-end:1px solid #0b1225
+  }
+  .main{padding:18mm 18mm}
+  .avatar{width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid #1f2937;background:#1f2937}
+  .name{font-size:26px;font-weight:800;margin:10px 0 2px}
+  .title{color:#cbd5e1;font-size:13px;margin:0 0 14px}
+  .side h3,.main h3{font-size:13px;letter-spacing:.5px;margin:14px 0 8px;text-transform:uppercase}
+  .side .info p,.side .skills span,.side .langs span{font-size:12px;color:#e2e8f0}
+  .skills .tag,.langs .tag{display:inline-block;border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:3px 8px;margin:4px 4px 0 0}
+  .section-title{font-size:14px;font-weight:800;margin:16px 0 8px;position:relative}
+  .main .job{margin-bottom:12px}
+  .job .top{display:flex;justify-content:space-between;gap:8px;font-weight:700}
+  .job .meta{color:#6b7280;font-size:12px;margin:2px 0 6px}
+  .bullets{margin:0 0 12px 0;padding:0 18px}
+  .bullets li{margin:4px 0}
+  .proj .link{font-size:12px}
+  .hero-summary{border:1px solid var(--line);border-radius:8px;padding:10px;background:#fafafa;margin-bottom:14px}
+  .muted{color:#6b7280}
+  /* Print */
+  @media print{
+    header.app,.card{display:none!important}
+    body{background:#fff}
+    .sheet{box-shadow:none;margin:0}
+    @page{size:A4;margin:12mm}
+  }
+</style>
 </head>
 <body>
 
-  <h1>منشئ السيرة الذاتية</h1>
-  <form id="cvForm">
-    <label>الاسم الكامل:
-      <input type="text" id="name" required>
-    </label>
-    <label>المسمى الوظيفي:
-      <input type="text" id="title">
-    </label>
-    <label>البريد الإلكتروني:
-      <input type="email" id="email">
-    </label>
-    <label>الملخص:
-      <textarea id="summary"></textarea>
-    </label>
-    <label>الخبرات:
-      <textarea id="experience"></textarea>
-    </label>
-    <label>التعليم:
-      <textarea id="education"></textarea>
-    </label>
-    <label>المهارات:
-      <textarea id="skills"></textarea>
-    </label>
-    <button type="submit">إنشاء السيرة</button>
-  </form>
+<header class="app">
+  <h1>منشئ سيرة ذاتية احترافية</h1>
+  <div class="stack">
+    <button class="btn" onclick="generate()">تحديث المعاينة</button>
+    <button class="btn secondary" onclick="window.print()">تحميل PDF</button>
+    <button class="btn ghost" onclick="clearAll()">تفريغ الحقول</button>
+  </div>
+</header>
 
-  <div id="cv" style="display:none">
-    <h2>السيرة الذاتية</h2>
-    <p><strong id="cvName"></strong> – <span id="cvTitle"></span></p>
-    <p><a id="cvEmail" href=""></a></p>
-    <h3>الملخص</h3>
-    <p id="cvSummary"></p>
-    <h3>الخبرات</h3>
-    <p id="cvExperience"></p>
-    <h3>التعليم</h3>
-    <p id="cvEducation"></p>
-    <h3>المهارات</h3>
-    <p id="cvSkills"></p>
+<div class="container">
+  <!-- ===== Form ===== -->
+  <div class="card">
+    <h2>البيانات الأساسية</h2>
+    <div class="row">
+      <div>
+        <label>الاسم الكامل</label>
+        <input id="name" placeholder="مثال: أحمد محمد الغامدي" required>
+      </div>
+      <div>
+        <label>المسمّى الوظيفي</label>
+        <input id="role" placeholder="مطوّر واجهات أمامية">
+      </div>
+    </div>
+    <div class="row section">
+      <div>
+        <label>البريد</label>
+        <input id="email" type="email" placeholder="you@example.com">
+      </div>
+      <div>
+        <label>الهاتف</label>
+        <input id="phone" placeholder="+966…">
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <label>المدينة</label>
+        <input id="location" placeholder="الرياض، السعودية">
+      </div>
+      <div>
+        <label>رابط شخصي (LinkedIn / موقع)</label>
+        <input id="website" placeholder="https://linkedin.com/in/username">
+      </div>
+    </div>
+    <div class="section">
+      <label>رابط صورة (اختياري)</label>
+      <input id="photo" placeholder="https://…/avatar.jpg">
+    </div>
+    <div class="section">
+      <label>ملخص احترافي (3–4 أسطر مركّزة)</label>
+      <textarea id="summary" placeholder="ملخّص قصير يوضح خبرتك، أهم إنجازاتك، وقيمتك المضافة."></textarea>
+      <div class="small">نصيحة: اذكر أرقام/نتائج ملموسة + أدواتك الأساسية.</div>
+    </div>
+
+    <div class="section">
+      <h2>الخبرات</h2>
+      <div id="expList"></div>
+      <button class="btn ghost" onclick="addExp()">+ إضافة خبرة</button>
+    </div>
+
+    <div class="section">
+      <h2>التعليم</h2>
+      <div id="eduList"></div>
+      <button class="btn ghost" onclick="addEdu()">+ إضافة مؤهل</button>
+    </div>
+
+    <div class="section">
+      <h2>المهارات</h2>
+      <div class="row">
+        <div><label>اكتب مهارة واضغط إضافة</label><input id="skillInput" placeholder="JavaScript"></div>
+        <div style="display:flex;align-items:end"><button class="btn secondary" onclick="addSkill()" type="button">إضافة</button></div>
+      </div>
+      <div id="skillsBox" class="stack" style="margin-top:8px"></div>
+    </div>
+
+    <div class="section">
+      <h2>اللغات</h2>
+      <div class="row">
+        <div><label>اللغة</label><input id="langName" placeholder="العربية"></div>
+        <div>
+          <label>المستوى</label>
+          <select id="langLevel">
+            <option>أساسي</option><option>متوسط</option><option>متقدم</option><option>طليق</option><option>لغة أم</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-top:8px"><button class="btn secondary" type="button" onclick="addLang()">إضافة</button></div>
+      <div id="langsBox" class="stack" style="margin-top:8px"></div>
+    </div>
+
+    <div class="section">
+      <h2>المشاريع (اختياري)</h2>
+      <div id="projList"></div>
+      <button class="btn ghost" onclick="addProj()">+ إضافة مشروع</button>
+    </div>
+
+    <div class="section">
+      <button class="btn" onclick="generate()">تحديث المعاينة</button>
+      <span class="small">يتم الحفظ تلقائيًا في المتصفح.</span>
+    </div>
   </div>
 
-<script>
-document.getElementById("cvForm").addEventListener("submit", function(e){
-  e.preventDefault();
-  document.getElementById("cvName").innerText = document.getElementById("name").value;
-  document.getElementById("cvTitle").innerText = document.getElementById("title").value;
-  document.getElementById("cvEmail").innerText = document.getElementById("email").value;
-  document.getElementById("cvEmail").href = "mailto:" + document.getElementById("email").value;
-  document.getElementById("cvSummary").innerText = document.getElementById("summary").value;
-  document.getElementById("cvExperience").innerText = document.getElementById("experience").value;
-  document.getElementById("cvEducation").innerText = document.getElementById("education").value;
-  document.getElementById("cvSkills").innerText = document.getElementById("skills").value;
-  document.getElementById("cv").style.display = "block";
-  window.scrollTo(0, document.getElementById("cv").offsetTop);
-});
-</script>
+  <!-- ===== CV Preview ===== -->
+  <div class="cv-wrap">
+    <div class="sheet" id="sheet">
+      <aside class="side">
+        <img id="p_avatar" class="avatar" alt="avatar">
+        <div class="name" id="p_name">الاسم الكامل</div>
+        <div class="title" id="p_role">المسمّى الوظيفي</div>
 
+        <h3>بيانات التواصل</h3>
+        <div class="info" id="p_contacts"></div>
+
+        <h3>المهارات</h3>
+        <div class="skills" id="p_skills"></div>
+
+        <h3>اللغات</h3>
+        <div class="langs" id="p_langs"></div>
+      </aside>
+
+      <main class="main">
+        <div class="hero-summary" id="p_summary">اكتب ملخّصًا احترافيًا موجزًا يبرز إنجازاتك.</div>
+
+        <div class="section-title">الخبرات العملية</div>
+        <div id="p_exps"></div>
+
+        <div class="section-title">التعليم</div>
+        <div id="p_edus"></div>
+
+        <div class="section-title" id="projTitle" style="display:none">المشاريع</div>
+        <div id="p_projs"></div>
+      </main>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- Helpers & State ---------- */
+const state = {
+  skills:[], langs:[], exps:[], edus:[], projs:[]
+};
+const $ = sel => document.querySelector(sel);
+const el = (tag, props={}, ...children)=>{
+  const e=document.createElement(tag);
+  Object.assign(e, props);
+  children.forEach(c=>e.append(c));
+  return e;
+};
+function save(){ localStorage.setItem('cvpro', JSON.stringify(collect())); }
+function load(){
+  const raw=localStorage.getItem('cvpro'); if(!raw) {seed(); return}
+  try{fill(JSON.parse(raw));}catch{seed()}
+}
+/* ---------- Seed with example ---------- */
+function seed(){
+  $('#name').value='أحمد محمد الغامدي';
+  $('#role').value='مطوّر واجهات أمامية';
+  $('#email').value='ahmad@example.com';
+  $('#phone').value='+966501234567';
+  $('#location').value='الرياض، السعودية';
+  $('#website').value='https://linkedin.com/in/ahmad';
+  $('#summary').value='مطوّر واجهات أمامية بخبرة 4+ سنوات في React وTypeScript... حسّنت سرعة تحميل المنتج 38% وساهمت برفع معدل التحويل 12%.';
+  addExp({company:'شركة تقنية XYZ',title:'Front-end Engineer',start:'2022',end:'الحالي',city:'الرياض',
+          bullets:'قيادة تطوير مكونات تصميم.\nتحسين الأداء Core Web Vitals.\nبناء CI/CD للواجهة.'});
+  addExp({company:'وكالة الويب ABC',title:'Front-end Developer',start:'2020',end:'2022',city:'جدة',
+          bullets:'تطوير لوحات تحكم.\nتكامل APIs.\nتحسين إمكانية الوصول.'});
+  addEdu({school:'جامعة الملك سعود',degree:'بكالوريوس علوم الحاسب',start:'2016',end:'2020',city:'الرياض',notes:'مرتبة الشرف الأولى'});
+  ['JavaScript','TypeScript','React','Next.js','CSS','Tailwind','Git','Testing'].forEach(s=>addSkill(s));
+  addLang('العربية','لغة أم'); addLang('الإنجليزية','متقدم');
+  addProj({name:'لوحة قياس المتاجر',desc:'Dashboard لمبيعات آنية مع Charts.',
+           link:'https://example.com'});
+  generate(); save();
+}
+/* ---------- Dynamic blocks ---------- */
+function addExp(pref={}){
+  const c=el('div',{className:'item'});
+  c.append(
+    el('button',{className:'btn remove',type:'button',onclick:()=>c.remove()},'حذف'),
+    lab('المسمى الوظيفي', 'title', pref.title||''),
+    lab('الشركة', 'company', pref.company||''),
+    lab('المدينة', 'city', pref.city||''),
+    row(lab('من', 'start', pref.start||''), lab('إلى', 'end', pref.end||'')),
+    lab('إنجازات (سطر لكل نقطة)', 'bullets', pref.bullets||'', true)
+  );
+  $('#expList').append(c);
+}
+function addEdu(pref={}){
+  const c=el('div',{className:'item'});
+  c.append(
+    el('button',{className:'btn remove',type:'button',onclick:()=>c.remove()},'حذف'),
+    lab('المؤسسة التعليمية', 'school', pref.school||''),
+    lab('المؤهل', 'degree', pref.degree||''),
+    lab('المدينة', 'city', pref.city||''),
+    row(lab('من', 'start', pref.start||''), lab('إلى', 'end', pref.end||'')),
+    lab('ملاحظات (اختياري)', 'notes', pref.notes||'', true)
+  );
+  $('#eduList').append(c);
+}
+function addProj(pref={}){
+  const c=el('div',{className:'item'});
+  c.append(
+    el('button',{className:'btn remove',type:'button',onclick:()=>c.remove()},'حذف'),
+    lab('اسم المشروع', 'name', pref.name||''),
+    lab('وصف مختصر', 'desc', pref.desc||'', true),
+    lab('رابط', 'link', pref.link||'')
+  );
+  $('#projList').append(c);
+}
+function lab(title, name, val, ta=false){
+  const wrap=el('div');
+  const id = 'f_'+name+'_'+Math.random().toString(36).slice(2,7);
+  const L=el('label',{}, title);
+  const field = ta ? el('textarea',{value:val}) : el('input',{value:val});
+  field.dataset.name = name;
+  wrap.append(L, field);
+  return wrap;
+}
+function row(a,b){const r=el('div',{className:'row'}); r.append(a,b); return r;}
+function addSkill(v){const val = typeof v==='string'? v : $('#skillInput').value.trim(); if(!val) return;
+  const s=el('span',{className:'tag'}, val); s.onclick=()=>s.remove(); $('#skillsBox').append(s); $('#skillInput').value='';}
+function addLang(n,l){const name = typeof n==='string'? n : $('#langName').value.trim(); const level = typeof l==='string'? l : $('#langLevel').value;
+  if(!name) return; const s=el('span',{className:'tag'}, name+' — '+level); s.onclick=()=>s.remove(); $('#langsBox').append(s); $('#langName').value='';}
+
+/* ---------- Collect & Fill ---------- */
+function collect(){
+  const exps=[...$('#expList').children].map(div=>{
+    const f=div.querySelectorAll('[data-name]');
+    const o={}; f.forEach(x=>o[x.dataset.name]=x.value); return o;
+  });
+  const edus=[...$('#eduList').children].map(div=>{
+    const f=div.querySelectorAll('[data-name]');
+    const o={}; f.forEach(x=>o[x.dataset.name]=x.value); return o;
+  });
+  const projs=[...$('#projList').children].map(div=>{
+    const f=div.querySelectorAll('[data-name]');
+    const o={}; f.forEach(x=>o[x.dataset.name]=x.value); return o;
+  });
+  const skills=[...$('#skillsBox').children].map(s=>s.textContent);
+  const langs=[...$('#langsBox').children].map(s=>s.textContent);
+  return {
+    name:$('#name').value, role:$('#role').value, email:$('#email').value, phone:$('#phone').value,
+    location:$('#location').value, website:$('#website').value, photo:$('#photo').value,
+    summary:$('#summary').value, exps, edus, skills, langs, projs
+  };
+}
+function fill(data){
+  // basics
+  ['name','role','email','phone','location','website','photo','summary'].forEach(k=>{
+    if(data[k]) $('#'+k).value=data[k];
+  });
+  // lists
+  $('#expList').innerHTML=''; (data.exps||[]).forEach(addExp);
+  $('#eduList').innerHTML=''; (data.edus||[]).forEach(addEdu);
+  $('#projList').innerHTML=''; (data.projs||[]).forEach(addProj);
+  $('#skillsBox').innerHTML=''; (data.skills||[]).forEach(addSkill);
+  $('#langsBox').innerHTML=''; (data.langs||[]).forEach(x=>{
+    const [n,...r]=x.split('—'); addLang(n.trim(), r.join('—').trim()||'');
+  });
+  generate();
+}
+/* ---------- Generate Preview ---------- */
+function generate(){
+  const d=collect();
+  // photo
+  const avatar = $('#p_avatar');
+  if(d.photo){ avatar.src = d.photo; avatar.style.display='block'; } else { avatar.removeAttribute('src'); avatar.style.display='none'; }
+  // name/role
+  $('#p_name').textContent = d.name || 'الاسم الكامل';
+  $('#p_role').textContent = d.role || 'المسمّى الوظيفي';
+  // contacts
+  const contacts=[];
+  if(d.email) contacts.push(`📧 <a href="mailto:${d.email}">${d.email}</a>`);
+  if(d.phone) contacts.push(`📞 ${d.phone}`);
+  if(d.location) contacts.push(`📍 ${d.location}`);
+  if(d.website) contacts.push(`🔗 <a href="${d.website}" target="_blank" rel="noreferrer">${d.website}</a>`);
+  $('#p_contacts').innerHTML = contacts.map(p=>`<p>${p}</p>`).join('') || '<p class="muted">أضف معلومات التواصل…</p>';
+  // skills
+  $('#p_skills').innerHTML = (d.skills||[]).map(s=>`<span class="tag">${s}</span>`).join('') || '<span class="small">أضف مهاراتك الأساسية</span>';
+  // langs
+  $('#p_langs').innerHTML = (d.langs||[]).map(s=>`<span class="tag">${s}</span>`).join('') || '<span class="small">أضف اللغات</span>';
+  // summary
+  $('#p_summary').textContent = d.summary || 'اكتب ملخّصًا احترافيًا موجزًا يبرز إنجازاتك.';
+  // exps
+  const exps = (d.exps||[]).filter(e=>e.company||e.title);
+  $('#p_exps').innerHTML = exps.map(e=>{
+    const bullets = (e.bullets||'').split('\n').filter(Boolean).map(b=>`<li>${escapeHTML(b)}</li>`).join('');
+    const meta = [e.city, [e.start,e.end].filter(Boolean).join(' – ')].filter(Boolean).join(' • ');
+    return `<div class="job">
+      <div class="top"><div>${escapeHTML(e.title||'')}</div><div>${escapeHTML(e.company||'')}</div></div>
+      <div class="meta">${escapeHTML(meta)}</div>
+      ${bullets?`<ul class="bullets">${bullets}</ul>`:''}
+    </div>`;
+  }).join('') || `<div class="small muted">أضف خبراتك مع إنجازات نقطية مركّزة.</div>`;
+  // edus
+  const edus = (d.edus||[]).filter(e=>e.school||e.degree);
+  $('#p_edus').innerHTML = edus.map(e=>{
+    const meta = [e.city, [e.start,e.end].filter(Boolean).join(' – ')].filter(Boolean).join(' • ');
+    return `<div class="job">
+      <div class="top"><div>${escapeHTML(e.degree||'')}</div><div>${escapeHTML(e.school||'')}</div></div>
+      <div class="meta">${escapeHTML(meta)}</div>
+      ${e.notes?`<div class="muted" style="margin-top:4px">${escapeHTML(e.notes)}</div>`:''}
+    </div>`;
+  }).join('') || `<div class="small muted">أضف مؤهلاتك التعليمية.</div>`;
+  // projects
+  const projs = (d.projs||[]).filter(p=>p.name||p.desc||p.link);
+  $('#projTitle').style.display = projs.length? 'block':'none';
+  $('#p_projs').innerHTML = projs.map(p=>{
+    const link = p.link? `<span class="link">— <a href="${p.link}" target="_blank" rel="noreferrer">${p.link}</a></span>`:'';
+    return `<div class="proj job">
+      <div class="top"><div>${escapeHTML(p.name||'')}</div><div></div></div>
+      <div class="muted">${escapeHTML(p.desc||'')}</div>
+      ${link}
+    </div>`;
+  }).join('');
+  save();
+}
+function escapeHTML(str){return (str||'').replace(/[&<>'"]/g, m=>({ '&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;' }[m]));}
+
+/* ---------- Utilities ---------- */
+function clearAll(){
+  if(!confirm('هل تريد تفريغ جميع الحقول؟')) return;
+  localStorage.removeItem('cvpro'); location.reload();
+}
+function addSkillEnter(e){ if(e.key==='Enter'){ e.preventDefault(); addSkill(); } }
+$('#skillInput').addEventListener('keydown', addSkillEnter);
+
+/* ---------- Init ---------- */
+window.addEventListener('DOMContentLoaded', load);
+</script>
 </body>
 </html>
