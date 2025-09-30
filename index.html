@@ -1,71 +1,492 @@
-<!DOCTYPE html><html lang="ar" dir="rtl">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>منشئ السيرة الذاتية | CV A4 بالعربي</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<title>منشئ السيرة الذاتية | عربي</title>
+<meta name="description" content="منشئ سيرة ذاتية عربي A4 — متوافق مع الجوال، إضافة خبرات وتعليم ومهارات ولغات ومشاريع، تصدير PDF ومشاركة.">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--gold:#C6A14A;--ink:#111827;--muted:#6b7280;--paper:#fff;--black:#0b0f19;--line:#e7e9ef;--pill:#f3f4f6}
+:root{--gold:#C6A14A;--black:#0b0f19;--ink:#111827;--muted:#6b7280;--paper:#fff;--accent:#0a4ea6}
 *{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+html,body{height:100%}
 body{margin:0;background:#f6f7f9;color:var(--ink);font-family:"Cairo",system-ui}
-.wrap{max-width:1200px;margin:auto;padding:12px;display:grid;gap:12px;grid-template-columns:1fr}
-.card{background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 8px 16px rgba(0,0,0,.05)}
+.wrap{max-width:1200px;margin:auto;padding:12px;display:grid;gap:12px;grid-template-columns:clamp(320px,46vw,540px) 1fr}
+@media(max-width:1024px){.wrap{grid-template-columns:1fr}}
+.card{background:#fff;border:1px solid #e7e9ef;border-radius:14px;box-shadow:0 8px 16px rgba(0,0,0,.05);overflow:hidden}
 .hd{padding:14px;background:linear-gradient(90deg,var(--black),#1b2335);color:#fff;font-weight:800;text-align:center}
 .bd{padding:14px}
 label{display:block;font:700 13px/1 "Cairo";color:var(--muted);margin:8px 2px 6px}
-input,textarea{width:100%;padding:12px;border:1px solid #dfe3ea;border-radius:12px;font-size:15px;background:#fff}
-textarea{min-height:100px}
-.btn{border:0;border-radius:12px;padding:10px 14px;font-weight:800;font-size:15px;cursor:pointer;background:var(--gold);color:#000}/* صفحة A4 */ #page{width:210mm;height:297mm;background:var(--paper);margin:auto;border:1px solid #e6e7ec;border-radius:14px;box-shadow:0 8px 20px rgba(0,0,0,.05);overflow:hidden;position:relative} .cv-head{padding:20px;background:linear-gradient(90deg,var(--black),#121828);color:#fff;text-align:center} .cv-head .cv-name{font-size:22px;font-weight:800}
+input,select,textarea{width:100%;padding:12px;border:1px solid #dfe3ea;border-radius:12px;font-size:15px;background:#fff}
+textarea{min-height:110px;resize:vertical}
+.grid{display:grid;gap:10px}
+.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:720px){.g2,.g3{grid-template-columns:1fr}}
+.btns{display:grid;gap:8px;grid-template-columns:1fr 1fr}
+.btn{border:0;border-radius:12px;padding:12px 14px;font-weight:800;font-size:15px;cursor:pointer}
+.btn.primary{background:var(--gold);color:#000}.btn.ghost{background:#eef2f7}.btn.warn{background:#ffe9e9;color:#b91c1c}
+.small{font-size:12.5px;color:var(--muted)}
+.tag-hint{font-size:12.5px;color:#6b7280;margin-top:4px}
 
-.cv-body{padding:18px} .cv-body h2{font:800 16px "Cairo";margin:10px 0;color:#0b1224} .cv-body p,.cv-body li{font-size:14px;line-height:1.7;color:#1f2937} .section{margin-bottom:16px}
+/* أدوات أعلى المعاينة */
+.tools{display:flex;gap:10px;align-items:center;padding:10px 10px 0;flex-wrap:wrap}
+.tool{display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 14px;border-radius:12px;border:1px solid #e4e7ef;background:#fff;cursor:pointer;font-weight:800;font-size:13.5px;white-space:nowrap}
+.tool.dark{background:linear-gradient(180deg,#1b2335,#0b0f19);color:#fff;border:0}
+.tool svg{width:16px;height:16px}
 
-/* أيقونات المشاركة */ .share{display:flex;justify-content:center;gap:20px;margin:16px 0} .share a{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;background:#f3f4f6;transition:.2s} .share a:hover{transform:translateY(-3px)} .share svg{width:22px;height:22px;fill:#C6A14A}
+/* المعاينة */
+.preview{padding:8px 10px 0}
+.viewport{width:100%;display:flex;justify-content:center;align-items:flex-start;overflow:hidden}
+.scale-box{transform-origin:top center;display:inline-block}
 
-.footer{padding:14px;text-align:center;font-size:14px;color:#6b7280} .footer a{color:#C6A14A;font-weight:800;text-decoration:none} .footer a:hover{text-decoration:underline}
+/* A4 */
+#page{width:210mm;height:297mm;background:var(--paper);position:relative;overflow:hidden;border:1px solid #e6e7ec;border-radius:14px;box-shadow:0 10px 26px rgba(0,0,0,.06)}
+.resume-hd{padding:14px 18mm 8px;background:linear-gradient(90deg,var(--black),#121828);color:#fff}
+.resume-name{font-weight:800;font-size:28px;margin:0}
+.resume-title{color:#e5e7eb;margin:4px 0 0;font-size:15px}
+.resume-contact{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px;font-size:12.5px;color:#f3f4f6}
+.resume-contact .item{display:flex;align-items:center;gap:6px}
+.resume-contact svg{width:14px;height:14px;fill:#C6A14A}
 
-@page{size:A4;margin:0} </style>
+.gold-line{height:4px;background:linear-gradient(90deg,#ead89c,var(--gold),#a6842a)}
 
+.doc{display:grid;grid-template-columns:1fr 1.1fr;gap:10mm;padding:10mm 18mm 16mm;height:calc(297mm - 58px - 4px - 16mm);overflow:auto}
+@media print {.doc{overflow:visible;height:auto}}
+@media(max-width:1024px){.doc{grid-template-columns:1fr}}
+
+.section{margin-bottom:8mm}
+.section h3{margin:0 0 6px;font:800 16px/1.2 "Cairo";color:#111;border-bottom:1px dashed #e5e7eb;padding-bottom:6px}
+.summary{font-size:14.5px;line-height:1.9;text-align:justify;text-justify:inter-word;color:#111}
+
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{padding:6px 10px;border:1px solid #e5e7eb;border-radius:999px;font-size:12.5px}
+
+.item{margin:10px 0}
+.item .top{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.item .role{font-weight:800}
+.item .meta{color:#6b7280;font-size:12.5px}
+.item ul{margin:6px 0 0 18px;padding:0}
+.item li{margin:3px 0;font-size:14px}
+
+/* تذييل مشاركة */
+.share-site{max-width:1200px;margin:6px auto 8px;padding:6px 12px;text-align:center}
+.share-box{border:1px solid #e7e9ef;background:#fff;border-radius:14px;box-shadow:0 8px 16px rgba(0,0,0,.05);padding:12px}
+.share-title{font:800 15px/1 "Cairo";margin:0 0 10px;color:var(--black)}
+.icon-row{display:flex;justify-content:center;gap:16px}
+.icon-row a{display:inline-grid;place-items:center;width:42px;height:42px;border-radius:50%;text-decoration:none;transition:.18s transform}
+.icon-row a svg{width:22px;height:22px;fill:#C6A14A}
+.icon-row a:hover{transform:translateY(-2px)}
+
+.site-footer{max-width:1200px;margin:4px auto 12px;color:#6b7280;text-align:center;padding:0 10px}
+.site-footer a{color:var(--gold);text-decoration:none;font-weight:800}
+.site-footer a:hover{text-decoration:underline}
+
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:9999}
+.modal.show{display:flex}
+.modal .box{width:min(92vw,520px);background:#fff;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.25);overflow:hidden}
+.modal .box .hd{background:linear-gradient(90deg,var(--black),#1b2335);color:#fff;text-align:center;padding:12px 16px}
+.modal .box .bd{padding:16px;font-size:15px}
+.modal .box .ft{padding:12px;display:flex;justify-content:center;background:#f6f7f9}
+.modal .box .ft button{border:0;background:var(--gold);color:#000;border-radius:10px;font-weight:800;padding:9px 16px;cursor:pointer}
+
+@page{size:A4;margin:0}
+@media print{body *{visibility:hidden}#page,#page *{visibility:visible}#page{position:absolute;inset:0;transform:none;box-shadow:none}}
+</style>
 </head>
-<body><div id="page">
-  <header class="cv-head">
-    <div class="cv-name" id="nameOut">اسم المرشح</div>
-  </header>  <div class="cv-body">
-    <div class="section">
-      <h2>معلومات الاتصال</h2>
-      <p>📞 <span id="phoneOut">—</span></p>
-      <p>✉️ <span id="emailOut">—</span></p>
-      <p>🔗 <span id="linkedinOut">—</span></p>
-    </div><div class="section">
-  <h2>الملخص المهني</h2>
-  <p id="summaryOut">اكتب ملخصًا قصيرًا هنا...</p>
-</div>
+<body>
 
-<div class="section">
-  <h2>الخبرة العملية</h2>
-  <ul id="expOut"><li>أحدث وظيفة — تفاصيل</li></ul>
-</div>
+<main class="wrap">
+  <!-- الإعدادات -->
+  <section class="card settings" aria-label="إعدادات السيرة الذاتية">
+    <div class="hd">إعدادات السيرة الذاتية</div>
+    <div class="bd">
+      <div class="grid">
+        <div class="g2">
+          <div><label>الاسم الكامل</label><input id="fullName" placeholder="مثال: أحمد محمد علي"></div>
+          <div><label>المسمّى الوظيفي</label><input id="headline" placeholder="مثال: مهندس برمجيات"></div>
+        </div>
 
-<div class="section">
-  <h2>التعليم</h2>
-  <ul id="eduOut"><li>أحدث شهادة — تفاصيل</li></ul>
-</div>
+        <div class="g2">
+          <div><label>الهاتف</label><input id="phone" type="tel" placeholder="+973 3xxxxxxx"></div>
+          <div><label>البريد الإلكتروني</label><input id="email" type="email" placeholder="name@example.com"></div>
+        </div>
 
-<div class="section">
-  <h2>المهارات</h2>
-  <ul id="skillsOut"><li>مهارة 1</li><li>مهارة 2</li></ul>
-</div>
+        <div class="g2">
+          <div><label>المدينة / الدولة</label><input id="location" placeholder="المنامة، البحرين"></div>
+          <div><label>روابط (لينكدإن/جيتهب/موقع)</label><input id="links" placeholder="linkedin.com/in/… , github.com/…"></div>
+        </div>
 
-<!-- مشاركة -->
-<div class="share">
-  <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5..."/></svg></a>
-  <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M22 5.9c-.8.3-1.6.6-2.4.7..."/></svg></a>
-</div>
+        <div>
+          <label>الملخص المهني</label>
+          <textarea id="summary" placeholder="ملخص قصير يوضح خبرتك ومهاراتك الرئيسية وقيمتك المضافة. 2-4 جمل."></textarea>
+        </div>
 
-<!-- برمجة -->
-<div class="footer">
-  برمجة وتطوير : <a href="https://api.whatsapp.com/send/?phone=97333375858" target="_blank">فاضل الريس</a>
-</div>
+        <div>
+          <label>المهارات (افصل بينها بفواصل)</label>
+          <input id="skills" placeholder="Python, SQL, إدارة مشاريع, تواصل, قيادة فريق">
+          <div class="tag-hint">اكتب المهارات الأساسية التقنية والناعمة مفصولة بفواصل.</div>
+        </div>
 
+        <div class="g3">
+          <div><label>اللغات</label><input id="languages" placeholder="العربية (أم), الإنجليزية (جيد جداً)"></div>
+          <div><label>الشهادات / الدورات</label><input id="certs" placeholder="PMP (2024), AWS CCP (2023)"></div>
+          <div><label>المشاريع البارزة</label><input id="projects" placeholder="منصة متاجر سحابية، تطبيق تتبع مهام"></div>
+        </div>
+
+        <!-- الخبرات -->
+        <div class="section">
+          <label>الخبرات العملية</label>
+          <div id="expList"></div>
+          <div class="btns" style="margin-top:8px">
+            <button type="button" class="btn primary" id="addExp">+ إضافة خبرة</button>
+            <button type="button" class="btn ghost" id="clearExp">مسح الخبرات</button>
+          </div>
+          <div class="small">اكتب إنجازاتك كنقاط تركّز على الأثر (مقاييس/أرقام عندما أمكن).</div>
+        </div>
+
+        <!-- التعليم -->
+        <div class="section">
+          <label>التعليم</label>
+          <div id="eduList"></div>
+          <div class="btns" style="margin-top:8px">
+            <button type="button" class="btn primary" id="addEdu">+ إضافة مؤهل</button>
+            <button type="button" class="btn ghost" id="clearEdu">مسح التعليم</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- المعاينة -->
+  <section class="card" aria-label="معاينة السيرة الذاتية">
+    <div class="hd">المعاينة</div>
+    <div class="tools" role="toolbar" aria-label="أدوات">
+      <button class="tool" id="printView" title="طباعة">
+        <svg viewBox="0 0 24 24"><path d="M6 2h12v6H6zM6 14h12v8H6z"/></svg><span>طباعة</span>
+      </button>
+      <button class="tool dark" id="downloadPdf" title="تحميل PDF">
+        <svg viewBox="0 0 24 24"><path d="M12 3v10.59l3.3-3.3 1.4 1.42L12 17.41 7.3 11.7l1.4-1.41 3.3 3.3V3h2z"/></svg><span>تحميل PDF</span>
+      </button>
+      <button class="tool" id="sharePdf" title="مشاركة">
+        <svg viewBox="0 0 24 24"><path d="M16 8a3 3 0 1 0-2.8-4H13v8.3l-2.1-1.2-1 1.7 4 2.3V22h2V8zM6 9h3v2H8v9H6z"/></svg><span>مشاركة</span>
+      </button>
+    </div>
+
+    <div class="bd preview">
+      <div class="viewport" id="viewport">
+        <div class="scale-box" id="scaleBox">
+          <div id="page" aria-label="ورقة A4">
+            <header class="resume-hd">
+              <h1 class="resume-name" id="vName">اسم المرشّح</h1>
+              <div class="resume-title" id="vHeadline">المسمّى الوظيفي</div>
+              <div class="resume-contact" id="vContact"></div>
+            </header>
+            <div class="gold-line"></div>
+
+            <main class="doc">
+              <!-- عمود جانبي -->
+              <aside>
+                <section class="section">
+                  <h3>ملخص</h3>
+                  <div class="summary" id="vSummary">اكتب ملخصك المهني المختصر هنا.</div>
+                </section>
+
+                <section class="section">
+                  <h3>مهارات</h3>
+                  <div class="chips" id="vSkills"></div>
+                </section>
+
+                <section class="section">
+                  <h3>اللغات</h3>
+                  <div id="vLangs" class="chips"></div>
+                </section>
+
+                <section class="section">
+                  <h3>الشهادات والدورات</h3>
+                  <div id="vCerts" class="chips"></div>
+                </section>
+
+                <section class="section">
+                  <h3>المشاريع</h3>
+                  <div id="vProjects" class="chips"></div>
+                </section>
+              </aside>
+
+              <!-- عمود المحتوى -->
+              <section>
+                <div class="section">
+                  <h3>الخبرات العملية</h3>
+                  <div id="vExp"></div>
+                </div>
+
+                <div class="section">
+                  <h3>التعليم</h3>
+                  <div id="vEdu"></div>
+                </div>
+              </section>
+            </main>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- مشاركة الصفحة -->
+<section class="share-site" aria-label="مشاركة الصفحة">
+  <div class="share-box">
+    <h3 class="share-title">مشاركة الصفحة</h3>
+    <div class="icon-row" id="shareRow"></div>
   </div>
-</div></body>
+</section>
+
+<footer class="site-footer">
+  برمجة وتطوير — <a href="https://api.whatsapp.com/send/?phone=97333375858&text&type=phone_number&app_absent=0" target="_blank" rel="noopener">فاضل الريس</a>
+</footer>
+
+<!-- مودال -->
+<div class="modal" id="msgModal">
+  <div class="box" role="dialog" aria-live="polite">
+    <div class="hd" id="msgTitle">تنويه</div>
+    <div class="bd" id="msgBody">نص الرسالة.</div>
+    <div class="ft"><button type="button" id="msgOk">حسنًا</button></div>
+  </div>
+</div>
+
+<!-- مكتبات -->
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const STORE='cvBuilderV1';
+
+/* أيقونات تواصل */
+const ICON=p=>`<svg viewBox="0 0 24 24"><g fill="#C6A14A">${p}</g></svg>`;
+const icons={
+  mail: ICON('<path d="M3 6h18v12H3z"/><path fill="#0b0f19" d="M3 8.2 12 13l9-4.8V6H3v2.2z"/>'),
+  phone: ICON('<path d="M6.6 2h2.7l1.1 4-2 1.2a13.5 13.5 0 0 0 6 6l1.2-2 4 1.1v2.7c0 1-0.8 1.9-1.8 1.9-7.8 0-14.1-6.3-14.1-14.1C4.7 2.8 5.6 2 6.6 2z"/>'),
+  loc: ICON('<path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5z"/>'),
+  link: ICON('<path d="M10 14a3 3 0 0 1 0-4l2-2a3 3 0 1 1 4 4l-1 1h-2l2-2a1 1 0 1 0-2-2l-2 2a1 1 0 1 0 2 2l.3-.3H16l-2 2a3 3 0 0 1-4 0z"/>')
+};
+
+/* عناصر النموذج */
+const fullName=$("fullName"), headline=$("headline"), phone=$("phone"), email=$("email"), locationIn=$("location"), links=$("links"), summary=$("summary"), skills=$("skills"), languages=$("languages"), certs=$("certs"), projects=$("projects");
+
+/* قوالب حقول ديناميكية */
+function expField(data={}) {
+  const id=crypto.randomUUID();
+  const wrap=document.createElement('div');
+  wrap.className='card';
+  wrap.style.margin='8px 0';
+  wrap.innerHTML=`
+    <div class="bd grid">
+      <div class="g2">
+        <div><label>المسمّى الوظيفي</label><input data-k="role" value="${data.role||''}"></div>
+        <div><label>الشركة</label><input data-k="company" value="${data.company||''}"></div>
+      </div>
+      <div class="g2">
+        <div><label>الموقع</label><input data-k="place" value="${data.place||''}"></div>
+        <div class="g2">
+          <div><label>من</label><input data-k="from" placeholder="06/2022" value="${data.from||''}"></div>
+          <div><label>إلى</label><input data-k="to" placeholder="الحالي / 08/2025" value="${data.to||''}"></div>
+        </div>
+      </div>
+      <div>
+        <label>إنجازات (كل سطر نقطة)</label>
+        <textarea data-k="bullets" placeholder="• حسّنت أداء النظام 35%&#10;• قدت فريقًا من 4 مهندسين">${(data.bullets||[]).join('\n')}</textarea>
+      </div>
+      <div class="btns">
+        <button type="button" class="btn ghost" data-act="dup">استنساخ</button>
+        <button type="button" class="btn warn" data-act="del">حذف</button>
+      </div>
+    </div>`;
+  wrap.dataset.type='exp'; wrap.dataset.id=id;
+  return wrap;
+}
+
+function eduField(data={}) {
+  const id=crypto.randomUUID();
+  const wrap=document.createElement('div');
+  wrap.className='card';
+  wrap.style.margin='8px 0';
+  wrap.innerHTML=`
+    <div class="bd grid">
+      <div class="g2">
+        <div><label>الدرجة العلمية</label><input data-k="degree" value="${data.degree||''}" placeholder="بكالوريوس هندسة حاسوب"></div>
+        <div><label>الجامعة</label><input data-k="school" value="${data.school||''}" placeholder="جامعة ..."></div>
+      </div>
+      <div class="g2">
+        <div><label>الموقع</label><input data-k="place" value="${data.place||''}"></div>
+        <div class="g2">
+          <div><label>من</label><input data-k="from" placeholder="2018" value="${data.from||''}"></div>
+          <div><label>إلى</label><input data-k="to" placeholder="2022" value="${data.to||''}"></div>
+        </div>
+      </div>
+      <div>
+        <label>تفاصيل (اختياري - كل سطر نقطة)</label>
+        <textarea data-k="bullets" placeholder="• مشروع تخرج عن ...">${(data.bullets||[]).join('\n')}</textarea>
+      </div>
+      <div class="btns">
+        <button type="button" class="btn ghost" data-act="dup">استنساخ</button>
+        <button type="button" class="btn warn" data-act="del">حذف</button>
+      </div>
+    </div>`;
+  wrap.dataset.type='edu'; wrap.dataset.id=id;
+  return wrap;
+}
+
+const expList=$("expList"), eduList=$("eduList");
+$("addExp").onclick=()=>{expList.appendChild(expField()); saveState(); render()};
+$("clearExp").onclick=()=>{expList.innerHTML=''; saveState(); render()};
+$("addEdu").onclick=()=>{eduList.appendChild(eduField()); saveState(); render()};
+$("clearEdu").onclick=()=>{eduList.innerHTML=''; saveState(); render()};
+
+/* استنساخ/حذف حقول ديناميكية */
+[expList, eduList].forEach(box=>{
+  box.addEventListener('click',e=>{
+    const btn=e.target.closest('button[data-act]'); if(!btn) return;
+    const card=e.target.closest('.card'); if(!card) return;
+    if(btn.dataset.act==='del'){card.remove()}
+    if(btn.dataset.act==='dup'){const clone=card.cloneNode(true); box.insertBefore(clone, card.nextSibling)}
+    saveState(); render();
+  });
+  box.addEventListener('input',()=>{saveState(); render()});
+});
+
+/* حفظ/تحميل */
+function readDynamic(box){
+  return [...box.children].map(card=>{
+    const data={};
+    card.querySelectorAll('[data-k]').forEach(inp=>{
+      const k=inp.dataset.k; 
+      if(k==='bullets'){ data[k]=inp.value.split('\n').map(s=>s.replace(/^•?\s*/,'').trim()).filter(Boolean)}
+      else{ data[k]=inp.value }
+    });
+    return data;
+  });
+}
+function saveState(){
+  const payload={
+    fullName:fullName.value, headline:headline.value, phone:phone.value, email:email.value, location:locationIn.value, links:links.value,
+    summary:summary.value, skills:skills.value, languages:languages.value, certs:certs.value, projects:projects.value,
+    exp:readDynamic(expList), edu:readDynamic(eduList)
+  };
+  localStorage.setItem(STORE, JSON.stringify(payload));
+}
+function loadState(){
+  const raw=localStorage.getItem(STORE); if(!raw){ // seed مثال
+    expList.appendChild(expField({role:'مهندس برمجيات',company:'شركة التقانة',place:'المنامة',from:'06/2022',to:'الحالي',bullets:['بنيت خدمات REST موثوقة','خفضت زمن الاستجابة 40%']})); 
+    eduList.appendChild(eduField({degree:'بكالوريوس علوم الحاسوب',school:'جامعة الخليج',place:'المنامة',from:'2018',to:'2022',bullets:['معدل تراكمي 3.6/4']})); 
+    return;
+  }
+  const d=JSON.parse(raw);
+  fullName.value=d.fullName||''; headline.value=d.headline||''; phone.value=d.phone||''; email.value=d.email||''; locationIn.value=d.location||''; links.value=d.links||'';
+  summary.value=d.summary||''; skills.value=d.skills||''; languages.value=d.languages||''; certs.value=d.certs||''; projects.value=d.projects||'';
+  expList.innerHTML=''; (d.exp||[]).forEach(x=>expList.appendChild(expField(x)));
+  eduList.innerHTML=''; (d.edu||[]).forEach(x=>eduList.appendChild(eduField(x)));
+}
+
+/* بناء المعاينة */
+function toChips(str){return (str||'').split(',').map(s=>s.trim()).filter(Boolean)}
+function renderContact(){
+  const c=$("vContact"); c.innerHTML='';
+  const items=[];
+  if(email.value) items.push({icon:icons.mail,txt:email.value});
+  if(phone.value) items.push({icon:icons.phone,txt:phone.value});
+  if(locationIn.value) items.push({icon:icons.loc,txt:locationIn.value});
+  if(links.value) toChips(links.value).forEach(l=>items.push({icon:icons.link,txt:l}));
+  items.forEach(it=>{const d=document.createElement('div');d.className='item';d.innerHTML=it.icon+`<span>${it.txt}</span>`;c.appendChild(d)});
+}
+function renderLists(){
+  $("vName").textContent=fullName.value||'اسم المرشّح';
+  $("vHeadline").textContent=headline.value||'المسمّى الوظيفي';
+  $("vSummary").textContent=summary.value||'—';
+
+  const sk=$("vSkills"); sk.innerHTML=''; toChips(skills.value).forEach(s=>{const el=document.createElement('span');el.className='chip';el.textContent=s;sk.appendChild(el)});
+  const lg=$("vLangs"); lg.innerHTML=''; toChips(languages.value).forEach(s=>{const el=document.createElement('span');el.className='chip';el.textContent=s;lg.appendChild(el)});
+  const ct=$("vCerts"); ct.innerHTML=''; toChips(certs.value).forEach(s=>{const el=document.createElement('span');el.className='chip';el.textContent=s;ct.appendChild(el)});
+  const pj=$("vProjects"); pj.innerHTML=''; toChips(projects.value).forEach(s=>{const el=document.createElement('span');el.className='chip';el.textContent=s;pj.appendChild(el)});
+
+  const vExp=$("vExp"); vExp.innerHTML='';
+  readDynamic(expList).forEach(x=>{
+    const box=document.createElement('div'); box.className='item';
+    const bullets=(x.bullets||[]).map(b=>`<li>${b}</li>`).join('');
+    box.innerHTML=`
+      <div class="top">
+        <div class="role">${x.role||''} — <span class="meta">${x.company||''}</span></div>
+        <div class="meta">${x.place||''} • ${x.from||''} — ${x.to||''}</div>
+      </div>
+      ${bullets?`<ul>${bullets}</ul>`:''}
+    `;
+    vExp.appendChild(box);
+  });
+
+  const vEdu=$("vEdu"); vEdu.innerHTML='';
+  readDynamic(eduList).forEach(x=>{
+    const box=document.createElement('div'); box.className='item';
+    const bullets=(x.bullets||[]).map(b=>`<li>${b}</li>`).join('');
+    box.innerHTML=`
+      <div class="top">
+        <div class="role">${x.degree||''} — <span class="meta">${x.school||''}</span></div>
+        <div class="meta">${x.place||''} • ${x.from||''} — ${x.to||''}</div>
+      </div>
+      ${bullets?`<ul>${bullets}</ul>`:''}
+    `;
+    vEdu.appendChild(box);
+  });
+}
+function render(){renderContact(); renderLists(); fit()}
+
+/* مشاركة */
+function buildShareBar(){
+  const url=encodeURIComponent(location.href);
+  const text=encodeURIComponent('جرّب منشئ السيرة الذاتية');
+  const row=$("shareRow"); row.innerHTML='';
+  const items=[
+    {label:'واتساب',href:`https://wa.me/?text=${text}%20${url}`,path:"M16.6 14.4c-.2.6-1 1-1.6.7-1.8-.9-3.3-2.4-4.2-4.2-.3-.6.1-1.4.7-1.6l.8-.3c.3-.1.5 0 .7.3l.9 1.4c.2.3.1.6-.1.8l-.3.3c.6 1 1.5 1.8 2.5 2.5l.3-.3c.2-.2.5-.3.8-.1l1.4.9c.3.2.4.4.3.7l-.3.8ZM12 2a10 10 0 0 1 8.8 14.8L20 22l-5.2-.8A10 10 0 1 1 12 2Z"},
+    {label:'تلغرام',href:`https://t.me/share/url?url=${url}&text=${text}`,path:"M21.5 3.5 2.9 10.8c-1 .4-1 1.8 0 2.2l4.6 1.7 1.8 5.6c.3 1 1.6 1.2 2.2.3l2.7-3.5 5.1 3.7c.8.6 2 .2 2.2-.8l2.7-15.6c.2-1-1-1.8-2.3-1.1Z"},
+    {label:'X',href:`https://twitter.com/intent/tweet?url=${url}&text=${text}`,path:"M13.7 10.6 21 2h-1.7l-6.2 7.4L8.2 2H2l7.6 11L2 22h1.7l6.6-7.8L15.8 22H22l-8.3-11.4Z"},
+    {label:'فيسبوك',href:`https://www.facebook.com/sharer/sharer.php?u=${url}`,path:"M22 12a10 10 0 1 0-11.6 9.9v-7H7.7V12h2.7V9.7c0-2.7 1.6-4.2 4-4.2 1.2 0 2.4.2 2.4.2v2.6h-1.4c-1.3 0-1.7.8-1.7 1.6V12h2.9l-.46 2.9h-2.4v7A10 10 0 0 0 22 12"},
+    {label:'لينكدإن',href:`https://www.linkedin.com/sharing/share-offsite/?url=${url}`,path:"M4.98 3.5a2.5 2.5 0 1 1 0 5.001 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.6h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.8 2.6 4.8 6v6H17v-5.3c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9V21H9z"},
+    {label:'بريد',href:`mailto:?subject=${encodeURIComponent('سيرة ذاتية')}&body=${text}%0A${url}`,path:"M3 6h18v12H3z M3 8.2 12 13l9-4.8"}
+  ];
+  for(const it of items){
+    const a=document.createElement('a'); a.href=it.href; a.target="_blank"; a.rel="noopener"; a.setAttribute('aria-label',it.label);
+    a.innerHTML=`<svg viewBox="0 0 24 24"><path d="${it.path}" fill="#C6A14A"/></svg>`;
+    row.appendChild(a);
+  }
+}
+
+/* تحجيم المعاينة */
+const viewport=$("viewport"), scaleBox=$("scaleBox");
+function fit(){const avail=viewport.clientWidth-6;const PAGE=210*96/25.4;const s=Math.min(1,avail/PAGE);scaleBox.style.transform=`scale(${s})`;viewport.style.height=(297*96/25.4*s)+'px'}
+addEventListener("resize",()=>requestAnimationFrame(fit),{passive:true});
+
+/* PDF */
+async function renderA4Canvas(){
+  const src=$("page"); const clone=src.cloneNode(true);
+  Object.assign(clone.style,{width:'210mm',height:'297mm',transform:'none',boxShadow:'none',position:'static'});
+  const holder=document.createElement('div');Object.assign(holder.style,{position:'fixed',left:'-9999px',top:'0',background:'#fff'});holder.appendChild(clone);document.body.appendChild(holder);
+  const canvas=await html2canvas(clone,{scale:2,backgroundColor:'#ffffff',useCORS:true});
+  document.body.removeChild(holder); return canvas;
+}
+async function makePDFBlob(){const {jsPDF}=window.jspdf;const c=await renderA4Canvas();const img=c.toDataURL('image/jpeg',0.96);const pdf=new jsPDF('p','mm','a4');pdf.addImage(img,'JPEG',0,0,210,297,'','FAST');return pdf.output('blob')}
+$("downloadPdf").onclick=async()=>{const blob=await makePDFBlob();const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='CV.pdf';a.click();URL.revokeObjectURL(url)};
+$("sharePdf").onclick=async()=>{try{const blob=await makePDFBlob();const file=new File([blob],'CV.pdf',{type:'application/pdf'});if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({title:'السيرة الذاتية',text:'ملف PDF للسيرة الذاتية',files:[file]});}else{showMsg('المشاركة غير مدعومة','حمّل ملف <strong>PDF</strong> ثم شاركه يدويًا.')}}catch(e){showMsg('خطأ','تعذّرت المشاركة الآن.')}};
+$("printView").addEventListener("click",()=>{window.focus();window.print()});
+
+/* مودال */
+const modal=$("msgModal");$("msgOk").onclick=()=>modal.classList.remove("show");
+function showMsg(t,b){$("msgTitle").textContent=t;$("msgBody").innerHTML=b;modal.classList.add("show")}
+
+/* تهيئة وحفظ تلقائي */
+function renderAll(){render(); buildShareBar()}
+(document.fonts?.ready||Promise.resolve()).then(()=>{loadState(); renderAll(); fit(); setTimeout(fit,40);});
+['input','change'].forEach(ev=>{
+  document.querySelectorAll('input,textarea,select').forEach(el=>{
+    el.addEventListener(ev,()=>{saveState(); render()},{passive:true});
+  });
+});
+</script>
+</body>
 </html>
