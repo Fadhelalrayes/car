@@ -1,424 +1,366 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>مولّد سيرة احترافية – عمودان</title>
-<style>
-  :root{
-    --bg:#f3f4f6;--text:#1f2937;--muted:#6b7280;--line:#e5e7eb;
-    --brand:#b29a8f; /* لون العمود الجانبي */
-  }
-  *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial}
-  a{color:#1f6feb}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  /* شريط علوي */
-  header.app{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);
-    padding:10px 16px;display:flex;gap:10px;align-items:center;z-index:5}
-  header.app h1{margin:0;font-size:18px;flex:1}
-  .btn{border:0;border-radius:10px;padding:12px 14px;font-weight:700;cursor:pointer}
-  .btn.primary{background:#1f6feb;color:#fff}
-  .btn.secondary{background:#1118270d;color:#111}
-  .btn.ghost{background:transparent;border:1px dashed var(--line);color:#111}
+    <!-- 1. SEO (Search Engine Optimization) -->
+    <title>دليل الصلاة الشامل | تعلم الصلاة وفق المذهب الجعفري (فتاوى السيد السيستاني)</title>
+    <meta name="description" content="دليلك الشامل والمبسط لتعلم الصلاة خطوة بخطوة: من الطهارة والمقدمات إلى كيفية الصلاة وأحكامها وقضاء الفوائت، وفقاً لفتاوى سماحة السيد السيستاني (دام ظله).">
+    <meta name="keywords" content="تعليم الصلاة, كيفية الصلاة, المذهب الجعفري, السيد السيستاني, أحكام الصلاة, الطهارة, الوضوء, قضاء الصلاة, فقه, شيعة, دليل الصلاة, الكعبة">
+    <meta name="author" content="فاضل الريس">
+    <link rel="canonical" href="https://your-domain.com/salah-guide.html"> <!-- ★ هام: استبدل بالرابط الفعلي لصفحتك -->
+    <meta name="robots" content="index, follow">
 
-  /* تخطيط الصفحة */
-  .container{display:grid;grid-template-columns:380px 1fr;gap:18px;max-width:1200px;margin:18px auto;padding:0 16px}
-  .card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px}
-  .card h2{font-size:16px;margin:0 0 8px}
-  .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-  label{display:block;margin-bottom:4px;color:var(--muted);font-size:13px}
-  input,textarea,select{width:100%;padding:12px 10px;border:1px solid var(--line);border-radius:10px;font-size:15px;background:#fff}
-  textarea{min-height:88px;resize:vertical}
-  .section{margin-top:14px;border-top:1px dashed var(--line);padding-top:14px}
-  .item{border:1px dashed var(--line);border-radius:10px;padding:10px;margin-top:10px;background:#fafafa;position:relative}
-  .item .remove{position:absolute;inset-inline-start:8px;top:8px;background:#fff;border:1px solid #ef4444;color:#ef4444}
+    <!-- 2. Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self'; 
+        script-src 'self' 'unsafe-inline'; 
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; 
+        font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; 
+        img-src 'self' https: data:; 
+        connect-src 'self';
+        frame-ancestors 'none';
+        form-action 'none';
+        base-uri 'self';
+    ">
+    <meta name="permissions-policy" content="camera=(), microphone=(), geolocation=()">
+    <meta name="referrer-policy" content="strict-origin-when-cross-origin">
 
-  /* معاينة السيرة – عمودان */
-  .cv-wrap{}
-  .cv{
-    width:100%;
-    max-width:210mm;               /* يمتلئ على الجوال ويثبت على A4 عند الطباعة */
-    min-height:297mm;
-    margin:0 auto;background:#fff;box-shadow:0 10px 30px rgba(0,0,0,.08);
-    display:grid;grid-template-columns:65% 35%;
-  }
-  main.content{padding:20mm 15mm}
-  aside.sidebar{background:var(--brand);color:#fff;padding:20mm 12mm}
-  h1{margin:0;font-size:26px;line-height:1.2}
-  .role{font-size:16px;margin:6px 0 10px;color:#eee}
-  h2{font-size:16px;margin:16px 0 6px}
-  p{margin:4px 0;font-size:13px;line-height:1.7}
-  ul{margin:6px 0 12px;padding:0 20px;font-size:13px}
-  .photo{width:110px;height:110px;border-radius:50%;object-fit:cover;margin:0 0 14px;border:4px solid #ffffff40;background:#ffffff22}
-  .chip{display:inline-block;border:1px solid #ffffff55;color:#fff;border-radius:999px;padding:4px 9px;margin:4px 4px 0 0;font-size:12px}
-  .side-block{margin-bottom:20px}
-  .side-block h3{font-size:15px;margin:10px 0 8px;color:#fff}
-  .bar{height:8px;background:#ffffff2b;border-radius:999px;overflow:hidden;margin:4px 0 10px}
-  .bar span{display:block;height:100%;background:#fff}
+    <!-- 3. Social Media Sharing (Open Graph) -->
+    <meta property="og:title" content="دليل الصلاة الشامل | تعلم الصلاة وفق المذهب الجعفري">
+    <meta property="og:description" content="دليل مبسط لتعلم الصلاة، أحكامها، ومقدماتها وفقاً لفتاوى سماحة السيد السيستاني (دام ظله).">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1598412213663-fd80b7352a2a?q=80&w=1974&auto=format&fit=crop">
+    <meta property="og:url" content="https://your-domain.com/salah-guide.html"> <!-- ★ هام: استبدل بالرابط الفعلي -->
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="ar_AR">
 
-  .muted{color:#6b7280}
-  .meta{color:#6b7280;font-size:12px;margin:2px 0 6px}
-  .job{margin-bottom:12px}
-  .job .top{display:flex;justify-content:space-between;gap:8px;font-weight:700}
-  .divider{height:1px;background:var(--line);margin:10px 0}
+    <!-- 4. Structured Data (Schema.org) for Google -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://your-domain.com/salah-guide.html" 
+      },
+      "headline": "دليل الصلاة الشامل: تعلم الصلاة وفق المذهب الجعفري (فتاوى السيد السيستاني)",
+      "image": "https://images.unsplash.com/photo-1598412213663-fd80b7352a2a?q=80&w=1974&auto=format&fit=crop",
+      "author": { "@type": "Person", "name": "فاضل الريس" },
+      "publisher": { "@type": "Organization", "name": "دليل الصلاة الجعفرية" },
+      "datePublished": "2025-10-05",
+      "dateModified": "2025-10-05"
+    }
+    </script>
 
-  /* استجابة */
-  @media (max-width: 900px){
-    .container{grid-template-columns:1fr}
-    .row{grid-template-columns:1fr}
-    .cv{grid-template-columns:1fr;min-height:auto}
-    aside.sidebar{border-bottom:1px solid #00000022}
-    .btn{width:100%} .stack>.btn{flex:1}
-  }
-  @media (max-width:420px){.card{padding:12px}}
+    <!-- Fonts and Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
-  /* طباعة */
-  @media print{
-    header.app,.card{display:none!important}
-    body{background:#fff}
-    .cv{box-shadow:none;margin:0;width:210mm;min-height:297mm;grid-template-columns:65% 35%}
-    @page{size:A4;margin:0}
-  }
-</style>
+    <style>
+        :root { 
+            --primary-color: #003366; /* كحلي غامق وهادئ */
+            --secondary-color: #5A7D7C; /* أخضر زيتوني هادئ */
+            --background-color: #FFFFFF; /* أبيض */
+            --light-bg-color: #F9F7F3; /* بيج فاتح جداً */
+            --text-color: #333333; 
+            --heading-color: #003366; 
+            --white-color: #FFFFFF; 
+            --quote-bg-color: #EFF3F3;
+        }
+        html { scroll-behavior: smooth; }
+        body { 
+            font-family: 'Tajawal', sans-serif; 
+            margin: 0; 
+            line-height: 1.9; 
+            background-color: var(--background-color); 
+            color: var(--text-color); 
+            font-weight: 400; 
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        h1, h2, h3 { font-weight: 700; color: var(--heading-color); }
+        h1 { font-size: clamp(2.8rem, 6vw, 3.5rem); font-weight: 800; }
+        h2 { font-size: clamp(2.2rem, 5vw, 2.8rem); text-align: center; margin-bottom: 50px; }
+        h3 { font-size: 1.8rem; }
+        section { padding: 80px 0; }
+
+        /* ★★★ تعديل جذري على الهيدر لضمان التوافقية ★★★ */
+        .main-header { 
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05); 
+            padding: 15px 0; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+        }
+        .main-header .container { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            gap: 20px; /* مسافة بين الشعار والقائمة */
+        }
+        .logo { 
+            font-size: 1.7rem; 
+            font-weight: 800; 
+            color: var(--primary-color); 
+            text-decoration: none;
+            white-space: nowrap; 
+            flex-shrink: 0; /* يمنع الشعار من التقلص */
+        }
+        .logo span { color: var(--secondary-color); }
+        .main-nav { 
+            display: flex; 
+            align-items: center; 
+            justify-content: flex-end; /* تبدأ الروابط من اليسار */
+            gap: clamp(10px, 2vw, 25px); /* مسافات مرنة بين الروابط */
+            width: 100%;
+            overflow-x: auto; /* يسمح بالتمرير الأفقي على أضيق الشاشات كحل أخير */
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        .main-nav::-webkit-scrollbar { display: none; } /* Chrome, Safari, Opera */
+        .main-nav a { 
+            color: var(--primary-color); 
+            text-decoration: none; 
+            font-weight: 500; 
+            transition: color 0.3s; 
+            font-size: clamp(0.85rem, 1.5vw, 1.05rem); /* حجم خط مرن */
+            white-space: nowrap; 
+        }
+        .main-nav a:hover { color: var(--secondary-color); }
+        
+        /* ★★★ تم تغيير رابط الصورة هنا ★★★ */
+        .hero {
+            position: relative;
+            color: var(--heading-color);
+            padding: 120px 0;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            min-height: 70vh;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(to top, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.3) 60%), url('https://images.unsplash.com/photo-1598412213663-fd80b7352a2a?q=80&w=1974&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+        }
+        .hero .container { position: relative; z-index: 2; }
+        .hero h1 { color: var(--heading-color); margin-bottom: 30px; text-shadow: 0px 1px 3px rgba(255,255,255,0.5); }
+        
+        .info-boxes-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        .info-box {
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(0, 51, 102, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 25px 0 rgba(0, 51, 102, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .info-box:hover { transform: translateY(-8px); box-shadow: 0 12px 35px 0 rgba(0, 51, 102, 0.08); }
+        .info-box h3 { color: var(--heading-color); font-size: 1.5rem; margin-top: 0; border-bottom: 2px solid var(--secondary-color); padding-bottom: 10px; margin-bottom: 15px; }
+        .info-box p { font-size: 1.1rem; color: #444; margin: 0; line-height: 1.7; }
+
+        .content-section { padding: 80px 0; }
+        .content-section.alternate-bg { background-color: var(--light-bg-color); }
+        .content-section .container { max-width: 900px; }
+        .content-section h3 { margin-top: 40px; margin-bottom: 20px; border-bottom: 2px solid var(--secondary-color); padding-bottom: 10px; }
+        .content-section p, .content-section ul { text-align: justify; }
+        .content-section ul { list-style-type: none; padding-right: 20px; }
+        .content-section ul li { position: relative; padding-right: 30px; margin-bottom: 15px; }
+        .content-section ul li::before { content: '\f00c'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: var(--secondary-color); position: absolute; right: 0; top: 5px; }
+        
+        .hadith-quote { background-color: var(--quote-bg-color); border-right: 5px solid var(--secondary-color); padding: 20px 25px; margin: 30px 0; border-radius: 5px; font-style: italic; }
+        .hadith-quote p { margin: 0; font-size: 1.15rem; color: #444; }
+        .hadith-quote .source { display: block; text-align: left; font-style: normal; font-weight: 500; margin-top: 10px; color: #777; }
+        
+        .main-footer { background-color: var(--primary-color); color: var(--white-color); text-align: center; padding: 40px 20px; }
+        .main-footer p { margin: 0; opacity: 0.9; }
+        .footer-credit { margin-top: 20px; font-size: 1.1rem; }
+        .footer-credit a { color: #a9cce3; text-decoration: none; font-weight: 700; transition: color 0.3s; }
+        .footer-credit a:hover { color: var(--white-color); }
+        .citation { font-size: 0.85rem; color: #777; display: block; margin-top: 20px; text-align: left; }
+
+        /* تعديل إضافي للشاشات الصغيرة جداً */
+        @media (max-width: 768px) {
+            .main-header .container { justify-content: center; flex-wrap: wrap; }
+            section { padding: 60px 0; }
+            .hero { min-height: 60vh; }
+        }
+    </style>
 </head>
 <body>
 
-<header class="app">
-  <h1>مولّد سيرة احترافية (تصميم عمودين)</h1>
-  <div class="stack" style="display:flex;gap:8px;flex-wrap:wrap;min-width:260px">
-    <button class="btn primary" onclick="generate()">تحديث المعاينة</button>
-    <button class="btn secondary" onclick="window.print()">تحميل PDF</button>
-    <button class="btn ghost" onclick="clearAll()">تفريغ الحقول</button>
-  </div>
-</header>
-
-<div class="container">
-  <!-- ===== النموذج ===== -->
-  <div class="card">
-    <h2>البيانات الأساسية</h2>
-    <div class="row">
-      <div><label>الاسم الكامل</label><input id="name" placeholder="SAMIRA HADID"></div>
-      <div><label>المسمّى الوظيفي</label><input id="role" placeholder="مصممة جرافيك"></div>
-    </div>
-    <div class="row section">
-      <div><label>البريد</label><input id="email" type="email" inputmode="email" placeholder="hello@example.com"></div>
-      <div><label>الهاتف</label><input id="phone" inputmode="tel" placeholder="+123-456-7890"></div>
-    </div>
-    <div class="row">
-      <div><label>العنوان</label><input id="address" placeholder="123 Anywhere St., Any City"></div>
-      <div><label>رابط صورة (اختياري)</label><input id="photo" placeholder="https://…/avatar.jpg"></div>
-    </div>
-    <div class="section">
-      <label>الملخص</label>
-      <textarea id="summary" placeholder="وصف مختصر عن خبرتك وقيمتك المضافة"></textarea>
-    </div>
-
-    <div class="section">
-      <h2>الخبرات</h2>
-      <div id="expList"></div>
-      <button class="btn ghost" type="button" onclick="addExp()">+ إضافة خبرة</button>
-    </div>
-
-    <div class="section">
-      <h2>المؤهلات العلمية</h2>
-      <div id="eduList"></div>
-      <button class="btn ghost" type="button" onclick="addEdu()">+ إضافة مؤهل</button>
-    </div>
-
-    <div class="section">
-      <h2>المهارات (تظهر كشرائط في العمود الجانبي)</h2>
-      <div class="row">
-        <div><label>المهارة</label><input id="skillName" placeholder="Adobe Photoshop"></div>
-        <div><label>النسبة %</label><input id="skillPct" type="number" min="0" max="100" placeholder="85"></div>
-      </div>
-      <div style="margin-top:8px"><button class="btn secondary" type="button" onclick="addSkill()">إضافة مهارة</button></div>
-      <div id="skillsBox"></div>
-    </div>
-
-    <div class="section">
-      <h2>اللغات</h2>
-      <div class="row">
-        <div><label>اللغة</label><input id="langName" placeholder="العربية"></div>
-        <div><label>النسبة %</label><input id="langPct" type="number" min="0" max="100" placeholder="95"></div>
-      </div>
-      <div style="margin-top:8px"><button class="btn secondary" type="button" onclick="addLang()">إضافة لغة</button></div>
-      <div id="langsBox"></div>
-    </div>
-
-    <div class="section">
-      <h2>الهوايات</h2>
-      <div class="row">
-        <div><label>الهواية</label><input id="hobbyInput" placeholder="ركوب الدراجة"></div>
-        <div style="display:flex;align-items:end"><button class="btn secondary" type="button" onclick="addHobby()">إضافة</button></div>
-      </div>
-      <div id="hobbiesBox" style="margin-top:8px"></div>
-    </div>
-
-    <div class="section">
-      <h2>المراجع</h2>
-      <div id="refList"></div>
-      <button class="btn ghost" type="button" onclick="addRef()">+ إضافة مرجع</button>
-    </div>
-
-    <div class="section">
-      <button class="btn primary" type="button" onclick="generate()">تحديث المعاينة</button>
-      <span style="font-size:12px;color:var(--muted)">يتم الحفظ تلقائيًا في المتصفح.</span>
-    </div>
-  </div>
-
-  <!-- ===== المعاينة ===== -->
-  <div class="cv-wrap">
-    <div class="cv" id="cv">
-      <!-- العمود الرئيسي (يسار) -->
-      <main class="content">
-        <h1 id="p_name">SAMIRA HADID</h1>
-        <div class="role" id="p_role">مصممة جرافيك</div>
-        <p id="p_summary" class="muted">ملخص مختصر عن الخبرة والإنجازات…</p>
-        <div class="divider"></div>
-
-        <h2>المؤهلات العلمية</h2>
-        <div id="p_edus"></div>
-
-        <h2>الخبرات العملية</h2>
-        <div id="p_exps"></div>
-
-        <h2>المهارات الاحترافية</h2>
-        <ul id="p_softskills"><li>التصميم الجرافيكي</li><li>التصوير الفوتوغرافي</li><li>الرسوم المتحركة</li></ul>
-      </main>
-
-      <!-- العمود الجانبي (يمين) -->
-      <aside class="sidebar">
-        <img id="p_photo" class="photo" alt="photo" />
-        <div class="side-block">
-          <h3>معلومات الاتصال</h3>
-          <p id="p_phone">📞 +123-456-7890</p>
-          <p id="p_email">📧 hello@example.com</p>
-          <p id="p_address">🏠 123 Anywhere St., Any City</p>
+    <header class="main-header">
+        <div class="container">
+            <a href="#" class="logo">دليل الصلاة <span>الجعفرية</span></a>
+            <nav class="main-nav">
+                <a href="#preliminaries">مقدمات الصلاة</a>
+                <a href="#how-to-pray">كيفية الصلاة</a>
+                <a href="#prayer-times">أوقات الصلاة</a>
+                <a href="#prayer-rulings">أحكام الصلاة</a>
+                <a href="#missed-prayers">قضاء الفوائت</a>
+            </nav>
         </div>
+    </header>
 
-        <div class="side-block">
-          <h3>المهارات</h3>
-          <div id="p_skills"></div>
+    <main>
+        <section id="hero" class="hero">
+            <div class="container">
+                <h1>دليلك الشامل لتعلم الصلاة</h1>
+                <div class="info-boxes-container">
+                    <div class="info-box">
+                        <h3>غاية الدليل</h3>
+                        <p>صفحة مبسطة تشرح كيفية الصلاة وأحكامها وفقاً لفتاوى سماحة المرجع الأعلى السيد علي الحسيني السيستاني (دام ظله).</p>
+                    </div>
+                    <div class="info-box">
+                        <h3>الهدف الأسمى</h3>
+                        <p>أن تكون هذه الصفحة عوناً لكل مؤمن ومؤمنة على أداء هذا الركن العظيم من أركان الدين على الوجه الصحيح والأكمل.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="preliminaries" class="content-section">
+            <div class="container">
+                <h2>مقدمات الصلاة</h2>
+                <p>قبل الشروع في الصلاة، يجب على المصلي أن يحقق شروطاً أساسية لا تصح الصلاة بدونها. هذه الشروط هي بمثابة تهيئة البدن والروح للوقوف بين يدي الله تعالى.</p>
+                <div class="hadith-quote">
+                    <p>"أوّل ما يُحاسَبُ به العبدُ الصلاة، فإن قُبِلَت قُبِلَ ما سواها، وإن رُدَّت رُدَّ ما سواها."</p>
+                    <span class="source">عن الإمام الصادق (عليه السلام) - الكافي، ج 3، ص 268.</span>
+                </div>
+                <h3>1. الطهارة:</h3>
+                <p>وهي شرط أساسي للصلاة، وتشمل الطهارة من الحدث (بالوضوء أو الغسل أو التيمم) والطهارة من الخبث (إزالة النجاسة عن البدن واللباس).</p>
+                <ul>
+                    <li><strong>الوضوء:</strong> يجب على غير المتوضئ أن يتوضأ للصلاة. والوضوء هو غسل الوجه واليدين من المرفقين إلى أطراف الأصابع، ومسح مقدم الرأس والقدمين.</li>
+                    <li><strong>الغسل:</strong> يجب في حالات معينة كالجنابة، وهو يغني عن الوضوء.</li>
+                    <li><strong>التيمم:</strong> يكون بديلاً عن الوضوء أو الغسل عند تعذر استخدام الماء.</li>
+                    <li><strong>طهارة البدن واللباس:</strong> يجب أن يكون بدن المصلي وثيابه طاهرة من النجاسات.</li>
+                </ul>
+                <div class="hadith-quote">
+                    <p>"لا صلاة إلا بطهور."</p>
+                    <span class="source">عن النبي محمد (صلى الله عليه وآله) - وسائل الشيعة، ج 1، ص 365.</span>
+                </div>
+                <h3>2. القبلة:</h3>
+                <p>يجب على المصلي التوجه نحو الكعبة المشرفة في مكة المكرمة. من كان بعيداً، يكفيه التوجه نحو جهتها.</p>
+                <ul>
+                    <li>يجب العلم أو الاطمئنان بجهة القبلة. إذا لم يمكن ذلك، يعمل بالظن الحاصل من بعض الطرق (كمحاريب المسلمين أو قبورهم) أو بالبوصلة.</li>
+                    <li>إذا لم يتمكن من تحصيل الظن، يصلي إلى أي جهة يحتمل وجود القبلة فيها، والأحوط استحباباً أن يصلي إلى أربع جهات.</li>
+                </ul>
+                <h3>3. لباس المصلي:</h3>
+                <p>هناك شروط للباس الذي تصح فيه الصلاة:</p>
+                <ul>
+                    <li><strong>الطهارة:</strong> يجب أن يكون طاهراً.</li>
+                    <li><strong>الإباحة:</strong> لا يجوز أن يكون لباس المصلي مغصوباً.</li>
+                    <li><strong>عدم كونه من أجزاء الميتة:</strong> لا تصح الصلاة في لباس مصنوع من جلد حيوان غير مذكى شرعاً.</li>
+                    <li><strong>عدم كونه من أجزاء ما لا يؤكل لحمه:</strong> على الأحوط وجوباً.</li>
+                    <li><strong>للرجال:</strong> يجب ألا يكون لباس الرجل من الحرير الخالص أو الذهب.</li>
+                </ul>
+                 <span class="citation">المصدر: موقع مكتب سماحة السيد السيستاني (دام ظله)، منهاج الصالحين والمسائل المنتخبة.</span>
+            </div>
+        </section>
+
+        <section id="how-to-pray" class="content-section alternate-bg">
+            <div class="container">
+                <h2>كيفية الصلاة</h2>
+                <p>الصلاة هي عمود الدين، وفيما يلي بيان لواجباتها الأساسية دون المستحبات، لتكون صلاتك صحيحة ومقبولة بإذن الله.</p>
+                <h3>واجبات الصلاة:</h3>
+                <ul>
+                    <li><strong>النية:</strong> وهي القصد القلبي لأداء صلاة معينة قربةً إلى الله تعالى، ولا يلزم التلفظ بها.</li>
+                    <li><strong>تكبيرة الإحرام:</strong> قول "الله أكبر" في بداية الصلاة مع استقرار البدن.</li>
+                    <li><strong>القيام:</strong> الوقوف منتصباً أثناء تكبيرة الإحرام والقراءة قبل الركوع.</li>
+                    <li><strong>القراءة:</strong> قراءة سورة الحمد وسورة كاملة أخرى في الركعتين الأولى والثانية. في الركعتين الثالثة والرابعة، يتخير المصلي بين قراءة سورة الحمد وحدها أو التسبيحات الأربع ("سبحان الله، والحمد لله، ولا إله إلا الله، والله أكبر").</li>
+                    <li><strong>الركوع:</strong> الانحناء بعد القراءة حتى تصل أطراف الأصابع إلى الركبة، وقول الذكر الواجب مثل "سبحان ربي العظيم وبحمده".</li>
+                    <li><strong>السجود:</strong> وضع المساجد السبعة (الجبهة، الكفان، الركبتان، وإبهاما القدمين) على ما يصح السجود عليه (الأرض أو ما أنبتت)، وقول الذكر الواجب مثل "سبحان ربي الأعلى وبحمده".</li>
+                    <li><strong>التشهد:</strong> الجلوس بعد السجدة الثانية من الركعة الثانية والركعة الأخيرة وقول: "أشهد أن لا إله إلا الله وحده لا شريك له، وأشهد أن محمداً عبده ورسوله، اللهم صلِّ على محمد وآل محمد".</li>
+                    <li><strong>التسليم:</strong> وهو آخر أجزاء الصلاة، وصيغته "السلام عليكم ورحمة الله وبركاته".</li>
+                    <li><strong>الترتيب والموالاة:</strong> أداء أفعال الصلاة بالترتيب المذكور دون فاصل زمني طويل بينها.</li>
+                </ul>
+                <span class="citation">المصدر: موقع مكتب سماحة السيد السيستاني (دام ظله)، منهاج الصالحين والمسائل المنتخبة.</span>
+            </div>
+        </section>
+
+        <section id="prayer-times" class="content-section">
+            <div class="container">
+                <h2>أوقات الصلاة</h2>
+                <p>لكل صلاة من الفرائض اليومية وقت محدد شرعاً، والالتزام به شرط لصحتها أداءً.</p>
+                <h3>أوقات الفرائض اليومية:</h3>
+                <ul>
+                    <li><strong>صلاة الصبح:</strong> وقتها من طلوع الفجر الصادق إلى طلوع الشمس.</li>
+                    <li><strong>صلاتا الظهر والعصر:</strong> وقتهما من زوال الشمس (منتصف النهار) إلى المغرب. تختص صلاة الظهر بأول الوقت بمقدار أدائها، وتختص صلاة العصر بآخر الوقت بمقدار أدائها، وما بينهما وقت مشترك لهما.</li>
+                    <li><strong>صلاتا المغرب والعشاء:</strong> وقتهما للمختار من المغرب إلى منتصف الليل. تختص صلاة المغرب بأول الوقت بمقدار أدائها، وتختص العشاء بآخر الوقت بمقدار أدائها، وما بينهما وقت مشترك. أما المضطر فيمتد وقتهما إلى طلوع الفجر.</li>
+                </ul>
+                <h3>أوقات الفضيلة:</h3>
+                <ul>
+                    <li><strong>فضيلة الظهر:</strong> من الزوال حتى بلوغ ظل الشاخص مثله.</li>
+                    <li><strong>فضيلة العصر:</strong> من بلوغ الظل مثله إلى بلوغه مثلين.</li>
+                    <li><strong>فضيلة المغرب:</strong> لغير المسافر، من المغرب إلى ذهاب الشفق (الحمرة المغربية).</li>
+                    <li><strong>فضيلة العشاء:</strong> من ذهاب الشفق إلى ثلث الليل.</li>
+                </ul>
+                 <span class="citation">المصدر: موقع مكتب سماحة السيد السيستاني (دام ظله)، منهاج الصالحين، والاستفتاءات.</span>
+            </div>
+        </section>
+
+        <section id="prayer-rulings" class="content-section alternate-bg">
+            <div class="container">
+                <h2>أحكام الصلاة (الشك والسهو)</h2>
+                <p>قد يطرأ على المصلي الشك أو السهو أثناء صلاته، وقد بيّن الفقهاء أحكاماً خاصة لمعالجة هذه الحالات لضمان صحة الصلاة.</p>
+                <h3>أحكام الشكوك:</h3>
+                <ul>
+                    <li><strong>الشكوك التي تبطل الصلاة:</strong> الشك في عدد ركعات صلاة الصبح والمغرب، والشك في الركعتين الأوليين من الصلوات الرباعية يبطل الصلاة إذا لم يترجح ظن المصلي لأحد الطرفين.</li>
+                    <li><strong>الشكوك التي لا تبطل الصلاة:</strong> هناك شكوك لها علاج، مثل الشك بين الثلاث والأربع، حيث يبني المصلي على الأكثر (الأربع) ثم يأتي بركعة احتياط.</li>
+                    <li><strong>كثير الشك:</strong> من يكثر شكه في الصلاة لا يعتني بشكه ويبني على وقوع الفعل المشكوك فيه، إلا إذا كان هذا البناء مفسداً للصلاة.</li>
+                    <li><strong>الشك بعد الفراغ من الصلاة:</strong> لا يُعتنى بالشك في صحة الصلاة بعد الانتهاء منها.</li>
+                </ul>
+                <h3>أحكام السهو:</h3>
+                <ul>
+                    <li><strong>سجود السهو:</strong> يجب الإتيان بسجدتي السهو لعدة أمور، منها: الكلام سهواً، والتسليم في غير موضعه، والشك بين الركعة الرابعة والخامسة.</li>
+                    <li><strong>قضاء الأجزاء المنسية:</strong> من نسي سجدة واحدة ولم يمكن تداركها في الصلاة، يجب عليه قضاؤها بعد الصلاة. ومن نسي التشهد، يأتي بسجدتي السهو.</li>
+                </ul>
+                <span class="citation">المصدر: موقع مكتب سماحة السيد السيستاني (دام ظله)، الوجيز في أحكام العبادات والمسائل المنتخبة.</span>
+            </div>
+        </section>
+
+        <section id="missed-prayers" class="content-section">
+            <div class="container">
+                <h2>كيفية قضاء الصلوات الفائتة</h2>
+                <p>من فاتته فريضة يومية عمداً أو سهواً أو لأي سبب آخر، يجب عليه قضاؤها خارج وقتها.</p>
+                <h3>أحكام القضاء:</h3>
+                <ul>
+                    <li><strong>وقت القضاء:</strong> يجوز قضاء الصلوات الفائتة في أي وقت من ليل أو نهار، في السفر أو الحضر.</li>
+                    <li><strong>كيفية القضاء:</strong> ما فات في الحضر يُقضى تماماً حتى لو كان القضاء في السفر، وما فات في السفر يُقضى قصراً حتى لو كان القضاء في الحضر.</li>
+                    <li><strong>الترتيب في القضاء:</strong> لا يجب الترتيب في قضاء الصلوات الفائتة، إلا بين الصلوات المترتبة في أصلها كالظهر والعصر من نفس اليوم.</li>
+                    <li><strong>عدم معرفة عدد الفوائت:</strong> إذا لم يعلم المكلف بعدد الصلوات التي فاتته، يجوز له الاقتصار على قضاء القدر المتيقن الذي يعلم بفواته.</li>
+                    <li><strong>قضاء صلاة الميت:</strong> الأحوط وجوباً على الولد الأكبر أن يقضي ما فات أباه من صلوات لعذر، إذا لم يكن الأب قد قضاها.</li>
+                </ul>
+                <span class="citation">المصدر: موقع مكتب سماحة السيد السيستاني (دام ظله)، منهاج الصالحين والمسائل المنتخبة.</span>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2025 دليل الصلاة الجعفرية. نسألكم الدعاء.</p>
+            <p class="footer-credit">
+                إعداد ومراجعة: 
+                <a href="https://wa.me/97333375858" target="_blank" rel="noopener noreferrer">فاضل الريس</a>
+            </p>
         </div>
+    </footer>
 
-        <div class="side-block">
-          <h3>اللغات</h3>
-          <div id="p_langs"></div>
-        </div>
-
-        <div class="side-block">
-          <h3>الهوايات</h3>
-          <p id="p_hobbies" style="white-space:pre-line"></p>
-        </div>
-
-        <div class="side-block">
-          <h3>المراجع</h3>
-          <div id="p_refs"></div>
-        </div>
-      </aside>
-    </div>
-  </div>
-</div>
-
-<script>
-/* ====== أدوات مساعدة ====== */
-const $ = s => document.querySelector(s);
-const el = (t,props={},...kids)=>{const e=document.createElement(t);Object.assign(e,props);kids.forEach(k=>e.append(k));return e;}
-function escapeHTML(s){return (s||'').replace(/[&<>'"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[m]));}
-function save(){localStorage.setItem('cv-2col', JSON.stringify(collect()));}
-function load(){
-  const raw=localStorage.getItem('cv-2col');
-  if(!raw){ seed(); return; }
-  try{fill(JSON.parse(raw));}catch{seed();}
-}
-
-/* ====== عناصر ديناميكية للنموذج ====== */
-function mkItem(fields){
-  const c=el('div',{className:'item'}); 
-  c.append(el('button',{className:'btn remove',type:'button',onclick:()=>c.remove()},'حذف'));
-  fields.forEach(f=>c.append(f));
-  return c;
-}
-function inputField(lbl,name,val){const w=el('div');w.append(el('label',{},lbl),el('input',{value:val||'',dataset:{name}}));return w;}
-function textField(lbl,name,val){const w=el('div');w.append(el('label',{},lbl),el('textarea',{value:val||'',dataset:{name}}));return w;}
-function row(a,b){const r=el('div',{className:'row'});r.append(a,b);return r;}
-
-function addExp(pref={}){
-  const it=mkItem([
-    inputField('المسمى الوظيفي','title',pref.title),
-    inputField('الشركة','company',pref.company),
-    inputField('المدينة','city',pref.city),
-    row(inputField('من','start',pref.start), inputField('إلى','end',pref.end)),
-    textField('إنجازات (سطر لكل نقطة)','bullets',pref.bullets)
-  ]);
-  $('#expList').append(it);
-}
-function addEdu(pref={}){
-  const it=mkItem([
-    inputField('المؤسسة التعليمية','school',pref.school),
-    inputField('المؤهل','degree',pref.degree),
-    inputField('المدينة','city',pref.city),
-    row(inputField('من','start',pref.start), inputField('إلى','end',pref.end)),
-    textField('ملاحظات (اختياري)','notes',pref.notes),
-  ]);
-  $('#eduList').append(it);
-}
-function addRef(pref={}){
-  const it=mkItem([
-    inputField('الاسم','name',pref.name),
-    inputField('المسمى/الصفة','title',pref.title),
-    inputField('البريد','email',pref.email),
-    inputField('الهاتف','phone',pref.phone),
-  ]);
-  $('#refList').append(it);
-}
-function addSkill(){
-  const n=$('#skillName').value.trim(), p=+$('#skillPct').value;
-  if(!n || isNaN(p)) return;
-  const it=mkItem([inputField('المهارة','name',n), inputField('النسبة %','pct',p)]);
-  $('#skillsBox').append(it); $('#skillName').value=''; $('#skillPct').value='';
-}
-function addLang(){
-  const n=$('#langName').value.trim(), p=+$('#langPct').value;
-  if(!n || isNaN(p)) return;
-  const it=mkItem([inputField('اللغة','name',n), inputField('النسبة %','pct',p)]);
-  $('#langsBox').append(it); $('#langName').value=''; $('#langPct').value='';
-}
-function addHobby(){
-  const h=$('#hobbyInput').value.trim(); if(!h) return;
-  const it=mkItem([inputField('الهواية','hobby',h)]);
-  $('#hobbiesBox').append(it); $('#hobbyInput').value='';
-}
-
-/* ====== جمع/ملء البيانات ====== */
-function collectList(parentSel){
-  return [...document.querySelector(parentSel).children].map(div=>{
-    const f=[...div.querySelectorAll('[data-name]')]; const o={}; f.forEach(x=>o[x.dataset.name]=x.value); return o;
-  });
-}
-function collect(){
-  return {
-    name:$('#name').value, role:$('#role').value, email:$('#email').value, phone:$('#phone').value,
-    address:$('#address').value, photo:$('#photo').value, summary:$('#summary').value,
-    exps:collectList('#expList'), edus:collectList('#eduList'), refs:collectList('#refList'),
-    skills:collectList('#skillsBox'), langs:collectList('#langsBox'), hobbies:collectList('#hobbiesBox')
-  };
-}
-function fill(d){
-  ['name','role','email','phone','address','photo','summary'].forEach(k=>{ if(d[k]!=null) $('#'+k).value=d[k]; });
-  const fillList=(sel,fn,arr)=>{ $(sel).innerHTML=''; (arr||[]).forEach(fn); };
-  fillList('#expList',addExp,d.exps); fillList('#eduList',addEdu,d.edus); fillList('#refList',addRef,d.refs);
-  $('#skillsBox').innerHTML=''; (d.skills||[]).forEach(s=>{ $('#skillName').value=s.name||''; $('#skillPct').value=s.pct||''; addSkill(); });
-  $('#langsBox').innerHTML=''; (d.langs||[]).forEach(l=>{ $('#langName').value=l.name||''; $('#langPct').value=l.pct||''; addLang(); });
-  $('#hobbiesBox').innerHTML=''; (d.hobbies||[]).forEach(h=>{ $('#hobbyInput').value=h.hobby||''; addHobby(); });
-  generate();
-}
-
-/* ====== إنشاء المعاينة ====== */
-function generate(){
-  const d=collect();
-
-  // العنوان والملخص
-  $('#p_name').textContent = d.name || 'الاسم الكامل';
-  $('#p_role').textContent = d.role || 'المسمّى الوظيفي';
-  $('#p_summary').textContent = d.summary || 'ملخص مختصر عن الخبرة والإنجازات…';
-
-  // الصورة
-  const img=$('#p_photo');
-  if(d.photo){ img.src=d.photo; img.style.display='block'; } else { img.removeAttribute('src'); img.style.display='none'; }
-
-  // الاتصال
-  $('#p_phone').textContent = d.phone ? `📞 ${d.phone}` : '';
-  $('#p_email').textContent = d.email ? `📧 ${d.email}` : '';
-  $('#p_address').textContent = d.address ? `🏠 ${d.address}` : '';
-
-  // التعليم
-  const edus=(d.edus||[]).filter(e=>e.school||e.degree);
-  $('#p_edus').innerHTML = edus.map(e=>{
-    const meta=[e.city,[e.start,e.end].filter(Boolean).join(' – ')].filter(Boolean).join(' • ');
-    return `<p><strong>${escapeHTML(e.degree||'')}</strong> — ${escapeHTML(e.school||'')}</p>
-            <p class="meta">${escapeHTML(meta)}${e.notes? ' • '+escapeHTML(e.notes):''}</p>`;
-  }).join('') || `<p class="muted">أضف مؤهلاتك التعليمية.</p>`;
-
-  // الخبرات
-  const exps=(d.exps||[]).filter(e=>e.title||e.company);
-  $('#p_exps').innerHTML = exps.map(e=>{
-    const meta=[e.city,[e.start,e.end].filter(Boolean).join(' – ')].filter(Boolean).join(' • ');
-    const bullets=(e.bullets||'').split('\n').filter(Boolean).map(b=>`<li>${escapeHTML(b)}</li>`).join('');
-    return `<div class="job">
-      <div class="top"><div>${escapeHTML(e.title||'')}</div><div>${escapeHTML(e.company||'')}</div></div>
-      <div class="meta">${escapeHTML(meta)}</div>
-      ${bullets? `<ul>${bullets}</ul>`:''}
-    </div>`;
-  }).join('') || `<p class="muted">أضف خبراتك العملية.</p>`;
-
-  // مهارات (شرائط في العمود الجانبي)
-  $('#p_skills').innerHTML = (d.skills||[]).filter(s=>s.name).map(s=>{
-    const pct=Math.max(0, Math.min(100, +s.pct||0));
-    return `<p style="margin:6px 0 2px">${escapeHTML(s.name)} <span style="opacity:.8">(${pct}%)</span></p>
-            <div class="bar"><span style="width:${pct}%"></span></div>`;
-  }).join('') || `<p style="opacity:.8">أضف مهاراتك.</p>`;
-
-  // لغات
-  $('#p_langs').innerHTML = (d.langs||[]).filter(l=>l.name).map(l=>{
-    const pct=Math.max(0, Math.min(100, +l.pct||0));
-    return `<p style="margin:6px 0 2px">${escapeHTML(l.name)} <span style="opacity:.8">(${pct}%)</span></p>
-            <div class="bar"><span style="width:${pct}%"></span></div>`;
-  }).join('') || `<p style="opacity:.8">أضف اللغات.</p>`;
-
-  // هوايات
-  $('#p_hobbies').textContent = (d.hobbies||[]).map(h=>h.hobby).filter(Boolean).join(' · ') || '';
-
-  // مراجع
-  $('#p_refs').innerHTML = (d.refs||[]).filter(r=>r.name).map(r=>{
-    const lines=[r.title, r.email, r.phone].filter(Boolean).map(x=>escapeHTML(x)).join(' — ');
-    return `<p><strong>${escapeHTML(r.name)}</strong><br><span style="opacity:.9">${lines}</span></p>`;
-  }).join('') || `<p style="opacity:.8">أضف مراجع إن أردت.</p>`;
-
-  // حفظ
-  save();
-}
-
-/* ====== بيانات افتراضية (Seed) ====== */
-function seed(){
-  $('#name').value='SAMIRA HADID';
-  $('#role').value='مصممة جرافيك';
-  $('#email').value='hello@reallygreatsite.com';
-  $('#phone').value='+123-456-7890';
-  $('#address').value='123 Anywhere St., Any City';
-  $('#photo').value='https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop';
-  $('#summary').value='مصممة جرافيك محترفة أعمل في تصميم الجرافيك والفنون التخطيطية وأجمع الصور والمواد المطبوعة ومؤثرات الرسوم المتحركة لإنشاء قطع تصميم.';
-
-  addEdu({school:'جامعة الجامعة',degree:'ماجستير في فنون الوسائط المتعددة',city:'',start:'2015',end:'2017'});
-  addEdu({school:'جامعة الجامعة',degree:'بكالوريوس في فنون الوسائط المتعددة',city:'',start:'2011',end:'2015'});
-
-  addExp({title:'مصمم جرافيك خبير',company:'استوديو الجامعة للفنون والطباعة',city:'',start:'يناير 2022',end:'الآن',
-          bullets:'تخصص معمّق في أعمال التصميم والتخطيط.\nإنتاج الصور الفوتوغرافية والمجلات.\nتنظيم الفعاليات.'});
-  addExp({title:'مصمم جرافيك مبتدئ',company:'استوديو الجامعة للفنون والطباعة',city:'',start:'2018',end:'ديسمبر 2021',
-          bullets:'المشاركة في التخطيط الإبداعي.\nإدارة محتوى السوشال.\nتصميم مطبوعات.'});
-
-  // مهارات
-  [['Adobe Photoshop',90],['Illustrator',85],['After Effects',75]].forEach(([n,p])=>{
-    $('#skillName').value=n; $('#skillPct').value=p; addSkill();
-  });
-  // لغات
-  [['اللغة الإنجليزية',70],['اللغة العربية',95],['اللغة التركية',85]].forEach(([n,p])=>{
-    $('#langName').value=n; $('#langPct').value=p; addLang();
-  });
-  // هوايات
-  $('#hobbyInput').value='ركوب الدراجة'; addHobby();
-  $('#hobbyInput').value='السباحة'; addHobby();
-  // مراجع
-  addRef({name:'Murad Naser',title:'رئيس مجلس إدارة الشركة',email:'hello@reallygreatsite.com',phone:'+123-456-7890'});
-  addRef({name:'Muhammad Patel',title:'منسق رئيسي للمعـهـد',email:'hello@reallygreatsite.com',phone:'+123-456-7890'});
-
-  generate(); save();
-}
-
-/* ====== أدوات ====== */
-function clearAll(){ if(!confirm('هل تريد تفريغ جميع الحقول؟')) return; localStorage.removeItem('cv-2col'); location.reload(); }
-window.addEventListener('DOMContentLoaded', load);
-</script>
 </body>
 </html>
