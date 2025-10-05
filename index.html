@@ -74,7 +74,6 @@
             --quote-bg-color: #EFF3F3;
         }
         
-        /* --- Animations --- */
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
         html { scroll-behavior: smooth; }
@@ -89,17 +88,7 @@
         }
         .container { max-width: 1280px; margin: 0 auto; padding: 0 25px; }
         h1, h2, h3 { font-weight: 700; color: var(--heading-color); }
-        h1 { font-size: clamp(2.8rem, 6vw, 3.5rem); font-weight: 800; }
-        h2 { 
-            font-size: clamp(2.2rem, 5vw, 2.8rem); 
-            text-align: center; 
-            margin-bottom: 60px; 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-        }
-        h2 .icon { font-size: 0.8em; color: var(--secondary-color); opacity: 0.7; }
+        h2 { font-size: clamp(2.2rem, 5vw, 2.8rem); text-align: center; margin-bottom: 60px; }
         h3 { font-size: 1.9rem; }
         section { 
             padding: 90px 0; 
@@ -146,21 +135,27 @@
         }
         .hero .container { position: relative; z-index: 2; }
         
+        /* ★★★ تعديل تصميم المربع والعنوان ★★★ */
         .hero-title-box {
             display: inline-block;
-            background: rgba(255, 255, 255, 0.5);
-            border: 2px double rgba(0, 51, 102, 0.3);
-            padding: 25px 40px;
-            border-radius: 10px;
-            backdrop-filter: blur(5px);
-            box-shadow: 0 4px 20px rgba(0, 51, 102, 0.1);
+            background: rgba(255, 255, 255, 0.65);
+            border: 1px solid rgba(0, 51, 102, 0.2);
+            padding: 20px 50px;
+            border-radius: 12px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 5px 25px rgba(0, 51, 102, 0.1);
             margin-bottom: 40px;
         }
-        .hero h1 { margin: 0; text-shadow: none; }
+        .hero h1 {
+            font-size: clamp(2.5rem, 5.5vw, 3.2rem);
+            font-weight: 700;
+            margin: 0;
+            text-shadow: none;
+        }
         
         .info-boxes-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
         .info-box {
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.75);
             border: 1px solid rgba(0, 51, 102, 0.1);
             padding: 30px;
             border-radius: 15px;
@@ -223,7 +218,6 @@
             .main-header .container { justify-content: center; flex-wrap: wrap; }
             section { padding: 60px 0; }
             .hero { min-height: 60vh; }
-            h2 { gap: 15px; }
             .hero-title-box { padding: 20px 25px; }
         }
     </style>
@@ -264,7 +258,7 @@
 
         <section id="preliminaries" class="content-section">
             <div class="container">
-                <h2><i class="icon fa-solid fa-star-of-david" aria-hidden="true"></i> مقدمات الصلاة <i class="icon fa-solid fa-star-of-david" aria-hidden="true"></i></h2>
+                <h2>مقدمات الصلاة</h2>
                 <p>قبل الشروع في الصلاة، يجب على المصلي أن يحقق شروطاً أساسية لا تصح الصلاة بدونها. هذه الشروط هي بمثابة تهيئة البدن والروح للوقوف بين يدي الله تعالى.</p>
                 <div class="hadith-quote">
                     <p>"أوّل ما يُحاسَبُ به العبدُ الصلاة، فإن قُبِلَت قُبِلَ ما سواها، وإن رُدَّت رُدَّ ما سواها."</p>
@@ -303,7 +297,7 @@
 
         <section id="how-to-pray" class="content-section alternate-bg">
             <div class="container">
-                <h2><i class="icon fa-solid fa-star-of-david" aria-hidden="true"></i> كيفية الصلاة <i class="icon fa-solid fa-star-of-david" aria-hidden="true"></i></h2>
+                <h2>كيفية الصلاة</h2>
                 <p>الصلاة هي عمود الدين، وفيما يلي بيان لواجباتها الأساسية دون المستحبات، لتكون صلاتك صحيحة ومقبولة بإذن الله.</p>
                 <h3>واجبات الصلاة:</h3>
                 <ul>
@@ -323,7 +317,7 @@
 
         <section id="prayer-times" class="content-section">
             <div class="container">
-                <h2><i class="icon fa-solid fa-star-of-david" aria-hidden="true"></i> أوقات الصلاة <i class="icon fa-solid fa-star-of-david" aria-hidden="true"></i></h2>
+                <h2>أوقات الصلاة</h2>
                 <p>لكل صلاة من الفرائض اليومية وقت محدد شرعاً، والالتزام به شرط لصحتها أداءً.</p>
                 <h3>أوقات الفرائض اليومية:</h3>
                 <ul>
@@ -344,7 +338,7 @@
 
         <section id="prayer-rulings" class="content-section alternate-bg">
             <div class="container">
-                <h2><i class="icon fa-solid fa-star-of-david" aria-hidden="true"></i> أحكام الصلاة (الشك والسهو) <i class="icon fa-solid fa-star-of-david" aria-hidden="true"></i></h2>
+                <h2>أحكام الصلاة (الشك والسهو)</h2>
                 <p>قد يطرأ على المصلي الشك أو السهو أثناء صلاته، وقد بيّن الفقهاء أحكاماً خاصة لمعالجة هذه الحالات لضمان صحة الصلاة.</p>
                 <h3>أحكام الشكوك:</h3>
                 <ul>
@@ -364,7 +358,7 @@
 
         <section id="missed-prayers" class="content-section">
             <div class="container">
-                <h2><i class="icon fa-solid fa-star-of-david" aria-hidden="true"></i> كيفية قضاء الصلوات الفائتة <i class="icon fa-solid fa-star-of-david" aria-hidden="true"></i></h2>
+                <h2>كيفية قضاء الصلوات الفائتة</h2>
                 <p>من فاتته فريضة يومية عمداً أو سهواً أو لأي سبب آخر، يجب عليه قضاؤها خارج وقتها.</p>
                 <h3>أحكام القضاء:</h3>
                 <ul>
@@ -381,7 +375,7 @@
 
     <footer class="main-footer">
         <div class="container">
-            <p>&copy; 2025 دليل الصلاة الجعفرية. نسألكم الدعاء.</p>
+            <p>&copy; 2025 دليل الصلاة الجعفرية. جميع الحقوق محفوظة.</p>
             <p class="footer-credit">
                 إعداد ومراجعة: 
                 <a href="https://wa.me/97333375858" target="_blank" rel="noopener noreferrer">فاضل الريس</a>
