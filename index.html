@@ -4,15 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- 1. SEO (Search Engine Optimization) -->
+    <!-- 1. Advanced SEO (Search Engine Optimization) -->
     <title>دليل الصلاة الشامل | تعلم الصلاة وفق المذهب الجعفري (فتاوى السيد السيستاني)</title>
     <meta name="description" content="دليلك الشامل والمبسط لتعلم الصلاة خطوة بخطوة: من الطهارة والمقدمات إلى كيفية الصلاة وأحكامها وقضاء الفوائت، وفقاً لفتاوى سماحة السيد السيستاني (دام ظله).">
     <meta name="keywords" content="تعليم الصلاة, كيفية الصلاة, المذهب الجعفري, السيد السيستاني, أحكام الصلاة, الطهارة, الوضوء, قضاء الصلاة, فقه, شيعة, دليل الصلاة, الكعبة">
     <meta name="author" content="فاضل الريس">
-    <link rel="canonical" href="https://your-domain.com/salah-guide.html"> <!-- ★ هام: استبدل بالرابط الفعلي لصفحتك -->
-    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://your-domain.com/salah-guide.html"> <!-- ★ هام: استبدل بالرابط الفعلي -->
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="theme-color" content="#003366"> <!-- لون شريط المتصفح على الموبايل -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
 
-    <!-- 2. Security Headers -->
+    <!-- 2. Hardened Security Headers -->
     <meta http-equiv="Content-Security-Policy" content="
         default-src 'self'; 
         script-src 'self' 'unsafe-inline'; 
@@ -24,10 +26,12 @@
         form-action 'none';
         base-uri 'self';
     ">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
     <meta name="permissions-policy" content="camera=(), microphone=(), geolocation=()">
     <meta name="referrer-policy" content="strict-origin-when-cross-origin">
 
-    <!-- 3. Social Media Sharing (Open Graph) -->
+    <!-- 3. Social Media & PWA -->
     <meta property="og:title" content="دليل الصلاة الشامل | تعلم الصلاة وفق المذهب الجعفري">
     <meta property="og:description" content="دليل مبسط لتعلم الصلاة، أحكامها، ومقدماتها وفقاً لفتاوى سماحة السيد السيستاني (دام ظله).">
     <meta property="og:image" content="https://images.unsplash.com/photo-1598412213663-fd80b7352a2a?q=80&w=1974&auto=format&fit=crop">
@@ -35,21 +39,20 @@
     <meta property="og:type" content="article">
     <meta property="og:locale" content="ar_AR">
 
-    <!-- 4. Structured Data (Schema.org) for Google -->
+    <!-- 4. Enriched Structured Data (Schema.org) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Article",
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https://your-domain.com/salah-guide.html" 
-      },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://your-domain.com/salah-guide.html" },
       "headline": "دليل الصلاة الشامل: تعلم الصلاة وفق المذهب الجعفري (فتاوى السيد السيستاني)",
       "image": "https://images.unsplash.com/photo-1598412213663-fd80b7352a2a?q=80&w=1974&auto=format&fit=crop",
       "author": { "@type": "Person", "name": "فاضل الريس" },
       "publisher": { "@type": "Organization", "name": "دليل الصلاة الجعفرية" },
       "datePublished": "2025-10-05",
-      "dateModified": "2025-10-05"
+      "dateModified": "2025-10-05",
+      "wordCount": "1150",
+      "timeRequired": "PT6M"
     }
     </script>
 
@@ -57,7 +60,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <style>
         :root { 
@@ -65,11 +68,15 @@
             --secondary-color: #5A7D7C; /* أخضر زيتوني هادئ */
             --background-color: #FFFFFF; /* أبيض */
             --light-bg-color: #F9F7F3; /* بيج فاتح جداً */
-            --text-color: #333333; 
+            --text-color: #3E3E3E; 
             --heading-color: #003366; 
             --white-color: #FFFFFF; 
             --quote-bg-color: #EFF3F3;
         }
+        
+        /* --- Animations --- */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
         html { scroll-behavior: smooth; }
         body { 
             font-family: 'Tajawal', sans-serif; 
@@ -78,15 +85,28 @@
             background-color: var(--background-color); 
             color: var(--text-color); 
             font-weight: 400; 
+            font-size: 17px;
         }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 25px; }
         h1, h2, h3 { font-weight: 700; color: var(--heading-color); }
         h1 { font-size: clamp(2.8rem, 6vw, 3.5rem); font-weight: 800; }
-        h2 { font-size: clamp(2.2rem, 5vw, 2.8rem); text-align: center; margin-bottom: 50px; }
-        h3 { font-size: 1.8rem; }
-        section { padding: 80px 0; }
+        h2 { 
+            font-size: clamp(2.2rem, 5vw, 2.8rem); 
+            text-align: center; 
+            margin-bottom: 60px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+        h2 .icon { font-size: 0.8em; color: var(--secondary-color); opacity: 0.7; }
+        h3 { font-size: 1.9rem; }
+        section { 
+            padding: 90px 0; 
+            animation: fadeIn 1s ease-out;
+            animation-fill-mode: both;
+        }
 
-        /* ★★★ تعديل جذري على الهيدر لضمان التوافقية ★★★ */
         .main-header { 
             background-color: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(10px);
@@ -96,43 +116,14 @@
             top: 0; 
             z-index: 1000; 
         }
-        .main-header .container { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            gap: 20px; /* مسافة بين الشعار والقائمة */
-        }
-        .logo { 
-            font-size: 1.7rem; 
-            font-weight: 800; 
-            color: var(--primary-color); 
-            text-decoration: none;
-            white-space: nowrap; 
-            flex-shrink: 0; /* يمنع الشعار من التقلص */
-        }
+        .main-header .container { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+        .logo { font-size: 1.7rem; font-weight: 800; color: var(--primary-color); text-decoration: none; white-space: nowrap; flex-shrink: 0; }
         .logo span { color: var(--secondary-color); }
-        .main-nav { 
-            display: flex; 
-            align-items: center; 
-            justify-content: flex-end; /* تبدأ الروابط من اليسار */
-            gap: clamp(10px, 2vw, 25px); /* مسافات مرنة بين الروابط */
-            width: 100%;
-            overflow-x: auto; /* يسمح بالتمرير الأفقي على أضيق الشاشات كحل أخير */
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
-        }
-        .main-nav::-webkit-scrollbar { display: none; } /* Chrome, Safari, Opera */
-        .main-nav a { 
-            color: var(--primary-color); 
-            text-decoration: none; 
-            font-weight: 500; 
-            transition: color 0.3s; 
-            font-size: clamp(0.85rem, 1.5vw, 1.05rem); /* حجم خط مرن */
-            white-space: nowrap; 
-        }
+        .main-nav { display: flex; align-items: center; justify-content: flex-end; gap: clamp(10px, 2vw, 25px); width: 100%; overflow-x: auto; -ms-overflow-style: none; scrollbar-width: none; }
+        .main-nav::-webkit-scrollbar { display: none; }
+        .main-nav a { color: var(--primary-color); text-decoration: none; font-weight: 500; transition: color 0.3s; font-size: clamp(0.9rem, 1.5vw, 1.1rem); white-space: nowrap; }
         .main-nav a:hover { color: var(--secondary-color); }
         
-        /* ★★★ تم تغيير رابط الصورة هنا ★★★ */
         .hero {
             position: relative;
             color: var(--heading-color);
@@ -142,28 +133,34 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            min-height: 70vh;
+            min-height: 75vh;
         }
         .hero::before {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background-image: linear-gradient(to top, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.3) 60%), url('https://images.unsplash.com/photo-1598412213663-fd80b7352a2a?q=80&w=1974&auto=format&fit=crop');
+            background-image: linear-gradient(to top, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.4) 60%), url('https://images.unsplash.com/photo-1598412213663-fd80b7352a2a?q=80&w=1974&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
             z-index: 1;
         }
         .hero .container { position: relative; z-index: 2; }
-        .hero h1 { color: var(--heading-color); margin-bottom: 30px; text-shadow: 0px 1px 3px rgba(255,255,255,0.5); }
         
-        .info-boxes-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 40px;
+        .hero-title-box {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.5);
+            border: 2px double rgba(0, 51, 102, 0.3);
+            padding: 25px 40px;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 20px rgba(0, 51, 102, 0.1);
+            margin-bottom: 40px;
         }
+        .hero h1 { margin: 0; text-shadow: none; }
+        
+        .info-boxes-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
         .info-box {
-            background: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.7);
             border: 1px solid rgba(0, 51, 102, 0.1);
             padding: 30px;
             border-radius: 15px;
@@ -175,9 +172,9 @@
         .info-box h3 { color: var(--heading-color); font-size: 1.5rem; margin-top: 0; border-bottom: 2px solid var(--secondary-color); padding-bottom: 10px; margin-bottom: 15px; }
         .info-box p { font-size: 1.1rem; color: #444; margin: 0; line-height: 1.7; }
 
-        .content-section { padding: 80px 0; }
+        .content-section { padding: 90px 0; }
         .content-section.alternate-bg { background-color: var(--light-bg-color); }
-        .content-section .container { max-width: 900px; }
+        .content-section .container { max-width: 950px; }
         .content-section h3 { margin-top: 40px; margin-bottom: 20px; border-bottom: 2px solid var(--secondary-color); padding-bottom: 10px; }
         .content-section p, .content-section ul { text-align: justify; }
         .content-section ul { list-style-type: none; padding-right: 20px; }
@@ -185,7 +182,7 @@
         .content-section ul li::before { content: '\f00c'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: var(--secondary-color); position: absolute; right: 0; top: 5px; }
         
         .hadith-quote { background-color: var(--quote-bg-color); border-right: 5px solid var(--secondary-color); padding: 20px 25px; margin: 30px 0; border-radius: 5px; font-style: italic; }
-        .hadith-quote p { margin: 0; font-size: 1.15rem; color: #444; }
+        .hadith-quote p { margin: 0; font-size: 1.2rem; color: #444; }
         .hadith-quote .source { display: block; text-align: left; font-style: normal; font-weight: 500; margin-top: 10px; color: #777; }
         
         .main-footer { background-color: var(--primary-color); color: var(--white-color); text-align: center; padding: 40px 20px; }
@@ -195,11 +192,39 @@
         .footer-credit a:hover { color: var(--white-color); }
         .citation { font-size: 0.85rem; color: #777; display: block; margin-top: 20px; text-align: left; }
 
-        /* تعديل إضافي للشاشات الصغيرة جداً */
+        .back-to-top {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            background: var(--primary-color);
+            color: var(--white-color);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+            transform: translateY(20px);
+            z-index: 1000;
+        }
+        .back-to-top.visible {
+            opacity: 0.8;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .back-to-top:hover { opacity: 1; }
+
         @media (max-width: 768px) {
+            body { font-size: 16px; }
             .main-header .container { justify-content: center; flex-wrap: wrap; }
             section { padding: 60px 0; }
             .hero { min-height: 60vh; }
+            h2 { gap: 15px; }
+            .hero-title-box { padding: 20px 25px; }
         }
     </style>
 </head>
@@ -221,7 +246,9 @@
     <main>
         <section id="hero" class="hero">
             <div class="container">
-                <h1>دليلك الشامل لتعلم الصلاة</h1>
+                <div class="hero-title-box">
+                    <h1>دليلك الشامل لتعلم الصلاة</h1>
+                </div>
                 <div class="info-boxes-container">
                     <div class="info-box">
                         <h3>غاية الدليل</h3>
@@ -237,7 +264,7 @@
 
         <section id="preliminaries" class="content-section">
             <div class="container">
-                <h2>مقدمات الصلاة</h2>
+                <h2><i class="icon fa-solid fa-star-of-david" aria-hidden="true"></i> مقدمات الصلاة <i class="icon fa-solid fa-star-of-david" aria-hidden="true"></i></h2>
                 <p>قبل الشروع في الصلاة، يجب على المصلي أن يحقق شروطاً أساسية لا تصح الصلاة بدونها. هذه الشروط هي بمثابة تهيئة البدن والروح للوقوف بين يدي الله تعالى.</p>
                 <div class="hadith-quote">
                     <p>"أوّل ما يُحاسَبُ به العبدُ الصلاة، فإن قُبِلَت قُبِلَ ما سواها، وإن رُدَّت رُدَّ ما سواها."</p>
@@ -276,7 +303,7 @@
 
         <section id="how-to-pray" class="content-section alternate-bg">
             <div class="container">
-                <h2>كيفية الصلاة</h2>
+                <h2><i class="icon fa-solid fa-star-of-david" aria-hidden="true"></i> كيفية الصلاة <i class="icon fa-solid fa-star-of-david" aria-hidden="true"></i></h2>
                 <p>الصلاة هي عمود الدين، وفيما يلي بيان لواجباتها الأساسية دون المستحبات، لتكون صلاتك صحيحة ومقبولة بإذن الله.</p>
                 <h3>واجبات الصلاة:</h3>
                 <ul>
@@ -296,7 +323,7 @@
 
         <section id="prayer-times" class="content-section">
             <div class="container">
-                <h2>أوقات الصلاة</h2>
+                <h2><i class="icon fa-solid fa-star-of-david" aria-hidden="true"></i> أوقات الصلاة <i class="icon fa-solid fa-star-of-david" aria-hidden="true"></i></h2>
                 <p>لكل صلاة من الفرائض اليومية وقت محدد شرعاً، والالتزام به شرط لصحتها أداءً.</p>
                 <h3>أوقات الفرائض اليومية:</h3>
                 <ul>
@@ -317,7 +344,7 @@
 
         <section id="prayer-rulings" class="content-section alternate-bg">
             <div class="container">
-                <h2>أحكام الصلاة (الشك والسهو)</h2>
+                <h2><i class="icon fa-solid fa-star-of-david" aria-hidden="true"></i> أحكام الصلاة (الشك والسهو) <i class="icon fa-solid fa-star-of-david" aria-hidden="true"></i></h2>
                 <p>قد يطرأ على المصلي الشك أو السهو أثناء صلاته، وقد بيّن الفقهاء أحكاماً خاصة لمعالجة هذه الحالات لضمان صحة الصلاة.</p>
                 <h3>أحكام الشكوك:</h3>
                 <ul>
@@ -337,7 +364,7 @@
 
         <section id="missed-prayers" class="content-section">
             <div class="container">
-                <h2>كيفية قضاء الصلوات الفائتة</h2>
+                <h2><i class="icon fa-solid fa-star-of-david" aria-hidden="true"></i> كيفية قضاء الصلوات الفائتة <i class="icon fa-solid fa-star-of-david" aria-hidden="true"></i></h2>
                 <p>من فاتته فريضة يومية عمداً أو سهواً أو لأي سبب آخر، يجب عليه قضاؤها خارج وقتها.</p>
                 <h3>أحكام القضاء:</h3>
                 <ul>
@@ -361,6 +388,20 @@
             </p>
         </div>
     </footer>
+
+    <a href="#" class="back-to-top" aria-label="العودة إلى الأعلى"><i class="fas fa-arrow-up"></i></a>
+
+    <script>
+        // Back to top button functionality
+        const backToTopButton = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+    </script>
 
 </body>
 </html>
