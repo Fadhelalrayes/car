@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>حِكمة في طلب العلم - تصميم احترافي مطابق</title>
-    <meta name="description" content="مقال بتصميم احترافي، جاهز للتنزيل كملف PDF مطابق تمامًا للعرض على الشاشة وبجودة عالية.">
+    <title>حِكمة في طلب العلم - الإصدار النهائي والمضمون</title>
+    <meta name="description" content="مقال بتصميم صفحة كتاب احترافية، جاهز للطباعة أو الحفظ كملف PDF بجودة عالية عبر المتصفح مباشرة.">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,10 +13,6 @@
     
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
-    <!-- The Most Reliable Libraries for WYSIWYG PDF Export -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <style>
         :root {
@@ -31,7 +27,6 @@
             --font-heading: 'Noto Kufi Arabic', sans-serif;
         }
 
-        /* The main body that will be captured */
         body {
             font-family: var(--font-body);
             color: var(--text-color);
@@ -46,7 +41,7 @@
             box-sizing: border-box;
         }
 
-        /* The A4-like page container */
+        /* The A4-like page container for screen view */
         .page-container {
             width: 210mm;
             min-height: 297mm;
@@ -100,8 +95,7 @@
             border: none; padding: 15px 35px; font-size: 1.1rem; font-weight: 600;
             border-radius: 5px; cursor: pointer; transition: all 0.3s ease;
         }
-        .download-button:hover:not(:disabled) { background-color: #a93226; transform: translateY(-2px); }
-        .download-button:disabled { background-color: #aaa; cursor: not-allowed; }
+        .download-button:hover { background-color: #a93226; transform: translateY(-2px); }
 
         @media (max-width: 820px) {
             body { padding: 1rem; }
@@ -110,16 +104,45 @@
             p { font-size: 1.1rem; line-height: 2.2; }
             .quote { margin: 1.5rem 1rem; }
         }
-        
-        /* This style will be applied only during PDF generation */
-        .pdf-generating .download-button-wrapper {
-            display: none;
+
+        /* ** THE MOST IMPORTANT PART: PRINT STYLES ** */
+        @media print {
+            body {
+                background-color: #fff !important; /* Ensure no background color from body */
+                padding: 0;
+                margin: 0;
+            }
+            .page-container {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 20mm; /* Standard print margins */
+                box-shadow: none !important;
+                border: none !important;
+            }
+            .download-button-wrapper {
+                display: none !important; /* Hide the button in the PDF */
+            }
+            h1, p, .quote {
+                color: #000 !important; /* Ensure text is black for printing */
+            }
+            .title-box {
+                background-color: #fff !important;
+                border-bottom-color: #000 !important;
+            }
+            .quote {
+                border-right-color: #000 !important;
+            }
+            /* Ensure page breaks happen between paragraphs, not inside them */
+            p, .quote, .title-box {
+                page-break-inside: avoid;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="page-container" id="content-to-print">
+    <div class="page-container">
         <main class="page-content">
             <div class="title-box">
                 <h1>حِكمةٌ في طَلبِ العِلم</h1>
@@ -151,60 +174,14 @@
     
     <div class="download-button-wrapper">
         <button id="download-btn" class="download-button">
-            تنزيل كملف PDF احترافي <i class="fas fa-file-pdf"></i>
+            طباعة أو حفظ كـ PDF <i class="fas fa-print"></i>
         </button>
     </div>
 
     <script>
-        window.jsPDF = window.jspdf.jsPDF;
-
+        // The simplest, most reliable code.
         document.getElementById('download-btn').addEventListener('click', function () {
-            const downloadButton = this;
-            const body = document.body;
-            
-            downloadButton.disabled = true;
-            downloadButton.innerHTML = 'جاري التحضير... <i class="fas fa-spinner fa-spin"></i>';
-
-            // Temporarily hide the button for a clean screenshot
-            body.classList.add('pdf-generating');
-
-            // A short delay to ensure the style change is applied
-            setTimeout(() => {
-                html2canvas(body, { // Capture the entire body
-                    scale: 3, // High resolution
-                    useCORS: true,
-                    allowTaint: true,
-                    logging: false,
-                    y: 0, // Start capture from the top
-                    scrollY: -window.scrollY
-                }).then(canvas => {
-                    const imgData = canvas.toDataURL('image/png');
-                    const pdf = new jsPDF({
-                        orientation: 'portrait',
-                        unit: 'mm',
-                        format: 'a4'
-                    });
-
-                    const pdfWidth = pdf.internal.pageSize.getWidth();
-                    const pdfHeight = pdf.internal.pageSize.getHeight();
-                    
-                    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-                    pdf.save('حكمة-في-طلب-العلم.pdf');
-
-                    // Restore the button
-                    body.classList.remove('pdf-generating');
-                    downloadButton.disabled = false;
-                    downloadButton.innerHTML = 'تنزيل كملف PDF احترافي <i class="fas fa-file-pdf"></i>';
-
-                }).catch(err => {
-                    console.error("PDF Generation Failed:", err);
-                    alert("عذراً، حدث خطأ أثناء إنشاء الملف. يرجى المحاولة مرة أخرى.");
-                    // Restore the button even on error
-                    body.classList.remove('pdf-generating');
-                    downloadButton.disabled = false;
-                    downloadButton.innerHTML = 'تنزيل كملف PDF احترافي <i class="fas fa-file-pdf"></i>';
-                });
-            }, 200); // A minimal delay
+            window.print();
         });
     </script>
 
