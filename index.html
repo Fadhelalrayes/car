@@ -3,397 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حِكمة في طلب العلم - تصميم نهائي</title>
+    <meta name="description" content="مقال بتصميم صفحة كتاب احترافية مع عنوان أنيق، جاهز للطباعة أو الحفظ كملف PDF بجودة عالية.">
 
-    <!-- 1. Advanced SEO (Search Engine Optimization) -->
-    <title>دليل الصلاة الشامل | تعلم الصلاة وفق المذهب الجعفري (فتاوى السيد السيستاني)</title>
-    <meta name="description" content="دليلك الشامل والمبسط لتعلم الصلاة خطوة بخطوة: من الطهارة والمقدمات إلى كيفية الصلاة وأحكامها وقضاء الفوائت، وفقاً لفتاوى سماحة السيد السيستاني (دام ظله).">
-    <meta name="keywords" content="تعليم الصلاة, كيفية الصلاة, المذهب الجعفري, السيد السيستاني, أحكام الصلاة, الطهارة, الوضوء, قضاء الصلاة, فقه, شيعة, دليل الصلاة, الكعبة">
-    <meta name="author" content="فاضل الريس">
-    <link rel="canonical" href="https://your-domain.com/salah-guide.html"> <!-- ★ هام: استبدل بالرابط الفعلي -->
-    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-    <meta name="theme-color" content="#003366"> <!-- لون شريط المتصفح على الموبايل -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-
-    <!-- 2. Hardened Security Headers -->
-    <meta http-equiv="Content-Security-Policy" content="
-        default-src 'self'; 
-        script-src 'self' 'unsafe-inline'; 
-        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; 
-        font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; 
-        img-src 'self' https: data:; 
-        connect-src 'self';
-        frame-ancestors 'none';
-        form-action 'none';
-        base-uri 'self';
-    ">
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="X-Frame-Options" content="DENY">
-    <meta name="permissions-policy" content="camera=(), microphone=(), geolocation=()">
-    <meta name="referrer-policy" content="strict-origin-when-cross-origin">
-
-    <!-- 3. Social Media & PWA -->
-    <meta property="og:title" content="دليل الصلاة الشامل | تعلم الصلاة وفق المذهب الجعفري">
-    <meta property="og:description" content="دليل مبسط لتعلم الصلاة، أحكامها، ومقدماتها وفقاً لفتاوى سماحة السيد السيستاني (دام ظله).">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1598412213663-fd80b7352a2a?q=80&w=1974&auto=format&fit=crop">
-    <meta property="og:url" content="https://your-domain.com/salah-guide.html"> <!-- ★ هام: استبدل بالرابط الفعلي -->
-    <meta property="og:type" content="article">
-    <meta property="og:locale" content="ar_AR">
-
-    <!-- 4. Enriched Structured Data (Schema.org) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://your-domain.com/salah-guide.html" },
-      "headline": "دليل الصلاة الشامل: تعلم الصلاة وفق المذهب الجعفري (فتاوى السيد السيستاني)",
-      "image": "https://images.unsplash.com/photo-1598412213663-fd80b7352a2a?q=80&w=1974&auto=format&fit=crop",
-      "author": { "@type": "Person", "name": "فاضل الريس" },
-      "publisher": { "@type": "Organization", "name": "دليل الصلاة الجعفرية" },
-      "datePublished": "2025-10-05",
-      "dateModified": "2025-10-05",
-      "wordCount": "1150",
-      "timeRequired": "PT6M"
-    }
-    </script>
-
-    <!-- Fonts and Icons -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Kufi+Arabic:wght@600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
     <style>
-        :root { 
-            --primary-color: #003366; /* كحلي غامق وهادئ */
-            --secondary-color: #5A7D7C; /* أخضر زيتوني هادئ */
-            --background-color: #FFFFFF; /* أبيض */
-            --light-bg-color: #F9F7F3; /* بيج فاتح جداً */
-            --text-color: #3E3E3E; 
-            --heading-color: #003366; 
-            --white-color: #FFFFFF; 
-            --quote-bg-color: #EFF3F3;
-        }
-        
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-        html { scroll-behavior: smooth; }
-        body { 
-            font-family: 'Tajawal', sans-serif; 
-            margin: 0; 
-            line-height: 1.9; 
-            background-color: var(--background-color); 
-            color: var(--text-color); 
-            font-weight: 400; 
-            font-size: 17px;
-        }
-        .container { max-width: 1280px; margin: 0 auto; padding: 0 25px; }
-        h1, h2, h3 { font-weight: 700; color: var(--heading-color); }
-        h2 { font-size: clamp(2.2rem, 5vw, 2.8rem); text-align: center; margin-bottom: 60px; }
-        h3 { font-size: 1.9rem; }
-        section { 
-            padding: 90px 0; 
-            animation: fadeIn 1s ease-out;
-            animation-fill-mode: both;
+        :root {
+            --page-bg: #ffffff;
+            --text-color: #212529;
+            --header-color: #8c1515;
+            --border-color: #dee2e6;
+            --body-bg: #e9ecef;
+            --title-box-bg: #fdfdf5;
+            --gold-accent: #c9b79c; /* A softer, elegant gold for accents */
+            --font-body: 'Amiri', serif;
+            --font-heading: 'Noto Kufi Arabic', sans-serif;
         }
 
-        .main-header { 
-            background-color: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05); 
-            padding: 15px 0; 
-            position: sticky; 
-            top: 0; 
-            z-index: 1000; 
-        }
-        .main-header .container { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
-        .logo { font-size: 1.7rem; font-weight: 800; color: var(--primary-color); text-decoration: none; white-space: nowrap; flex-shrink: 0; }
-        .logo span { color: var(--secondary-color); }
-        .main-nav { display: flex; align-items: center; justify-content: flex-end; gap: clamp(10px, 2vw, 25px); width: 100%; overflow-x: auto; -ms-overflow-style: none; scrollbar-width: none; }
-        .main-nav::-webkit-scrollbar { display: none; }
-        .main-nav a { color: var(--primary-color); text-decoration: none; font-weight: 500; transition: color 0.3s; font-size: clamp(0.9rem, 1.5vw, 1.1rem); white-space: nowrap; }
-        .main-nav a:hover { color: var(--secondary-color); }
-        
-        .hero {
-            position: relative;
-            color: var(--heading-color);
-            padding: 120px 0;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            min-height: 75vh;
-        }
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: linear-gradient(to top, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.4) 60%), url('https://images.unsplash.com/photo-1598412213663-fd80b7352a2a?q=80&w=1974&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-            z-index: 1;
-        }
-        .hero .container { position: relative; z-index: 2; }
-        
-        /* ★★★ تعديل تصميم المربع والعنوان ★★★ */
-        .hero-title-box {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.65);
-            border: 1px solid rgba(0, 51, 102, 0.2);
-            padding: 20px 50px;
-            border-radius: 12px;
-            backdrop-filter: blur(8px);
-            box-shadow: 0 5px 25px rgba(0, 51, 102, 0.1);
-            margin-bottom: 40px;
-        }
-        .hero h1 {
-            font-size: clamp(2.5rem, 5.5vw, 3.2rem);
-            font-weight: 700;
+        body {
+            font-family: var(--font-body);
+            color: var(--text-color);
+            background-color: var(--body-bg);
             margin: 0;
-            text-shadow: none;
-        }
-        
-        .info-boxes-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
-        .info-box {
-            background: rgba(255, 255, 255, 0.75);
-            border: 1px solid rgba(0, 51, 102, 0.1);
-            padding: 30px;
-            border-radius: 15px;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 8px 25px 0 rgba(0, 51, 102, 0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .info-box:hover { transform: translateY(-8px); box-shadow: 0 12px 35px 0 rgba(0, 51, 102, 0.08); }
-        .info-box h3 { color: var(--heading-color); font-size: 1.5rem; margin-top: 0; border-bottom: 2px solid var(--secondary-color); padding-bottom: 10px; margin-bottom: 15px; }
-        .info-box p { font-size: 1.1rem; color: #444; margin: 0; line-height: 1.7; }
-
-        .content-section { padding: 90px 0; }
-        .content-section.alternate-bg { background-color: var(--light-bg-color); }
-        .content-section .container { max-width: 950px; }
-        .content-section h3 { margin-top: 40px; margin-bottom: 20px; border-bottom: 2px solid var(--secondary-color); padding-bottom: 10px; }
-        .content-section p, .content-section ul { text-align: justify; }
-        .content-section ul { list-style-type: none; padding-right: 20px; }
-        .content-section ul li { position: relative; padding-right: 30px; margin-bottom: 15px; }
-        .content-section ul li::before { content: '\f00c'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: var(--secondary-color); position: absolute; right: 0; top: 5px; }
-        
-        .hadith-quote { background-color: var(--quote-bg-color); border-right: 5px solid var(--secondary-color); padding: 20px 25px; margin: 30px 0; border-radius: 5px; font-style: italic; }
-        .hadith-quote p { margin: 0; font-size: 1.2rem; color: #444; }
-        .hadith-quote .source { display: block; text-align: left; font-style: normal; font-weight: 500; margin-top: 10px; color: #777; }
-        
-        .main-footer { background-color: var(--primary-color); color: var(--white-color); text-align: center; padding: 40px 20px; }
-        .main-footer p { margin: 0; opacity: 0.9; }
-        .footer-credit { margin-top: 20px; font-size: 1.1rem; }
-        .footer-credit a { color: #a9cce3; text-decoration: none; font-weight: 700; transition: color 0.3s; }
-        .footer-credit a:hover { color: var(--white-color); }
-        .citation { font-size: 0.85rem; color: #777; display: block; margin-top: 20px; text-align: left; }
-
-        .back-to-top {
-            position: fixed;
-            bottom: 25px;
-            left: 25px;
-            background: var(--primary-color);
-            color: var(--white-color);
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
+            padding: 3rem 1rem;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            text-decoration: none;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
-            transform: translateY(20px);
-            z-index: 1000;
+            min-height: 100vh;
+            box-sizing: border-box;
         }
-        .back-to-top.visible {
-            opacity: 0.8;
-            visibility: visible;
-            transform: translateY(0);
-        }
-        .back-to-top:hover { opacity: 1; }
 
-        @media (max-width: 768px) {
-            body { font-size: 16px; }
-            .main-header .container { justify-content: center; flex-wrap: wrap; }
-            section { padding: 60px 0; }
-            .hero { min-height: 60vh; }
-            .hero-title-box { padding: 20px 25px; }
+        /* The A4-like page container */
+        .page-container {
+            width: 210mm;
+            min-height: 297mm;
+            background-color: var(--page-bg);
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+            padding: 25mm;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .page-content { flex-grow: 1; }
+        .page-footer {
+            width: 100%; text-align: center; font-size: 14px; color: #888; font-family: sans-serif;
+            border-top: 1px solid var(--border-color); padding-top: 10px; margin-top: auto;
+        }
+
+        /* The elegant title box */
+        .title-box {
+            background-color: var(--title-box-bg);
+            text-align: center;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-bottom: 3px double var(--gold-accent);
+        }
+
+        h1 {
+            font-family: var(--font-heading);
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--header-color);
+            margin: 0;
+        }
+
+        p { font-size: 1.2rem; line-height: 2.4; text-align: justify; margin: 0 0 1.5rem 0; }
+        p.first-paragraph { text-indent: 3rem; }
+        strong { font-weight: 700; }
+
+        .quote {
+            font-style: italic; font-size: 1.25rem; color: #495057; margin: 2rem 3rem;
+            padding-right: 1.5rem; 
+            border-right: 4px solid var(--gold-accent);
+        }
+        
+        .ornament { text-align: center; font-size: 1.5rem; color: var(--gold-accent); margin: 2rem 0; }
+
+        .download-button-wrapper { text-align: center; margin-top: 2.5rem; }
+        .download-button {
+            font-family: var(--font-heading); background-color: var(--header-color); color: white;
+            border: none; padding: 15px 35px; font-size: 1.1rem; font-weight: 600;
+            border-radius: 5px; cursor: pointer; transition: all 0.3s ease;
+        }
+        .download-button:hover { background-color: #a93226; transform: translateY(-2px); }
+
+        @media (max-width: 820px) {
+            body { padding: 1rem; }
+            .page-container { width: 100%; min-height: 0; height: auto; padding: 2rem; }
+            h1 { font-size: 2.2rem; }
+            p { font-size: 1.1rem; line-height: 2.2; }
+            .quote { margin: 1.5rem 1rem; }
+        }
+
+        /* Print Styles for a Perfect PDF */
+        @media print {
+            body { background-color: #fff; padding: 0; margin: 0; }
+            .page-container { margin: 0; box-shadow: none; border: none; padding: 20mm; }
+            .download-button-wrapper { display: none; }
+            h1, p, .quote { color: #000 !important; }
+            .title-box { background-color: #fff !important; border-bottom-color: #000 !important; }
+            .quote { border-right-color: #000 !important; }
+            p, .quote, .title-box { page-break-inside: avoid; }
         }
     </style>
 </head>
 <body>
 
-    <header class="main-header">
-        <div class="container">
-            <a href="#" class="logo">دليل الصلاة <span>الجعفرية</span></a>
-            <nav class="main-nav">
-                <a href="#preliminaries">مقدمات الصلاة</a>
-                <a href="#how-to-pray">كيفية الصلاة</a>
-                <a href="#prayer-times">أوقات الصلاة</a>
-                <a href="#prayer-rulings">أحكام الصلاة</a>
-                <a href="#missed-prayers">قضاء الفوائت</a>
-            </nav>
-        </div>
-    </header>
-
-    <main>
-        <section id="hero" class="hero">
-            <div class="container">
-                <div class="hero-title-box">
-                    <h1>دليلك الشامل لتعلم الصلاة</h1>
-                </div>
-                <div class="info-boxes-container">
-                    <div class="info-box">
-                        <h3>غاية الدليل</h3>
-                        <p>صفحة مبسطة تشرح كيفية الصلاة وأحكامها وفقاً لفتاوى سماحة المرجع الأعلى السيد علي الحسيني السيستاني (دام ظله).</p>
-                    </div>
-                    <div class="info-box">
-                        <h3>الهدف الأسمى</h3>
-                        <p>أن تكون هذه الصفحة عوناً لكل مؤمن ومؤمنة على أداء هذا الركن العظيم من أركان الدين على الوجه الصحيح والأكمل.</p>
-                    </div>
-                </div>
+    <div class="page-container">
+        <main class="page-content">
+            <div class="title-box">
+                <h1>حِكمةٌ في طَلبِ العِلم</h1>
             </div>
-        </section>
-
-        <section id="preliminaries" class="content-section">
-            <div class="container">
-                <h2>مقدمات الصلاة</h2>
-                <p>قبل الشروع في الصلاة، يجب على المصلي أن يحقق شروطاً أساسية لا تصح الصلاة بدونها. هذه الشروط هي بمثابة تهيئة البدن والروح للوقوف بين يدي الله تعالى.</p>
-                <div class="hadith-quote">
-                    <p>"أوّل ما يُحاسَبُ به العبدُ الصلاة، فإن قُبِلَت قُبِلَ ما سواها، وإن رُدَّت رُدَّ ما سواها."</p>
-                    <span class="source">عن الإمام الصادق (عليه السلام) - الكافي، ج 3، ص 268.</span>
-                </div>
-                <h3>1. الطهارة:</h3>
-                <p>وهي شرط أساسي للصلاة، وتشمل الطهارة من الحدث (بالوضوء أو الغسل أو التيمم) والطهارة من الخبث (إزالة النجاسة عن البدن واللباس).</p>
-                <ul>
-                    <li><strong>الوضوء:</strong> يجب على غير المتوضئ أن يتوضأ للصلاة. والوضوء هو غسل الوجه واليدين من المرفقين إلى أطراف الأصابع، ومسح مقدم الرأس والقدمين.</li>
-                    <li><strong>الغسل:</strong> يجب في حالات معينة كالجنابة، وهو يغني عن الوضوء.</li>
-                    <li><strong>التيمم:</strong> يكون بديلاً عن الوضوء أو الغسل عند تعذر استخدام الماء.</li>
-                    <li><strong>طهارة البدن واللباس:</strong> يجب أن يكون بدن المصلي وثيابه طاهرة من النجاسات.</li>
-                </ul>
-                <div class="hadith-quote">
-                    <p>"لا صلاة إلا بطهور."</p>
-                    <span class="source">عن النبي محمد (صلى الله عليه وآله) - وسائل الشيعة، ج 1، ص 365.</span>
-                </div>
-                <h3>2. القبلة:</h3>
-                <p>يجب على المصلي التوجه نحو الكعبة المشرفة في مكة المكرمة. من كان بعيداً، يكفيه التوجه نحو جهتها.</p>
-                <ul>
-                    <li>يجب العلم أو الاطمئنان بجهة القبلة. إذا لم يمكن ذلك، يعمل بالظن الحاصل من بعض الطرق (كمحاريب المسلمين أو قبورهم) أو بالبوصلة.</li>
-                    <li>إذا لم يتمكن من تحصيل الظن، يصلي إلى أي جهة يحتمل وجود القبلة فيها، والأحوط استحباباً أن يصلي إلى أربع جهات.</li>
-                </ul>
-                <h3>3. لباس المصلي:</h3>
-                <p>هناك شروط للباس الذي تصح فيه الصلاة:</p>
-                <ul>
-                    <li><strong>الطهارة:</strong> يجب أن يكون طاهراً.</li>
-                    <li><strong>الإباحة:</strong> لا يجوز أن يكون لباس المصلي مغصوباً.</li>
-                    <li><strong>عدم كونه من أجزاء الميتة:</strong> لا تصح الصلاة في لباس مصنوع من جلد حيوان غير مذكى شرعاً.</li>
-                    <li><strong>عدم كونه من أجزاء ما لا يؤكل لحمه:</strong> على الأحوط وجوباً.</li>
-                    <li><strong>للرجال:</strong> يجب ألا يكون لباس الرجل من الحرير الخالص أو الذهب.</li>
-                </ul>
-                 <span class="citation">المصدر: موقع مكتب سماحة السيد السيستاني (دام ظله)، منهاج الصالحين والمسائل المنتخبة.</span>
-            </div>
-        </section>
-
-        <section id="how-to-pray" class="content-section alternate-bg">
-            <div class="container">
-                <h2>كيفية الصلاة</h2>
-                <p>الصلاة هي عمود الدين، وفيما يلي بيان لواجباتها الأساسية دون المستحبات، لتكون صلاتك صحيحة ومقبولة بإذن الله.</p>
-                <h3>واجبات الصلاة:</h3>
-                <ul>
-                    <li><strong>النية:</strong> وهي القصد القلبي لأداء صلاة معينة قربةً إلى الله تعالى، ولا يلزم التلفظ بها.</li>
-                    <li><strong>تكبيرة الإحرام:</strong> قول "الله أكبر" في بداية الصلاة مع استقرار البدن.</li>
-                    <li><strong>القيام:</strong> الوقوف منتصباً أثناء تكبيرة الإحرام والقراءة قبل الركوع.</li>
-                    <li><strong>القراءة:</strong> قراءة سورة الحمد وسورة كاملة أخرى في الركعتين الأولى والثانية. في الركعتين الثالثة والرابعة، يتخير المصلي بين قراءة سورة الحمد وحدها أو التسبيحات الأربع ("سبحان الله، والحمد لله، ولا إله إلا الله، والله أكبر").</li>
-                    <li><strong>الركوع:</strong> الانحناء بعد القراءة حتى تصل أطراف الأصابع إلى الركبة، وقول الذكر الواجب مثل "سبحان ربي العظيم وبحمده".</li>
-                    <li><strong>السجود:</strong> وضع المساجد السبعة (الجبهة، الكفان، الركبتان، وإبهاما القدمين) على ما يصح السجود عليه (الأرض أو ما أنبتت)، وقول الذكر الواجب مثل "سبحان ربي الأعلى وبحمده".</li>
-                    <li><strong>التشهد:</strong> الجلوس بعد السجدة الثانية من الركعة الثانية والركعة الأخيرة وقول: "أشهد أن لا إله إلا الله وحده لا شريك له، وأشهد أن محمداً عبده ورسوله، اللهم صلِّ على محمد وآل محمد".</li>
-                    <li><strong>التسليم:</strong> وهو آخر أجزاء الصلاة، وصيغته "السلام عليكم ورحمة الله وبركاته".</li>
-                    <li><strong>الترتيب والموالاة:</strong> أداء أفعال الصلاة بالترتيب المذكور دون فاصل زمني طويل بينها.</li>
-                </ul>
-                <span class="citation">المصدر: موقع مكتب سماحة السيد السيستاني (دام ظله)، منهاج الصالحين والمسائل المنتخبة.</span>
-            </div>
-        </section>
-
-        <section id="prayer-times" class="content-section">
-            <div class="container">
-                <h2>أوقات الصلاة</h2>
-                <p>لكل صلاة من الفرائض اليومية وقت محدد شرعاً، والالتزام به شرط لصحتها أداءً.</p>
-                <h3>أوقات الفرائض اليومية:</h3>
-                <ul>
-                    <li><strong>صلاة الصبح:</strong> وقتها من طلوع الفجر الصادق إلى طلوع الشمس.</li>
-                    <li><strong>صلاتا الظهر والعصر:</strong> وقتهما من زوال الشمس (منتصف النهار) إلى المغرب. تختص صلاة الظهر بأول الوقت بمقدار أدائها، وتختص صلاة العصر بآخر الوقت بمقدار أدائها، وما بينهما وقت مشترك لهما.</li>
-                    <li><strong>صلاتا المغرب والعشاء:</strong> وقتهما للمختار من المغرب إلى منتصف الليل. تختص صلاة المغرب بأول الوقت بمقدار أدائها، وتختص العشاء بآخر الوقت بمقدار أدائها، وما بينهما وقت مشترك. أما المضطر فيمتد وقتهما إلى طلوع الفجر.</li>
-                </ul>
-                <h3>أوقات الفضيلة:</h3>
-                <ul>
-                    <li><strong>فضيلة الظهر:</strong> من الزوال حتى بلوغ ظل الشاخص مثله.</li>
-                    <li><strong>فضيلة العصر:</strong> من بلوغ الظل مثله إلى بلوغه مثلين.</li>
-                    <li><strong>فضيلة المغرب:</strong> لغير المسافر، من المغرب إلى ذهاب الشفق (الحمرة المغربية).</li>
-                    <li><strong>فضيلة العشاء:</strong> من ذهاب الشفق إلى ثلث الليل.</li>
-                </ul>
-                 <span class="citation">المصدر: موقع مكتب سماحة السيد السيستاني (دام ظله)، منهاج الصالحين، والاستفتاءات.</span>
-            </div>
-        </section>
-
-        <section id="prayer-rulings" class="content-section alternate-bg">
-            <div class="container">
-                <h2>أحكام الصلاة (الشك والسهو)</h2>
-                <p>قد يطرأ على المصلي الشك أو السهو أثناء صلاته، وقد بيّن الفقهاء أحكاماً خاصة لمعالجة هذه الحالات لضمان صحة الصلاة.</p>
-                <h3>أحكام الشكوك:</h3>
-                <ul>
-                    <li><strong>الشكوك التي تبطل الصلاة:</strong> الشك في عدد ركعات صلاة الصبح والمغرب، والشك في الركعتين الأوليين من الصلوات الرباعية يبطل الصلاة إذا لم يترجح ظن المصلي لأحد الطرفين.</li>
-                    <li><strong>الشكوك التي لا تبطل الصلاة:</strong> هناك شكوك لها علاج، مثل الشك بين الثلاث والأربع، حيث يبني المصلي على الأكثر (الأربع) ثم يأتي بركعة احتياط.</li>
-                    <li><strong>كثير الشك:</strong> من يكثر شكه في الصلاة لا يعتني بشكه ويبني على وقوع الفعل المشكوك فيه، إلا إذا كان هذا البناء مفسداً للصلاة.</li>
-                    <li><strong>الشك بعد الفراغ من الصلاة:</strong> لا يُعتنى بالشك في صحة الصلاة بعد الانتهاء منها.</li>
-                </ul>
-                <h3>أحكام السهو:</h3>
-                <ul>
-                    <li><strong>سجود السهو:</strong> يجب الإتيان بسجدتي السهو لعدة أمور، منها: الكلام سهواً، والتسليم في غير موضعه، والشك بين الركعة الرابعة والخامسة.</li>
-                    <li><strong>قضاء الأجزاء المنسية:</strong> من نسي سجدة واحدة ولم يمكن تداركها في الصلاة، يجب عليه قضاؤها بعد الصلاة. ومن نسي التشهد، يأتي بسجدتي السهو.</li>
-                </ul>
-                <span class="citation">المصدر: موقع مكتب سماحة السيد السيستاني (دام ظله)، الوجيز في أحكام العبادات والمسائل المنتخبة.</span>
-            </div>
-        </section>
-
-        <section id="missed-prayers" class="content-section">
-            <div class="container">
-                <h2>كيفية قضاء الصلوات الفائتة</h2>
-                <p>من فاتته فريضة يومية عمداً أو سهواً أو لأي سبب آخر، يجب عليه قضاؤها خارج وقتها.</p>
-                <h3>أحكام القضاء:</h3>
-                <ul>
-                    <li><strong>وقت القضاء:</strong> يجوز قضاء الصلوات الفائتة في أي وقت من ليل أو نهار، في السفر أو الحضر.</li>
-                    <li><strong>كيفية القضاء:</strong> ما فات في الحضر يُقضى تماماً حتى لو كان القضاء في السفر، وما فات في السفر يُقضى قصراً حتى لو كان القضاء في الحضر.</li>
-                    <li><strong>الترتيب في القضاء:</strong> لا يجب الترتيب في قضاء الصلوات الفائتة، إلا بين الصلوات المترتبة في أصلها كالظهر والعصر من نفس اليوم.</li>
-                    <li><strong>عدم معرفة عدد الفوائت:</strong> إذا لم يعلم المكلف بعدد الصلوات التي فاتته، يجوز له الاقتصار على قضاء القدر المتيقن الذي يعلم بفواته.</li>
-                    <li><strong>قضاء صلاة الميت:</strong> الأحوط وجوباً على الولد الأكبر أن يقضي ما فات أباه من صلوات لعذر، إذا لم يكن الأب قد قضاها.</li>
-                </ul>
-                <span class="citation">المصدر: موقع مكتب سماحة السيد السيستاني (دام ظله)، منهاج الصالحين والمسائل المنتخبة.</span>
-            </div>
-        </section>
-    </main>
-
-    <footer class="main-footer">
-        <div class="container">
-            <p>&copy; 2025 دليل الصلاة الجعفرية. جميع الحقوق محفوظة.</p>
-            <p class="footer-credit">
-                إعداد ومراجعة: 
-                <a href="https://wa.me/97333375858" target="_blank" rel="noopener noreferrer">فاضل الريس</a>
+            
+            <p class="first-paragraph">
+                يُحكى أنّ الشيخ مرتضى الأنصاري (1281هـ)، الذي تُعتبر مدرسته الأصوليّة هي المهيمنة إلى اليوم على آليّات الاجتهاد الشرعي عند الإماميّة، حضر في درس الفقه عند الشيخ محمد حسن النجفي (1266هـ)، صاحب الموسوعة الفقهيّة الشهيرة "جواهر الكلام"، ويبدو أنّ حضوره هذا كان لأوّل مرّة أو ربما رآه بعض الطلاب لأوّل مرّة حاضراً مجلس درس المحقّق النجفي، فجاء إليه بعضهم وسأله عن درسه وتحصيله العلمي، فأجابهم.
             </p>
-        </div>
-    </footer>
-
-    <a href="#" class="back-to-top" aria-label="العودة إلى الأعلى"><i class="fas fa-arrow-up"></i></a>
+            <p>
+                ومن ضمن الكلام والحوار العلمي الذي جرى بينهم أنّه قال لهم: هذه المسألة مبنيّة على <strong>نظريّة الحكومة</strong> في أصول الفقه. وهي نظريّة تعنى بتنظيم بعض العلاقات بين النصوص والأدلّة، وتشتهر نسبتها إلى الشيخ الأنصاريّ، وإن كان هناك من يرى أنّ لها حضوراً في الدراسات القانونية المعاصرة.
+            </p>
+            <div class="quote">
+                على أيّة حال، لم يفهم أولئك الطلاب معنى كلمة الحكومة، إذ بدت جديدة بالنسبة إليهم، فسألوه بنوعٍ من الاستخفاف: وما هي الحكومة؟ فقال لهم: تحتاجون أن تحضروا عندي الدرس الأصولي لستّة أشهر، وبعدها تفهمون الأمر.
+            </div>
+            <div class="ornament">
+                ***
+            </div>
+            <p>
+                بصرف النظر عن مدى صحّة النقل، قد تحكي هذه القصّة عن حِكمة لو فسّرناها بطريقة معيّنة، وهي أنّه لا يمكنك فهم المدارس الجديدة، بل والقديمة، عبر المرور العجول عليها، ولا الحكم عليها بعيونك من خلال نظرة واحدة أو مقطع واحد أو فكرة هنا أو هنا.
+            </p>
+            <p>
+                هذا يعني أنّه لكي نفهم الآخر وبخاصّة لو كان يقدّم مشروعاً مختلفاً عن المألوف، مثل مشروع الأنصاري والملا صدرا وكانط، أن نعيش معه لفترةٍ كافية، اعتبرَها الأنصاري ستة أشهر، فندخل داخل منظومته الفكريّة ونتعايش مع طريقة تفكيره، ثم بعد ذلك تبدأ رحلة النقاش والحوار. أمّا العجلة، وبخاصّة في عصر التسطيح الذي تُتحفنا به وسائل التواصل الاجتماعي، فإنّ تقدّماً علميّاً لن يكون مرجوّاً أبداً، والأملُ بالله لا ينقطع.
+            </p>
+        </main>
+        <footer class="page-footer">
+            1
+        </footer>
+    </div>
+    
+    <div class="download-button-wrapper">
+        <button id="download-btn" class="download-button">
+            طباعة أو حفظ كـ PDF <i class="fas fa-print"></i>
+        </button>
+    </div>
 
     <script>
-        // Back to top button functionality
-        const backToTopButton = document.querySelector('.back-to-top');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                backToTopButton.classList.add('visible');
-            } else {
-                backToTopButton.classList.remove('visible');
-            }
+        // The simplest, most reliable code.
+        document.getElementById('download-btn').addEventListener('click', function () {
+            window.print();
         });
     </script>
 
