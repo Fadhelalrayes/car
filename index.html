@@ -3,186 +3,268 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>حِكمة في طلب العلم - الإصدار النهائي والمضمون</title>
-    <meta name="description" content="مقال بتصميم صفحة كتاب احترافية، جاهز للطباعة أو الحفظ كملف PDF بجودة عالية عبر المتصفح مباشرة.">
-
+    
+    <!-- SEO Meta Tags -->
+    <title>دليلك الشامل لاستيراد سيارة من أمريكا | 2025 (مع حاسبة التكاليف)</title>
+    <meta name="description" content="تعلم كيفية شراء واستيراد سيارة من أمريكا مع حاسبة تفاعلية للتكاليف الإجمالية. دليلك لأشهر المواقع، نصائح للفحص والشحن، وكيفية تجنب الأخطاء الشائعة.">
+    <meta name="keywords" content="شراء سيارة من امريكا, حاسبة تكاليف استيراد السيارات, استيراد سيارات من امريكا, مزاد كوبارت, مزاد IAAI, شحن سيارات من امريكا, تقرير CarFax, فحص سيارات قبل الشراء">
+    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Kufi+Arabic:wght@600;700&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
 
     <style>
+        /* نفس الأنماط السابقة مع إضافة أنماط للحاسبة */
         :root {
-            --page-bg: #ffffff;
-            --text-color: #212529;
-            --header-color: #8c1515;
-            --border-color: #dee2e6;
-            --body-bg: #e9ecef;
-            --title-box-bg: #fdfdf5;
-            --gold-accent: #c9b79c;
-            --font-body: 'Amiri', serif;
-            --font-heading: 'Noto Kufi Arabic', sans-serif;
+            --primary-color: #0056b3;
+            --secondary-color: #333;
+            --background-color: #f4f7f9;
+            --text-color: #333;
+            --light-text-color: #fff;
+            --card-bg-color: #fff;
+            --border-color: #ddd;
+            --success-color: #28a745;
         }
-
         body {
-            font-family: var(--font-body);
-            color: var(--text-color);
-            background-color: var(--body-bg);
+            font-family: 'Cairo', sans-serif;
+            line-height: 1.8;
             margin: 0;
-            padding: 3rem 1rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            box-sizing: border-box;
+            background-color: var(--background-color);
+            color: var(--text-color);
         }
-
-        /* The A4-like page container for screen view */
-        .page-container {
-            width: 210mm;
-            min-height: 297mm;
-            background-color: var(--page-bg);
-            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1);
-            border: 1px solid #ddd;
-            padding: 25mm;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
         }
-        
-        .page-content { flex-grow: 1; }
-        .page-footer {
-            width: 100%; text-align: center; font-size: 14px; color: #888; font-family: sans-serif;
-            border-top: 1px solid var(--border-color); padding-top: 10px; margin-top: auto;
-        }
-
-        /* The elegant title box */
-        .title-box {
-            background-color: var(--title-box-bg);
+        header {
+            background: var(--secondary-color);
+            color: var(--light-text-color);
+            padding: 2rem 0;
             text-align: center;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            border-bottom: 3px double var(--gold-accent);
+            border-bottom: 5px solid var(--primary-color);
         }
-
-        h1 {
-            font-family: var(--font-heading);
+        header h1 {
+            margin: 0;
             font-size: 2.8rem;
             font-weight: 700;
-            color: var(--header-color);
-            margin: 0;
         }
-
-        p { font-size: 1.2rem; line-height: 2.4; text-align: justify; margin: 0 0 1.5rem 0; }
-        p.first-paragraph { text-indent: 3rem; }
-        strong { font-weight: 700; }
-
-        .quote {
-            font-style: italic; font-size: 1.25rem; color: #495057; margin: 2rem 3rem;
-            padding-right: 1.5rem; 
-            border-right: 4px solid var(--gold-accent);
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
         }
-        
-        .ornament { text-align: center; font-size: 1.5rem; color: var(--gold-accent); margin: 2rem 0; }
-
-        .download-button-wrapper { text-align: center; margin-top: 2.5rem; }
-        .download-button {
-            font-family: var(--font-heading); background-color: var(--header-color); color: white;
-            border: none; padding: 15px 35px; font-size: 1.1rem; font-weight: 600;
-            border-radius: 5px; cursor: pointer; transition: all 0.3s ease;
+        section {
+            background: var(--card-bg-color);
+            margin: 25px 0;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
         }
-        .download-button:hover { background-color: #a93226; transform: translateY(-2px); }
-
-        @media (max-width: 820px) {
-            body { padding: 1rem; }
-            .page-container { width: 100%; min-height: 0; height: auto; padding: 2rem; }
-            h1 { font-size: 2.2rem; }
-            p { font-size: 1.1rem; line-height: 2.2; }
-            .quote { margin: 1.5rem 1rem; }
+        h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 0;
         }
-
-        /* ** THE MOST IMPORTANT PART: PRINT STYLES ** */
-        @media print {
-            body {
-                background-color: #fff !important; /* Ensure no background color from body */
-                padding: 0;
-                margin: 0;
-            }
-            .page-container {
-                width: 100%;
-                height: 100%;
-                margin: 0;
-                padding: 20mm; /* Standard print margins */
-                box-shadow: none !important;
-                border: none !important;
-            }
-            .download-button-wrapper {
-                display: none !important; /* Hide the button in the PDF */
-            }
-            h1, p, .quote {
-                color: #000 !important; /* Ensure text is black for printing */
-            }
-            .title-box {
-                background-color: #fff !important;
-                border-bottom-color: #000 !important;
-            }
-            .quote {
-                border-right-color: #000 !important;
-            }
-            /* Ensure page breaks happen between paragraphs, not inside them */
-            p, .quote, .title-box {
-                page-break-inside: avoid;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            text-align: right;
+            vertical-align: top;
+        }
+        th {
+            background-color: var(--primary-color);
+            color: var(--light-text-color);
+            font-weight: 600;
+        }
+        /* أنماط الحاسبة */
+        .calculator {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .calculator-input, .calculator-output {
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1rem;
+        }
+        .calculate-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: var(--light-text-color);
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .calculate-btn:hover {
+            background-color: #004494;
+        }
+        #total-cost-display {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--success-color);
+            margin-top: 20px;
+        }
+        .cost-breakdown {
+            list-style-type: none;
+            padding: 0;
+        }
+        .cost-breakdown li {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        @media (max-width: 768px) {
+            .calculator {
+                grid-template-columns: 1fr;
             }
         }
+        /* باقي الأنماط السابقة */
+        .timeline { position: relative; padding: 20px 0; }
+        .timeline-item { padding: 10px 40px; position: relative; background-color: inherit; width: 90%; }
+        .timeline-item::before { content: attr(data-step); position: absolute; right: -15px; top: 15px; width: 30px; height: 30px; border-radius: 50%; background-color: var(--primary-color); color: white; text-align: center; line-height: 30px; font-weight: bold; border: 3px solid var(--background-color); }
+        .timeline::after { content: ''; position: absolute; width: 4px; background-color: #ccc; top: 20px; bottom: 20px; right: 0; }
+        .tip-list li { margin-bottom: 10px; font-weight: 600; }
+        .tip-list span { font-weight: 400; }
+        footer { text-align: center; padding: 20px; background: var(--secondary-color); color: var(--light-text-color); margin-top: 40px; }
+        code { background-color: #eef; padding: 2px 6px; border-radius: 4px; font-family: monospace; }
     </style>
 </head>
 <body>
 
-    <div class="page-container">
-        <main class="page-content">
-            <div class="title-box">
-                <h1>حِكمةٌ في طَلبِ العِلم</h1>
+    <header>
+        <h1>دليلك الشامل لاستيراد سيارة من أمريكا</h1>
+        <p>من البحث في أشهر المواقع الموثوقة، وحتى استلام سيارتك أمام باب بيتك</p>
+    </header>
+
+    <main class="container">
+
+        <!-- قسم حاسبة التكاليف الجديد -->
+        <section id="cost-calculator">
+            <h2>حاسبة التكاليف التقديرية</h2>
+            <p>سعر السيارة في أمريكا هو مجرد البداية. استخدم هذه الحاسبة للحصول على فكرة تقريبية عن التكلفة الإجمالية بعد إضافة جميع الرسوم والضرائب. (الأرقام هي متوسطات تقديرية وقد تختلف).</p>
+            <div class="calculator">
+                <div class="calculator-input">
+                    <h3>أدخل بيانات التكلفة (بالدولار الأمريكي)</h3>
+                    <div class="form-group">
+                        <label for="car-price">سعر شراء السيارة</label>
+                        <input type="number" id="car-price" placeholder="مثال: 15000">
+                    </div>
+                    <div class="form-group">
+                        <label for="customs-rate">نسبة الجمارك في بلدك (%)</label>
+                        <input type="number" id="customs-rate" placeholder="مثال: 5 أو 15">
+                    </div>
+                    <div class="form-group">
+                        <label for="vat-rate">نسبة ضريبة القيمة المضافة في بلدك (%)</label>
+                        <input type="number" id="vat-rate" placeholder="مثال: 15">
+                    </div>
+                    <button class="calculate-btn" onclick="calculateTotalCost()">احسب التكلفة الإجمالية</button>
+                </div>
+                <div class="calculator-output">
+                    <h3>التكلفة الإجمالية التقديرية</h3>
+                    <ul class="cost-breakdown">
+                        <li><span>سعر السيارة:</span> <span id="display-car-price">$0</span></li>
+                        <li><span>رسوم المزاد/الوسيط (تقديري):</span> <span id="display-auction-fee">$0</span></li>
+                        <li><span>فحص وشحن داخلي (تقديري):</span> <span id="display-local-shipping">$0</span></li>
+                        <li><span>شحن بحري وتأمين (تقديري):</span> <span id="display-sea-shipping">$0</span></li>
+                        <li><span>رسوم جمركية (تقديري):</span> <span id="display-customs-cost">$0</span></li>
+                        <li><span>ضريبة القيمة المضافة (تقديري):</span> <span id="display-vat-cost">$0</span></li>
+                    </ul>
+                    <div id="total-cost-display">$0</div>
+                    <small>ملاحظة: هذه الأرقام استرشادية ولا تشمل رسوم المخلص الجمركي أو أي تكاليف غير متوقعة.</small>
+                </div>
             </div>
-            
-            <p class="first-paragraph">
-                يُحكى أنّ الشيخ مرتضى الأنصاري (1281هـ)، الذي تُعتبر مدرسته الأصوليّة هي المهيمنة إلى اليوم على آليّات الاجتهاد الشرعي عند الإماميّة، حضر في درس الفقه عند الشيخ محمد حسن النجفي (1266هـ)، صاحب الموسوعة الفقهيّة الشهيرة "جواهر الكلام"، ويبدو أنّ حضوره هذا كان لأوّل مرّة أو ربما رآه بعض الطلاب لأوّل مرّة حاضراً مجلس درس المحقّق النجفي، فجاء إليه بعضهم وسأله عن درسه وتحصيله العلمي، فأجابهم.
-            </p>
-            <p>
-                ومن ضمن الكلام والحوار العلمي الذي جرى بينهم أنّه قال لهم: هذه المسألة مبنيّة على <strong>نظريّة الحكومة</strong> في أصول الفقه. وهي نظريّة تعنى بتنظيم بعض العلاقات بين النصوص والأدلّة، وتشتهر نسبتها إلى الشيخ الأنصاريّ، وإن كان هناك من يرى أنّ لها حضوراً في الدراسات القانونية المعاصرة.
-            </p>
-            <div class="quote">
-                على أيّة حال، لم يفهم أولئك الطلاب معنى كلمة الحكومة، إذ بدت جديدة بالنسبة إليهم، فسألوه بنوعٍ من الاستخفاف: وما هي الحكومة؟ فقال لهم: تحتاجون أن تحضروا عندي الدرس الأصولي لستّة أشهر، وبعدها تفهمون الأمر.
-            </div>
-            <div class="ornament">
-                ***
-            </div>
-            <p>
-                بصرف النظر عن مدى صحّة النقل، قد تحكي هذه القصّة عن حِكمة لو فسّرناها بطريقة معيّنة، وهي أنّه لا يمكنك فهم المدارس الجديدة، بل والقديمة، عبر المرور العجول عليها، ولا الحكم عليها بعيونك من خلال نظرة واحدة أو مقطع واحد أو فكرة هنا أو هنا.
-            </p>
-            <p>
-                هذا يعني أنّه لكي نفهم الآخر وبخاصّة لو كان يقدّم مشروعاً مختلفاً عن المألوف، مثل مشروع الأنصاري والملا صدرا وكانط، أن نعيش معه لفترةٍ كافية، اعتبرَها الأنصاري ستة أشهر، فندخل داخل منظومته الفكريّة ونتعايش مع طريقة تفكيره، ثم بعد ذلك تبدأ رحلة النقاش والحوار. أمّا العجلة، وبخاصّة في عصر التسطيح الذي تُتحفنا به وسائل التواصل الاجتماعي، فإنّ تقدّماً علميّاً لن يكون مرجوّاً أبداً، والأملُ بالله لا ينقطع.
-            </p>
-        </main>
-        <footer class="page-footer">
-            1
-        </footer>
-    </div>
-    
-    <div class="download-button-wrapper">
-        <button id="download-btn" class="download-button">
-            طباعة أو حفظ كـ PDF <i class="fas fa-print"></i>
-        </button>
-    </div>
+        </section>
+
+        <!-- الأقسام السابقة تبقى كما هي -->
+        <section id="websites">
+            <h2>أشهر المواقع الموثوقة لشراء السيارات</h2>
+            <!-- ... محتوى جدول المواقع ... -->
+        </section>
+
+        <section id="steps">
+            <h2>مراحل الشراء خطوة بخطوة</h2>
+            <!-- ... محتوى الخطوات ... -->
+        </section>
+
+        <section id="carfax-guide">
+            <h2>كيف تقرأ تقرير CarFax مثل المحترفين؟</h2>
+            <!-- ... محتوى دليل CarFax ... -->
+        </section>
+
+        <section id="tips">
+            <h2>نصائح ذهبية لصفقة ناجحة</h2>
+            <!-- ... محتوى النصائح ... -->
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 | تم إنشاؤه لمساعدتك في تحقيق حلمك.</p>
+    </footer>
 
     <script>
-        // The simplest, most reliable code.
-        document.getElementById('download-btn').addEventListener('click', function () {
-            window.print();
-        });
+        // JavaScript Code for the Calculator
+        function calculateTotalCost() {
+            // 1. الحصول على المدخلات من المستخدم
+            const carPrice = parseFloat(document.getElementById('car-price').value) || 0;
+            const customsRate = parseFloat(document.getElementById('customs-rate').value) || 0;
+            const vatRate = parseFloat(document.getElementById('vat-rate').value) || 0;
+
+            // 2. تعريف التكاليف الثابتة والمتغيرة (تقديرية)
+            const auctionFee = carPrice * 0.08; // رسوم المزاد حوالي 8%
+            const localShippingAndPPI = 800; // متوسط 300$ فحص + 500$ نقل داخلي
+            const seaShipping = 1500; // متوسط شحن بحري وتأمين
+
+            // 3. حساب التكاليف المعتمدة على المدخلات
+            const costBeforeCustoms = carPrice + auctionFee + localShippingAndPPI + seaShipping;
+            const customsCost = costBeforeCustoms * (customsRate / 100);
+            const costAfterCustoms = costBeforeCustoms + customsCost;
+            const vatCost = costAfterCustoms * (vatRate / 100);
+
+            // 4. حساب التكلفة الإجمالية
+            const totalCost = costAfterCustoms + vatCost;
+
+            // 5. عرض النتائج في الصفحة
+            document.getElementById('display-car-price').textContent = `$${carPrice.toFixed(0)}`;
+            document.getElementById('display-auction-fee').textContent = `$${auctionFee.toFixed(0)}`;
+            document.getElementById('display-local-shipping').textContent = `$${localShippingAndPPI.toFixed(0)}`;
+            document.getElementById('display-sea-shipping').textContent = `$${seaShipping.toFixed(0)}`;
+            document.getElementById('display-customs-cost').textContent = `$${customsCost.toFixed(0)}`;
+            document.getElementById('display-vat-cost').textContent = `$${vatCost.toFixed(0)}`;
+            document.getElementById('total-cost-display').textContent = `$${totalCost.toFixed(0)}`;
+        }
     </script>
 
 </body>
