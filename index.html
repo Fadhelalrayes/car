@@ -1,484 +1,155 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>تقويم الخسوف والكسوف | صلاة الآيات</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- SEO -->
-  <meta name="description" content="تقويم دقيق للكسوف والخسوف القادمة مع بيان الحكم الشرعي لصلاة الآيات وفق رأي السيد السيستاني. يعتمد على مصادر فلكية موثوقة مثل NASA و TimeandDate.">
-  <meta name="keywords" content="الخسوف, الكسوف, صلاة الآيات, السيد السيستاني, NASA, TimeandDate, تقويم, أحكام, كيفية الصلاة">
-  <meta property="og:title" content="تقويم الخسوف والكسوف | صلاة الآيات">
-  <meta property="og:description" content="مواعيد دقيقة للكسوف والخسوف مع الأحكام المختصرة وكيفية صلاة الآيات.">
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="ar_AR">
-  <link rel="canonical" href="https://fadhel-alrayes.fun/index67.html"/>
+  <title>فاضل الريس | مركز الأدوات والمشاريع</title>
 
-  <!-- JSON-LD placeholders (يُملأ من السكربت) -->
-  <script id="ld-json" type="application/ld+json">{}</script>
-  <script id="ld-list" type="application/ld+json">{}</script>
+  <meta name="description" content="مجموعة من الأدوات والمشاريع التي طورها فاضل الريس، وتشمل: محادثة ذكاء اصطناعي، مواقيت الصلاة، القرآن الكريم، أدوات صحية، أخبار، وغيرها من التطبيقات المفيدة." />
+  <meta name="keywords" content="فاضل الريس, أدوات, مشاريع, ذكاء اصطناعي, مواقيت الصلاة, القرآن الكريم, استخارة, مسبحة, أخبار, رياضة, تذاكر طيران, حاسبة عمر, فاحص طبي, العد التنازلي, تصميم مواقع ويب, Fadhel Alrayes" />
+  <link rel="canonical" href="https://fadhel-alrayes.fun/" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="author" content="فاضل الريس" />
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700;800&family=Noto+Kufi+Arabic:wght@600;700&display=swap" rel="stylesheet">
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="فاضل الريس | مركز الأدوات والمشاريع" />
+  <meta property="og:description" content="مجموعة من الأدوات والمشاريع التي طورها فاضل الريس." />
+  <meta property="og:url" content="https://fadhel-alrayes.fun/" />
+  <meta property="og:image" content="https://fadhel-alrayes.fun/og-cover.jpg" />
+  <meta property="og:locale" content="ar_AR" />
+  <meta name="twitter:card" content="summary_large_image" />
 
-  <style>
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+  <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&display=swap" rel="stylesheet" />
+
+  <meta name="google-site-verification" content="google7486b7402e792c6c.html" />
+
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    base-uri 'self';
+    object-src 'none';
+    upgrade-insecure-requests;
+    form-action 'self';
+    frame-ancestors 'self';
+    script-src 'self' 'nonce-7uSYr3';
+    style-src 'self' https://fonts.googleapis.com 'nonce-7uSYr3';
+    img-src 'self' https://fadhel-alrayes.fun data:;
+    font-src https://fonts.gstatic.com;
+    connect-src 'self';
+    frame-src 'self';
+  ">
+
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=(), interest-cohort=()" />
+
+  <style nonce="7uSYr3">
     :root{
-      --bg:#f7f7f4; --card:#ffffff; --ink:#0d1420; --muted:#68707a;
-      --border:#e7e3d7; --green:#0f7a4a; --green-700:#0b5e3a; --gold:#c6a83c;
-      --shadow:0 10px 24px rgba(0,0,0,.06);
+      --gold-1:#d4af37; --gold-2:#f5d76e;
+      --bg-1:#ffffff; --bg-2:#f7f4ea;
+      --text:#101418; --muted:#5e6773;
+      --card:#fff; --border:#e8e2cf;
+      --radius:16px;
+      --shadow:0 10px 28px rgba(0,0,0,.10);
+      --shadow-hover:0 16px 40px rgba(0,0,0,.14);
     }
     *{box-sizing:border-box}
     body{
-      margin:0; background:var(--bg); color:var(--ink);
-      font-family:"Cairo", "Noto Kufi Arabic", Tahoma, Arial, sans-serif;
-      line-height:1.75;
-      font-variant-emoji: text;
+      margin:0; color:var(--text);
+      font-family:"Cairo","Noto Kufi Arabic",Tahoma,Arial,sans-serif;
+      background:
+        radial-gradient(900px 480px at 85% -10%, rgba(212,175,55,.10), transparent),
+        linear-gradient(180deg,var(--bg-2),var(--bg-1));
     }
-    .container{width:min(1100px,100%);margin:auto;padding:16px;display:flex;flex-direction:column;gap:14px}
+    .wrap{max-width:1000px; margin:0 auto; padding:20px}
+    .title-bar{
+      background:#fff; border:1px solid var(--border); border-radius:18px;
+      padding:18px 22px; box-shadow:0 10px 26px rgba(0,0,0,.06);
+      margin-bottom:22px; position:relative; overflow:hidden;
+    }
+    .title-bar::before{
+      content:""; position:absolute; inset:0 0 auto 0; height:5px;
+      background:linear-gradient(90deg, var(--gold-1), var(--gold-2));
+    }
+    .title{margin:0; text-align:center; font-weight:900; font-size:1.8rem; letter-spacing:.4px; color:#1a1f27;}
 
-    .hero{background:var(--card);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);padding:16px;text-align:center}
-    .heroTitle{margin:2px 0;font-family:"Noto Kufi Arabic",sans-serif;font-weight:700;font-size:1.35rem;letter-spacing:.2px}
-
-    .nextBox{background:var(--card);border:2px solid var(--gold);border-radius:14px;box-shadow:var(--shadow);padding:14px;display:grid;gap:10px}
-    .nextTitle{color:var(--green);font-weight:900;font-size:1.05rem;text-align:center}
-    .nextDate{color:#8b7a24;font-weight:800;text-align:center}
-    .eventName{margin-top:2px;text-align:center;font-weight:900;font-size:1.1rem}
-    .whenCol{display:grid;gap:8px}
-    .tag{display:block;width:100%;text-align:center;background:#faf9f5;border:1px solid var(--border);border-radius:10px;padding:.55rem .7rem;font-weight:800}
-    .ruleLine{text-align:center;color:#7a6720;font-weight:800}
-
-    .tzActions{margin-top:10px;display:flex;justify-content:center}
-    .btn{border:1px solid var(--border);background:#fff;border-radius:10px;padding:.5rem .85rem;font-weight:800;cursor:pointer}
-    .btn.primary{border-color:#e8dfb2;background:#fff}
-
-    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    @media(max-width:760px){.row{grid-template-columns:1fr}}
-    .chip{background:var(--card);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);padding:12px;display:flex;gap:10px}
-    .stack{display:flex;flex-direction:column}
-    .label{font-size:.86rem;color:var(--muted);font-weight:700}
-    .value{font-weight:900}
-
-    .rulingBox{background:var(--card);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);padding:14px}
-    .rulingBox h3{margin:0 0 10px;text-align:center;font-weight:900;font-size:1.06rem;color:var(--green)}
-    .rulingGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    @media(max-width:900px){.rulingGrid{grid-template-columns:1fr}}
-    .rCard{background:var(--card);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);padding:12px}
-    .rCard h4{margin:0 0 6px;font-weight:900;text-align:center}
-    .rCard p{margin:.35rem 0;text-align:justify}
-    .rList{margin:.35rem 0 0 1rem}
-    .rList li{margin:.25rem 0}
-
-    .defsGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    @media(max-width:760px){.defsGrid{grid-template-columns:1fr}}
-    .defCard{background:var(--card);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);padding:14px}
-    .defCard h4{margin:0 0 8px;font-weight:900;color:var(--green);text-align:center}
-    .defCard p{margin:.35rem 0;text-align:justify}
-    .bul{margin:.35rem 0 .2rem 1rem}
-    .bul li{margin:.25rem 0}
-    .defWide{grid-column:1/-1}
-
-    .upcoming{background:var(--card);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);padding:14px}
-    .upcoming h3{margin:0 0 8px;text-align:center;font-weight:900;font-size:1.05rem}
-    .uDesc{margin:6px 0 12px;color:var(--muted);text-align:center}
-    .uList{display:grid;gap:8px}
-    .uItem{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;border:1px solid #efeade;border-radius:10px;padding:10px}
-    .uName{font-weight:900}
-    .uWhen{display:flex;flex-direction:column;text-align:left}
-    .uWhen .l{font-weight:800}
-    .uWhen .z{color:var(--muted);font-size:.9rem}
-
-    .sourcesBar{background:var(--card);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);padding:12px;display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap}
-    .sourcesBar label{font-weight:900;color:var(--green-700)}
-    .sourcesBar select{padding:.55rem .8rem;border:1px solid var(--border);border-radius:10px;font-weight:800;background:#fff;min-width:300px}
-    .sourcesBar .btn{border:1px solid var(--border);border-radius:10px;padding:.5rem .9rem;font-weight:900;background:#fff;cursor:pointer}
-    .sourcesBar .btn.primary{border-color:#e8dfb2}
-
-    footer{text-align:center;margin-top:6px}
-    .credit{color:var(--green-700);font-weight:900}
-
-    .modal{position:fixed;inset:0;display:none;place-items:center;background:rgba(15,23,42,.28);z-index:60}
-    .modal.open{display:grid}
-    .box{width:min(480px,95%);background:var(--card);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);padding:14px}
-    .rowCtrl{display:flex;gap:10px;align-items:center;margin:8px 0}
-    .rowCtrl label{width:120px;color:var(--muted);font-weight:800}
-    select{flex:1;padding:.55rem;border:1px solid var(--border);border-radius:10px;font-weight:800;background:#fff}
-    .actions{display:flex;gap:10px;margin-top:10px;justify-content:flex-end}
-
-    .ico, [class*="icon"], [data-icon], .emoji, .emj { display:none !important; }
+    .grid{display:grid; gap:14px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));}
+    a.card{
+      display:block; text-decoration:none; color:inherit; background:var(--card);
+      border:1px solid var(--border); border-radius:var(--radius);
+      padding:16px; box-shadow:var(--shadow); transition:.2s ease;
+      will-change: transform, box-shadow;
+    }
+    a.card:hover{transform:translateY(-3px); box-shadow:var(--shadow-hover)}
+    .row{display:flex; align-items:flex-start; gap:12px}
+    .ico{
+      width:42px; height:42px; border-radius:12px; display:grid; place-items:center; flex:0 0 42px;
+      background: radial-gradient(120% 120% at 20% 15%, var(--gold-2), var(--gold-1));
+      color:#fff; font-size:1.1rem; box-shadow:0 8px 18px rgba(212,175,55,.30)
+    }
+    h3{margin:0 0 6px; font-size:1.06rem; font-weight:800}
+    p.desc{margin:0; color:var(--muted); font-size:.92rem; line-height:1.65}
+    footer{margin:26px 0 6px; text-align:center; color:var(--muted); font-size:.9rem; font-weight:600;}
+    #footerName{cursor:pointer; user-select:none; -webkit-tap-highlight-color:transparent}
   </style>
 </head>
 <body>
-  <div class="container">
-    <!-- العنوان -->
-    <section class="hero" aria-label="تقويم الخسوف والكسوف">
-      <h1 class="heroTitle">تقويم الخسوف والكسوف | صلاة الآيات</h1>
-    </section>
+  <div class="wrap">
+    <header class="title-bar"><h1 class="title">فاضل الريس</h1></header>
 
-    <!-- الحدث القادم -->
-    <section class="nextBox" id="nextBox" aria-live="polite">
-      <div class="nextTitle">الحدث القادم</div>
-      <div class="nextDate" id="nextDate">—</div>
-      <div class="eventName" id="eventName">—</div>
-      <div class="whenCol">
-        <span class="tag" id="tStart">يبدأ: —</span>
-        <span class="tag" id="tMax">الأعظم: —</span>
-        <span class="tag" id="tEnd">ينتهي: —</span>
-      </div>
-      <div class="ruleLine" id="nextRuling">الحكم الشرعي للصلاة : واجبة</div>
-    </section>
+    <main class="grid">
 
-    <!-- زر تغيير المنطقة -->
-    <div class="tzActions">
-      <button class="btn primary" id="openTZ" type="button">تغيير المنطقة</button>
-    </div>
+      <!-- جميع البطاقات كما كانت -->
+      <a class="card" href="https://fadhel-alrayes.fun/talk.html"><div class="row"><span class="ico">🤖</span><div><h3>محادثة الذكاء الاصطناعي</h3><p class="desc">مساعد ذكي يتفاعل معك بالعربية.</p></div></div></a>
+      <a class="card" href="https://fadhelalrayes.github.io/Akbar/"><div class="row"><span class="ico">📰</span><div><h3>مدار الخبر</h3><p class="desc">صفحة خفيفة لأحدث المستجدّات العربية.</p></div></div></a>
+      <a class="card" href="https://fadhel-alrayes.fun/index3.html"><div class="row"><span class="ico">🕌</span><div><h3>مواقيت الصلاة</h3><p class="desc">حساب وعرض المواقيت الدقيقة.</p></div></div></a>
 
-    <!-- معلومات عامة -->
-    <section class="row">
-      <div class="chip">
-        <div class="stack">
-          <div class="label">التاريخ الميلادي</div>
-          <div class="value" id="greg">—</div>
+      <a class="card" href="https://fadhel-alrayes.fun/prayer.html">
+        <div class="row">
+          <span class="ico">🙏</span>
+          <div><h3>تعليم الصلاة</h3><p class="desc">دليلك الشامل لتعلّم الصلاة.</p></div>
         </div>
-      </div>
-      <div class="chip">
-        <div class="stack">
-          <div class="label">المنطقة الزمنية</div>
-          <div class="value" id="tzLabel">—</div>
-        </div>
-      </div>
-    </section>
+      </a>
 
-    <!-- أحكام صلاة الآيات -->
-    <section class="rulingBox" aria-label="أحكام صلاة الآيات">
-      <h3>أحكام صلاة الآيات</h3>
-      <div class="rulingGrid">
-        <div class="rCard">
-          <h4>تعريف</h4>
-          <p>صلاة واجبة عند الظواهر المخوفة مثل الكسوف والخسوف، وتؤدّى بنية صلاة الآيات تقربًا إلى الله تعالى.</p>
-        </div>
-        <div class="rCard">
-          <h4>الطريقة</h4>
-          <p>ركعتان، في كل ركعة خمسة ركوعات ثم سجدتان. تعاد الركعة الثانية كذلك، ثم التشهد والسلام.</p>
-          <p>القراءة: إمّا الفاتحة وسورة كاملة لكل قيام، أو تجزئة سورة واحدة على القيامات الخمسة.</p>
-        </div>
-        <div class="rCard">
-          <h4>الأحكام العامة</h4>
-          <ul class="rList">
-            <li>واجبة عند حدوث الكسوف أو الخسوف ولو جزئيًا.</li>
-            <li>وقتها: من ابتداء الظاهرة إلى تمام الانجلاء.</li>
-            <li>القضاء: من علم بالظاهرة ولم يصلِّ حتى انجلت وجب عليه القضاء. من لم يعلم بها: يقضي إن كان كليًا فقط.</li>
-          </ul>
-        </div>
-        <div class="rCard">
-          <h4>ذوو الأعذار (النساء)</h4>
-          <ul class="rList">
-            <li>الحائض والنفساء: لا تجب الصلاة حال العذر، ولا قضاء لما فات زمن العذر.</li>
-            <li>إن طهرت أثناء بقاء وقت الظاهرة صلّت ما دام الوقت باقيًا.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+      <a class="card" href="https://fadhel-alrayes.fun/index67.html"><div class="row"><span class="ico">🌑</span><div><h3>تقويم الخسوف والكسوف</h3><p class="desc">مواعيد دقيقة للأحداث القادمة.</p></div></div></a>
+      <a class="card" href="https://fadhel-alrayes.fun/index5.html#home"><div class="row"><span class="ico">📖</span><div><h3>استخارة بالقرآن</h3><p class="desc">نتيجة لحظية بالآيات.</p></div></div></a>
+      <a class="card" href="https://fadhel-alrayes.fun/index6.html#home"><div class="row"><span class="ico">🔢</span><div><h3>مِسبحة رقمية</h3><p class="desc">تسبيح الزهراء عليها السلام.</p></div></div></a>
+      <a class="card" href="https://fadhel-alrayes.fun/index7.html"><div class="row"><span class="ico">📅</span><div><h3>الأيام الصالحة للزواج</h3><p class="desc">تقويم يساعدك على اختيار الأيام.</p></div></div></a>
+      <a class="card" href="https://fadhel-alrayes.fun/index9.html#home"><div class="row"><span class="ico">🌙</span><div><h3>حساب سنّ التكليف</h3><p class="desc">تحويل العمر القمري.</p></div></div></a>
+      <a class="card" href="https://fadhel-alrayes.fun/index11.html"><div class="row"><span class="ico">⚽</span><div><h3>خط التماس الأخباري</h3><p class="desc">آخر الأخبار الرياضية.</p></div></div></a>
+      <a class="card" href="https://fadhel-alrayes.fun/index13.html"><div class="row"><span class="ico">✈️</span><div><h3>تذكرتك للطيران</h3><p class="desc">قارن أسعار الرحلات.</p></div></div></a>
+      <a class="card" href="https://fadhel-alrayes.fun/index15.html"><div class="row"><span class="ico">📜</span><div><h3>القرآن الكريم</h3><p class="desc">اختيار السورة والاستماع.</p></div></div></a>
+      <a class="card" href="https://fadhel-alrayes.fun/index22.html"><div class="row"><span class="ico">⏳</span><div><h3>حاسبة العمر</h3><p class="desc">عمر متوقّع ونصائح صحية.</p></div></div></a>
+      <a class="card" href="https://fadhel-alrayes.fun/index23.html"><div class="row"><span class="ico">🧪</span><div><h3>فاحص السرطان</h3><p class="desc">استبيان إرشادي.</p></div></div></a>
+      <a class="card" href="https://fadhel-alrayes.fun/index88.html"><div class="row"><span class="ico">❤️</span><div><h3>فاحص القلب</h3><p class="desc">تقدير خطورة الأعراض القلبية.</p></div></div></a>
+      <a class="card" href="https://fadhel-alrayes.fun/index89.html"><div class="row"><span class="ico">👶</span><div><h3>فاحص العقم</h3><p class="desc">مؤشرات أولية.</p></div></div></a>
+      <a class="card" href="https://fadhel-alrayes.fun/index90.html"><div class="row"><span class="ico">🧩</span><div><h3>فاحص التوحّد</h3><p class="desc">تقدير المؤشرات.</p></div></div></a>
+      <a class="card" href="https://fadhel-alrayes.fun/index91.html"><div class="row"><span class="ico">🩺</span><div><h3>فاحص الاكتئاب</h3><p class="desc">مؤشرات الاكتئاب.</p></div></div></a>
+      <a class="card" href="https://fadhel-alrayes.fun/index92.html"><div class="row"><span class="ico">🩸</span><div><h3>فاحص السكري</h3><p class="desc">مؤشرات السكري.</p></div></div></a>
+      <a class="card" href="https://fadhel-alrayes.fun/index10.html"><div class="row"><span class="ico">🌙</span><div><h3>العدّ التنازلي لرمضان</h3><p class="desc">حساب دقيق للشهر.</p></div></div></a>
+      <a class="card" href="https://fadhel-alrayes.fun/index55.html"><div class="row"><span class="ico">📆</span><div><h3>العدّ التنازلي لمحرم</h3><p class="desc">موعد بداية محرم.</p></div></div></a>
+      <a class="card" href="https://fadhel-alrayes.fun/index505.html"><div class="row"><span class="ico">📜</span><div><h3>أربعون حديث</h3><p class="desc">أحاديث الإمام الجواد.</p></div></div></a>
+      <a class="card" href="https://fadhel-alrayes.fun/index202.html"><div class="row"><span class="ico">🤲</span><div><h3>فصل الصدقة</h3><p class="desc">آيات وأحاديث مختارة.</p></div></div></a>
+      <a class="card" href="https://fadhel-alrayes.fun/index787.html"><div class="row"><span class="ico">💵</span><div><h3>رصيد استلام</h3><p class="desc">إنشاء إيصال فوري مع ختم وتوقيع PDF جاهز للطباعة.</p></div></div></a>
+      <a class="card" href="https://fadhel-alrayes.fun/index242.html"><div class="row"><span class="ico">📄</span><div><h3>لتر هد أونلاين</h3><p class="desc">Letterhead A4 احترافي بالعربي مع ختم أزرق، توقيع أونلاين، و<span dir="ltr">PDF</span> جاهز للطباعة.</p></div></div></a>
+      <a class="card" href="https://fadhel-alrayes.fun/design.html#contact"><div class="row"><span class="ico">💻</span><div><h3>تصميم مواقع ويب</h3><p class="desc">نقدم خدمة تصميم مواقع ويب احترافية.</p></div></div></a>
 
-    <!-- تعريف الكسوف والخسوف -->
-    <section class="defsGrid" aria-label="التعريف الفلكي">
-      <article class="defCard defWide">
-        <h4>الكسوف والخسوف</h4>
-        <p>ظاهرتان فلكيتان مختلفتان تمامًا: الكسوف للشمس والخسوف للقمر.</p>
-      </article>
-      <article class="defCard">
-        <h4>الكسوف</h4>
-        <p>حجب الشمس عن الأرض عندما يمرّ القمر بين الشمس والأرض فيَحجُب ضوءها كليًا أو جزئيًا.</p>
-        <ul class="bul">
-          <li>المحجوب: الشمس</li>
-          <li>الترتيب: الشمس - القمر - الأرض</li>
-        </ul>
-      </article>
-      <article class="defCard">
-        <h4>الخسوف</h4>
-        <p>وقوع القمر في ظلّ الأرض عندما تكون الأرض بين الشمس والقمر؛ فيبدو القمر مظلمًا أو محمرًا.</p>
-        <ul class="bul">
-          <li>المحجوب: القمر</li>
-          <li>الترتيب: الشمس - الأرض - القمر</li>
-        </ul>
-      </article>
-    </section>
+    </main>
 
-    <!-- الأحداث القادمة -->
-    <section class="upcoming" id="upcoming">
-      <h3>الخسوف والكسوف القادمة</h3>
-      <div class="uDesc">أقرب خمسة أحداث قادمة عالميًا: التاريخ بالعربية، ووقت أعظم الظاهرة محليًا وبتوقيت UTC.</div>
-      <div class="uList" id="uList">
-        <div class="uItem"><div class="uName">جارٍ التحميل</div><div class="uWhen"><span class="l">...</span><span class="z">...</span></div></div>
-      </div>
-    </section>
-
-    <!-- المصادر -->
-    <section class="sourcesBar" aria-label="مصادر معتمدة">
-      <label for="srcSel">المصادر:</label>
-      <select id="srcSel" aria-label="اختيار مصدر">
-        <option value="https://eclipse.gsfc.nasa.gov/SEdecade/SEdecade2021.html">NASA GSFC — Solar Eclipses 2021-2030</option>
-        <option value="https://eclipse.gsfc.nasa.gov/LEdecade/LEdecade2021.html">NASA GSFC — Lunar Eclipses 2021-2030</option>
-        <option value="https://www.timeanddate.com/eclipse/">TimeandDate — Eclipses</option>
-        <option value="https://www.eclipsewise.com/">EclipseWise</option>
-        <option value="https://www.sistani.org/arabic/qa/0551/">الموقع الرسمي — استفتاءات صلاة الآيات</option>
-        <option value="https://www.sistani.org/arabic/book/23720/4663/">الموقع الرسمي — موارد وجوب صلاة الآيات</option>
-        <option value="https://www.sistani.org/arabic/book/23720/4664/">الموقع الرسمي — وقت صلاة الآيات</option>
-        <option value="https://www.sistani.org/arabic/book/23720/4665/">الموقع الرسمي — كيفية صلاة الآيات</option>
-      </select>
-      <button type="button" id="openSrc" class="btn primary">فتح المصدر</button>
-    </section>
-
-    <footer><span class="credit">برمجة وتطوير فاضل الريس</span></footer>
+    <footer>© <span id="year"></span> <span id="footerName">فاضل الريس</span> — جميع الحقوق محفوظة</footer>
   </div>
 
-  <!-- حوار تغيير المنطقة -->
-  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="تغيير المنطقة">
-    <div class="box">
-      <div class="rowCtrl"><label for="tzSel">المنطقة الزمنية</label><select id="tzSel"></select></div>
-      <div class="actions">
-        <button class="btn" id="cancelTZ" type="button">إلغاء</button>
-        <button class="btn primary" id="saveTZ" type="button">حفظ</button>
-      </div>
-    </div>
-  </div>
-
-<script>
-/* =============== تنسيقات وقت ومنطقة =============== */
-const SYSTEM_TZ = Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
-let tz = localStorage.getItem('eclipse_tz') || SYSTEM_TZ;
-
-function fmtDateFull(d, zone){
-  return new Intl.DateTimeFormat('ar', {timeZone: zone, weekday:'long', year:'numeric', month:'long', day:'numeric'}).format(d);
-}
-function fmtHMS12(d, zone){
-  return new Intl.DateTimeFormat('en-US', {timeZone: zone, hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:true}).format(d);
-}
-function fmtHMS12UTC(iso){
-  return new Intl.DateTimeFormat('en-US', {timeZone: 'UTC', hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:true}).format(new Date(iso));
-}
-function toTZ(iso, zone){
-  const d = new Date(iso);
-  const parts = new Intl.DateTimeFormat('en-CA', {
-    timeZone: zone, year:'numeric', month:'2-digit', day:'2-digit',
-    hour:'2-digit', minute:'2-digit', second:'2-digit'
-  }).formatToParts(d);
-  const g = t => +(parts.find(p=>p.type===t).value);
-  return new Date(g('year'), g('month')-1, g('day'), g('hour'), g('minute'), g('second'));
-}
-
-/* =============== بيانات فلكية دقيقة (UTC) =============== */
-const EVENTS = [
-  { id:"LE-2025-09-07", kind:"خسوف قمري كلي",
-    p1:"2025-09-07T15:28:21Z", u1:"2025-09-07T16:27:02Z", u2:"2025-09-07T17:30:41Z",
-    greatest:"2025-09-07T18:11:43Z", u3:"2025-09-07T18:52:47Z", u4:"2025-09-07T19:56:26Z", p4:"2025-09-07T20:55:00Z" },
-  { id:"SE-2025-09-21", kind:"كسوف شمسي جزئي",
-    p1:"2025-09-21T17:30:51Z", greatest:"2025-09-21T19:43:04Z", p4:"2025-09-21T21:54:55Z" },
-  { id:"SE-2026-02-17", kind:"كسوف شمسي حلقي",
-    p1:"2026-02-17T09:57:36Z", greatest:"2026-02-17T12:13:06Z", p4:"2026-02-17T14:28:51Z" },
-  { id:"LE-2026-03-03", kind:"خسوف قمري كلي",
-    p1:"2026-03-03T08:44:22Z", u1:"2026-03-03T09:50:00Z", u2:"2026-03-03T11:04:26Z",
-    greatest:"2026-03-03T11:33:37Z", u3:"2026-03-03T12:02:45Z", u4:"2026-03-03T13:17:10Z", p4:"2026-03-03T14:22:59Z" },
-  { id:"SE-2026-08-12", kind:"كسوف شمسي كلي",
-    p1:"2026-08-12T15:34:15Z", greatest:"2026-08-12T17:46:06Z", p4:"2026-08-12T19:57:57Z" },
-  { id:"LE-2026-08-28", kind:"خسوف قمري جزئي",
-    p1:"2026-08-28T01:23:58Z", u1:"2026-08-28T02:33:54Z", greatest:"2026-08-28T04:12:53Z", u4:"2026-08-28T05:51:59Z", p4:"2026-08-28T07:01:47Z" },
-  { id:"SE-2027-02-06", kind:"كسوف شمسي حلقي",
-    p1:"2027-02-06T12:58:47Z", greatest:"2027-02-06T16:00:48Z", p4:"2027-02-06T19:02:50Z" },
-  { id:"SE-2027-08-02", kind:"كسوف شمسي كلي",
-    p1:"2027-08-02T07:30:11Z", greatest:"2027-08-02T10:06:40Z", p4:"2027-08-02T12:43:10Z" }
-];
-
-/* =============== اختيار الحدث التالي/الجاري =============== */
-function nextOrCurrent(){
-  const now = new Date();
-  const sorted = [...EVENTS].sort((a,b)=> new Date(a.p1 || a.greatest) - new Date(b.p1 || b.greatest));
-  for(const ev of sorted){
-    const start = new Date(ev.p1 || ev.greatest);
-    const end   = new Date(ev.p4 || ev.u4 || ev.greatest || ev.p1);
-    if(now < start) return {ev, state:'upcoming'};
-    if(now >= start && now <= end) return {ev, state:'ongoing'};
-  }
-  return {ev: sorted[sorted.length-1], state:'past'};
-}
-
-/* =============== عرض الحدث في البطاقة العلوية =============== */
-function renderEvent(){
-  const {ev} = nextOrCurrent();
-  document.getElementById('eventName').textContent = ev.kind;
-
-  const startLocal = toTZ(ev.p1 || ev.greatest, tz);
-  document.getElementById('nextDate').textContent = fmtDateFull(startLocal, tz);
-
-  const s = ev.p1 ? fmtHMS12(toTZ(ev.p1, tz), tz) : '—';
-  const g = ev.greatest ? fmtHMS12(toTZ(ev.greatest, tz), tz) : '—';
-  const e = (ev.p4 || ev.u4 || ev.greatest) ? fmtHMS12(toTZ(ev.p4 || ev.u4 || ev.greatest, tz), tz) : '—';
-  document.getElementById('tStart').textContent = "يبدأ: " + s;
-  document.getElementById('tMax').textContent   = "الأعظم: " + g;
-  document.getElementById('tEnd').textContent   = "ينتهي: " + e;
-
-  document.getElementById('nextRuling').textContent = "الحكم الشرعي للصلاة : واجبة";
-
-  // ===== JSON-LD للحدث الحالي/التالي (امتثال لمتطلبات Google) =====
-  const startISO = ev.p1 || ev.greatest;
-  const endISO   = ev.p4 || ev.u4 || ev.greatest || startISO;
-
-  const ld = {
-    "@context": "https://schema.org",
-    "@type": "Event",
-    "name": ev.kind,
-    "url": "https://fadhel-alrayes.fun/index67.html",
-    "startDate": startISO,
-    "endDate": endISO,
-    "inLanguage": "ar",
-    "description": "متابعة ومشاهدة ظواهر الخسوف والكسوف الفلكية مع معرفة الأحكام الشرعية لصلاة الآيات. توفر الصفحة مواعيد دقيقة حسب المنطقة الزمنية للمستخدم مع شرح مفصل للأحكام الفقهية المتعلقة بهذه الظواهر الطبيعية.",
-    "eventStatus": "https://schema.org/EventScheduled",
-    "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
-    "isAccessibleForFree": true,
-    "image": [
-      "https://fadhel-alrayes.fun/images/eclipse-calendar.jpg"
-    ],
-    "location": {
-      "@type": "VirtualLocation",
-      "url": "https://fadhel-alrayes.fun/index67.html"
-    },
-    "organizer": {
-      "@type": "Organization",
-      "name": "فاضل الريس",
-      "url": "https://fadhel-alrayes.fun"
-    },
-    "offers": {
-      "@type": "Offer",
-      "url": "https://fadhel-alrayes.fun/index67.html",
-      "price": "0",
-      "priceCurrency": "SAR",
-      "availability": "https://schema.org/InStock"
-    },
-    "performer": {
-      "@type": "Organization",
-      "name": "موقع فاضل الريس للتقاويم الفلكية",
-      "url": "https://fadhel-alrayes.fun"
-    }
-  };
-
-  document.getElementById('ld-json').textContent = JSON.stringify(ld, null, 2);
-}
-
-/* =============== خمسة أحداث قادمة + JSON-LD =============== */
-function renderUpcoming(){
-  const now = new Date();
-  const future = [...EVENTS]
-    .filter(e => new Date(e.p1 || e.greatest) > now)
-    .sort((a,b)=> new Date(a.p1||a.greatest) - new Date(b.p1||b.greatest))
-    .slice(0,5);
-
-  const uList = document.getElementById('uList');
-  if(!future.length){
-    uList.innerHTML = `<div class="uItem"><div class="uName">لا توجد أحداث قادمة ضمن البيانات الحالية</div><div class="uWhen"><span class="l">غير متاح</span><span class="z">غير متاح</span></div></div>`;
-  }else{
-    uList.innerHTML = future.map(e=>{
-      const dLocal = fmtDateFull(toTZ(e.greatest || e.p1, tz), tz);
-      const tLocal = fmtHMS12(toTZ(e.greatest || e.p1, tz), tz);
-      const tUTC   = fmtHMS12UTC(e.greatest || e.p1);
-      return `<div class="uItem">
-        <div class="uName">${e.kind}</div>
-        <div class="uWhen">
-          <span class="l">${dLocal} - ${tLocal}</span>
-          <span class="z">UTC: ${tUTC}</span>
-        </div>
-      </div>`;
-    }).join('');
-  }
-
-  // ===== JSON-LD لقائمة الأحداث القادمة (ItemList) =====
-  const list = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    "name": "الأحداث الفلكية القادمة - الخسوف والكسوف",
-    "description": "قائمة بأقرب خمسة أحداث فلكية قادمة من الخسوف والكسوف",
-    "itemListElement": future.map((e,i)=>({
-      "@type": "ListItem",
-      "position": i+1,
-      "item": {
-        "@type": "Event",
-        "name": e.kind,
-        "url": "https://fadhel-alrayes.fun/index67.html",
-        "startDate": e.p1||e.greatest,
-        "endDate": e.p4||e.u4||e.greatest,
-        "inLanguage": "ar",
-        "eventStatus": "https://schema.org/EventScheduled",
-        "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
-        "isAccessibleForFree": true,
-        "image": [
-          "https://fadhel-alrayes.fun/images/eclipse-calendar.jpg"
-        ],
-        "location": {
-          "@type": "VirtualLocation",
-          "url": "https://fadhel-alrayes.fun/index67.html"
-        },
-        "organizer": {
-          "@type": "Organization",
-          "name": "فاضل الريس",
-          "url": "https://fadhel-alrayes.fun"
-        }
-      }
-    }))
-  };
-
-  document.getElementById('ld-list').textContent = JSON.stringify(list, null, 2);
-}
-
-/* =============== شريط معلومات عام وتغيير المنطقة =============== */
-const TZ_LIST = [
-  "UTC","Asia/Bahrain","Asia/Riyadh","Asia/Kuwait","Asia/Baghdad","Asia/Tehran","Asia/Beirut",
-  "Asia/Dubai","Asia/Qatar","Africa/Cairo","Europe/Istanbul","Europe/Athens","Europe/Paris",
-  "Europe/London","America/New_York","America/Toronto","Asia/Karachi","Asia/Kolkata","Asia/Tokyo"
-];
-
-function renderMeta(){
-  document.getElementById('tzLabel').textContent = tz;
-  document.getElementById('greg').textContent = fmtDateFull(new Date(), tz);
-}
-
-const modal = document.getElementById('modal');
-const tzSel  = document.getElementById('tzSel');
-
-document.getElementById('openTZ').addEventListener('click', ()=>{
-  tzSel.innerHTML = TZ_LIST.map(z=>`<option value="${z}">${z}</option>`).join("");
-  tzSel.value = tz;
-  modal.classList.add('open'); 
-  document.body.style.overflow='hidden';
-});
-
-document.getElementById('cancelTZ').addEventListener('click', ()=>{
-  modal.classList.remove('open'); 
-  document.body.style.overflow='';
-});
-
-document.getElementById('saveTZ').addEventListener('click', ()=>{
-  tz = tzSel.value || SYSTEM_TZ;
-  localStorage.setItem('eclipse_tz', tz);
-  modal.classList.remove('open'); 
-  document.body.style.overflow='';
-  renderMeta(); 
-  renderEvent(); 
-  renderUpcoming();
-});
-
-modal.addEventListener('click', (e)=>{ 
-  if(e.target===modal){ 
-    modal.classList.remove('open'); 
-    document.body.style.overflow=''; 
-  }
-});
-
-document.getElementById('openSrc').addEventListener('click', ()=>{
-  const url = document.getElementById('srcSel').value;
-  if(url) window.open(url, '_blank', 'noopener');
-});
-
-renderMeta();
-renderEvent();
-renderUpcoming();
-</script>
+  <script nonce="7uSYr3">
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const waUrl = "https://api.whatsapp.com/send/?phone=97333375858&text&type=phone_number&app_absent=0";
+    document.getElementById('footerName').addEventListener('click', () => {
+      window.open(waUrl, '_blank', 'noopener,noreferrer');
+    });
+  </script>
 </body>
 </html>
