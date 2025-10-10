@@ -4,29 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>صلاة الليل | دليل تفاعلي فاخر للكيفية والأحكام</title>
-    <meta name="description" content="تجربة بصرية فريدة لصلاة الليل. دليل تفاعلي فاخر ومنظم بأناقة يشرح الفضل، الكيفية، والأحكام بتصميم عالمي المستوى.">
-    <meta name="keywords" content="صلاة الليل, تصميم احترافي, دليل تفاعلي, كيفية صلاة الليل, الشفع والوتر, قيام الليل, فضل صلاة الليل">
-    <meta name="author" content="استوديو الإلهام الرقمي">
-    <link rel="canonical" href="https://your-domain.com/salat-al-layl-pro.html">
+    <title>صلاة الليل | دليل منهجي بتصميم يبعث على السكينة</title>
+    <meta name="description" content="دليل احترافي لصلاة الليل بتصميم دافئ وروحاني. تنظيم منهجي يجمع بين الفضل، الكيفية المفصلة، والأحكام الفقهية بوضوح وأناقة.">
+    <meta name="keywords" content="صلاة الليل, دليل صلاة الليل, تصميم روحاني, كيفية صلاة الليل, الشفع والوتر, قيام الليل, فضل صلاة الليل">
+    <meta name="author" content="مرشد السالكين">
+    <link rel="canonical" href="https://your-domain.com/salat-al-layl-serene.html">
 
-    <!-- Fonts: Merriweather for Headings, Inter for Body -->
+    <!-- Fonts: Amiri for Headings, Noto Naskh Arabic for Body -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
         :root {
-            --bg-main: #111111;
-            --bg-card: #191919;
-            --text-primary: #EAEAEA;
-            --text-secondary: #A0A0A0;
-            --accent-gold: #D4AF37;
-            --font-heading: 'Merriweather', serif;
-            --font-body: 'Inter', sans-serif;
+            --bg-main: #FDFCF9;
+            --text-primary: #3a3a3a;
+            --text-secondary: #6b6b6b;
+            --accent-gold: #c5a773;
+            --accent-green: #5a6e5a;
+            --border-color: #e0dccc;
+            --font-heading: 'Amiri', serif;
+            --font-body: 'Noto Naskh Arabic', serif;
         }
 
         * {
@@ -43,337 +44,205 @@
             font-family: var(--font-body);
             background-color: var(--bg-main);
             color: var(--text-primary);
-            line-height: 1.8;
-            overflow-x: hidden;
+            line-height: 2.0;
+            font-size: 16px;
         }
 
-        .page-wrapper {
-            display: flex;
-        }
-
-        /* --- Sidebar Navigation --- */
-        .sidebar {
-            width: 280px;
-            height: 100vh;
-            background-color: var(--bg-main);
-            border-left: 1px solid #2a2a2a;
-            position: fixed;
-            top: 0;
-            right: 0;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            z-index: 1000;
-        }
-        .sidebar-logo {
-            font-family: var(--font-heading);
-            font-size: 1.8rem;
-            color: var(--accent-gold);
-            text-decoration: none;
+        /* --- Header --- */
+        .main-header {
             text-align: center;
-            margin-bottom: 50px;
+            padding: 50px 20px;
+            border-bottom: 1px solid var(--border-color);
         }
-        .sidebar-nav ul {
-            list-style: none;
-        }
-        .sidebar-nav li {
-            margin-bottom: 25px;
-        }
-        .sidebar-nav a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 1rem;
-            font-weight: 500;
-            transition: color 0.3s, letter-spacing 0.3s;
-            display: flex;
-            align-items: center;
-        }
-        .sidebar-nav a:hover, .sidebar-nav a.active {
-            color: var(--text-primary);
-            letter-spacing: 0.5px;
-        }
-        .sidebar-nav a .nav-number {
-            color: var(--accent-gold);
+        .main-header h1 {
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
+            color: var(--accent-green);
             font-weight: 700;
-            margin-left: 15px;
-            font-size: 0.9rem;
         }
-        .sidebar-footer {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            text-align: center;
-        }
-
-        /* --- Main Content --- */
-        .main-content {
-            margin-right: 280px;
-            width: calc(100% - 280px);
-        }
-
-        .content-section {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 100px 5%;
-            border-bottom: 1px solid #2a2a2a;
-        }
-        
-        .container {
-            max-width: 900px;
-            width: 100%;
-        }
-
-        /* Hero Section */
-        #hero {
-            text-align: center;
-        }
-        #hero h1 {
-            font-family: var(--font-heading);
-            font-size: 4.5rem;
-            color: var(--text-primary);
-            line-height: 1.2;
-        }
-        #hero h1 .gold {
-            color: var(--accent-gold);
-        }
-        #hero p {
+        .main-header p {
             font-size: 1.2rem;
             color: var(--text-secondary);
-            max-width: 600px;
-            margin: 20px auto 0;
+            max-width: 700px;
+            margin: 10px auto 0;
         }
 
-        /* Section Headers */
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
+        /* --- Main Layout (Book Style) --- */
+        .book-layout {
+            display: flex;
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 20px;
+            gap: 40px;
         }
-        .section-header h2 {
-            font-family: var(--font-heading);
-            font-size: 3rem;
-            color: var(--text-primary);
-        }
-        .section-header p {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-        }
-
-        /* Cards Layout */
-        .grid-layout {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        .book-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
             gap: 30px;
         }
-        .card {
-            background-color: var(--bg-card);
-            border: 1px solid #2a2a2a;
-            border-radius: 15px;
-            padding: 30px;
-            transition: transform 0.3s, border-color 0.3s;
+        .divider {
+            width: 1px;
+            background-color: var(--border-color);
         }
-        .card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent-gold);
-        }
-        .card-icon {
+
+        /* --- Section Title --- */
+        .section-title {
+            font-family: var(--font-heading);
             font-size: 2rem;
+            font-weight: 700;
             color: var(--accent-gold);
-            margin-bottom: 20px;
+            text-align: center;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* --- Content Cards --- */
+        .card {
+            background-color: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
         }
         .card h3 {
             font-family: var(--font-heading);
             font-size: 1.5rem;
+            color: var(--accent-green);
             margin-bottom: 15px;
-            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+        }
+        .card h3 i {
+            margin-left: 12px;
+            color: var(--accent-gold);
         }
         .card p, .card ul {
             color: var(--text-secondary);
-            font-size: 0.95rem;
+            font-size: 1rem;
+            padding-right: 10px;
         }
         .card ul {
-            padding-right: 20px;
+            list-style-position: inside;
+            padding-right: 5px;
+        }
+        .card li {
+            margin-bottom: 10px;
+        }
+        .quote {
+            font-family: var(--font-heading);
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--accent-green);
+            text-align: center;
+            padding: 20px;
+            border-right: 3px solid var(--accent-gold);
+            background-color: #f9f7f2;
+            border-radius: 8px;
         }
 
-        /* Responsive Design */
+        /* --- Footer --- */
+        .main-footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 40px;
+            color: var(--text-secondary);
+        }
+
+        /* --- Responsive Design --- */
         @media (max-width: 992px) {
-            .page-wrapper { flex-direction: column; }
-            .sidebar {
-                position: relative;
-                width: 100%;
-                height: auto;
-                flex-direction: row;
-                padding: 20px;
-                border-left: none;
-                border-bottom: 1px solid #2a2a2a;
+            .book-layout {
+                flex-direction: column;
             }
-            .sidebar-logo { margin-bottom: 0; font-size: 1.5rem; }
-            .sidebar-nav { display: none; } /* Hide for simplicity on mobile, can be a burger menu */
-            .sidebar-footer { display: none; }
-            .main-content { margin-right: 0; width: 100%; }
-            #hero h1 { font-size: 3rem; }
-            .section-header h2 { font-size: 2.5rem; }
+            .divider {
+                display: none;
+            }
+            .main-header h1 {
+                font-size: 2.8rem;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="page-wrapper">
-        <aside class="sidebar">
-            <div>
-                <a href="#hero" class="sidebar-logo">صلاة الليل</a>
-                <nav class="sidebar-nav">
-                    <ul>
-                        <li><a href="#hero" class="active"><i class="fas fa-home"></i><span class="nav-number">البداية</span></a></li>
-                        <li><a href="#prep"><i class="fas fa-hands-praying"></i><span class="nav-number">التهيئة</span></a></li>
-                        <li><a href="#how-to"><i class="fas fa-moon"></i><span class="nav-number">الأداء</span></a></li>
-                        <li><a href="#after"><i class="fas fa-gem"></i><span class="nav-number">الختام</span></a></li>
-                        <li><a href="#rules"><i class="fas fa-gavel"></i><span class="nav-number">الفقه</span></a></li>
-                    </ul>
-                </nav>
+    <header class="main-header">
+        <h1>صلاة الليل</h1>
+        <p>دليل منهجي وميسّر لرحلة الخشوع في جوف الليل، مستوحى من كتاب مفاتيح الجنان</p>
+    </header>
+
+    <main class="book-layout">
+        <!-- Right Column: The Foundations -->
+        <div class="book-column">
+            <h2 class="section-title">المقدمات والفضل</h2>
+
+            <div class="card">
+                <h3><i class="fas fa-star"></i>فضل صلاة الليل</h3>
+                <p class="quote">"شرف المؤمن صلاته بالليل، وعز المؤمن كفه عن أعراض الناس."</p>
+                <p>صلاة الليل هي مدرسة الأنبياء والأولياء، وهي سبب لنور الوجه، صحة البدن، جلب الرزق، وقضاء الدين.</p>
             </div>
-            <div class="sidebar-footer">
-                &copy; 2025. نسألكم الدعاء.
+
+            <div class="card">
+                <h3><i class="fas fa-hands-praying"></i>التهيئة الروحية</h3>
+                <ul>
+                    <li><strong>عند الاستيقاظ:</strong> اسجد لله وقل: "الحمد لله الذي أحياني بعد ما أماتني وإليه النشور".</li>
+                    <li><strong>مناجاة السماء:</strong> انظر إلى السماء وتلُ الآيات الخمس الأخيرة من سورة آل عمران.</li>
+                    <li><strong>التطهّر:</strong> توضأ واستخدم السواك وتطيب، استعدادًا للقاء الله.</li>
+                </ul>
             </div>
-        </aside>
+            
+            <div class="card">
+                <h3><i class="fas fa-gavel"></i>أحكام أساسية</h3>
+                 <ul>
+                    <li><strong>وقتها:</strong> من منتصف الليل إلى الفجر، وأفضلها وقت السحر.</li>
+                    <li><strong>الاختصار:</strong> عند ضيق الوقت، يجوز الاقتصار على الشفع والوتر، أو الوتر فقط.</li>
+                    <li><strong>القضاء:</strong> يستحب قضاؤها في النهار لمن فاتته.</li>
+                </ul>
+            </div>
+        </div>
 
-        <main class="main-content">
-            <section id="hero" class="content-section">
-                <div class="container">
-                    <h1>رحلة <span class="gold">الخشوع</span> في جوف الليل</h1>
-                    <p>دليل تفاعلي فاخر يأخذك خطوة بخطوة في رحاب صلاة الليل، العبادة التي هي شرف المؤمن ونور قلبه.</p>
-                </div>
-            </section>
+        <div class="divider"></div>
 
-            <section id="prep" class="content-section">
-                <div class="container">
-                    <div class="section-header">
-                        <h2>التهيئة الروحية</h2>
-                        <p>قبل الوقوف بين يدي الله، هيّئ قلبك وجسدك لهذا اللقاء العظيم.</p>
-                    </div>
-                    <div class="grid-layout">
-                        <div class="card">
-                            <div class="card-icon"><i class="fas fa-bed"></i></div>
-                            <h3>سجدة الاستيقاظ</h3>
-                            <p>ابدأ لقاءك مع الله بسجدة عند الاستيقاظ، وقل: "الحَمْدُ لله الَّذِي أحْياني بَعْدَ ما أماتَني وَإلِيهِ النُشورُ".</p>
-                        </div>
-                        <div class="card">
-                            <div class="card-icon"><i class="fas fa-star"></i></div>
-                            <h3>مناجاة السماء</h3>
-                            <p>انظر إلى ملكوت السماء وتلُ الآيات الخمس الأخيرة من سورة آل عمران بتدبر ويقين.</p>
-                        </div>
-                        <div class="card">
-                            <div class="card-icon"><i class="fas fa-hand-sparkles"></i></div>
-                            <h3>التطهّر والتطيب</h3>
-                            <p>توضأ وضوءًا سابغًا، واستخدم السواك، وتطيب بأفضل الطيب استعدادًا لمناجاة الحبيب.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+        <!-- Left Column: The Practice -->
+        <div class="book-column">
+            <h2 class="section-title">الكيفية والأعمال</h2>
 
-            <section id="how-to" class="content-section">
-                <div class="container">
-                    <div class="section-header">
-                        <h2>كيفية الأداء</h2>
-                        <p>تتكون الصلاة من 11 ركعة، مقسمة إلى ثلاث محطات من النور.</p>
-                    </div>
-                    <div class="grid-layout">
-                        <div class="card">
-                            <div class="card-icon"><i class="fas fa-layer-group"></i></div>
-                            <h3>نافلة الليل (8 ركعات)</h3>
-                            <p>أربع صلوات من ركعتين. اقرأ الفاتحة وما تشاء. للفضل العظيم، اقرأ التوحيد 30 مرة في كل من الركعتين الأوليين.</p>
-                        </div>
-                        <div class="card">
-                            <div class="card-icon"><i class="fas fa-stream"></i></div>
-                            <h3>صلاة الشفع (ركعتان)</h3>
-                            <p>ركعتان. في الأولى: الفاتحة والناس. في الثانية: الفاتحة والفلق. لا قنوت فيها على المشهور.</p>
-                        </div>
-                        <div class="card">
-                            <div class="card-icon"><i class="fas fa-pray"></i></div>
-                            <h3>صلاة الوتر (ركعة واحدة)</h3>
-                            <p>مسك الختام. بعد السور، ارفع يديك للقنوت واستغفر لـ 40 مؤمنًا، ثم قل "أستغفر الله" 70 مرة، و"العفو" 300 مرة.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <div class="card">
+                <h3><i class="fas fa-moon"></i>كيفية الأداء (11 ركعة)</h3>
+                <ol>
+                    <li><strong>نافلة الليل (8 ركعات):</strong> تُصلى أربع مرات (ركعتان في كل مرة). اقرأ الفاتحة وما تشاء من السور.</li>
+                    <li><strong>صلاة الشفع (ركعتان):</strong> في الأولى (الفاتحة والناس)، وفي الثانية (الفاتحة والفلق).</li>
+                    <li><strong>صلاة الوتر (ركعة واحدة):</strong> هي ذروة الصلاة. بعد السور، ارفع يديك للقنوت.</li>
+                </ol>
+            </div>
 
-            <section id="after" class="content-section">
-                <div class="container">
-                    <div class="section-header">
-                        <h2>التعقيبات والختام</h2>
-                        <p>لا تستعجل بالقيام، فبعد الصلاة كنوز من الذكر والدعاء.</p>
-                    </div>
-                    <div class="grid-layout">
-                        <div class="card">
-                            <div class="card-icon"><i class="fas fa-tasks"></i></div>
-                            <h3>تسبيح الزهراء (ع)</h3>
-                            <p>ابدأ بتسبيح السيدة الزهراء (ع)، ثم قل: "الحَمْدُ لِرَبِّ الصَّباحِ الحَمْدُ لِفالِقِ الاصْباحِ".</p>
-                        </div>
-                        <div class="card">
-                            <div class="card-icon"><i class="fas fa-hand-holding-dollar"></i></div>
-                            <h3>دعاء الرزق</h3>
-                            <p>اطلب الرزق المادي والمعنوي بدعاء: "يا حَيُّ يا قَيومُ يا بَرُّ يا رَحيمُ... إرْزُقْنِي مِنَ التِّجارَةِ أعظَمَها فَضْلاً".</p>
-                        </div>
-                        <div class="card">
-                            <div class="card-icon"><i class="fas fa-chevron-down"></i></div>
-                            <h3>سجدة الشكر</h3>
-                            <p>اسجد وقل خمس مرات: "سُبّوحٌ قُدّوسٌ رَبُّ المَلائِكَةِ والرّوحِ". ثم اجلس واقرأ آية الكرسي، وكرر السجود.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <div class="card">
+                <h3><i class="fas fa-pray"></i>أعمال قنوت الوتر</h3>
+                <p>هو وقت الانكسار والدعاء. يستحب فيه:</p>
+                <ul>
+                    <li>الدعاء لـ 40 مؤمنًا بقول: "اللهم اغفر لفلان...".</li>
+                    <li>الاستغفار 70 مرة: "أستغفر الله ربي وأتوب إليه".</li>
+                    <li>قول 7 مرات: "هذا مقام العائذ بك من النار".</li>
+                    <li>قول 300 مرة: "العفو".</li>
+                </ul>
+            </div>
 
-            <section id="rules" class="content-section">
-                <div class="container">
-                    <div class="section-header">
-                        <h2>الفقه والأحكام</h2>
-                        <p>مسائل مهمة لتكون صلاتك صحيحة ومقبولة بإذن الله.</p>
-                    </div>
-                    <div class="grid-layout">
-                        <div class="card">
-                            <div class="card-icon"><i class="fas fa-clock"></i></div>
-                            <h3>الوقت والاختصار</h3>
-                            <p>وقتها من منتصف الليل للفجر. عند ضيق الوقت، يجوز الاقتصار على الشفع والوتر، أو الوتر فقط.</p>
-                        </div>
-                        <div class="card">
-                            <div class="card-icon"><i class="fas fa-calendar-check"></i></div>
-                            <h3>القضاء والتقديم</h3>
-                            <p>يستحب قضاؤها نهارًا لمن فاتته. ويجوز تقديمها قبل منتصف الليل للمسافر أو من يخشى فواتها.</p>
-                        </div>
-                        <div class="card">
-                            <div class="card-icon"><i class="fas fa-chair"></i></div>
-                            <h3>الصلاة من جلوس</h3>
-                            <p>تجوز صلاة الليل من جلوس حتى مع القدرة على القيام، ولكن يُحتسب كل ركعتين من جلوس بركعة واحدة من قيام.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
-    </div>
+            <div class="card">
+                <h3><i class="fas fa-gem"></i>التعقيبات والختام</h3>
+                <p>بعد التسليم، لا تستعجل بالقيام، بل اختم بهذه الكنوز:</p>
+                <ul>
+                    <li><strong>تسبيح الزهراء (ع):</strong> فهو من أفضل التعقيبات.</li>
+                    <li><strong>دعاء الرزق:</strong> "يا حي يا قيوم يا بر يا رحيم...".</li>
+                    <li><strong>سجدة الشكر:</strong> اسجد وقل 5 مرات: "سبوح قدوس رب الملائكة والروح".</li>
+                </ul>
+            </div>
+        </div>
+    </main>
 
-    <script>
-        // Active link switching on scroll
-        const sections = document.querySelectorAll('.content-section');
-        const navLinks = document.querySelectorAll('.sidebar-nav a');
-
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (pageYOffset >= sectionTop - 60) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href').includes(current)) {
-                    link.classList.add('active');
-                }
-            });
-        });
-    </script>
+    <footer class="main-footer">
+        <p>نسألكم الدعاء في جوف الليل</p>
+    </footer>
 
 </body>
 </html>
