@@ -31,7 +31,6 @@
       position:absolute;top:0;white-space:nowrap;will-change:transform;
       line-height:28px;font-weight:700;letter-spacing:.2px
     }
-    .ticker-bar:hover .ticker-text{transition-timing-function:linear}
 
     /* ===== بطاقات الأخبار ===== */
     .article{
@@ -119,7 +118,6 @@ const AUTO_REFRESH_MS = 60 * 1000;
 const FETCH_TIMEOUT_MS = 9000;
 const state = { all: [], page: 0, pageSize: 10, map: new Map() };
 const $ = s => document.querySelector(s);
-const $$ = s => document.querySelectorAll(s);
 
 /* ===== ساعة ===== */
 function startClock(){
@@ -220,36 +218,32 @@ function updateTickerFromPage(){
 function runTickerOnce(){
   const list=ticker.titles;
   if(!list.length) return;
-  const viewport=$(".ticker-viewport");
+  const viewport=document.querySelector(".ticker-viewport");
   const textOld=$("#tickerText");
   const text=textOld.cloneNode(true);
   textOld.parentNode.replaceChild(text,textOld);
 
-  const SPEED=60; // بكسل/ثانية (اخفض القيمة لبطيء أكثر)
+  const SPEED=200; // ← سرعة القنوات الإخبارية (بكسل/ثانية)
   const GAP=30;
   const vw=viewport.clientWidth;
   const title=list[ticker.idx];
 
   text.textContent=title;
 
-  // قياس العرض ثم تحريك من اليسار إلى اليمين
+  // تحضير العرض وقياس الطول
   text.style.transition='none';
-  // ضع مبدئيًا خارج اليسار
-  const tw = (function(){
-    // ضع مؤقتًا داخل الإطار لحساب العرض
-    text.style.transform='translateX(0)';
-    void text.offsetWidth;
-    return text.offsetWidth;
-  })();
+  text.style.transform='translateX(0)';
+  void text.offsetWidth;
+  const tw=text.offsetWidth;
 
-  const startX = -(tw + GAP); // خارج اليسار
-  const endX   = vw;          // إلى خارج اليمين
+  const startX = -(tw + GAP); // يبدأ خارج اليسار
+  const endX   = vw;          // ينتهي خارج اليمين
   const distance = endX - startX;
-  const duration = Math.max(6, distance / SPEED);
+  const duration = Math.max(4, distance / SPEED); // حدّ أدنى معقول
 
   text.style.transition='none';
   text.style.transform=`translateX(${startX}px)`;
-  void text.offsetWidth; // reflow
+  void text.offsetWidth;
   text.style.transition=`transform ${duration}s linear`;
   text.style.transform=`translateX(${endX}px)`;
 
