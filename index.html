@@ -4,23 +4,19 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>مدار الخبر | متجددة لحظة بلحظة</title>
-  <meta name="description" content="مدار الخبر — صفحة أخبار عربية متجددة لحظة بلحظة من عدة مصادر موثوقة، مع عرض سريع ودقيق.">
+  <meta name="description" content="مدار الخبر — صفحة أخبار عربية متجددة لحظة بلحظة من عدة مصادر موثوقة.">
   <meta name="theme-color" content="#0ea5e9">
   <link rel="canonical" href="https://example.com/">
-  <link rel="alternate" hreflang="ar" href="https://example.com/">
   <meta name="robots" content="index,follow,max-image-preview:large">
 
-  <!-- Open Graph / Twitter -->
+  <!-- OG/Twitter -->
   <meta property="og:type" content="website">
   <meta property="og:locale" content="ar_AR">
   <meta property="og:title" content="مدار الخبر | متجددة لحظة بلحظة">
-  <meta property="og:description" content="متابعة آنية لأهم الأخبار العربية من مصادر موثوقة، تحدّث تلقائياً.">
+  <meta property="og:description" content="متابعة آنية لأهم الأخبار العربية من مصادر موثوقة.">
   <meta property="og:url" content="https://example.com/">
   <meta property="og:image" content="https://example.com/cover.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="مدار الخبر | متجددة لحظة بلحظة">
-  <meta name="twitter:description" content="متابعة آنية لأهم الأخبار العربية من مصادر موثوقة.">
-  <meta name="twitter:image" content="https://example.com/cover.jpg">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,69 +27,41 @@
 
   <style>
     :root{--card-shadow:0 4px 14px rgba(0,0,0,.06)}
-    body{
-      font-family:'Cairo','Tajawal',system-ui,Arial,sans-serif;
-      background:#f8fafc;color:#0f172a;line-height:1.9
-    }
+    body{font-family:'Cairo','Tajawal',system-ui,Arial,sans-serif;background:#f8fafc;color:#0f172a;line-height:1.9}
     .brand-title{letter-spacing:.2px}
     .clock{font-variant-numeric:tabular-nums}
     .btn{padding:.55rem .9rem;border-radius:12px;border:1px solid #e2e8f0;background:#fff;font-weight:700}
     .btn-brand{background:#0ea5e9;color:#fff;border-color:transparent}
 
-    /* الشريط الإخباري (بطيء + تكرار لا نهائي) */
+    /* الشريط الإخباري (يأخذ عناوين الصفحة) */
     .ticker-bar{display:none;background:#0ea5e9;color:#fff;border-bottom:1px solid rgba(255,255,255,.25)}
     .ticker-inner{overflow:hidden}
     .ticker-track{
-      display:flex;
-      gap:2rem;
-      white-space:nowrap;
-      will-change:transform;
-      --dur: 60s; /* يتم ضبطها من JS */
-      animation: ticker var(--dur) linear infinite;
+      display:flex;gap:2rem;white-space:nowrap;will-change:transform;
+      --dur:60s;animation:ticker var(--dur) linear infinite;
     }
     .ticker-seg{display:flex;gap:2rem}
     .ticker-item{opacity:.98}
     .ticker-item::before{content:"•";margin-inline:8px;opacity:.7}
     .ticker-bar:hover .ticker-track{animation-play-state:paused}
-    @keyframes ticker{
-      0%{transform:translateX(0)}
-      100%{transform:translateX(-50%)} /* لأننا نكرر المحتوى مرتين */
-    }
+    @keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
     /* بطاقات الأخبار — صورة كبيرة */
-    .article{
-      background:#fff;padding:18px;border-radius:16px;box-shadow:var(--card-shadow);
-      display:grid;grid-template-columns:280px 1fr;gap:18px;cursor:pointer
-    }
+    .article{background:#fff;padding:18px;border-radius:16px;box-shadow:var(--card-shadow);display:grid;grid-template-columns:280px 1fr;gap:18px;cursor:pointer}
     .thumb{width:280px;height:180px;border-radius:16px;object-fit:cover;background:#e2e8f0;transition:transform .2s}
     .article:hover .thumb{transform:scale(1.01)}
     .article h3{font-size:1.18rem;font-weight:800;margin-bottom:6px}
     .article .meta{font-size:.8rem;color:#64748b}
     .article p{text-align:justify;font-size:.98rem;margin-top:6px;white-space:pre-line}
-    @media (max-width:820px){
-      .article{grid-template-columns:1fr}
-      .thumb{width:100%;height:240px}
-    }
+    @media (max-width:820px){.article{grid-template-columns:1fr}.thumb{width:100%;height:240px}}
 
     /* صفحة التفاصيل */
     #detailView{display:none}
     .hero-img{width:100%;max-height:460px;object-fit:cover;border-radius:18px;background:#e2e8f0}
 
-    /* تحسين قابلية القراءة */
     .nice-text{letter-spacing:.1px}
     .nice-heading{letter-spacing:.3px}
   </style>
-
-  <!-- Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"NewsMediaOrganization",
-    "name":"مدار الخبر",
-    "url":"https://example.com/",
-    "logo":"https://example.com/logo.png"
-  }
-  </script>
 </head>
 <body>
 
@@ -113,7 +81,7 @@
     </div>
   </div>
 
-  <!-- الشريط الإخباري (يظهر فقط عند وجود أخبار) -->
+  <!-- الشريط الإخباري (من عناوين الصفحة) -->
   <div id="tickerBar" class="ticker-bar">
     <div class="max-w-6xl mx-auto px-4 py-2">
       <div class="ticker-inner">
@@ -126,25 +94,9 @@
   </div>
 </header>
 
-<!-- MAIN (قائمة) -->
+<!-- MAIN -->
 <main class="max-w-6xl mx-auto px-4 py-6 nice-text" id="mainView">
-  <div class="mb-4 text-[13px] text-sky-800 bg-sky-100 border border-sky-200 rounded-lg px-3 py-2">
-    📡 يتم تحديث الأخبار تلقائيًا كل دقيقة
-  </div>
-
-  <div id="loadingMsg" class="rounded-xl border border-sky-200 bg-sky-50 p-4 text-sky-700 mb-5">
-    ⌛ يجري الآن جلب الأخبار…
-  </div>
-
-  <div id="emptyState" class="hidden rounded-xl border border-slate-200 bg-white p-5 text-slate-600">
-    لا توجد أخبار متاحة حاليًا. قد يكون هناك انقطاع مؤقت من المصادر.
-    <div class="mt-3">
-      <button id="tryAgain" class="btn btn-brand">حاول مجددًا</button>
-    </div>
-  </div>
-
   <div id="newsList" class="space-y-4" aria-live="polite"></div>
-
   <div class="flex justify-center mt-8">
     <button id="loadMore" class="px-5 py-2 rounded-xl bg-sky-600 text-white hover:bg-sky-700 disabled:opacity-50 disabled:cursor-not-allowed">
       تحميل المزيد
@@ -172,7 +124,7 @@
 </div>
 
 <script>
-/* ===== إعدادات عامة ===== */
+/* ===== إعدادات ===== */
 const FEEDS = [
   "https://feeds.bbci.co.uk/arabic/rss.xml",
   "https://www.france24.com/ar/rss",
@@ -180,7 +132,6 @@ const FEEDS = [
   "https://arabic.rt.com/rss/"
 ];
 
-// بروكسيات احتياط
 const PROXIES = [
   u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
   u => `https://corsproxy.io/?${encodeURIComponent(u)}`,
@@ -188,7 +139,7 @@ const PROXIES = [
 ];
 
 const FETCH_TIMEOUT_MS = 9000;
-const AUTO_REFRESH_MIN = 1;
+const AUTO_REFRESH_MIN = 1;          // تحديث تلقائي كل دقيقة
 const CACHE_TTL_MS = 60 * 1000;
 const MAX_RETRIES = 2;
 
@@ -203,22 +154,6 @@ function fmt(t){ const d=new Date(t); if(isNaN(d))return""; return d.toLocaleStr
 function startClock(){ const el=$("#liveClock"); function tick(){el.textContent=new Date().toLocaleTimeString('ar-BH',{hour12:false});} tick(); setInterval(tick,1000); }
 function openWhatsApp(){ const link="https://api.whatsapp.com/send/?phone=97333375858&type=phone_number&app_absent=0"; window.open(link,"_blank","noopener"); }
 function escapeHTML(s){ return (s||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m])); }
-
-/* ===== تطبيع التاريخ ===== */
-function tryParseDate(el){
-  const picks = ["pubDate","updated","published","dc\\:date","date"];
-  for(const p of picks){
-    const t = el.querySelector(p)?.textContent?.trim();
-    if(t){ const d = Date.parse(t); if(!isNaN(d)) return new Date(d).toISOString(); }
-  }
-  return "";
-}
-
-/* ===== مصدر الخبر ===== */
-function sourceNameFromDoc(doc, fallback){
-  const ch = doc.querySelector("channel>title, feed>title");
-  return (ch?.textContent?.trim()) || fallback || "";
-}
 
 /* ===== شبكة مع إعادة محاولات ===== */
 async function fetchWithTimeout(url, timeoutMs=FETCH_TIMEOUT_MS){
@@ -241,170 +176,123 @@ async function getWithRetries(url){
   throw new Error("failed after retries");
 }
 
-/* ===== استخراج الصور ===== */
+/* ===== تطبيع التاريخ + الصور + الروابط ===== */
+function tryParseDate(el){
+  const picks = ["pubDate","updated","published","dc\\:date","date"];
+  for(const p of picks){
+    const t = el.querySelector(p)?.textContent?.trim();
+    if(t){ const d = Date.parse(t); if(!isNaN(d)) return new Date(d).toISOString(); }
+  } return "";
+}
 function pickImageFromItem(el){
   const media = el.querySelector("media\\:content, content");
-  const media2 = el.querySelector("media\\:thumbnail, thumbnail");
+  const thumb = el.querySelector("media\\:thumbnail, thumbnail");
   const enc = el.querySelector("enclosure");
   let url = (media && (media.getAttribute("url")||media.textContent)) ||
-            (media2 && (media2.getAttribute("url")||media2.textContent)) || "";
+            (thumb && (thumb.getAttribute("url")||thumb.textContent)) || "";
   if(!url && enc && /^image\\//i.test(enc.getAttribute("type")||"")) url = enc.getAttribute("url")||"";
   if(!url){
-    const descHTML = (el.querySelector("content\\:encoded")?.textContent || el.querySelector("description")?.textContent || "");
-    const m = descHTML && descHTML.match(/<img[^>]+src=["']([^"']+)["']/i);
+    const html = (el.querySelector("content\\:encoded")?.textContent || el.querySelector("description")?.textContent || "");
+    const m = html && html.match(/<img[^>]+src=["']([^"']+)["']/i);
     if(m) url = m[1];
   }
   return url || "";
 }
-
-/* ===== تنظيف رابط الخبر ===== */
 function cleanUrl(u){
-  try{
-    const url = new URL(u);
-    ["utm_source","utm_medium","utm_campaign","utm_term","utm_content","fbclid","gclid"].forEach(k=>url.searchParams.delete(k));
-    return url.toString();
-  }catch{return u||"";}
+  try{ const url=new URL(u); ["utm_source","utm_medium","utm_campaign","utm_term","utm_content","fbclid","gclid"].forEach(k=>url.searchParams.delete(k)); return url.toString(); }
+  catch{ return u||""; }
 }
 
 /* ===== تحليل RSS ===== */
 function parseRSS(xmlText, srcUrl){
   const doc = new DOMParser().parseFromString(xmlText,"text/xml");
-  const srcName = sourceNameFromDoc(doc, new URL(srcUrl).hostname.replace(/^www\\./,''));
+  const srcName = (doc.querySelector("channel>title, feed>title")?.textContent?.trim())
+    || new URL(srcUrl).hostname.replace(/^www\\./,'');
   const nodes = Array.from(doc.querySelectorAll("item,entry"));
   const items = nodes.map((el, idx)=>{
     const title=(el.querySelector("title")?.textContent||"").trim();
-    const rawDesc=(el.querySelector("content\\:encoded")?.textContent||
-                   el.querySelector("description")?.textContent||
-                   el.querySelector("summary")?.textContent||"").trim();
-    const full=stripHtml(rawDesc);
+    const desc =(el.querySelector("content\\:encoded")?.textContent||
+                 el.querySelector("description")?.textContent||
+                 el.querySelector("summary")?.textContent||"").trim();
+    const full = stripHtml(desc);
     const time = tryParseDate(el);
-    const link=(el.querySelector("link")?.getAttribute?.("href") || el.querySelector("link")?.textContent || "").trim();
-    const img=pickImageFromItem(el);
-    const linkClean = cleanUrl(link);
-    return {
-      id: `${linkClean || srcUrl}|${(title||"").slice(0,80)}|${time||idx}`,
-      title, full, time, link: linkClean, img, source: srcName
-    };
-  }).filter(i=> (hasAr(i.title)||hasAr(i.full)));
+    const link = cleanUrl((el.querySelector("link")?.getAttribute?.("href") || el.querySelector("link")?.textContent || "").trim());
+    const img  = pickImageFromItem(el);
+    return { id:`${link||srcUrl}|${(title||"").slice(0,80)}|${time||idx}`, title, full, time, link, img, source:srcName };
+  }).filter(i=> hasAr(i.title)||hasAr(i.full));
   return items;
 }
 
 /* ===== كاش محلي ===== */
-function cacheGet(key){
-  try{
-    const s=localStorage.getItem(key);
-    if(!s) return null;
-    const obj=JSON.parse(s);
-    if(Date.now()-obj.t > CACHE_TTL_MS) return null;
-    return obj.v;
-  }catch{return null;}
-}
-function cacheSet(key, value){ try{ localStorage.setItem(key, JSON.stringify({t:Date.now(), v:value})); }catch{} }
+function cacheGet(key){ try{const s=localStorage.getItem(key); if(!s) return null; const o=JSON.parse(s); if(Date.now()-o.t> CACHE_TTL_MS) return null; return o.v;}catch{return null;} }
+function cacheSet(key, v){ try{localStorage.setItem(key, JSON.stringify({t:Date.now(), v}));}catch{} }
 
-/* ===== شريط إخباري (إظهار/إخفاء + سرعة محسوبة + تكرار لا نهائي) ===== */
-function updateTicker(items){
+/* ===== بناء الشريط من عناوين الصفحة ===== */
+function getPageHeadlines(){
+  const hs = Array.from(document.querySelectorAll('#newsList h3')).map(h=>h.textContent.trim()).filter(Boolean);
+  const uniq = []; const seen=new Set();
+  for(const t of hs){ if(!seen.has(t)){ seen.add(t); uniq.push(t); } }
+  return uniq;
+}
+function updateTickerFromPage(){
   const bar = $("#tickerBar");
   const seg1 = $("#tickerSeg1");
   const seg2 = $("#tickerSeg2");
   const track = $("#tickerTrack");
 
-  // قائمة عناوين فريدة (بدون مكررات داخل الدورة الواحدة)
-  const seen = new Set();
-  const titles = [];
-  for (const it of items){
-    const t = (it.title || "").trim();
-    if (!t) continue;
-    if (seen.has(t)) continue;
-    seen.add(t);
-    titles.push(t);
-    if (titles.length >= 120) break; // حد أعلى منطقي
-  }
-
-  if (!titles.length){
+  const titles = getPageHeadlines();
+  if(!titles.length){
     seg1.innerHTML = seg2.innerHTML = "";
     bar.style.display = "none";
     return;
   }
-
-  // نبني مقطعًا واحدًا ثم نكرّره مرّة ثانية لعمل حلقة لا نهائية سلسة
-  const html = titles.map(t => `<span class="ticker-item">${escapeHTML(t)}</span>`).join(" ");
-  seg1.innerHTML = html;
-  seg2.innerHTML = html;
+  const html = titles.map(t=>`<span class="ticker-item">${escapeHTML(t)}</span>`).join(" ");
+  seg1.innerHTML = html; seg2.innerHTML = html;
   bar.style.display = "block";
-
-  // احسب المدّة بناءً على عرض المقطع الأول + قيمة gap الفعلية
   startTickerDuration(track, seg1);
 }
-
 function startTickerDuration(track, seg1){
-  // إجبار إعادة الحساب
-  track.style.animation = "none";
-  void track.offsetWidth;
-
-  const SPEED_PX_PER_S = 40; // اضبطها لأبطأ/أسرع
+  // إعادة ضبط وتحسب المدة حسب عرض المحتوى
+  track.style.animation = "none"; void track.offsetWidth;
+  const SPEED_PX_PER_S = 40; // أبطأ/أسرع
   const segWidth = seg1.scrollWidth;
-
-  // قراءة gap (بين العناصر) من CSS فعليًا
   const cs = getComputedStyle(track);
-  const gap = parseFloat(cs.getPropertyValue("column-gap") || cs.getPropertyValue("gap") || "0") || 0;
-
-  const distance = segWidth + gap; // مقدار التحريك لنصف العرض (أحد المقطعين)
+  const gap = parseFloat(cs.getPropertyValue("gap")||"0")||0;
+  const distance = segWidth + gap; // نصف المسار
   const durationSec = Math.max(12, Math.ceil(distance / SPEED_PX_PER_S));
-
   track.style.setProperty("--dur", `${durationSec}s`);
-  // استعادة الحركة
   track.style.animation = `ticker var(--dur) linear infinite`;
 }
 
 /* ===== تحميل كل المصادر ===== */
 async function loadAll(){
-  $("#loadingMsg").classList.remove("hidden");
-  $("#emptyState").classList.add("hidden");
-
+  // استخدم الكاش لإظهار سريع
   const cached = cacheGet("feeds-cache");
-  if(cached){
-    applyItems(cached);
-    $("#loadingMsg").classList.add("hidden");
-  }
+  if(cached){ applyItems(cached); }
 
   try{
-    const results = await Promise.allSettled(FEEDS.map(async f => {
-      const txt = await getWithRetries(f);
-      return {f,txt};
-    }));
+    const results = await Promise.allSettled(FEEDS.map(async f => ({f, txt: await getWithRetries(f)})));
     let all=[];
     for(const r of results){
       if(r.status==="fulfilled"){
-        try{ all = all.concat(parseRSS(r.value.txt, r.value.f)); }
-        catch(e){ console.warn("parse fail:", e); }
+        try{ all = all.concat(parseRSS(r.value.txt, r.value.f)); }catch(e){ console.warn("parse fail:", e); }
       }
     }
-    // إزالة التكرار: بالأولوية للرابط ثم (العنوان + الوقت)
+    // إزالة التكرار
     const seen=new Set(), uniq=[];
     for(const it of all){
-      const key = (it.link||"") || ((it.title||"")+"|"+(it.time||""));
-      if(seen.has(key)) continue;
-      seen.add(key);
-      uniq.push(it);
+      const key=(it.link||"") || ((it.title||"")+"|"+(it.time||""));
+      if(seen.has(key)) continue; seen.add(key); uniq.push(it);
     }
     // ترتيب زمني
     uniq.sort((a,b)=>(Date.parse(b.time)||0)-(Date.parse(a.time)||0));
-
     cacheSet("feeds-cache", uniq);
     applyItems(uniq);
-  }catch(e){
-    console.warn(e);
-  }finally{
-    $("#loadingMsg").classList.add("hidden");
-    if(!state.all.length){
-      $("#emptyState").classList.remove("hidden");
-    }
-  }
+  }catch(e){ console.warn(e); }
 }
 
 /* ===== تقديم العناصر + Lazy Images ===== */
 function excerpt(txt, limit=240){return (txt||"").length<=limit?txt:txt.slice(0,limit)+"…";}
-
 function articleHTML(a){
   const timeHtml = a.time? fmt(a.time):"";
   const img = a.img || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='180'%3E%3Crect width='100%25' height='100%25' fill='%23e2e8f0'/%3E%3C/svg%3E";
@@ -418,17 +306,13 @@ function articleHTML(a){
     </div>
   </article>`;
 }
-
 function applyItems(items){
-  state.all = items;
-  state.page = 0;
-  state.map.clear();
+  state.all = items; state.page = 0; state.map.clear();
   for(const it of items){ state.map.set(it.id, it); }
   renderChunk(true);
   setupLazyImages();
-  updateTicker(items);  // ← يظهر/يخفي الشريط ويشغّل الحركة
+  updateTickerFromPage();     // ← الشريط من العناوين المعروضة
 }
-
 function renderChunk(reset){
   if(reset) $("#newsList").innerHTML="";
   const end = Math.min((state.page+1)*state.pageSize, state.all.length);
@@ -436,6 +320,8 @@ function renderChunk(reset){
   container.innerHTML = state.all.slice(0,end).map(articleHTML).join("");
   $("#newsList").replaceChildren(...Array.from(container.childNodes));
   $("#loadMore").disabled = end >= state.all.length;
+  // بعد كل تقديم/تحميل المزيد حدّث الشريط من DOM
+  updateTickerFromPage();
 }
 
 /* ===== Lazy Loading ===== */
@@ -464,39 +350,18 @@ function openDetail(id){
   $("#detailMeta").textContent = [a.source||"", a.time?fmt(a.time):""].filter(Boolean).join(" · ");
   $("#detailBody").textContent = a.full || "";
 
-  injectDetailJsonLd(a);
-
   $("#mainView").style.display="none";
   $("#detailView").style.display="block";
   document.title = (a.title||"") + " | مدار الخبر";
   history.pushState({id}, "", `?id=${encodeURIComponent(id)}`);
   window.scrollTo({top:0, behavior:"instant"});
 }
-
-/* JSON-LD ديناميكي للخبر */
-function injectDetailJsonLd(a){
-  const old = document.getElementById("ld-article"); if(old) old.remove();
-  const data = {
-    "@context":"https://schema.org",
-    "@type":"NewsArticle",
-    "headline": a.title || "",
-    "datePublished": a.time || "",
-    "image": a.img ? [a.img] : undefined,
-    "articleSection": "أخبار",
-    "publisher": {"@type":"Organization","name":"مدار الخبر"},
-    "mainEntityOfPage": {"@type":"WebPage","@id": location.href}
-  };
-  const s=document.createElement("script");
-  s.type="application/ld+json"; s.id="ld-article";
-  s.textContent = JSON.stringify(data);
-  document.head.appendChild(s);
-}
-
 function goHome(push=true){
   $("#detailView").style.display="none";
   $("#mainView").style.display="block";
   document.title = "مدار الخبر | متجددة لحظة بلحظة";
   if(push) history.pushState({}, "", location.pathname);
+  updateTickerFromPage(); // عند العودة، حدّث الشريط من القائمة
 }
 
 /* ===== تفاعلات ===== */
@@ -527,7 +392,6 @@ window.addEventListener("popstate", ()=>{
 
 $("#loadMore").onclick=()=>{state.page++; renderChunk(false); setupLazyImages();};
 $("#refreshNow").onclick=()=>{loadAll();};
-$("#tryAgain").onclick=()=>{loadAll();};
 $("#year").textContent=new Date().getFullYear();
 
 /* ===== إقلاع وتحديث ===== */
@@ -535,13 +399,6 @@ function boot(){
   startClock();
   loadAll();
   setInterval(loadAll, AUTO_REFRESH_MIN*60*1000);
-
-  const params=new URLSearchParams(location.search);
-  const id=params.get("id");
-  if(id){
-    const iv=setInterval(()=>{ if(state.map.size){ clearInterval(iv); if(state.map.has(id)) openDetail(id);} },200);
-    setTimeout(()=>clearInterval(iv), 5000);
-  }
 }
 boot();
 </script>
