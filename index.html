@@ -1,290 +1,466 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مجلة المعرفة الثقافية</title>
-    <style>
-        /* --- الإعدادات العامة والخطوط --- */
-        @import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;400;600;700&display=swap');
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>مدار الخبر | متجددة لحظة بلحظة</title>
+  <meta name="description" content="مدار الخبر — صفحة أخبار عربية متجددة لحظة بلحظة من عدة مصادر موثوقة، مع عرض موجز وسريع التحميل.">
+  <meta name="theme-color" content="#0ea5e9">
+  <link rel="canonical" href="https://example.com/">
+  <link rel="alternate" hreflang="ar" href="https://example.com/">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ar_AR">
+  <meta property="og:title" content="مدار الخبر | متجددة لحظة بلحظة">
+  <meta property="og:description" content="متابعة آنية لأهم الأخبار العربية من مصادر موثوقة، تحدّث تلقائياً.">
+  <meta property="og:url" content="https://example.com/">
+  <meta property="og:image" content="https://example.com/cover.jpg">
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="مدار الخبر | متجددة لحظة بلحظة">
+  <meta name="twitter:description" content="متابعة آنية لأهم الأخبار العربية من مصادر موثوقة.">
+  <meta name="twitter:image" content="https://example.com/cover.jpg">
 
-        body {
-            font-family: 'Cairo', sans-serif;
-            background-color: #f0f0f0;
-            color: #333;
-            margin: 0;
-            padding: 0;
-            line-height: 1.9;
-        }
+  <!-- أداء الخطوط -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;800&display=swap" rel="stylesheet">
 
-        /* --- حاوية المجلة الرئيسية --- */
-        .magazine-container {
-            max-width: 900px;
-            margin: 25px auto;
-            background-color: #ffffff;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-            border-top: 12px solid #D4AF37; /* شريط ذهبي فاخر */
-        }
+  <script src="https://cdn.tailwindcss.com" defer></script>
 
-        /* --- رأس الصفحة (الترويسة) --- */
-        .header {
-            text-align: center;
-            padding: 50px 20px;
-            background-color: #000000;
-            color: #ffffff;
-            border-bottom: 2px solid #D4AF37;
-        }
+  <style>
+    :root{--card-shadow:0 4px 14px rgba(0,0,0,.06)}
+    body{font-family:'Tajawal',system-ui,Arial,sans-serif;background:#f8fafc;color:#0f172a;line-height:1.9}
+    .article{background:#fff;padding:18px;border-radius:16px;box-shadow:var(--card-shadow);display:grid;grid-template-columns:120px 1fr;gap:14px}
+    .thumb{width:120px;height:90px;border-radius:12px;object-fit:cover;background:#e2e8f0}
+    .article h3{font-size:1.05rem;font-weight:800;margin-bottom:6px}
+    .article p{text-align:justify;font-size:.95rem;margin-top:6px;white-space:pre-line}
+    .clock{font-variant-numeric:tabular-nums}
+    .more-btn{display:inline-flex;align-items:center;gap:.4rem;font-size:.85rem;padding:.4rem .7rem;border-radius:10px;border:1px solid #c7d2fe;background:#eef2ff;color:#3730a3}
+    .more-btn:hover{filter:brightness(0.97)}
+    .btn{padding:.55rem .9rem;border-radius:12px;border:1px solid #e2e8f0;background:#fff;font-weight:600}
+    .btn-brand{background:#0ea5e9;color:#fff;border-color:transparent}
+    .link{color:#0369a1}
+    @media (max-width:480px){.article{grid-template-columns:1fr}}
+    /* صفحة التفاصيل */
+    #detailView{display:none}
+    .hero-img{width:100%;max-height:360px;object-fit:cover;border-radius:16px;background:#e2e8f0}
+  </style>
 
-        .header h1 {
-            font-family: 'Amiri', serif;
-            font-size: 52px;
-            font-weight: 700;
-            color: #D4AF37;
-            margin: 0;
-        }
-
-        .header p {
-            font-size: 18px;
-            color: #ddd;
-            margin-top: 10px;
-        }
-        
-        /* --- زر الطباعة --- */
-        .print-button-container {
-            text-align: center;
-            padding: 25px;
-            background: #fafafa;
-            border-bottom: 1px solid #eee;
-        }
-        .print-button {
-            background-color: #000;
-            color: #D4AF37;
-            border: 2px solid #D4AF37;
-            padding: 12px 30px;
-            font-size: 18px;
-            font-family: 'Cairo', sans-serif;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
-        }
-        .print-button:hover {
-            background-color: #D4AF37;
-            color: #000;
-        }
-
-        /* --- تنسيق أقسام المجلة --- */
-        .content-area {
-            padding: 40px 50px;
-        }
-
-        .section {
-            margin-bottom: 55px;
-            padding-bottom: 40px;
-            border-bottom: 1px solid #e0e0e0;
-        }
-        .section:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-        }
-
-        .section-title {
-            font-family: 'Amiri', serif;
-            font-size: 36px;
-            font-weight: 700;
-            color: #000000;
-            margin-bottom: 25px;
-            position: relative;
-            padding-bottom: 15px;
-        }
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 80px;
-            height: 4px;
-            background-color: #D4AF37;
-        }
-
-        .section-content p {
-            font-size: 18px;
-            color: #2c2c2c;
-            text-align: justify;
-        }
-
-        .section-image {
-            width: 100%;
-            height: 350px;
-            object-fit: cover;
-            margin-bottom: 30px;
-            border-radius: 8px;
-            border: 1px solid #eee;
-        }
-        
-        /* --- تنسيق خاص لقسم الاقتباسات --- */
-        .quotes-section blockquote {
-            border-right: 5px solid #D4AF37;
-            padding-right: 25px;
-            margin: 30px 0;
-            font-family: 'Amiri', serif;
-            font-style: italic;
-            font-size: 22px;
-            color: #444;
-        }
-        .quotes-section .quote-author {
-            text-align: left;
-            font-weight: bold;
-            color: #000;
-            font-size: 18px;
-            padding-left: 10px;
-        }
-
-        /* --- تذييل الصفحة --- */
-        .footer {
-            text-align: center;
-            padding: 40px 20px;
-            background-color: #000000;
-            color: #ccc;
-            font-size: 15px;
-        }
-        .footer p {
-            margin: 8px 0;
-        }
-        .footer .gold-text {
-            color: #D4AF37;
-            font-weight: bold;
-        }
-        
-        /* --- إعدادات الطباعة --- */
-        @media print {
-            body {
-                background-color: #fff;
-                font-size: 12pt;
-            }
-            .magazine-container {
-                box-shadow: none;
-                border-top: none;
-                margin: 0;
-                max-width: 100%;
-            }
-            .header, .footer, .print-button-container {
-                display: none;
-            }
-            .content-area {
-                padding: 0;
-            }
-            .section-image {
-                max-width: 80%; 
-                height: auto;
-                display: block;
-                margin: 20px auto;
-                border-radius: 0;
-            }
-            .section {
-                page-break-after: always;
-            }
-            .section:last-child {
-                page-break-after: avoid;
-            }
-            .section-title, .section-content p, .quote-author {
-                color: #000 !important;
-            }
-            .section-title::after {
-                background-color: #000 !important;
-            }
-        }
-
-    </style>
+  <!-- Structured Data لموقع الأخبار -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"NewsMediaOrganization",
+    "name":"مدار الخبر",
+    "url":"https://example.com/",
+    "logo":"https://example.com/logo.png",
+    "sameAs":[]
+  }
+  </script>
 </head>
 <body>
 
-    <div class="magazine-container">
-        <!-- رأس المجلة -->
-        <header class="header">
-            <h1>مجلة المعرفة الثقافية</h1>
-            <p>العدد الأول - تصدر عن مجلس الشيخ عباس</p>
-        </header>
-        
-        <!-- زر الطباعة -->
-        <div class="print-button-container">
-            <button class="print-button" onclick="window.print()">🖨️ طباعة أو حفظ كـ PDF</button>
-        </div>
-
-        <!-- محتوى المجلة -->
-        <main class="content-area">
-
-            <!-- القسم الأول: الافتتاحية -->
-            <section class="section">
-                <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663032402115/ljq2I47DQaKx.jpg" alt="مخطوطات وكتب إسلامية قديمة" class="section-image">
-                <h2 class="section-title">افتتاحية: نور العلم</h2>
-                <div class="section-content">
-                    <p>في خضم أمواج الحياة المتلاطمة، يبقى العلم هو المنارة التي تهدي السائرين، والسراج الذي يبدد ظلمات الجهل. فما ارتفعت أمة إلا وكان العلم أساس نهضتها، وما تخلفت أخرى إلا وكان الجهل سبيل تخلفها. لقد كرم الإسلام العلم والعلماء، وجعل طلب المعرفة فريضة تمتد من المهد إلى اللحد. في هذا العدد الأول، نبدأ رحلتنا معكم في بساتين المعرفة، نقطف من كل بستان زهرة، ونقدم لكم باقة من الأفكار التي تنير العقل وتهذب الروح، سائلين الله أن يكون هذا العمل خالصاً لوجهه الكريم، ونافذة تطلون منها على آفاق أرحب من الفكر والثقافة.</p>
-                </div>
-            </section>
-
-            <!-- القسم الثاني: سيرة وتاريخ -->
-            <section class="section">
-                <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663032402115/lznVa1oMKY4L.jpg" alt="المسجد النبوي الشريف" class="section-image">
-                <h2 class="section-title">سيرة: اليتيم الذي أضاء العالم</h2>
-                <div class="section-content">
-                    <p>في قلب مكة، وُلد نبي الرحمة محمد (صلى الله عليه وآله وسلم) يتيماً، ليعلّم البشرية أن العظمة لا تقاس بالجاه أو بالنسب، بل بصفاء الروح ونبل الهدف. نشأ في كنف جده عبد المطلب، ثم رعاه عمه أبو طالب بحب وحنان. هذه النشأة الاستثنائية، التي ذاق فيها مرارة اليتم، صقلت شخصيته العظيمة وجعلته يشعر بآلام الضعفاء والمحتاجين. كانت طفولته وشبابه مدرسة ربانية أعدته لأعظم رسالة عرفتها البشرية. في كل خطوة من خطوات سيرته العطرة، درسٌ في الصبر، وحكمة في التعامل، ونور يهدي الإنسانية إلى يومنا هذا.</p>
-                </div>
-            </section>
-
-            <!-- القسم الثالث: أخلاق وسنن -->
-            <section class="section">
-                <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663032402115/i5eypc1XcYeu.jpg" alt="يد تساعد يد أخرى كرمز للأخلاق والمساعدة" class="section-image">
-                <h2 class="section-title">أخلاق: حُسن الخُلق مفتاح القلوب</h2>
-                <div class="section-content">
-                    <p>"إنما بُعثت لأتمم مكارم الأخلاق"، بهذا الحديث الشريف لخص النبي الأكرم (ص) جوهر رسالته. فالأخلاق ليست مجرد سلوكيات اجتماعية، بل هي ترجمة عملية لعمق الإيمان. حُسن الخلق هو الكلمة الطيبة التي تفتح مغاليق القلوب، والابتسامة الصادقة التي تزرع المودة، واليد الممدودة التي تعين على نوائب الدهر. إنه القوة الحقيقية التي لا تُهزم، والجمال الذي لا يبلى. في عالم يموج بالمادية، تبقى الأخلاق هي الملاذ الآمن الذي يحفظ على الإنسان إنسانيته، ويرتقي بالمجتمع إلى مصاف الحضارات الراقية.</p>
-                </div>
-            </section>
-
-            <!-- القسم الرابع: موضوع العدد -->
-            <section class="section">
-                <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663032402115/v4kIxTQCjKGH.jpg" alt="شباب مسلمون في مجلس علم" class="section-image">
-                <h2 class="section-title">موضوع العدد: الشباب بين الأصالة والتحديات</h2>
-                <div class="section-content">
-                    <p>يقف شباب اليوم على مفترق طرق؛ بين أصالة متجذرة وقيم راسخة، وبين تحديات معاصرة وتيارات فكرية جارفة. إن بناء شخصية شابة واعية وقوية لا يعني الانغلاق على الماضي، ولا الذوبان في الحاضر. بل يكمن التحدي الحقيقي في القدرة على التمسك بالهوية الإسلامية الأصيلة، مع الانفتاح الواعي على علوم العصر وثقافاته. الشاب المسلم مدعو ليكون فاعلاً في مجتمعه، مسلحاً بالعلم والإيمان، قادراً على التمييز بين الغث والسمين، ومؤثراً إيجابياً في محيطه. إنها مسؤولية عظيمة، ولكنها السبيل الوحيد لبناء مستقبل مشرق لأمتنا.</p>
-                </div>
-            </section>
-
-            <!-- القسم الخامس: قرآنيات -->
-            <section class="section">
-                <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663032402115/Ub8ODhdSccfh.png" alt="فن الخط العربي لآية النور" class="section-image">
-                <h2 class="section-title">قرآنيات: تأملات في آية النور</h2>
-                <div class="section-content">
-                    <p>يقول الله تعالى في كتابه الكريم: "اللَّهُ نُورُ السَّمَاوَاتِ وَالْأَرْضِ..." [النور: 35]. هذه الآية العظيمة ليست مجرد وصف، بل هي مفتاح لفهم الوجود كله. فالله هو مصدر كل نور، سواء كان نور الشمس الحسي الذي نراه، أو نور الهداية المعنوي الذي يضيء القلوب والعقول. وتكمل الآية بوصف "مَثَلُ نُورِهِ كَمِشْكَاةٍ فِيهَا مِصْبَاحٌ..."، وهو تشبيه بليغ يصور كيف يستقر نور الإيمان في قلب المؤمن، فيكون قلبه صافياً كالزجاجة، يستمد نوره من شجرة مباركة هي الوحي الإلهي. إن التأمل في هذه الآية يمنح النفس طمأنينة، ويجدد الأمل في أن نور الله لا يمكن أن ينطفئ أبداً.</p>
-                </div>
-            </section>
-
-            <!-- القسم السادس: من أقوالهم -->
-            <section class="section quotes-section">
-                <h2 class="section-title">قبسات من حكمة</h2>
-                <div class="section-content">
-                    <blockquote>"قيمة كل امرئ ما يحسنه. فتكلموا في العلم تتبين أقداركم."</blockquote>
-                    <p class="quote-author">الإمام علي بن أبي طالب (ع)</p>
-                    
-                    <blockquote>"إن لم تكن لك بداية محرقة، لن تكون لك نهاية مشرقة."</blockquote>
-                    <p class="quote-author">الإمام الخميني (قده)</p>
-
-                    <blockquote>"العمل هو الذي يجسد الكلمة، ويعطيها قيمتها ومعناها الحقيقي."</blockquote>
-                    <p class="quote-author">السيد عباس الموسوي (رض)</p>
-                </div>
-            </section>
-
-        </main>
-
-        <!-- تذييل المجلة -->
-        <footer class="footer">
-            <p><span class="gold-text">مجلة المعرفة الثقافية</span> - العدد الأول</p>
-            <p>جميع الحقوق محفوظة © <span id="year"></span> - مجلس الشيخ عباس</p>
-        </footer>
+<!-- HEADER -->
+<header class="bg-white/90 backdrop-blur sticky top-0 z-50 border-b border-slate-100">
+  <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div style="width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,#0ea5e9,#6366f1);box-shadow:0 6px 16px rgba(14,165,233,.35)"></div>
+      <div>
+        <div class="text-2xl font-extrabold bg-gradient-to-r from-sky-500 to-indigo-500 text-transparent bg-clip-text">مدار الخبر</div>
+      </div>
     </div>
+    <div class="flex items-center gap-2">
+      <div class="clock text-sm px-2 py-1 rounded-lg bg-slate-100 text-slate-700" id="liveClock">--:--:--</div>
+      <button id="refreshNow" class="btn" aria-label="تحديث الآن">تحديث الآن</button>
+    </div>
+  </div>
+</header>
 
-    <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
-    </script>
+<!-- MAIN -->
+<main class="max-w-5xl mx-auto px-4 py-6" id="mainView">
+  <div class="mb-4 text-[13px] text-sky-800 bg-sky-100 border border-sky-200 rounded-lg px-3 py-2">
+    📡 يتم تحديث الأخبار تلقائيًا كل دقيقة
+  </div>
 
+  <div id="loadingMsg" class="rounded-xl border border-sky-200 bg-sky-50 p-4 text-sky-700 mb-5">
+    ⌛ يجري الآن جلب الأخبار…
+  </div>
+
+  <div id="emptyState" class="hidden rounded-xl border border-slate-200 bg-white p-5 text-slate-600">
+    لم يتم جلب أي أخبار الآن. قد يكون السبب انقطاع مؤقّت من المصادر.
+    <div class="mt-3">
+      <button id="tryAgain" class="btn btn-brand">حاول مجددًا</button>
+    </div>
+  </div>
+
+  <div id="newsList" class="space-y-4" aria-live="polite"></div>
+
+  <div class="flex justify-center mt-8">
+    <button id="loadMore" class="px-5 py-2 rounded-xl bg-sky-600 text-white hover:bg-sky-700 disabled:opacity-50 disabled:cursor-not-allowed">
+      تحميل المزيد
+    </button>
+  </div>
+</main>
+
+<!-- DETAIL PAGE -->
+<section class="max-w-3xl mx-auto px-4 py-6" id="detailView">
+  <button id="backBtn" class="mb-5 btn" aria-label="رجوع">← رجوع</button>
+  <article id="detailArticle" class="bg-white p-5 rounded-2xl shadow">
+    <img id="detailImg" class="hero-img" alt="صورة الخبر" loading="lazy" referrerpolicy="no-referrer">
+    <h1 id="detailTitle" class="text-2xl font-extrabold mt-4"></h1>
+    <div id="detailTime" class="text-xs text-slate-500 mt-1"></div>
+    <p id="detailBody" class="mt-4 text-justify leading-8"></p>
+    <div class="mt-4">
+      <a id="detailSource" class="link" target="_blank" rel="noopener noreferrer">المصدر الأصلي</a>
+    </div>
+  </article>
+</section>
+
+<!-- FOOTER -->
+<footer class="text-center py-10 text-sm text-slate-500">
+  © <span id="year"></span> مدار الخبر — جميع الحقوق محفوظة.
+</footer>
+<div class="text-center text-xs opacity-80 -mt-6 mb-8">
+  <span class="link" onclick="openWhatsApp()">برمجة و تطوير : فاضل الريس</span>
+</div>
+
+<script>
+/* ========= إعدادات عامة ========= */
+const FEEDS = [
+  "https://feeds.bbci.co.uk/arabic/rss.xml",
+  "https://www.france24.com/ar/rss",
+  "https://arabic.cnn.com/rss",
+  "https://arabic.rt.com/rss/"
+];
+
+// بوابات (Proxies) – نجربها عند الحاجة فقط
+const PROXIES = [
+  u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
+  u => `https://corsproxy.io/?${encodeURIComponent(u)}`,
+  u => `https://r.jina.ai/http://r.jina.ai/${encodeURIComponent(u)}`
+];
+
+const FETCH_TIMEOUT_MS = 9000;
+const AUTO_REFRESH_MIN = 1;
+const CACHE_TTL_MS = 60 * 1000; // 60 ثانية
+
+const state = { all: [], page: 0, pageSize: 10, map: new Map() };
+const $ = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
+
+function stripHtml(h){
+  const d=document.createElement("div");
+  d.innerHTML=h;
+  return (d.textContent||"").trim();
+}
+function hasAr(t){return /[\u0600-\u06FF]/.test(t||"");}
+function fmt(t){
+  const d=new Date(t);
+  if(isNaN(d))return"";
+  return d.toLocaleString('ar-EG',{dateStyle:'medium',timeStyle:'short'});
+}
+function startClock(){
+  const el=$("#liveClock");
+  function tick(){el.textContent=new Date().toLocaleTimeString('ar-BH',{hour12:false});}
+  tick(); setInterval(tick,1000);
+}
+function openWhatsApp(){
+  const link="https://api.whatsapp.com/send/?phone=97333375858&type=phone_number&app_absent=0";
+  window.open(link,"_blank","noopener");
+}
+
+/* ========= أدوات أداء وحماية ========= */
+async function fetchWithTimeout(url, timeoutMs=FETCH_TIMEOUT_MS){
+  const ctrl=new AbortController();
+  const t=setTimeout(()=>ctrl.abort(), timeoutMs);
+  try{
+    const res=await fetch(url,{signal:ctrl.signal,cache:"no-store",redirect:"follow"});
+    clearTimeout(t);
+    if(!res.ok)throw new Error("bad status");
+    return await res.text();
+  }catch(e){clearTimeout(t);throw e;}
+}
+async function fetchViaProxies(url){
+  // نحاول المصدر مباشرة أولاً لتقليل الزمن، وإن فشل ننتقل للبروكسيات
+  try{return await fetchWithTimeout(url);}catch(_){}
+  for(const p of PROXIES){
+    try{return await fetchWithTimeout(p(url));}catch(_){}
+  }
+  throw new Error("all proxies failed");
+}
+
+/* ========= استخراج الصورة من الـ RSS ========= */
+function pickImageFromItem(el){
+  // media:content / media:thumbnail
+  const media = el.querySelector("media\\:content, content");
+  const media2 = el.querySelector("media\\:thumbnail, thumbnail");
+  const enc = el.querySelector("enclosure");
+  let url = (media && (media.getAttribute("url")||media.textContent)) ||
+            (media2 && (media2.getAttribute("url")||media2.textContent)) || "";
+
+  if(!url && enc && /^image\//i.test(enc.getAttribute("type")||"")){
+    url = enc.getAttribute("url")||"";
+  }
+
+  // البحث عن أول <img> داخل الوصف إن وُجد
+  if(!url){
+    const descHTML = (el.querySelector("content\\:encoded")?.textContent ||
+                      el.querySelector("description")?.textContent || "");
+    if(descHTML){
+      const m = descHTML.match(/<img[^>]+src=["']([^"']+)["']/i);
+      if(m) url = m[1];
+    }
+  }
+  return url || "";
+}
+
+/* ========= تحليل الـ RSS ========= */
+function parseRSS(xmlText, sourceUrl){
+  const doc=new DOMParser().parseFromString(xmlText,"text/xml");
+  const items = Array.from(doc.querySelectorAll("item,entry")).map((el, idx)=>{
+    const title=(el.querySelector("title")?.textContent||"").trim();
+    const rawDesc=(el.querySelector("content\\:encoded")?.textContent||
+                   el.querySelector("description")?.textContent||
+                   el.querySelector("summary")?.textContent||"").trim();
+    const full=stripHtml(rawDesc);
+    const pub=(el.querySelector("pubDate")?.textContent||el.querySelector("updated")?.textContent||"").trim();
+    const link=(el.querySelector("link")?.getAttribute?.("href") || el.querySelector("link")?.textContent || "").trim();
+    const img=pickImageFromItem(el);
+
+    return {
+      id: `${sourceUrl}|${(title||"").slice(0,80)}|${pub||idx}`, // معرف ثابت للخبر
+      title, full, time: pub, link, img
+    };
+  }).filter(i=>(hasAr(i.title)||hasAr(i.full)));
+  return items;
+}
+
+/* ========= تخزين مؤقت ========= */
+function cacheGet(key){
+  try{
+    const s=localStorage.getItem(key);
+    if(!s)return null;
+    const obj=JSON.parse(s);
+    if(Date.now()-obj.t > CACHE_TTL_MS) return null;
+    return obj.v;
+  }catch{return null;}
+}
+function cacheSet(key, value){
+  try{
+    localStorage.setItem(key, JSON.stringify({t:Date.now(), v:value}));
+  }catch{}
+}
+
+/* ========= جلب كل المصادر بالتوازي ========= */
+async function loadAll(){
+  $("#loadingMsg").classList.remove("hidden");
+  $("#emptyState").classList.add("hidden");
+
+  const cache = cacheGet("feeds-cache");
+  if(cache){
+    applyItems(cache);
+    $("#loadingMsg").classList.add("hidden");
+  }
+
+  try{
+    const results = await Promise.allSettled(FEEDS.map(f => fetchViaProxies(f).then(txt => ({f,txt}))));
+    let all=[];
+    for(const r of results){
+      if(r.status==="fulfilled"){
+        try{
+          all = all.concat(parseRSS(r.value.txt, r.value.f));
+        }catch(e){console.warn("parse fail:", e);}
+      }
+    }
+    // إزالة التكرار
+    const seen=new Set(), uniq=[];
+    for(const it of all){
+      const key = (it.title||"")+"|"+(it.full||"").slice(0,120);
+      if(seen.has(key)) continue;
+      seen.add(key); uniq.push(it);
+    }
+    // ترتيب زمني
+    uniq.sort((a,b)=>(Date.parse(b.time)||0)-(Date.parse(a.time)||0));
+
+    cacheSet("feeds-cache", uniq);
+    applyItems(uniq);
+  }catch(e){
+    console.warn(e);
+  }finally{
+    $("#loadingMsg").classList.add("hidden");
+    if(!state.all.length) $("#emptyState").classList.remove("hidden");
+  }
+}
+
+/* ========= تقديم العناصر على دفعات + Lazy Images ========= */
+function applyItems(items){
+  state.all = items;
+  state.page = 0;
+  state.map.clear();
+  for(const it of items){state.map.set(it.id, it);}
+  renderChunk(true);
+}
+
+function excerpt(txt, limit=220){return (txt||"").length<=limit?txt:txt.slice(0,limit)+"…";}
+
+function articleHTML(a){
+  const timeHtml = a.time? fmt(a.time):"";
+  const img = a.img || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='90'%3E%3Crect width='100%25' height='100%25' fill='%23e2e8f0'/%3E%3C/svg%3E";
+  return `
+  <article class="article" data-id="${encodeURIComponent(a.id)}" role="button" tabindex="0" aria-label="فتح الخبر">
+    <img class="thumb lazy" data-src="${encodeURIComponent(img)}" alt="صورة الخبر" referrerpolicy="no-referrer" loading="lazy">
+    <div>
+      <h3>${escapeHTML(a.title||"")}</h3>
+      <div class="text-xs text-slate-500 mb-1">${timeHtml}</div>
+      <p>${escapeHTML(excerpt(a.full||""))}</p>
+    </div>
+  </article>`;
+}
+
+function escapeHTML(s){
+  return (s||"").replace(/[&<>"']/g,m=>({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+}
+
+function renderChunk(reset){
+  if(reset) $("#newsList").innerHTML="";
+  const start = 0;
+  const end = Math.min((state.page+1)*state.pageSize, state.all.length);
+  const fragment = document.createDocumentFragment();
+  const container = document.createElement("div");
+  container.innerHTML = state.all.slice(0,end).map(articleHTML).join("");
+  fragment.append(...Array.from(container.childNodes));
+  $("#newsList").appendChild(fragment);
+  $("#loadMore").disabled = end >= state.all.length;
+  // تفعيل Lazy Loading للصور بعد الإضافة
+  setupLazyImages();
+}
+
+/* ========= Lazy Loading للصور ========= */
+let io=null;
+function setupLazyImages(){
+  if(io) io.disconnect();
+  io = new IntersectionObserver(entries=>{
+    for(const e of entries){
+      if(e.isIntersecting){
+        const img=e.target;
+        const src=decodeURIComponent(img.getAttribute("data-src")||"");
+        if(src){ img.src = src; img.removeAttribute("data-src"); }
+        io.unobserve(img);
+      }
+    }
+  }, {rootMargin:"200px"});
+  $$(".lazy").forEach(img=>io.observe(img));
+}
+
+/* ========= أحداث الواجهة ========= */
+document.addEventListener("click", e=>{
+  const art=e.target.closest(".article");
+  if(art){
+    const id=decodeURIComponent(art.getAttribute("data-id")||"");
+    openDetail(id);
+    return;
+  }
+});
+
+document.addEventListener("keydown", e=>{
+  if(e.key==="Enter"){
+    const art=e.target.closest(".article");
+    if(art){
+      const id=decodeURIComponent(art.getAttribute("data-id")||"");
+      openDetail(id);
+    }
+  }
+});
+
+$("#loadMore").onclick=()=>{state.page++; renderChunk(false);};
+$("#refreshNow").onclick=()=>{loadAll();};
+$("#tryAgain").onclick=()=>{loadAll();};
+$("#year").textContent=new Date().getFullYear();
+
+/* ========= صفحة التفاصيل (Routing بسيط) ========= */
+function openDetail(id){
+  const a = state.map.get(id);
+  if(!a) return;
+  // تعبئة الصفحة
+  const img = a.img || "";
+  $("#detailImg").src = img || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='600'%3E%3Crect width='100%25' height='100%25' fill='%23e2e8f0'/%3E%3C/svg%3E";
+  $("#detailTitle").textContent = a.title || "";
+  $("#detailTime").textContent = a.time? fmt(a.time):"";
+  $("#detailBody").textContent = a.full || "";
+  const link = a.link || "";
+  const srcEl = $("#detailSource");
+  if(link){ srcEl.href = link; srcEl.style.display="inline"; }
+  else { srcEl.style.display="none"; }
+
+  // JSON-LD ديناميكي للخبر
+  injectDetailJsonLd(a);
+
+  // تبديل العرض + تحديث العنوان/المسار
+  $("#mainView").style.display="none";
+  $("#detailView").style.display="block";
+  document.title = (a.title||"") + " | مدار الخبر";
+  history.pushState({id}, "", `?id=${encodeURIComponent(id)}`);
+  // تمرير أعلى الصفحة
+  window.scrollTo({top:0, behavior:"instant"});
+}
+
+function injectDetailJsonLd(a){
+  // إزالة سكريبت سابق إن وجد
+  const old = document.getElementById("ld-article");
+  if(old) old.remove();
+  const data = {
+    "@context":"https://schema.org",
+    "@type":"NewsArticle",
+    "headline": a.title || "",
+    "datePublished": a.time || "",
+    "image": a.img ? [a.img] : undefined,
+    "articleSection": "أخبار",
+    "mainEntityOfPage": {"@type":"WebPage","@id": location.href},
+    "publisher": {"@type":"Organization","name":"مدار الخبر"}
+  };
+  const s=document.createElement("script");
+  s.type="application/ld+json"; s.id="ld-article";
+  s.textContent = JSON.stringify(data);
+  document.head.appendChild(s);
+}
+
+$("#backBtn").onclick=()=>goHome();
+window.addEventListener("popstate", ()=>{
+  const params=new URLSearchParams(location.search);
+  const id=params.get("id");
+  if(id && state.map.has(id)) openDetail(id);
+  else goHome(false);
+});
+function goHome(push=true){
+  $("#detailView").style.display="none";
+  $("#mainView").style.display="block";
+  document.title = "مدار الخبر | متجددة لحظة بلحظة";
+  if(push) history.pushState({}, "", location.pathname);
+}
+
+/* ========= تشغيل دوري ========= */
+function boot(){
+  startClock();
+  loadAll();
+  setInterval(loadAll, AUTO_REFRESH_MIN*60*1000);
+
+  // افتح التفاصيل مباشرة إذا وُجد ?id=...
+  const params=new URLSearchParams(location.search);
+  const id=params.get("id");
+  if(id) {
+    // سنحاول فتحها بعد أول تحميل (أو من الكاش)
+    const iv = setInterval(()=>{
+      if(state.map.size>0){
+        clearInterval(iv);
+        if(state.map.has(id)) openDetail(id);
+      }
+    }, 200);
+    setTimeout(()=>clearInterval(iv), 5000);
+  }
+}
+boot();
+</script>
 </body>
 </html>
