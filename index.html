@@ -13,12 +13,12 @@
   <!-- Open Graph / Twitter -->
   <meta property="og:type" content="website">
   <meta property="og:locale" content="ar_AR">
-  <meta property="og:title" content="مدار الخبر | متجددة لحظة لحظة">
+  <meta property="og:title" content="مدار الخبر | متجددة لحظة بلحظة">
   <meta property="og:description" content="متابعة آنية لأهم الأخبار العربية من مصادر موثوقة، تحدّث تلقائياً.">
   <meta property="og:url" content="https://example.com/">
   <meta property="og:image" content="https://example.com/cover.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="مدار الخبر | متجددة لحظة لحظة">
+  <meta name="twitter:title" content="مدار الخبر | متجددة لحظة بلحظة">
   <meta name="twitter:description" content="متابعة آنية لأهم الأخبار العربية من مصادر موثوقة.">
   <meta name="twitter:image" content="https://example.com/cover.jpg">
 
@@ -40,14 +40,25 @@
     .btn{padding:.55rem .9rem;border-radius:12px;border:1px solid #e2e8f0;background:#fff;font-weight:700}
     .btn-brand{background:#0ea5e9;color:#fff;border-color:transparent}
 
-    /* شريط إخباري (يظهر/يختفي حسب الأخبار) */
+    /* الشريط الإخباري (بطيء + تكرار لا نهائي) */
     .ticker-bar{display:none;background:#0ea5e9;color:#fff;border-bottom:1px solid rgba(255,255,255,.25)}
-    .ticker-inner{display:flex;overflow:hidden;gap:2rem}
-    .ticker-track{display:flex;gap:2rem;white-space:nowrap;animation:ticker 28s linear infinite}
+    .ticker-inner{overflow:hidden}
+    .ticker-track{
+      display:flex;
+      gap:2rem;
+      white-space:nowrap;
+      will-change:transform;
+      --dur: 60s; /* يتم ضبطها من JS */
+      animation: ticker var(--dur) linear infinite;
+    }
+    .ticker-seg{display:flex;gap:2rem}
     .ticker-item{opacity:.98}
     .ticker-item::before{content:"•";margin-inline:8px;opacity:.7}
     .ticker-bar:hover .ticker-track{animation-play-state:paused}
-    @keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+    @keyframes ticker{
+      0%{transform:translateX(0)}
+      100%{transform:translateX(-50%)} /* لأننا نكرر المحتوى مرتين */
+    }
 
     /* بطاقات الأخبار — صورة كبيرة */
     .article{
@@ -101,12 +112,15 @@
       <button id="refreshNow" class="btn" aria-label="تحديث الآن">تحديث الآن</button>
     </div>
   </div>
-  <!-- TICKER (يظهر فقط عند وجود أخبار) -->
+
+  <!-- الشريط الإخباري (يظهر فقط عند وجود أخبار) -->
   <div id="tickerBar" class="ticker-bar">
     <div class="max-w-6xl mx-auto px-4 py-2">
       <div class="ticker-inner">
-        <div class="ticker-track" id="tickerTrack" aria-live="polite"></div>
-        <div class="ticker-track" id="tickerTrackClone" aria-hidden="true"></div>
+        <div class="ticker-track" id="tickerTrack" aria-live="polite">
+          <div class="ticker-seg" id="tickerSeg1"></div>
+          <div class="ticker-seg" id="tickerSeg2"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -287,23 +301,59 @@ function cacheGet(key){
 }
 function cacheSet(key, value){ try{ localStorage.setItem(key, JSON.stringify({t:Date.now(), v:value})); }catch{} }
 
-/* ===== شريط إخباري (إظهار/إخفاء) ===== */
+/* ===== شريط إخباري (إظهار/إخفاء + سرعة محسوبة + تكرار لا نهائي) ===== */
 function updateTicker(items){
   const bar = $("#tickerBar");
-  const titles = items.slice(0,30).map(i=>escapeHTML(i.title||"")).filter(Boolean);
+  const seg1 = $("#tickerSeg1");
+  const seg2 = $("#tickerSeg2");
   const track = $("#tickerTrack");
-  const clone = $("#tickerTrackClone");
 
-  if(!titles.length){
-    track.innerHTML = "";
-    clone.innerHTML = "";
-    bar.style.display = "none";        // إخفاء الشريط عند عدم وجود أخبار
+  // قائمة عناوين فريدة (بدون مكررات داخل الدورة الواحدة)
+  const seen = new Set();
+  const titles = [];
+  for (const it of items){
+    const t = (it.title || "").trim();
+    if (!t) continue;
+    if (seen.has(t)) continue;
+    seen.add(t);
+    titles.push(t);
+    if (titles.length >= 120) break; // حد أعلى منطقي
+  }
+
+  if (!titles.length){
+    seg1.innerHTML = seg2.innerHTML = "";
+    bar.style.display = "none";
     return;
   }
-  const html = titles.map(t=>`<span class="ticker-item">${t}</span>`).join("");
-  track.innerHTML = html;
-  clone.innerHTML = html;
-  bar.style.display = "block";         // إظهار الشريط عند وجود أخبار
+
+  // نبني مقطعًا واحدًا ثم نكرّره مرّة ثانية لعمل حلقة لا نهائية سلسة
+  const html = titles.map(t => `<span class="ticker-item">${escapeHTML(t)}</span>`).join(" ");
+  seg1.innerHTML = html;
+  seg2.innerHTML = html;
+  bar.style.display = "block";
+
+  // احسب المدّة بناءً على عرض المقطع الأول + قيمة gap الفعلية
+  startTickerDuration(track, seg1);
+}
+
+function startTickerDuration(track, seg1){
+  // إجبار إعادة الحساب
+  track.style.animation = "none";
+  void track.offsetWidth;
+
+  const SPEED_PX_PER_S = 40; // اضبطها لأبطأ/أسرع
+  const segWidth = seg1.scrollWidth;
+
+  // قراءة gap (بين العناصر) من CSS فعليًا
+  const cs = getComputedStyle(track);
+  const gap = parseFloat(cs.getPropertyValue("column-gap") || cs.getPropertyValue("gap") || "0") || 0;
+
+  const distance = segWidth + gap; // مقدار التحريك لنصف العرض (أحد المقطعين)
+  const durationSec = Math.max(12, Math.ceil(distance / SPEED_PX_PER_S));
+
+  track.style.setProperty("--dur", `${durationSec}s`);
+  // استعادة الحركة
+  track.style.animation = `ticker var(--dur) linear infinite`;
 }
 
 /* ===== تحميل كل المصادر ===== */
@@ -376,7 +426,7 @@ function applyItems(items){
   for(const it of items){ state.map.set(it.id, it); }
   renderChunk(true);
   setupLazyImages();
-  updateTicker(items);  // ← هنا يتم إظهار/إخفاء الشريط تلقائيًا
+  updateTicker(items);  // ← يظهر/يخفي الشريط ويشغّل الحركة
 }
 
 function renderChunk(reset){
