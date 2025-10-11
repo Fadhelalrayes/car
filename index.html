@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>مدار الخبر | متجددة لحظة بلحظة</title>
-  <meta name="description" content="مدار الخبر — صفحة أخبار عربية متجددة لحظة بلحظة من عدة مصادر موثوقة، مع عرض موجز وسريع التحميل.">
+  <meta name="description" content="مدار الخبر — صفحة أخبار عربية متجددة لحظة بلحظة من عدة مصادر موثوقة، مع عرض سريع وخفيف.">
   <meta name="theme-color" content="#0ea5e9">
   <link rel="canonical" href="https://example.com/">
   <link rel="alternate" hreflang="ar" href="https://example.com/">
@@ -22,7 +22,6 @@
   <meta name="twitter:description" content="متابعة آنية لأهم الأخبار العربية من مصادر موثوقة.">
   <meta name="twitter:image" content="https://example.com/cover.jpg">
 
-  <!-- أداء الخطوط -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;800&display=swap" rel="stylesheet">
@@ -32,23 +31,23 @@
   <style>
     :root{--card-shadow:0 4px 14px rgba(0,0,0,.06)}
     body{font-family:'Tajawal',system-ui,Arial,sans-serif;background:#f8fafc;color:#0f172a;line-height:1.9}
-    .article{background:#fff;padding:18px;border-radius:16px;box-shadow:var(--card-shadow);display:grid;grid-template-columns:120px 1fr;gap:14px}
-    .thumb{width:120px;height:90px;border-radius:12px;object-fit:cover;background:#e2e8f0}
-    .article h3{font-size:1.05rem;font-weight:800;margin-bottom:6px}
+    /* بطاقات الأخبار (صورة أكبر) */
+    .article{background:#fff;padding:18px;border-radius:16px;box-shadow:var(--card-shadow);display:grid;grid-template-columns:180px 1fr;gap:16px;cursor:pointer}
+    .thumb{width:180px;height:120px;border-radius:14px;object-fit:cover;background:#e2e8f0;transition:transform .2s}
+    .article:hover .thumb{transform:scale(1.02)}
+    .article h3{font-size:1.12rem;font-weight:800;margin-bottom:6px}
     .article p{text-align:justify;font-size:.95rem;margin-top:6px;white-space:pre-line}
     .clock{font-variant-numeric:tabular-nums}
-    .more-btn{display:inline-flex;align-items:center;gap:.4rem;font-size:.85rem;padding:.4rem .7rem;border-radius:10px;border:1px solid #c7d2fe;background:#eef2ff;color:#3730a3}
-    .more-btn:hover{filter:brightness(0.97)}
     .btn{padding:.55rem .9rem;border-radius:12px;border:1px solid #e2e8f0;background:#fff;font-weight:600}
     .btn-brand{background:#0ea5e9;color:#fff;border-color:transparent}
     .link{color:#0369a1}
-    @media (max-width:480px){.article{grid-template-columns:1fr}}
-    /* صفحة التفاصيل */
-    #detailView{display:none}
-    .hero-img{width:100%;max-height:360px;object-fit:cover;border-radius:16px;background:#e2e8f0}
+    @media (max-width:640px){
+      .article{grid-template-columns:1fr}
+      .thumb{width:100%;height:220px;border-radius:16px}
+    }
   </style>
 
-  <!-- Structured Data لموقع الأخبار -->
+  <!-- Structured Data للجهة الناشرة -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -104,20 +103,6 @@
   </div>
 </main>
 
-<!-- DETAIL PAGE -->
-<section class="max-w-3xl mx-auto px-4 py-6" id="detailView">
-  <button id="backBtn" class="mb-5 btn" aria-label="رجوع">← رجوع</button>
-  <article id="detailArticle" class="bg-white p-5 rounded-2xl shadow">
-    <img id="detailImg" class="hero-img" alt="صورة الخبر" loading="lazy" referrerpolicy="no-referrer">
-    <h1 id="detailTitle" class="text-2xl font-extrabold mt-4"></h1>
-    <div id="detailTime" class="text-xs text-slate-500 mt-1"></div>
-    <p id="detailBody" class="mt-4 text-justify leading-8"></p>
-    <div class="mt-4">
-      <a id="detailSource" class="link" target="_blank" rel="noopener noreferrer">المصدر الأصلي</a>
-    </div>
-  </article>
-</section>
-
 <!-- FOOTER -->
 <footer class="text-center py-10 text-sm text-slate-500">
   © <span id="year"></span> مدار الخبر — جميع الحقوق محفوظة.
@@ -127,7 +112,7 @@
 </div>
 
 <script>
-/* ========= إعدادات عامة ========= */
+/* ========= إعدادات ========= */
 const FEEDS = [
   "https://feeds.bbci.co.uk/arabic/rss.xml",
   "https://www.france24.com/ar/rss",
@@ -135,7 +120,6 @@ const FEEDS = [
   "https://arabic.rt.com/rss/"
 ];
 
-// بوابات (Proxies) – نجربها عند الحاجة فقط
 const PROXIES = [
   u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
   u => `https://corsproxy.io/?${encodeURIComponent(u)}`,
@@ -144,12 +128,13 @@ const PROXIES = [
 
 const FETCH_TIMEOUT_MS = 9000;
 const AUTO_REFRESH_MIN = 1;
-const CACHE_TTL_MS = 60 * 1000; // 60 ثانية
+const CACHE_TTL_MS = 60 * 1000;
 
-const state = { all: [], page: 0, pageSize: 10, map: new Map() };
+const state = { all: [], page: 0, pageSize: 10 };
 const $ = s => document.querySelector(s);
 const $$ = s => document.querySelectorAll(s);
 
+/* ========= أدوات عامة ========= */
 function stripHtml(h){
   const d=document.createElement("div");
   d.innerHTML=h;
@@ -171,29 +156,27 @@ function openWhatsApp(){
   window.open(link,"_blank","noopener");
 }
 
-/* ========= أدوات أداء وحماية ========= */
+/* ========= شبكة وجلب ========= */
 async function fetchWithTimeout(url, timeoutMs=FETCH_TIMEOUT_MS){
-  const ctrl=new AbortController();
-  const t=setTimeout(()=>ctrl.abort(), timeoutMs);
+  const ctrl = new AbortController();
+  const t = setTimeout(()=>ctrl.abort(), timeoutMs);
   try{
-    const res=await fetch(url,{signal:ctrl.signal,cache:"no-store",redirect:"follow"});
+    const res = await fetch(url,{signal:ctrl.signal,cache:"no-store",redirect:"follow"});
     clearTimeout(t);
-    if(!res.ok)throw new Error("bad status");
+    if(!res.ok) throw new Error("bad status");
     return await res.text();
-  }catch(e){clearTimeout(t);throw e;}
+  }catch(e){clearTimeout(t); throw e;}
 }
 async function fetchViaProxies(url){
-  // نحاول المصدر مباشرة أولاً لتقليل الزمن، وإن فشل ننتقل للبروكسيات
-  try{return await fetchWithTimeout(url);}catch(_){}
+  try{ return await fetchWithTimeout(url); }catch(_){}
   for(const p of PROXIES){
-    try{return await fetchWithTimeout(p(url));}catch(_){}
+    try{ return await fetchWithTimeout(p(url)); }catch(_){}
   }
   throw new Error("all proxies failed");
 }
 
-/* ========= استخراج الصورة من الـ RSS ========= */
+/* ========= استخراج الصور ========= */
 function pickImageFromItem(el){
-  // media:content / media:thumbnail
   const media = el.querySelector("media\\:content, content");
   const media2 = el.querySelector("media\\:thumbnail, thumbnail");
   const enc = el.querySelector("enclosure");
@@ -203,8 +186,6 @@ function pickImageFromItem(el){
   if(!url && enc && /^image\//i.test(enc.getAttribute("type")||"")){
     url = enc.getAttribute("url")||"";
   }
-
-  // البحث عن أول <img> داخل الوصف إن وُجد
   if(!url){
     const descHTML = (el.querySelector("content\\:encoded")?.textContent ||
                       el.querySelector("description")?.textContent || "");
@@ -216,10 +197,10 @@ function pickImageFromItem(el){
   return url || "";
 }
 
-/* ========= تحليل الـ RSS ========= */
+/* ========= تحليل RSS ========= */
 function parseRSS(xmlText, sourceUrl){
   const doc=new DOMParser().parseFromString(xmlText,"text/xml");
-  const items = Array.from(doc.querySelectorAll("item,entry")).map((el, idx)=>{
+  return Array.from(doc.querySelectorAll("item,entry")).map((el, idx)=>{
     const title=(el.querySelector("title")?.textContent||"").trim();
     const rawDesc=(el.querySelector("content\\:encoded")?.textContent||
                    el.querySelector("description")?.textContent||
@@ -229,38 +210,32 @@ function parseRSS(xmlText, sourceUrl){
     const link=(el.querySelector("link")?.getAttribute?.("href") || el.querySelector("link")?.textContent || "").trim();
     const img=pickImageFromItem(el);
 
-    return {
-      id: `${sourceUrl}|${(title||"").slice(0,80)}|${pub||idx}`, // معرف ثابت للخبر
-      title, full, time: pub, link, img
-    };
+    return { title, full, time: pub, link, img };
   }).filter(i=>(hasAr(i.title)||hasAr(i.full)));
-  return items;
 }
 
-/* ========= تخزين مؤقت ========= */
+/* ========= كاش خفيف ========= */
 function cacheGet(key){
   try{
     const s=localStorage.getItem(key);
-    if(!s)return null;
+    if(!s) return null;
     const obj=JSON.parse(s);
     if(Date.now()-obj.t > CACHE_TTL_MS) return null;
     return obj.v;
   }catch{return null;}
 }
 function cacheSet(key, value){
-  try{
-    localStorage.setItem(key, JSON.stringify({t:Date.now(), v:value}));
-  }catch{}
+  try{ localStorage.setItem(key, JSON.stringify({t:Date.now(), v:value})); }catch{}
 }
 
-/* ========= جلب كل المصادر بالتوازي ========= */
+/* ========= تحميل كل المصادر ========= */
 async function loadAll(){
   $("#loadingMsg").classList.remove("hidden");
   $("#emptyState").classList.add("hidden");
 
-  const cache = cacheGet("feeds-cache");
-  if(cache){
-    applyItems(cache);
+  const cached = cacheGet("feeds-cache");
+  if(cached){
+    applyItems(cached);
     $("#loadingMsg").classList.add("hidden");
   }
 
@@ -269,15 +244,14 @@ async function loadAll(){
     let all=[];
     for(const r of results){
       if(r.status==="fulfilled"){
-        try{
-          all = all.concat(parseRSS(r.value.txt, r.value.f));
-        }catch(e){console.warn("parse fail:", e);}
+        try{ all = all.concat(parseRSS(r.value.txt, r.value.f)); }
+        catch(e){ console.warn("parse fail:", e); }
       }
     }
-    // إزالة التكرار
+    // إزالة التكرار (عنوان+أول 120 حرف)
     const seen=new Set(), uniq=[];
     for(const it of all){
-      const key = (it.title||"")+"|"+(it.full||"").slice(0,120);
+      const key=(it.title||"")+"|"+(it.full||"").slice(0,120);
       if(seen.has(key)) continue;
       seen.add(key); uniq.push(it);
     }
@@ -294,22 +268,15 @@ async function loadAll(){
   }
 }
 
-/* ========= تقديم العناصر على دفعات + Lazy Images ========= */
-function applyItems(items){
-  state.all = items;
-  state.page = 0;
-  state.map.clear();
-  for(const it of items){state.map.set(it.id, it);}
-  renderChunk(true);
-}
-
+/* ========= عرض العناصر + Lazy Images ========= */
 function excerpt(txt, limit=220){return (txt||"").length<=limit?txt:txt.slice(0,limit)+"…";}
+function escapeHTML(s){return (s||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));}
 
 function articleHTML(a){
   const timeHtml = a.time? fmt(a.time):"";
-  const img = a.img || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='90'%3E%3Crect width='100%25' height='100%25' fill='%23e2e8f0'/%3E%3C/svg%3E";
+  const img = a.img || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='120'%3E%3Crect width='100%25' height='100%25' fill='%23e2e8f0'/%3E%3C/svg%3E";
   return `
-  <article class="article" data-id="${encodeURIComponent(a.id)}" role="button" tabindex="0" aria-label="فتح الخبر">
+  <article class="article" data-link="${encodeURIComponent(a.link||'')}" role="button" tabindex="0" aria-label="فتح الخبر من المصدر">
     <img class="thumb lazy" data-src="${encodeURIComponent(img)}" alt="صورة الخبر" referrerpolicy="no-referrer" loading="lazy">
     <div>
       <h3>${escapeHTML(a.title||"")}</h3>
@@ -319,25 +286,23 @@ function articleHTML(a){
   </article>`;
 }
 
-function escapeHTML(s){
-  return (s||"").replace(/[&<>"']/g,m=>({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+function applyItems(items){
+  state.all = items;
+  state.page = 0;
+  renderChunk(true);
+  setupLazyImages();
 }
 
 function renderChunk(reset){
   if(reset) $("#newsList").innerHTML="";
-  const start = 0;
   const end = Math.min((state.page+1)*state.pageSize, state.all.length);
-  const fragment = document.createDocumentFragment();
   const container = document.createElement("div");
   container.innerHTML = state.all.slice(0,end).map(articleHTML).join("");
-  fragment.append(...Array.from(container.childNodes));
-  $("#newsList").appendChild(fragment);
+  $("#newsList").replaceChildren(...Array.from(container.childNodes));
   $("#loadMore").disabled = end >= state.all.length;
-  // تفعيل Lazy Loading للصور بعد الإضافة
-  setupLazyImages();
 }
 
-/* ========= Lazy Loading للصور ========= */
+/* ========= Lazy Loading ========= */
 let io=null;
 function setupLazyImages(){
   if(io) io.disconnect();
@@ -354,111 +319,36 @@ function setupLazyImages(){
   $$(".lazy").forEach(img=>io.observe(img));
 }
 
-/* ========= أحداث الواجهة ========= */
+/* ========= تفاعلات ========= */
 document.addEventListener("click", e=>{
   const art=e.target.closest(".article");
-  if(art){
-    const id=decodeURIComponent(art.getAttribute("data-id")||"");
-    openDetail(id);
-    return;
+  if(!art) return;
+  const link=decodeURIComponent(art.getAttribute("data-link")||"");
+  if(link){
+    // فتح الخبر الكامل من المصدر الأصلي في تبويب جديد
+    window.open(link, "_blank", "noopener,noreferrer");
   }
 });
 
 document.addEventListener("keydown", e=>{
   if(e.key==="Enter"){
     const art=e.target.closest(".article");
-    if(art){
-      const id=decodeURIComponent(art.getAttribute("data-id")||"");
-      openDetail(id);
-    }
+    if(!art) return;
+    const link=decodeURIComponent(art.getAttribute("data-link")||"");
+    if(link){ window.open(link, "_blank", "noopener,noreferrer"); }
   }
 });
 
-$("#loadMore").onclick=()=>{state.page++; renderChunk(false);};
+$("#loadMore").onclick=()=>{state.page++; renderChunk(false); setupLazyImages();};
 $("#refreshNow").onclick=()=>{loadAll();};
 $("#tryAgain").onclick=()=>{loadAll();};
 $("#year").textContent=new Date().getFullYear();
 
-/* ========= صفحة التفاصيل (Routing بسيط) ========= */
-function openDetail(id){
-  const a = state.map.get(id);
-  if(!a) return;
-  // تعبئة الصفحة
-  const img = a.img || "";
-  $("#detailImg").src = img || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='600'%3E%3Crect width='100%25' height='100%25' fill='%23e2e8f0'/%3E%3C/svg%3E";
-  $("#detailTitle").textContent = a.title || "";
-  $("#detailTime").textContent = a.time? fmt(a.time):"";
-  $("#detailBody").textContent = a.full || "";
-  const link = a.link || "";
-  const srcEl = $("#detailSource");
-  if(link){ srcEl.href = link; srcEl.style.display="inline"; }
-  else { srcEl.style.display="none"; }
-
-  // JSON-LD ديناميكي للخبر
-  injectDetailJsonLd(a);
-
-  // تبديل العرض + تحديث العنوان/المسار
-  $("#mainView").style.display="none";
-  $("#detailView").style.display="block";
-  document.title = (a.title||"") + " | مدار الخبر";
-  history.pushState({id}, "", `?id=${encodeURIComponent(id)}`);
-  // تمرير أعلى الصفحة
-  window.scrollTo({top:0, behavior:"instant"});
-}
-
-function injectDetailJsonLd(a){
-  // إزالة سكريبت سابق إن وجد
-  const old = document.getElementById("ld-article");
-  if(old) old.remove();
-  const data = {
-    "@context":"https://schema.org",
-    "@type":"NewsArticle",
-    "headline": a.title || "",
-    "datePublished": a.time || "",
-    "image": a.img ? [a.img] : undefined,
-    "articleSection": "أخبار",
-    "mainEntityOfPage": {"@type":"WebPage","@id": location.href},
-    "publisher": {"@type":"Organization","name":"مدار الخبر"}
-  };
-  const s=document.createElement("script");
-  s.type="application/ld+json"; s.id="ld-article";
-  s.textContent = JSON.stringify(data);
-  document.head.appendChild(s);
-}
-
-$("#backBtn").onclick=()=>goHome();
-window.addEventListener("popstate", ()=>{
-  const params=new URLSearchParams(location.search);
-  const id=params.get("id");
-  if(id && state.map.has(id)) openDetail(id);
-  else goHome(false);
-});
-function goHome(push=true){
-  $("#detailView").style.display="none";
-  $("#mainView").style.display="block";
-  document.title = "مدار الخبر | متجددة لحظة بلحظة";
-  if(push) history.pushState({}, "", location.pathname);
-}
-
-/* ========= تشغيل دوري ========= */
+/* ========= تشغيل ========= */
 function boot(){
   startClock();
   loadAll();
   setInterval(loadAll, AUTO_REFRESH_MIN*60*1000);
-
-  // افتح التفاصيل مباشرة إذا وُجد ?id=...
-  const params=new URLSearchParams(location.search);
-  const id=params.get("id");
-  if(id) {
-    // سنحاول فتحها بعد أول تحميل (أو من الكاش)
-    const iv = setInterval(()=>{
-      if(state.map.size>0){
-        clearInterval(iv);
-        if(state.map.has(id)) openDetail(id);
-      }
-    }, 200);
-    setTimeout(()=>clearInterval(iv), 5000);
-  }
 }
 boot();
 </script>
