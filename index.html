@@ -1,349 +1,213 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>مدار الخبر | متجددة لحظة بلحظة</title>
-  <meta name="description" content="مدار الخبر — صفحة أخبار عربية متجددة لحظة بلحظة من BBC وCNN وفرانس 24 وRT وسبوتنيك.">
-  <meta name="theme-color" content="#0ea5e9">
-  <meta name="robots" content="index,follow,max-image-preview:large">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محرر Manus المباشر</title>
 
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- 1. تضمين مكتبة CodeMirror (CSS) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/theme/dracula.min.css">
 
-  <script src="https://cdn.tailwindcss.com" defer></script>
+    <style>
+        /* CSS للتصميم العام للصفحة */
+        :root {
+            --background-color: #1e1e1e;
+            --editor-background: #282a36; /* لون ثيم Dracula */
+            --border-color: #44475a;
+            --text-color: #f8f8f2;
+            --header-height: 50px;
+        }
 
-  <style>
-    :root{--card-shadow:0 4px 14px rgba(0,0,0,.06)}
-    body{font-family:'Cairo',system-ui,Arial,sans-serif;background:#f8fafc;color:#0f172a;line-height:1.9}
-    header{background:#fff;border-bottom:1px solid #e5e7eb;position:sticky;top:0;z-index:60}
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    .brand{letter-spacing:.2px}
-    .clock{font-variant-numeric:tabular-nums}
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
 
-    /* ===== شريط الأخبار (من اليسار إلى اليمين) ===== */
-    .ticker-bar{display:none;background:#0ea5e9;color:#fff}
-    .ticker-shell{max-width:72rem;margin-inline:auto;padding:6px 16px}
-    .ticker-viewport{position:relative;overflow:hidden;width:100%;height:28px}
-    .ticker-text{
-      position:absolute;top:0;white-space:nowrap;will-change:transform;
-      line-height:28px;font-weight:700;letter-spacing:.2px
-    }
+        .main-header {
+            background-color: var(--editor-background);
+            padding: 0 25px;
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #bd93f9; /* لون بنفسجي من ثيم Dracula */
+        }
 
-    /* ===== بطاقات الأخبار ===== */
-    .article{
-      background:#fff;padding:18px;border-radius:16px;box-shadow:var(--card-shadow);
-      display:grid;grid-template-columns:280px 1fr;gap:18px;cursor:pointer
-    }
-    .thumb{width:280px;height:180px;border-radius:14px;object-fit:cover;background:#e2e8f0;transition:transform .2s}
-    .article:hover .thumb{transform:scale(1.01)}
-    .article h3{font-size:1.12rem;font-weight:800;margin-bottom:6px}
-    .article .meta{font-size:.8rem;color:#64748b}
-    .article p{font-size:.98rem;margin-top:6px;text-align:justify}
-    @media(max-width:820px){.article{grid-template-columns:1fr}.thumb{width:100%;height:240px}}
+        .editor-container {
+            display: flex;
+            height: calc(100vh - var(--header-height));
+            width: 100%;
+        }
 
-    /* ===== صفحة التفاصيل ===== */
-    #detailView{display:none}
-    .hero-img{width:100%;max-height:460px;object-fit:cover;border-radius:18px;background:#e2e8f0}
-  </style>
+        .editor-pane, .preview-pane {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+        }
+        
+        .preview-pane {
+            background-color: white;
+            border-right: 1px solid var(--border-color);
+        }
+
+        .code-area {
+            height: 50%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .code-area-header {
+            background-color: #191a21;
+            padding: 8px 15px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            border-bottom: 1px solid var(--border-color);
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* تخصيص مظهر CodeMirror */
+        .CodeMirror {
+            flex-grow: 1;
+            font-size: 1rem;
+            line-height: 1.5;
+            font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+            height: 100%;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background-color: #fff;
+        }
+    </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<header class="py-3 px-4">
-  <div class="max-w-6xl mx-auto flex items-center justify-between gap-4">
-    <div class="flex items-center gap-3">
-      <div style="width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,#0ea5e9,#6366f1);box-shadow:0 6px 16px rgba(14,165,233,.35)"></div>
-      <div class="brand">
-        <div class="text-[26px] font-extrabold bg-gradient-to-r from-sky-500 to-indigo-500 text-transparent bg-clip-text">مدار الخبر</div>
-        <div class="text-xs text-slate-500 -mt-1">متجددة لحظة بلحظة</div>
-      </div>
+    <header class="main-header">
+        محرر Manus
+    </header>
+
+    <div class="editor-container">
+        <div class="editor-pane">
+            <!-- منطقة محرر HTML -->
+            <div class="code-area">
+                <div class="code-area-header">HTML</div>
+                <textarea id="html-code"></textarea>
+            </div>
+            <!-- منطقة محرر CSS -->
+            <div class="code-area">
+                <div class="code-area-header">CSS</div>
+                <textarea id="css-code"></textarea>
+            </div>
+        </div>
+        <!-- منطقة المعاينة -->
+        <div class="preview-pane">
+            <iframe id="preview-frame" sandbox="allow-scripts"></iframe>
+        </div>
     </div>
-    <div class="flex items-center gap-2">
-      <div id="clock" class="clock text-sm px-2 py-1 rounded-lg bg-slate-100 text-slate-700">--:--:--</div>
-      <button id="refreshNow" class="px-3 py-1 rounded-lg border border-slate-200 text-sm">تحديث الآن</button>
-    </div>
-  </div>
-</header>
 
-<!-- شريط الأخبار -->
-<div id="tickerBar" class="ticker-bar">
-  <div class="ticker-shell">
-    <div class="ticker-viewport">
-      <span id="tickerText" class="ticker-text"></span>
-    </div>
-  </div>
-</div>
+    <!-- 2. تضمين مكتبة CodeMirror (JavaScript) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/mode/xml/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/mode/css/css.min.js"></script>
 
-<!-- القائمة -->
-<main class="max-w-6xl mx-auto px-4 py-6" id="mainView">
-  <div id="newsList" class="space-y-4" aria-live="polite"></div>
-  <div class="flex justify-center mt-8">
-    <button id="loadMore" class="px-5 py-2 rounded-xl bg-sky-600 text-white hover:bg-sky-700 disabled:opacity-50 disabled:cursor-not-allowed">
-      تحميل المزيد
-    </button>
-  </div>
-</main>
+    <script>
+        // 3. الكود المسؤول عن تشغيل المحرر والتحديث المباشر
+        document.addEventListener('DOMContentLoaded', () => {
+            // إعدادات مشتركة لمحررات CodeMirror
+            const editorOptions = {
+                lineNumbers: true,
+                theme: 'dracula',
+                lineWrapping: true,
+                autofocus: true
+            };
 
-<!-- التفاصيل -->
-<section class="max-w-3xl mx-auto px-4 py-6" id="detailView">
-  <button id="backBtn" class="mb-5 px-3 py-1 rounded-lg border border-slate-200">← رجوع</button>
-  <article class="bg-white p-5 rounded-2xl shadow">
-    <img id="detailImg" class="hero-img" alt="صورة الخبر" loading="lazy" referrerpolicy="no-referrer">
-    <h1 id="detailTitle" class="text-2xl font-extrabold mt-4"></h1>
-    <div id="detailMeta" class="text-xs text-slate-500 mt-1"></div>
-    <p id="detailBody" class="mt-4 text-justify leading-8"></p>
-  </article>
-</section>
+            // تهيئة محرر HTML
+            const htmlEditor = CodeMirror.fromTextArea(document.getElementById('html-code'), {
+                ...editorOptions,
+                mode: 'xml',
+            });
 
-<!-- FOOTER -->
-<footer class="text-center py-10 text-sm text-slate-500">
-  © <span id="year"></span> مدار الخبر — جميع الحقوق محفوظة.
-</footer>
+            // تهيئة محرر CSS
+            const cssEditor = CodeMirror.fromTextArea(document.getElementById('css-code'), {
+                ...editorOptions,
+                mode: 'css'
+            });
 
-<script>
-/* ===== إعدادات ===== */
-const FEEDS = [
-  "https://feeds.bbci.co.uk/arabic/rss.xml",                           // BBC Arabic
-  "https://arabic.cnn.com/rss",                                        // CNN Arabic
-  "https://www.france24.com/ar/rss",                                   // France24 Arabic
-  "https://arabic.rt.com/rss/",                                        // RT Arabic
-  "https://arabic.sputniknews.com/export/rss2/archive/index.xml"       // Sputnik Arabic
-];
-const PROXIES = [
-  u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
-  u => `https://corsproxy.io/?${encodeURIComponent(u)}`
-];
-
-const AUTO_REFRESH_MS = 60 * 1000;
-const FETCH_TIMEOUT_MS = 9000;
-const state = { all: [], page: 0, pageSize: 10, map: new Map() };
-const $ = s => document.querySelector(s);
-
-/* ===== ساعة ===== */
-function startClock(){
-  const el=$("#clock");
-  const tick = () => el.textContent = new Date().toLocaleTimeString('ar-EG',{hour12:false});
-  tick(); setInterval(tick,1000);
+            // وضع كود مبدئي في المحررات
+            const initialHtml = `<h1>أهلاً بك في محرر Manus!</h1>
+<p>هذا محرر أكواد مباشر.</p>
+<button class="my-button">اضغط هنا</button>
+`;
+            const initialCss = `body {
+    font-family: sans-serif;
+    padding: 20px;
+    background-color: #f0f8ff;
+    color: #333;
 }
 
-/* ===== أدوات ===== */
-function stripHtml(h){const d=document.createElement("div"); d.innerHTML=h; return (d.textContent||"").replace(/\s+/g,' ').trim();}
-function hasAr(t){return /[\u0600-\u06FF]/.test(t||"");}
-function fmt(t){const d=new Date(t); return isNaN(d)?"":d.toLocaleString('ar-EG',{dateStyle:'medium',timeStyle:'short'});}
-
-/* ===== شبكة ===== */
-async function fetchWithTimeout(url, ms=FETCH_TIMEOUT_MS){
-  const ctrl=new AbortController(); const to=setTimeout(()=>ctrl.abort(), ms);
-  try{const r=await fetch(url,{signal:ctrl.signal,cache:"no-store"}); clearTimeout(to); if(!r.ok) throw new Error("bad status"); return await r.text();}
-  catch(e){clearTimeout(to); throw e;}
-}
-async function getFeed(u){
-  const tryList=[u, ...PROXIES.map(p=>p(u))];
-  for(const x of tryList){try{return await fetchWithTimeout(x)}catch{}}
-  return "";
+.my-button {
+    background-color: #bd93f9; /* بنفسجي */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: transform 0.2s;
 }
 
-/* ===== تحليل RSS ===== */
-function tryParseDate(el){
-  const keys=["pubDate","updated","published","dc\\:date","date"];
-  for(const k of keys){
-    const v=el.querySelector(k)?.textContent?.trim();
-    if(v){const d=Date.parse(v); if(!isNaN(d)) return new Date(d).toISOString();}
-  }
-  return "";
-}
-function pickImageFromItem(el){
-  const media=el.querySelector("media\\:content,content");
-  const th=el.querySelector("media\\:thumbnail,thumbnail");
-  const enc=el.querySelector("enclosure");
-  let url=(media&&(media.getAttribute("url")||media.textContent))||(th&&(th.getAttribute("url")||th.textContent))||"";
-  if(!url && enc && /^image\\//i.test(enc.getAttribute("type")||"")) url=enc.getAttribute("url")||"";
-  if(!url){
-    const html=(el.querySelector("content\\:encoded")?.textContent||el.querySelector("description")?.textContent||"");
-    const m=html && html.match(/<img[^>]+src=["']([^"']+)["']/i);
-    if(m) url=m[1];
-  }
-  return url||"";
-}
-function parseRSS(xmlText, src){
-  const doc=new DOMParser().parseFromString(xmlText,"text/xml");
-  return Array.from(doc.querySelectorAll("item,entry")).map((el,idx)=>{
-    const title=(el.querySelector("title")?.textContent||"").trim();
-    const desc =(el.querySelector("content\\:encoded")?.textContent||el.querySelector("description")?.textContent||el.querySelector("summary")?.textContent||"").trim();
-    const time = tryParseDate(el);
-    const link =(el.querySelector("link")?.getAttribute?.("href") || el.querySelector("link")?.textContent || "").trim();
-    const img  = pickImageFromItem(el);
-    return {
-      id:`${link||src}|${(title||"").slice(0,80)}|${time||idx}`,
-      title,
-      full: stripHtml(desc),
-      time,
-      link,
-      img
-      // لا نستخدم المصدر في العرض حسب طلبك
-    };
-  }).filter(x=> hasAr(x.title)||hasAr(x.full));
-}
+.my-button:hover {
+    transform: scale(1.1);
+}`;
+            
+            htmlEditor.setValue(initialHtml);
+            cssEditor.setValue(initialCss);
 
-/* ===== تقديم ===== */
-function excerpt(t,l=240){return (t||"").length<=l?t:t.slice(0,l)+"…";}
-function articleHTML(a){
-  const timeHtml = a.time ? fmt(a.time) : "";
-  const img = a.img || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='180'%3E%3Crect width='100%25' height='100%25' fill='%23e2e8f0'/%3E%3C/svg%3E";
-  return `
-    <article class="article" data-id="${encodeURIComponent(a.id)}" role="button" tabindex="0">
-      <img class="thumb" src="${img}" alt="صورة الخبر" referrerpolicy="no-referrer" loading="lazy">
-      <div>
-        <h3>${a.title}</h3>
-        <div class="meta">${timeHtml}</div>
-        <p>${excerpt(a.full)}</p>
-      </div>
-    </article>
-  `;
-}
-function render(reset){
-  if(reset) $("#newsList").innerHTML="";
-  const end=Math.min((state.page+1)*state.pageSize, state.all.length);
-  const frag=document.createElement("div");
-  frag.innerHTML = state.all.slice(0,end).map(articleHTML).join("");
-  $("#newsList").replaceChildren(...Array.from(frag.childNodes));
-  $("#loadMore").disabled = end >= state.all.length;
-  updateTickerFromPage();
-}
+            const previewFrame = document.getElementById('preview-frame');
 
-/* ===== الشريط: من اليسار إلى اليمين (خبر ورا خبر) ===== */
-const ticker={titles:[],idx:0};
-function getPageHeadlines(){
-  const hs=Array.from(document.querySelectorAll('#newsList h3')).map(h=>h.textContent.trim()).filter(Boolean);
-  const seen=new Set(), out=[];
-  for(const t of hs){ if(!seen.has(t)){ seen.add(t); out.push(t); } }
-  return out;
-}
-function updateTickerFromPage(){
-  ticker.titles = getPageHeadlines();
-  ticker.idx = 0;
-  const bar=$("#tickerBar");
-  if(!ticker.titles.length){ bar.style.display="none"; return; }
-  bar.style.display="block";
-  runTickerOnce();
-}
-function runTickerOnce(){
-  const list=ticker.titles;
-  if(!list.length) return;
+            // دالة لتحديث المعاينة
+            function updatePreview() {
+                const htmlCode = htmlEditor.getValue();
+                const cssCode = cssEditor.getValue();
 
-  const viewport=document.querySelector(".ticker-viewport");
-  const textOld=$("#tickerText");
-  const text=textOld.cloneNode(true);
-  textOld.parentNode.replaceChild(text,textOld);
+                const documentContent = `
+                    <html>
+                        <head>
+                            <style>${cssCode}</style>
+                        </head>
+                        <body>${htmlCode}</body>
+                    </html>
+                `;
+                
+                // استخدام srcdoc هو الطريقة الأكثر أمانًا لتحديث محتوى iframe
+                previewFrame.srcdoc = documentContent;
+            }
 
-  const SPEED=200; // سرعة القنوات الإخبارية (بكسل/ثانية)
-  const GAP=30;
-  const vw=viewport.clientWidth;
-  const title=list[ticker.idx];
+            // ربط حدث التغيير في المحررات بدالة التحديث
+            htmlEditor.on('change', updatePreview);
+            cssEditor.on('change', updatePreview);
 
-  text.textContent=title;
+            // تحديث المعاينة لأول مرة عند تحميل الصفحة
+            updatePreview();
+        });
+    </script>
 
-  // قياس العرض والتحريك من اليسار إلى اليمين
-  text.style.transition='none';
-  text.style.transform='translateX(0)';
-  void text.offsetWidth;
-  const tw=text.offsetWidth;
-
-  const startX = -(tw + GAP); // خارج اليسار
-  const endX   = vw;          // خارج اليمين
-  const distance = endX - startX;
-  const duration = Math.max(4, distance / SPEED);
-
-  text.style.transition='none';
-  text.style.transform=`translateX(${startX}px)`;
-  void text.offsetWidth;
-  text.style.transition=`transform ${duration}s linear`;
-  text.style.transform=`translateX(${endX}px)`;
-
-  text.addEventListener('transitionend', ()=>{
-    ticker.idx=(ticker.idx+1)%list.length;
-    runTickerOnce();
-  }, {once:true});
-}
-
-/* ===== تحميل ===== */
-async function loadAll(){
-  try{
-    const results = await Promise.allSettled(FEEDS.map(getFeed));
-    let all=[];
-    for(let i=0;i<results.length;i++){
-      const r=results[i];
-      if(r.status==="fulfilled" && r.value){
-        try{ all=all.concat(parseRSS(r.value, FEEDS[i])); }catch{}
-      }
-    }
-    // إزالة التكرار (بالرابط ثم العنوان+الوقت)
-    const seen=new Set(), uniq=[];
-    for(const it of all){
-      const key=(it.link||"") || ((it.title||"")+"|"+(it.time||""));
-      if(seen.has(key)) continue;
-      seen.add(key);
-      uniq.push(it);
-    }
-    // ترتيب زمني تنازلي
-    uniq.sort((a,b)=>(Date.parse(b.time)||0)-(Date.parse(a.time)||0));
-
-    state.all=uniq; state.page=0; state.map.clear();
-    for(const it of uniq){ state.map.set(it.id, it); }
-    render(true);
-  }catch(e){ console.warn(e); }
-}
-
-/* ===== تفاصيل ===== */
-function openDetail(id){
-  const a=state.map.get(id); if(!a) return;
-  $("#detailImg").src = a.img || "";
-  $("#detailTitle").textContent = a.title || "";
-  // لا نعرض المصدر — نعرض التاريخ فقط إن وجد
-  $("#detailMeta").textContent = a.time ? fmt(a.time) : "";
-  $("#detailBody").textContent = a.full || "";
-
-  $("#mainView").style.display="none";
-  $("#detailView").style.display="block";
-  document.title = (a.title||"") + " | مدار الخبر";
-  history.pushState({id}, "", `?id=${encodeURIComponent(id)}`);
-  window.scrollTo({top:0, behavior:"instant"});
-}
-function goHome(push=true){
-  $("#detailView").style.display="none";
-  $("#mainView").style.display="block";
-  document.title = "مدار الخبر | متجددة لحظة بلحظة";
-  if(push) history.pushState({}, "", location.pathname);
-  updateTickerFromPage();
-}
-
-/* ===== أحداث ===== */
-document.addEventListener("click", e=>{
-  const art=e.target.closest(".article");
-  if(art){ const id=decodeURIComponent(art.getAttribute("data-id")||""); openDetail(id); }
-});
-document.addEventListener("keydown", e=>{
-  if(e.key==="Enter"){
-    const art=e.target.closest(".article");
-    if(art){ const id=decodeURIComponent(art.getAttribute("data-id")||""); openDetail(id); }
-  }
-});
-$("#backBtn").onclick=()=>goHome();
-window.addEventListener("popstate", ()=>{
-  const p=new URLSearchParams(location.search);
-  const id=p.get("id");
-  if(id && state.map.has(id)) openDetail(id); else goHome(false);
-});
-$("#loadMore").onclick=()=>{ state.page++; render(false); };
-$("#refreshNow").onclick=()=>{ loadAll(); };
-$("#year").textContent=new Date().getFullYear();
-
-/* ===== إقلاع ===== */
-startClock();
-loadAll();
-setInterval(loadAll, AUTO_REFRESH_MS);
-</script>
 </body>
 </html>
