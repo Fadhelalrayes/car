@@ -3,30 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الأبراج اليومية المتجددة</title>
+    <title>الأبراج اليومية - يعمل دائمًا</title>
     <style>
         :root {
-            --primary-color: #4a148c; /* بنفسجي غامق */
-            --secondary-color: #7e57c2; /* بنفسجي فاتح */
-            --background-color: #f3e5f5; /* خلفية بنفسجية باهتة */
-            --card-background: #ffffff;
-            --text-color: #333;
-            --shadow: 0 4px 12px rgba(0,0,0,0.1);
+            --primary-color: #4a148c; --secondary-color: #7e57c2; --background-color: #f3e5f5;
+            --card-background: #ffffff; --text-color: #333; --shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: 'Cairo', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            line-height: 1.7;
+            background-color: var(--background-color); color: var(--text-color); line-height: 1.7;
         }
         header {
             background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 1.5rem 2rem;
-            text-align: center;
-            box-shadow: var(--shadow);
-            position: sticky; top: 0; z-index: 1000;
+            color: white; padding: 1.5rem 2rem; text-align: center;
+            box-shadow: var(--shadow); position: sticky; top: 0; z-index: 1000;
         }
         footer {
             text-align: center; padding: 1.5rem; margin-top: 2rem;
@@ -34,52 +25,20 @@
         }
         main { padding: 2rem 1rem; }
         #content-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 1.5rem; max-width: 1200px; margin: 0 auto;
         }
         .card {
-            background-color: var(--card-background);
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            overflow: hidden;
-            display: flex; flex-direction: column;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-top: 4px solid var(--primary-color);
+            background-color: var(--card-background); border-radius: 12px; box-shadow: var(--shadow);
+            overflow: hidden; display: flex; flex-direction: column;
+            transition: transform 0.3s, box-shadow 0.3s; border-top: 4px solid var(--primary-color);
         }
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-        }
-        .card-header {
-            padding: 1rem;
-            text-align: center;
-        }
-        .card-title {
-            font-size: 1.5rem; color: var(--primary-color);
-            font-weight: 700;
-        }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
+        .card-header { padding: 1rem; text-align: center; }
+        .card-title { font-size: 1.5rem; color: var(--primary-color); font-weight: 700; }
         .card-content { padding: 0 1.5rem 1.5rem; flex-grow: 1; }
         .card-summary { font-size: 1rem; margin-bottom: 1rem; text-align: justify; }
-        .card-meta {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            font-size: 0.85rem; color: #555;
-            border-top: 1px solid #eee; padding-top: 1rem;
-        }
-        .meta-item { text-align: center; }
-        .meta-item span { display: block; font-weight: bold; color: var(--secondary-color); }
-        #loading-indicator, #update-notification {
-            text-align: center; padding: 2rem; font-size: 1.2rem; color: #555;
-        }
-        #update-notification {
-            display: none; background-color: #ffab40; color: black;
-            padding: 1rem; cursor: pointer; position: sticky;
-            top: 80px; z-index: 999; transition: opacity 0.3s;
-            font-weight: bold;
-        }
-        #update-notification:hover { opacity: 0.9; }
+        #loading-indicator { text-align: center; padding: 2rem; font-size: 1.2rem; color: #555; }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -90,10 +49,6 @@
     <header>
         <h1>الأبراج اليومية</h1>
     </header>
-    
-    <div id="update-notification">
-        ✨ تحديثات اليوم الجديد متاحة! اضغط للعرض.
-    </div>
 
     <main>
         <div id="content-grid">
@@ -108,43 +63,40 @@
     <script>
         const contentGrid = document.getElementById('content-grid');
         const loadingIndicator = document.getElementById('loading-indicator');
-        const updateNotification = document.getElementById('update-notification');
 
-        const HOROSCOPE_SIGNS = {
-            aries: "الحمل", taurus: "الثور", gemini: "الجوزاء", cancer: "السرطان",
-            leo: "الأسد", virgo: "العذراء", libra: "الميزان", scorpio: "العقرب",
-            sagittarius: "القوس", capricorn: "الجدي", aquarius: "الدلو", pisces: "الحوت"
+        // --- بيانات الأبراج المدمجة داخل الكود ---
+        const HOROSCOPE_DATA = {
+            "الحمل": ["يوم مثالي لبدء مشاريع جديدة. طاقتك في أوجها.", "قد تواجه بعض التحديات العائلية، كن صبورًا.", "فرصة مالية غير متوقعة في الطريق إليك.", "ركز على صحتك اليوم، قد تحتاج إلى بعض الراحة.", "تواصل مع صديق قديم، ستسعدك المحادثة."],
+            "الثور": ["استقرارك هو سر قوتك اليوم. لا تتسرع في اتخاذ القرارات.", "يوم مناسب للاستمتاع بالطبيعة أو وجبة لذيذة.", "كن حذرًا في نفقاتك، قد تظهر مصاريف غير متوقعة.", "علاقاتك المهنية في تحسن مستمر.", "وقت رائع لتعلم مهارة جديدة."],
+            "الجوزاء": ["تواصلك الاجتماعي هو مفتاحك اليوم. ستلتقي بأشخاص مثيرين للاهتمام.", "قد تشعر ببعض التشتت، حاول التركيز على مهمة واحدة.", "فكرة إبداعية قد تتحول إلى مشروع ناجح.", "استمع جيدًا لما يقوله الآخرون قبل أن تتكلم.", "يوم جيد للقراءة والكتابة."],
+            "السرطان": ["عواطفك قوية اليوم. اقضِ وقتًا مع أحبائك.", "حدسك قوي جدًا، ثق به في اتخاذ القرارات.", "قد تشعر بالحنين إلى الماضي، استرجع الذكريات الجميلة.", "اهتم بمنزلك وبيئتك المحيطة.", "عمل إبداعي سيجلب لك الرضا النفسي."],
+            "الأسد": ["ثقتك بنفسك تجذب إليك الأنظار. يوم مناسب للقيادة والتأثير.", "لا تدع الغرور يسيطر عليك، استمع لآراء فريقك.", "فرصة لإظهار مواهبك وقدراتك في العمل.", "استمتع ببعض الترفيه والمرح.", "كرمك سيجلب لك محبة الآخرين."],
+            "العذراء": ["تركيزك على التفاصيل يجعلك تنجز الكثير اليوم.", "لا تكن شديد النقد لنفسك أو للآخرين.", "يوم ممتاز لتنظيم أمورك المالية والعملية.", "صحتك بحاجة لبعض الاهتمام، تناول طعامًا صحيًا.", "مساعدة الآخرين ستشعرك بالرضا."],
+            "الميزان": ["تبحث عن التوازن والانسجام في كل شيء.", "يوم رائع لتقوية علاقاتك الشخصية والمهنية.", "قرار مهم يحتاج إلى تفكير متأنٍ.", "اهتم بمظهرك الخارجي، سيعزز ثقتك بنفسك.", "الفن والجمال يلهمانك اليوم."],
+            "العقرب": ["شغفك وعمق تفكيرك يقودانك إلى اكتشافات جديدة.", "قد تكتشف سرًا أو حقيقة لم تكن تعرفها.", "طاقتك عالية، استغلها في تحقيق أهدافك.", "تجنب الدخول في جدالات غير ضرورية.", "وقت مناسب للتفكير في أهدافك طويلة الأمد."],
+            "القوس": ["حبك للمغامرة يدفعك لاستكشاف آفاق جديدة.", "يوم مثالي للسفر أو التخطيط لرحلة.", "تفاؤلك معدي ويؤثر إيجابًا على من حولك.", "لا تتردد في طرح الأسئلة والبحث عن المعرفة.", "كن صريحًا ولكن بلباقة."],
+            "الجدي": ["طموحك وعملك الجاد يؤتي ثماره اليوم.", "قد تحقق تقدمًا كبيرًا في حياتك المهنية.", "تحمل المسؤولية يجعلك قائدًا بالفطرة.", "لا تنسَ أن تأخذ قسطًا من الراحة، فالإرهاق عدو النجاح.", "خطط لمستقبلك المالي بحكمة."],
+            "الدلو": ["أفكارك المبتكرة والمختلفة هي مصدر قوتك.", "يوم جيد للتواصل مع الأصدقاء والمجموعات.", "قد تشعر برغبة في التمرد على الروتين.", "استخدم التكنولوجيا لصالحك اليوم.", "عمل إنساني أو تطوعي سيناسبك."],
+            "الحوت": ["خيالك وإبداعك لا حدود لهما اليوم.", "استمع إلى أحلامك، قد تحمل لك رسائل مهمة.", "تعاطفك مع الآخرين يجعلك صديقًا رائعًا.", "يوم مناسب لممارسة الفنون أو التأمل.", "قد تشعر ببعض الحساسية المفرطة، حاول حماية طاقتك."]
         };
-        
-        let currentDay = 'today';
 
-        async function fetchHoroscopeData(day) {
-            loadingIndicator.style.display = 'block';
-            contentGrid.innerHTML = '';
+        function getDailyHoroscope() {
+            const today = new Date();
+            const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
             
-            const signKeys = Object.keys(HOROSCOPE_SIGNS);
-            let allHoroscopes = [];
+            let dailyData = [];
 
-            for (const sign of signKeys) {
-                try {
-                    // *** التغيير الوحيد هنا ***
-                    // استخدام بروكسي لتجاوز مشكلة CORS
-                    const apiUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(`https://aztro.sameerkumar.website/?sign=${sign}&day=${day}`)}`;
-                    const response = await fetch(apiUrl, { method: 'GET' }); // تغيير POST إلى GET لأن البروكسي يتطلب ذلك
-                    const proxyData = await response.json();
-                    
-                    // البيانات الحقيقية تكون داخل خاصية contents
-                    const data = JSON.parse(proxyData.contents);
-                    
-                    data.arabic_sign = HOROSCOPE_SIGNS[sign];
-                    allHoroscopes.push(data);
-                } catch (error) {
-                    console.error(`فشل جلب بيانات برج ${sign}:`, error);
-                }
+            for (const sign in HOROSCOPE_DATA) {
+                const predictions = HOROSCOPE_DATA[sign];
+                // استخدام باقي القسمة لاختيار توقع مختلف كل يوم بشكل دوري
+                const dailyPrediction = predictions[dayOfYear % predictions.length];
+                
+                dailyData.push({
+                    arabic_sign: sign,
+                    description: dailyPrediction
+                });
             }
-            
-            loadingIndicator.style.display = 'none';
-            return allHoroscopes;
+            return dailyData;
         }
 
         function renderCards(data) {
@@ -157,12 +109,6 @@
                         </div>
                         <div class="card-content">
                             <p class="card-summary">${item.description}</p>
-                            <div class="card-meta">
-                                <div class="meta-item"><span>التوافق</span> ${item.compatibility || 'غير محدد'}</div>
-                                <div class="meta-item"><span>المزاج</span> ${item.mood || 'غير محدد'}</div>
-                                <div class="meta-item"><span>اللون</span> ${item.color || 'غير محدد'}</div>
-                                <div class="meta-item"><span>رقم الحظ</span> ${item.lucky_number || 'غير محدد'}</div>
-                            </div>
                         </div>
                     </article>
                 `;
@@ -170,33 +116,19 @@
             });
         }
         
-        async function initializePage(day) {
-            const data = await fetchHoroscopeData(day);
-            if (data && data.length > 0) {
-                renderCards(data);
-            } else {
-                contentGrid.innerHTML = '<p>عفوًا، حدث خطأ أثناء جلب بيانات الأبراج. يرجى المحاولة مرة أخرى لاحقًا.</p>';
-            }
-        }
-
-        function simulateNewDay() {
-            setTimeout(() => {
-                if (currentDay === 'today') {
-                    updateNotification.style.display = 'block';
-                }
-            }, 120000);
-        }
-
+        // --- بدء تشغيل التطبيق ---
         document.addEventListener('DOMContentLoaded', () => {
-            initializePage('today');
-            simulateNewDay();
+            // تأخير بسيط لمحاكاة التحميل
+            setTimeout(() => {
+                try {
+                    const data = getDailyHoroscope();
+                    renderCards(data);
+                } catch (e) {
+                    contentGrid.innerHTML = '<p>عفوًا، حدث خطأ غير متوقع.</p>';
+                }
+            }, 500);
         });
-        
-        updateNotification.addEventListener('click', () => {
-            updateNotification.style.display = 'none';
-            currentDay = 'tomorrow';
-            initializePage('tomorrow');
-        });
+
     </script>
 </body>
 </html>
