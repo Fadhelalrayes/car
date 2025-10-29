@@ -3,554 +3,200 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>محول العملات</title>
+    <title>الأبراج اليومية المتجددة</title>
     <style>
+        :root {
+            --primary-color: #4a148c; /* بنفسجي غامق */
+            --secondary-color: #7e57c2; /* بنفسجي فاتح */
+            --background-color: #f3e5f5; /* خلفية بنفسجية باهتة */
+            --card-background: #ffffff;
+            --text-color: #333;
+            --shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f7fa;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
+            font-family: 'Cairo', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.7;
         }
-        .container {
-            width: 100%;
-            max-width: 600px;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        h1 {
+        header {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1.5rem 2rem;
             text-align: center;
-            color: #333;
+            box-shadow: var(--shadow);
+            position: sticky; top: 0; z-index: 1000;
         }
-        .last-updated {
+        footer {
+            text-align: center; padding: 1.5rem; margin-top: 2rem;
+            background-color: #e1bee7; font-size: 0.9rem;
+        }
+        main { padding: 2rem 1rem; }
+        #content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem; max-width: 1200px; margin: 0 auto;
+        }
+        .card {
+            background-color: var(--card-background);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            display: flex; flex-direction: column;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 4px solid var(--primary-color);
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        .card-header {
+            padding: 1rem;
             text-align: center;
-            color: #666;
-            font-size: 0.9em;
         }
-        .currency-row {
-            display: flex;
-            align-items: center;
-            background: #fff;
-            border: 1px solid #007bff;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            padding: 10px;
+        .card-title {
+            font-size: 1.5rem; color: var(--primary-color);
+            font-weight: 700;
         }
-        .flag {
-            width: 30px;
-            height: 22.5px;
-            border-radius: 50%;
-            margin-right: 10px;
+        .card-content { padding: 0 1.5rem 1.5rem; flex-grow: 1; }
+        .card-summary { font-size: 1rem; margin-bottom: 1rem; text-align: justify; }
+        .card-meta {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            font-size: 0.85rem; color: #555;
+            border-top: 1px solid #eee; padding-top: 1rem;
         }
-        select, input {
-            flex: 1;
-            border: none;
-            background: transparent;
-            font-size: 1.2em;
-            color: #333;
+        .meta-item { text-align: center; }
+        .meta-item span { display: block; font-weight: bold; color: var(--secondary-color); }
+        #loading-indicator, #update-notification {
+            text-align: center; padding: 2rem; font-size: 1.2rem; color: #555;
         }
-        .amount {
-            text-align: right;
-            white-space: nowrap;
+        #update-notification {
+            display: none; background-color: #ffab40; color: black;
+            padding: 1rem; cursor: pointer; position: sticky;
+            top: 80px; z-index: 999; transition: opacity 0.3s;
+            font-weight: bold;
         }
-        .amount input {
-            width: 100px;
-            text-align: right;
-        }
-        .rate {
-            font-size: 0.8em;
-            color: #666;
-            margin-top: 5px;
-            width: 100%;
-            text-align: right;
-        }
-        #add-currency {
-            background: transparent;
-            border: none;
-            color: #007bff;
-            font-size: 1em;
-            cursor: pointer;
-            margin-bottom: 10px;
-        }
-        .mid-market {
-            text-align: center;
-            color: #666;
-            font-size: 0.8em;
-        }
-        .footer {
-            text-align: center;
-            font-size: 0.9em;
-            color: #333;
-            margin-top: 20px;
-        }
-        @media (max-width: 600px) {
-            .currency-row {
-                flex-wrap: wrap;
-            }
-            .amount {
-                margin-top: 5px;
-                width: 100%;
-                text-align: right;
-            }
-            select {
-                max-width: 150px;
-            }
-        }
+        #update-notification:hover { opacity: 0.9; }
     </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <h1>محول العملات</h1>
-        <p class="last-updated">آخر تحديث: <span id="last-updated"></span></p>
-        <div id="base-currency" class="currency-row">
-            <!-- Populated by JS -->
-        </div>
-        <div id="target-currencies">
-            <!-- Target currencies will be added here -->
-        </div>
-        <button id="add-currency">+ إضافة عملة</button>
-        <p class="mid-market">أسعار منتصف السوق <span id="info-icon">i</span></p>
+
+    <header>
+        <h1>الأبراج اليومية</h1>
+    </header>
+    
+    <div id="update-notification">
+        ✨ تحديثات اليوم الجديد متاحة! اضغط للعرض.
     </div>
-    <p class="footer">برمجة وتطوير: فاضل الريس</p>
+
+    <main>
+        <div id="content-grid">
+            <div id="loading-indicator">جاري تحضير توقعات الأبراج...</div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 - بيانات الأبراج مقدمة لأغراض الترفيه.</p>
+    </footer>
 
     <script>
-        // List of supported currencies from API
-        const currencies = [
-            {code: "AED", name: "درهم إماراتي"},
-            {code: "AFN", name: "أفغاني أفغانستان"},
-            {code: "ALL", name: "ليك ألباني"},
-            {code: "AMD", name: "درام أرميني"},
-            {code: "ANG", name: "غيلدر أنتيلي هولندي"},
-            {code: "AOA", name: "كوانزا أنغولي"},
-            {code: "ARS", name: "بيزو أرجنتيني"},
-            {code: "AUD", name: "دولار أسترالي"},
-            {code: "AWG", name: "فلورن أروبي"},
-            {code: "AZN", name: "مانات أذربيجاني"},
-            {code: "BAM", name: "مارك بوسني وهرسكي"},
-            {code: "BBD", name: "دولار بربادوسي"},
-            {code: "BDT", name: "تاكا بنغلاديشي"},
-            {code: "BGN", name: "ليف بلغاري"},
-            {code: "BHD", name: "دينار بحريني"},
-            {code: "BIF", name: "فرنك بوروندي"},
-            {code: "BMD", name: "دولار برمودي"},
-            {code: "BND", name: "دولار بروناي"},
-            {code: "BOB", name: "بوليفيانو بوليفي"},
-            {code: "BRL", name: "ريال برازيلي"},
-            {code: "BSD", name: "دولار بهامي"},
-            {code: "BTN", name: "نغولترم بوتاني"},
-            {code: "BWP", name: "بولا بوتسواني"},
-            {code: "BYN", name: "روبل بيلاروسي"},
-            {code: "BZD", name: "دولار بليزي"},
-            {code: "CAD", name: "دولار كندي"},
-            {code: "CDF", name: "فرنك كونغولي"},
-            {code: "CHF", name: "فرنك سويسري"},
-            {code: "CLP", name: "بيزو تشيلي"},
-            {code: "CNY", name: "يوان صيني"},
-            {code: "COP", name: "بيزو كولومبي"},
-            {code: "CRC", name: "كولون كوستاريكي"},
-            {code: "CUP", name: "بيزو كوبي"},
-            {code: "CVE", name: "إسكودو كاب فيردي"},
-            {code: "CZK", name: "كرونة تشيكية"},
-            {code: "DJF", name: "فرنك جيبوتي"},
-            {code: "DKK", name: "كرونة دانمركية"},
-            {code: "DOP", name: "بيزو دومينيكاني"},
-            {code: "DZD", name: "دينار جزائري"},
-            {code: "EGP", name: "جنيه مصري"},
-            {code: "ERN", name: "ناكفا إريتري"},
-            {code: "ETB", name: "بير إثيوبي"},
-            {code: "EUR", name: "يورو"},
-            {code: "FJD", name: "دولار فيجي"},
-            {code: "FKP", name: "جنيه جزر فوكلاند"},
-            {code: "FOK", name: "كرونة فاروية"},
-            {code: "GBP", name: "جنيه إسترليني"},
-            {code: "GEL", name: "لاري جورجي"},
-            {code: "GGP", name: "جنيه غيرنزي"},
-            {code: "GHS", name: "سيدي غاني"},
-            {code: "GIP", name: "جنيه جبل طارق"},
-            {code: "GMD", name: "دالاسي غامبي"},
-            {code: "GNF", name: "فرنك غيني"},
-            {code: "GTQ", name: "كيتزال غواتيمالي"},
-            {code: "GYD", name: "دولار غياني"},
-            {code: "HKD", name: "دولار هونغ كونغ"},
-            {code: "HNL", name: "ليمبيرا هندوراسي"},
-            {code: "HRK", name: "كونا كرواتية"},
-            {code: "HTG", name: "غورد هاييتي"},
-            {code: "HUF", name: "فورنت مجري"},
-            {code: "IDR", name: "روبية إندونيسية"},
-            {code: "ILS", name: "شيكل إسرائيلي جديد"},
-            {code: "IMP", name: "جنيه مانكس"},
-            {code: "INR", name: "روبية هندية"},
-            {code: "IQD", name: "دينار عراقي"},
-            {code: "IRR", name: "ريال إيراني"},
-            {code: "ISK", name: "كرونة آيسلندية"},
-            {code: "JEP", name: "جنيه جيرسي"},
-            {code: "JMD", name: "دولار جامايكي"},
-            {code: "JOD", name: "دينار أردني"},
-            {code: "JPY", name: "ين ياباني"},
-            {code: "KES", name: "شلن كيني"},
-            {code: "KGS", name: "سوم قيرغيزستاني"},
-            {code: "KHR", name: "ريال كمبودي"},
-            {code: "KID", name: "دولار كيريباتي"},
-            {code: "KMF", name: "فرنك قمري"},
-            {code: "KRW", name: "وون كوري جنوبي"},
-            {code: "KWD", name: "دينار كويتي"},
-            {code: "KYD", name: "دولار جزر كايمان"},
-            {code: "KZT", name: "تينغ كازاخستاني"},
-            {code: "LAK", name: "كيب لاوسي"},
-            {code: "LBP", name: "ليرة لبنانية"},
-            {code: "LKR", name: "روبية سريلانكية"},
-            {code: "LRD", name: "دولار ليبيري"},
-            {code: "LSL", name: "لوتي ليسوتو"},
-            {code: "LYD", name: "دينار ليبي"},
-            {code: "MAD", name: "درهم مغربي"},
-            {code: "MDL", name: "ليو مولدوفي"},
-            {code: "MGA", name: "أرياري مدغشقري"},
-            {code: "MKD", name: "دينار مقدوني"},
-            {code: "MMK", name: "كيات ميانماري"},
-            {code: "MNT", name: "توغروغ منغولي"},
-            {code: "MOP", name: "باتاكا ماكاوية"},
-            {code: "MRU", name: "أوقية موريتانية"},
-            {code: "MUR", name: "روبية موريشيوسية"},
-            {code: "MVR", name: "روفية مالديفية"},
-            {code: "MWK", name: "كواتشا ملاوية"},
-            {code: "MXN", name: "بيزو مكسيكي"},
-            {code: "MYR", name: "رينغيت ماليزي"},
-            {code: "MZN", name: "ميتيكال موزمبيقي"},
-            {code: "NAD", name: "دولار ناميبي"},
-            {code: "NGN", name: "نايرا نيجيرية"},
-            {code: "NIO", name: "كوردوبا نيكاراغوي"},
-            {code: "NOK", name: "كرونة نرويجية"},
-            {code: "NPR", name: "روبية نيبالية"},
-            {code: "NZD", name: "دولار نيوزيلندي"},
-            {code: "OMR", name: "ريال عماني"},
-            {code: "PAB", name: "بالبوا بنمي"},
-            {code: "PEN", name: "سول بيروفي"},
-            {code: "PGK", name: "كينا بابوا غينيا الجديدة"},
-            {code: "PHP", name: "بيزو فلبيني"},
-            {code: "PKR", name: "روبية باكستانية"},
-            {code: "PLN", name: "زلوتي بولندي"},
-            {code: "PYG", name: "غواراني باراغواي"},
-            {code: "QAR", name: "ريال قطري"},
-            {code: "RON", name: "ليو روماني"},
-            {code: "RSD", name: "دينار صربي"},
-            {code: "RUB", name: "روبل روسي"},
-            {code: "RWF", name: "فرنك رواندي"},
-            {code: "SAR", name: "ريال سعودي"},
-            {code: "SBD", name: "دولار جزر سليمان"},
-            {code: "SCR", name: "روبية سيشلية"},
-            {code: "SDG", name: "جنيه سوداني"},
-            {code: "SEK", name: "كرونة سويدية"},
-            {code: "SGD", name: "دولار سنغافوري"},
-            {code: "SHP", name: "جنيه سانت هيلينا"},
-            {code: "SLE", name: "ليون سيراليوني"},
-            {code: "SOS", name: "شلن صومالي"},
-            {code: "SRD", name: "دولار سورينامي"},
-            {code: "SSP", name: "جنيه جنوب سوداني"},
-            {code: "STN", name: "دوبرا ساو تومي وبرينسيبي"},
-            {code: "SYP", name: "ليرة سورية"},
-            {code: "SZL", name: "ليلانغيني سوازيلندي"},
-            {code: "THB", name: "بات تايلاندي"},
-            {code: "TJS", name: "سوموني طاجيكستاني"},
-            {code: "TMT", name: "مانات تركمانستاني"},
-            {code: "TND", name: "دينار تونسي"},
-            {code: "TOP", name: "بانغا تونغي"},
-            {code: "TRY", name: "ليرة تركية"},
-            {code: "TTD", name: "دولار ترينيداد وتوباغو"},
-            {code: "TVD", name: "دولار توفالو"},
-            {code: "TWD", name: "دولار تايواني جديد"},
-            {code: "TZS", name: "شلن تنزاني"},
-            {code: "UAH", name: "هريفنا أوكرانية"},
-            {code: "UGX", name: "شلن أوغندي"},
-            {code: "USD", name: "دولار أمريكي"},
-            {code: "UYU", name: "بيزو أوروغواي"},
-            {code: "UZS", name: "سوم أوزبكستاني"},
-            {code: "VES", name: "بوليفار فنزويلي"},
-            {code: "VND", name: "دونغ فيتنامي"},
-            {code: "VUV", name: "فاتو فانواتي"},
-            {code: "WST", name: "تالا ساموي"},
-            {code: "XAF", name: "فرنك وسط أفريقي"},
-            {code: "XCD", name: "دولار شرق الكاريبي"},
-            {code: "XDR", name: "حقوق سحب خاصة"},
-            {code: "XOF", name: "فرنك غرب أفريقي"},
-            {code: "XPF", name: "فرنك سي إف بي"},
-            {code: "YER", name: "ريال يمني"},
-            {code: "ZAR", name: "راند جنوب أفريقي"},
-            {code: "ZMW", name: "كواتشا زامبية"},
-            {code: "ZWL", name: "دولار زيمبابوي"}
-        ];
+        const contentGrid = document.getElementById('content-grid');
+        const loadingIndicator = document.getElementById('loading-indicator');
+        const updateNotification = document.getElementById('update-notification');
 
-        // Map from currency code to country code for flags (partial, based on common associations)
-        const currencyToCountry = {
-            "AED": "ae",
-            "AFN": "af",
-            "ALL": "al",
-            "AMD": "am",
-            "ANG": "cw",
-            "AOA": "ao",
-            "ARS": "ar",
-            "AUD": "au",
-            "AWG": "aw",
-            "AZN": "az",
-            "BAM": "ba",
-            "BBD": "bb",
-            "BDT": "bd",
-            "BGN": "bg",
-            "BHD": "bh",
-            "BIF": "bi",
-            "BMD": "bm",
-            "BND": "bn",
-            "BOB": "bo",
-            "BRL": "br",
-            "BSD": "bs",
-            "BTN": "bt",
-            "BWP": "bw",
-            "BYN": "by",
-            "BZD": "bz",
-            "CAD": "ca",
-            "CDF": "cd",
-            "CHF": "ch",
-            "CLP": "cl",
-            "CNY": "cn",
-            "COP": "co",
-            "CRC": "cr",
-            "CUP": "cu",
-            "CVE": "cv",
-            "CZK": "cz",
-            "DJF": "dj",
-            "DKK": "dk",
-            "DOP": "do",
-            "DZD": "dz",
-            "EGP": "eg",
-            "ERN": "er",
-            "ETB": "et",
-            "EUR": "eu",
-            "FJD": "fj",
-            "FKP": "fk",
-            "GBP": "gb",
-            "GEL": "ge",
-            "GHS": "gh",
-            "GIP": "gi",
-            "GMD": "gm",
-            "GNF": "gn",
-            "GTQ": "gt",
-            "GYD": "gy",
-            "HKD": "hk",
-            "HNL": "hn",
-            "HRK": "hr",
-            "HTG": "ht",
-            "HUF": "hu",
-            "IDR": "id",
-            "ILS": "il",
-            "INR": "in",
-            "IQD": "iq",
-            "IRR": "ir",
-            "ISK": "is",
-            "JMD": "jm",
-            "JOD": "jo",
-            "JPY": "jp",
-            "KES": "ke",
-            "KGS": "kg",
-            "KHR": "kh",
-            "KMF": "km",
-            "KRW": "kr",
-            "KWD": "kw",
-            "KYD": "ky",
-            "KZT": "kz",
-            "LAK": "la",
-            "LBP": "lb",
-            "LKR": "lk",
-            "LRD": "lr",
-            "LSL": "ls",
-            "LYD": "ly",
-            "MAD": "ma",
-            "MDL": "md",
-            "MGA": "mg",
-            "MKD": "mk",
-            "MMK": "mm",
-            "MNT": "mn",
-            "MOP": "mo",
-            "MRU": "mr",
-            "MUR": "mu",
-            "MVR": "mv",
-            "MWK": "mw",
-            "MXN": "mx",
-            "MYR": "my",
-            "MZN": "mz",
-            "NAD": "na",
-            "NGN": "ng",
-            "NIO": "ni",
-            "NOK": "no",
-            "NPR": "np",
-            "NZD": "nz",
-            "OMR": "om",
-            "PAB": "pa",
-            "PEN": "pe",
-            "PGK": "pg",
-            "PHP": "ph",
-            "PKR": "pk",
-            "PLN": "pl",
-            "PYG": "py",
-            "QAR": "qa",
-            "RON": "ro",
-            "RSD": "rs",
-            "RUB": "ru",
-            "RWF": "rw",
-            "SAR": "sa",
-            "SBD": "sb",
-            "SCR": "sc",
-            "SDG": "sd",
-            "SEK": "se",
-            "SGD": "sg",
-            "SHP": "sh",
-            "SLE": "sl",
-            "SOS": "so",
-            "SRD": "sr",
-            "SSP": "ss",
-            "STN": "st",
-            "SYP": "sy",
-            "SZL": "sz",
-            "THB": "th",
-            "TJS": "tj",
-            "TMT": "tm",
-            "TND": "tn",
-            "TOP": "to",
-            "TRY": "tr",
-            "TTD": "tt",
-            "TWD": "tw",
-            "TZS": "tz",
-            "UAH": "ua",
-            "UGX": "ug",
-            "USD": "us",
-            "UYU": "uy",
-            "UZS": "uz",
-            "VES": "ve",
-            "VND": "vn",
-            "VUV": "vu",
-            "WST": "ws",
-            "XAF": "cm",  // Cameroon as example
-            "XCD": "ag",  // Antigua and Barbuda as example
-            "XDR": "un",  // No flag, use placeholder
-            "XOF": "bj",  // Benin as example
-            "XPF": "pf",  // French Polynesia
-            "YER": "ye",
-            "ZAR": "za",
-            "ZMW": "zm",
-            "ZWL": "zw"
+        const HOROSCOPE_SIGNS = {
+            aries: "الحمل", taurus: "الثور", gemini: "الجوزاء", cancer: "السرطان",
+            leo: "الأسد", virgo: "العذراء", libra: "الميزان", scorpio: "العقرب",
+            sagittarius: "القوس", capricorn: "الجدي", aquarius: "الدلو", pisces: "الحوت"
         };
+        
+        let currentDay = 'today';
 
-        let baseCurrency = 'EUR';
-        let amount = 1;
-        let rates = {};
-        let targetCurrencies = ['USD', 'BHD'];  // Initial targets like in screenshot
+        async function fetchHoroscopeData(day) {
+            loadingIndicator.style.display = 'block';
+            contentGrid.innerHTML = '';
+            
+            const signKeys = Object.keys(HOROSCOPE_SIGNS);
+            let allHoroscopes = [];
 
-        async function fetchRates(base) {
-            try {
-                const response = await fetch(`https://open.er-api.com/v6/latest/${base}`);
-                const data = await response.json();
-                if (data.result === 'success') {
-                    rates = data.rates;
-                    document.getElementById('last-updated').innerText = new Date(data.time_last_update_utc).toLocaleString('ar');
-                    updateConversions();
-                } else {
-                    alert('خطأ في جلب الأسعار');
+            for (const sign of signKeys) {
+                try {
+                    // *** التغيير الوحيد هنا ***
+                    // استخدام بروكسي لتجاوز مشكلة CORS
+                    const apiUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(`https://aztro.sameerkumar.website/?sign=${sign}&day=${day}`)}`;
+                    const response = await fetch(apiUrl, { method: 'GET' }); // تغيير POST إلى GET لأن البروكسي يتطلب ذلك
+                    const proxyData = await response.json();
+                    
+                    // البيانات الحقيقية تكون داخل خاصية contents
+                    const data = JSON.parse(proxyData.contents);
+                    
+                    data.arabic_sign = HOROSCOPE_SIGNS[sign];
+                    allHoroscopes.push(data);
+                } catch (error) {
+                    console.error(`فشل جلب بيانات برج ${sign}:`, error);
                 }
-            } catch (error) {
-                alert('خطأ في الشبكة');
             }
+            
+            loadingIndicator.style.display = 'none';
+            return allHoroscopes;
         }
 
-        function getSymbol(code) {
-            // Simple symbols, can expand
-            const symbols = {
-                'EUR': '€',
-                'USD': '$',
-                'BHD': 'BD',
-                'GBP': '£',
-                'JPY': '¥',
-                // Add more as needed
-            };
-            return symbols[code] || code;
-        }
-
-        function populateSelect(select, selectedCode) {
-            currencies.forEach(curr => {
-                const option = document.createElement('option');
-                option.value = curr.code;
-                option.innerText = `${curr.code} - ${curr.name}`;
-                if (curr.code === selectedCode) option.selected = true;
-                select.appendChild(option);
+        function renderCards(data) {
+            contentGrid.innerHTML = '';
+            data.forEach(item => {
+                const cardHTML = `
+                    <article class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">${item.arabic_sign}</h2>
+                        </div>
+                        <div class="card-content">
+                            <p class="card-summary">${item.description}</p>
+                            <div class="card-meta">
+                                <div class="meta-item"><span>التوافق</span> ${item.compatibility || 'غير محدد'}</div>
+                                <div class="meta-item"><span>المزاج</span> ${item.mood || 'غير محدد'}</div>
+                                <div class="meta-item"><span>اللون</span> ${item.color || 'غير محدد'}</div>
+                                <div class="meta-item"><span>رقم الحظ</span> ${item.lucky_number || 'غير محدد'}</div>
+                            </div>
+                        </div>
+                    </article>
+                `;
+                contentGrid.insertAdjacentHTML('beforeend', cardHTML);
             });
         }
-
-        function createCurrencyRow(code, isBase = false) {
-            const div = document.createElement('div');
-            div.className = 'currency-row';
-            const country = currencyToCountry[code] || 'un';
-            const flagUrl = `https://flagcdn.com/w40/${country}.png`;
-            div.innerHTML = `
-                <img src="${flagUrl}" alt="علم ${code}" class="flag">
-                <select ${isBase ? 'id="base-select"' : ''}></select>
-                <span class="amount">${getSymbol(code)} <input type="number" ${isBase ? 'id="amount-input" value="' + amount + '"' : 'disabled'}></span>
-                <div class="rate"></div>
-            `;
-            const select = div.querySelector('select');
-            populateSelect(select, code);
-            if (!isBase) {
-                select.onchange = () => {
-                    const newCode = select.value;
-                    div.parentNode.replaceChild(createCurrencyRow(newCode), div);
-                    targetCurrencies = targetCurrencies.map(c => c === code ? newCode : c);
-                    updateConversions();
-                };
+        
+        async function initializePage(day) {
+            const data = await fetchHoroscopeData(day);
+            if (data && data.length > 0) {
+                renderCards(data);
             } else {
-                select.onchange = () => {
-                    baseCurrency = select.value;
-                    fetchRates(baseCurrency);
-                };
-                const input = div.querySelector('input');
-                input.oninput = () => {
-                    amount = parseFloat(input.value) || 1;
-                    updateConversions();
-                };
+                contentGrid.innerHTML = '<p>عفوًا، حدث خطأ أثناء جلب بيانات الأبراج. يرجى المحاولة مرة أخرى لاحقًا.</p>';
             }
-            return div;
         }
 
-        function updateConversions() {
-            targetCurrencies.forEach((target, index) => {
-                const row = document.getElementById('target-currencies').children[index];
-                const converted = (amount * rates[target]).toFixed(2);
-                row.querySelector('input').value = converted;
-                row.querySelector('.rate').innerText = `1 ${baseCurrency} = ${rates[target].toFixed(4)} ${target}`;
-            });
+        function simulateNewDay() {
+            setTimeout(() => {
+                if (currentDay === 'today') {
+                    updateNotification.style.display = 'block';
+                }
+            }, 120000);
         }
 
-        function init() {
-            // Base
-            document.getElementById('base-currency').appendChild(createCurrencyRow(baseCurrency, true));
-
-            // Targets
-            const targetsDiv = document.getElementById('target-currencies');
-            targetCurrencies.forEach(code => {
-                targetsDiv.appendChild(createCurrencyRow(code));
-            });
-
-            // Add button
-            document.getElementById('add-currency').onclick = () => {
-                const newCode = 'USD';  // Default new
-                targetCurrencies.push(newCode);
-                targetsDiv.appendChild(createCurrencyRow(newCode));
-            };
-
-            fetchRates(baseCurrency);
-        }
-
-        init();
+        document.addEventListener('DOMContentLoaded', () => {
+            initializePage('today');
+            simulateNewDay();
+        });
+        
+        updateNotification.addEventListener('click', () => {
+            updateNotification.style.display = 'none';
+            currentDay = 'tomorrow';
+            initializePage('tomorrow');
+        });
     </script>
 </body>
 </html>
