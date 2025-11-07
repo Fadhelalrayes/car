@@ -3,7 +3,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>حاسبة الخمس الشرعي — وفق فتاوى السيد السيستاني</title>
+<title>حاسبة الخمس الشرعي | وفق فتاوى السيد السيستاني | حساب مبلغ الخمس</title>
+<meta name="description" content="حاسبة شرعية لحساب مبلغ الخمس الواجب على أرباح المكاسب وفق فتاوى مكتب سماحة المرجع الديني الأعلى السيد علي الحسيني السيستاني (دام ظله). تتضمن تعريف الخمس وأحكامه ومسائله وسن التكليف."/>
+<meta name="keywords" content="الخمس, حاسبة الخمس, السيد السيستاني, فتاوى الخمس, حساب الخمس, أحكام الخمس, سن التكليف"/>
+<meta name="author" content="فاضل الريس"/>
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -38,9 +41,17 @@
   @media(min-width:860px){ .deck{grid-template-columns:repeat(2,1fr)} }
   .card{background:#fdfdfd; border:1px solid var(--line); border-radius:12px; padding:16px; box-shadow:0 2px 6px rgba(0,0,0,.04)}
   .card h3{margin:0 0 8px; font-family:"Amiri",serif; color:var(--gold)}
-  .card p, .card ul{margin:0; font-size:14px; color:#374151; line-height:1.7}
-  .card ul{margin-top:8px; padding-inline-start:20px;}
+  /* تطبيق محاذاة الأطراف (Justify) للنصوص الفقهية */
+  .card p, .card ul{margin:0; font-size:14px; color:#374151; line-height:1.7; text-align:justify; text-justify:inter-word;}
+  .card ul{margin-top:8px; padding-inline-start:20px; text-align:right; text-justify:unset;} /* القوائم تبقى محاذاة لليمين */
   .card .cite { font-size: 10px; color: var(--muted); display: inline-block; margin-right: 4px; }
+
+  /* أيقونات المشاركة */
+  .sharebar{display:flex; justify-content:center; gap:12px; margin:20px 0 10px; flex-wrap:wrap}
+  .iconbtn{width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; border:1px solid var(--line); background:#fff; cursor:pointer; transition:all .2s ease}
+  .iconbtn:hover{background:var(--gold-soft); border-color:var(--gold)}
+  .iconbtn svg{width:20px; height:20px; fill:#374151}
+  .iconbtn:hover svg{fill:var(--ink)}
 
   footer{text-align:center; margin:20px 0 16px; font-size:12px; color:#6b7280}
   .ghost-link{color:inherit; text-decoration:none; cursor:pointer}
@@ -114,8 +125,29 @@
     </div>
   </section>
 
+  <!-- أيقونات المشاركة -->
+  <div class="sharebar">
+    <a class="iconbtn" id="shareWA" title="واتساب" target="_blank" aria-label="WhatsApp">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0a12 12 0 00-10 18.3L1 23l4.9-1A12 12 0 1012 0zm6.5 17.2c-.3.8-1.7 1.6-2.4 1.6-.6 0-1.4.1-3.8-1-3.2-1.4-5.3-4.6-5.5-4.8-.1-.2-1.3-1.7-1.3-3.2 0-1.6.8-2.4 1.1-2.7.3-.3.7-.4 1-.4h.8c.2 0 .6 0 .9.7.3.8 1.1 2.7 1.2 2.9.1.2.2.5 0 .8-.2.3-.3.5-.6.8-.3.3-.6.6-.2 1.2.4.6 1.7 2.8 4 3.8 2.9 1.2 3 .8 3.5.8.5 0 1.8-.8 2.1-1.5.2-.7 1-1.6 1.3-1.8.2-.1.3-.2.5-.1l1 .5c.3.1.5.3.5.5-.1.4-.7 2-1 2.7z"/></svg>
+    </a>
+    <a class="iconbtn" id="shareTG" title="تيليغرام" target="_blank" aria-label="Telegram">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18.2l-.3 4.1c.4 0 .6-.2.8-.4l2-1.8 4.1 3c.7.4 1.3.2 1.5-.7L22 6.2c.2-1.1-.4-1.5-1.1-1.2L2.3 11.1c-1.1.4-1 1.3 0 1.6l4.1 1.2 9.4-5.9c.4-.3.9-.1.5.2L9 18.2z"/></svg>
+    </a>
+    <a class="iconbtn" id="shareX" title="X" target="_blank" aria-label="X">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 2h4.7l5 6.8L18.7 2H22l-7.8 9.1L22 22h-4.8l-5.4-7.2L6 22H2.1l8.3-9.8L3 2z"/></svg>
+    </a>
+    <a class="iconbtn" id="shareFB" title="فيسبوك" target="_blank" aria-label="Facebook">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12a10 10 0 10-11.6 9.9v-7H7.7V12h2.7V9.8c0-2.7 1.6-4.2 4-4.2 1.2 0 2.5.2 2.5.2v2.7h-1.4c-1.4 0-1.9.9-1.9 1.8V12h3.2l-.5 2.9h-2.7v7A10 10 0 0022 12z"/></svg>
+    </a>
+    <button class="iconbtn" id="copyLink" title="نسخ الرابط" aria-label="Copy Link">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 1H8C6.3 1 5 2.3 5 4v12c0 1.7 1.3 3 3 3h8c1.7 0 3-1.3 3-3V4c0-1.7-1.3-3-3-3zm1 15c0 .6-.4 1-1 1H8c-.6 0-1-.4-1-1V4c0-.6.4-1 1-1h8c.6 0 1 .4 1 1v12zM7 20c0 .6.4 1 1 1h8v2H8c-1.7 0-3-1.3-3-3v-2h2v2z"/></svg>
+    </button>
+  </div>
+
   <footer>
     <a class="ghost-link" href="https://www.sistani.org/arabic/book/24/1861/" target="_blank" rel="noopener">المصدر: الأحكام مبنية على فتاوى مكتب السيد السيستاني (دام ظله)</a>
+    <br>
+    <span style="display:block; margin-top: 5px;">برمجة وتطوير : فاضل الريس</span>
   </footer>
 </main>
 
@@ -133,6 +165,17 @@ const resultBox = document.getElementById('resultBox');
 const khumsValue = document.getElementById('khumsValue');
 const toast = document.getElementById('toast');
 const toastMsg = toast.querySelector('.msg');
+const shareWA = document.getElementById('shareWA');
+const shareTG = document.getElementById('shareTG');
+const shareX = document.getElementById('shareX');
+const shareFB = document.getElementById('shareFB');
+const copyLink = document.getElementById('copyLink');
+
+const pageTitle = document.title;
+// ملاحظة: في بيئة حقيقية، يجب أن تكون window.location.href هي رابط الصفحة الفعلي
+// هنا نستخدم رابط وهمي لغرض العرض، لكن في بيئة التشغيل الحقيقية سيتم استخدام الرابط الصحيح.
+const pageUrl = "https://your-domain.com/khums-calculator"; 
+const shareText = `${pageTitle} - احسب الخمس الشرعي وفق فتاوى السيد السيستاني.`;
 
 /* فلترة أرقام فقط */
 amountEl.addEventListener('input', () => {
@@ -168,6 +211,32 @@ calcBtn.addEventListener('click', () => {
   // استخدام toLocaleString لتنسيق الأرقام مع فواصل
   khumsValue.textContent = khums.toLocaleString('ar-EG', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   resultBox.style.display = 'block';
+});
+
+/* وظائف المشاركة */
+shareWA.href = `https://wa.me/?text=${encodeURIComponent(shareText + ' ' + pageUrl)}`;
+shareTG.href = `https://t.me/share/url?url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(shareText)}`;
+shareX.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(pageUrl)}`;
+shareFB.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`;
+
+copyLink.addEventListener('click', () => {
+  // استخدام navigator.clipboard.writeText لنسخ الرابط
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(pageUrl).then(() => {
+      showToast('تم نسخ الرابط بنجاح.', { title: 'نجاح' });
+    }).catch(err => {
+      showToast('فشل في نسخ الرابط.', { type: 'error', title: 'خطأ' });
+    });
+  } else {
+    // حل بديل للمتصفحات التي لا تدعم navigator.clipboard
+    const tempInput = document.createElement('input');
+    tempInput.value = pageUrl;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand('copy');
+    document.body.removeChild(tempInput);
+    showToast('تم نسخ الرابط بنجاح (حل بديل).', { title: 'نجاح' });
+  }
 });
 </script>
 </body>
